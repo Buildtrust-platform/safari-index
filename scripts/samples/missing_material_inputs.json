@@ -1,0 +1,44 @@
+{
+  "task": "DECISION",
+  "tracking": {
+    "session_id": "sess_test_missing",
+    "traveler_id": null,
+    "lead_id": null
+  },
+  "user_context": {
+    "traveler_type": "unknown",
+    "budget_band": "unknown",
+    "pace_preference": "unknown",
+    "drive_tolerance_hours": 0,
+    "risk_tolerance": "unknown",
+    "dates": {
+      "type": "unknown"
+    },
+    "group_size": 0,
+    "prior_decisions": []
+  },
+  "request": {
+    "question": "Should I go on a safari?",
+    "scope": "thin_edge_scope_only=true",
+    "destinations_considered": [],
+    "constraints": {}
+  },
+  "facts": {
+    "known_constraints": [],
+    "known_tradeoffs": [],
+    "destination_notes": []
+  },
+  "policy": {
+    "must_refuse_if": [
+      "guarantee_requested",
+      "inputs_conflict_unbounded",
+      "missing_material_inputs"
+    ],
+    "forbidden_phrases": [
+      "unforgettable",
+      "magical",
+      "once-in-a-lifetime",
+      "breathtaking"
+    ]
+  }
+}

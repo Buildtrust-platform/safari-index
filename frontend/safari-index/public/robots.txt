@@ -1,0 +1,14 @@
+# Safari Index robots.txt
+# Per 14_seo_generation.md: minimal, no tracking
+
+User-agent: *
+Allow: /
+
+Sitemap: https://safariindex.com/sitemap.xml
+
+# Block non-content paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /dev/
+Disallow: /embed/
+Disallow: /assurance/

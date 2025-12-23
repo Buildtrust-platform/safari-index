@@ -1,0 +1,436 @@
+@import "tailwindcss";
+
+/**
+ * Safari Index Design System - Editorial Safari Authority
+ *
+ * Color tokens: Paper backgrounds, Editorial ink, Safari-industry signal colors
+ * Typography: Source Serif 4 (editorial), Inter (UI)
+ */
+
+:root {
+  /* ==========================================================================
+   * PAPER BACKGROUNDS - Warm earth-toned safari palette
+   * Evokes: aged field journals, sun-bleached savannah grass, dusty trails
+   * ========================================================================== */
+  --paper-base: #F5F1E8;      /* Warm parchment - sunlit paper */
+  --paper-surface: #EDE8DC;   /* Aged journal page */
+  --paper-inset: #E3DBCC;     /* Dusty trail tone */
+  --paper-border: #CFC4B0;    /* Dried grass edge */
+
+  /* ==========================================================================
+   * GOLD/SUN ACCENT - African sun, not luxury
+   * Reserved for atmospheric highlights, not decoration
+   * ========================================================================== */
+  --sun-base: #C4973B;        /* Golden hour light */
+  --sun-soft: #D4A94A;        /* Softer sun highlight */
+  --sun-bg: #FAF6EB;          /* Warmest paper, touched by sun */
+  --sun-border: #E8D5A8;      /* Sun-kissed edge */
+
+  /* ==========================================================================
+   * INK COLORS - Editorial text hierarchy
+   * ========================================================================== */
+  --ink-primary: #1F1F1D;
+  --ink-body: #2E2E2A;
+  --ink-meta: #6B6A63;
+  --ink-muted: #9A978F;
+
+  /* ==========================================================================
+   * OUTCOME COLORS - Safari-industry signal colors
+   * ========================================================================== */
+  /* Book - Safari green */
+  --outcome-book-base: #2F5D50;
+  --outcome-book-bg: #EDF5F2;
+  --outcome-book-border: #C5DDD5;
+  --outcome-book-text: #1F4038;
+
+  /* Wait - Savannah amber */
+  --outcome-wait-base: #8C6D2E;
+  --outcome-wait-bg: #F7F3E8;
+  --outcome-wait-border: #E5D9B8;
+  --outcome-wait-text: #5C4720;
+
+  /* Switch - Safari blue-slate */
+  --outcome-switch-base: #3E5C76;
+  --outcome-switch-bg: #EEF2F6;
+  --outcome-switch-border: #C5D3DE;
+  --outcome-switch-text: #2A3F52;
+
+  /* Discard - Muted terracotta */
+  --outcome-discard-base: #8A3F3B;
+  --outcome-discard-bg: #F6EDEC;
+  --outcome-discard-border: #E0C5C3;
+  --outcome-discard-text: #5E2A28;
+
+  /* Refusal */
+  --refusal-bg: #F4ECEB;
+  --refusal-text: #7A2E2A;
+  --refusal-border: #E0C5C3;
+
+  /* ==========================================================================
+   * SEMANTIC MAPPINGS - For backward compatibility
+   * ========================================================================== */
+  --background: var(--paper-base);
+  --foreground: var(--ink-primary);
+}
+
+@theme inline {
+  /* Map CSS variables to Tailwind theme */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Font families */
+  --font-editorial: var(--font-editorial);
+  --font-ui: var(--font-ui);
+
+  /* Paper color scale mapped to neutral */
+  --color-neutral-50: var(--paper-base);
+  --color-neutral-100: var(--paper-surface);
+  --color-neutral-200: var(--paper-inset);
+  --color-neutral-300: var(--paper-border);
+  --color-neutral-400: var(--ink-muted);
+  --color-neutral-500: var(--ink-meta);
+  --color-neutral-600: var(--ink-body);
+  --color-neutral-700: var(--ink-primary);
+  --color-neutral-800: #1A1A18;
+  --color-neutral-900: #0F0F0E;
+
+  /* Outcome colors for Tailwind */
+  --color-outcome-book-bg: var(--outcome-book-bg);
+  --color-outcome-book-border: var(--outcome-book-border);
+  --color-outcome-book-base: var(--outcome-book-base);
+  --color-outcome-book-text: var(--outcome-book-text);
+
+  --color-outcome-wait-bg: var(--outcome-wait-bg);
+  --color-outcome-wait-border: var(--outcome-wait-border);
+  --color-outcome-wait-base: var(--outcome-wait-base);
+  --color-outcome-wait-text: var(--outcome-wait-text);
+
+  --color-outcome-switch-bg: var(--outcome-switch-bg);
+  --color-outcome-switch-border: var(--outcome-switch-border);
+  --color-outcome-switch-base: var(--outcome-switch-base);
+  --color-outcome-switch-text: var(--outcome-switch-text);
+
+  --color-outcome-discard-bg: var(--outcome-discard-bg);
+  --color-outcome-discard-border: var(--outcome-discard-border);
+  --color-outcome-discard-base: var(--outcome-discard-base);
+  --color-outcome-discard-text: var(--outcome-discard-text);
+
+  /* Sun/Gold accent colors for Tailwind */
+  --color-sun-base: var(--sun-base);
+  --color-sun-soft: var(--sun-soft);
+  --color-sun-bg: var(--sun-bg);
+  --color-sun-border: var(--sun-border);
+}
+
+/**
+ * Dark mode is disabled for Safari Index
+ * Editorial design requires consistent paper-toned backgrounds
+ */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-ui), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/**
+ * Font family utility classes
+ */
+.font-editorial {
+  font-family: var(--font-editorial), Georgia, "Times New Roman", serif;
+}
+
+.font-ui {
+  font-family: var(--font-ui), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/**
+ * Accessibility: Focus States
+ * Visible focus rings for keyboard navigation
+ */
+:focus-visible {
+  outline: 2px solid var(--ink-primary);
+  outline-offset: 2px;
+}
+
+/**
+ * Accessibility: Reduced Motion
+ * Respect user preferences for reduced motion
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/**
+ * Screen reader only utility
+ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/**
+ * Skip link for keyboard navigation
+ */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--ink-primary);
+  color: #ffffff;
+  padding: 8px 16px;
+  z-index: 100;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/**
+ * Outcome surface color utilities
+ * Apply via data attribute or class
+ */
+.outcome-book {
+  --outcome-bg: var(--outcome-book-bg);
+  --outcome-border: var(--outcome-book-border);
+  --outcome-text: var(--outcome-book-text);
+}
+
+.outcome-wait {
+  --outcome-bg: var(--outcome-wait-bg);
+  --outcome-border: var(--outcome-wait-border);
+  --outcome-text: var(--outcome-wait-text);
+}
+
+.outcome-switch {
+  --outcome-bg: var(--outcome-switch-bg);
+  --outcome-border: var(--outcome-switch-border);
+  --outcome-text: var(--outcome-switch-text);
+}
+
+.outcome-discard {
+  --outcome-bg: var(--outcome-discard-bg);
+  --outcome-border: var(--outcome-discard-border);
+  --outcome-text: var(--outcome-discard-text);
+}
+
+/**
+ * Ink text color utilities
+ */
+.text-ink-primary {
+  color: var(--ink-primary);
+}
+
+.text-ink-body {
+  color: var(--ink-body);
+}
+
+.text-ink-meta {
+  color: var(--ink-meta);
+}
+
+.text-ink-muted {
+  color: var(--ink-muted);
+}
+
+/**
+ * Paper background utilities
+ */
+.bg-paper {
+  background-color: var(--paper-base);
+}
+
+.bg-paper-surface {
+  background-color: var(--paper-surface);
+}
+
+.bg-paper-inset {
+  background-color: var(--paper-inset);
+}
+
+.border-paper-border {
+  border-color: var(--paper-border);
+}
+
+/**
+ * Hover states for interactive elements
+ */
+.hover\:border-sun-border:hover {
+  border-color: var(--sun-border);
+}
+
+/**
+ * Outcome background utilities
+ */
+.bg-outcome-book-bg {
+  background-color: var(--outcome-book-bg);
+}
+
+.border-outcome-book-border {
+  border-color: var(--outcome-book-border);
+}
+
+.text-outcome-book {
+  color: var(--outcome-book-base);
+}
+
+.bg-outcome-wait-bg {
+  background-color: var(--outcome-wait-bg);
+}
+
+.border-outcome-wait-border {
+  border-color: var(--outcome-wait-border);
+}
+
+.text-outcome-wait {
+  color: var(--outcome-wait-base);
+}
+
+.bg-outcome-switch-bg {
+  background-color: var(--outcome-switch-bg);
+}
+
+.border-outcome-switch-border {
+  border-color: var(--outcome-switch-border);
+}
+
+.text-outcome-switch {
+  color: var(--outcome-switch-base);
+}
+
+.bg-outcome-discard-bg {
+  background-color: var(--outcome-discard-bg);
+}
+
+.border-outcome-discard-border {
+  border-color: var(--outcome-discard-border);
+}
+
+.text-outcome-discard {
+  color: var(--outcome-discard-base);
+}
+
+/**
+ * Status color utilities (aliases to outcome colors)
+ */
+.bg-status-healthy-bg {
+  background-color: var(--outcome-book-bg);
+}
+
+.border-status-healthy-border {
+  border-color: var(--outcome-book-border);
+}
+
+.bg-status-watch-bg {
+  background-color: var(--outcome-wait-bg);
+}
+
+.border-status-watch-border {
+  border-color: var(--outcome-wait-border);
+}
+
+.bg-status-critical-bg {
+  background-color: var(--outcome-discard-bg);
+}
+
+.border-status-critical-border {
+  border-color: var(--outcome-discard-border);
+}
+
+/**
+ * Sun/Gold accent utilities
+ * African sun - atmospheric, not decorative
+ */
+.text-sun {
+  color: var(--sun-base);
+}
+
+.text-sun-soft {
+  color: var(--sun-soft);
+}
+
+.bg-sun-bg {
+  background-color: var(--sun-bg);
+}
+
+.border-sun-border {
+  border-color: var(--sun-border);
+}
+
+/**
+ * Arrival Page Animations
+ * Subtle, cinematic entrance animations
+ */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+/* Animation delays for staggered entrance */
+.animation-delay-100 {
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.animation-delay-300 {
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-bounce-subtle {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .animation-delay-100,
+  .animation-delay-200,
+  .animation-delay-300 {
+    opacity: 1;
+  }
+}

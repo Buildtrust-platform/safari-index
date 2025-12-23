@@ -1,0 +1,470 @@
+{
+ "Description": "Safari Index DynamoDB tables (staging)",
+ "Resources": {
+  "DecisionTable2908AF27": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "decision_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "traveler_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "created_at",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "lead_id",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "traveler-created-index",
+      "KeySchema": [
+       {
+        "AttributeName": "traveler_id",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "lead-created-index",
+      "KeySchema": [
+       {
+        "AttributeName": "lead_id",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "decision_id",
+      "KeyType": "HASH"
+     }
+    ],
+    "PointInTimeRecoverySpecification": {
+     "PointInTimeRecoveryEnabled": true
+    },
+    "TableName": "staging-safari-index-decisions"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexDataStack/DecisionTable/Resource"
+   }
+  },
+  "EventTable3F3CD4B2": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "event_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "traveler_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "created_at",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "event_type",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "session_id",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "traveler-created-index",
+      "KeySchema": [
+       {
+        "AttributeName": "traveler_id",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "type-created-index",
+      "KeySchema": [
+       {
+        "AttributeName": "event_type",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "session-created-index",
+      "KeySchema": [
+       {
+        "AttributeName": "session_id",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "event_id",
+      "KeyType": "HASH"
+     }
+    ],
+    "PointInTimeRecoverySpecification": {
+     "PointInTimeRecoveryEnabled": true
+    },
+    "TableName": "staging-safari-index-events"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexDataStack/EventTable/Resource"
+   }
+  },
+  "ReviewTable04EF996C": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "review_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "topic_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "created_at",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "status",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "topic-created-index",
+      "KeySchema": [
+       {
+        "AttributeName": "topic_id",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "status-created-index",
+      "KeySchema": [
+       {
+        "AttributeName": "status",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "review_id",
+      "KeyType": "HASH"
+     }
+    ],
+    "PointInTimeRecoverySpecification": {
+     "PointInTimeRecoveryEnabled": true
+    },
+    "TableName": "staging-safari-index-reviews"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexDataStack/ReviewTable/Resource"
+   }
+  },
+  "AssuranceTable249FE877": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "assurance_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "decision_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "traveler_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "created_at",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "decision-index",
+      "KeySchema": [
+       {
+        "AttributeName": "decision_id",
+        "KeyType": "HASH"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "traveler-created-index",
+      "KeySchema": [
+       {
+        "AttributeName": "traveler_id",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "assurance_id",
+      "KeyType": "HASH"
+     }
+    ],
+    "PointInTimeRecoverySpecification": {
+     "PointInTimeRecoveryEnabled": true
+    },
+    "TableName": "staging-safari-index-assurances"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexDataStack/AssuranceTable/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzI21jNQTCwv1k1OydbNyUzSqw4uSUzO1gEKxadU5iXm5qcAxUISk3JSdZzT8sCMWp2g1OL80qJksJB/aUlBaUmtTl5+SqpeVrF+mZGJninQ0KzizEzdotK8kszcVL0gCA0AqUBDm3EAAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexDataStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "DecisionTableName": {
+   "Description": "DynamoDB table for storing decisions",
+   "Value": {
+    "Ref": "DecisionTable2908AF27"
+   },
+   "Export": {
+    "Name": "StagingSafariIndexDecisionTableName"
+   }
+  },
+  "EventTableName": {
+   "Description": "DynamoDB table for event logging",
+   "Value": {
+    "Ref": "EventTable3F3CD4B2"
+   },
+   "Export": {
+    "Name": "StagingSafariIndexEventTableName"
+   }
+  },
+  "ReviewTableName": {
+   "Description": "DynamoDB table for review queue",
+   "Value": {
+    "Ref": "ReviewTable04EF996C"
+   },
+   "Export": {
+    "Name": "StagingSafariIndexReviewTableName"
+   }
+  },
+  "AssuranceTableName": {
+   "Description": "DynamoDB table for decision assurance artifacts",
+   "Value": {
+    "Ref": "AssuranceTable249FE877"
+   },
+   "Export": {
+    "Name": "StagingSafariIndexAssuranceTableName"
+   }
+  },
+  "ExportsOutputFnGetAttDecisionTable2908AF27Arn4224CD64": {
+   "Value": {
+    "Fn::GetAtt": [
+     "DecisionTable2908AF27",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "StagingSafariIndexDataStack:ExportsOutputFnGetAttDecisionTable2908AF27Arn4224CD64"
+   }
+  },
+  "ExportsOutputFnGetAttEventTable3F3CD4B2Arn3B7AEA50": {
+   "Value": {
+    "Fn::GetAtt": [
+     "EventTable3F3CD4B2",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "StagingSafariIndexDataStack:ExportsOutputFnGetAttEventTable3F3CD4B2Arn3B7AEA50"
+   }
+  },
+  "ExportsOutputFnGetAttReviewTable04EF996CArn37432891": {
+   "Value": {
+    "Fn::GetAtt": [
+     "ReviewTable04EF996C",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "StagingSafariIndexDataStack:ExportsOutputFnGetAttReviewTable04EF996CArn37432891"
+   }
+  },
+  "ExportsOutputFnGetAttAssuranceTable249FE877Arn5A26DAF0": {
+   "Value": {
+    "Fn::GetAtt": [
+     "AssuranceTable249FE877",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "StagingSafariIndexDataStack:ExportsOutputFnGetAttAssuranceTable249FE877Arn5A26DAF0"
+   }
+  },
+  "ExportsOutputRefDecisionTable2908AF279047AB50": {
+   "Value": {
+    "Ref": "DecisionTable2908AF27"
+   },
+   "Export": {
+    "Name": "StagingSafariIndexDataStack:ExportsOutputRefDecisionTable2908AF279047AB50"
+   }
+  },
+  "ExportsOutputRefEventTable3F3CD4B25C10E802": {
+   "Value": {
+    "Ref": "EventTable3F3CD4B2"
+   },
+   "Export": {
+    "Name": "StagingSafariIndexDataStack:ExportsOutputRefEventTable3F3CD4B25C10E802"
+   }
+  },
+  "ExportsOutputRefReviewTable04EF996C113914EB": {
+   "Value": {
+    "Ref": "ReviewTable04EF996C"
+   },
+   "Export": {
+    "Name": "StagingSafariIndexDataStack:ExportsOutputRefReviewTable04EF996C113914EB"
+   }
+  },
+  "ExportsOutputRefAssuranceTable249FE877F0EC3A3F": {
+   "Value": {
+    "Ref": "AssuranceTable249FE877"
+   },
+   "Export": {
+    "Name": "StagingSafariIndexDataStack:ExportsOutputRefAssuranceTable249FE877F0EC3A3F"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

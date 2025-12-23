@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+.npm/
+
+# Build outputs
+.next/
+out/
+dist/
+*.js.map
+*.d.ts.map
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Test outputs
+playwright-report/
+test-results/
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Misc
+*.tgz
+.cache/

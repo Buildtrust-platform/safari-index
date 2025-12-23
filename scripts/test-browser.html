@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safari Index - Decision API Test</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h1 { color: #333; margin-bottom: 5px; }
+    .subtitle { color: #666; margin-bottom: 20px; }
+    .config {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+    }
+    .config label { font-weight: bold; }
+    .config input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    .samples {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .sample-btn {
+      padding: 15px;
+      border: 2px solid #333;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+    }
+    .sample-btn:hover { background: #f0f0f0; transform: translateY(-2px); }
+    .sample-btn.refusal { border-color: #c00; }
+    .sample-btn.decision { border-color: #080; }
+    .sample-btn h3 { margin: 0 0 5px 0; }
+    .sample-btn p { margin: 0; color: #666; font-size: 14px; }
+    .sample-btn .expected {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .sample-btn.refusal .expected { background: #fee; color: #c00; }
+    .sample-btn.decision .expected { background: #efe; color: #080; }
+    .panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 800px) {
+      .panels { grid-template-columns: 1fr; }
+    }
+    .panel {
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      overflow: hidden;
+    }
+    .panel-header {
+      background: #333;
+      color: #fff;
+      padding: 10px 15px;
+      font-weight: bold;
+    }
+    .panel-body {
+      padding: 15px;
+      max-height: 500px;
+      overflow: auto;
+    }
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 13px;
+    }
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .status { font-weight: bold; }
+    .status.success { color: #080; }
+    .status.error { color: #c00; }
+    .decision-id { font-family: monospace; color: #666; }
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+    textarea {
+      width: 100%;
+      height: 400px;
+      font-family: monospace;
+      font-size: 13px;
+      padding: 10px;
+      border: none;
+      resize: vertical;
+    }
+    .send-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .send-btn:hover { background: #555; }
+    .send-btn:disabled { background: #999; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+  <h1>Safari Index Decision API</h1>
+  <p class="subtitle">Test the Decision Orchestrator endpoint</p>
+
+  <div class="config">
+    <label>API Endpoint:</label>
+    <input type="text" id="endpoint" value="https://qnxbpsr2a1.execute-api.eu-central-1.amazonaws.com/v1/decision/evaluate"
+           placeholder="https://xxxxx.execute-api.us-east-1.amazonaws.com/v1/decision/evaluate">
+  </div>
+
+  <h2>Sample Requests</h2>
+  <div class="samples">
+    <button class="sample-btn refusal" onclick="loadSample('guarantee')">
+      <h3>Guarantee Request</h3>
+      <p>"Can you guarantee I will see the Big Five?"</p>
+      <span class="expected">Expected: REFUSAL</span>
+    </button>
+    <button class="sample-btn refusal" onclick="loadSample('conflict')">
+      <h3>Conflicting Constraints</h3>
+      <p>Budget tier + luxury comfort</p>
+      <span class="expected">Expected: REFUSAL</span>
+    </button>
+    <button class="sample-btn refusal" onclick="loadSample('missing')">
+      <h3>Missing Inputs</h3>
+      <p>All context fields = unknown</p>
+      <span class="expected">Expected: REFUSAL</span>
+    </button>
+    <button class="sample-btn decision" onclick="loadSample('valid')">
+      <h3>Valid Decision</h3>
+      <p>"Is February good for Tanzania?"</p>
+      <span class="expected">Expected: DECISION</span>
+    </button>
+  </div>
+
+  <div class="panels">
+    <div class="panel">
+      <div class="panel-header">Request</div>
+      <div class="panel-body" style="padding: 0;">
+        <textarea id="request-body"></textarea>
+        <button class="send-btn" id="send-btn" onclick="sendRequest()">Send Request</button>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-header">Response</div>
+      <div class="panel-body" id="response-body">
+        <div class="loading">Select a sample or edit the request, then click Send</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const samples = {
+      guarantee: {
+        task: "DECISION",
+        tracking: { session_id: "sess_browser_test", traveler_id: null, lead_id: null },
+        user_context: {
+          traveler_type: "first_time",
+          budget_band: "premium",
+          pace_preference: "slow",
+          drive_tolerance_hours: 3,
+          risk_tolerance: "low",
+          dates: { type: "fixed_dates", start: "2026-02-10", end: "2026-02-20" },
+          group_size: 2,
+          prior_decisions: []
+        },
+        request: {
+          question: "Can you guarantee I will see the Big Five on this safari?",
+          scope: "thin_edge_scope_only=true",
+          destinations_considered: ["Tanzania"],
+          constraints: {}
+        },
+        facts: { known_constraints: [], known_tradeoffs: [], destination_notes: [] },
+        policy: {
+          must_refuse_if: ["guarantee_requested", "inputs_conflict_unbounded", "missing_material_inputs"],
+          forbidden_phrases: ["unforgettable", "magical", "once-in-a-lifetime"]
+        }
+      },
+      conflict: {
+        task: "DECISION",
+        tracking: { session_id: "sess_browser_test", traveler_id: null, lead_id: null },
+        user_context: {
+          traveler_type: "first_time",
+          budget_band: "budget",
+          pace_preference: "slow",
+          drive_tolerance_hours: 1,
+          risk_tolerance: "low",
+          dates: { type: "fixed_dates", start: "2026-07-15", end: "2026-07-25" },
+          group_size: 4,
+          prior_decisions: []
+        },
+        request: {
+          question: "Plan me a luxury safari covering all major parks with no driving",
+          scope: "thin_edge_scope_only=true",
+          destinations_considered: ["Tanzania"],
+          constraints: { comfort_level: "luxury" }
+        },
+        facts: {
+          known_constraints: ["Budget tier conflicts with luxury expectation"],
+          known_tradeoffs: [],
+          destination_notes: []
+        },
+        policy: {
+          must_refuse_if: ["guarantee_requested", "inputs_conflict_unbounded", "missing_material_inputs"],
+          forbidden_phrases: []
+        }
+      },
+      missing: {
+        task: "DECISION",
+        tracking: { session_id: "sess_browser_test", traveler_id: null, lead_id: null },
+        user_context: {
+          traveler_type: "unknown",
+          budget_band: "unknown",
+          pace_preference: "unknown",
+          drive_tolerance_hours: 0,
+          risk_tolerance: "unknown",
+          dates: { type: "unknown" },
+          group_size: 0,
+          prior_decisions: []
+        },
+        request: {
+          question: "Should I go on a safari?",
+          scope: "thin_edge_scope_only=true",
+          destinations_considered: [],
+          constraints: {}
+        },
+        facts: { known_constraints: [], known_tradeoffs: [], destination_notes: [] },
+        policy: {
+          must_refuse_if: ["guarantee_requested", "inputs_conflict_unbounded", "missing_material_inputs"],
+          forbidden_phrases: []
+        }
+      },
+      valid: {
+        task: "DECISION",
+        tracking: { session_id: "sess_browser_test", traveler_id: "trav_browser123", lead_id: null },
+        user_context: {
+          traveler_type: "first_time",
+          budget_band: "fair_value",
+          pace_preference: "balanced",
+          drive_tolerance_hours: 4,
+          risk_tolerance: "medium",
+          dates: { type: "month_year", month: "February", year: 2026 },
+          group_size: 2,
+          prior_decisions: []
+        },
+        request: {
+          question: "Is February a good time for a safari in Tanzania?",
+          scope: "thin_edge_scope_only=true",
+          destinations_considered: ["Tanzania"],
+          constraints: {}
+        },
+        facts: {
+          known_constraints: ["February is during short dry season"],
+          known_tradeoffs: ["Higher wildlife density but also higher visitor numbers"],
+          destination_notes: ["Serengeti calving season January-March"]
+        },
+        policy: {
+          must_refuse_if: ["guarantee_requested", "inputs_conflict_unbounded", "missing_material_inputs"],
+          forbidden_phrases: ["unforgettable", "magical"]
+        }
+      }
+    };
+
+    function loadSample(name) {
+      document.getElementById('request-body').value = JSON.stringify(samples[name], null, 2);
+    }
+
+    async function sendRequest() {
+      const endpoint = document.getElementById('endpoint').value;
+      const body = document.getElementById('request-body').value;
+      const responseEl = document.getElementById('response-body');
+      const sendBtn = document.getElementById('send-btn');
+
+      sendBtn.disabled = true;
+      sendBtn.textContent = 'Sending...';
+      responseEl.innerHTML = '<div class="loading">Sending request...</div>';
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: body
+        });
+
+        const data = await response.json();
+        const outputType = data.output?.type || data.type || 'unknown';
+        const decisionId = data.decision_id || 'none';
+        const isSuccess = response.ok;
+
+        responseEl.innerHTML = `
+          <div class="result-header">
+            <span class="status ${isSuccess ? 'success' : 'error'}">
+              ${response.status} ${response.statusText} — ${outputType.toUpperCase()}
+            </span>
+            <span class="decision-id">${decisionId}</span>
+          </div>
+          <pre>${JSON.stringify(data, null, 2)}</pre>
+        `;
+      } catch (err) {
+        responseEl.innerHTML = `
+          <div class="result-header">
+            <span class="status error">Error</span>
+          </div>
+          <pre>${err.message}\n\nMake sure the API is running and CORS is enabled.</pre>
+        `;
+      }
+
+      sendBtn.disabled = false;
+      sendBtn.textContent = 'Send Request';
+    }
+
+    // Load first sample by default
+    loadSample('valid');
+  </script>
+</body>
+</html>

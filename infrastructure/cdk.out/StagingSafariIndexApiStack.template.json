@@ -1,0 +1,1670 @@
+{
+ "Description": "Safari Index API Gateway and Decision Orchestrator (staging)",
+ "Resources": {
+  "DecisionOrchestratorLambdaServiceRole60F4ABB4": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/DecisionOrchestratorLambda/ServiceRole/Resource"
+   }
+  },
+  "DecisionOrchestratorLambdaServiceRoleDefaultPolicyFCBE1A5A": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttDecisionTable2908AF27Arn4224CD64"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttDecisionTable2908AF27Arn4224CD64"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttEventTable3F3CD4B2Arn3B7AEA50"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttEventTable3F3CD4B2Arn3B7AEA50"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttReviewTable04EF996CArn37432891"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttReviewTable04EF996CArn37432891"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttAssuranceTable249FE877Arn5A26DAF0"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttAssuranceTable249FE877Arn5A26DAF0"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttDecisionTable2908AF27Arn4224CD64"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttDecisionTable2908AF27Arn4224CD64"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttDecisionTable2908AF27Arn4224CD64"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttDecisionTable2908AF27Arn4224CD64"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttEventTable3F3CD4B2Arn3B7AEA50"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttEventTable3F3CD4B2Arn3B7AEA50"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttEventTable3F3CD4B2Arn3B7AEA50"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttEventTable3F3CD4B2Arn3B7AEA50"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttReviewTable04EF996CArn37432891"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttReviewTable04EF996CArn37432891"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttReviewTable04EF996CArn37432891"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttReviewTable04EF996CArn37432891"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttAssuranceTable249FE877Arn5A26DAF0"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttAssuranceTable249FE877Arn5A26DAF0"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttAssuranceTable249FE877Arn5A26DAF0"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputFnGetAttAssuranceTable249FE877Arn5A26DAF0"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "bedrock:InvokeModel",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "DecisionOrchestratorLambdaServiceRoleDefaultPolicyFCBE1A5A",
+    "Roles": [
+     {
+      "Ref": "DecisionOrchestratorLambdaServiceRole60F4ABB4"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/DecisionOrchestratorLambda/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "DecisionOrchestratorLambdaCFD5967E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-928622536086-eu-central-1",
+     "S3Key": "b043cb15129a43e2264a1af36251b7f65822b17d27952249af9656db8b55b53f.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "DECISION_TABLE": {
+       "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputRefDecisionTable2908AF279047AB50"
+      },
+      "EVENT_TABLE": {
+       "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputRefEventTable3F3CD4B25C10E802"
+      },
+      "REVIEW_TABLE": {
+       "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputRefReviewTable04EF996C113914EB"
+      },
+      "ASSURANCE_TABLE": {
+       "Fn::ImportValue": "StagingSafariIndexDataStack:ExportsOutputRefAssuranceTable249FE877F0EC3A3F"
+      },
+      "LOGIC_VERSION": "rules_v1.0",
+      "PROMPT_VERSION": "prompt_v1.0",
+      "BEDROCK_REGION": "us-east-1",
+      "BEDROCK_MODEL_ID": "anthropic.claude-3-sonnet-20240229-v1:0"
+     }
+    },
+    "FunctionName": "staging-safari-index-decision-orchestrator",
+    "Handler": "handler.handler",
+    "MemorySize": 512,
+    "Role": {
+     "Fn::GetAtt": [
+      "DecisionOrchestratorLambdaServiceRole60F4ABB4",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 60
+   },
+   "DependsOn": [
+    "DecisionOrchestratorLambdaServiceRoleDefaultPolicyFCBE1A5A",
+    "DecisionOrchestratorLambdaServiceRole60F4ABB4"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/DecisionOrchestratorLambda/Resource",
+    "aws:asset:path": "asset.b043cb15129a43e2264a1af36251b7f65822b17d27952249af9656db8b55b53f",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "DecisionOrchestratorLambdaLogRetentionBCEA2DF3": {
+   "Type": "Custom::LogRetention",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+      "Arn"
+     ]
+    },
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "DecisionOrchestratorLambdaCFD5967E"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 30
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/DecisionOrchestratorLambda/LogRetention/Resource"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:PutRetentionPolicy",
+        "logs:DeleteRetentionPolicy"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+    "Roles": [
+     {
+      "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Handler": "index.handler",
+    "Runtime": "nodejs22.x",
+    "Timeout": 900,
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-928622536086-eu-central-1",
+     "S3Key": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource",
+    "aws:asset:path": "asset.2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "SafariIndexApiD1A580DE": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Description": "Decision authority API for Safari Index",
+    "Name": "Staging Safari Index Decision API"
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Resource"
+   }
+  },
+  "SafariIndexApiCloudWatchRole1CE5D0CA": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+       ]
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/CloudWatchRole/Resource"
+   }
+  },
+  "SafariIndexApiAccount2B10B565": {
+   "Type": "AWS::ApiGateway::Account",
+   "Properties": {
+    "CloudWatchRoleArn": {
+     "Fn::GetAtt": [
+      "SafariIndexApiCloudWatchRole1CE5D0CA",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "SafariIndexApiD1A580DE"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Account"
+   }
+  },
+  "SafariIndexApiDeployment2673AD0E7e76a649a78b367ce8b91bfa7f1d8e68": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Decision authority API for Safari Index",
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "DependsOn": [
+    "SafariIndexApiassuranceassuranceidGET5A5B0028",
+    "SafariIndexApiassuranceassuranceidOPTIONSA4F00BC4",
+    "SafariIndexApiassuranceassuranceid4301AA5E",
+    "SafariIndexApiassurancegenerateOPTIONS6A4BB9F2",
+    "SafariIndexApiassurancegeneratePOST3D24E093",
+    "SafariIndexApiassurancegenerateC2555880",
+    "SafariIndexApiassuranceOPTIONS4D99F094",
+    "SafariIndexApiassurance2E6CB52C",
+    "SafariIndexApidecisionevaluateOPTIONSE1D5741A",
+    "SafariIndexApidecisionevaluatePOST2EA10C73",
+    "SafariIndexApidecisionevaluate90034056",
+    "SafariIndexApidecisionOPTIONS650C4DFD",
+    "SafariIndexApidecision38F1F7E0",
+    "SafariIndexApiopshealthGETEEBAF479",
+    "SafariIndexApiopshealthOPTIONS94599564",
+    "SafariIndexApiopshealthA2DA705B",
+    "SafariIndexApiopsOPTIONSA5467EAC",
+    "SafariIndexApiopsB77AC9DC",
+    "SafariIndexApiOPTIONSC265D292"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Deployment/Resource",
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "SafariIndexApiDeploymentStagev18350D785": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": {
+     "Ref": "SafariIndexApiDeployment2673AD0E7e76a649a78b367ce8b91bfa7f1d8e68"
+    },
+    "MethodSettings": [
+     {
+      "DataTraceEnabled": false,
+      "HttpMethod": "*",
+      "ResourcePath": "/*",
+      "ThrottlingBurstLimit": 200,
+      "ThrottlingRateLimit": 100
+     }
+    ],
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    },
+    "StageName": "v1"
+   },
+   "DependsOn": [
+    "SafariIndexApiAccount2B10B565"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/DeploymentStage.v1/Resource"
+   }
+  },
+  "SafariIndexApiOPTIONSC265D292": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Fn::GetAtt": [
+      "SafariIndexApiD1A580DE",
+      "RootResourceId"
+     ]
+    },
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/OPTIONS/Resource"
+   }
+  },
+  "SafariIndexApidecision38F1F7E0": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "SafariIndexApiD1A580DE",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "decision",
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/decision/Resource"
+   }
+  },
+  "SafariIndexApidecisionOPTIONS650C4DFD": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "SafariIndexApidecision38F1F7E0"
+    },
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/decision/OPTIONS/Resource"
+   }
+  },
+  "SafariIndexApidecisionevaluate90034056": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "SafariIndexApidecision38F1F7E0"
+    },
+    "PathPart": "evaluate",
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/decision/evaluate/Resource"
+   }
+  },
+  "SafariIndexApidecisionevaluateOPTIONSE1D5741A": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "SafariIndexApidecisionevaluate90034056"
+    },
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/decision/evaluate/OPTIONS/Resource"
+   }
+  },
+  "SafariIndexApidecisionevaluatePOSTApiPermissionStagingSafariIndexApiStackSafariIndexApiBE814CF6POSTdecisionevaluateA3FB2FE5": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DecisionOrchestratorLambdaCFD5967E",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:eu-central-1:928622536086:",
+       {
+        "Ref": "SafariIndexApiD1A580DE"
+       },
+       "/",
+       {
+        "Ref": "SafariIndexApiDeploymentStagev18350D785"
+       },
+       "/POST/decision/evaluate"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/decision/evaluate/POST/ApiPermission.StagingSafariIndexApiStackSafariIndexApiBE814CF6.POST..decision.evaluate"
+   }
+  },
+  "SafariIndexApidecisionevaluatePOSTApiPermissionTestStagingSafariIndexApiStackSafariIndexApiBE814CF6POSTdecisionevaluateDA6B9C0C": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DecisionOrchestratorLambdaCFD5967E",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:eu-central-1:928622536086:",
+       {
+        "Ref": "SafariIndexApiD1A580DE"
+       },
+       "/test-invoke-stage/POST/decision/evaluate"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/decision/evaluate/POST/ApiPermission.Test.StagingSafariIndexApiStackSafariIndexApiBE814CF6.POST..decision.evaluate"
+   }
+  },
+  "SafariIndexApidecisionevaluatePOST2EA10C73": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:eu-central-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "DecisionOrchestratorLambdaCFD5967E",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "SafariIndexApidecisionevaluate90034056"
+    },
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/decision/evaluate/POST/Resource"
+   }
+  },
+  "SafariIndexApiassurance2E6CB52C": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "SafariIndexApiD1A580DE",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "assurance",
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/assurance/Resource"
+   }
+  },
+  "SafariIndexApiassuranceOPTIONS4D99F094": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "SafariIndexApiassurance2E6CB52C"
+    },
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/assurance/OPTIONS/Resource"
+   }
+  },
+  "SafariIndexApiassurancegenerateC2555880": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "SafariIndexApiassurance2E6CB52C"
+    },
+    "PathPart": "generate",
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/assurance/generate/Resource"
+   }
+  },
+  "SafariIndexApiassurancegenerateOPTIONS6A4BB9F2": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "SafariIndexApiassurancegenerateC2555880"
+    },
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/assurance/generate/OPTIONS/Resource"
+   }
+  },
+  "SafariIndexApiassurancegeneratePOSTApiPermissionStagingSafariIndexApiStackSafariIndexApiBE814CF6POSTassurancegenerate3AF97E51": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DecisionOrchestratorLambdaCFD5967E",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:eu-central-1:928622536086:",
+       {
+        "Ref": "SafariIndexApiD1A580DE"
+       },
+       "/",
+       {
+        "Ref": "SafariIndexApiDeploymentStagev18350D785"
+       },
+       "/POST/assurance/generate"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/assurance/generate/POST/ApiPermission.StagingSafariIndexApiStackSafariIndexApiBE814CF6.POST..assurance.generate"
+   }
+  },
+  "SafariIndexApiassurancegeneratePOSTApiPermissionTestStagingSafariIndexApiStackSafariIndexApiBE814CF6POSTassurancegenerate9E9C8377": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DecisionOrchestratorLambdaCFD5967E",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:eu-central-1:928622536086:",
+       {
+        "Ref": "SafariIndexApiD1A580DE"
+       },
+       "/test-invoke-stage/POST/assurance/generate"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/assurance/generate/POST/ApiPermission.Test.StagingSafariIndexApiStackSafariIndexApiBE814CF6.POST..assurance.generate"
+   }
+  },
+  "SafariIndexApiassurancegeneratePOST3D24E093": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:eu-central-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "DecisionOrchestratorLambdaCFD5967E",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "SafariIndexApiassurancegenerateC2555880"
+    },
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/assurance/generate/POST/Resource"
+   }
+  },
+  "SafariIndexApiassuranceassuranceid4301AA5E": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "SafariIndexApiassurance2E6CB52C"
+    },
+    "PathPart": "{assurance_id}",
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/assurance/{assurance_id}/Resource"
+   }
+  },
+  "SafariIndexApiassuranceassuranceidOPTIONSA4F00BC4": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "SafariIndexApiassuranceassuranceid4301AA5E"
+    },
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/assurance/{assurance_id}/OPTIONS/Resource"
+   }
+  },
+  "SafariIndexApiassuranceassuranceidGETApiPermissionStagingSafariIndexApiStackSafariIndexApiBE814CF6GETassuranceassuranceidDD8BCF0A": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DecisionOrchestratorLambdaCFD5967E",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:eu-central-1:928622536086:",
+       {
+        "Ref": "SafariIndexApiD1A580DE"
+       },
+       "/",
+       {
+        "Ref": "SafariIndexApiDeploymentStagev18350D785"
+       },
+       "/GET/assurance/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/assurance/{assurance_id}/GET/ApiPermission.StagingSafariIndexApiStackSafariIndexApiBE814CF6.GET..assurance.{assurance_id}"
+   }
+  },
+  "SafariIndexApiassuranceassuranceidGETApiPermissionTestStagingSafariIndexApiStackSafariIndexApiBE814CF6GETassuranceassuranceidAB275D31": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DecisionOrchestratorLambdaCFD5967E",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:eu-central-1:928622536086:",
+       {
+        "Ref": "SafariIndexApiD1A580DE"
+       },
+       "/test-invoke-stage/GET/assurance/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/assurance/{assurance_id}/GET/ApiPermission.Test.StagingSafariIndexApiStackSafariIndexApiBE814CF6.GET..assurance.{assurance_id}"
+   }
+  },
+  "SafariIndexApiassuranceassuranceidGET5A5B0028": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:eu-central-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "DecisionOrchestratorLambdaCFD5967E",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "SafariIndexApiassuranceassuranceid4301AA5E"
+    },
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/assurance/{assurance_id}/GET/Resource"
+   }
+  },
+  "SafariIndexApiopsB77AC9DC": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "SafariIndexApiD1A580DE",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "ops",
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/ops/Resource"
+   }
+  },
+  "SafariIndexApiopsOPTIONSA5467EAC": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "SafariIndexApiopsB77AC9DC"
+    },
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/ops/OPTIONS/Resource"
+   }
+  },
+  "SafariIndexApiopshealthA2DA705B": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "SafariIndexApiopsB77AC9DC"
+    },
+    "PathPart": "health",
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/ops/health/Resource"
+   }
+  },
+  "SafariIndexApiopshealthOPTIONS94599564": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "SafariIndexApiopshealthA2DA705B"
+    },
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/ops/health/OPTIONS/Resource"
+   }
+  },
+  "SafariIndexApiopshealthGETApiPermissionStagingSafariIndexApiStackSafariIndexApiBE814CF6GETopshealth21CD1CFE": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DecisionOrchestratorLambdaCFD5967E",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:eu-central-1:928622536086:",
+       {
+        "Ref": "SafariIndexApiD1A580DE"
+       },
+       "/",
+       {
+        "Ref": "SafariIndexApiDeploymentStagev18350D785"
+       },
+       "/GET/ops/health"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/ops/health/GET/ApiPermission.StagingSafariIndexApiStackSafariIndexApiBE814CF6.GET..ops.health"
+   }
+  },
+  "SafariIndexApiopshealthGETApiPermissionTestStagingSafariIndexApiStackSafariIndexApiBE814CF6GETopshealthF88CF9E9": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DecisionOrchestratorLambdaCFD5967E",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:eu-central-1:928622536086:",
+       {
+        "Ref": "SafariIndexApiD1A580DE"
+       },
+       "/test-invoke-stage/GET/ops/health"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/ops/health/GET/ApiPermission.Test.StagingSafariIndexApiStackSafariIndexApiBE814CF6.GET..ops.health"
+   }
+  },
+  "SafariIndexApiopshealthGETEEBAF479": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:eu-central-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "DecisionOrchestratorLambdaCFD5967E",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "SafariIndexApiopshealthA2DA705B"
+    },
+    "RestApiId": {
+     "Ref": "SafariIndexApiD1A580DE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/SafariIndexApi/Default/ops/health/GET/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/02Q3U7DMAyFn4X71KAWHqADcTXEVB5gylJTvKZJVTtMVdV3J8mG1it/xz/HTkooqwqeHvSFC9P2haUTLF+iTa9i6rhYPZxaDct7cEbIO/X67bZ8wGkg5qhWRXqApfEWUyHHg7dk5tyXaVVcHTUzCkOdQtSwC6ZH2WlGZX3HsPddg4Iur9AjdVrwoudojSz1SNn9jrUxPjhRbzhaPw9xLmU3Kr6myyddIY76MBnMCz9Qfnybijf6r96WZF7XezpfnYzIdduexJ9BxiCrcr5FOPPjb/kML/Fvz0xUTPFGGhCaa/wD3yDegXgBAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexApiStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "SafariIndexApiEndpointC41135A5": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "SafariIndexApiD1A580DE"
+      },
+      ".execute-api.eu-central-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "SafariIndexApiDeploymentStagev18350D785"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "ApiUrl": {
+   "Description": "Safari Index Decision API URL",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "SafariIndexApiD1A580DE"
+      },
+      ".execute-api.eu-central-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "SafariIndexApiDeploymentStagev18350D785"
+      },
+      "/"
+     ]
+    ]
+   },
+   "Export": {
+    "Name": "StagingSafariIndexApiUrl"
+   }
+  },
+  "DecisionEndpoint": {
+   "Description": "Decision evaluation endpoint",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "SafariIndexApiD1A580DE"
+      },
+      ".execute-api.eu-central-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "SafariIndexApiDeploymentStagev18350D785"
+      },
+      "/decision/evaluate"
+     ]
+    ]
+   },
+   "Export": {
+    "Name": "StagingSafariIndexDecisionEndpoint"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

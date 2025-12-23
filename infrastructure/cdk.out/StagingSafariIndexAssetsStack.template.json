@@ -1,0 +1,346 @@
+{
+ "Description": "Safari Index S3 + CloudFront CDN for static assets (staging)",
+ "Resources": {
+  "AssetsBucket5CB76180": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "SSEAlgorithm": "AES256"
+       }
+      }
+     ]
+    },
+    "BucketName": "staging-safari-index-assets-928622536086-eu-central-1",
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexAssetsStack/AssetsBucket/Resource"
+   }
+  },
+  "AssetsBucketPolicyFFACF6C4": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "AssetsBucket5CB76180"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "AssetsBucket5CB76180",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "AssetsBucket5CB76180",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "s3:GetObject",
+       "Condition": {
+        "StringEquals": {
+         "AWS:SourceArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":cloudfront::",
+            {
+             "Ref": "AWS::AccountId"
+            },
+            ":distribution/",
+            {
+             "Ref": "AssetsDistribution16B90841"
+            }
+           ]
+          ]
+         }
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "cloudfront.amazonaws.com"
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "AssetsBucket5CB76180",
+            "Arn"
+           ]
+          },
+          "/*"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexAssetsStack/AssetsBucket/Policy/Resource"
+   }
+  },
+  "AssetsCachePolicyE2E5AAD9": {
+   "Type": "AWS::CloudFront::CachePolicy",
+   "Properties": {
+    "CachePolicyConfig": {
+     "Comment": "Long TTL cache for versioned static assets",
+     "DefaultTTL": 31536000,
+     "MaxTTL": 31536000,
+     "MinTTL": 86400,
+     "Name": "staging-safari-index-assets-cache",
+     "ParametersInCacheKeyAndForwardedToOrigin": {
+      "CookiesConfig": {
+       "CookieBehavior": "none"
+      },
+      "EnableAcceptEncodingBrotli": true,
+      "EnableAcceptEncodingGzip": true,
+      "HeadersConfig": {
+       "HeaderBehavior": "none"
+      },
+      "QueryStringsConfig": {
+       "QueryStringBehavior": "none"
+      }
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexAssetsStack/AssetsCachePolicy/Resource"
+   }
+  },
+  "AssetsResponseHeadersPolicyCE1CE087": {
+   "Type": "AWS::CloudFront::ResponseHeadersPolicy",
+   "Properties": {
+    "ResponseHeadersPolicyConfig": {
+     "Comment": "Security headers for static assets",
+     "CustomHeadersConfig": {
+      "Items": [
+       {
+        "Header": "Cache-Control",
+        "Override": false,
+        "Value": "public, max-age=31536000, immutable"
+       }
+      ]
+     },
+     "Name": "staging-safari-index-assets-headers",
+     "SecurityHeadersConfig": {
+      "ContentTypeOptions": {
+       "Override": true
+      },
+      "FrameOptions": {
+       "FrameOption": "DENY",
+       "Override": true
+      },
+      "ReferrerPolicy": {
+       "Override": true,
+       "ReferrerPolicy": "strict-origin-when-cross-origin"
+      },
+      "StrictTransportSecurity": {
+       "AccessControlMaxAgeSec": 31536000,
+       "IncludeSubdomains": true,
+       "Override": true
+      },
+      "XSSProtection": {
+       "ModeBlock": true,
+       "Override": true,
+       "Protection": true
+      }
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexAssetsStack/AssetsResponseHeadersPolicy/Resource"
+   }
+  },
+  "AssetsDistributionOrigin1S3OriginAccessControl87E18FB2": {
+   "Type": "AWS::CloudFront::OriginAccessControl",
+   "Properties": {
+    "OriginAccessControlConfig": {
+     "Name": "StagingSafariIndexAssetsStacOrigin1S3OriginAccessControlA8F2FB40",
+     "OriginAccessControlOriginType": "s3",
+     "SigningBehavior": "always",
+     "SigningProtocol": "sigv4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexAssetsStack/AssetsDistribution/Origin1/S3OriginAccessControl/Resource"
+   }
+  },
+  "AssetsDistribution16B90841": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "Comment": "Safari Index Assets CDN (staging)",
+     "CustomErrorResponses": [
+      {
+       "ErrorCachingMinTTL": 300,
+       "ErrorCode": 403
+      },
+      {
+       "ErrorCachingMinTTL": 300,
+       "ErrorCode": 404
+      }
+     ],
+     "DefaultCacheBehavior": {
+      "AllowedMethods": [
+       "GET",
+       "HEAD"
+      ],
+      "CachePolicyId": {
+       "Ref": "AssetsCachePolicyE2E5AAD9"
+      },
+      "Compress": true,
+      "ResponseHeadersPolicyId": {
+       "Ref": "AssetsResponseHeadersPolicyCE1CE087"
+      },
+      "TargetOriginId": "StagingSafariIndexAssetsStackAssetsDistributionOrigin1D9652F66",
+      "ViewerProtocolPolicy": "redirect-to-https"
+     },
+     "Enabled": true,
+     "HttpVersion": "http2and3",
+     "IPV6Enabled": true,
+     "Origins": [
+      {
+       "DomainName": {
+        "Fn::GetAtt": [
+         "AssetsBucket5CB76180",
+         "RegionalDomainName"
+        ]
+       },
+       "Id": "StagingSafariIndexAssetsStackAssetsDistributionOrigin1D9652F66",
+       "OriginAccessControlId": {
+        "Fn::GetAtt": [
+         "AssetsDistributionOrigin1S3OriginAccessControl87E18FB2",
+         "Id"
+        ]
+       },
+       "S3OriginConfig": {
+        "OriginAccessIdentity": ""
+       }
+      }
+     ],
+     "PriceClass": "PriceClass_100"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexAssetsStack/AssetsDistribution/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/3WQQQ6CMBBFz+K+jIbqARQX7jRwAANl0AFsSafVGNK7i2ICC139+W/+zyQTQywlrBb5gyNVNlFLBfSZy1UjBnTuWUK/86pBJ5JKf6dRTqYl9Zzw6INQrfFlZY120Ce5uuIUnNsUuTOa8YB5iZan0O/FnthZKrwjo0Umj5YupLdKIXMynLKmfXf/4Hk5hE/Qu867ILQpEWpe3uM1bIY/1EwUWa8d3RDSUV9EwPKvJAEAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "StagingSafariIndexAssetsStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "AssetsBucketName": {
+   "Description": "S3 bucket for static assets",
+   "Value": {
+    "Ref": "AssetsBucket5CB76180"
+   },
+   "Export": {
+    "Name": "StagingSafariIndexAssetsBucketName"
+   }
+  },
+  "AssetsDistributionDomain": {
+   "Description": "CloudFront distribution domain for assets",
+   "Value": {
+    "Fn::GetAtt": [
+     "AssetsDistribution16B90841",
+     "DomainName"
+    ]
+   },
+   "Export": {
+    "Name": "StagingSafariIndexAssetsDistributionDomain"
+   }
+  },
+  "AssetsDistributionId": {
+   "Description": "CloudFront distribution ID for cache invalidation",
+   "Value": {
+    "Ref": "AssetsDistribution16B90841"
+   },
+   "Export": {
+    "Name": "StagingSafariIndexAssetsDistributionId"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

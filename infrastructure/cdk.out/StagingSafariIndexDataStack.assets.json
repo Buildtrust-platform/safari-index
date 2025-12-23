@@ -1,0 +1,21 @@
+{
+  "version": "48.0.0",
+  "files": {
+    "9343313267b102b28ee625b2e90c09304a7301a3885cabfd9b929636436a507f": {
+      "displayName": "StagingSafariIndexDataStack Template",
+      "source": {
+        "path": "StagingSafariIndexDataStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "928622536086-eu-central-1-36d5e4e4": {
+          "bucketName": "cdk-hnb659fds-assets-928622536086-eu-central-1",
+          "objectKey": "9343313267b102b28ee625b2e90c09304a7301a3885cabfd9b929636436a507f.json",
+          "region": "eu-central-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::928622536086:role/cdk-hnb659fds-file-publishing-role-928622536086-eu-central-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

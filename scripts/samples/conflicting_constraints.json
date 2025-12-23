@@ -1,0 +1,53 @@
+{
+  "task": "DECISION",
+  "tracking": {
+    "session_id": "sess_test_conflict",
+    "traveler_id": null,
+    "lead_id": null
+  },
+  "user_context": {
+    "traveler_type": "first_time",
+    "budget_band": "budget",
+    "pace_preference": "slow",
+    "drive_tolerance_hours": 1,
+    "risk_tolerance": "low",
+    "dates": {
+      "type": "fixed_dates",
+      "start": "2026-07-15",
+      "end": "2026-07-25"
+    },
+    "group_size": 4,
+    "prior_decisions": []
+  },
+  "request": {
+    "question": "Plan me a luxury safari covering all major parks with no driving",
+    "scope": "thin_edge_scope_only=true",
+    "destinations_considered": ["Tanzania"],
+    "constraints": {
+      "comfort_level": "luxury",
+      "parks_required": ["Serengeti", "Ngorongoro", "Tarangire", "Lake Manyara", "Selous"],
+      "max_daily_drive": 0
+    }
+  },
+  "facts": {
+    "known_constraints": [
+      "Budget tier conflicts with luxury expectation",
+      "Zero drive tolerance incompatible with multi-park coverage"
+    ],
+    "known_tradeoffs": [],
+    "destination_notes": []
+  },
+  "policy": {
+    "must_refuse_if": [
+      "guarantee_requested",
+      "inputs_conflict_unbounded",
+      "missing_material_inputs"
+    ],
+    "forbidden_phrases": [
+      "unforgettable",
+      "magical",
+      "once-in-a-lifetime",
+      "breathtaking"
+    ]
+  }
+}

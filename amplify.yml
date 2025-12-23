@@ -1,0 +1,21 @@
+version: 1
+applications:
+  - appRoot: frontend/safari-index
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm ci
+            - npm run validate-env
+        build:
+          commands:
+            - echo "Building with NEXT_PUBLIC_APP_MODE=$NEXT_PUBLIC_APP_MODE"
+            - npm run build
+      artifacts:
+        baseDirectory: .next
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
+          - .next/cache/**/*
