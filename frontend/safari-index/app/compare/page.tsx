@@ -7,9 +7,7 @@
  */
 
 import { useState, useCallback, useEffect } from 'react';
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { isBuildMode } from '../../lib/app-mode';
 import { getPublishedTopics, type DecisionTopic } from '../content/decision-topics';
 import { buildRequestEnvelope } from '../../lib/page-assembly';
 import { API_BASE } from '../../lib/api-client';
@@ -67,10 +65,7 @@ function TopicSelector({
 }
 
 export default function ComparePage() {
-  if (!isBuildMode()) {
-    notFound();
-  }
-
+  // PRODUCTION-SAFE: Read-only comparison tool, no internal diagnostics
   const topics = getPublishedTopics();
 
   const [selectedA, setSelectedA] = useState<string | null>(null);
@@ -368,7 +363,7 @@ export default function ComparePage() {
         {/* Footer */}
         <footer className="mt-16 pt-8 border-t border-stone-200">
           <p className="text-sm text-stone-400">
-            Staging preview. Not visible in production.
+            Safari Index — Decision support for safari planning.
           </p>
         </footer>
       </PageGrid>

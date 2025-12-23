@@ -1,10 +1,11 @@
 /**
  * StagingShell
  *
- * Staging-only layout wrapper for build-mode pages:
- * - /explore
- * - /compare
- * - /dev/*
+ * INTERNAL: Staging-only layout wrapper for dev pages.
+ * Now only used for /dev/* routes since /explore and /compare are production-visible.
+ *
+ * Classification: INTERNAL (gated forever)
+ * Reason: Staging navigation wrapper with "Staging" badge.
  *
  * Provides:
  * - Minimal header with navigation links
@@ -17,7 +18,6 @@
  * - 03_ux_flow.md: Single primary column
  * - 04_metrics_truth.md: No tracking/cookies
  * - 13_frontend_templates.md: Semantic HTML/ARIA
- * - MVP_FREEZE.md: Staging-only, production unchanged
  *
  * Does NOT appear in production (observation mode).
  */

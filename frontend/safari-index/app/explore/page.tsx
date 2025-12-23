@@ -8,9 +8,7 @@
  */
 
 import { useState, useMemo } from 'react';
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { isBuildMode } from '../../lib/app-mode';
 import {
   getExploreTopics,
   filterTopics,
@@ -121,10 +119,7 @@ function ActiveFilter({
 }
 
 export default function ExplorePage() {
-  if (!isBuildMode()) {
-    notFound();
-  }
-
+  // PRODUCTION-CORE: Topic discovery is essential user functionality
   const allTopics = useMemo(() => getExploreTopics(), []);
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -369,7 +364,7 @@ export default function ExplorePage() {
         {/* Footer */}
         <footer className="mt-16 pt-8 border-t border-stone-200">
           <p className="text-sm text-stone-400">
-            Staging preview. Not visible in production.
+            Safari Index — Decision support for safari planning.
           </p>
         </footer>
       </PageGrid>

@@ -3,8 +3,11 @@
 /**
  * Preflight Wizard Component
  *
- * Staging-only collapsible panel for testing decision inputs.
+ * INTERNAL: Staging-only collapsible panel for testing decision inputs.
  * Appears ABOVE the evaluation trigger area on /decisions/[slug].
+ *
+ * Classification: INTERNAL (gated forever)
+ * Reason: Developer testing tool, not user-facing functionality.
  *
  * Gate: isBuildMode() - renders nothing in production.
  *

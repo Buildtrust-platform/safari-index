@@ -1,9 +1,12 @@
 /**
  * Input Readiness Panel
  *
- * Staging-only component showing what inputs are needed for a decision.
+ * INTERNAL: Staging-only component showing what inputs are needed for a decision.
  * Displays required and optional inputs with copy functionality.
  * Does NOT render in observation mode.
+ *
+ * Classification: INTERNAL (gated forever)
+ * Reason: Developer debugging tool, not user-facing functionality.
  *
  * Per task requirements:
  * - Shows "To answer this well, we need" with 6-10 bullet inputs

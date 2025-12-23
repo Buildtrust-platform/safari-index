@@ -1,8 +1,11 @@
 /**
  * Refusal Recovery Panel
  *
- * Staging-only component that appears below refusal messages.
+ * INTERNAL: Staging-only component that appears below refusal messages.
  * Shows missing inputs needed to get a decision.
+ *
+ * Classification: INTERNAL (gated forever)
+ * Reason: Developer debugging tool, not user-facing functionality.
  *
  * Gated by isBuildMode() - does not render in production.
  */

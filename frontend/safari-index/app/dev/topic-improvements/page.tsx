@@ -3,9 +3,12 @@
 /**
  * Topic Improvements Dashboard
  *
- * DEV-ONLY page for analyzing topic health and suggesting improvements.
+ * INTERNAL: DEV-ONLY page for analyzing topic health and suggesting improvements.
  * Gate: Returns 404 in observation mode (production).
- * Not indexed, not in sitemap.
+ * Must NEVER be exposed to production users.
+ *
+ * Classification: INTERNAL (gated forever)
+ * Reason: Internal improvement tooling exposing diagnostic analysis.
  *
  * Shows:
  * - Per-topic refusal rates

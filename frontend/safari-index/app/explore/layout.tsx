@@ -1,15 +1,24 @@
+import { Metadata } from 'next';
+
 /**
  * Explore Page Layout
  *
- * Wraps the explore page with StagingShell.
- * Only renders shell in build mode; production returns 404 from page.
+ * PRODUCTION-CORE: Topic discovery page.
+ * Indexed, accessible to all users.
  */
 
-import { StagingShell } from '../components/StagingShell';
-
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Explore Decisions',
-  robots: 'noindex, nofollow',
+  description: 'Browse safari decisions with clear verdicts. Filter by region, travel style, and decision type.',
+  alternates: {
+    canonical: '/explore',
+  },
+  openGraph: {
+    title: 'Explore Safari Decisions',
+    description: 'Browse safari decisions with clear verdicts.',
+    url: '/explore',
+    type: 'website',
+  },
 };
 
 export default function ExploreLayout({
@@ -17,5 +26,5 @@ export default function ExploreLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <StagingShell>{children}</StagingShell>;
+  return children;
 }

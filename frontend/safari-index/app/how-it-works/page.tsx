@@ -21,8 +21,6 @@
  */
 
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { isBuildMode } from '../../lib/app-mode';
 import { DecisionProcess } from '../components/visual';
 import { PageGrid } from '../components/layout';
 import {
@@ -68,11 +66,8 @@ function RefusalReason({
 }
 
 export default function HowItWorksPage() {
-  // Gate: 404 in observation mode
-  if (!isBuildMode()) {
-    notFound();
-  }
-
+  // PRODUCTION-CORE: This page is visible in all modes
+  // Explains methodology, refusal policy, and accountability
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50/50 via-stone-50 to-stone-100">
       {/* Hero - Dark header matching explore/compare */}

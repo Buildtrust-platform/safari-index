@@ -1,15 +1,24 @@
+import { Metadata } from 'next';
+
 /**
  * Compare Page Layout
  *
- * Wraps the compare page with StagingShell.
- * Only renders shell in build mode; production returns 404 from page.
+ * PRODUCTION-SAFE: Side-by-side decision comparison.
+ * Read-only tool, indexed for discovery.
  */
 
-import { StagingShell } from '../components/StagingShell';
-
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Compare Decisions',
-  robots: 'noindex, nofollow',
+  description: 'Compare two safari decisions side by side to understand the trade-offs.',
+  alternates: {
+    canonical: '/compare',
+  },
+  openGraph: {
+    title: 'Compare Safari Decisions',
+    description: 'Compare two safari decisions side by side.',
+    url: '/compare',
+    type: 'website',
+  },
 };
 
 export default function CompareLayout({
@@ -17,5 +26,5 @@ export default function CompareLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <StagingShell>{children}</StagingShell>;
+  return children;
 }

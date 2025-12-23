@@ -3,8 +3,12 @@
 /**
  * Decision Variants Page
  *
- * Staging-only page for testing how different assumptions change outcomes.
+ * INTERNAL: Staging-only page for testing how different assumptions change outcomes.
  * Returns 404 in observation mode (production).
+ * Must NEVER be exposed to production users.
+ *
+ * Classification: INTERNAL (gated forever)
+ * Reason: Exposes internal parameterization and assumption testing.
  *
  * Per task requirements:
  * - Gated by APP_MODE

@@ -3,9 +3,12 @@
 /**
  * Topic Health Dashboard
  *
- * DEV-ONLY page for monitoring decision health per topic.
+ * INTERNAL: DEV-ONLY page for monitoring decision health per topic.
  * Gate: Returns 404 in observation mode (production).
- * Not indexed, not in sitemap.
+ * Must NEVER be exposed to production users.
+ *
+ * Classification: INTERNAL (gated forever)
+ * Reason: Internal diagnostic dashboard exposing operational metrics.
  *
  * Shows:
  * - Global health status from /ops/health
