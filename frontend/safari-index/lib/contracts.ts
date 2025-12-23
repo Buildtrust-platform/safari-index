@@ -4,7 +4,7 @@
  * This file is synced from backend/contracts/index.ts
  * To update: edit backend/contracts/index.ts and run scripts/sync-contracts.sh
  *
- * Last synced: 2025-12-22T02:24:53Z
+ * Last synced: 2025-12-23T20:18:19Z
  */
 
 import { z } from 'zod';
@@ -60,9 +60,25 @@ export const DecisionOutputSchema = z.object({
 export type DecisionOutput = z.infer<typeof DecisionOutputSchema>;
 
 /**
+ * Refusal codes for categorizing refusal types
+ * SERVICE_DEGRADED: Temporary service issue (rate limiting, timeouts)
+ * MISSING_INPUTS: Required information not provided
+ * CONFLICTING_INPUTS: User inputs are contradictory
+ * GUARANTEE_REQUESTED: User asked for guarantees we cannot provide
+ */
+export const RefusalCodeSchema = z.enum([
+  'SERVICE_DEGRADED',
+  'MISSING_INPUTS',
+  'CONFLICTING_INPUTS',
+  'GUARANTEE_REQUESTED',
+]);
+export type RefusalCode = z.infer<typeof RefusalCodeSchema>;
+
+/**
  * Refusal output (when type = 'refusal')
  */
 export const RefusalOutputSchema = z.object({
+  code: RefusalCodeSchema.optional(), // Optional for backwards compatibility
   reason: z.string(),
   missing_or_conflicting_inputs: z.array(z.string()),
   safe_next_step: z.string(),

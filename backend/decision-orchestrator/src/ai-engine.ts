@@ -149,6 +149,7 @@ export async function invokeAIEngineWithRetry(
     output: {
       type: 'refusal' as const,
       refusal: {
+        code: 'SERVICE_DEGRADED',
         reason: 'The decision service is temporarily unable to process your request.',
         missing_or_conflicting_inputs: [
           'Service capacity constraints are currently active',

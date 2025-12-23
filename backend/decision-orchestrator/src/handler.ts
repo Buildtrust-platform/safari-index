@@ -199,6 +199,7 @@ export async function handler(
     const fallbackRefusal: RefusalOutput = {
       type: 'refusal',
       refusal: {
+        code: 'SERVICE_DEGRADED',
         reason: 'A reliable recommendation could not be generated at this time.',
         missing_or_conflicting_inputs: [
           'The decision service encountered an unexpected condition',

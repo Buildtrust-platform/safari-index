@@ -40,6 +40,7 @@ import { NextSensibleStep } from '../../components/NextSensibleStep';
 import { DecisionFollowUp } from '../../components/DecisionFollowUp';
 import { InputReadinessPanel } from '../../components/InputReadinessPanel';
 import { RefusalRecoveryPanel } from '../../components/RefusalRecoveryPanel';
+import { ServiceDegradedRefusal } from '../../components/ServiceDegradedRefusal';
 import { PreflightWizard } from '../../components/PreflightWizard';
 import { getTopicBySlug, DecisionTopic } from '../../content/decision-topics';
 import { getRelatedTopics } from '../../content/topic-graph';
@@ -259,41 +260,61 @@ export default function DecisionPage() {
   // Refusal state
   if (state === 'refusal' && decision?.output.refusal) {
     const refusal = decision.output.refusal;
+    const isServiceDegraded = refusal.code === 'SERVICE_DEGRADED';
+
+    // Handler for retry attempts (service-degraded only)
+    const handleRetry = async () => {
+      if (topic) {
+        await fetchDecision(topic);
+      }
+    };
+
     return (
       <main className={pageContainer}>
         <h1 className="text-2xl font-semibold mb-2">{topic.question}</h1>
         <p className="text-gray-600 mb-8">{topic.context_line}</p>
 
-        <VerdictCard
-          outcome="refused"
-          headline="Decision refused"
-          summary={refusal.reason}
-          confidence={0}
-        />
+        {/* Service-degraded refusals get special treatment */}
+        {isServiceDegraded ? (
+          <ServiceDegradedRefusal
+            reason={refusal.reason}
+            safeNextStep={refusal.safe_next_step}
+            onRetry={handleRetry}
+          />
+        ) : (
+          <>
+            <VerdictCard
+              outcome="refused"
+              headline="Decision refused"
+              summary={refusal.reason}
+              confidence={0}
+            />
 
-        <section className={section} aria-labelledby="needs-heading">
-          <h2 id="needs-heading" className={sectionHeading}>What we need</h2>
-          <ul className={listContainer} aria-label="Required information">
-            {refusal.missing_or_conflicting_inputs.map((input, i) => (
-              <li key={i} className={listItem}>
-                <span className={listBullet} aria-hidden="true">&bull;</span>
-                <span className={listText}>{input}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+            <section className={section} aria-labelledby="needs-heading">
+              <h2 id="needs-heading" className={sectionHeading}>What we need</h2>
+              <ul className={listContainer} aria-label="Required information">
+                {refusal.missing_or_conflicting_inputs.map((input, i) => (
+                  <li key={i} className={listItem}>
+                    <span className={listBullet} aria-hidden="true">&bull;</span>
+                    <span className={listText}>{input}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
 
-        <section className={section} aria-labelledby="next-step-heading">
-          <h2 id="next-step-heading" className={sectionHeading}>Next step</h2>
-          <p className="text-gray-700">{refusal.safe_next_step}</p>
-        </section>
+            <section className={section} aria-labelledby="next-step-heading">
+              <h2 id="next-step-heading" className={sectionHeading}>Next step</h2>
+              <p className="text-gray-700">{refusal.safe_next_step}</p>
+            </section>
 
-        {/* Refusal Recovery Panel - staging only */}
-        <RefusalRecoveryPanel refusalReason={refusal.reason} topic={topic} />
+            {/* Refusal Recovery Panel - staging only */}
+            <RefusalRecoveryPanel refusalReason={refusal.reason} topic={topic} />
 
-        <CTABar
-          primary={{ label: 'Answer questions to get a recommendation', href: '/tools/safari-fit' }}
-        />
+            <CTABar
+              primary={{ label: 'Answer questions to get a recommendation', href: '/tools/safari-fit' }}
+            />
+          </>
+        )}
 
         <RelatedDecisions topics={relatedTopics} />
 

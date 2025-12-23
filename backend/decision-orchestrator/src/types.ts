@@ -111,9 +111,23 @@ export interface DecisionOutput {
   };
 }
 
+/**
+ * Refusal codes for categorizing refusal types
+ * SERVICE_DEGRADED: Temporary service issue (rate limiting, timeouts)
+ * MISSING_INPUTS: Required information not provided
+ * CONFLICTING_INPUTS: User inputs are contradictory
+ * GUARANTEE_REQUESTED: User asked for guarantees we cannot provide
+ */
+export type RefusalCode =
+  | 'SERVICE_DEGRADED'
+  | 'MISSING_INPUTS'
+  | 'CONFLICTING_INPUTS'
+  | 'GUARANTEE_REQUESTED';
+
 export interface RefusalOutput {
   type: 'refusal';
   refusal: {
+    code?: RefusalCode; // Optional for backwards compatibility
     reason: string;
     missing_or_conflicting_inputs: string[];
     safe_next_step: string;
