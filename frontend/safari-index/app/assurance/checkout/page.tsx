@@ -7,17 +7,17 @@
  * - Assurance is a one-time purchase
  * - No subscriptions, no bundles
  *
- * Per Task Requirements:
+ * Per governance:
  * - Calm, no sales pressure
  * - Clear about what is being purchased
- *
- * MVP: Stub payment flow, will integrate Stripe later
+ * - Redirects to Stripe Checkout for payment
  */
 
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { API_BASE } from '../../../lib/api-client';
+
 const ASSURANCE_PRICE_CENTS = 2900;
 
 interface AssuranceResponse {
@@ -35,17 +35,29 @@ interface AssuranceResponse {
   };
 }
 
-type PageState = 'loading' | 'preview' | 'processing' | 'success' | 'error';
+interface CheckoutSessionResponse {
+  checkout_session_id: string;
+  checkout_url: string;
+}
+
+type PageState = 'loading' | 'preview' | 'processing' | 'redirecting' | 'cancelled' | 'error';
 
 function CheckoutContent() {
   const searchParams = useSearchParams();
   const decisionId = searchParams.get('decision_id');
+  const cancelled = searchParams.get('cancelled');
 
-  const [state, setState] = useState<PageState>('loading');
+  const [state, setState] = useState<PageState>(cancelled ? 'cancelled' : 'loading');
   const [assurance, setAssurance] = useState<AssuranceResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // If cancelled, show the cancelled state with existing assurance info
+    if (cancelled && decisionId) {
+      setState('cancelled');
+      return;
+    }
+
     if (!decisionId) {
       setError('No decision ID provided');
       setState('error');
@@ -65,10 +77,24 @@ function CheckoutContent() {
         });
 
         if (response.status === 409) {
-          // Assurance already exists
+          // Assurance already exists - this is OK, use the existing one
           const data = await response.json();
-          setError(`Assurance already exists: ${data.existing_assurance_id}`);
-          setState('error');
+          // Redirect to checkout with existing assurance
+          setAssurance({
+            assurance_id: data.existing_assurance_id,
+            decision_id: decisionId!,
+            payment_required: true,
+            payment: {
+              amount_cents: ASSURANCE_PRICE_CENTS,
+              currency: 'USD',
+              checkout_url: '',
+            },
+            preview: {
+              outcome: 'unknown',
+              confidence_label: 'Unknown',
+            },
+          });
+          setState('preview');
           return;
         }
 
@@ -87,18 +113,46 @@ function CheckoutContent() {
     }
 
     generateAssurance();
-  }, [decisionId]);
+  }, [decisionId, cancelled]);
 
-  // Stub payment handler - will integrate Stripe
+  // Stripe Checkout redirect handler
   const handlePayment = async () => {
+    if (!assurance) return;
+
     setState('processing');
 
-    // Simulate payment processing
-    // In production, this would redirect to Stripe Checkout
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      // Create Stripe Checkout Session via our API
+      const response = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          assurance_id: assurance.assurance_id,
+          decision_id: assurance.decision_id,
+        }),
+      });
 
-    // For MVP, mark as successful
-    setState('success');
+      if (!response.ok) {
+        const data = await response.json();
+
+        // If already paid, redirect to assurance page
+        if (response.status === 409 && data.redirect_url) {
+          window.location.href = data.redirect_url;
+          return;
+        }
+
+        throw new Error(data.error || 'Failed to create checkout session');
+      }
+
+      const data: CheckoutSessionResponse = await response.json();
+
+      // Redirect to Stripe Checkout
+      setState('redirecting');
+      window.location.href = data.checkout_url;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Payment initiation failed');
+      setState('error');
+    }
   };
 
   if (state === 'loading') {
@@ -106,6 +160,49 @@ function CheckoutContent() {
       <main className="max-w-xl mx-auto px-4 py-12">
         <div className="bg-gray-50 border border-gray-200 p-6 rounded">
           <p className="text-gray-600">Preparing your assurance...</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (state === 'redirecting') {
+    return (
+      <main className="max-w-xl mx-auto px-4 py-12">
+        <div className="bg-gray-50 border border-gray-200 p-6 rounded">
+          <p className="text-gray-600">Redirecting to secure payment...</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (state === 'cancelled') {
+    return (
+      <main className="max-w-xl mx-auto px-4 py-12">
+        <div className="bg-amber-50 border border-amber-200 p-6 rounded mb-6">
+          <h1 className="text-xl font-semibold text-amber-900 mb-2">
+            Payment cancelled
+          </h1>
+          <p className="text-amber-700">
+            Your payment was not completed. No charge was made.
+          </p>
+        </div>
+
+        <div className="flex gap-4">
+          <button
+            onClick={() => {
+              setState('loading');
+              window.location.href = `/assurance/checkout?decision_id=${decisionId}`;
+            }}
+            className="bg-gray-900 text-white px-6 py-3 rounded font-medium hover:bg-gray-800 transition-colors"
+          >
+            Try again
+          </button>
+          <Link
+            href={`/decisions`}
+            className="px-6 py-3 text-gray-600 hover:text-gray-900"
+          >
+            Back to decisions
+          </Link>
         </div>
       </main>
     );
@@ -119,33 +216,11 @@ function CheckoutContent() {
           <p className="text-red-700">{error}</p>
         </div>
         <Link
-          href="/decisions"
+          href="/explore"
           className="inline-block mt-6 text-gray-600 hover:text-gray-900"
         >
           &larr; Back to decisions
         </Link>
-      </main>
-    );
-  }
-
-  if (state === 'success') {
-    return (
-      <main className="max-w-xl mx-auto px-4 py-12">
-        <div className="bg-green-50 border border-green-200 p-6 rounded mb-6">
-          <h1 className="text-2xl font-semibold text-green-900 mb-2">
-            Assurance purchased
-          </h1>
-          <p className="text-green-700">
-            Your Decision Assurance is ready. You can access it anytime.
-          </p>
-        </div>
-
-        <a
-          href={`/assurance/${assurance?.assurance_id}`}
-          className="inline-block bg-gray-900 text-white px-6 py-3 rounded text-center font-medium hover:bg-gray-800 transition-colors"
-        >
-          View your Decision Assurance
-        </a>
       </main>
     );
   }
@@ -222,6 +297,10 @@ function CheckoutContent() {
 
           <p className="text-center text-sm text-gray-500 mt-4">
             One-time purchase. No subscription. No hidden fees.
+          </p>
+
+          <p className="text-center text-xs text-gray-400 mt-2">
+            Secure payment powered by Stripe
           </p>
         </>
       )}

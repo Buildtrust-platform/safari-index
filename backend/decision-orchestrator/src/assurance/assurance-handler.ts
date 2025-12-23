@@ -9,6 +9,7 @@
  * Endpoints:
  * - POST /assurance/generate - Generate assurance from decision_id
  * - GET /assurance/{id} - Retrieve assurance artifact
+ * - POST /assurance/{id}/payment - Update payment status (webhook callback)
  */
 
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
@@ -19,6 +20,7 @@ import {
   getAssurance,
   getAssuranceByDecisionId,
   recordAccess,
+  updatePaymentStatus,
   AssuranceRequest,
   ASSURANCE_PRICING,
 } from './index';
@@ -256,6 +258,129 @@ export async function handleGetAssurance(
       headers: CORS_HEADERS,
       body: JSON.stringify({
         error: 'Failed to retrieve assurance',
+        details: error instanceof Error ? error.message : 'Unknown error',
+      }),
+    };
+  }
+}
+
+/**
+ * Handle POST /assurance/{assurance_id}/payment
+ * Updates payment status after successful Stripe payment
+ *
+ * Per governance:
+ * - Idempotent: safe to call multiple times
+ * - Only transitions from 'pending' to 'completed'
+ * - Logs payment event for audit trail
+ */
+export async function handleUpdatePayment(
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> {
+  try {
+    const assuranceId = event.pathParameters?.assurance_id;
+
+    if (!assuranceId) {
+      return {
+        statusCode: 400,
+        headers: CORS_HEADERS,
+        body: JSON.stringify({
+          error: 'assurance_id is required',
+        }),
+      };
+    }
+
+    const body = JSON.parse(event.body || '{}');
+
+    if (!body.payment_id) {
+      return {
+        statusCode: 400,
+        headers: CORS_HEADERS,
+        body: JSON.stringify({
+          error: 'payment_id is required',
+        }),
+      };
+    }
+
+    if (body.payment_status !== 'completed' && body.payment_status !== 'refunded') {
+      return {
+        statusCode: 400,
+        headers: CORS_HEADERS,
+        body: JSON.stringify({
+          error: 'payment_status must be "completed" or "refunded"',
+        }),
+      };
+    }
+
+    // Verify assurance exists
+    const record = await getAssurance(assuranceId);
+
+    if (!record) {
+      return {
+        statusCode: 404,
+        headers: CORS_HEADERS,
+        body: JSON.stringify({
+          error: 'Assurance not found',
+        }),
+      };
+    }
+
+    // Check if already processed (idempotent)
+    if (record.payment_status === 'completed') {
+      return {
+        statusCode: 409,
+        headers: CORS_HEADERS,
+        body: JSON.stringify({
+          message: 'Payment already processed',
+          assurance_id: assuranceId,
+          payment_status: record.payment_status,
+        }),
+      };
+    }
+
+    // Update payment status
+    await updatePaymentStatus(assuranceId, body.payment_id, body.payment_status);
+
+    // Log payment event
+    await logEvent({
+      event_type: body.payment_status === 'completed' ? 'ASSURANCE_PAID' : 'ASSURANCE_REFUNDED',
+      session_id: record.session_id,
+      traveler_id: record.traveler_id,
+      decision_id: record.decision_id,
+      payload: {
+        assurance_id: assuranceId,
+        payment_id: body.payment_id,
+        stripe_session_id: body.stripe_session_id,
+        amount_cents: record.payment_amount_cents,
+      },
+    });
+
+    return {
+      statusCode: 200,
+      headers: CORS_HEADERS,
+      body: JSON.stringify({
+        success: true,
+        assurance_id: assuranceId,
+        payment_status: body.payment_status,
+      }),
+    };
+  } catch (error) {
+    // Handle DynamoDB conditional check failure (already updated)
+    if (error instanceof Error && error.name === 'ConditionalCheckFailedException') {
+      return {
+        statusCode: 409,
+        headers: CORS_HEADERS,
+        body: JSON.stringify({
+          message: 'Payment already processed (concurrent update)',
+        }),
+      };
+    }
+
+    console.error('Update payment error:', error);
+    return {
+      statusCode: 500,
+      headers: CORS_HEADERS,
+      body: JSON.stringify({
+        error: 'Failed to update payment status',
         details: error instanceof Error ? error.message : 'Unknown error',
       }),
     };
