@@ -47,6 +47,7 @@ import {
 import {
   handleGenerateAssurance,
   handleGetAssurance,
+  handleUpdatePayment,
 } from './assurance/assurance-handler';
 import { handleOpsHealth } from './ops/ops-health-handler';
 
@@ -58,7 +59,7 @@ const CORS_HEADERS = {
   'Content-Type': 'application/json',
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Content-Type,Authorization',
-  'Access-Control-Allow-Methods': 'POST,OPTIONS',
+  'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
 };
 
 /**
@@ -89,6 +90,11 @@ export async function handler(
   // POST /assurance/generate
   if (path.endsWith('/assurance/generate') && event.httpMethod === 'POST') {
     return handleGenerateAssurance(event);
+  }
+
+  // POST /assurance/{id}/payment - Stripe webhook callback
+  if (path.includes('/assurance/') && path.endsWith('/payment') && event.httpMethod === 'POST') {
+    return handleUpdatePayment(event);
   }
 
   // GET /assurance/{id}
