@@ -189,12 +189,44 @@ export async function handler(
       },
     });
   } catch (error) {
-    console.error('Orchestrator error:', error);
-    return createErrorResponse(
-      500,
-      'Decision orchestration failed',
-      error instanceof Error ? error.message : 'Unknown error'
-    );
+    // Per governance: return a governed refusal instead of 500
+    // This ensures the frontend always receives a valid decision response
+    console.error('Orchestrator error (returning governed refusal):', error);
+
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+
+    // Build a refusal output for unexpected errors
+    const fallbackRefusal: RefusalOutput = {
+      type: 'refusal',
+      refusal: {
+        reason: 'A reliable recommendation could not be generated at this time.',
+        missing_or_conflicting_inputs: [
+          'The decision service encountered an unexpected condition',
+          'This may be due to temporary capacity constraints',
+        ],
+        safe_next_step: 'Please try again in a few moments. If the issue persists, contact support.',
+      },
+    };
+
+    // Generate a decision ID for tracking even on errors
+    const fallbackDecisionId = `dec_err_${Date.now().toString(36)}`;
+
+    // Log the error event for monitoring
+    console.error('Fallback refusal issued:', {
+      decision_id: fallbackDecisionId,
+      error: errorMessage,
+    });
+
+    return createSuccessResponse({
+      decision_id: fallbackDecisionId,
+      output: fallbackRefusal,
+      metadata: {
+        logic_version: LOGIC_VERSION,
+        ai_used: false,
+        retry_count: 0,
+        persisted: false, // Not persisted due to error
+      },
+    });
   }
 }
 

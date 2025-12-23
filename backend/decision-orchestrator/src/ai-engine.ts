@@ -140,7 +140,25 @@ export async function invokeAIEngineWithRetry(
     }
   }
 
-  throw lastError || new Error('AI engine invocation failed after retries');
+  // Per governance: return refusal instead of throwing
+  // This ensures the caller always receives a valid AIOutput
+  const errorMessage = lastError?.message || 'AI engine invocation failed after retries';
+  console.error('Bedrock invocation failed, returning governed refusal:', errorMessage);
+
+  return {
+    output: {
+      type: 'refusal' as const,
+      refusal: {
+        reason: 'The decision service is temporarily unable to process your request.',
+        missing_or_conflicting_inputs: [
+          'Service capacity constraints are currently active',
+          'Please wait a moment before trying again',
+        ],
+        safe_next_step: 'Wait a few seconds and refresh the page, or try again later.',
+      },
+    },
+    retryCount,
+  };
 }
 
 /**
