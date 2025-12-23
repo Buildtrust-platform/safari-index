@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Output as standalone for Amplify deployment
+  output: 'standalone',
   /**
    * Remote image patterns for Next.js Image optimization.
    * Allows images from CloudFront CDN when NEXT_PUBLIC_ASSETS_CDN_BASE is set.
