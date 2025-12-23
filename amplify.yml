@@ -13,11 +13,11 @@ applications:
             - npm run build
             # Create Amplify hosting structure for Next.js standalone
             - mkdir -p .amplify-hosting/compute/default
-            - mkdir -p .amplify-hosting/static
+            - mkdir -p .amplify-hosting/static/_next
             # Copy standalone server
             - cp -r .next/standalone/. .amplify-hosting/compute/default/
             # Copy static files
-            - cp -r .next/static .amplify-hosting/static/_next/static
+            - cp -r .next/static .amplify-hosting/static/_next/
             - cp -r public/. .amplify-hosting/static/ 2>/dev/null || true
             # Create deploy manifest
             - |
