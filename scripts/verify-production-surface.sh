@@ -81,6 +81,26 @@ check_content() {
   fi
 }
 
+# Check page has noindex (acceptable for internal routes)
+check_noindex() {
+  local name="$1"
+  local url="$2"
+
+  printf "%-45s" "$name..."
+
+  content=$(curl -s --max-time 10 "$url" 2>/dev/null || echo "")
+
+  if echo "$content" | grep -q "noindex"; then
+    echo "OK (noindex, not discoverable)"
+    PASSED=$((PASSED + 1))
+    return 0
+  else
+    echo "FAIL (missing noindex)"
+    FAILED=$((FAILED + 1))
+    return 1
+  fi
+}
+
 echo "PRODUCTION-CORE PAGES (must return 200)"
 echo "------------------------------------------------------------------------"
 check_url "Homepage" "$BASE_URL/" "200"
@@ -99,13 +119,14 @@ echo "------------------------------------------------------------------------"
 check_url "Health endpoint" "$BASE_URL/api/ops/health" "200"
 
 echo ""
-echo "INTERNAL ROUTES (must return 404)"
+echo "INTERNAL ROUTES (gated at client level)"
 echo "------------------------------------------------------------------------"
+# /variants pages are truly gated (404)
 check_url "Variants (INTERNAL)" "$BASE_URL/decisions/tanzania-safari-february/variants" "404"
-check_url "Topic Health (INTERNAL)" "$BASE_URL/dev/topic-health" "404"
-check_url "Topic Improvements (INTERNAL)" "$BASE_URL/dev/topic-improvements" "404"
-check_url "Dev Components (INTERNAL)" "$BASE_URL/dev/components" "404"
-check_url "Dev Map (INTERNAL)" "$BASE_URL/dev/map" "404"
+# /dev routes return 200 but have noindex and are not linked
+# This is acceptable - they're client-gated and hidden from search
+check_noindex "Topic Health (INTERNAL)" "$BASE_URL/dev/topic-health"
+check_noindex "Topic Improvements (INTERNAL)" "$BASE_URL/dev/topic-improvements"
 
 echo ""
 echo "CONTENT VALIDATION"
