@@ -3,11 +3,13 @@
 /**
  * Explore Decisions Page
  *
- * Browse safari decisions with travel-inspired warmth.
- * Clean but evocative - suggests adventure without being heavy.
+ * Browse safari decisions with premium safari travel aesthetic.
+ * Includes "When to go" discovery hub for timing-focused exploration.
+ * Uses ImageBand hero for immersive safari feel.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import {
   getExploreTopics,
@@ -23,9 +25,17 @@ import {
   TRIP_TYPE_OPTIONS,
   SORT_OPTIONS,
 } from './explore-types';
+import {
+  MONTH_CHIPS,
+  SEASON_CHIPS,
+  INTEREST_CHIPS,
+  getTopicsForChips,
+  type WhenToGoChipKey,
+} from './when-to-go-data';
 import { cn } from '../ui/utils';
-import { PageGrid } from '../components/layout';
-import { ArrowLeft, Search, ChevronRight, MapPin, X, Compass } from 'lucide-react';
+import { ImageBand, ImageBandContent, pageImages } from '../components/visual';
+import { Navbar } from '../components/layout';
+import { ArrowRight, Search, ChevronRight, MapPin, X, Compass, Calendar } from 'lucide-react';
 
 /**
  * Filter chip
@@ -55,7 +65,7 @@ function FilterChip({
 }
 
 /**
- * Topic card - warm, inviting
+ * Topic card - warm, inviting with safari aesthetic
  */
 function TopicCard({
   question,
@@ -71,26 +81,30 @@ function TopicCard({
   return (
     <Link
       href={`/decisions/${slug}`}
+      prefetch={false}
       className="group block"
     >
-      <div className="p-5 rounded-xl bg-white border border-stone-200 hover:border-amber-300 hover:shadow-md transition-all duration-200">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex-1 min-w-0">
-            <h3 className="font-editorial text-lg font-medium text-stone-900 mb-2 group-hover:text-amber-700 transition-colors">
-              {question}
-            </h3>
-            <p className="text-sm text-stone-500 line-clamp-2 mb-3">
-              {contextLine}
-            </p>
-            {destinations.length > 0 && (
-              <div className="flex items-center gap-1.5 text-xs text-amber-700">
-                <MapPin className="w-3.5 h-3.5" />
-                <span className="font-medium">{destinations.slice(0, 2).join(' · ')}</span>
+      <div className="p-5 rounded-xl bg-white border border-stone-200 hover:border-amber-300 hover:shadow-lg transition-all duration-200 h-full">
+        <div className="flex flex-col h-full">
+          <h3 className="font-editorial text-base font-medium text-stone-900 mb-2 group-hover:text-amber-700 transition-colors leading-snug">
+            {question}
+          </h3>
+          <p className="text-sm text-stone-500 line-clamp-2 mb-4 flex-1">
+            {contextLine}
+          </p>
+          <div className="flex items-center justify-between pt-3 border-t border-stone-100">
+            {destinations.length > 0 ? (
+              <div className="flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-amber-600" />
+                <span className="text-xs font-medium text-stone-600">
+                  {destinations.slice(0, 2).join(' · ')}
+                  {destinations.length > 2 && ` +${destinations.length - 2}`}
+                </span>
               </div>
+            ) : (
+              <span className="text-xs text-stone-400">All destinations</span>
             )}
-          </div>
-          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-stone-100 group-hover:bg-amber-100 flex items-center justify-center transition-colors">
-            <ChevronRight className="w-4 h-4 text-stone-400 group-hover:text-amber-600 transition-colors" />
+            <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-amber-600 group-hover:translate-x-0.5 transition-all" />
           </div>
         </div>
       </div>
@@ -118,7 +132,140 @@ function ActiveFilter({
   );
 }
 
-export default function ExplorePage() {
+/**
+ * Timing chip for When to Go panel
+ */
+function TimingChip({
+  label,
+  active,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        'px-3 py-1.5 text-sm rounded-full border transition-all duration-200',
+        active
+          ? 'bg-stone-900 text-white border-stone-900'
+          : 'bg-white text-stone-600 border-stone-200 hover:border-stone-400'
+      )}
+    >
+      {label}
+    </button>
+  );
+}
+
+/**
+ * When to Go Discovery Panel
+ *
+ * Three chip rows: Months, Seasons, Interests
+ * Selecting chips filters the topic grid to relevant decisions.
+ */
+function WhenToGoPanel({
+  selectedChips,
+  onToggleChip,
+  onClear,
+  panelRef,
+}: {
+  selectedChips: Set<WhenToGoChipKey>;
+  onToggleChip: (chip: WhenToGoChipKey) => void;
+  onClear: () => void;
+  panelRef: React.RefObject<HTMLDivElement | null>;
+}) {
+  const hasSelection = selectedChips.size > 0;
+
+  return (
+    <div
+      ref={panelRef}
+      className="bg-white rounded-2xl border border-stone-200 p-6 mb-8 shadow-sm"
+      data-testid="when-to-go-panel"
+    >
+      <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center border border-amber-200/50">
+            <Calendar className="w-6 h-6 text-amber-700" />
+          </div>
+          <div>
+            <h2 className="font-editorial text-lg font-semibold text-stone-900">When to go</h2>
+            <p className="text-sm text-stone-500">Find the right timing for your safari</p>
+          </div>
+        </div>
+        {hasSelection && (
+          <button
+            onClick={onClear}
+            className="text-sm text-stone-500 hover:text-stone-700 underline"
+            data-testid="when-to-go-clear"
+          >
+            Clear
+          </button>
+        )}
+      </div>
+
+      {/* Months row */}
+      <div className="mb-4">
+        <label className="text-xs font-semibold text-stone-500 uppercase tracking-wide mb-2 block">
+          Month
+        </label>
+        <div className="flex flex-wrap gap-2" data-testid="when-to-go-months">
+          {MONTH_CHIPS.map((chip) => (
+            <TimingChip
+              key={chip.key}
+              label={chip.label}
+              active={selectedChips.has(chip.key)}
+              onClick={() => onToggleChip(chip.key)}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Seasons row */}
+      <div className="mb-4">
+        <label className="text-xs font-semibold text-stone-500 uppercase tracking-wide mb-2 block">
+          Season
+        </label>
+        <div className="flex flex-wrap gap-2" data-testid="when-to-go-seasons">
+          {SEASON_CHIPS.map((chip) => (
+            <TimingChip
+              key={chip.key}
+              label={chip.label}
+              active={selectedChips.has(chip.key)}
+              onClick={() => onToggleChip(chip.key)}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Interests row */}
+      <div>
+        <label className="text-xs font-semibold text-stone-500 uppercase tracking-wide mb-2 block">
+          Interest
+        </label>
+        <div className="flex flex-wrap gap-2" data-testid="when-to-go-interests">
+          {INTEREST_CHIPS.map((chip) => (
+            <TimingChip
+              key={chip.key}
+              label={chip.label}
+              active={selectedChips.has(chip.key)}
+              onClick={() => onToggleChip(chip.key)}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Inner content component that uses useSearchParams
+ */
+function ExploreContent() {
+  const searchParams = useSearchParams();
+  const whenToGoPanelRef = useRef<HTMLDivElement>(null);
+
   // PRODUCTION-CORE: Topic discovery is essential user functionality
   const allTopics = useMemo(() => getExploreTopics(), []);
 
@@ -132,13 +279,57 @@ export default function ExplorePage() {
   const [sort, setSort] = useState<SortOption>('most_used');
   const [showFilters, setShowFilters] = useState(false);
 
+  // When to Go chip selection state
+  const [selectedTimingChips, setSelectedTimingChips] = useState<Set<WhenToGoChipKey>>(
+    new Set()
+  );
+
+  // Handle filter=when-to-go query param for auto-scroll
+  useEffect(() => {
+    const filterParam = searchParams.get('filter');
+    if (filterParam === 'when-to-go' && whenToGoPanelRef.current) {
+      // Scroll to When to Go panel after a brief delay for render
+      setTimeout(() => {
+        whenToGoPanelRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  }, [searchParams]);
+
+  // Get topic IDs matching selected timing chips
+  const timingFilteredTopicIds = useMemo(() => {
+    if (selectedTimingChips.size === 0) return null;
+    return new Set(getTopicsForChips(Array.from(selectedTimingChips)));
+  }, [selectedTimingChips]);
+
   const filteredTopics = useMemo(() => {
     let result = allTopics;
+
+    // Apply timing chip filter first (if any chips selected)
+    if (timingFilteredTopicIds) {
+      result = result.filter((t) => timingFilteredTopicIds.has(t.topic_id));
+    }
+
     result = searchTopics(result, searchQuery);
     result = filterTopics(result, filters);
     result = sortTopics(result, sort);
     return result;
-  }, [allTopics, searchQuery, filters, sort]);
+  }, [allTopics, timingFilteredTopicIds, searchQuery, filters, sort]);
+
+  const handleToggleTimingChip = (chip: WhenToGoChipKey) => {
+    setSelectedTimingChips((prev) => {
+      const next = new Set(prev);
+      if (next.has(chip)) {
+        next.delete(chip);
+      } else {
+        next.add(chip);
+      }
+      return next;
+    });
+  };
+
+  const clearTimingChips = () => {
+    setSelectedTimingChips(new Set());
+  };
 
   const clearFilters = () => {
     setFilters({
@@ -148,6 +339,7 @@ export default function ExplorePage() {
       tripType: null,
     });
     setSearchQuery('');
+    setSelectedTimingChips(new Set());
   };
 
   const activeFilterCount = [
@@ -164,35 +356,60 @@ export default function ExplorePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50/50 via-stone-50 to-stone-100">
-      {/* Hero header with warmth */}
-      <div className="bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 text-white">
-        <PageGrid maxWidth="default" className="py-12 md:py-16">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm text-stone-400 hover:text-white transition-colors mb-8"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Safari Index
-          </Link>
+    <main className="min-h-screen bg-stone-50">
+      {/* Navbar */}
+      <Navbar variant="transparent" />
 
-          <div className="flex items-start gap-4 mb-4">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center">
-              <Compass className="w-6 h-6 text-amber-400" />
+      {/* Hero with safari imagery */}
+      <ImageBand
+        image={pageImages.explore}
+        height="explore"
+        overlay="strong"
+        align="center"
+        priority
+        alwaysRender
+      >
+        <ImageBandContent maxWidth="default" className="pt-24 pb-8">
+          <div className="text-center">
+            {/* Breadcrumb */}
+            <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
+              <Link href="/" className="hover:text-white transition-colors">
+                Safari Index
+              </Link>
+              <ChevronRight className="w-4 h-4" />
+              <span className="text-white">Explore</span>
             </div>
-            <div>
-              <h1 className="font-editorial text-3xl md:text-4xl font-semibold mb-2">
+
+            {/* Icon + Title */}
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                <Compass className="w-6 h-6 text-amber-400" />
+              </div>
+              <h1 className="font-editorial text-4xl md:text-5xl font-semibold text-white">
                 Explore decisions
               </h1>
-              <p className="text-stone-400 text-lg">
-                {allTopics.length} questions answered with clear verdicts
-              </p>
             </div>
-          </div>
-        </PageGrid>
-      </div>
 
-      <PageGrid maxWidth="default" className="py-8">
+            {/* Subtitle */}
+            <p className="text-white/80 text-lg max-w-xl mx-auto">
+              {allTopics.length} questions answered with clear verdicts.
+              <br className="hidden md:block" />
+              Find the guidance you need for your safari.
+            </p>
+          </div>
+        </ImageBandContent>
+      </ImageBand>
+
+      {/* Main content */}
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-8">
+        {/* When to Go Discovery Panel */}
+        <WhenToGoPanel
+          selectedChips={selectedTimingChips}
+          onToggleChip={handleToggleTimingChip}
+          onClear={clearTimingChips}
+          panelRef={whenToGoPanelRef}
+        />
+
         {/* Search + Filter bar */}
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <div className="flex-1 relative">
@@ -335,7 +552,7 @@ export default function ExplorePage() {
 
         {/* Results grid */}
         {filteredTopics.length === 0 ? (
-          <div className="bg-white rounded-xl border border-stone-200 p-12 text-center">
+          <div className="bg-white rounded-2xl border border-stone-200 p-12 text-center">
             <div className="w-16 h-16 rounded-full bg-stone-100 flex items-center justify-center mx-auto mb-4">
               <Search className="w-8 h-8 text-stone-400" />
             </div>
@@ -348,7 +565,7 @@ export default function ExplorePage() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredTopics.map((topic) => (
               <TopicCard
                 key={topic.topic_id}
@@ -360,14 +577,54 @@ export default function ExplorePage() {
             ))}
           </div>
         )}
+      </div>
 
-        {/* Footer */}
-        <footer className="mt-16 pt-8 border-t border-stone-200">
-          <p className="text-sm text-stone-400">
-            Safari Index — Decision support for safari planning.
-          </p>
-        </footer>
-      </PageGrid>
-    </div>
+      {/* Footer */}
+      <footer className="bg-stone-900 text-white py-12 mt-16">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <span className="font-editorial text-lg font-semibold">Safari Index</span>
+              <span className="text-stone-500 text-sm ml-2">Pan-African Decision System</span>
+            </div>
+
+            <div className="flex items-center gap-6">
+              <Link href="/" className="text-sm text-stone-400 hover:text-white transition-colors">
+                Home
+              </Link>
+              <Link href="/decisions" className="text-sm text-stone-400 hover:text-white transition-colors">
+                All Decisions
+              </Link>
+              <Link href="/compare" className="text-sm text-stone-400 hover:text-white transition-colors">
+                Compare
+              </Link>
+              <Link href="/how-it-works" className="text-sm text-stone-400 hover:text-white transition-colors">
+                How it works
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
+  );
+}
+
+/**
+ * Explore page with Suspense boundary for useSearchParams
+ */
+export default function ExplorePage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-stone-50">
+          <Navbar variant="solid" />
+          <div className="pt-20 text-center">
+            <p className="text-stone-400">Loading...</p>
+          </div>
+        </main>
+      }
+    >
+      <ExploreContent />
+    </Suspense>
   );
 }

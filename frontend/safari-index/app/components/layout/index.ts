@@ -7,3 +7,4 @@
 
 export { PageGrid, PageGridMain, PageGridSection } from './PageGrid';
 export { MetaRail, MetaRailBlock } from './MetaRail';
+export { Navbar } from './Navbar';

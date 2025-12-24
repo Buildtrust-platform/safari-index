@@ -43,6 +43,13 @@ import {
   storeDecision,
   logDecisionIssued,
   logDecisionRefused,
+  getSnapshot,
+  storeSnapshot,
+  acquireLock,
+  releaseLock,
+  hashInputs,
+  extractTopicId,
+  isDefaultInput,
 } from './db';
 import {
   handleGenerateAssurance,
@@ -155,39 +162,111 @@ export async function handler(
       });
     }
 
-    // Step 3: Invoke AI engine with validation and retry logic
-    const result = await invokeAndValidateAI(input);
+    // Step 3: Check snapshot cache for default inputs
+    // This prevents evaluation stampedes and provides instant responses
+    const topicId = extractTopicId(input);
+    const inputsHash = hashInputs(input);
+    const useCache = isDefaultInput(input);
 
-    // Step 4: Persist the decision (per 10_data_model.md)
-    // Per 11_mvp_build_plan.md: "If decisions are not persisted, nothing else matters."
-    const { decisionId, record } = await storeDecision(
-      input,
-      result.output,
-      sessionId,
-      travelerId,
-      leadId
-    );
+    if (useCache) {
+      const snapshotResult = await getSnapshot(topicId, inputsHash);
 
-    // Step 5: Log the appropriate event
-    if (result.output.type === 'refusal') {
-      await logDecisionRefused(record);
-    } else if (result.output.type === 'decision') {
-      await logDecisionIssued(record);
+      if (snapshotResult.status === 'hit') {
+        // Cache hit - return cached response immediately
+        console.log('Snapshot cache hit:', { topicId, age_seconds: snapshotResult.age_seconds });
+        return createSuccessResponse({
+          ...snapshotResult.snapshot,
+          metadata: {
+            ...snapshotResult.snapshot.metadata,
+            cached: true,
+            cache_age_seconds: snapshotResult.age_seconds,
+          },
+        });
+      }
+
+      if (snapshotResult.status === 'locked') {
+        // Another evaluation is in progress - return capacity refusal
+        console.log('Snapshot locked, returning capacity refusal:', { topicId, retry_after: snapshotResult.retry_after_seconds });
+        return createCapacityRefusal(snapshotResult.retry_after_seconds);
+      }
+
+      if (snapshotResult.status === 'stale') {
+        // Stale cache - can serve while refreshing, but let's try to refresh
+        // For now, proceed with evaluation but could serve stale in high-load scenarios
+        console.log('Snapshot stale, proceeding with refresh:', { topicId, age_seconds: snapshotResult.age_seconds });
+      }
     }
-    // Note: clarification, tradeoff_explanation, revision are not persisted as decisions
-    // They are intermediate outputs. Only final decisions/refusals are stored.
 
-    // Step 6: Return validated, persisted output
-    return createSuccessResponse({
-      decision_id: decisionId,
-      output: result.output,
-      metadata: {
-        logic_version: LOGIC_VERSION,
-        ai_used: true,
-        retry_count: result.retryCount,
-        persisted: true,
-      },
-    });
+    // Step 4: Acquire lock for request coalescing (default inputs only)
+    let lockId: string | null = null;
+    if (useCache) {
+      const lockResult = await acquireLock(topicId);
+      if (lockResult.status === 'locked') {
+        // Another process is evaluating - return capacity refusal
+        console.log('Lock held by another process, returning capacity refusal:', { topicId });
+        return createCapacityRefusal(5); // Suggest retry in 5 seconds
+      }
+      if (lockResult.status === 'acquired') {
+        lockId = lockResult.lockId;
+      }
+      // If status === 'unavailable', proceed without lock (infrastructure not deployed)
+      if (lockResult.status === 'unavailable') {
+        console.log('Lock infrastructure unavailable, proceeding without caching:', { topicId });
+      }
+    }
+
+    try {
+      // Step 5: Invoke AI engine with validation and retry logic
+      const result = await invokeAndValidateAI(input);
+
+      // Step 6: Persist the decision (per 10_data_model.md)
+      // Per 11_mvp_build_plan.md: "If decisions are not persisted, nothing else matters."
+      const { decisionId, record } = await storeDecision(
+        input,
+        result.output,
+        sessionId,
+        travelerId,
+        leadId
+      );
+
+      // Step 7: Log the appropriate event
+      if (result.output.type === 'refusal') {
+        await logDecisionRefused(record);
+      } else if (result.output.type === 'decision') {
+        await logDecisionIssued(record);
+      }
+      // Note: clarification, tradeoff_explanation, revision are not persisted as decisions
+      // They are intermediate outputs. Only final decisions/refusals are stored.
+
+      // Step 8: Build response
+      const response: DecisionResponse = {
+        decision_id: decisionId,
+        output: result.output,
+        metadata: {
+          logic_version: LOGIC_VERSION,
+          ai_used: true,
+          retry_count: result.retryCount,
+          persisted: true,
+        },
+      };
+
+      // Step 9: Store snapshot for default inputs (releases lock)
+      if (useCache && lockId && result.output.type === 'decision') {
+        await storeSnapshot(topicId, response, inputsHash, lockId);
+        console.log('Stored snapshot:', { topicId });
+      } else if (lockId) {
+        // Release lock without storing (e.g., for refusals)
+        await releaseLock(topicId, lockId);
+      }
+
+      return createSuccessResponse(response);
+    } catch (error) {
+      // Release lock on error
+      if (lockId) {
+        await releaseLock(topicId, lockId);
+      }
+      throw error;
+    }
   } catch (error) {
     // Per governance: return a governed refusal instead of 500
     // This ensures the frontend always receives a valid decision response
@@ -386,5 +465,47 @@ function createErrorResponse(
       error: message,
       details,
     }),
+  };
+}
+
+/**
+ * Create a capacity refusal response for request coalescing
+ * Returns a valid DecisionResponse with SERVICE_DEGRADED code
+ * Includes retry guidance for the frontend
+ */
+function createCapacityRefusal(retryAfterSeconds: number): OrchestratorResponse {
+  const refusalOutput: RefusalOutput = {
+    type: 'refusal',
+    refusal: {
+      code: 'SERVICE_DEGRADED',
+      reason: 'The decision service is currently at capacity. Please try again shortly.',
+      missing_or_conflicting_inputs: [
+        'Multiple requests for this decision are being processed',
+        `Please retry in ${retryAfterSeconds} seconds`,
+      ],
+      safe_next_step: `Wait ${retryAfterSeconds} seconds and refresh the page, or try a different decision topic.`,
+    },
+  };
+
+  const response: DecisionResponse = {
+    decision_id: `dec_cap_${Date.now().toString(36)}`,
+    output: refusalOutput,
+    metadata: {
+      logic_version: LOGIC_VERSION,
+      ai_used: false,
+      retry_count: 0,
+      persisted: false,
+    },
+  };
+
+  return {
+    statusCode: 200,
+    headers: {
+      ...CORS_HEADERS,
+      'X-Decision-Id': response.decision_id,
+      'X-Logic-Version': LOGIC_VERSION,
+      'X-Retry-After': String(retryAfterSeconds),
+    },
+    body: JSON.stringify(response),
   };
 }

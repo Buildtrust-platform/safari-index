@@ -202,16 +202,25 @@ export interface OrchestratorError {
 }
 
 /**
+ * Metadata for decision responses
+ */
+export interface DecisionMetadata {
+  logic_version: string;
+  ai_used: boolean;
+  retry_count: number;
+  persisted: boolean;
+  /** Present if response came from snapshot cache */
+  cached?: boolean;
+  /** Age of cached response in seconds */
+  cache_age_seconds?: number;
+}
+
+/**
  * Enriched response that includes decision_id for tracking
  * Per 10_data_model.md: every decision must be stored and referenceable
  */
 export interface DecisionResponse {
   decision_id: string;
   output: AIOutput;
-  metadata: {
-    logic_version: string;
-    ai_used: boolean;
-    retry_count: number;
-    persisted: boolean;
-  };
+  metadata: DecisionMetadata;
 }

@@ -35,3 +35,16 @@ export {
   updateReviewStatus,
 } from './review-store';
 export type { ReviewReasonCode, ReviewRecord } from './review-store';
+
+// Snapshot cache
+export {
+  getSnapshot,
+  storeSnapshot,
+  acquireLock,
+  releaseLock,
+  invalidateSnapshot,
+  hashInputs,
+  extractTopicId,
+  isDefaultInput,
+} from './snapshot-store';
+export type { SnapshotRecord, SnapshotResult, LockResult } from './snapshot-store';

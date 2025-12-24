@@ -206,12 +206,14 @@ function TopicHealthTable({ topics }: { topics: TopicHealthRow[] }) {
                 <div className="flex justify-end gap-2">
                   <Link
                     href={`/decisions/${topic.slug}`}
+                    prefetch={false}
                     className="text-xs text-blue-600 hover:text-blue-800 underline"
                   >
                     View
                   </Link>
                   <Link
                     href={`/decisions/${topic.slug}/variants`}
+                    prefetch={false}
                     className="text-xs text-blue-600 hover:text-blue-800 underline"
                   >
                     Variants

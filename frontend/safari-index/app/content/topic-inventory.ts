@@ -1,0 +1,1246 @@
+/**
+ * Decision Topic Inventory
+ *
+ * Strategic planning registry for Safari Index decision topics.
+ * This file defines WHAT topics exist and their launch/business attributes.
+ * The operational decision-topics.ts defines HOW each topic works at runtime.
+ *
+ * Usage:
+ * - P0 topics: Build operational definitions immediately
+ * - P1 topics: Build after P0 complete
+ * - P2 topics: Build based on demand signals
+ *
+ * Validation Summary (98 topics):
+ * - P0: 40 topics (launch-critical)
+ * - P1: 40 topics (fast-follow)
+ * - P2: 18 topics (demand-driven)
+ * - Assurance-eligible: 79 topics
+ * - Compare-enabled: 21 topics
+ * - High SEO intent: 47 topics
+ */
+
+export type LaunchPriority = 'P0' | 'P1' | 'P2';
+export type DecisionComplexity = 'binary' | 'conditional' | 'multi-factor';
+export type SeoIntent = 'high' | 'medium' | 'low';
+
+export interface TopicInventoryItem {
+  id: string;
+  title: string;
+  bucket: string;
+  decision_complexity: DecisionComplexity;
+  assurance_eligible: boolean;
+  assurance_rationale: string;
+  launch_priority: LaunchPriority;
+  seo_intent: SeoIntent;
+  compare_enabled: boolean;
+}
+
+/**
+ * Internal bucket classification (not exposed in UI)
+ * Used for content strategy and coverage analysis
+ */
+export const TOPIC_BUCKETS = [
+  'personal_fit',
+  'destination_choice',
+  'timing',
+  'experience_type',
+  'accommodation',
+  'logistics',
+  'risk_ethics',
+  'value_cost',
+] as const;
+
+export type TopicBucket = (typeof TOPIC_BUCKETS)[number];
+
+/**
+ * 98 Decision Topics organized by internal bucket
+ */
+export const topicInventory: TopicInventoryItem[] = [
+  // ============================================================
+  // BUCKET 1: PERSONAL FIT (12 topics)
+  // "Is this trip right for me given who I am?"
+  // ============================================================
+  {
+    id: 'first-timer-ready',
+    title: 'Am I ready for my first safari?',
+    bucket: 'personal_fit',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'High emotional stakes for first-timers; trade-offs between preparation and spontaneity',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'solo-safari-fit',
+    title: 'Is solo safari travel right for me?',
+    bucket: 'personal_fit',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Safety, cost, and social trade-offs require careful weighing',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'family-young-kids',
+    title: 'Should I take young children (under 6) on safari?',
+    bucket: 'personal_fit',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Safety, lodge policies, and experience quality create complex trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'family-teens',
+    title: 'Is safari a good trip for teenagers?',
+    bucket: 'personal_fit',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Engagement and activity variety trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'multigenerational',
+    title: 'Can a multigenerational group do safari together?',
+    bucket: 'personal_fit',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Pace, accommodation, and activity trade-offs across age groups',
+    launch_priority: 'P0',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'mobility-challenges',
+    title: 'Can I do safari with mobility challenges?',
+    bucket: 'personal_fit',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Accessibility varies dramatically by destination and camp',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'honeymoon-fit',
+    title: 'Is safari right for a honeymoon?',
+    bucket: 'personal_fit',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Romance vs adventure trade-offs; privacy considerations',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'anniversary-trip',
+    title: 'Is safari a good anniversary trip?',
+    bucket: 'personal_fit',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Similar to honeymoon but different expectations',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'photographer-fit',
+    title: 'Am I serious enough about photography for a photo safari?',
+    bucket: 'personal_fit',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Primarily skill-based; less trade-off complexity',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'adventure-seeker',
+    title: 'Is traditional safari too passive for adventure seekers?',
+    bucket: 'personal_fit',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Activity variety trade-offs; walking safari considerations',
+    launch_priority: 'P1',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+  {
+    id: 'repeat-visitor-value',
+    title: 'Is another safari worth it if I\'ve been before?',
+    bucket: 'personal_fit',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Diminishing returns vs new experiences trade-off',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'wildlife-expectation',
+    title: 'Will I be disappointed if I don\'t see the Big Five?',
+    bucket: 'personal_fit',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Expectation management; less trade-off complexity',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+
+  // ============================================================
+  // BUCKET 2: DESTINATION CHOICE (15 topics)
+  // "Where should I go?"
+  // ============================================================
+  {
+    id: 'tz-vs-ke',
+    title: 'Tanzania or Kenya for first safari?',
+    bucket: 'destination_choice',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Major destination decision with significant trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: true,
+  },
+  {
+    id: 'tz-vs-bw',
+    title: 'Tanzania or Botswana?',
+    bucket: 'destination_choice',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Different safari styles; cost and exclusivity trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: true,
+  },
+  {
+    id: 'ke-vs-bw',
+    title: 'Kenya or Botswana?',
+    bucket: 'destination_choice',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Accessibility vs exclusivity trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: true,
+  },
+  {
+    id: 'sa-vs-ea',
+    title: 'South Africa or East Africa for first safari?',
+    bucket: 'destination_choice',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Malaria, driving, and experience style trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: true,
+  },
+  {
+    id: 'rwanda-gorillas-worth',
+    title: 'Is Rwanda worth it just for gorillas?',
+    bucket: 'destination_choice',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'High cost, singular focus; value judgment required',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'uganda-vs-rwanda',
+    title: 'Uganda or Rwanda for gorilla trekking?',
+    bucket: 'destination_choice',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Cost, trek difficulty, and add-on options trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: true,
+  },
+  {
+    id: 'namibia-different',
+    title: 'Is Namibia too different for a traditional safari expectation?',
+    bucket: 'destination_choice',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Landscape vs wildlife density trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'zambia-value',
+    title: 'Is Zambia underrated or just limited?',
+    bucket: 'destination_choice',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Value vs infrastructure trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'zimbabwe-safe',
+    title: 'Is Zimbabwe safe and worthwhile for safari?',
+    bucket: 'destination_choice',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Political concerns vs quality trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'okavango-worth',
+    title: 'Is the Okavango Delta worth the premium?',
+    bucket: 'destination_choice',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'High cost; unique experience value judgment',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'serengeti-vs-mara',
+    title: 'Serengeti or Masai Mara?',
+    bucket: 'destination_choice',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Scale, crowds, and border logistics trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: true,
+  },
+  {
+    id: 'ngorongoro-worth',
+    title: 'Is Ngorongoro Crater worth a full day?',
+    bucket: 'destination_choice',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Straightforward time allocation; less complexity',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'kruger-vs-private',
+    title: 'Kruger National Park or private reserves?',
+    bucket: 'destination_choice',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Self-drive flexibility vs guided exclusivity trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: true,
+  },
+  {
+    id: 'single-country-multi',
+    title: 'Should I focus on one country or visit multiple?',
+    bucket: 'destination_choice',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Depth vs breadth; logistics and cost trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'off-beaten-path',
+    title: 'Should I choose a less-visited destination?',
+    bucket: 'destination_choice',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Exclusivity vs reliability trade-offs',
+    launch_priority: 'P2',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+
+  // ============================================================
+  // BUCKET 3: TIMING (18 topics)
+  // "When should I go?"
+  // ============================================================
+  {
+    id: 'tz-dry-season',
+    title: 'Is dry season the only good time for Tanzania?',
+    bucket: 'timing',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Season choice affects experience significantly',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'migration-timing',
+    title: 'When is the best time to see the Great Migration?',
+    bucket: 'timing',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Unpredictable timing; location trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'river-crossings',
+    title: 'When is the best time to see river crossings?',
+    bucket: 'timing',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'High unpredictability; timing vs certainty trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'calving-season',
+    title: 'Is calving season worth planning around?',
+    bucket: 'timing',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Timing constraints vs flexibility trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'green-season-value',
+    title: 'Is green season worth it for the savings?',
+    bucket: 'timing',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Cost vs experience quality trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'shoulder-season',
+    title: 'Are shoulder seasons the sweet spot?',
+    bucket: 'timing',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Balance of cost and conditions; varies by destination',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'christmas-safari',
+    title: 'Is Christmas a good time for safari?',
+    bucket: 'timing',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Family timing vs peak pricing trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'school-holidays',
+    title: 'Should I avoid school holiday periods?',
+    bucket: 'timing',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Crowd and cost vs family scheduling trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'tz-feb',
+    title: 'Is February a good time for Tanzania safari?',
+    bucket: 'timing',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Calving season considerations; variable conditions',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'tz-jul',
+    title: 'Is July a good time for Tanzania safari?',
+    bucket: 'timing',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Peak season trade-offs; migration timing',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'ke-aug',
+    title: 'Is August a good time for Kenya safari?',
+    bucket: 'timing',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Peak Mara season; crowd considerations',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'bw-jun',
+    title: 'Is June a good time for Botswana safari?',
+    bucket: 'timing',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Early dry season considerations',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'bw-peak-flood',
+    title: 'When is peak flood in the Okavango?',
+    bucket: 'timing',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Flood timing affects activities significantly',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'sa-winter',
+    title: 'Is South African winter good for safari?',
+    bucket: 'timing',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Temperature vs wildlife viewing trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'rain-impact',
+    title: 'How much does rain really affect safari?',
+    bucket: 'timing',
+    decision_complexity: 'conditional',
+    assurance_eligible: false,
+    assurance_rationale: 'Informational; less trade-off complexity',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'last-minute-timing',
+    title: 'Can I book a good safari last minute?',
+    bucket: 'timing',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Availability vs choice trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'booking-lead-time',
+    title: 'How far in advance should I book?',
+    bucket: 'timing',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Flexibility vs availability trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'weather-unpredictable',
+    title: 'Should I worry about weather unpredictability?',
+    bucket: 'timing',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Risk tolerance question; less trade-off complexity',
+    launch_priority: 'P2',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+
+  // ============================================================
+  // BUCKET 4: EXPERIENCE TYPE (12 topics)
+  // "What kind of safari do I want?"
+  // ============================================================
+  {
+    id: 'walking-safari',
+    title: 'Is a walking safari worth the risk and cost?',
+    bucket: 'experience_type',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Safety, fitness, and experience trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'night-drives',
+    title: 'Are night drives worth choosing a park that allows them?',
+    bucket: 'experience_type',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Experience variety vs destination choice trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'balloon-safari',
+    title: 'Is a balloon safari worth the extra cost?',
+    bucket: 'experience_type',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Significant cost; experience value judgment',
+    launch_priority: 'P1',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'mokoro-canoe',
+    title: 'Should I prioritize mokoro/canoe safaris?',
+    bucket: 'experience_type',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Activity preference; destination implications',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'photo-safari-vs-regular',
+    title: 'Should I book a dedicated photo safari?',
+    bucket: 'experience_type',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Cost and pace trade-offs for photographers',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'fly-camping',
+    title: 'Is fly camping worth the discomfort?',
+    bucket: 'experience_type',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Comfort vs authenticity trade-offs',
+    launch_priority: 'P2',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+  {
+    id: 'mobile-vs-fixed',
+    title: 'Mobile camp or fixed lodge safari?',
+    bucket: 'experience_type',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Flexibility, comfort, and experience trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: true,
+  },
+  {
+    id: 'self-drive-safari',
+    title: 'Should I do a self-drive safari?',
+    bucket: 'experience_type',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Control vs expertise trade-offs; destination specific',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'private-vs-shared',
+    title: 'Is a private vehicle worth double the cost?',
+    bucket: 'experience_type',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Cost vs experience quality trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: true,
+  },
+  {
+    id: 'group-tour-value',
+    title: 'Is a group tour ever the right choice?',
+    bucket: 'experience_type',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Social vs private experience trade-offs; cost',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'conservation-experience',
+    title: 'Should I choose a conservation-focused safari?',
+    bucket: 'experience_type',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Values alignment vs experience optimization',
+    launch_priority: 'P2',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+  {
+    id: 'cultural-component',
+    title: 'How important is a cultural component?',
+    bucket: 'experience_type',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Preference-based; less trade-off complexity',
+    launch_priority: 'P2',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+
+  // ============================================================
+  // BUCKET 5: ACCOMMODATION (11 topics)
+  // "Where should I stay?"
+  // ============================================================
+  {
+    id: 'lodge-vs-tented',
+    title: 'Lodge or tented camp?',
+    bucket: 'accommodation',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Experience style and comfort trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: true,
+  },
+  {
+    id: 'luxury-worth-it',
+    title: 'Is luxury accommodation worth it on safari?',
+    bucket: 'accommodation',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Cost vs experience quality trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'budget-accommodation-ok',
+    title: 'Is budget accommodation acceptable for safari?',
+    bucket: 'accommodation',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Cost vs comfort trade-offs; safety considerations',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'inside-vs-outside-park',
+    title: 'Should I stay inside or outside the park?',
+    bucket: 'accommodation',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Cost, access, and experience trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: true,
+  },
+  {
+    id: 'all-inclusive-value',
+    title: 'Is all-inclusive worth the premium?',
+    bucket: 'accommodation',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Cost certainty vs flexibility trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'camp-hopping',
+    title: 'Should I stay at multiple camps or just one?',
+    bucket: 'accommodation',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Variety vs logistics trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'family-rooms',
+    title: 'Are family rooms worth the premium over separate tents?',
+    bucket: 'accommodation',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Cost vs convenience trade-offs for families',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'private-pool-villa',
+    title: 'Is a private pool/villa worth it?',
+    bucket: 'accommodation',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Pure luxury preference; less trade-off complexity',
+    launch_priority: 'P2',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+  {
+    id: 'small-vs-large-camp',
+    title: 'Small intimate camp or larger lodge?',
+    bucket: 'accommodation',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Exclusivity vs amenities trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: true,
+  },
+  {
+    id: 'owner-run-camps',
+    title: 'Are owner-run camps worth seeking out?',
+    bucket: 'accommodation',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Personality vs consistency trade-offs',
+    launch_priority: 'P2',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+  {
+    id: 'treehouse-unique',
+    title: 'Is a treehouse or unique property worth the premium?',
+    bucket: 'accommodation',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Novelty preference; less trade-off complexity',
+    launch_priority: 'P2',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+
+  // ============================================================
+  // BUCKET 6: LOGISTICS (12 topics)
+  // "How do I make this work practically?"
+  // ============================================================
+  {
+    id: 'trip-length',
+    title: 'Is 5 days enough for safari?',
+    bucket: 'logistics',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Quality vs quantity trade-offs; destination specific',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'ideal-length',
+    title: 'What\'s the ideal safari length?',
+    bucket: 'logistics',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Multiple factors affect optimal duration',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'fly-vs-drive',
+    title: 'Should I fly or drive between parks?',
+    bucket: 'logistics',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Cost, time, and experience trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: true,
+  },
+  {
+    id: 'charter-vs-scheduled',
+    title: 'Charter flight or scheduled service?',
+    bucket: 'logistics',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Cost vs flexibility trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: true,
+  },
+  {
+    id: 'beach-extension',
+    title: 'Should I add a beach extension?',
+    bucket: 'logistics',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Trip pacing and cost trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'city-stopover',
+    title: 'Should I plan a city stopover (Nairobi/Cape Town)?',
+    bucket: 'logistics',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Time allocation and fatigue trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'visa-complexity',
+    title: 'Should visa requirements affect my destination choice?',
+    bucket: 'logistics',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Factual logistics; less trade-off complexity',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'travel-insurance',
+    title: 'Do I really need comprehensive travel insurance?',
+    bucket: 'logistics',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Risk mitigation; less trade-off complexity',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'packing-weight',
+    title: 'How strict are the luggage weight limits?',
+    bucket: 'logistics',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Factual information; less trade-off complexity',
+    launch_priority: 'P2',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'agent-vs-direct',
+    title: 'Should I book through an agent or direct?',
+    bucket: 'logistics',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Cost, support, and flexibility trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: true,
+  },
+  {
+    id: 'local-vs-international',
+    title: 'Local operator or international tour company?',
+    bucket: 'logistics',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Cost, reliability, and support trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: true,
+  },
+  {
+    id: 'deposit-timing',
+    title: 'When should I pay the deposit?',
+    bucket: 'logistics',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Factual timing; less trade-off complexity',
+    launch_priority: 'P2',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+
+  // ============================================================
+  // BUCKET 7: RISK & ETHICS (10 topics)
+  // "What should I be cautious about?"
+  // ============================================================
+  {
+    id: 'malaria-decision',
+    title: 'Should I avoid malaria zones entirely?',
+    bucket: 'risk_ethics',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Health risk vs experience trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'yellow-fever',
+    title: 'Do I need a yellow fever vaccine?',
+    bucket: 'risk_ethics',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Factual requirement; less trade-off complexity',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'political-stability',
+    title: 'Should political instability affect my destination choice?',
+    bucket: 'risk_ethics',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Risk assessment vs opportunity trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'ethical-hunting',
+    title: 'Should I avoid areas with hunting concessions?',
+    bucket: 'risk_ethics',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Values vs experience quality trade-offs',
+    launch_priority: 'P2',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+  {
+    id: 'volunteer-tourism',
+    title: 'Is volunteer/conservation tourism ethical?',
+    bucket: 'risk_ethics',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Impact vs intention trade-offs',
+    launch_priority: 'P2',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+  {
+    id: 'orphanage-visits',
+    title: 'Should I include orphanage or school visits?',
+    bucket: 'risk_ethics',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Clear ethical guidance; less trade-off complexity',
+    launch_priority: 'P2',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+  {
+    id: 'elephant-interaction',
+    title: 'Are elephant interaction experiences ethical?',
+    bucket: 'risk_ethics',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Sanctuary quality varies; ethical trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'carbon-offset',
+    title: 'Should I carbon offset my safari flights?',
+    bucket: 'risk_ethics',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Values-based; less trade-off complexity',
+    launch_priority: 'P2',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+  {
+    id: 'community-benefit',
+    title: 'How do I ensure my trip benefits local communities?',
+    bucket: 'risk_ethics',
+    decision_complexity: 'conditional',
+    assurance_eligible: false,
+    assurance_rationale: 'Guidance-focused; less trade-off complexity',
+    launch_priority: 'P2',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+  {
+    id: 'photography-ethics',
+    title: 'What are the ethics of wildlife photography on safari?',
+    bucket: 'risk_ethics',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Guidance-focused; less trade-off complexity',
+    launch_priority: 'P2',
+    seo_intent: 'low',
+    compare_enabled: false,
+  },
+
+  // ============================================================
+  // BUCKET 8: VALUE & COST (8 topics)
+  // "Am I getting good value?"
+  // ============================================================
+  {
+    id: 'total-budget',
+    title: 'What should my total safari budget be?',
+    bucket: 'value_cost',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Major financial decision with trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'budget-tanzania',
+    title: 'Can I do Tanzania on a budget?',
+    bucket: 'value_cost',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Cost vs quality trade-offs specific to destination',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'hidden-costs',
+    title: 'What hidden costs should I expect?',
+    bucket: 'value_cost',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Informational; less trade-off complexity',
+    launch_priority: 'P1',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'tipping-guide',
+    title: 'How much should I tip guides and staff?',
+    bucket: 'value_cost',
+    decision_complexity: 'binary',
+    assurance_eligible: false,
+    assurance_rationale: 'Factual guidance; less trade-off complexity',
+    launch_priority: 'P1',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'peak-vs-value',
+    title: 'Is peak season worth the premium?',
+    bucket: 'value_cost',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Cost vs experience quality trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'high',
+    compare_enabled: false,
+  },
+  {
+    id: 'cheap-warning',
+    title: 'When is cheap too cheap for safari?',
+    bucket: 'value_cost',
+    decision_complexity: 'conditional',
+    assurance_eligible: true,
+    assurance_rationale: 'Quality floor assessment; safety considerations',
+    launch_priority: 'P0',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+  {
+    id: 'value-destinations',
+    title: 'Which destinations offer the best value?',
+    bucket: 'value_cost',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Destination comparison with cost trade-offs',
+    launch_priority: 'P1',
+    seo_intent: 'high',
+    compare_enabled: true,
+  },
+  {
+    id: 'splurge-allocation',
+    title: 'Where should I splurge vs save?',
+    bucket: 'value_cost',
+    decision_complexity: 'multi-factor',
+    assurance_eligible: true,
+    assurance_rationale: 'Budget allocation with impact trade-offs',
+    launch_priority: 'P0',
+    seo_intent: 'medium',
+    compare_enabled: false,
+  },
+];
+
+// ============================================================
+// HELPER FUNCTIONS
+// ============================================================
+
+/**
+ * Get topics by launch priority
+ */
+export function getTopicsByPriority(priority: LaunchPriority): TopicInventoryItem[] {
+  return topicInventory.filter((t) => t.launch_priority === priority);
+}
+
+/**
+ * Get topics by bucket
+ */
+export function getTopicsByBucket(bucket: TopicBucket): TopicInventoryItem[] {
+  return topicInventory.filter((t) => t.bucket === bucket);
+}
+
+/**
+ * Get assurance-eligible topics
+ */
+export function getAssuranceEligibleTopics(): TopicInventoryItem[] {
+  return topicInventory.filter((t) => t.assurance_eligible);
+}
+
+/**
+ * Get compare-enabled topics
+ */
+export function getCompareEnabledTopics(): TopicInventoryItem[] {
+  return topicInventory.filter((t) => t.compare_enabled);
+}
+
+/**
+ * Get topics with high SEO intent
+ */
+export function getHighSeoTopics(): TopicInventoryItem[] {
+  return topicInventory.filter((t) => t.seo_intent === 'high');
+}
+
+/**
+ * Inventory validation summary
+ */
+export function getInventorySummary(): {
+  total: number;
+  byPriority: Record<LaunchPriority, number>;
+  byBucket: Record<string, number>;
+  assuranceEligible: number;
+  compareEnabled: number;
+  highSeo: number;
+} {
+  return {
+    total: topicInventory.length,
+    byPriority: {
+      P0: getTopicsByPriority('P0').length,
+      P1: getTopicsByPriority('P1').length,
+      P2: getTopicsByPriority('P2').length,
+    },
+    byBucket: TOPIC_BUCKETS.reduce(
+      (acc, bucket) => {
+        acc[bucket] = getTopicsByBucket(bucket).length;
+        return acc;
+      },
+      {} as Record<string, number>
+    ),
+    assuranceEligible: getAssuranceEligibleTopics().length,
+    compareEnabled: getCompareEnabledTopics().length,
+    highSeo: getHighSeoTopics().length,
+  };
+}

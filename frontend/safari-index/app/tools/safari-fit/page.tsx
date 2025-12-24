@@ -405,6 +405,7 @@ function SafariFitContent() {
               <div className="text-center">
                 <Link
                   href={`/decisions/tanzania-safari-${inputs.month.toLowerCase()}`}
+                  prefetch={false}
                   className="text-gray-600 hover:text-gray-900 text-sm underline"
                 >
                   View full decision with assumptions and trade-offs

@@ -31,7 +31,7 @@ export default defineConfig({
   webServer: {
     command: 'ENABLE_DEV_PAGES=true NEXT_PUBLIC_APP_MODE=build npm run dev',
     url: 'http://localhost:3000',
-    // Never reuse existing server to ensure ENABLE_DEV_PAGES and NEXT_PUBLIC_APP_MODE are set correctly
-    reuseExistingServer: false,
+    // Reuse existing server if available, start new one otherwise
+    reuseExistingServer: !process.env.CI,
   },
 });

@@ -26,6 +26,7 @@ export function RelatedDecisions({ topics }: RelatedDecisionsProps) {
           <li key={topic.topic_id}>
             <Link
               href={`/decisions/${topic.slug}`}
+              prefetch={false}
               className="text-gray-700 hover:text-gray-900 hover:underline"
             >
               {topic.question}

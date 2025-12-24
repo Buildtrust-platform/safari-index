@@ -1,22 +1,25 @@
 'use client';
 
 /**
- * Safari Index Arrival Page
+ * Safari Index Homepage
  *
- * Clean decision tool aesthetic - minimal, functional, content-focused.
- * Photography and typography do the heavy lifting.
+ * Pure arrival page - industry-standard safari aesthetic with Safari Index's
+ * decision authority framing. Premium, restrained, documentary tone.
  *
  * Structure:
- * 1. ARRIVAL - Full viewport hero with photography
- * 2. THE PROMISE - What Safari Index does (simple text)
- * 3. ENTRY POINTS - Start here (clean cards)
- * 4. BOUNDARIES - What we won't do (trust section)
+ * 1. ARRIVAL HERO - Full viewport with African landscape
+ * 2. ORIENTATION - What Safari Index does (3 pillars)
+ * 3. REAL QUESTIONS - 6 decision cards from topic registry
+ * 4. CATEGORY CLARIFICATION - What Safari Index is not
+ * 5. ACCOUNTABILITY - Trust signals
+ * 6. CALM CLOSE - Final CTA
  */
 
 import Link from 'next/link';
-import { ChevronDown, ArrowRight, CheckCircle, Scale, RefreshCw, Compass, GitCompare, Sliders, ShieldX, Sparkles, AlertCircle, CloudOff } from 'lucide-react';
+import { ChevronDown, ArrowRight, MapPin, Calendar, Scale, ShieldOff, FileText, RefreshCw } from 'lucide-react';
 import { ImageBand, ImageBandContent, pageImages } from './components/visual';
-import { PageGrid } from './components/layout';
+import { Navbar, PageGrid } from './components/layout';
+import { getPublishedTopics, type DecisionTopic } from './content/decision-topics';
 
 /**
  * Scroll Indicator
@@ -34,97 +37,72 @@ function ScrollIndicator() {
 }
 
 /**
- * Button - Clean, solid colors
+ * Primary Button - Solid white on dark backgrounds
  */
-function Button({
+function PrimaryButton({
   href,
   children,
-  variant = 'primary',
 }: {
   href: string;
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary';
 }) {
   return (
     <Link
       href={href}
-      className={`
-        group inline-flex items-center gap-2 px-6 py-3 text-sm font-medium
-        rounded-md transition-colors duration-200
-        ${variant === 'primary'
-          ? 'bg-white text-neutral-900 hover:bg-neutral-100'
-          : 'bg-transparent text-white border border-white/40 hover:bg-white/10 hover:border-white/60'
-        }
-      `}
+      className="group inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-white text-stone-900 hover:bg-stone-100"
     >
       {children}
-      {variant === 'primary' && (
-        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-      )}
+      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
     </Link>
   );
 }
 
 /**
- * Entry Card - Warm safari styling with icons
+ * Secondary Button - Outline on dark backgrounds
  */
-function EntryCard({
-  title,
-  description,
+function SecondaryButton({
   href,
-  icon: Icon,
-  primary = false,
+  children,
 }: {
-  title: string;
-  description: string;
   href: string;
-  icon: React.ElementType;
-  primary?: boolean;
+  children: React.ReactNode;
 }) {
   return (
     <Link
       href={href}
-      className={`
-        group block rounded-xl transition-all duration-200
-        ${primary
-          ? 'bg-stone-900 text-white'
-          : 'bg-white border border-stone-200 hover:border-amber-300 hover:shadow-md'
-        }
-      `}
+      className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-transparent text-white border border-white/40 hover:bg-white/10 hover:border-white/60"
     >
-      <div className="p-6">
-        <div className="flex items-start gap-4">
-          <div className={`
-            flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center
-            ${primary
-              ? 'bg-amber-500/20'
-              : 'bg-amber-100 group-hover:bg-amber-200'
-            }
-          `}>
-            <Icon className={`w-6 h-6 ${primary ? 'text-amber-400' : 'text-amber-600'}`} />
-          </div>
-          <div className="flex-1">
-            {primary && (
-              <span className="inline-block px-2 py-0.5 mb-2 text-xs font-medium bg-amber-500/20 rounded text-amber-300">
-                Recommended
-              </span>
+      {children}
+    </Link>
+  );
+}
+
+/**
+ * Question Card - Links to decision pages
+ */
+function QuestionCard({ topic }: { topic: DecisionTopic }) {
+  return (
+    <Link
+      href={`/decisions/${topic.slug}`}
+      prefetch={false}
+      className="group block"
+    >
+      <div className="p-5 rounded-xl bg-white border border-stone-200 hover:border-amber-300 hover:shadow-md transition-all duration-200 h-full">
+        <div className="flex flex-col h-full">
+          <h3 className="font-editorial text-base font-medium text-stone-900 group-hover:text-amber-700 transition-colors mb-2">
+            {topic.question}
+          </h3>
+          <p className="text-sm text-stone-500 mb-3 flex-1">
+            {topic.context_line}
+          </p>
+          <div className="flex items-center justify-between">
+            {topic.destinations.length > 0 && (
+              <div className="flex items-center gap-1.5 text-xs text-amber-700">
+                <MapPin className="w-3.5 h-3.5" />
+                <span className="font-medium">{topic.destinations.slice(0, 2).join(' · ')}</span>
+              </div>
             )}
-            <h3 className={`font-editorial text-lg font-semibold mb-2 ${primary ? 'text-white' : 'text-stone-900'}`}>
-              {title}
-            </h3>
-            <p className={`font-editorial text-sm leading-relaxed ${primary ? 'text-stone-400' : 'text-stone-600'}`}>
-              {description}
-            </p>
-          </div>
-          <div className={`
-            flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center
-            transition-colors duration-200
-            ${primary
-              ? 'bg-white/10 group-hover:bg-white/20'
-              : 'bg-stone-100 group-hover:bg-amber-100'
-            }
-          `}>
-            <ArrowRight className={`w-4 h-4 ${primary ? 'text-white' : 'text-stone-500 group-hover:text-amber-600'}`} />
+            <ArrowRight className="w-4 h-4 text-stone-400 group-hover:text-amber-600 transition-colors" />
           </div>
         </div>
       </div>
@@ -133,14 +111,84 @@ function EntryCard({
 }
 
 /**
- * Arrival Page
+ * Pillar Card - Three pillars of what Safari Index does
+ */
+function PillarCard({
+  title,
+  description,
+  icon: Icon,
+}: {
+  title: string;
+  description: string;
+  icon: React.ElementType;
+}) {
+  return (
+    <div className="text-center">
+      <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mx-auto mb-4">
+        <Icon className="w-6 h-6 text-amber-700" />
+      </div>
+      <h3 className="font-editorial text-lg font-semibold text-stone-900 mb-2">
+        {title}
+      </h3>
+      <p className="font-editorial text-sm text-stone-600 leading-relaxed">
+        {description}
+      </p>
+    </div>
+  );
+}
+
+/**
+ * Get 6 featured topics for the homepage
+ * Priority order based on spec examples
+ */
+function getFeaturedTopics(): DecisionTopic[] {
+  const allTopics = getPublishedTopics();
+
+  // Priority slugs from spec (in order of preference)
+  const prioritySlugs = [
+    'tanzania-safari-february',
+    'tanzania-vs-kenya-first-safari',
+    'green-season-safari-worth-it',
+    'tanzania-safari-july',
+    'tanzania-safari-november',
+    'is-5-days-enough-for-safari',
+    'safari-with-young-children',
+    'kenya-safari-august',
+    'botswana-safari-june',
+    'tanzania-safari-on-budget',
+  ];
+
+  const featured: DecisionTopic[] = [];
+
+  for (const slug of prioritySlugs) {
+    if (featured.length >= 6) break;
+    const topic = allTopics.find(t => t.slug === slug);
+    if (topic) featured.push(topic);
+  }
+
+  // Fill remaining slots if needed
+  for (const topic of allTopics) {
+    if (featured.length >= 6) break;
+    if (!featured.includes(topic)) featured.push(topic);
+  }
+
+  return featured.slice(0, 6);
+}
+
+/**
+ * Homepage
  */
 export default function Home() {
+  const featuredTopics = getFeaturedTopics();
+
   return (
     <>
+      {/* Navbar - transparent over hero */}
+      <Navbar variant="transparent" />
+
       {/* ================================================================
-          SECTION 1 — ARRIVAL
-          Full viewport, photography-first. Let the image speak.
+          SECTION 1 — ARRIVAL HERO
+          Full viewport, African landscape, decision authority framing.
           ================================================================ */}
       <ImageBand
         image={pageImages.home}
@@ -150,35 +198,25 @@ export default function Home() {
         priority
         alwaysRender
       >
-        <ImageBandContent maxWidth="wide" className="flex flex-col justify-end min-h-screen pb-28 md:pb-36">
-          {/* Identity badge - glass effect kept */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 w-fit animate-fade-in-up">
-            <div className="w-1.5 h-1.5 rounded-full bg-white/80" />
-            <span className="font-ui text-xs font-medium text-white/90 uppercase tracking-wider">
-              Safari Index
-            </span>
-          </div>
-
-          {/* Headline */}
+        <ImageBandContent maxWidth="wide" className="flex flex-col justify-end min-h-screen pb-28 md:pb-36 pt-20">
+          {/* H1 Headline */}
           <h1 className="font-editorial text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-[1.1] tracking-tight mb-5 max-w-3xl animate-fade-in-up animation-delay-100">
-            Your safari decision,
-            <br />
-            treated seriously.
+            Safari decisions, clarified.
           </h1>
 
           {/* Subhead */}
           <p className="font-editorial text-lg md:text-xl text-white/80 leading-relaxed mb-10 max-w-xl animate-fade-in-up animation-delay-200">
-            Clear verdicts, real trade-offs, and honest refusals when we can't help.
+            Clear judgments when timing, cost, and expectations matter.
           </p>
 
-          {/* CTAs - solid buttons */}
+          {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 animate-fade-in-up animation-delay-300">
-            <Button href="/explore" variant="primary">
-              Start exploring
-            </Button>
-            <Button href="/how-it-works" variant="secondary">
-              How it works
-            </Button>
+            <PrimaryButton href="/explore">
+              Explore decisions
+            </PrimaryButton>
+            <SecondaryButton href="/explore?filter=when-to-go">
+              When to go
+            </SecondaryButton>
           </div>
         </ImageBandContent>
 
@@ -186,192 +224,160 @@ export default function Home() {
       </ImageBand>
 
       {/* ================================================================
-          SECTION 2 — THE PROMISE
-          Warm safari aesthetic with icons.
+          SECTION 2 — ORIENTATION (What Safari Index does)
+          Three pillars.
           ================================================================ */}
-      <div className="bg-gradient-to-b from-amber-50/50 via-stone-50 to-stone-100 py-20 md:py-28">
+      <section className="bg-gradient-to-b from-stone-50 to-white py-20 md:py-28">
         <PageGrid maxWidth="narrow">
+          <div className="text-center mb-14">
+            <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900 mb-4">
+              What Safari Index does
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+            <PillarCard
+              icon={Scale}
+              title="We issue verdicts"
+              description="Not recommendations. Clear outcomes based on trade-offs and constraints."
+            />
+            <PillarCard
+              icon={RefreshCw}
+              title="We show what changes the answer"
+              description="Timing, flexibility, expectations, and risk made explicit."
+            />
+            <PillarCard
+              icon={ShieldOff}
+              title="We refuse when it's irresponsible"
+              description="If a decision can't be made honestly, we say so."
+            />
+          </div>
+        </PageGrid>
+      </section>
+
+      {/* ================================================================
+          SECTION 3 — REAL QUESTIONS
+          6 decision cards from topic registry.
+          ================================================================ */}
+      <section className="bg-white py-20 md:py-28">
+        <PageGrid maxWidth="default">
           <div className="text-center mb-12">
             <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900 mb-4">
-              Decisions, not suggestions
+              Start with a real question
             </h2>
-            <p className="font-editorial text-stone-600 max-w-lg mx-auto">
-              We don't give you inspiration. We give you verdicts you can act on.
-            </p>
           </div>
 
-          {/* Feature cards with icons */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-xl p-6 border border-stone-200 shadow-sm">
-              <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center mb-4">
-                <CheckCircle className="w-5 h-5 text-amber-600" />
-              </div>
-              <h3 className="font-editorial text-base font-semibold text-stone-900 mb-2">
-                Clear Verdicts
-              </h3>
-              <p className="font-editorial text-sm text-stone-600 leading-relaxed">
-                Book, wait, switch, or discard. Every question gets a direct answer.
-              </p>
-            </div>
-            <div className="bg-white rounded-xl p-6 border border-stone-200 shadow-sm">
-              <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center mb-4">
-                <Scale className="w-5 h-5 text-amber-600" />
-              </div>
-              <h3 className="font-editorial text-base font-semibold text-stone-900 mb-2">
-                Real Trade-offs
-              </h3>
-              <p className="font-editorial text-sm text-stone-600 leading-relaxed">
-                See what you gain and what you lose. No hidden downsides.
-              </p>
-            </div>
-            <div className="bg-white rounded-xl p-6 border border-stone-200 shadow-sm">
-              <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center mb-4">
-                <RefreshCw className="w-5 h-5 text-amber-600" />
-              </div>
-              <h3 className="font-editorial text-base font-semibold text-stone-900 mb-2">
-                Change Conditions
-              </h3>
-              <p className="font-editorial text-sm text-stone-600 leading-relaxed">
-                Know exactly what would flip our recommendation.
-              </p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {featuredTopics.map((topic) => (
+              <QuestionCard key={topic.topic_id} topic={topic} />
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link
+              href="/explore"
+              className="inline-flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-800 transition-colors"
+            >
+              View all decisions
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </PageGrid>
-      </div>
+      </section>
 
       {/* ================================================================
-          SECTION 3 — ENTRY POINTS
-          Warm cards with icons
+          SECTION 4 — CATEGORY CLARIFICATION
+          What Safari Index is not.
           ================================================================ */}
-      <div className="bg-white py-20 md:py-28">
-        <PageGrid maxWidth="default">
-          <div className="text-center mb-10">
-            <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900 mb-3">
-              Choose your path
-            </h2>
-            <p className="font-editorial text-stone-600">
-              Three ways to find the answers you need.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <EntryCard
-              title="Explore Decisions"
-              description="Browse safari planning questions by region, travel style, or topic."
-              href="/explore"
-              icon={Compass}
-              primary
-            />
-            <EntryCard
-              title="Compare Options"
-              description="View two decisions side by side to understand the trade-offs."
-              href="/compare"
-              icon={GitCompare}
-            />
-            <EntryCard
-              title="Test Variants"
-              description="See how recommendations change when your constraints change."
-              href="/explore"
-              icon={Sliders}
-            />
-          </div>
-        </PageGrid>
-      </div>
-
-      {/* ================================================================
-          SECTION 4 — BOUNDARIES
-          What we won't do. Warm dark stone with amber accents.
-          ================================================================ */}
-      <div className="bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 text-white py-20 md:py-28">
+      <section className="bg-stone-50 py-16 md:py-20">
         <PageGrid maxWidth="narrow">
-          <div className="text-center mb-10">
-            <h2 className="font-editorial text-2xl md:text-3xl font-semibold mb-3">
-              What we won't do
+          <div className="text-center">
+            <h2 className="font-editorial text-xl md:text-2xl font-semibold text-stone-900 mb-4">
+              Built for serious safari planning
             </h2>
-            <p className="font-editorial text-stone-400">
-              Trust comes from transparency about our limits.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0">
-                  <ShieldX className="w-4 h-4 text-amber-400" />
-                </div>
-                <div>
-                  <h3 className="font-editorial font-semibold mb-1.5">We don't sell tours</h3>
-                  <p className="text-sm text-stone-400">No commissions, no rankings, no sponsored placements.</p>
-                </div>
-              </div>
-            </div>
-            <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0">
-                  <Sparkles className="w-4 h-4 text-amber-400" />
-                </div>
-                <div>
-                  <h3 className="font-editorial font-semibold mb-1.5">We don't fake inspiration</h3>
-                  <p className="text-sm text-stone-400">No listicles, no "top 10" fluff, no aspirational content.</p>
-                </div>
-              </div>
-            </div>
-            <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0">
-                  <AlertCircle className="w-4 h-4 text-amber-400" />
-                </div>
-                <div>
-                  <h3 className="font-editorial font-semibold mb-1.5">We refuse when we should</h3>
-                  <p className="text-sm text-stone-400">Missing inputs? Outside our scope? We'll say so clearly.</p>
-                </div>
-              </div>
-            </div>
-            <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0">
-                  <CloudOff className="w-4 h-4 text-amber-400" />
-                </div>
-                <div>
-                  <h3 className="font-editorial font-semibold mb-1.5">We don't guarantee outcomes</h3>
-                  <p className="text-sm text-stone-400">Weather, wildlife, and local conditions remain beyond control.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center mt-12 pt-8 border-t border-white/10">
-            <p className="font-editorial text-stone-400 italic">
-              Built for travelers who take their decisions seriously.
+            <p className="font-editorial text-stone-600 leading-relaxed max-w-2xl mx-auto">
+              Safari Index is not a booking platform or a travel guide. It exists to help travelers avoid costly mistakes before committing to a safari.
             </p>
           </div>
         </PageGrid>
-      </div>
+      </section>
 
       {/* ================================================================
-          FOOTER — Warm stone footer
+          SECTION 5 — ACCOUNTABILITY SIGNALS
+          Trust signals.
+          ================================================================ */}
+      <section className="bg-white py-16 md:py-20">
+        <PageGrid maxWidth="narrow">
+          <div className="space-y-4">
+            {[
+              { icon: FileText, text: 'Decisions are versioned and dated.' },
+              { icon: RefreshCw, text: 'Outcomes change when conditions change.' },
+              { icon: Calendar, text: 'Assurance preserves a decision as-issued.' },
+              { icon: ShieldOff, text: 'No commissions. No bookings. No incentives.' },
+            ].map((item, index) => (
+              <div key={index} className="flex items-center gap-4">
+                <div className="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center flex-shrink-0">
+                  <item.icon className="w-4 h-4 text-stone-500" />
+                </div>
+                <p className="font-editorial text-stone-700">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </PageGrid>
+      </section>
+
+      {/* ================================================================
+          SECTION 6 — CALM CLOSE
+          Final CTA.
+          ================================================================ */}
+      <section className="bg-stone-900 text-white py-20 md:py-28">
+        <PageGrid maxWidth="narrow">
+          <div className="text-center">
+            <p className="font-editorial text-xl md:text-2xl text-stone-300 mb-8">
+              Start with the decision that matters most.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link
+                href="/explore"
+                className="group inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-white text-stone-900 hover:bg-stone-100"
+              >
+                Explore decisions
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+              <Link
+                href="/compare"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-transparent text-white border border-white/40 hover:bg-white/10 hover:border-white/60"
+              >
+                Compare
+              </Link>
+            </div>
+          </div>
+        </PageGrid>
+      </section>
+
+      {/* ================================================================
+          FOOTER
+          Simple, quiet.
           ================================================================ */}
       <footer className="bg-stone-950 text-white py-10">
         <PageGrid maxWidth="default">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center">
-                <Compass className="w-4 h-4 text-amber-400" />
-              </div>
-              <div>
-                <span className="font-editorial text-base font-semibold">Safari Index</span>
-                <span className="text-stone-500 text-sm ml-2">Pan-African Decision System</span>
-              </div>
+            <div>
+              <span className="font-editorial text-base font-semibold">Safari Index</span>
+              <span className="text-stone-500 text-sm ml-2">Pan-African Decision System</span>
             </div>
 
             <div className="flex items-center gap-6">
-              <Link href="/explore" className="text-sm text-stone-400 hover:text-amber-400 transition-colors">
+              <Link href="/" className="text-sm text-stone-400 hover:text-white transition-colors">
+                Home
+              </Link>
+              <Link href="/explore" className="text-sm text-stone-400 hover:text-white transition-colors">
                 Explore
               </Link>
-              <Link href="/compare" className="text-sm text-stone-400 hover:text-amber-400 transition-colors">
+              <Link href="/compare" className="text-sm text-stone-400 hover:text-white transition-colors">
                 Compare
               </Link>
-              <Link href="/how-it-works" className="text-sm text-stone-400 hover:text-amber-400 transition-colors">
+              <Link href="/how-it-works" className="text-sm text-stone-400 hover:text-white transition-colors">
                 How it works
               </Link>
             </div>

@@ -25,6 +25,7 @@ export class DataStack extends cdk.Stack {
   public readonly eventTable: dynamodb.Table;
   public readonly reviewTable: dynamodb.Table;
   public readonly assuranceTable: dynamodb.Table;
+  public readonly snapshotTable: dynamodb.Table;
 
   constructor(scope: Construct, id: string, props: DataStackProps) {
     super(scope, id, props);
@@ -259,6 +260,36 @@ export class DataStack extends cdk.Stack {
       value: this.assuranceTable.tableName,
       description: 'DynamoDB table for decision assurance artifacts',
       exportName: `${exportPrefix}SafariIndexAssuranceTableName`,
+    });
+
+    /**
+     * Snapshot Cache Table
+     * Stores pre-computed decision snapshots for default inputs per topic.
+     * Used to serve instant responses and prevent evaluation stampedes.
+     *
+     * PK: topic_id
+     * Attributes:
+     * - decision_response: The cached DecisionResponse
+     * - inputs_hash: Hash of the default inputs used
+     * - created_at: When the snapshot was generated
+     * - expires_at: TTL for automatic expiration
+     * - lock_until: In-flight lock expiration (for request coalescing)
+     */
+    this.snapshotTable = new dynamodb.Table(this, 'SnapshotTable', {
+      tableName: `${resourcePrefix}safari-index-snapshots`,
+      partitionKey: {
+        name: 'topic_id',
+        type: dynamodb.AttributeType.STRING,
+      },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      removalPolicy: cdk.RemovalPolicy.DESTROY, // Snapshots are regenerable cache
+      timeToLiveAttribute: 'expires_at_epoch', // TTL attribute for auto-expiration
+    });
+
+    new cdk.CfnOutput(this, 'SnapshotTableName', {
+      value: this.snapshotTable.tableName,
+      description: 'DynamoDB table for decision snapshot cache',
+      exportName: `${exportPrefix}SafariIndexSnapshotTableName`,
     });
   }
 }
