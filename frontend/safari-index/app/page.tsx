@@ -3,22 +3,25 @@
 /**
  * Safari Index Homepage
  *
- * Pure arrival page - industry-standard safari aesthetic with Safari Index's
- * decision authority framing. Premium, restrained, documentary tone.
+ * Professional safari operator arrival page with decision authority framing.
+ * Positions Safari Index as a serious safari company that uses logic-backed
+ * decision support to plan better trips.
  *
  * Structure:
- * 1. ARRIVAL HERO - Full viewport with African landscape
- * 2. ORIENTATION - What Safari Index does (3 pillars)
- * 3. REAL QUESTIONS - 6 decision cards from topic registry
- * 4. CATEGORY CLARIFICATION - What Safari Index is not
- * 5. ACCOUNTABILITY - Trust signals
- * 6. CALM CLOSE - Final CTA
+ * 1. ARRIVAL HERO - Operator positioning with African landscape
+ * 2. OPERATOR CREDENTIALS - Factual trust signals
+ * 3. HOW WE WORK - Decision-backed planning (3 pillars)
+ * 4. REAL QUESTIONS - 6 decision cards from topic registry
+ * 5. TRIP SHAPES - Commercial safari offerings
+ * 6. ACCOUNTABILITY - Trust signals
+ * 7. CALM CLOSE - Start planning CTA
  */
 
 import Link from 'next/link';
 import { ChevronDown, ArrowRight, MapPin, Calendar, Scale, ShieldOff, FileText, RefreshCw, Map } from 'lucide-react';
 import { ImageBand, ImageBandContent, pageImages } from './components/visual';
 import { Navbar, PageGrid } from './components/layout';
+import { OperatorCredentials } from './components/OperatorCredentials';
 import { getPublishedTopics, type DecisionTopic } from './content/decision-topics';
 import { getAllTrips } from './content/trip-shapes/trips';
 
@@ -218,7 +221,7 @@ export default function Home() {
 
       {/* ================================================================
           SECTION 1 — ARRIVAL HERO
-          Full viewport, African landscape, decision authority framing.
+          Operator positioning with African landscape.
           ================================================================ */}
       <ImageBand
         image={pageImages.home}
@@ -229,23 +232,29 @@ export default function Home() {
         alwaysRender
       >
         <ImageBandContent maxWidth="wide" className="flex flex-col justify-end min-h-screen pb-28 md:pb-36 pt-20">
-          {/* H1 Headline */}
-          <h1 className="font-editorial text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-[1.1] tracking-tight mb-5 max-w-3xl animate-fade-in-up animation-delay-100">
-            Safari decisions, clarified.
-          </h1>
-
-          {/* Subhead */}
-          <p className="font-editorial text-lg md:text-xl text-white/80 leading-relaxed mb-10 max-w-xl animate-fade-in-up animation-delay-200">
-            Clear judgments when timing, cost, and expectations matter.
+          {/* Eyebrow - Operator positioning */}
+          <p className="font-ui text-xs md:text-sm font-medium text-white/60 uppercase tracking-wider mb-4 animate-fade-in-up">
+            Private Safari Planning · East & Southern Africa
           </p>
 
-          {/* CTAs - Decisions first, then Trips */}
+          {/* H1 Headline - Operator-first, decision-backed */}
+          <h1 className="font-editorial text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-[1.1] tracking-tight mb-5 max-w-3xl animate-fade-in-up animation-delay-100">
+            Safaris planned with clarity.
+          </h1>
+
+          {/* Subhead - Operator identity */}
+          <p className="font-editorial text-lg md:text-xl text-white/80 leading-relaxed mb-10 max-w-xl animate-fade-in-up animation-delay-200">
+            Safari Index plans and operates private safaris across Africa.
+            Every decision is logic-backed. Every trip is custom-built.
+          </p>
+
+          {/* CTAs - Trips first (commercial), then Decisions (how we work) */}
           <div className="flex flex-col sm:flex-row gap-3 animate-fade-in-up animation-delay-300">
-            <PrimaryButton href="/decisions">
-              Explore decisions
+            <PrimaryButton href="/trips">
+              Browse safaris
             </PrimaryButton>
-            <SecondaryButton href="/trips">
-              Browse trip shapes
+            <SecondaryButton href="/decisions">
+              How we decide
             </SecondaryButton>
           </div>
         </ImageBandContent>
@@ -254,32 +263,45 @@ export default function Home() {
       </ImageBand>
 
       {/* ================================================================
-          SECTION 2 — ORIENTATION (What Safari Index does)
-          Three pillars.
+          SECTION 1.5 — OPERATOR CREDENTIALS
+          Factual trust signals. No slogans.
+          ================================================================ */}
+      <section className="bg-white border-b border-stone-100 py-6">
+        <PageGrid maxWidth="default">
+          <OperatorCredentials variant="full" />
+        </PageGrid>
+      </section>
+
+      {/* ================================================================
+          SECTION 2 — HOW WE PLAN SAFARIS
+          Decision-backed planning approach.
           ================================================================ */}
       <section className="bg-gradient-to-b from-stone-50 to-white py-20 md:py-28">
         <PageGrid maxWidth="narrow">
           <div className="text-center mb-14">
             <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900 mb-4">
-              What Safari Index does
+              How we plan safaris
             </h2>
+            <p className="text-stone-600 max-w-xl mx-auto">
+              Every safari we operate starts with clear decisions about timing, expectations, and trade-offs.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
             <PillarCard
               icon={Scale}
-              title="We issue verdicts"
-              description="Not recommendations. Clear outcomes based on trade-offs and constraints."
+              title="Clear verdicts"
+              description="We give you direct answers, not vague suggestions. Go or don't go. This month or that one."
             />
             <PillarCard
               icon={RefreshCw}
-              title="We show what changes the answer"
-              description="Timing, flexibility, expectations, and risk made explicit."
+              title="Visible trade-offs"
+              description="Every choice has costs. We show you what you gain and what you give up."
             />
             <PillarCard
               icon={ShieldOff}
-              title="We refuse when it's irresponsible"
-              description="If a decision can't be made honestly, we say so."
+              title="Honest refusals"
+              description="If we can't recommend something responsibly, we'll tell you why."
             />
           </div>
         </PageGrid>
@@ -316,8 +338,8 @@ export default function Home() {
       </section>
 
       {/* ================================================================
-          SECTION 3.5 — TRIP SHAPES
-          6 trip shapes for application context.
+          SECTION 3.5 — SAFARIS WE OPERATE
+          Trip shapes as commercial anchors.
           ================================================================ */}
       <section className="bg-stone-50 py-20 md:py-28">
         <PageGrid maxWidth="default">
@@ -327,11 +349,12 @@ export default function Home() {
                 <Map className="w-5 h-5 text-amber-700" />
               </div>
               <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900">
-                Trip shapes
+                Safaris we operate
               </h2>
             </div>
             <p className="text-stone-600 max-w-xl mx-auto">
-              Common safari itinerary patterns. Each links to the decisions that matter.
+              Private itineraries across East and Southern Africa.
+              Each is custom-built around the decisions that matter for your trip.
             </p>
           </div>
 
@@ -346,7 +369,7 @@ export default function Home() {
               href="/trips"
               className="inline-flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-800 transition-colors"
             >
-              View all trip shapes
+              View all safari itineraries
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -355,16 +378,17 @@ export default function Home() {
 
       {/* ================================================================
           SECTION 4 — CATEGORY CLARIFICATION
-          What Safari Index is not.
+          What kind of operator Safari Index is.
           ================================================================ */}
       <section className="bg-white py-16 md:py-20">
         <PageGrid maxWidth="narrow">
           <div className="text-center">
             <h2 className="font-editorial text-xl md:text-2xl font-semibold text-stone-900 mb-4">
-              Built for serious safari planning
+              A different kind of safari operator
             </h2>
             <p className="font-editorial text-stone-600 leading-relaxed max-w-2xl mx-auto">
-              Safari Index is not a booking platform or a travel guide. It exists to help travelers avoid costly mistakes before committing to a safari.
+              We plan and operate private safaris. We also publish the decision logic behind our recommendations.
+              You see exactly why we suggest what we suggest—and what would change our answer.
             </p>
           </div>
         </PageGrid>
@@ -395,28 +419,31 @@ export default function Home() {
       </section>
 
       {/* ================================================================
-          SECTION 6 — CALM CLOSE
-          Final CTA.
+          SECTION 6 — START PLANNING
+          Final CTA - operator focused.
           ================================================================ */}
       <section className="bg-stone-900 text-white py-20 md:py-28">
         <PageGrid maxWidth="narrow">
           <div className="text-center">
-            <p className="font-editorial text-xl md:text-2xl text-stone-300 mb-8">
-              Start with the decision that matters most.
+            <h2 className="font-editorial text-xl md:text-2xl text-white mb-3">
+              Ready to plan your safari?
+            </h2>
+            <p className="font-editorial text-stone-400 mb-8 max-w-lg mx-auto">
+              Browse our itineraries or start with the decisions that shape your trip.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
-                href="/decisions"
+                href="/trips"
                 className="group inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-white text-stone-900 hover:bg-stone-100"
               >
-                Explore decisions
+                Browse safaris
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
-                href="/trips"
+                href="/inquire"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-transparent text-white border border-white/40 hover:bg-white/10 hover:border-white/60"
               >
-                Browse trips
+                Start planning
               </Link>
             </div>
           </div>
@@ -425,25 +452,25 @@ export default function Home() {
 
       {/* ================================================================
           FOOTER
-          Simple, quiet.
+          Safari operator identity.
           ================================================================ */}
       <footer className="bg-stone-950 text-white py-10">
         <PageGrid maxWidth="default">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <span className="font-editorial text-base font-semibold">Safari Index</span>
-              <span className="text-stone-500 text-sm ml-2">Pan-African Decision System</span>
+              <span className="text-stone-500 text-sm ml-2">Private Safari Operator</span>
             </div>
 
             <div className="flex items-center gap-6">
               <Link href="/" className="text-sm text-stone-400 hover:text-white transition-colors">
                 Home
               </Link>
+              <Link href="/trips" className="text-sm text-stone-400 hover:text-white transition-colors">
+                Safaris
+              </Link>
               <Link href="/decisions" className="text-sm text-stone-400 hover:text-white transition-colors">
                 Decisions
-              </Link>
-              <Link href="/trips" className="text-sm text-stone-400 hover:text-white transition-colors">
-                Trips
               </Link>
               <Link href="/guides" className="text-sm text-stone-400 hover:text-white transition-colors">
                 Guides

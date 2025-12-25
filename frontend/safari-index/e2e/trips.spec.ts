@@ -24,7 +24,7 @@ test.describe('Trips Hub Page', () => {
     await page.goto('/trips');
     const heading = page.getByTestId('trips-h1');
     await expect(heading).toBeVisible();
-    await expect(heading).toHaveText('Trip Shapes');
+    await expect(heading).toHaveText('Private Safaris');
   });
 
   test('lists trips across regional sections', async ({ page }) => {
@@ -75,7 +75,7 @@ test.describe('Trips Hub Page', () => {
     await expect(page).toHaveURL(/\/trips\/.+/);
   });
 
-  test('has navbar with Trips link', async ({ page, isMobile }) => {
+  test('has navbar with Safaris link', async ({ page, isMobile }) => {
     await page.goto('/trips');
 
     if (isMobile) {
@@ -85,7 +85,7 @@ test.describe('Trips Hub Page', () => {
       await expect(mobileMenu).toBeVisible();
       await expect(mobileMenu.locator('a[href="/trips"]')).toBeVisible();
     } else {
-      await expect(page.getByTestId('navbar-link-trips')).toBeVisible();
+      await expect(page.getByTestId('navbar-link-safaris')).toBeVisible();
     }
   });
 

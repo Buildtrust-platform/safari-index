@@ -465,7 +465,7 @@ test.describe('Design System v1 - Authority Front Door', () => {
 
     // Should navigate to how-it-works page
     await expect(page).toHaveURL('/how-it-works');
-    await expect(page.getByRole('heading', { name: 'How Safari Index works' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'How it works' })).toBeVisible();
   });
 });
 

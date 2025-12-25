@@ -214,8 +214,13 @@ export default function PublicProposalPage() {
                 </div>
               </div>
 
+              {/* Operator badge */}
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium text-white/80 bg-white/10 rounded-full mb-4">
+                Safari Index Proposal
+              </span>
+
               <h1 className="font-editorial text-3xl md:text-4xl font-semibold text-white mb-3">
-                Safari Proposal
+                Your Safari Proposal
               </h1>
 
               {proposal.traveler_name && (
@@ -224,11 +229,9 @@ export default function PublicProposalPage() {
                 </p>
               )}
 
-              {proposal.operator_name && (
-                <p className="text-white/60 text-sm mt-2">
-                  By {proposal.operator_name}
-                </p>
-              )}
+              <p className="text-white/60 text-sm mt-2">
+                Operated by Safari Index
+              </p>
             </div>
           </ImageBandContent>
         </ImageBand>
@@ -291,11 +294,11 @@ export default function PublicProposalPage() {
             </div>
           </section>
 
-          {/* Recommended Trips */}
+          {/* Recommended Safaris */}
           {recommendedTrips.length > 0 ? (
             <section className="mb-8">
               <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
-                Recommended Trip Shapes
+                Recommended Safaris
               </h2>
 
               <div className="space-y-3">
@@ -324,9 +327,9 @@ export default function PublicProposalPage() {
           ) : (
             <section className="mb-8">
               <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
-                Recommended Trip Shapes
+                Recommended Safaris
               </h2>
-              <MissingPlaceholder label="Trip recommendations" />
+              <MissingPlaceholder label="Safari recommendations" />
             </section>
           )}
 
@@ -403,7 +406,7 @@ export default function PublicProposalPage() {
               className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-white border border-stone-200 text-stone-700 rounded-xl hover:bg-stone-50 transition-colors"
             >
               <MapPin className="w-5 h-5" />
-              Browse All Trips
+              Browse All Safaris
             </Link>
             <Link
               href="/decisions"
@@ -428,9 +431,10 @@ export default function PublicProposalPage() {
 
           {/* Footer attribution */}
           <div className="mt-12 text-center text-xs text-stone-400">
-            <p>Proposal prepared via Safari Index</p>
-            <p className="mt-1">
-              Proposal ID: {proposal.proposal_id}
+            <p>Proposal prepared by Safari Index</p>
+            <p className="text-stone-500 mt-1">Private Safari Operator · East & Southern Africa</p>
+            <p className="mt-2 font-mono">
+              Ref: {proposal.proposal_id}
             </p>
           </div>
         </div>

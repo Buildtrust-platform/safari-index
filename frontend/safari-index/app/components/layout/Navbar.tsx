@@ -25,11 +25,9 @@ interface NavbarProps {
 }
 
 const NAV_LINKS = [
+  { label: 'Safaris', href: '/trips' },
   { label: 'Decisions', href: '/decisions' },
-  { label: 'Trips', href: '/trips' },
   { label: 'Guides', href: '/guides' },
-  { label: 'Explore', href: '/explore' },
-  { label: 'Compare', href: '/compare' },
   { label: 'How it works', href: '/how-it-works' },
 ];
 
@@ -104,19 +102,19 @@ export function Navbar({ variant = 'transparent' }: NavbarProps) {
             ))}
           </div>
 
-          {/* Right side - Decision Assurance (desktop) */}
+          {/* Right side - Plan a Safari CTA (desktop) */}
           <div className="hidden md:flex items-center">
             <Link
-              href="/assurance/checkout"
+              href="/inquire"
               className={cn(
-                'text-sm transition-colors',
+                'px-4 py-2 text-sm font-medium rounded-md transition-colors',
                 showSolid
-                  ? 'text-stone-500 hover:text-stone-700'
-                  : 'text-white/60 hover:text-white/90'
+                  ? 'bg-stone-900 text-white hover:bg-stone-800'
+                  : 'bg-white text-stone-900 hover:bg-stone-100'
               )}
-              data-testid="navbar-assurance-link"
+              data-testid="navbar-plan-link"
             >
-              Decision Assurance
+              Plan a Safari
             </Link>
           </div>
 
@@ -161,11 +159,11 @@ export function Navbar({ variant = 'transparent' }: NavbarProps) {
             ))}
             <div className="border-t border-stone-100 pt-3 mt-3">
               <Link
-                href="/assurance/checkout"
+                href="/inquire"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block px-4 py-3 text-stone-500 hover:bg-stone-50 rounded-md transition-colors"
+                className="block px-4 py-3 bg-stone-900 text-white text-center rounded-md hover:bg-stone-800 transition-colors"
               >
-                Decision Assurance
+                Plan a Safari
               </Link>
             </div>
           </div>

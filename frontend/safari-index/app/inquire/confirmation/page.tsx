@@ -1,15 +1,13 @@
 /**
  * Inquiry Confirmation Page
  *
- * Displays a read-only summary of the submitted trip brief
- * with quiet links to relevant decisions and guides.
- *
- * Loads inquiry data from API by inquiry ID.
+ * Displays confirmation that Safari Index has received the safari brief.
+ * Positions Safari Index as the operator who will plan the trip.
  *
  * Per governance:
  * - No promises, timelines, or sales language
  * - Documentary, calm tone
- * - Links to decision system
+ * - Operator responsibility clear
  */
 
 'use client';
@@ -89,7 +87,136 @@ function formatMonth(month: number | null): string | null {
 }
 
 /**
- * Error state component
+ * Recovery state component - shown when no inquiry_id is present
+ * This is a valid pre-transaction state, not an error
+ */
+function RecoveryState() {
+  return (
+    <main className="min-h-screen bg-stone-50">
+      <Navbar variant="transparent" />
+
+      {/* Hero */}
+      <ImageBand
+        image={ecosystemImages[0]}
+        height="explore"
+        overlay="strong"
+        align="center"
+        priority
+        alwaysRender
+      >
+        <ImageBandContent maxWidth="default" className="pt-24 pb-8">
+          <div className="text-center">
+            {/* Breadcrumb */}
+            <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
+              <Link href="/" className="hover:text-white transition-colors">
+                Safari Index
+              </Link>
+              <ChevronRight className="w-4 h-4" />
+              <span className="text-white">Plan a Safari</span>
+            </div>
+
+            {/* Icon */}
+            <div className="flex justify-center mb-4">
+              <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
+                <MapPin className="w-8 h-8 text-white" />
+              </div>
+            </div>
+
+            <h1
+              className="font-editorial text-3xl md:text-4xl font-semibold text-white mb-3"
+              data-testid="recovery-h1"
+            >
+              Start Your Safari Planning
+            </h1>
+
+            <p className="text-white/80 text-lg max-w-xl mx-auto">
+              Safari Index operates private safaris across East and Southern Africa.
+              Tell us about your trip and we'll respond personally.
+            </p>
+          </div>
+        </ImageBandContent>
+      </ImageBand>
+
+      {/* Content */}
+      <div className="max-w-2xl mx-auto px-4 md:px-8 py-12">
+        {/* Recovery Card */}
+        <section className="bg-white border border-stone-200 rounded-xl p-6 mb-8">
+          <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
+            How Safari Index Works
+          </h2>
+
+          <ul className="space-y-4 text-stone-600">
+            <li className="flex items-start gap-3">
+              <span className="w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-medium flex-shrink-0">
+                1
+              </span>
+              <span>
+                Share your travel dates, preferences, and any decisions you've already made.
+              </span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-medium flex-shrink-0">
+                2
+              </span>
+              <span>
+                We review your brief and build a custom itinerary around the logic of your decisions.
+              </span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-medium flex-shrink-0">
+                3
+              </span>
+              <span>
+                You receive a proposal with clear pricing, trade-offs, and next steps.
+              </span>
+            </li>
+          </ul>
+        </section>
+
+        {/* CTA */}
+        <div className="text-center">
+          <Link
+            href="/inquire"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-stone-900 text-white rounded-xl hover:bg-stone-800 transition-colors text-lg font-medium"
+            data-testid="recovery-cta"
+          >
+            Plan a Safari
+            <ArrowRight className="w-5 h-5" />
+          </Link>
+          <p className="mt-4 text-sm text-stone-500">
+            Every inquiry receives a personal response from our planning team.
+          </p>
+        </div>
+
+        {/* Browse Other Options */}
+        <div className="mt-12 pt-8 border-t border-stone-200">
+          <h3 className="font-medium text-stone-900 mb-4 text-center">
+            Or explore on your own
+          </h3>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link
+              href="/trips"
+              className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-white border border-stone-200 text-stone-700 rounded-xl hover:bg-stone-50 transition-colors"
+            >
+              <MapPin className="w-5 h-5" />
+              Browse Safaris
+            </Link>
+            <Link
+              href="/decisions"
+              className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-white border border-stone-200 text-stone-700 rounded-xl hover:bg-stone-50 transition-colors"
+            >
+              Explore Decisions
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+/**
+ * Error state component - shown when inquiry exists but can't be loaded
  */
 function ErrorState({ message }: { message: string }) {
   return (
@@ -131,8 +258,8 @@ function ConfirmationContent() {
 
   useEffect(() => {
     async function fetchInquiry() {
+      // Skip fetch if no inquiry ID - recovery state will be shown
       if (!inquiryId) {
-        setError('No inquiry ID provided. Please submit an inquiry first.');
         setLoading(false);
         return;
       }
@@ -162,6 +289,12 @@ function ConfirmationContent() {
 
     fetchInquiry();
   }, [inquiryId]);
+
+  // No inquiry_id is a valid pre-transaction state - show recovery flow
+  // This handles direct navigation, expired bookmarks, or users who haven't submitted yet
+  if (!inquiryId) {
+    return <RecoveryState />;
+  }
 
   const handleCopyId = () => {
     if (inquiry?.inquiry_id) {
@@ -241,12 +374,12 @@ function ConfirmationContent() {
               className="font-editorial text-3xl md:text-4xl font-semibold text-white mb-3"
               data-testid="confirmation-h1"
             >
-              Trip Brief Captured
+              Your Safari Brief Has Been Received
             </h1>
 
             <p className="text-white/80 text-lg max-w-xl mx-auto">
-              We have recorded your safari planning intent. Review the summary below
-              and explore the decisions that matter for your trip.
+              Safari Index has recorded your planning requirements. Review the summary below
+              and confirm the decisions that will shape your trip.
             </p>
           </div>
         </ImageBandContent>
@@ -282,7 +415,7 @@ function ConfirmationContent() {
         {/* Summary Card */}
         <section className="bg-white border border-stone-200 rounded-xl p-6 mb-8">
           <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
-            Your Trip Brief
+            Your Safari Brief
           </h2>
 
           {/* Trip Shape */}
@@ -294,7 +427,7 @@ function ConfirmationContent() {
               >
                 <div>
                   <p className="text-xs text-amber-700 uppercase tracking-wide mb-1">
-                    Trip Shape
+                    Safari Itinerary
                   </p>
                   <p className="font-medium text-stone-900 group-hover:text-amber-800 transition-colors">
                     {trip.title}
@@ -378,26 +511,19 @@ function ConfirmationContent() {
             <li className="flex items-start gap-2">
               <span className="text-stone-400 mt-1">1.</span>
               <span>
-                Review the linked decisions to understand trade-offs for your trip.
+                Safari Index reviews your brief and confirms the decisions that apply.
               </span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-stone-400 mt-1">2.</span>
               <span>
-                Use your inquiry reference to track your planning progress.
+                We build a custom itinerary around your dates, preferences, and the logic of your decisions.
               </span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-stone-400 mt-1">3.</span>
               <span>
-                Explore{' '}
-                <Link
-                  href="/guides"
-                  className="text-amber-600 hover:text-amber-700 underline underline-offset-2"
-                >
-                  our guides
-                </Link>{' '}
-                for deeper context on safari planning.
+                You receive a proposal with clear pricing, trade-offs, and next steps.
               </span>
             </li>
           </ul>
@@ -410,13 +536,13 @@ function ConfirmationContent() {
             className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-white border border-stone-200 text-stone-700 rounded-xl hover:bg-stone-50 transition-colors"
           >
             <MapPin className="w-5 h-5" />
-            Browse Trip Shapes
+            Browse Other Safaris
           </Link>
           <Link
             href="/decisions"
             className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-stone-900 text-white rounded-xl hover:bg-stone-800 transition-colors"
           >
-            Explore All Decisions
+            Explore Decisions
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>

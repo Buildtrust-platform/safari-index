@@ -74,15 +74,14 @@ test.describe('Navbar', () => {
     await expect(logo).toBeVisible();
     await expect(logo).toHaveAttribute('href', '/');
 
-    // Primary nav links in order (desktop only)
+    // Primary nav links - Safaris first (commercial), then Decisions, Guides, How it works
+    await expect(page.getByTestId('navbar-link-safaris')).toBeVisible();
     await expect(page.getByTestId('navbar-link-decisions')).toBeVisible();
-    await expect(page.getByTestId('navbar-link-explore')).toBeVisible();
-    await expect(page.getByTestId('navbar-link-compare')).toBeVisible();
-    await expect(page.getByTestId('navbar-link-when-to-go')).toBeVisible();
+    await expect(page.getByTestId('navbar-link-guides')).toBeVisible();
     await expect(page.getByTestId('navbar-link-how-it-works')).toBeVisible();
 
-    // Decision Assurance link
-    await expect(page.getByTestId('navbar-assurance-link')).toBeVisible();
+    // Plan a Safari CTA
+    await expect(page.getByTestId('navbar-plan-link')).toBeVisible();
   });
 
   test('mobile menu toggle works', async ({ page, isMobile }) => {
@@ -98,24 +97,23 @@ test.describe('Navbar', () => {
     await page.getByTestId('navbar-mobile-toggle').click();
     await expect(page.getByTestId('navbar-mobile-menu')).toBeVisible();
 
-    // Menu contains all links
+    // Menu contains operator-focused links
+    await expect(page.getByTestId('navbar-mobile-menu').getByText('Safaris')).toBeVisible();
     await expect(page.getByTestId('navbar-mobile-menu').getByText('Decisions')).toBeVisible();
-    await expect(page.getByTestId('navbar-mobile-menu').getByText('Explore')).toBeVisible();
-    await expect(page.getByTestId('navbar-mobile-menu').getByText('Compare')).toBeVisible();
-    await expect(page.getByTestId('navbar-mobile-menu').getByText('When to go')).toBeVisible();
+    await expect(page.getByTestId('navbar-mobile-menu').getByText('Guides')).toBeVisible();
     await expect(page.getByTestId('navbar-mobile-menu').getByText('How it works')).toBeVisible();
   });
 
-  test('Explore link routes to /explore', async ({ page, isMobile }) => {
+  test('Safaris link routes to /trips', async ({ page, isMobile }) => {
     await page.goto('/');
 
     if (isMobile) {
       await page.getByTestId('navbar-mobile-toggle').click();
-      await page.getByTestId('navbar-mobile-menu').getByText('Explore').click();
+      await page.getByTestId('navbar-mobile-menu').getByText('Safaris').click();
     } else {
-      await page.getByTestId('navbar-link-explore').click();
+      await page.getByTestId('navbar-link-safaris').click();
     }
-    await expect(page).toHaveURL('/explore');
+    await expect(page).toHaveURL('/trips');
   });
 
   test('How it works link routes to /how-it-works', async ({ page, isMobile }) => {
@@ -130,28 +128,13 @@ test.describe('Navbar', () => {
     await expect(page).toHaveURL('/how-it-works');
   });
 
-  test('Compare link routes to /compare', async ({ page, isMobile }) => {
+  test('Plan a Safari link routes to /inquire', async ({ page, isMobile }) => {
+    // Only test on desktop - mobile has different CTA placement
+    test.skip(isMobile, 'Desktop-only test');
+
     await page.goto('/');
-
-    if (isMobile) {
-      await page.getByTestId('navbar-mobile-toggle').click();
-      await page.getByTestId('navbar-mobile-menu').getByText('Compare').click();
-    } else {
-      await page.getByTestId('navbar-link-compare').click();
-    }
-    await expect(page).toHaveURL('/compare');
-  });
-
-  test('When to go link routes to /explore with filter', async ({ page, isMobile }) => {
-    await page.goto('/');
-
-    if (isMobile) {
-      await page.getByTestId('navbar-mobile-toggle').click();
-      await page.getByTestId('navbar-mobile-menu').getByText('When to go').click();
-    } else {
-      await page.getByTestId('navbar-link-when-to-go').click();
-    }
-    await expect(page).toHaveURL(/\/explore\?filter=when-to-go/);
+    await page.getByTestId('navbar-plan-link').click();
+    await expect(page).toHaveURL('/inquire');
   });
 });
 

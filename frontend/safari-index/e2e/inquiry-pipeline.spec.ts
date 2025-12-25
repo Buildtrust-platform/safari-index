@@ -43,15 +43,35 @@ test.describe('Inquiry Submission Flow', () => {
     await expect(page.getByText('Please select a budget range')).toBeVisible();
   });
 
-  test('confirmation page shows error when no ID provided', async ({ page }) => {
+  test('confirmation page shows recovery state when no ID provided', async ({ page }) => {
     await page.goto('/inquire/confirmation');
 
-    // Should show error state
-    await expect(page.getByText('Inquiry Not Found')).toBeVisible();
-    await expect(page.getByText('No inquiry ID provided')).toBeVisible();
+    // Should show recovery state, not error
+    await expect(page.getByTestId('recovery-h1')).toHaveText('Start Your Safari Planning');
 
-    // Should have link back to inquiry form
-    await expect(page.getByText('Start a New Inquiry')).toBeVisible();
+    // Should explain how Safari Index works
+    await expect(page.getByText('How Safari Index Works')).toBeVisible();
+
+    // Should have Plan a Safari CTA linking to /inquire
+    const cta = page.getByTestId('recovery-cta');
+    await expect(cta).toHaveText(/Plan a Safari/);
+    await expect(cta).toHaveAttribute('href', '/inquire');
+
+    // Should have personal response reassurance
+    await expect(page.getByText('Every inquiry receives a personal response')).toBeVisible();
+
+    // Should have alternate exploration options
+    await expect(page.getByText('Browse Safaris')).toBeVisible();
+    await expect(page.getByText('Explore Decisions')).toBeVisible();
+  });
+
+  test('recovery state has no error messaging', async ({ page }) => {
+    await page.goto('/inquire/confirmation');
+
+    // Should NOT show error-related text
+    await expect(page.getByText('Inquiry Not Found')).not.toBeVisible();
+    await expect(page.getByText('error')).not.toBeVisible();
+    await expect(page.getByText('not found')).not.toBeVisible();
   });
 
   test('confirmation page shows error for invalid ID', async ({ page }) => {

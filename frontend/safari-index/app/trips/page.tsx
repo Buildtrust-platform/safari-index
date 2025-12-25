@@ -1,11 +1,11 @@
 /**
- * Trips Hub Page
+ * Safaris Hub Page
  *
- * Safari itinerary archetypes - planning reference shapes that connect
- * users to relevant decisions and guides.
+ * Safari Index-operated itinerary shapes. Each is custom-built around
+ * traveler decisions and preferences.
  *
  * Per governance: documentary, calm, safari-native tone. No hype, emojis,
- * or exclamation marks. These are NOT bookable products.
+ * or exclamation marks. Clear operator positioning.
  */
 
 import Link from 'next/link';
@@ -36,17 +36,17 @@ import { Navbar } from '../components/layout';
  * SEO Metadata
  */
 export const metadata: Metadata = {
-  title: 'Safari Trip Shapes | Safari Index',
+  title: 'Private Safaris | Safari Index',
   description:
-    'Explore 20 safari itinerary archetypes across East and Southern Africa. Find trip shapes that match your style, then confirm key decisions before booking.',
+    'Private safaris operated by Safari Index. 20 itinerary shapes across East and Southern Africa, each custom-built around your decisions.',
   robots: 'index, follow',
   alternates: {
     canonical: '/trips',
   },
   openGraph: {
-    title: 'Safari Trip Shapes | Safari Index',
+    title: 'Private Safaris | Safari Index',
     description:
-      'Safari itinerary archetypes to guide your planning. From classic Serengeti circuits to gorilla treks and self-drive adventures.',
+      'Safari Index operates private safaris across Africa. From classic Serengeti circuits to gorilla treks and self-drive adventures.',
     type: 'website',
     url: '/trips',
   },
@@ -196,8 +196,14 @@ export default function TripsHubPage() {
                 Safari Index
               </Link>
               <ChevronRight className="w-4 h-4" />
-              <span className="text-white">Trip Shapes</span>
+              <span className="text-white">Safaris</span>
             </div>
+
+            {/* Operator badge */}
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium text-white/80 bg-white/10 rounded-full mb-4">
+              <Compass className="w-3 h-3" />
+              Safari Index Operated
+            </span>
 
             {/* Icon + Title */}
             <div className="flex items-center justify-center gap-3 mb-3">
@@ -208,15 +214,15 @@ export default function TripsHubPage() {
                 className="font-editorial text-4xl md:text-5xl font-semibold text-white"
                 data-testid="trips-h1"
               >
-                Trip Shapes
+                Private Safaris
               </h1>
             </div>
 
             {/* Subtitle */}
             <p className="text-white/80 text-lg max-w-xl mx-auto">
-              {allTrips.length} safari itinerary archetypes.
+              {allTrips.length} itinerary shapes across East and Southern Africa.
               <br className="hidden md:block" />
-              Find shapes that match your style, then confirm key decisions.
+              Each is custom-built around your decisions.
             </p>
           </div>
         </ImageBandContent>
@@ -227,10 +233,9 @@ export default function TripsHubPage() {
         {/* Orientation */}
         <div className="mb-8">
           <p className="text-stone-600 leading-relaxed max-w-3xl">
-            These trip shapes represent common safari itinerary patterns. They are not fixed
-            products but planning references that help you understand trade-offs before
-            committing. Each shape links to decisions you should confirm before booking with
-            any operator.
+            Safari Index plans and operates private safaris across Africa. These itinerary shapes
+            are starting points—each trip is custom-built around your dates, preferences, and the
+            decisions that matter for your situation.
           </p>
         </div>
 
@@ -294,25 +299,21 @@ export default function TripsHubPage() {
           </div>
         </section>
 
-        {/* Close framing */}
+        {/* Plan a Safari CTA */}
         <div className="mt-12 pt-8 border-t border-stone-200">
-          <p className="text-stone-500 text-sm">
-            These shapes are starting points, not fixed itineraries.{' '}
+          <div className="bg-stone-900 rounded-xl p-6 text-center">
+            <h3 className="font-editorial text-xl text-white mb-2">Ready to plan your safari?</h3>
+            <p className="text-stone-400 text-sm mb-4 max-w-md mx-auto">
+              Tell us about your trip and we'll build a custom itinerary around your decisions.
+            </p>
             <Link
-              href="/decisions"
-              className="text-amber-600 hover:text-amber-700 underline underline-offset-2"
+              href="/inquire"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-stone-900 rounded-lg font-medium hover:bg-stone-100 transition-colors"
             >
-              Browse all decisions
-            </Link>{' '}
-            to confirm your priorities, or{' '}
-            <Link
-              href="/guides"
-              className="text-amber-600 hover:text-amber-700 underline underline-offset-2"
-            >
-              read our guides
-            </Link>{' '}
-            for deeper context.
-          </p>
+              Start planning
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -322,7 +323,7 @@ export default function TripsHubPage() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <span className="font-editorial text-lg font-semibold">Safari Index</span>
-              <span className="text-stone-500 text-sm ml-2">Pan-African Decision System</span>
+              <span className="text-stone-500 text-sm ml-2">Private Safari Operator</span>
             </div>
 
             <div className="flex items-center gap-6">
@@ -336,7 +337,13 @@ export default function TripsHubPage() {
                 href="/trips"
                 className="text-sm text-stone-400 hover:text-white transition-colors"
               >
-                Trips
+                Safaris
+              </Link>
+              <Link
+                href="/decisions"
+                className="text-sm text-stone-400 hover:text-white transition-colors"
+              >
+                Decisions
               </Link>
               <Link
                 href="/guides"
@@ -345,10 +352,10 @@ export default function TripsHubPage() {
                 Guides
               </Link>
               <Link
-                href="/decisions"
+                href="/how-it-works"
                 className="text-sm text-stone-400 hover:text-white transition-colors"
               >
-                Decisions
+                How it works
               </Link>
             </div>
           </div>

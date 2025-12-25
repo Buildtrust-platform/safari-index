@@ -1,16 +1,18 @@
 /**
  * Trip Archetype Page
  *
- * Individual safari itinerary archetype with:
- * - Hero with snapshot strip
+ * Safari Index-operated itinerary shape with:
+ * - Hero with operator badge and snapshot strip
  * - What this trip is for
  * - What you trade off
  * - Decisions to confirm before booking
  * - Guides worth reading
  * - Variants section
+ * - Clear operator CTA
  *
  * Per governance: documentary, calm, safari-native tone.
  * No hype, emojis, or exclamation marks.
+ * Positions Safari Index as the operator.
  */
 
 import Link from 'next/link';
@@ -80,15 +82,15 @@ export async function generateMetadata({
     .join(', ') || getRegionDisplayName(trip.regions[0]);
 
   return {
-    title: `${trip.title} | Safari Trip Shape | Safari Index`,
-    description: `${trip.subtitle}. ${formatDuration(trip.duration_days)} in ${regions}. Understand trade-offs and confirm key decisions before booking.`,
+    title: `${trip.title} | Private Safari | Safari Index`,
+    description: `${trip.subtitle}. A Safari Index-operated private safari: ${formatDuration(trip.duration_days)} in ${regions}. Custom-built around your decisions.`,
     robots: 'index, follow',
     alternates: {
       canonical: `/trips/${id}`,
     },
     openGraph: {
       title: `${trip.title} | Safari Index`,
-      description: trip.what_this_trip_is_for,
+      description: `Private safari operated by Safari Index. ${trip.what_this_trip_is_for}`,
       type: 'article',
       url: `/trips/${id}`,
     },
@@ -192,11 +194,17 @@ export default async function TripPage({
                 className="hover:text-white transition-colors"
                 data-testid="breadcrumb-trips"
               >
-                Trips
+                Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <span className="text-white truncate max-w-[200px]">{trip.title}</span>
             </div>
+
+            {/* Operator badge */}
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium text-white/80 bg-white/10 rounded-full mb-4">
+              <Compass className="w-3 h-3" />
+              Safari Index Operated
+            </span>
 
             {/* Title */}
             <h1
@@ -428,7 +436,7 @@ export default async function TripPage({
           </section>
         )}
 
-        {/* Trip Brief CTA */}
+        {/* Plan This Safari CTA */}
         <section className="mb-8" data-testid="section-inquiry">
           <Link
             href={`/inquire?trip=${id}`}
@@ -437,12 +445,12 @@ export default async function TripPage({
           >
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
-                <FileText className="w-6 h-6 text-amber-400" />
+                <Compass className="w-6 h-6 text-amber-400" />
               </div>
               <div>
-                <p className="font-medium text-lg">Request a Trip Brief</p>
+                <p className="font-medium text-lg">Plan this safari with Safari Index</p>
                 <p className="text-stone-400 text-sm">
-                  Capture your intent and get linked decisions for this trip shape
+                  Private, custom-built around your dates and preferences
                 </p>
               </div>
             </div>
@@ -453,19 +461,19 @@ export default async function TripPage({
         {/* Close framing */}
         <div className="mt-12 pt-8 border-t border-stone-200">
           <p className="text-stone-500 text-sm">
-            This trip shape is a planning reference, not a fixed itinerary.{' '}
+            This is a Safari Index-operated itinerary shape. Every trip is custom-built.{' '}
             <Link
               href="/trips"
               className="text-amber-600 hover:text-amber-700 underline underline-offset-2"
             >
-              Browse other trip shapes
+              Browse other safaris
             </Link>{' '}
             or{' '}
             <Link
               href="/decisions"
               className="text-amber-600 hover:text-amber-700 underline underline-offset-2"
             >
-              explore all decisions
+              explore the decisions that shape your trip
             </Link>
             .
           </p>
@@ -478,7 +486,7 @@ export default async function TripPage({
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <span className="font-editorial text-lg font-semibold">Safari Index</span>
-              <span className="text-stone-500 text-sm ml-2">Pan-African Decision System</span>
+              <span className="text-stone-500 text-sm ml-2">Private Safari Operator</span>
             </div>
 
             <div className="flex items-center gap-6">
@@ -492,7 +500,13 @@ export default async function TripPage({
                 href="/trips"
                 className="text-sm text-stone-400 hover:text-white transition-colors"
               >
-                Trips
+                Safaris
+              </Link>
+              <Link
+                href="/decisions"
+                className="text-sm text-stone-400 hover:text-white transition-colors"
+              >
+                Decisions
               </Link>
               <Link
                 href="/guides"
@@ -501,10 +515,10 @@ export default async function TripPage({
                 Guides
               </Link>
               <Link
-                href="/decisions"
+                href="/how-it-works"
                 className="text-sm text-stone-400 hover:text-white transition-colors"
               >
-                Decisions
+                How it works
               </Link>
             </div>
           </div>
