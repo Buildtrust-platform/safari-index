@@ -14,10 +14,12 @@ import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
 import type { InquiryRecord } from '../contracts';
 
 // Initialize SES client lazily to pick up env vars at runtime
+// SES may be in a different region than DynamoDB (SES_REGION takes precedence)
 let _sesClient: SESClient | null = null;
 function getSesClient(): SESClient {
   if (!_sesClient) {
-    _sesClient = new SESClient({ region: process.env.AWS_REGION || 'us-east-1' });
+    const region = process.env.SES_REGION || process.env.AWS_REGION || 'us-east-1';
+    _sesClient = new SESClient({ region });
   }
   return _sesClient;
 }
@@ -112,7 +114,7 @@ export async function sendInquiryNotification(inquiry: InquiryRecord): Promise<b
   // Configuration validation with structured logging
   const operatorEmail = process.env.OPERATOR_EMAIL;
   const fromEmail = process.env.FROM_EMAIL || 'notifications@safariindex.com';
-  const region = process.env.AWS_REGION || 'us-east-1';
+  const region = process.env.SES_REGION || process.env.AWS_REGION || 'us-east-1';
 
   console.log(`${logPrefix} Config check:`, {
     inquiry_id: inquiryId,
