@@ -162,7 +162,7 @@ test('deepMerge merges top-level properties', () => {
   const target = { a: 1, b: 2 };
   const source = { b: 3, c: 4 };
   const result = deepMerge(target, source);
-  assertEqual(result, { a: 1, b: 3, c: 4 });
+  assertEqual(result, { a: 1, b: 3, c: 4 } as typeof result);
 });
 
 test('deepMerge merges nested objects', () => {

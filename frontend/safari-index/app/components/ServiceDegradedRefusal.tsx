@@ -1,19 +1,21 @@
 'use client';
 
 /**
- * Service Degraded Refusal Component
+ * Service Capacity Refusal Component
  *
- * Displays a calm, authoritative refusal when the decision service
- * is temporarily unavailable (rate limiting, timeouts, etc.)
+ * Displays a calm, deliberate refusal when the decision service
+ * is at capacity (rate limiting, timeouts, etc.)
  *
  * Per UX requirements:
- * - Not a panic state (no red alerts)
+ * - Frame as a safety choice, not a broken system
+ * - "At capacity" messaging conveys intentional guardrail
  * - Includes retry with cooldown (15 seconds)
- * - Shows safe_next_step from refusal
+ * - Link to /how-it-works for context
  * - Maintains documentary tone
  */
 
 import { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import { cn } from '../ui/utils';
 import { section } from '../ui/styles';
 
@@ -61,24 +63,25 @@ export function ServiceDegradedRefusal({
   return (
     <article
       className={cn(
-        'bg-amber-50/50 border border-amber-200/60 rounded-xl p-6',
+        'bg-stone-50 border border-stone-200 rounded-xl p-6',
         section
       )}
       role="status"
       aria-live="polite"
+      data-testid="service-capacity-refusal"
     >
-      {/* Header with icon */}
+      {/* Header - calm capacity message */}
       <div className="flex items-start gap-3 mb-4">
         <div className="flex-shrink-0 w-5 h-5 mt-0.5">
           <svg
             viewBox="0 0 20 20"
             fill="none"
-            className="w-5 h-5 text-amber-600"
+            className="w-5 h-5 text-stone-500"
             aria-hidden="true"
           >
             <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
             <path
-              d="M10 6v4M10 13v1"
+              d="M6 10h8"
               stroke="currentColor"
               strokeWidth="1.5"
               strokeLinecap="round"
@@ -86,21 +89,37 @@ export function ServiceDegradedRefusal({
           </svg>
         </div>
         <div>
-          <h2 className="font-editorial text-lg font-semibold text-amber-900">
-            Temporarily unavailable
+          <h2
+            className="font-editorial text-lg font-semibold text-stone-800"
+            data-testid="capacity-heading"
+          >
+            At capacity
           </h2>
-          <p className="text-amber-800 mt-1">{reason}</p>
+          <p className="text-stone-600 mt-1">
+            We limit concurrent requests to maintain decision quality.
+          </p>
         </div>
       </div>
 
-      {/* Safe next step */}
-      <div className="bg-white/60 border border-amber-100 rounded-lg p-4 mb-4">
-        <p className="text-sm font-medium text-amber-900 mb-1">Next step</p>
-        <p className="text-amber-700">{safeNextStep}</p>
+      {/* Explanation block - why this is intentional */}
+      <div
+        className="bg-white border border-stone-100 rounded-lg p-4 mb-4"
+        data-testid="capacity-explanation"
+      >
+        <p className="text-sm text-stone-600 mb-3">
+          This is a deliberate guardrail. When demand exceeds our capacity to produce reliable decisions, we pause rather than risk giving you a weak answer.
+        </p>
+        <Link
+          href="/how-it-works"
+          className="text-sm font-medium text-stone-700 hover:text-stone-900 underline underline-offset-2"
+          data-testid="how-it-works-link"
+        >
+          Learn how we make decisions
+        </Link>
       </div>
 
-      {/* Retry button */}
-      <div className="flex items-center gap-4">
+      {/* Retry section */}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
         <button
           onClick={handleRetry}
           disabled={isDisabled}
@@ -111,13 +130,13 @@ export function ServiceDegradedRefusal({
               : 'bg-stone-900 text-white hover:bg-stone-800'
           )}
           aria-disabled={isDisabled}
+          data-testid="retry-button"
         >
           {isRetrying ? 'Checking...' : cooldown > 0 ? `Try again in ${cooldown}s` : 'Try again'}
         </button>
 
-        {/* Persistence note */}
         <p className="text-sm text-stone-500">
-          If this persists, return in a few minutes.
+          Capacity typically clears within seconds.
         </p>
       </div>
     </article>

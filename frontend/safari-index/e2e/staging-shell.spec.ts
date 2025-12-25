@@ -10,30 +10,8 @@ import { test, expect } from '@playwright/test';
  */
 
 test.describe('StagingShell', () => {
-  test('staging shell renders on explore page', async ({ page }) => {
-    await page.goto('/explore');
-
-    // Should show staging navigation
-    await expect(page.getByRole('navigation', { name: 'Staging navigation' })).toBeVisible();
-
-    // Should show nav links
-    await expect(page.getByRole('link', { name: 'Explore' })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Compare' })).toBeVisible();
-
-    // Should show staging badge (using aria-label to be specific)
-    await expect(page.getByLabel('Staging environment')).toBeVisible();
-  });
-
-  test('staging shell renders on compare page', async ({ page }) => {
-    await page.goto('/compare');
-
-    // Should show staging navigation
-    await expect(page.getByRole('navigation', { name: 'Staging navigation' })).toBeVisible();
-
-    // Compare should be active (has aria-current)
-    const compareLink = page.getByRole('link', { name: 'Compare' });
-    await expect(compareLink).toHaveAttribute('aria-current', 'page');
-  });
+  // StagingShell is now only used on dev pages, not on explore/compare
+  // Explore and Compare have their own production-visible headers
 
   test('staging shell renders on dev pages', async ({ page }) => {
     await page.goto('/dev/topic-health');
@@ -43,10 +21,13 @@ test.describe('StagingShell', () => {
 
     // Should show Dev Tools link when on dev pages
     await expect(page.getByRole('link', { name: 'Dev Tools' })).toBeVisible();
+
+    // Should show staging badge
+    await expect(page.getByLabel('Staging environment')).toBeVisible();
   });
 
-  test('skip link is accessible', async ({ page }) => {
-    await page.goto('/explore');
+  test('skip link is accessible on dev pages', async ({ page }) => {
+    await page.goto('/dev/topic-health');
 
     // Skip link should exist
     const skipLink = page.getByRole('link', { name: 'Skip to main content' });
@@ -57,22 +38,21 @@ test.describe('StagingShell', () => {
     await expect(mainContent).toBeVisible();
   });
 
-  test('navigation links work correctly', async ({ page }) => {
+  test('explore page has working navigation', async ({ page }) => {
     await page.goto('/explore');
 
-    // Click Compare link
-    await page.getByRole('link', { name: 'Compare' }).click();
-
-    // Should navigate to compare page
-    await expect(page).toHaveURL('/compare');
-    await expect(page.getByRole('heading', { name: 'Compare decisions' })).toBeVisible();
-
-    // Click Explore link
-    await page.getByRole('link', { name: 'Explore' }).click();
-
-    // Should navigate back to explore page
-    await expect(page).toHaveURL('/explore');
+    // Explore page should be visible
     await expect(page.getByRole('heading', { name: 'Explore decisions' })).toBeVisible();
+
+    // Should have a link back to home
+    await expect(page.getByRole('link', { name: /Safari Index|Back/ })).toBeVisible();
+  });
+
+  test('compare page loads correctly', async ({ page }) => {
+    await page.goto('/compare');
+
+    // Compare page should be visible
+    await expect(page.getByRole('heading', { name: 'Compare decisions' })).toBeVisible();
   });
 });
 

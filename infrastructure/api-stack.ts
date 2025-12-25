@@ -64,8 +64,8 @@ export class ApiStack extends cdk.Stack {
         LOGIC_VERSION: 'rules_v1.0',
         PROMPT_VERSION: 'prompt_v1.0',
         // Bedrock configuration
-        BEDROCK_REGION: 'us-east-1',
-        BEDROCK_MODEL_ID: 'anthropic.claude-3-sonnet-20240229-v1:0',
+        BEDROCK_REGION: 'us-west-2',
+        BEDROCK_MODEL_ID: 'anthropic.claude-3-haiku-20240307-v1:0',
       },
       logRetention: logs.RetentionDays.ONE_MONTH,
     });

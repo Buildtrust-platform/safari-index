@@ -3,7 +3,8 @@
 /**
  * Compare Decisions Page
  *
- * Side-by-side decision comparison with warm safari aesthetic.
+ * Side-by-side decision comparison with premium safari aesthetic.
+ * Uses ImageBand hero for immersive safari feel.
  */
 
 import { useState, useCallback, useEffect } from 'react';
@@ -17,9 +18,10 @@ import { ComparePanel } from './ComparePanel';
 import { DiffSummary } from './DiffSummary';
 import { computeDiff, type DiffModel } from './compare-diff';
 import { emptyPanel, type ComparePanel as PanelType } from './compare-types';
-import { PageGrid } from '../components/layout';
+import { ImageBand, ImageBandContent, pageImages } from '../components/visual';
+import { Navbar } from '../components/layout';
 import { MetaRail } from '../components/layout/MetaRail';
-import { ArrowLeft, RefreshCw, Loader2, ArrowRight, Hash, Scale } from 'lucide-react';
+import { ChevronRight, RefreshCw, Loader2, ArrowRight, Hash, Scale } from 'lucide-react';
 
 const API_ENDPOINT = `${API_BASE}/decision/evaluate`;
 
@@ -201,35 +203,50 @@ export default function ComparePage() {
   ) : undefined;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50/50 via-stone-50 to-stone-100">
-      {/* Hero header */}
-      <div className="bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 text-white">
-        <PageGrid maxWidth="wide" className="py-12 md:py-16">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm text-stone-400 hover:text-white transition-colors mb-8"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Safari Index
-          </Link>
+    <main className="min-h-screen bg-stone-50">
+      {/* Navbar */}
+      <Navbar variant="transparent" />
 
-          <div className="flex items-start gap-4 mb-4">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center">
-              <Scale className="w-6 h-6 text-amber-400" />
+      {/* Hero with safari imagery */}
+      <ImageBand
+        image={pageImages.compare}
+        height="compare"
+        overlay="strong"
+        align="center"
+        priority
+        alwaysRender
+      >
+        <ImageBandContent maxWidth="wide" className="pt-24 pb-8">
+          <div className="text-center">
+            {/* Breadcrumb */}
+            <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
+              <Link href="/" className="hover:text-white transition-colors">
+                Safari Index
+              </Link>
+              <ChevronRight className="w-4 h-4" />
+              <span className="text-white">Compare</span>
             </div>
-            <div>
-              <h1 className="font-editorial text-3xl md:text-4xl font-semibold mb-2">
+
+            {/* Icon + Title */}
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                <Scale className="w-6 h-6 text-amber-400" />
+              </div>
+              <h1 className="font-editorial text-4xl md:text-5xl font-semibold text-white">
                 Compare decisions
               </h1>
-              <p className="text-stone-400 text-lg">
-                View two decisions side by side to understand the trade-offs.
-              </p>
             </div>
-          </div>
-        </PageGrid>
-      </div>
 
-      <PageGrid maxWidth="wide" metaRail={metaRailContent} className="py-8">
+            {/* Subtitle */}
+            <p className="text-white/80 text-lg max-w-xl mx-auto">
+              View two decisions side by side to understand the trade-offs.
+            </p>
+          </div>
+        </ImageBandContent>
+      </ImageBand>
+
+      {/* Main content */}
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-8">
         {/* Selectors */}
         <div className="bg-white rounded-xl border border-stone-200 p-5 mb-6 shadow-sm">
           <div className="flex flex-col md:flex-row gap-4 mb-4">
@@ -336,7 +353,7 @@ export default function ComparePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-testid="compare-panels-grid">
             <div
               id="panel-a"
-              className="bg-white p-5 border border-stone-200 rounded-xl shadow-sm scroll-mt-4"
+              className="bg-white p-5 border border-stone-200 rounded-2xl shadow-sm scroll-mt-4"
             >
               <div className="md:hidden mb-4 pb-3 border-b border-stone-200">
                 <span className="text-xs font-semibold text-stone-500 uppercase tracking-wide">
@@ -348,7 +365,7 @@ export default function ComparePage() {
 
             <div
               id="panel-b"
-              className="bg-white p-5 border border-stone-200 rounded-xl shadow-sm scroll-mt-4"
+              className="bg-white p-5 border border-stone-200 rounded-2xl shadow-sm scroll-mt-4"
             >
               <div className="md:hidden mb-4 pb-3 border-b border-stone-200">
                 <span className="text-xs font-semibold text-stone-500 uppercase tracking-wide">
@@ -359,14 +376,34 @@ export default function ComparePage() {
             </div>
           </div>
         )}
+      </div>
 
-        {/* Footer */}
-        <footer className="mt-16 pt-8 border-t border-stone-200">
-          <p className="text-sm text-stone-400">
-            Safari Index — Decision support for safari planning.
-          </p>
-        </footer>
-      </PageGrid>
-    </div>
+      {/* Footer */}
+      <footer className="bg-stone-900 text-white py-12 mt-16">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <span className="font-editorial text-lg font-semibold">Safari Index</span>
+              <span className="text-stone-500 text-sm ml-2">Pan-African Decision System</span>
+            </div>
+
+            <div className="flex items-center gap-6">
+              <Link href="/" className="text-sm text-stone-400 hover:text-white transition-colors">
+                Home
+              </Link>
+              <Link href="/decisions" className="text-sm text-stone-400 hover:text-white transition-colors">
+                All Decisions
+              </Link>
+              <Link href="/explore" className="text-sm text-stone-400 hover:text-white transition-colors">
+                Explore
+              </Link>
+              <Link href="/how-it-works" className="text-sm text-stone-400 hover:text-white transition-colors">
+                How it works
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
   );
 }

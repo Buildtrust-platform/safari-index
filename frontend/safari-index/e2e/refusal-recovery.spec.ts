@@ -99,7 +99,7 @@ test.describe('Refusal Recovery Panel', () => {
     // Wait for panel
     await expect(page.getByTestId('refusal-recovery-panel')).toBeVisible({ timeout: 10000 });
 
-    // Should show mapped fields for missing_material_inputs
+    // Should show mapped fields for missing_material_inputs (from REASON_TO_FIELDS)
     await expect(page.getByText('Travel month')).toBeVisible();
     await expect(page.getByText('Traveler type')).toBeVisible();
     await expect(page.getByText('Budget tier')).toBeVisible();
@@ -135,8 +135,10 @@ test.describe('Refusal Recovery Panel', () => {
     await expect(page.getByTestId('refusal-recovery-panel')).toBeVisible({ timeout: 10000 });
 
     // Should fall back to topic required_inputs (tz-feb has these)
-    await expect(page.getByText('Travel month')).toBeVisible();
-    await expect(page.getByText('Budget tier')).toBeVisible();
+    // Use exact match to avoid matching key paths like 'request.destinations_considered'
+    await expect(page.getByText('Destination', { exact: true })).toBeVisible();
+    await expect(page.getByText('Travel month', { exact: true })).toBeVisible();
+    await expect(page.getByText('Calving interest', { exact: true })).toBeVisible();
   });
 
   test('copy button copies JSON to clipboard', async ({ page, context }) => {

@@ -14,8 +14,13 @@
     "test:ui": "playwright test --ui",
     "sync-contracts": "./scripts/sync-contracts.sh",
     "check-contracts": "./scripts/check-contracts.sh",
+    "sync-kb": "./scripts/sync-kb.sh",
+    "check-kb": "./scripts/check-kb.sh",
+    "ensure-kb-fresh": "./scripts/ensure-kb-fresh.sh",
     "validate-env": "node scripts/validate-env.js",
-    "ci": "npm run check-contracts && npm run lint && npm run build && npm run test"
+    "verify:p0": "npx ts-node --project scripts/tsconfig.json scripts/verify-p0-coverage.ts",
+    "test:kb": "npx ts-node --project scripts/tsconfig.json lib/kb.test.ts",
+    "ci": "npm run verify:p0 && npm run check-contracts && npm run lint && npm run build && npm run test"
   },
   "dependencies": {
     "lucide-react": "^0.562.0",
@@ -34,6 +39,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.0",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

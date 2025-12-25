@@ -94,21 +94,23 @@ test.describe('Compare Page', () => {
   });
 
   test('differences section shows outcome difference when outcomes differ', async ({ page }) => {
-    // Mock API with different outcomes
+    // Track which request is first
+    let requestCount = 0;
+
+    // Mock API with different outcomes based on request order
     await page.route('**/decision/evaluate', async (route) => {
-      const request = route.request();
-      const body = JSON.parse(request.postData() || '{}');
-      const isFirstTopic = body.tracking?.session_id?.includes('tz-feb');
+      requestCount++;
+      const isFirst = requestCount === 1;
 
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
         body: JSON.stringify({
-          decision_id: isFirstTopic ? 'dec_a' : 'dec_b',
+          decision_id: isFirst ? 'dec_a' : 'dec_b',
           output: {
             type: 'decision',
             decision: {
-              outcome: isFirstTopic ? 'book' : 'switch',
+              outcome: isFirst ? 'book' : 'switch',
               headline: 'Test headline that is long enough',
               summary: 'Test summary that provides enough detail for the quality gate check.',
               confidence: 0.75,
@@ -130,7 +132,7 @@ test.describe('Compare Page', () => {
 
     await page.goto('/compare');
 
-    // Select two different topics
+    // Select two different topics by index
     await page.getByLabel('Decision A').selectOption({ index: 1 });
     await page.getByLabel('Decision B').selectOption({ index: 2 });
 

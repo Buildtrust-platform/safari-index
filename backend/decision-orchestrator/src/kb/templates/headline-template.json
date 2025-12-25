@@ -1,0 +1,28 @@
+{
+  "template_id": "headline-template",
+  "version": "1.0.0",
+  "name": "Decision Headline Template",
+  "description": "Template for writing decision headlines. Headlines should be direct, factual, and outcome-oriented without hype.",
+  "category": "headline",
+  "template": "[Outcome implication] + [key condition or trade-off]",
+  "examples": [
+    {
+      "input": "Tanzania dry season recommendation",
+      "output": "Dry season offers best conditions for first-time visitors to Tanzania"
+    },
+    {
+      "input": "Budget safari feasibility",
+      "output": "Budget safari is achievable with strategic choices on timing and accommodation"
+    },
+    {
+      "input": "Solo safari safety",
+      "output": "Solo safari travel carries manageable risks with proper planning"
+    },
+    {
+      "input": "Migration timing",
+      "output": "Migration timing depends on which spectacle matters most to you"
+    }
+  ],
+  "created_at": "2025-12-25T00:00:00Z",
+  "updated_at": "2025-12-25T00:00:00Z"
+}

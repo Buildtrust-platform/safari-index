@@ -4,7 +4,7 @@
  * This file is synced from backend/contracts/index.ts
  * To update: edit backend/contracts/index.ts and run scripts/sync-contracts.sh
  *
- * Last synced: 2025-12-23T20:18:19Z
+ * Last synced: 2025-12-24T08:56:24Z
  */
 
 import { z } from 'zod';

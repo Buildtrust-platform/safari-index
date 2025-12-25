@@ -77,6 +77,28 @@ test.describe('Decision Pages Mobile', () => {
 });
 
 test.describe('Decision Pages Contract Validation', () => {
+  const validMockResponse = {
+    decision_id: 'dec_test_valid',
+    output: {
+      type: 'decision',
+      decision: {
+        outcome: 'book',
+        headline: 'February is excellent for Tanzania safari viewing',
+        summary:
+          'The dry season conditions in February provide optimal wildlife viewing opportunities with minimal rain interference.',
+        assumptions: [
+          { id: 'a1', text: 'Traveler prefers dry season conditions', confidence: 0.8 },
+          { id: 'a2', text: 'Budget allows for peak pricing', confidence: 0.7 },
+          { id: 'a3', text: 'Traveling with standard safari expectations', confidence: 0.9 },
+        ],
+        tradeoffs: { gains: ['Optimal wildlife viewing', 'Less rain'], losses: ['Higher prices'] },
+        change_conditions: ['If dates become flexible', 'If budget constraints change'],
+        confidence: 0.75,
+      },
+    },
+    metadata: { logic_version: 'v1.0', ai_used: false },
+  };
+
   test('decision page renders verdict when API returns valid response', async ({ page }) => {
     // Mock valid API response that passes quality gates
     // Quality gates require: 2+ tradeoffs, 2+ assumptions, 2+ change conditions, headline 20+ chars, summary 50+ chars
@@ -84,26 +106,7 @@ test.describe('Decision Pages Contract Validation', () => {
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify({
-          decision_id: 'dec_test_valid',
-          output: {
-            type: 'decision',
-            decision: {
-              outcome: 'book',
-              headline: 'February is excellent for Tanzania safari viewing',
-              summary:
-                'The dry season conditions in February provide optimal wildlife viewing opportunities with minimal rain interference.',
-              assumptions: [
-                { id: 'a1', text: 'Traveler prefers dry season', confidence: 0.8 },
-                { id: 'a2', text: 'Budget allows for peak pricing', confidence: 0.7 },
-              ],
-              tradeoffs: { gains: ['Optimal wildlife viewing', 'Less rain'], losses: ['Higher prices'] },
-              change_conditions: ['If dates become flexible', 'If budget constraints change'],
-              confidence: 0.75,
-            },
-          },
-          metadata: { logic_version: 'v1.0', ai_used: false },
-        }),
+        body: JSON.stringify(validMockResponse),
       });
     });
 
@@ -121,6 +124,53 @@ test.describe('Decision Pages Contract Validation', () => {
     await expect(
       page.getByRole('heading', { name: 'February is excellent for Tanzania safari viewing' })
     ).toBeVisible({ timeout: 10000 });
+  });
+
+  test('decision page hero shows documentary subline', async ({ page }) => {
+    await page.route('**/decision/evaluate', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(validMockResponse),
+      });
+    });
+
+    await page.goto('/decisions/tanzania-safari-february');
+
+    // In build mode, handle wizard
+    const wizard = page.getByTestId('preflight-wizard');
+    if (await wizard.isVisible()) {
+      await page.getByRole('button', { name: /answer quality check/i }).click();
+      await page.getByTestId('preflight-skip').click();
+    }
+
+    // Hero should show documentary subline
+    await expect(page.getByText('A decision with trade-offs. Read the conditions.')).toBeVisible({
+      timeout: 10000,
+    });
+  });
+
+  test('decision page shows depends-on strip with assumptions and conditions', async ({ page }) => {
+    await page.route('**/decision/evaluate', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(validMockResponse),
+      });
+    });
+
+    await page.goto('/decisions/tanzania-safari-february');
+
+    // In build mode, handle wizard
+    const wizard = page.getByTestId('preflight-wizard');
+    if (await wizard.isVisible()) {
+      await page.getByRole('button', { name: /answer quality check/i }).click();
+      await page.getByTestId('preflight-skip').click();
+    }
+
+    // DependsOnStrip should be visible with assumptions/conditions
+    await expect(page.getByTestId('depends-on-strip')).toBeVisible({ timeout: 10000 });
+    await expect(page.getByText('What this depends on')).toBeVisible();
   });
 
   test('decision page shows error state when API returns malformed response', async ({ page }) => {

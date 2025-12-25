@@ -1,0 +1,1327 @@
+{
+  "version": "1.0.0",
+  "synced_at": "2025-12-25T02:45:18.581Z",
+  "evidence": {
+    "serengeti-park-fees-2025": {
+      "evidence_id": "serengeti-park-fees-2025",
+      "version": "1.0.0",
+      "type": "cost_benchmark",
+      "title": "Serengeti National Park Entry Fees 2025",
+      "content": "Serengeti National Park entry fee is $70 USD per person per 24-hour period for non-residents. This fee is collected by TANAPA and is non-negotiable. Children under 5 are free; ages 5-15 pay reduced rates.",
+      "source": "Tanzania National Parks Authority (TANAPA)",
+      "source_url": "https://www.tanzaniaparks.go.tz/",
+      "source_date": "2025-01-01T00:00:00Z",
+      "tags": [
+        "park-fees",
+        "tanzania",
+        "serengeti",
+        "cost"
+      ],
+      "topic_ids": [
+        "total-budget",
+        "budget-tanzania"
+      ],
+      "destinations": [
+        "Tanzania",
+        "Serengeti"
+      ],
+      "valid_from": "2025-01-01T00:00:00Z",
+      "valid_until": "2025-12-31T23:59:59Z",
+      "requires_annual_review": true,
+      "created_at": "2025-12-25T00:00:00Z",
+      "updated_at": "2025-12-25T00:00:00Z"
+    }
+  },
+  "banned_phrases": {
+    "version": "1.0.0",
+    "updated_at": "2025-12-25T00:00:00Z",
+    "banned_words": [
+      "unforgettable experience",
+      "magical",
+      "breathtaking",
+      "seamless",
+      "curated",
+      "unlock your",
+      "elevate your",
+      "world-class",
+      "hidden gem",
+      "bucket list",
+      "AI-powered",
+      "amazing experience",
+      "we guarantee",
+      "we promise",
+      "we ensure"
+    ],
+    "forbidden_patterns": [
+      {
+        "pattern": "!",
+        "description": "Exclamation points not allowed"
+      },
+      {
+        "pattern": "[\\u{1F300}-\\u{1F9FF}]",
+        "description": "Emojis not allowed"
+      },
+      {
+        "pattern": "you('ll| will) love",
+        "description": "Presumptuous emotional language"
+      },
+      {
+        "pattern": "perfect for",
+        "description": "Overly confident recommendation"
+      },
+      {
+        "pattern": "ideal choice",
+        "description": "Overly confident recommendation"
+      },
+      {
+        "pattern": "great option",
+        "description": "Vague positive language"
+      },
+      {
+        "pattern": "book now",
+        "description": "Pushy CTA"
+      },
+      {
+        "pattern": "don't miss",
+        "description": "FOMO language"
+      },
+      {
+        "pattern": "as an ai",
+        "description": "AI self-reference"
+      },
+      {
+        "pattern": "unique blend",
+        "description": "Marketing speak"
+      },
+      {
+        "pattern": "excellent choice",
+        "description": "Overly confident validation"
+      }
+    ],
+    "preferred_vocabulary": [
+      "trade-off",
+      "likelihood",
+      "depends on",
+      "tends to",
+      "typically",
+      "often",
+      "rarely",
+      "in practice",
+      "worth it if",
+      "not ideal if",
+      "assumes",
+      "requires",
+      "carries risk",
+      "consider",
+      "may",
+      "can",
+      "generally"
+    ]
+  },
+  "topics": {
+    "first-timer-ready": {
+      "topic_id": "first-timer-ready",
+      "title": "Am I ready for my first safari?",
+      "bucket": "personal_fit",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "personal-fit",
+        "africa"
+      ]
+    },
+    "solo-safari-fit": {
+      "topic_id": "solo-safari-fit",
+      "title": "Is solo safari travel right for me?",
+      "bucket": "personal_fit",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "personal-fit",
+        "africa"
+      ]
+    },
+    "family-young-kids": {
+      "topic_id": "family-young-kids",
+      "title": "Should I take young children (under 6) on safari?",
+      "bucket": "personal_fit",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "personal-fit",
+        "africa"
+      ]
+    },
+    "family-teens": {
+      "topic_id": "family-teens",
+      "title": "Is safari a good trip for teenagers?",
+      "bucket": "personal_fit",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "personal-fit",
+        "africa"
+      ]
+    },
+    "multigenerational": {
+      "topic_id": "multigenerational",
+      "title": "Can a multigenerational group do safari together?",
+      "bucket": "personal_fit",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "personal-fit",
+        "africa"
+      ]
+    },
+    "mobility-challenges": {
+      "topic_id": "mobility-challenges",
+      "title": "Can I do safari with mobility challenges?",
+      "bucket": "personal_fit",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "personal-fit",
+        "africa"
+      ]
+    },
+    "honeymoon-fit": {
+      "topic_id": "honeymoon-fit",
+      "title": "Is safari right for a honeymoon?",
+      "bucket": "personal_fit",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "personal-fit",
+        "africa"
+      ]
+    },
+    "anniversary-trip": {
+      "topic_id": "anniversary-trip",
+      "title": "Is safari a good anniversary trip?",
+      "bucket": "personal_fit",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "personal-fit",
+        "africa"
+      ]
+    },
+    "photographer-fit": {
+      "topic_id": "photographer-fit",
+      "title": "Am I serious enough about photography for a photo safari?",
+      "bucket": "personal_fit",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "personal-fit",
+        "africa"
+      ]
+    },
+    "adventure-seeker": {
+      "topic_id": "adventure-seeker",
+      "title": "Is traditional safari too passive for adventure seekers?",
+      "bucket": "personal_fit",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "personal-fit",
+        "africa"
+      ]
+    },
+    "repeat-visitor-value": {
+      "topic_id": "repeat-visitor-value",
+      "title": "Is another safari worth it if I've been before?",
+      "bucket": "personal_fit",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "personal-fit",
+        "africa"
+      ]
+    },
+    "wildlife-expectation": {
+      "topic_id": "wildlife-expectation",
+      "title": "Will I be disappointed if I don't see the Big Five?",
+      "bucket": "personal_fit",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "personal-fit",
+        "africa"
+      ]
+    },
+    "tz-vs-ke": {
+      "topic_id": "tz-vs-ke",
+      "title": "Tanzania or Kenya for first safari?",
+      "bucket": "destination_choice",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "destination-choice",
+        "africa",
+        "tanzania"
+      ]
+    },
+    "tz-vs-bw": {
+      "topic_id": "tz-vs-bw",
+      "title": "Tanzania or Botswana?",
+      "bucket": "destination_choice",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "destination-choice",
+        "africa",
+        "tanzania"
+      ]
+    },
+    "ke-vs-bw": {
+      "topic_id": "ke-vs-bw",
+      "title": "Kenya or Botswana?",
+      "bucket": "destination_choice",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "destination-choice",
+        "africa",
+        "kenya"
+      ]
+    },
+    "sa-vs-ea": {
+      "topic_id": "sa-vs-ea",
+      "title": "South Africa or East Africa for first safari?",
+      "bucket": "destination_choice",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "destination-choice",
+        "africa",
+        "south-africa"
+      ]
+    },
+    "rwanda-gorillas-worth": {
+      "topic_id": "rwanda-gorillas-worth",
+      "title": "Is Rwanda worth it just for gorillas?",
+      "bucket": "destination_choice",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "destination-choice",
+        "africa",
+        "rwanda",
+        "gorillas"
+      ]
+    },
+    "uganda-vs-rwanda": {
+      "topic_id": "uganda-vs-rwanda",
+      "title": "Uganda or Rwanda for gorilla trekking?",
+      "bucket": "destination_choice",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "destination-choice",
+        "africa",
+        "rwanda",
+        "uganda"
+      ]
+    },
+    "namibia-different": {
+      "topic_id": "namibia-different",
+      "title": "Is Namibia too different for a traditional safari expectation?",
+      "bucket": "destination_choice",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "destination-choice",
+        "africa"
+      ]
+    },
+    "zambia-value": {
+      "topic_id": "zambia-value",
+      "title": "Is Zambia underrated or just limited?",
+      "bucket": "destination_choice",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "destination-choice",
+        "africa"
+      ]
+    },
+    "zimbabwe-safe": {
+      "topic_id": "zimbabwe-safe",
+      "title": "Is Zimbabwe safe and worthwhile for safari?",
+      "bucket": "destination_choice",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "destination-choice",
+        "africa"
+      ]
+    },
+    "okavango-worth": {
+      "topic_id": "okavango-worth",
+      "title": "Is the Okavango Delta worth the premium?",
+      "bucket": "destination_choice",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "destination-choice",
+        "africa",
+        "okavango"
+      ]
+    },
+    "serengeti-vs-mara": {
+      "topic_id": "serengeti-vs-mara",
+      "title": "Serengeti or Masai Mara?",
+      "bucket": "destination_choice",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "destination-choice",
+        "africa",
+        "serengeti",
+        "masai-mara"
+      ]
+    },
+    "ngorongoro-worth": {
+      "topic_id": "ngorongoro-worth",
+      "title": "Is Ngorongoro Crater worth a full day?",
+      "bucket": "destination_choice",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "destination-choice",
+        "africa"
+      ]
+    },
+    "kruger-vs-private": {
+      "topic_id": "kruger-vs-private",
+      "title": "Kruger National Park or private reserves?",
+      "bucket": "destination_choice",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "destination-choice",
+        "africa",
+        "kruger"
+      ]
+    },
+    "single-country-multi": {
+      "topic_id": "single-country-multi",
+      "title": "Should I focus on one country or visit multiple?",
+      "bucket": "destination_choice",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "destination-choice",
+        "africa"
+      ]
+    },
+    "off-beaten-path": {
+      "topic_id": "off-beaten-path",
+      "title": "Should I choose a less-visited destination?",
+      "bucket": "destination_choice",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "destination-choice",
+        "africa"
+      ]
+    },
+    "tz-dry-season": {
+      "topic_id": "tz-dry-season",
+      "title": "Is dry season the only good time for Tanzania?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa",
+        "tanzania"
+      ]
+    },
+    "migration-timing": {
+      "topic_id": "migration-timing",
+      "title": "When is the best time to see the Great Migration?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa",
+        "migration"
+      ]
+    },
+    "river-crossings": {
+      "topic_id": "river-crossings",
+      "title": "When is the best time to see river crossings?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa"
+      ]
+    },
+    "calving-season": {
+      "topic_id": "calving-season",
+      "title": "Is calving season worth planning around?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa"
+      ]
+    },
+    "green-season-value": {
+      "topic_id": "green-season-value",
+      "title": "Is green season worth it for the savings?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa"
+      ]
+    },
+    "shoulder-season": {
+      "topic_id": "shoulder-season",
+      "title": "Are shoulder seasons the sweet spot?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa"
+      ]
+    },
+    "christmas-safari": {
+      "topic_id": "christmas-safari",
+      "title": "Is Christmas a good time for safari?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa"
+      ]
+    },
+    "school-holidays": {
+      "topic_id": "school-holidays",
+      "title": "Should I avoid school holiday periods?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa"
+      ]
+    },
+    "tz-feb": {
+      "topic_id": "tz-feb",
+      "title": "Is February a good time for Tanzania safari?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa",
+        "tanzania"
+      ]
+    },
+    "tz-jul": {
+      "topic_id": "tz-jul",
+      "title": "Is July a good time for Tanzania safari?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa",
+        "tanzania"
+      ]
+    },
+    "ke-aug": {
+      "topic_id": "ke-aug",
+      "title": "Is August a good time for Kenya safari?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa",
+        "kenya"
+      ]
+    },
+    "bw-jun": {
+      "topic_id": "bw-jun",
+      "title": "Is June a good time for Botswana safari?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa",
+        "botswana"
+      ]
+    },
+    "bw-peak-flood": {
+      "topic_id": "bw-peak-flood",
+      "title": "When is peak flood in the Okavango?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa",
+        "botswana"
+      ]
+    },
+    "sa-winter": {
+      "topic_id": "sa-winter",
+      "title": "Is South African winter good for safari?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa",
+        "south-africa"
+      ]
+    },
+    "rain-impact": {
+      "topic_id": "rain-impact",
+      "title": "How much does rain really affect safari?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa"
+      ]
+    },
+    "last-minute-timing": {
+      "topic_id": "last-minute-timing",
+      "title": "Can I book a good safari last minute?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa"
+      ]
+    },
+    "booking-lead-time": {
+      "topic_id": "booking-lead-time",
+      "title": "How far in advance should I book?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa"
+      ]
+    },
+    "weather-unpredictable": {
+      "topic_id": "weather-unpredictable",
+      "title": "Should I worry about weather unpredictability?",
+      "bucket": "timing",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "timing",
+        "africa"
+      ]
+    },
+    "walking-safari": {
+      "topic_id": "walking-safari",
+      "title": "Is a walking safari worth the risk and cost?",
+      "bucket": "experience_type",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "experience-type",
+        "africa"
+      ]
+    },
+    "night-drives": {
+      "topic_id": "night-drives",
+      "title": "Are night drives worth choosing a park that allows them?",
+      "bucket": "experience_type",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "experience-type",
+        "africa"
+      ]
+    },
+    "balloon-safari": {
+      "topic_id": "balloon-safari",
+      "title": "Is a balloon safari worth the extra cost?",
+      "bucket": "experience_type",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "experience-type",
+        "africa"
+      ]
+    },
+    "mokoro-canoe": {
+      "topic_id": "mokoro-canoe",
+      "title": "Should I prioritize mokoro/canoe safaris?",
+      "bucket": "experience_type",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "experience-type",
+        "africa"
+      ]
+    },
+    "photo-safari-vs-regular": {
+      "topic_id": "photo-safari-vs-regular",
+      "title": "Should I book a dedicated photo safari?",
+      "bucket": "experience_type",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "experience-type",
+        "africa"
+      ]
+    },
+    "fly-camping": {
+      "topic_id": "fly-camping",
+      "title": "Is fly camping worth the discomfort?",
+      "bucket": "experience_type",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "experience-type",
+        "africa"
+      ]
+    },
+    "mobile-vs-fixed": {
+      "topic_id": "mobile-vs-fixed",
+      "title": "Mobile camp or fixed lodge safari?",
+      "bucket": "experience_type",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "experience-type",
+        "africa"
+      ]
+    },
+    "self-drive-safari": {
+      "topic_id": "self-drive-safari",
+      "title": "Should I do a self-drive safari?",
+      "bucket": "experience_type",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "experience-type",
+        "africa"
+      ]
+    },
+    "private-vs-shared": {
+      "topic_id": "private-vs-shared",
+      "title": "Is a private vehicle worth double the cost?",
+      "bucket": "experience_type",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "experience-type",
+        "africa"
+      ]
+    },
+    "group-tour-value": {
+      "topic_id": "group-tour-value",
+      "title": "Is a group tour ever the right choice?",
+      "bucket": "experience_type",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "experience-type",
+        "africa"
+      ]
+    },
+    "conservation-experience": {
+      "topic_id": "conservation-experience",
+      "title": "Should I choose a conservation-focused safari?",
+      "bucket": "experience_type",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "experience-type",
+        "africa"
+      ]
+    },
+    "cultural-component": {
+      "topic_id": "cultural-component",
+      "title": "How important is a cultural component?",
+      "bucket": "experience_type",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "experience-type",
+        "africa"
+      ]
+    },
+    "lodge-vs-tented": {
+      "topic_id": "lodge-vs-tented",
+      "title": "Lodge or tented camp?",
+      "bucket": "accommodation",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "accommodation",
+        "africa"
+      ]
+    },
+    "luxury-worth-it": {
+      "topic_id": "luxury-worth-it",
+      "title": "Is luxury accommodation worth it on safari?",
+      "bucket": "accommodation",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "accommodation",
+        "africa"
+      ]
+    },
+    "budget-accommodation-ok": {
+      "topic_id": "budget-accommodation-ok",
+      "title": "Is budget accommodation acceptable for safari?",
+      "bucket": "accommodation",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "accommodation",
+        "africa",
+        "cost"
+      ]
+    },
+    "inside-vs-outside-park": {
+      "topic_id": "inside-vs-outside-park",
+      "title": "Should I stay inside or outside the park?",
+      "bucket": "accommodation",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "accommodation",
+        "africa"
+      ]
+    },
+    "all-inclusive-value": {
+      "topic_id": "all-inclusive-value",
+      "title": "Is all-inclusive worth the premium?",
+      "bucket": "accommodation",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "accommodation",
+        "africa"
+      ]
+    },
+    "camp-hopping": {
+      "topic_id": "camp-hopping",
+      "title": "Should I stay at multiple camps or just one?",
+      "bucket": "accommodation",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "accommodation",
+        "africa"
+      ]
+    },
+    "family-rooms": {
+      "topic_id": "family-rooms",
+      "title": "Are family rooms worth the premium over separate tents?",
+      "bucket": "accommodation",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "accommodation",
+        "africa"
+      ]
+    },
+    "private-pool-villa": {
+      "topic_id": "private-pool-villa",
+      "title": "Is a private pool/villa worth it?",
+      "bucket": "accommodation",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "accommodation",
+        "africa"
+      ]
+    },
+    "small-vs-large-camp": {
+      "topic_id": "small-vs-large-camp",
+      "title": "Small intimate camp or larger lodge?",
+      "bucket": "accommodation",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "accommodation",
+        "africa"
+      ]
+    },
+    "owner-run-camps": {
+      "topic_id": "owner-run-camps",
+      "title": "Are owner-run camps worth seeking out?",
+      "bucket": "accommodation",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "accommodation",
+        "africa"
+      ]
+    },
+    "treehouse-unique": {
+      "topic_id": "treehouse-unique",
+      "title": "Is a treehouse or unique property worth the premium?",
+      "bucket": "accommodation",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "accommodation",
+        "africa"
+      ]
+    },
+    "trip-length": {
+      "topic_id": "trip-length",
+      "title": "Is 5 days enough for safari?",
+      "bucket": "logistics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "logistics",
+        "africa"
+      ]
+    },
+    "ideal-length": {
+      "topic_id": "ideal-length",
+      "title": "What's the ideal safari length?",
+      "bucket": "logistics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "logistics",
+        "africa"
+      ]
+    },
+    "fly-vs-drive": {
+      "topic_id": "fly-vs-drive",
+      "title": "Should I fly or drive between parks?",
+      "bucket": "logistics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "logistics",
+        "africa"
+      ]
+    },
+    "charter-vs-scheduled": {
+      "topic_id": "charter-vs-scheduled",
+      "title": "Charter flight or scheduled service?",
+      "bucket": "logistics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "logistics",
+        "africa"
+      ]
+    },
+    "beach-extension": {
+      "topic_id": "beach-extension",
+      "title": "Should I add a beach extension?",
+      "bucket": "logistics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "logistics",
+        "africa"
+      ]
+    },
+    "city-stopover": {
+      "topic_id": "city-stopover",
+      "title": "Should I plan a city stopover (Nairobi/Cape Town)?",
+      "bucket": "logistics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "logistics",
+        "africa"
+      ]
+    },
+    "visa-complexity": {
+      "topic_id": "visa-complexity",
+      "title": "Should visa requirements affect my destination choice?",
+      "bucket": "logistics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "logistics",
+        "africa",
+        "south-africa"
+      ]
+    },
+    "travel-insurance": {
+      "topic_id": "travel-insurance",
+      "title": "Do I really need comprehensive travel insurance?",
+      "bucket": "logistics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "logistics",
+        "africa"
+      ]
+    },
+    "packing-weight": {
+      "topic_id": "packing-weight",
+      "title": "How strict are the luggage weight limits?",
+      "bucket": "logistics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "logistics",
+        "africa"
+      ]
+    },
+    "agent-vs-direct": {
+      "topic_id": "agent-vs-direct",
+      "title": "Should I book through an agent or direct?",
+      "bucket": "logistics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "logistics",
+        "africa"
+      ]
+    },
+    "local-vs-international": {
+      "topic_id": "local-vs-international",
+      "title": "Local operator or international tour company?",
+      "bucket": "logistics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "logistics",
+        "africa"
+      ]
+    },
+    "deposit-timing": {
+      "topic_id": "deposit-timing",
+      "title": "When should I pay the deposit?",
+      "bucket": "logistics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "logistics",
+        "africa",
+        "timing"
+      ]
+    },
+    "malaria-decision": {
+      "topic_id": "malaria-decision",
+      "title": "Should I avoid malaria zones entirely?",
+      "bucket": "risk_ethics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "risk-ethics",
+        "africa"
+      ]
+    },
+    "yellow-fever": {
+      "topic_id": "yellow-fever",
+      "title": "Do I need a yellow fever vaccine?",
+      "bucket": "risk_ethics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "risk-ethics",
+        "africa"
+      ]
+    },
+    "political-stability": {
+      "topic_id": "political-stability",
+      "title": "Should political instability affect my destination choice?",
+      "bucket": "risk_ethics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "risk-ethics",
+        "africa"
+      ]
+    },
+    "ethical-hunting": {
+      "topic_id": "ethical-hunting",
+      "title": "Should I avoid areas with hunting concessions?",
+      "bucket": "risk_ethics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "risk-ethics",
+        "africa"
+      ]
+    },
+    "volunteer-tourism": {
+      "topic_id": "volunteer-tourism",
+      "title": "Is volunteer/conservation tourism ethical?",
+      "bucket": "risk_ethics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "risk-ethics",
+        "africa"
+      ]
+    },
+    "orphanage-visits": {
+      "topic_id": "orphanage-visits",
+      "title": "Should I include orphanage or school visits?",
+      "bucket": "risk_ethics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "risk-ethics",
+        "africa"
+      ]
+    },
+    "elephant-interaction": {
+      "topic_id": "elephant-interaction",
+      "title": "Are elephant interaction experiences ethical?",
+      "bucket": "risk_ethics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "risk-ethics",
+        "africa"
+      ]
+    },
+    "carbon-offset": {
+      "topic_id": "carbon-offset",
+      "title": "Should I carbon offset my safari flights?",
+      "bucket": "risk_ethics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "risk-ethics",
+        "africa"
+      ]
+    },
+    "community-benefit": {
+      "topic_id": "community-benefit",
+      "title": "How do I ensure my trip benefits local communities?",
+      "bucket": "risk_ethics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "risk-ethics",
+        "africa"
+      ]
+    },
+    "photography-ethics": {
+      "topic_id": "photography-ethics",
+      "title": "What are the ethics of wildlife photography on safari?",
+      "bucket": "risk_ethics",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "risk-ethics",
+        "africa"
+      ]
+    },
+    "total-budget": {
+      "topic_id": "total-budget",
+      "title": "What should my total safari budget be?",
+      "bucket": "value_cost",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "value-cost",
+        "africa",
+        "cost"
+      ]
+    },
+    "budget-tanzania": {
+      "topic_id": "budget-tanzania",
+      "title": "Can I do Tanzania on a budget?",
+      "bucket": "value_cost",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "value-cost",
+        "africa",
+        "tanzania",
+        "cost"
+      ]
+    },
+    "hidden-costs": {
+      "topic_id": "hidden-costs",
+      "title": "What hidden costs should I expect?",
+      "bucket": "value_cost",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "value-cost",
+        "africa",
+        "cost"
+      ]
+    },
+    "tipping-guide": {
+      "topic_id": "tipping-guide",
+      "title": "How much should I tip guides and staff?",
+      "bucket": "value_cost",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "value-cost",
+        "africa"
+      ]
+    },
+    "peak-vs-value": {
+      "topic_id": "peak-vs-value",
+      "title": "Is peak season worth the premium?",
+      "bucket": "value_cost",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "value-cost",
+        "africa"
+      ]
+    },
+    "cheap-warning": {
+      "topic_id": "cheap-warning",
+      "title": "When is cheap too cheap for safari?",
+      "bucket": "value_cost",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "value-cost",
+        "africa",
+        "cost"
+      ]
+    },
+    "value-destinations": {
+      "topic_id": "value-destinations",
+      "title": "Which destinations offer the best value?",
+      "bucket": "value_cost",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "value-cost",
+        "africa"
+      ]
+    },
+    "splurge-allocation": {
+      "topic_id": "splurge-allocation",
+      "title": "Where should I splurge vs save?",
+      "bucket": "value_cost",
+      "destinations": [
+        "Africa"
+      ],
+      "tags": [
+        "value-cost",
+        "africa"
+      ]
+    }
+  }
+}

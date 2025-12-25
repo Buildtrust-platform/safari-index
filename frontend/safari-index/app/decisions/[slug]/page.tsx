@@ -42,7 +42,13 @@ import { InputReadinessPanel } from '../../components/InputReadinessPanel';
 import { RefusalRecoveryPanel } from '../../components/RefusalRecoveryPanel';
 import { ServiceDegradedRefusal } from '../../components/ServiceDegradedRefusal';
 import { PreflightWizard } from '../../components/PreflightWizard';
+import { BaselineFallbackBanner } from '../../components/BaselineFallbackBanner';
 import { getTopicBySlug, DecisionTopic } from '../../content/decision-topics';
+import {
+  getBaselineDecision,
+  isCapacityOrServiceRefusal,
+  type BaselineDecision,
+} from '../../../lib/baseline-decisions';
 import { getRelatedTopics } from '../../content/topic-graph';
 import {
   validateDecisionQuality,
@@ -77,8 +83,10 @@ import {
   mergeEnvelopeWithOverrides,
 } from '../../../lib/preflight-inputs';
 import { ImageBand, ImageBandContent, pageImages, VerdictMoment } from '../../components/visual';
+import { DependsOnStrip } from '../../components/DependsOnStrip';
+import { SectionDivider } from '../../components/ui/Divider';
 
-type PageState = 'pending' | 'loading' | 'success' | 'refusal' | 'error' | 'quality_failed';
+type PageState = 'pending' | 'loading' | 'success' | 'refusal' | 'error' | 'quality_failed' | 'baseline_fallback';
 
 const API_ENDPOINT = `${API_BASE}/decision/evaluate`;
 
@@ -94,6 +102,7 @@ export default function DecisionPage() {
   const [topic, setTopic] = useState<DecisionTopic | null>(null);
   const [relatedTopics, setRelatedTopics] = useState<DecisionTopic[]>([]);
   const [qualityFailures, setQualityFailures] = useState<string[]>([]);
+  const [baselineDecision, setBaselineDecision] = useState<BaselineDecision | null>(null);
 
   // Fetch decision with optional overrides
   const fetchDecision = useCallback(
@@ -121,6 +130,15 @@ export default function DecisionPage() {
         setDecision(data);
 
         if (data.output.type === 'refusal') {
+          // Check for capacity/service refusal and baseline availability
+          if (isCapacityOrServiceRefusal(data.output)) {
+            const baseline = getBaselineDecision(foundTopic.topic_id);
+            if (baseline) {
+              setBaselineDecision(baseline);
+              setState('baseline_fallback');
+              return;
+            }
+          }
           setState('refusal');
         } else if (data.output.decision) {
           // Validate quality gates before rendering
@@ -257,6 +275,117 @@ export default function DecisionPage() {
     );
   }
 
+  // Baseline fallback state - capacity refusal with available baseline
+  if (state === 'baseline_fallback' && baselineDecision && topic) {
+    const d = baselineDecision;
+    const fitMisfit = deriveFitMisfitModel(topic, d.outcome);
+
+    // Handler for retry attempts
+    const handleRetry = async () => {
+      if (topic) {
+        await fetchDecision(topic);
+      }
+    };
+
+    // Derive conditions for display
+    const primaryCondition = extractPrimaryCondition(d.assumptions, d.change_conditions);
+    const invalidatingCondition = extractInvalidatingCondition(d.change_conditions);
+
+    return (
+      <>
+        {/* Cinematic Hero - same as success but with baseline context */}
+        <ImageBand
+          image={pageImages.decision}
+          height="decision-hero"
+          overlay="cinematic"
+          align="center"
+          priority
+        >
+          <ImageBandContent maxWidth="default">
+            {/* Eyebrow label */}
+            <span className="inline-block font-ui text-xs font-medium text-white/70 uppercase tracking-wider mb-3">
+              Baseline Decision
+            </span>
+
+            {/* H1 Question - serif headline, short measure */}
+            <h1 className="font-editorial text-2xl md:text-3xl lg:text-4xl font-semibold text-white leading-snug tracking-tight mb-3 max-w-[22ch]">
+              {topic.question}
+            </h1>
+
+            {/* Context line - documentary framing */}
+            <p className="font-editorial text-white/80 text-base md:text-lg leading-relaxed mb-6 max-w-xl">
+              A decision with trade-offs. Read the conditions.
+            </p>
+
+            {/* Verdict Moment strip - no decision_id for baseline */}
+            <VerdictMoment
+              outcome={d.outcome}
+              headline={d.headline}
+              confidence={d.confidence}
+            />
+          </ImageBandContent>
+        </ImageBand>
+
+        {/* Body - Warm safari background */}
+        <main className={`${pageContainer} min-h-screen bg-gradient-to-b from-amber-50/30 via-stone-50 to-stone-100`}>
+          {/* No StructuredData for baseline - per SEO requirements */}
+
+          {/* Baseline Fallback Banner - above content */}
+          <BaselineFallbackBanner
+            topicId={topic.topic_id}
+            onRetry={handleRetry}
+          />
+
+          {/* Primary flow: VerdictCard → AnswerOwnershipBlock → Divider → DependsOnStrip */}
+          <VerdictCard
+            outcome={d.outcome}
+            headline={d.headline}
+            summary={d.summary}
+            confidence={d.confidence}
+          />
+
+          {/* Answer Ownership Block - quotable verdict for citation */}
+          <AnswerOwnershipBlock
+            question={topic.question}
+            outcome={d.outcome}
+            headline={d.headline}
+            summary={d.summary}
+            confidence={d.confidence}
+            primaryCondition={primaryCondition}
+            invalidatingCondition={invalidatingCondition}
+          />
+
+          <SectionDivider />
+
+          {/* What this depends on - key assumptions and change conditions */}
+          <DependsOnStrip
+            assumptions={d.assumptions}
+            changeConditions={d.change_conditions}
+          />
+
+          <TradeoffLedger gains={d.tradeoffs.gains} losses={d.tradeoffs.losses} />
+
+          <FitMisfitBlock rightFor={fitMisfit.rightFor} notIdealFor={fitMisfit.notIdealFor} />
+
+          <AssumptionsBlock assumptions={d.assumptions} />
+
+          <ChangeConditions conditions={d.change_conditions} />
+
+          <CTABar primary={{ label: 'Check fit for your dates', href: '/tools/safari-fit' }} />
+
+          <RelatedDecisions topics={relatedTopics} />
+
+          {/* Attribution Footer - baseline source, no decision_id */}
+          <footer className={footerStyles} aria-label="Reference information">
+            <p className="text-stone-500 text-sm">
+              Source: Baseline snapshot for {topic.topic_id}
+            </p>
+          </footer>
+        </main>
+      </>
+    );
+  }
+
   // Refusal state
   if (state === 'refusal' && decision?.output.refusal) {
     const refusal = decision.output.refusal;
@@ -363,9 +492,9 @@ export default function DecisionPage() {
               {topic.question}
             </h1>
 
-            {/* Context line */}
+            {/* Context line - documentary framing */}
             <p className="font-editorial text-white/80 text-base md:text-lg leading-relaxed mb-6 max-w-xl">
-              {topic.context_line}
+              A decision with trade-offs. Read the conditions.
             </p>
 
             {/* Verdict Moment strip */}
@@ -395,6 +524,14 @@ export default function DecisionPage() {
           {/* Input Readiness Panel - staging only */}
           <InputReadinessPanel topic={topic} />
 
+          {/* Primary flow: VerdictCard → AnswerOwnershipBlock → Divider → DependsOnStrip */}
+          <VerdictCard
+            outcome={d.outcome}
+            headline={d.headline}
+            summary={d.summary}
+            confidence={d.confidence}
+          />
+
           {/* Answer Ownership Block - quotable verdict for citation */}
           <AnswerOwnershipBlock
             question={topic.question}
@@ -406,11 +543,12 @@ export default function DecisionPage() {
             invalidatingCondition={invalidatingCondition}
           />
 
-          <VerdictCard
-            outcome={d.outcome}
-            headline={d.headline}
-            summary={d.summary}
-            confidence={d.confidence}
+          <SectionDivider />
+
+          {/* What this depends on - key assumptions and change conditions */}
+          <DependsOnStrip
+            assumptions={d.assumptions}
+            changeConditions={d.change_conditions}
           />
 
           <TradeoffLedger gains={d.tradeoffs.gains} losses={d.tradeoffs.losses} />

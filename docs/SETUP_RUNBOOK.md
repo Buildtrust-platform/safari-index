@@ -244,6 +244,86 @@ aws cloudfront create-invalidation \
 
 ---
 
+## Section G: Assurance Payment Troubleshooting
+
+### G.1 User Reports "Paid But Not Unlocked"
+
+When a user reports they paid but can't access their assurance:
+
+1. **Get identifiers from user:**
+   - Assurance ID (visible in footer of assurance page)
+   - Stripe payment receipt email (contains payment intent ID `pi_...`)
+
+2. **Check Stripe Dashboard:**
+   - Go to Stripe Dashboard → Payments
+   - Search by payment intent ID or customer email
+   - Verify payment status is "Succeeded"
+   - Note the `checkout.session.id` from metadata
+
+3. **Check webhook delivery:**
+   - Stripe Dashboard → Developers → Webhooks → Recent events
+   - Find `checkout.session.completed` event
+   - Check delivery status (Success/Failed)
+   - View request/response logs
+
+4. **Check backend assurance record:**
+   ```bash
+   # Query DynamoDB for assurance
+   aws dynamodb get-item \
+     --table-name safari-index-assurance \
+     --key '{"assurance_id": {"S": "asr_XXXXXX"}}' \
+     --region eu-central-1
+   ```
+
+   Look for:
+   - `payment_status`: Should be `completed`
+   - `payment_id`: Should match Stripe payment intent
+
+### G.2 Replay Stripe Webhook Safely
+
+If webhook was missed or failed:
+
+1. **Verify idempotency is safe:**
+   - Backend `/assurance/{id}/payment` endpoint is idempotent
+   - Returns 409 if already processed (safe to retry)
+
+2. **Replay from Stripe:**
+   - Stripe Dashboard → Developers → Webhooks
+   - Find the failed event
+   - Click "Resend" to replay webhook
+
+3. **Manual update (last resort):**
+   ```bash
+   # Only if Stripe shows successful payment but backend missed it
+   curl -X POST \
+     "https://qnxbpsr2a1.execute-api.eu-central-1.amazonaws.com/v1/assurance/{assurance_id}/payment" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "payment_id": "pi_XXXXXX",
+       "payment_status": "completed",
+       "stripe_session_id": "cs_XXXXXX"
+     }'
+   ```
+
+### G.3 Where to Find IDs
+
+| ID Type | Location |
+|---------|----------|
+| `assurance_id` | Footer of `/assurance/{id}` page, Stripe checkout metadata |
+| `decision_id` | Footer of decision page, Stripe checkout metadata |
+| `payment_id` (Stripe PI) | Stripe Dashboard → Payments, user's receipt email |
+| `session_id` | Stripe Dashboard → Checkout Sessions |
+
+### G.4 Common Issues
+
+| Symptom | Likely Cause | Fix |
+|---------|--------------|-----|
+| Banner shows "Payment processing" | Webhook delayed | User clicks "Refresh status" or waits |
+| 402 Payment Required | Webhook never received | Replay webhook from Stripe |
+| Banner persists after refresh | Backend didn't update | Check webhook logs, manual update if needed |
+
+---
+
 ## What Is NOT Configured Yet
 
 Per governance documents (MVP_FREEZE.md):

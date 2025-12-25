@@ -1,0 +1,86 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2025-12-25T00:00:00Z",
+  "banned_words": [
+    "unforgettable experience",
+    "magical",
+    "breathtaking",
+    "seamless",
+    "curated",
+    "unlock your",
+    "elevate your",
+    "world-class",
+    "hidden gem",
+    "bucket list",
+    "AI-powered",
+    "amazing experience",
+    "we guarantee",
+    "we promise",
+    "we ensure"
+  ],
+  "forbidden_patterns": [
+    {
+      "pattern": "!",
+      "description": "Exclamation points not allowed"
+    },
+    {
+      "pattern": "[\\u{1F300}-\\u{1F9FF}]",
+      "description": "Emojis not allowed"
+    },
+    {
+      "pattern": "you('ll| will) love",
+      "description": "Presumptuous emotional language"
+    },
+    {
+      "pattern": "perfect for",
+      "description": "Overly confident recommendation"
+    },
+    {
+      "pattern": "ideal choice",
+      "description": "Overly confident recommendation"
+    },
+    {
+      "pattern": "great option",
+      "description": "Vague positive language"
+    },
+    {
+      "pattern": "book now",
+      "description": "Pushy CTA"
+    },
+    {
+      "pattern": "don't miss",
+      "description": "FOMO language"
+    },
+    {
+      "pattern": "as an ai",
+      "description": "AI self-reference"
+    },
+    {
+      "pattern": "unique blend",
+      "description": "Marketing speak"
+    },
+    {
+      "pattern": "excellent choice",
+      "description": "Overly confident validation"
+    }
+  ],
+  "preferred_vocabulary": [
+    "trade-off",
+    "likelihood",
+    "depends on",
+    "tends to",
+    "typically",
+    "often",
+    "rarely",
+    "in practice",
+    "worth it if",
+    "not ideal if",
+    "assumes",
+    "requires",
+    "carries risk",
+    "consider",
+    "may",
+    "can",
+    "generally"
+  ]
+}

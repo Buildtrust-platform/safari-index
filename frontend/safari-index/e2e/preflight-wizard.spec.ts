@@ -39,10 +39,10 @@ test.describe('Preflight Wizard (Build Mode)', () => {
     // Expand wizard
     await page.getByRole('button', { name: /answer quality check/i }).click();
 
-    // Should show the topic's required inputs
+    // Should show the topic's required inputs (tz-feb specific)
+    await expect(page.getByLabel('Destination')).toBeVisible();
     await expect(page.getByLabel('Travel month')).toBeVisible();
-    await expect(page.getByLabel('Budget tier')).toBeVisible();
-    await expect(page.getByLabel('Group size')).toBeVisible();
+    await expect(page.getByLabel('Calving interest')).toBeVisible();
   });
 
   test('wizard shows optional input fields', async ({ page }) => {
@@ -77,12 +77,10 @@ test.describe('Preflight Wizard (Build Mode)', () => {
     // Expand wizard
     await page.getByRole('button', { name: /answer quality check/i }).click();
 
-    // Fill in required inputs to pass validation
+    // Fill in required inputs to pass validation (tz-feb specific inputs)
+    await page.getByLabel('Destination').fill('["Tanzania"]');
     await page.getByLabel('Travel month').fill('February');
-    await page.getByLabel('Budget tier').selectOption('premium');
-    await page.getByLabel('Group size').fill('4');
-    await page.getByLabel('Traveler type').selectOption('first_time');
-    await page.getByLabel('Destinations').fill('["Tanzania"]');
+    await page.getByLabel('Calving interest').fill('interested');
 
     // Click Use these inputs
     await page.getByTestId('preflight-use-inputs').click();

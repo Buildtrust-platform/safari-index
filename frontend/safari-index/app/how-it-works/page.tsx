@@ -4,7 +4,7 @@
  * How It Works Page
  *
  * Explains Safari Index methodology, refusal policy, and accountability.
- * Editorial + documentary aesthetic. No marketing language.
+ * Premium safari aesthetic with ImageBand hero.
  *
  * Sections:
  * 1. What it is
@@ -12,27 +12,19 @@
  * 3. How a decision is made (4-step diagram)
  * 4. Why refusals exist
  * 5. Change and accountability (versioning and stability)
- *
- * Governance:
- * - 01_brand_voice.md: Senior safari planner voice
- * - 02_decision_doctrine.md: Decision framework and refusal policy
- * - 03_ux_flow.md: Clear information hierarchy
- * - 13_frontend_templates.md: Component patterns
  */
 
 import Link from 'next/link';
-import { DecisionProcess } from '../components/visual';
-import { PageGrid } from '../components/layout';
+import { DecisionProcess, ImageBand, ImageBandContent, pageImages } from '../components/visual';
+import { Navbar } from '../components/layout';
 import {
-  Heading1,
   Heading2,
   Heading3,
   Text,
-  Meta,
   Section,
   SectionDivider,
 } from '../components/ui';
-import { ArrowLeft, BookOpen, XCircle, AlertTriangle, HelpCircle, Target, Hash, GitBranch, Eye, Quote, Compass, ChevronRight } from 'lucide-react';
+import { BookOpen, XCircle, AlertTriangle, HelpCircle, Target, ChevronRight, ArrowRight } from 'lucide-react';
 
 /**
  * RefusalReason - Explains a specific refusal category with icon
@@ -47,10 +39,10 @@ function RefusalReason({
   icon: React.ElementType;
 }) {
   return (
-    <div className="flex gap-4 p-4 bg-white rounded-xl border border-stone-200">
+    <div className="flex gap-4 p-5 bg-white rounded-2xl border border-stone-200 shadow-sm">
       <div className="flex-shrink-0">
-        <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
-          <RefusalIcon className="w-5 h-5 text-amber-600" />
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center border border-amber-200/50">
+          <RefusalIcon className="w-6 h-6 text-amber-700" />
         </div>
       </div>
       <div>
@@ -66,51 +58,66 @@ function RefusalReason({
 }
 
 export default function HowItWorksPage() {
-  // PRODUCTION-CORE: This page is visible in all modes
-  // Explains methodology, refusal policy, and accountability
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50/50 via-stone-50 to-stone-100">
-      {/* Hero - Dark header matching explore/compare */}
-      <div className="bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 text-white">
-        <PageGrid maxWidth="narrow" className="py-12 md:py-16">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm text-stone-400 hover:text-white transition-colors mb-8"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Safari Index
-          </Link>
+    <main className="min-h-screen bg-stone-50">
+      {/* Navbar */}
+      <Navbar variant="transparent" />
 
-          <div className="flex items-start gap-4 mb-4">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center">
-              <BookOpen className="w-6 h-6 text-amber-400" />
+      {/* Hero with safari imagery */}
+      <ImageBand
+        image={pageImages.howItWorks}
+        height="compare"
+        overlay="strong"
+        align="center"
+        priority
+        alwaysRender
+      >
+        <ImageBandContent maxWidth="narrow" className="pt-24 pb-8">
+          <div className="text-center">
+            {/* Breadcrumb */}
+            <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
+              <Link href="/" className="hover:text-white transition-colors">
+                Safari Index
+              </Link>
+              <ChevronRight className="w-4 h-4" />
+              <span className="text-white">How it works</span>
             </div>
-            <div>
-              <Heading1 className="text-white text-3xl md:text-4xl font-semibold mb-2">
-                How Safari Index works
-              </Heading1>
-              <Text variant="body" className="text-stone-400 text-lg max-w-xl">
-                The decision process, refusal policy, and accountability structure.
-              </Text>
+
+            {/* Icon + Title */}
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                <BookOpen className="w-6 h-6 text-amber-400" />
+              </div>
+              <h1 className="font-editorial text-4xl md:text-5xl font-semibold text-white">
+                How it works
+              </h1>
             </div>
+
+            {/* Subtitle */}
+            <p className="text-white/80 text-lg max-w-xl mx-auto">
+              The decision process, refusal policy, and accountability structure.
+            </p>
           </div>
-        </PageGrid>
-      </div>
+        </ImageBandContent>
+      </ImageBand>
 
-      <PageGrid maxWidth="narrow" className="py-8">
+      {/* Main content */}
+      <div className="max-w-3xl mx-auto px-4 md:px-8 py-12">
 
         {/* Section 1: What it is */}
         <Section className="mb-12">
           <Heading2 className="mb-6">What it is</Heading2>
-          <Text variant="body" color="primary" className="mb-4">
-            Safari Index is a decision support system for safari travel planning.
-            It provides clear verdicts on common safari questions—when to go,
-            where to stay, what to expect—with trade-offs and conditions stated upfront.
-          </Text>
-          <Text variant="body" color="secondary">
+          <div className="bg-white rounded-2xl border border-stone-200 p-6 mb-4">
+            <p className="text-stone-900 leading-relaxed">
+              Safari Index is a decision support system for safari travel planning.
+              It provides clear verdicts on common safari questions: when to go,
+              where to stay, what to expect. Trade-offs and conditions are stated upfront.
+            </p>
+          </div>
+          <p className="text-stone-600 leading-relaxed">
             Each decision follows a consistent structure: a verdict, the reasoning behind it,
             the assumptions it depends on, and the conditions under which it would change.
-          </Text>
+          </p>
         </Section>
 
         <SectionDivider />
@@ -118,32 +125,24 @@ export default function HowItWorksPage() {
         {/* Section 2: What it does not do */}
         <Section className="my-12">
           <Heading2 className="mb-6">What it does not do</Heading2>
-          <ul className="space-y-4">
-            <li className="flex gap-3">
-              <span className="text-neutral-400 select-none" aria-hidden>—</span>
-              <Text variant="body" color="primary">
-                Does not book travel or sell tours.
-              </Text>
-            </li>
-            <li className="flex gap-3">
-              <span className="text-neutral-400 select-none" aria-hidden>—</span>
-              <Text variant="body" color="primary">
-                Does not rank or recommend specific operators.
-              </Text>
-            </li>
-            <li className="flex gap-3">
-              <span className="text-neutral-400 select-none" aria-hidden>—</span>
-              <Text variant="body" color="primary">
-                Does not guarantee wildlife sightings or weather.
-              </Text>
-            </li>
-            <li className="flex gap-3">
-              <span className="text-neutral-400 select-none" aria-hidden>—</span>
-              <Text variant="body" color="primary">
-                Does not personalize based on hidden signals.
-              </Text>
-            </li>
-          </ul>
+          <div className="bg-white rounded-2xl border border-stone-200 divide-y divide-stone-100">
+            <div className="p-5">
+              <p className="font-medium text-stone-900">No bookings or tours</p>
+              <p className="text-sm text-stone-500 mt-1">We provide decisions, not travel packages.</p>
+            </div>
+            <div className="p-5">
+              <p className="font-medium text-stone-900">No operator rankings</p>
+              <p className="text-sm text-stone-500 mt-1">We don't recommend or rate specific safari companies.</p>
+            </div>
+            <div className="p-5">
+              <p className="font-medium text-stone-900">No sighting guarantees</p>
+              <p className="text-sm text-stone-500 mt-1">Wildlife and weather are unpredictable by nature.</p>
+            </div>
+            <div className="p-5">
+              <p className="font-medium text-stone-900">No hidden personalization</p>
+              <p className="text-sm text-stone-500 mt-1">Every input we use is visible. No tracking, no signals.</p>
+            </div>
+          </div>
         </Section>
 
         <SectionDivider />
@@ -202,28 +201,28 @@ export default function HowItWorksPage() {
           <Heading2 className="mb-6">Change and accountability</Heading2>
 
           <div className="space-y-6">
-            <div>
+            <div className="bg-white rounded-2xl border border-stone-200 p-6">
               <Heading3 className="mb-2">Decision IDs</Heading3>
               <Text variant="body" color="secondary">
                 Every decision has a unique identifier that tracks the verdict,
                 logic version, and timestamp.
               </Text>
             </div>
-            <div>
+            <div className="bg-white rounded-2xl border border-stone-200 p-6">
               <Heading3 className="mb-2">Logic versioning</Heading3>
               <Text variant="body" color="secondary">
                 Decision logic is versioned. When reasoning changes, the version
                 increments. Prior decisions remain citable.
               </Text>
             </div>
-            <div>
+            <div className="bg-white rounded-2xl border border-stone-200 p-6">
               <Heading3 className="mb-2">Inputs are visible</Heading3>
               <Text variant="body" color="secondary">
                 The inputs used in any decision are visible. There are no hidden
                 signals or personalization.
               </Text>
             </div>
-            <div>
+            <div className="bg-white rounded-2xl border border-stone-200 p-6">
               <Heading3 className="mb-2">Citation</Heading3>
               <Text variant="body" color="secondary">
                 Cite as: Safari Index. [Decision title]. Version [X]. [URL]. Accessed [date].
@@ -232,32 +231,52 @@ export default function HowItWorksPage() {
           </div>
         </Section>
 
-        <SectionDivider />
-
-        {/* Optional link back to explore */}
-        <Section className="my-12">
-          <Link
-            href="/explore"
-            className="inline-flex items-center gap-2 text-sm text-stone-600 hover:text-amber-600 transition-colors"
-          >
-            Browse decisions
-            <ChevronRight className="w-4 h-4" />
-          </Link>
-        </Section>
-
-        {/* Footer */}
-        <footer className="mt-16 pt-6 border-t border-stone-200">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <Compass className="w-4 h-4 text-amber-600" />
-              <Meta className="text-stone-600">Safari Index</Meta>
-            </div>
-            <Link href="/" className="text-sm text-stone-500 hover:text-amber-600 transition-colors">
-              Home
+        {/* CTA section */}
+        <div className="mt-16 text-center">
+          <div className="inline-block bg-white rounded-2xl border border-stone-200 p-8 max-w-lg">
+            <h3 className="font-editorial text-xl font-semibold text-stone-900 mb-2">
+              Ready to explore?
+            </h3>
+            <p className="text-stone-500 mb-6">
+              Browse our library of safari decisions and find the answers you need.
+            </p>
+            <Link
+              href="/explore"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-stone-900 text-white rounded-lg font-medium hover:bg-stone-800 transition-colors"
+            >
+              Browse decisions
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-        </footer>
-      </PageGrid>
-    </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-stone-900 text-white py-12 mt-16">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <span className="font-editorial text-lg font-semibold">Safari Index</span>
+              <span className="text-stone-500 text-sm ml-2">Pan-African Decision System</span>
+            </div>
+
+            <div className="flex items-center gap-6">
+              <Link href="/" className="text-sm text-stone-400 hover:text-white transition-colors">
+                Home
+              </Link>
+              <Link href="/decisions" className="text-sm text-stone-400 hover:text-white transition-colors">
+                All Decisions
+              </Link>
+              <Link href="/explore" className="text-sm text-stone-400 hover:text-white transition-colors">
+                Explore
+              </Link>
+              <Link href="/compare" className="text-sm text-stone-400 hover:text-white transition-colors">
+                Compare
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
   );
 }

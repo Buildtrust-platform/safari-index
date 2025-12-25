@@ -4,14 +4,16 @@ import { test, expect } from '@playwright/test';
  * Tests for service-degraded refusal handling
  *
  * These tests verify:
- * 1. SERVICE_DEGRADED refusals show the special component
- * 2. Try again button appears and has cooldown
- * 3. Related decisions still render
- * 4. Other refusal types are unaffected
+ * 1. SERVICE_DEGRADED refusals show the "At capacity" component
+ * 2. Messaging frames as deliberate safety choice, not broken system
+ * 3. Link to /how-it-works is present
+ * 4. Try again button appears and has cooldown
+ * 5. Related decisions still render
+ * 6. Other refusal types are unaffected
  */
 
 test.describe('Service Degraded Refusal', () => {
-  test('shows service-degraded component with retry button', async ({ page }) => {
+  test('shows "At capacity" heading with deliberate guardrail messaging', async ({ page }) => {
     // Mock API returning SERVICE_DEGRADED refusal
     await page.route('**/decision/evaluate', async (route) => {
       await route.fulfill({
@@ -45,22 +47,59 @@ test.describe('Service Degraded Refusal', () => {
       await page.getByTestId('preflight-skip').click();
     }
 
-    // Should show "Temporarily unavailable" heading
-    await expect(page.getByText('Temporarily unavailable')).toBeVisible({ timeout: 10000 });
+    // Should show "At capacity" heading (not "Temporarily unavailable")
+    await expect(page.getByTestId('capacity-heading')).toBeVisible({ timeout: 10000 });
+    await expect(page.getByTestId('capacity-heading')).toHaveText('At capacity');
 
-    // Should show the reason
-    await expect(
-      page.getByText('The decision service is temporarily unable to process your request.')
-    ).toBeVisible();
+    // Should show deliberate guardrail messaging
+    await expect(page.getByText('We limit concurrent requests to maintain decision quality.')).toBeVisible();
+    await expect(page.getByText(/deliberate guardrail/)).toBeVisible();
 
     // Should show "Try again" button
+    await expect(page.getByTestId('retry-button')).toBeVisible();
     await expect(page.getByRole('button', { name: 'Try again' })).toBeVisible();
 
-    // Should show persistence note
-    await expect(page.getByText('If this persists, return in a few minutes.')).toBeVisible();
+    // Should show capacity clears message
+    await expect(page.getByText('Capacity typically clears within seconds.')).toBeVisible();
   });
 
-  test('retry button triggers re-fetch and returns to service-degraded state', async ({ page }) => {
+  test('shows link to how-it-works page', async ({ page }) => {
+    await page.route('**/decision/evaluate', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          decision_id: 'dec_link_test',
+          output: {
+            type: 'refusal',
+            refusal: {
+              code: 'SERVICE_DEGRADED',
+              reason: 'Capacity reached.',
+              missing_or_conflicting_inputs: [],
+              safe_next_step: 'Wait and retry.',
+            },
+          },
+          metadata: { logic_version: 'v1.0', ai_used: false },
+        }),
+      });
+    });
+
+    await page.goto('/decisions/tanzania-safari-february');
+
+    const wizard = page.getByTestId('preflight-wizard');
+    if (await wizard.isVisible()) {
+      await page.getByRole('button', { name: /answer quality check/i }).click();
+      await page.getByTestId('preflight-skip').click();
+    }
+
+    // Should show link to how-it-works
+    const howItWorksLink = page.getByTestId('how-it-works-link');
+    await expect(howItWorksLink).toBeVisible({ timeout: 10000 });
+    await expect(howItWorksLink).toHaveText('Learn how we make decisions');
+    await expect(howItWorksLink).toHaveAttribute('href', '/how-it-works');
+  });
+
+  test('retry button triggers re-fetch and returns to capacity state', async ({ page }) => {
     let requestCount = 0;
 
     // Mock API - always returns SERVICE_DEGRADED
@@ -94,21 +133,20 @@ test.describe('Service Degraded Refusal', () => {
       await page.getByTestId('preflight-skip').click();
     }
 
-    // Wait for refusal to show
-    await expect(page.getByText('Temporarily unavailable')).toBeVisible({ timeout: 10000 });
+    // Wait for capacity refusal to show
+    await expect(page.getByTestId('capacity-heading')).toBeVisible({ timeout: 10000 });
 
     // Click retry - this triggers a new fetch
-    await page.getByRole('button', { name: 'Try again' }).click();
+    await page.getByTestId('retry-button').click();
 
-    // Wait for page to re-render with SERVICE_DEGRADED after retry
-    // (the loading state is brief, then we return to refusal)
-    await expect(page.getByText('Temporarily unavailable')).toBeVisible({ timeout: 10000 });
+    // Wait for page to re-render with capacity state after retry
+    await expect(page.getByTestId('capacity-heading')).toBeVisible({ timeout: 10000 });
 
     // Verify multiple requests were made (retry triggered a new fetch)
     expect(requestCount).toBeGreaterThan(1);
 
     // Button should still be available for another retry
-    await expect(page.getByRole('button', { name: 'Try again' })).toBeVisible();
+    await expect(page.getByTestId('retry-button')).toBeVisible();
   });
 
   test('retry leads to success when API recovers', async ({ page }) => {
@@ -174,22 +212,22 @@ test.describe('Service Degraded Refusal', () => {
       await page.getByTestId('preflight-skip').click();
     }
 
-    // First, see the service-degraded state
-    await expect(page.getByText('Temporarily unavailable')).toBeVisible({ timeout: 10000 });
+    // First, see the capacity state
+    await expect(page.getByTestId('capacity-heading')).toBeVisible({ timeout: 10000 });
 
     // Click retry
-    await page.getByRole('button', { name: 'Try again' }).click();
+    await page.getByTestId('retry-button').click();
 
     // Now we should see the success state with the verdict headline
     await expect(
       page.getByRole('heading', { name: 'February is excellent for Tanzania safari viewing' })
     ).toBeVisible({ timeout: 10000 });
 
-    // Should NOT show service-degraded anymore
-    await expect(page.getByText('Temporarily unavailable')).not.toBeVisible();
+    // Should NOT show capacity state anymore
+    await expect(page.getByTestId('service-capacity-refusal')).not.toBeVisible();
   });
 
-  test('related decisions still render with service-degraded refusal', async ({ page }) => {
+  test('related decisions still render with capacity refusal', async ({ page }) => {
     await page.route('**/decision/evaluate', async (route) => {
       await route.fulfill({
         status: 200,
@@ -219,7 +257,7 @@ test.describe('Service Degraded Refusal', () => {
       await page.getByTestId('preflight-skip').click();
     }
 
-    await expect(page.getByText('Temporarily unavailable')).toBeVisible({ timeout: 10000 });
+    await expect(page.getByTestId('capacity-heading')).toBeVisible({ timeout: 10000 });
 
     // Related decisions section should still be visible
     await expect(page.getByText('Related decisions')).toBeVisible();
@@ -265,10 +303,10 @@ test.describe('Service Degraded Refusal', () => {
     // Should show "What we need" section
     await expect(page.getByText('What we need')).toBeVisible();
 
-    // Should NOT show "Temporarily unavailable"
-    await expect(page.getByText('Temporarily unavailable')).not.toBeVisible();
+    // Should NOT show capacity component
+    await expect(page.getByTestId('service-capacity-refusal')).not.toBeVisible();
 
     // Should NOT show "Try again" button
-    await expect(page.getByRole('button', { name: 'Try again' })).not.toBeVisible();
+    await expect(page.getByTestId('retry-button')).not.toBeVisible();
   });
 });

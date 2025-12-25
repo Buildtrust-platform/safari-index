@@ -202,7 +202,18 @@ export interface OrchestratorError {
 }
 
 /**
+ * Observability: Lock acquisition status for request coalescing
+ */
+export type LockStatus = 'acquired' | 'existing' | 'refused' | 'unavailable' | 'skipped';
+
+/**
+ * Observability: Snapshot cache status
+ */
+export type SnapshotStatus = 'hit' | 'miss' | 'stale' | 'locked' | 'skipped';
+
+/**
  * Metadata for decision responses
+ * Includes observability fields for debugging and monitoring
  */
 export interface DecisionMetadata {
   logic_version: string;
@@ -213,6 +224,12 @@ export interface DecisionMetadata {
   cached?: boolean;
   /** Age of cached response in seconds */
   cache_age_seconds?: number;
+  /** Observability: snapshot cache status (hit/miss/stale/locked/skipped) */
+  snapshot_status?: SnapshotStatus;
+  /** Observability: lock acquisition status */
+  lock_status?: LockStatus;
+  /** Observability: whether Bedrock AI was invoked */
+  bedrock_called?: boolean;
 }
 
 /**

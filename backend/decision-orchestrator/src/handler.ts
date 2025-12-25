@@ -35,6 +35,8 @@ import {
   RefusalOutput,
   AIOutput,
   DecisionResponse,
+  LockStatus,
+  SnapshotStatus,
 } from './types';
 import { validateInput, detectInputConflicts } from './validator';
 import { validateAIOutput, generateRetryPrompt } from './output-enforcer';
@@ -158,6 +160,9 @@ export async function handler(
           ai_used: false,
           retry_count: 0,
           persisted: true,
+          snapshot_status: 'skipped',
+          lock_status: 'skipped',
+          bedrock_called: false,
         },
       });
     }
@@ -168,8 +173,14 @@ export async function handler(
     const inputsHash = hashInputs(input);
     const useCache = isDefaultInput(input);
 
+    // Observability tracking
+    let snapshotStatus: SnapshotStatus = useCache ? 'miss' : 'skipped';
+    let lockStatus: LockStatus = useCache ? 'skipped' : 'skipped';
+    let bedrockCalled = false;
+
     if (useCache) {
       const snapshotResult = await getSnapshot(topicId, inputsHash);
+      snapshotStatus = snapshotResult.status as SnapshotStatus;
 
       if (snapshotResult.status === 'hit') {
         // Cache hit - return cached response immediately
@@ -180,6 +191,9 @@ export async function handler(
             ...snapshotResult.snapshot.metadata,
             cached: true,
             cache_age_seconds: snapshotResult.age_seconds,
+            snapshot_status: 'hit',
+            lock_status: 'skipped',
+            bedrock_called: false,
           },
         });
       }
@@ -187,7 +201,7 @@ export async function handler(
       if (snapshotResult.status === 'locked') {
         // Another evaluation is in progress - return capacity refusal
         console.log('Snapshot locked, returning capacity refusal:', { topicId, retry_after: snapshotResult.retry_after_seconds });
-        return createCapacityRefusal(snapshotResult.retry_after_seconds);
+        return createCapacityRefusal(snapshotResult.retry_after_seconds, 'locked', 'existing');
       }
 
       if (snapshotResult.status === 'stale') {
@@ -204,19 +218,23 @@ export async function handler(
       if (lockResult.status === 'locked') {
         // Another process is evaluating - return capacity refusal
         console.log('Lock held by another process, returning capacity refusal:', { topicId });
-        return createCapacityRefusal(5); // Suggest retry in 5 seconds
+        lockStatus = 'refused';
+        return createCapacityRefusal(5, snapshotStatus, 'refused'); // Suggest retry in 5 seconds
       }
       if (lockResult.status === 'acquired') {
         lockId = lockResult.lockId;
+        lockStatus = 'acquired';
       }
       // If status === 'unavailable', proceed without lock (infrastructure not deployed)
       if (lockResult.status === 'unavailable') {
         console.log('Lock infrastructure unavailable, proceeding without caching:', { topicId });
+        lockStatus = 'unavailable';
       }
     }
 
     try {
       // Step 5: Invoke AI engine with validation and retry logic
+      bedrockCalled = true;
       const result = await invokeAndValidateAI(input);
 
       // Step 6: Persist the decision (per 10_data_model.md)
@@ -238,7 +256,7 @@ export async function handler(
       // Note: clarification, tradeoff_explanation, revision are not persisted as decisions
       // They are intermediate outputs. Only final decisions/refusals are stored.
 
-      // Step 8: Build response
+      // Step 8: Build response with observability fields
       const response: DecisionResponse = {
         decision_id: decisionId,
         output: result.output,
@@ -247,6 +265,9 @@ export async function handler(
           ai_used: true,
           retry_count: result.retryCount,
           persisted: true,
+          snapshot_status: snapshotStatus,
+          lock_status: lockStatus,
+          bedrock_called: bedrockCalled,
         },
       };
 
@@ -259,7 +280,7 @@ export async function handler(
         await releaseLock(topicId, lockId);
       }
 
-      return createSuccessResponse(response);
+      return createSuccessResponse(response, snapshotStatus, lockStatus, bedrockCalled);
     } catch (error) {
       // Release lock on error
       if (lockId) {
@@ -305,6 +326,9 @@ export async function handler(
         ai_used: false,
         retry_count: 0,
         persisted: false, // Not persisted due to error
+        snapshot_status: 'skipped',
+        lock_status: 'skipped',
+        bedrock_called: false,
       },
     });
   }
@@ -434,9 +458,13 @@ function generateImmediateRefusal(
 /**
  * Create a success response with decision response structure
  * Returns decision_id for tracking per 10_data_model.md
+ * Includes observability headers for debugging and monitoring
  */
 function createSuccessResponse(
-  response: DecisionResponse
+  response: DecisionResponse,
+  snapshotStatus?: SnapshotStatus,
+  lockStatus?: LockStatus,
+  bedrockCalled?: boolean
 ): OrchestratorResponse {
   return {
     statusCode: 200,
@@ -445,6 +473,9 @@ function createSuccessResponse(
       'X-Decision-Id': response.decision_id,
       'X-Logic-Version': response.metadata.logic_version,
       'X-Retry-Count': String(response.metadata.retry_count),
+      'X-Snapshot-Status': snapshotStatus || response.metadata.snapshot_status || 'unknown',
+      'X-Lock-Status': lockStatus || response.metadata.lock_status || 'unknown',
+      'X-Bedrock-Called': String(bedrockCalled ?? response.metadata.bedrock_called ?? false),
     },
     body: JSON.stringify(response),
   };
@@ -473,7 +504,11 @@ function createErrorResponse(
  * Returns a valid DecisionResponse with SERVICE_DEGRADED code
  * Includes retry guidance for the frontend
  */
-function createCapacityRefusal(retryAfterSeconds: number): OrchestratorResponse {
+function createCapacityRefusal(
+  retryAfterSeconds: number,
+  snapshotStatus: SnapshotStatus = 'skipped',
+  lockStatus: LockStatus = 'skipped'
+): OrchestratorResponse {
   const refusalOutput: RefusalOutput = {
     type: 'refusal',
     refusal: {
@@ -495,6 +530,9 @@ function createCapacityRefusal(retryAfterSeconds: number): OrchestratorResponse 
       ai_used: false,
       retry_count: 0,
       persisted: false,
+      snapshot_status: snapshotStatus,
+      lock_status: lockStatus,
+      bedrock_called: false,
     },
   };
 
@@ -505,6 +543,9 @@ function createCapacityRefusal(retryAfterSeconds: number): OrchestratorResponse 
       'X-Decision-Id': response.decision_id,
       'X-Logic-Version': LOGIC_VERSION,
       'X-Retry-After': String(retryAfterSeconds),
+      'X-Snapshot-Status': snapshotStatus,
+      'X-Lock-Status': lockStatus,
+      'X-Bedrock-Called': 'false',
     },
     body: JSON.stringify(response),
   };

@@ -31,10 +31,10 @@ export interface VerdictMomentProps {
   headline: string;
   /** Confidence score 0-1 */
   confidence: number;
-  /** Decision ID for reference */
-  decisionId: string;
-  /** Logic version for transparency */
-  logicVersion: string;
+  /** Decision ID for reference (optional for baseline fallback) */
+  decisionId?: string;
+  /** Logic version for transparency (optional for baseline fallback) */
+  logicVersion?: string;
   /** Optional click handler for copy button */
   onCopyId?: () => void;
 }
@@ -82,7 +82,7 @@ export function VerdictMoment({
   const handleCopy = () => {
     if (onCopyId) {
       onCopyId();
-    } else {
+    } else if (decisionId) {
       navigator.clipboard.writeText(decisionId);
     }
   };
@@ -126,23 +126,27 @@ export function VerdictMoment({
         </p>
       </div>
 
-      {/* Right: Decision ID + version (subdued mono) */}
-      <div className="flex items-center gap-2 text-white/50">
-        <span className="font-mono text-xs hidden md:inline">
-          {logicVersion}
-        </span>
-        <span className="font-mono text-xs">
-          {decisionId.slice(0, 12)}…
-        </span>
-        <button
-          onClick={handleCopy}
-          className="p-1 hover:bg-white/10 rounded transition-colors"
-          aria-label="Copy decision ID"
-          title="Copy decision ID"
-        >
-          <CopyIcon className="w-3.5 h-3.5 text-white/50" aria-hidden="true" />
-        </button>
-      </div>
+      {/* Right: Decision ID + version (subdued mono) - only shown for live decisions */}
+      {decisionId && (
+        <div className="flex items-center gap-2 text-white/50">
+          {logicVersion && (
+            <span className="font-mono text-xs hidden md:inline">
+              {logicVersion}
+            </span>
+          )}
+          <span className="font-mono text-xs">
+            {decisionId.slice(0, 12)}…
+          </span>
+          <button
+            onClick={handleCopy}
+            className="p-1 hover:bg-white/10 rounded transition-colors"
+            aria-label="Copy decision ID"
+            title="Copy decision ID"
+          >
+            <CopyIcon className="w-3.5 h-3.5 text-white/50" aria-hidden="true" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

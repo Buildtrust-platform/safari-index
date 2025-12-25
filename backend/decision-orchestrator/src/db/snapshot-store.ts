@@ -97,11 +97,28 @@ export function extractTopicId(input: StandardInputEnvelope): string {
 }
 
 /**
- * Check if an input is using default values (cacheable)
- * Custom/override inputs should bypass the cache
+ * Check if an input is using default/page-generated values (cacheable)
+ *
+ * Cache eligibility rules:
+ * - Page-generated envelopes from decision topics are cacheable
+ * - User-customized inputs (from preflight wizard) bypass cache
+ *
+ * Detection logic:
+ * - Page-generated envelopes have session_id starting with 'sess_page_' or 'sess_prewarm_'
+ * - User inputs have session_id starting with 'sess_user_' or other patterns
+ *
+ * This matches the frontend's buildRequestEnvelope() in page-assembly.ts
  */
 export function isDefaultInput(input: StandardInputEnvelope): boolean {
-  // Default inputs have unknown/balanced values
+  const sessionId = input.tracking?.session_id || '';
+
+  // Page-generated envelopes are always cacheable
+  if (sessionId.startsWith('sess_page_') || sessionId.startsWith('sess_prewarm_')) {
+    return true;
+  }
+
+  // For other session types, check if using truly default values
+  // (this handles edge cases where session_id convention isn't followed)
   const ctx = input.user_context;
   return (
     ctx.traveler_type === 'unknown' ||

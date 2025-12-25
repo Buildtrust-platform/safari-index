@@ -31,8 +31,8 @@ test.describe('Design System v1 - Staging Pages', () => {
     const topicCards = page.locator('a[href^="/decisions/"]');
     await expect(topicCards.first()).toBeVisible();
 
-    // Footer with staging indicator
-    await expect(page.getByText('Staging preview')).toBeVisible();
+    // Footer with Safari Index branding
+    await expect(page.locator('footer').getByText('Safari Index')).toBeVisible();
   });
 
   test('compare page renders with design system primitives', async ({ page }) => {
@@ -51,8 +51,8 @@ test.describe('Design System v1 - Staging Pages', () => {
     // Should have compare button
     await expect(page.getByRole('button', { name: 'Compare' })).toBeVisible();
 
-    // Footer with staging indicator
-    await expect(page.getByText('Staging preview')).toBeVisible();
+    // Footer should exist
+    await expect(page.locator('footer')).toBeVisible();
   });
 
   test('explore page shows proper visual hierarchy', async ({ page }) => {
@@ -68,26 +68,28 @@ test.describe('Design System v1 - Staging Pages', () => {
   });
 
   test('compare page shows diff summary with icons', async ({ page }) => {
+    // Track which request is first
+    let requestCount = 0;
+
     // Mock API responses for comparison
     await page.route('**/decision/evaluate', async (route) => {
-      const request = route.request();
-      const body = JSON.parse(request.postData() || '{}');
-      const isFirstTopic = body.tracking?.session_id?.includes('tz-feb');
+      requestCount++;
+      const isFirst = requestCount === 1;
 
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
         body: JSON.stringify({
-          decision_id: isFirstTopic ? 'dec_a' : 'dec_b',
+          decision_id: isFirst ? 'dec_a' : 'dec_b',
           output: {
             type: 'decision',
             decision: {
-              outcome: isFirstTopic ? 'book' : 'wait',
+              outcome: isFirst ? 'book' : 'wait',
               headline: 'Test headline that is long enough',
               summary: 'Test summary providing enough detail.',
               confidence: 0.75,
               tradeoffs: {
-                gains: isFirstTopic ? ['Gain A1'] : ['Gain B1'],
+                gains: isFirst ? ['Gain A1'] : ['Gain B1'],
                 losses: ['Loss 1'],
               },
               assumptions: [{ id: 'a1', text: 'Assumption', confidence: 0.8 }],
@@ -414,23 +416,23 @@ test.describe('Design System v1 - Authority Front Door', () => {
     // ImageBand should be visible at top
     await expect(page.getByTestId('image-band')).toBeVisible();
 
-    // Main headline should be in ImageBand - new copy with amber accent
+    // Main headline should be in ImageBand - "Safari decisions, clarified."
     const imageBand = page.getByTestId('image-band');
     await expect(imageBand.getByRole('heading', { level: 1 })).toBeVisible();
-    await expect(imageBand.getByText('Your safari decision,')).toBeVisible();
+    await expect(imageBand.getByText('Safari decisions, clarified.')).toBeVisible();
   });
 
   test('homepage has correct structure and navigation links', async ({ page }) => {
     await page.goto('/');
 
-    // Should have "Decisions, not suggestions" section (new Promise section)
-    await expect(page.getByRole('heading', { name: 'Decisions, not suggestions' })).toBeVisible();
+    // Should have "What Safari Index does" section (Orientation)
+    await expect(page.getByRole('heading', { name: 'What Safari Index does' })).toBeVisible();
 
-    // Should have "Choose your path" section (new Entry Points section)
-    await expect(page.getByRole('heading', { name: 'Choose your path' })).toBeVisible();
+    // Should have "Start with a real question" section (Real Questions)
+    await expect(page.getByRole('heading', { name: 'Start with a real question' })).toBeVisible();
 
-    // Should have "What we won't do" section (new Boundaries section)
-    await expect(page.getByText("What we won't do")).toBeVisible();
+    // Should have "Built for serious safari planning" section
+    await expect(page.getByRole('heading', { name: 'Built for serious safari planning' })).toBeVisible();
 
     // Entry tiles should link to correct pages (using .first() since there are multiple)
     await expect(page.getByRole('link', { name: /Explore/i }).first()).toBeVisible();
@@ -441,8 +443,8 @@ test.describe('Design System v1 - Authority Front Door', () => {
   test('homepage explore button navigates to explore page', async ({ page }) => {
     await page.goto('/');
 
-    // Click the explore button in hero (now "Start exploring")
-    const heroExploreButton = page.getByTestId('image-band').getByRole('link', { name: /Start exploring/i });
+    // Click the explore button in hero (now "Explore decisions")
+    const heroExploreButton = page.getByTestId('image-band').getByRole('link', { name: /Explore decisions/i });
     await heroExploreButton.click();
 
     // Should navigate to explore page
@@ -450,12 +452,16 @@ test.describe('Design System v1 - Authority Front Door', () => {
     await expect(page.getByRole('heading', { name: 'Explore decisions' })).toBeVisible();
   });
 
-  test('homepage how it works button navigates to how-it-works page', async ({ page }) => {
+  test('homepage navbar how it works link navigates to how-it-works page', async ({ page, isMobile }) => {
     await page.goto('/');
 
-    // Click the how it works button in hero
-    const heroHowButton = page.getByTestId('image-band').getByRole('link', { name: /How it works/i });
-    await heroHowButton.click();
+    // On mobile, need to open hamburger menu first
+    if (isMobile) {
+      await page.getByTestId('navbar-mobile-toggle').click();
+      await page.getByTestId('navbar-mobile-menu').getByText('How it works').click();
+    } else {
+      await page.getByTestId('navbar-link-how-it-works').click();
+    }
 
     // Should navigate to how-it-works page
     await expect(page).toHaveURL('/how-it-works');

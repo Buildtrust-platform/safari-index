@@ -2,6 +2,11 @@
  * Safari Index AI Engine Integration
  * Handles communication with AWS Bedrock (or other providers)
  * Provider-agnostic as per 12_ai_prompts.md
+ *
+ * Evidence injection:
+ * - KB evidence is retrieved and injected into prompts for grounding
+ * - Evidence injection is optional and fails closed (engine works without KB)
+ * - No schema changes to AI output
  */
 
 import {
@@ -10,10 +15,16 @@ import {
 } from '@aws-sdk/client-bedrock-runtime';
 import { StandardInputEnvelope, AIOutput } from './types';
 import { GLOBAL_SYSTEM_PROMPT, getTaskPrompt } from './prompts';
+import {
+  getEvidenceForTopic,
+  formatEvidenceForPrompt,
+  inferTagsFromInputs,
+  isKBAvailable,
+} from './kb';
 
 // Configuration
-const BEDROCK_REGION = process.env.BEDROCK_REGION || 'us-east-1';
-const MODEL_ID = process.env.BEDROCK_MODEL_ID || 'anthropic.claude-3-sonnet-20240229-v1:0';
+const BEDROCK_REGION = process.env.BEDROCK_REGION || 'us-west-2';
+const MODEL_ID = process.env.BEDROCK_MODEL_ID || 'anthropic.claude-3-haiku-20240307-v1:0';
 const MAX_RETRIES = 2;
 
 // Initialize Bedrock client
@@ -69,6 +80,62 @@ export async function invokeAIEngine(
 }
 
 /**
+ * Get evidence context for a topic (fails closed - returns empty string if KB unavailable)
+ */
+function getEvidenceContext(input: StandardInputEnvelope): string {
+  try {
+    // Only inject evidence for DECISION tasks
+    if (input.task !== 'DECISION') {
+      return '';
+    }
+
+    // Check if KB is available
+    if (!isKBAvailable()) {
+      return '';
+    }
+
+    // Extract topic ID from request scope
+    const topicId = extractTopicIdFromScope(input.request.scope);
+    if (!topicId) {
+      return '';
+    }
+
+    // Infer additional tags from user inputs
+    const additionalTags = inferTagsFromInputs({
+      destinations: input.request.destinations_considered,
+      budget_band: input.user_context.budget_band,
+      traveler_type: input.user_context.traveler_type,
+      dates: input.user_context.dates.month
+        ? { month: input.user_context.dates.month }
+        : undefined,
+    });
+
+    // Retrieve evidence cards
+    const evidenceCards = getEvidenceForTopic(topicId, additionalTags, 8);
+
+    if (evidenceCards.length === 0) {
+      return '';
+    }
+
+    // Format for prompt injection
+    return formatEvidenceForPrompt(evidenceCards);
+  } catch (error) {
+    // Fail closed - log and return empty
+    console.warn('Evidence retrieval failed (continuing without):', error);
+    return '';
+  }
+}
+
+/**
+ * Extract topic ID from request scope string
+ */
+function extractTopicIdFromScope(scope: string): string | null {
+  // Scope format: "topic_id=xxx" or contains topic_id somewhere
+  const match = scope.match(/topic_id=([a-z0-9-]+)/i);
+  return match ? match[1] : null;
+}
+
+/**
  * Invoke AI engine with retry logic for invalid outputs
  * Per 12_ai_prompts.md section 8 retry mechanism
  */
@@ -79,12 +146,22 @@ export async function invokeAIEngineWithRetry(
   let lastError: Error | null = null;
   let retryCount = 0;
 
+  // Get evidence context (optional, fails closed)
+  const evidenceContext = getEvidenceContext(input);
+
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     try {
       const taskPrompt = getTaskPrompt(input.task);
 
-      // Build message content
-      let userContent = `${taskPrompt}\n\nInput:\n${JSON.stringify(input, null, 2)}`;
+      // Build message content with optional evidence injection
+      let userContent = '';
+
+      // Add evidence context if available (before task prompt)
+      if (evidenceContext && attempt === 0) {
+        userContent = `${evidenceContext}\n`;
+      }
+
+      userContent += `${taskPrompt}\n\nInput:\n${JSON.stringify(input, null, 2)}`;
 
       // Add retry instructions if this is a retry attempt
       if (attempt > 0 && retryPrompt) {
