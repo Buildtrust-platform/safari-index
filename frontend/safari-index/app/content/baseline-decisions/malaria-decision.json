@@ -1,0 +1,44 @@
+{
+  "topic_id": "malaria-decision",
+  "outcome": "book",
+  "headline": "Malaria prophylaxis recommended for most safari destinations",
+  "summary": "Most popular safari destinations in East and Southern Africa carry malaria risk year-round, though levels vary by season and location. Prophylaxis is strongly recommended for first-time visitors. Consult a travel medicine specialist 4-6 weeks before departure for current recommendations specific to your itinerary and health profile.",
+  "assumptions": [
+    {
+      "id": "malaria-risk",
+      "text": "Tanzania, Kenya, Botswana, and Zimbabwe have significant malaria transmission.",
+      "confidence": 0.95
+    },
+    {
+      "id": "prophylaxis-effective",
+      "text": "Modern prophylaxis (Malarone, doxycycline) is highly effective when taken correctly.",
+      "confidence": 0.90
+    },
+    {
+      "id": "individual-factors",
+      "text": "Risk tolerance, health conditions, and previous exposure affect the decision.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Protection against potentially fatal disease",
+      "Peace of mind during travel",
+      "Modern drugs have manageable side effects",
+      "Insurance and medical support often require prophylaxis"
+    ],
+    "losses": [
+      "Daily medication regimen",
+      "Potential side effects vary by drug",
+      "Cost of prescription medications",
+      "Still need mosquito avoidance measures"
+    ]
+  },
+  "change_conditions": [
+    "If visiting malaria-free areas (Cape Town, some Namibia), prophylaxis may not be needed.",
+    "If you have contraindications to all prophylaxis options, discuss alternatives with your doctor.",
+    "If visiting during dry season in low-risk areas, risk is reduced but not eliminated.",
+    "If pregnant or with young children, consult specialist for specific guidance."
+  ],
+  "confidence": 0.75
+}

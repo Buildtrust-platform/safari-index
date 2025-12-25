@@ -1,0 +1,44 @@
+{
+  "topic_id": "serengeti-vs-mara",
+  "outcome": "wait",
+  "headline": "Both are exceptional; timing determines the better choice",
+  "summary": "The Serengeti and Masai Mara are part of the same ecosystem separated by a border. The migration moves between them seasonally. The Serengeti offers greater scale and variety across regions. The Mara offers compact, concentrated wildlife with off-road driving permitted. For migration, timing determines which side is better; for general safari, both deliver exceptionally.",
+  "assumptions": [
+    {
+      "id": "same-ecosystem",
+      "text": "Serengeti and Mara are the same ecosystem; the migration moves between them.",
+      "confidence": 0.95
+    },
+    {
+      "id": "serengeti-larger",
+      "text": "The Serengeti is much larger with more variety across regions.",
+      "confidence": 0.95
+    },
+    {
+      "id": "mara-off-road",
+      "text": "The Masai Mara allows off-road driving; Tanzania national parks do not.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Serengeti: Greater scale and regional variety",
+      "Serengeti: Combined with Ngorongoro for diversity",
+      "Mara: Compact area with high wildlife density",
+      "Mara: Off-road driving for better positioning"
+    ],
+    "losses": [
+      "Serengeti: On-road only in national park",
+      "Serengeti: More transit time between regions",
+      "Mara: Can feel more vehicle-dense",
+      "Mara: Smaller overall area"
+    ]
+  },
+  "change_conditions": [
+    "If visiting July-October, the Mara has the migration and river crossings.",
+    "If visiting November-June, the Serengeti has the migration.",
+    "If off-road driving matters for photography, the Mara has the advantage.",
+    "If combining with other Tanzania experiences, the Serengeti fits better."
+  ],
+  "confidence": 0.80
+}

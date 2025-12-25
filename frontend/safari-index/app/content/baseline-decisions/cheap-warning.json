@@ -1,0 +1,45 @@
+{
+  "topic_id": "cheap-warning",
+  "outcome": "wait",
+  "headline": "Ultra-cheap safari deals often have significant hidden trade-offs",
+  "summary": "Safari packages advertised at $100-150/day typically involve compromises: shared minibuses with 6-8 passengers, accommodations outside parks (adding 1-2 hours transit daily), rigid itineraries, rushed game drives, and limited guide quality. While some budget options deliver genuine value, deals that seem too good often result in disappointing experiences.",
+  "assumptions": [
+    {
+      "id": "cost-floor",
+      "text": "Park fees, fuel, and basic operations create a minimum cost floor around $180-250/day.",
+      "confidence": 0.90
+    },
+    {
+      "id": "quality-indicators",
+      "text": "Vehicle type, group size, and accommodation location significantly impact experience.",
+      "confidence": 0.90
+    },
+    {
+      "id": "guide-importance",
+      "text": "Guide expertise is the single biggest factor in safari satisfaction.",
+      "confidence": 0.95
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Lowest upfront cost",
+      "Still see wildlife (animals don't check budgets)",
+      "Social group experience",
+      "Access to major parks"
+    ],
+    "losses": [
+      "Crowded vehicles with limited photo angles",
+      "Rigid schedules missing best wildlife times",
+      "Rushed crater/park visits",
+      "Long transit times from budget lodges",
+      "Variable guide quality"
+    ]
+  },
+  "change_conditions": [
+    "If deal includes private vehicle and inside-park stays, it may be legitimate value.",
+    "If operator has verified reviews mentioning guide names, quality may be consistent.",
+    "If you're young, flexible, and purely price-focused, trade-offs may be acceptable.",
+    "If this is a once-in-a-lifetime trip, investing more significantly improves experience."
+  ],
+  "confidence": 0.85
+}

@@ -1,0 +1,44 @@
+{
+  "topic_id": "beach-extension",
+  "outcome": "book",
+  "headline": "Beach extension provides excellent contrast to safari intensity",
+  "summary": "Adding 3-4 beach days after safari provides welcome relaxation and physical recovery. Zanzibar, Kenya coast, or Mozambique offer easy connections from safari destinations. The contrast between bush intensity and beach relaxation enhances both experiences. For honeymoons or longer trips, the combination is highly recommended.",
+  "assumptions": [
+    {
+      "id": "recovery-valuable",
+      "text": "Safari involves early mornings and physical activity; beach provides recovery.",
+      "confidence": 0.90
+    },
+    {
+      "id": "easy-connections",
+      "text": "Zanzibar, Kenya coast, and Mozambique have easy connections from safari areas.",
+      "confidence": 0.90
+    },
+    {
+      "id": "contrast-enhances",
+      "text": "The contrast between activities enhances appreciation of both.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Physical and mental recovery after intensive safari",
+      "Contrast enhances overall trip experience",
+      "Snorkeling, diving, and water activities",
+      "Relaxed end to the trip before long flight home"
+    ],
+    "losses": [
+      "Additional cost and logistics",
+      "Time that could be more safari",
+      "Beach may feel anticlimactic after wildlife",
+      "Weather-dependent experience"
+    ]
+  },
+  "change_conditions": [
+    "If trip is under 7 days total, skip beach to maximize safari time.",
+    "If purely wildlife-focused, consider second safari location instead.",
+    "If honeymoon or anniversary, beach extension is strongly recommended.",
+    "If ending with long flight, beach recovery before travel helps."
+  ],
+  "confidence": 0.80
+}

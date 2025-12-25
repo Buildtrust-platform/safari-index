@@ -1,0 +1,44 @@
+{
+  "topic_id": "tz-feb",
+  "outcome": "book",
+  "headline": "February is excellent for Tanzania with calving season",
+  "summary": "February is one of the best months for Tanzania safari, particularly for calving in the southern Serengeti. The wildebeest calving spectacle peaks mid-February with thousands of births daily and exceptional predator action. This is technically green season with occasional rain, but conditions are generally good and prices are lower than dry season.",
+  "assumptions": [
+    {
+      "id": "calving-peaks",
+      "text": "Wildebeest calving peaks in February in southern Serengeti/Ndutu.",
+      "confidence": 0.90
+    },
+    {
+      "id": "predator-action",
+      "text": "Predator concentration around calving herds is exceptional.",
+      "confidence": 0.90
+    },
+    {
+      "id": "green-season-pricing",
+      "text": "February is considered shoulder/green season with lower prices than dry season.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Calving season spectacle",
+      "Exceptional predator sightings",
+      "Lower prices than dry season",
+      "Fewer crowds than peak season"
+    ],
+    "losses": [
+      "Occasional afternoon rain",
+      "Some roads can be muddy",
+      "Not classic dry savannah look",
+      "Some areas may have restricted access"
+    ]
+  },
+  "change_conditions": [
+    "If calving is the goal, southern Serengeti/Ndutu is the only location.",
+    "If weather reliability is essential, dry season months are more predictable.",
+    "If combining with Zanzibar, February has good beach weather.",
+    "If migration crossings are priority, July-October is better timing."
+  ],
+  "confidence": 0.85
+}

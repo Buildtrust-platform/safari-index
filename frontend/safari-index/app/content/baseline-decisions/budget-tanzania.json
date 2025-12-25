@@ -1,0 +1,44 @@
+{
+  "topic_id": "budget-tanzania",
+  "outcome": "book",
+  "headline": "Tanzania on a budget is achievable with strategic choices",
+  "summary": "Budget-conscious travelers can experience Tanzania's wildlife by choosing value lodges outside parks, traveling during green season, joining group departures, and focusing on the Northern Circuit's established infrastructure. Expect $250-400/day all-inclusive for mid-range options, with budget options at $150-250/day requiring more logistics management.",
+  "assumptions": [
+    {
+      "id": "park-fees",
+      "text": "Serengeti park fees are $70/day, Ngorongoro $70 entry plus $300 crater fee - fixed costs.",
+      "confidence": 0.95
+    },
+    {
+      "id": "green-season-savings",
+      "text": "March-May and November rates are 20-40% lower than peak season.",
+      "confidence": 0.90
+    },
+    {
+      "id": "group-tours-value",
+      "text": "Joining group safaris reduces per-person costs significantly.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Significant savings possible with planning",
+      "Green season offers fewer crowds",
+      "Quality wildlife viewing still achievable",
+      "Group tours provide social experience"
+    ],
+    "losses": [
+      "Less flexibility in schedule",
+      "Accommodations more basic",
+      "Shared vehicle means less control",
+      "Some areas inaccessible in green season"
+    ]
+  },
+  "change_conditions": [
+    "If traveling July-September, expect 30-50% higher prices for same quality.",
+    "If you need private vehicle, add $150-200/day to budget.",
+    "If Ngorongoro Crater is essential, factor in the $300 conservation fee.",
+    "If combining with Zanzibar, budget beach portion separately."
+  ],
+  "confidence": 0.80
+}

@@ -1,0 +1,44 @@
+{
+  "topic_id": "ke-aug",
+  "outcome": "book",
+  "headline": "August is prime time for Kenya with migration in the Mara",
+  "summary": "August is one of the best months for Kenya safari. The Great Migration is typically in the Masai Mara, river crossings are possible, and dry season conditions make wildlife viewing excellent. This is also peak season with highest prices and most visitors. The combination of migration presence and dry conditions makes August exceptional.",
+  "assumptions": [
+    {
+      "id": "migration-in-mara",
+      "text": "The migration is typically in the Masai Mara during August.",
+      "confidence": 0.85
+    },
+    {
+      "id": "river-crossings-possible",
+      "text": "August offers good opportunities for Mara River crossing sightings.",
+      "confidence": 0.80
+    },
+    {
+      "id": "peak-demand",
+      "text": "August is peak season with highest demand and prices.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Migration in the Mara",
+      "Possible river crossing sightings",
+      "Excellent dry season conditions",
+      "Off-road driving permitted in Mara"
+    ],
+    "losses": [
+      "Peak season pricing",
+      "Higher vehicle density at sightings",
+      "Camps book far in advance",
+      "July-August school holiday crowds"
+    ]
+  },
+  "change_conditions": [
+    "If river crossings are essential, extend stay to 4+ nights near crossing points.",
+    "If avoiding crowds, September often has migration with fewer visitors.",
+    "If budget constrained, June or October offer similar conditions at lower prices.",
+    "If specific camps desired, book 6-9 months ahead for August."
+  ],
+  "confidence": 0.85
+}

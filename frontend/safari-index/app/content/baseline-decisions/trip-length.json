@@ -1,0 +1,44 @@
+{
+  "topic_id": "trip-length",
+  "outcome": "wait",
+  "headline": "5 days works but 7-10 days is optimal for first safaris",
+  "summary": "A 5-day safari is viable and will deliver meaningful wildlife experiences. However, 7-10 days allows for more relaxed pacing, recovery from jet lag, and better odds of specific sightings. Each additional day increases chances of seeing elusive species. For first-time travelers, 7 days is the sweet spot between value and experience.",
+  "assumptions": [
+    {
+      "id": "five-days-viable",
+      "text": "5 days of safari provides meaningful wildlife experiences for most travelers.",
+      "confidence": 0.85
+    },
+    {
+      "id": "more-days-better-odds",
+      "text": "Each additional day increases odds of specific or rare sightings.",
+      "confidence": 0.90
+    },
+    {
+      "id": "jet-lag-factor",
+      "text": "Long-haul travelers benefit from extra days for jet lag recovery.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Longer trips: Better odds of rare sightings",
+      "Longer trips: More relaxed pacing",
+      "Shorter trips: Lower total cost",
+      "Shorter trips: Fits limited vacation time"
+    ],
+    "losses": [
+      "Shorter trips: Rush through experiences",
+      "Shorter trips: Less recovery time",
+      "Longer trips: Higher total cost",
+      "Longer trips: May experience some repetition"
+    ]
+  },
+  "change_conditions": [
+    "If specific sightings are essential, extend trip to improve odds.",
+    "If budget is fixed, 5 quality days beats 10 budget days.",
+    "If jet lag is a concern, add buffer days before safari begins.",
+    "If combining with beach or other activities, 5-7 safari days may suffice."
+  ],
+  "confidence": 0.80
+}

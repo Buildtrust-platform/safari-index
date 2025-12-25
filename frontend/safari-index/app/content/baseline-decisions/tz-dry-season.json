@@ -1,0 +1,49 @@
+{
+  "topic_id": "tz-dry-season",
+  "outcome": "wait",
+  "headline": "Dry season offers best conditions, but green season is viable",
+  "summary": "For most first-time visitors prioritizing wildlife viewing, dry season (June-October) provides optimal conditions. However, green season offers legitimate value through lower prices, fewer crowds, and dramatic landscapes. The right choice depends on whether you prioritize viewing ease or budget and atmosphere.",
+  "assumptions": [
+    {
+      "id": "wildlife-present-year-round",
+      "text": "Wildlife is present year-round in Tanzania parks; only concentration and visibility change with seasons.",
+      "confidence": 0.95
+    },
+    {
+      "id": "dry-season-viewing-advantage",
+      "text": "Dry season provides easier viewing as animals concentrate around water sources and vegetation is sparse.",
+      "confidence": 0.90
+    },
+    {
+      "id": "green-season-discount",
+      "text": "Green season pricing is typically 30-40% lower than peak dry season rates.",
+      "confidence": 0.85
+    },
+    {
+      "id": "calving-spectacle",
+      "text": "Calving season (January-February) in southern Serengeti is a green season highlight with exceptional predator action.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Dry season: Concentrated wildlife at water sources",
+      "Dry season: Sparse vegetation for easier photography",
+      "Green season: 30-40% lower prices",
+      "Green season: Dramatic skies and lush landscapes"
+    ],
+    "losses": [
+      "Dry season: Peak pricing and more visitors",
+      "Dry season: Dusty conditions",
+      "Green season: Wildlife more dispersed in vegetation",
+      "Green season: Afternoon rain may interrupt drives"
+    ]
+  },
+  "change_conditions": [
+    "If budget is the primary constraint, green season savings of 30-40% may make the difference between going or not.",
+    "If photography is a priority, green season skies often produce more dramatic images despite dispersed wildlife.",
+    "If visiting during calving (January-February), green season conditions are offset by exceptional predator activity.",
+    "If dates are fixed in green season, the trip remains viable with adjusted expectations."
+  ],
+  "confidence": 0.75
+}

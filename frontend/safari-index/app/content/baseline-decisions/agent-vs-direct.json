@@ -1,0 +1,44 @@
+{
+  "topic_id": "agent-vs-direct",
+  "outcome": "book",
+  "headline": "Safari specialists add significant value for first-timers",
+  "summary": "For first-time safari travelers, booking through a specialized agent provides considerable benefits: destination expertise, camp relationships, crisis support, and itinerary optimization. While direct booking saves 10-15% on commission, the hidden complexity of safari logistics often leads to suboptimal choices. The value proposition shifts after 2-3 safaris when travelers understand the ecosystem.",
+  "assumptions": [
+    {
+      "id": "first-safari",
+      "text": "First-time safari travelers face a steep learning curve on camps, routes, and timing.",
+      "confidence": 0.90
+    },
+    {
+      "id": "agent-relationships",
+      "text": "Good agents have camp relationships that secure better availability and perks.",
+      "confidence": 0.85
+    },
+    {
+      "id": "crisis-value",
+      "text": "Agent support during flight cancellations or health issues is valuable in remote areas.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Expert destination and camp knowledge",
+      "Relationships for upgrades and availability",
+      "24/7 support for emergencies",
+      "Optimized routing and timing"
+    ],
+    "losses": [
+      "10-15% commission cost",
+      "Less control over specific details",
+      "Dependent on agent quality",
+      "May push preferred partners over best fit"
+    ]
+  },
+  "change_conditions": [
+    "If you've done 3+ safaris and know the camps, direct booking saves money.",
+    "If budget is severely constrained, direct booking with thorough research may work.",
+    "If you have a strong existing relationship with a camp, book direct.",
+    "If traveling in peak season, agent relationships help secure availability."
+  ],
+  "confidence": 0.80
+}

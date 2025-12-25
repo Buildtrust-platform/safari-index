@@ -146,6 +146,10 @@ export function buildOverridesFromInputs(
 /**
  * Merge wizard overrides into a base envelope
  * Returns a new envelope without mutating the original
+ *
+ * Important: When user overrides are applied, the session_id is changed to
+ * 'sess_user_*' to bypass the snapshot cache. This ensures personalized
+ * inputs always get fresh AI evaluation.
  */
 export function mergeEnvelopeWithOverrides(
   baseEnvelope: StandardInputEnvelope,
@@ -155,6 +159,17 @@ export function mergeEnvelopeWithOverrides(
     baseEnvelope as unknown as Record<string, unknown>,
     overrides as Record<string, unknown>
   );
+
+  // Mark as user-customized input to bypass snapshot cache
+  // The backend's isDefaultInput() checks for 'sess_page_' or 'sess_prewarm_' prefixes
+  const tracking = result.tracking as StandardInputEnvelope['tracking'] | undefined;
+  const originalSessionId = tracking?.session_id || '';
+  const topicId = originalSessionId.replace('sess_page_', '').replace('sess_prewarm_', '');
+  result.tracking = {
+    ...tracking,
+    session_id: `sess_user_${topicId}_${Date.now().toString(36)}`,
+  };
+
   return result as unknown as StandardInputEnvelope;
 }
 

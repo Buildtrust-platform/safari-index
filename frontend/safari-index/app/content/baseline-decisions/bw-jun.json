@@ -1,0 +1,44 @@
+{
+  "topic_id": "bw-jun",
+  "outcome": "book",
+  "headline": "June is excellent for Botswana with peak flood and dry weather",
+  "summary": "June is one of the best months for Botswana, particularly the Okavango Delta. The annual flood peaks, enabling mokoro and boat activities, while weather is dry and cool. Wildlife concentrates around permanent water. This is early high season with excellent conditions but not yet at peak July-August prices.",
+  "assumptions": [
+    {
+      "id": "flood-peak",
+      "text": "The Okavango Delta flood typically peaks around June.",
+      "confidence": 0.85
+    },
+    {
+      "id": "dry-cool-weather",
+      "text": "June has dry, cool weather with minimal rain.",
+      "confidence": 0.90
+    },
+    {
+      "id": "early-high-season",
+      "text": "June is early high season, slightly lower prices than July-August.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Peak Delta flood for water activities",
+      "Excellent dry season conditions",
+      "Cool, comfortable temperatures",
+      "Slightly lower prices than peak July-August"
+    ],
+    "losses": [
+      "Cool mornings and evenings require layers",
+      "Still high season pricing",
+      "Some camps book ahead",
+      "Water levels vary year to year"
+    ]
+  },
+  "change_conditions": [
+    "If water activities are priority, June flood peak is ideal.",
+    "If heat is preferred, September-October are warmer.",
+    "If budget constrained, November offers lower prices with good wildlife.",
+    "If combining with Victoria Falls, June has good water flow."
+  ],
+  "confidence": 0.85
+}

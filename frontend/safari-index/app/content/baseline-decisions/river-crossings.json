@@ -1,0 +1,44 @@
+{
+  "topic_id": "river-crossings",
+  "outcome": "wait",
+  "headline": "River crossings cannot be guaranteed regardless of timing",
+  "summary": "Mara River crossings are spectacular but unpredictable. Even during peak crossing season (July-October), herds may wait days at the river or cross at unpredictable times. Camps near crossing points improve odds but cannot guarantee sightings. A trip focused solely on crossings may disappoint; crossings should be possible bonus, not the primary goal.",
+  "assumptions": [
+    {
+      "id": "crossings-unpredictable",
+      "text": "Crossings depend on herd behavior, water levels, and predator presence; none is predictable.",
+      "confidence": 0.95
+    },
+    {
+      "id": "peak-season-july-oct",
+      "text": "July-October offers the best odds for crossings in northern Serengeti or Mara.",
+      "confidence": 0.90
+    },
+    {
+      "id": "location-matters",
+      "text": "Camps near known crossing points significantly improve odds.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Peak season: Herds are in the area",
+      "Strategic camp placement: Near known crossing points",
+      "Extended stays: More opportunities",
+      "Flexibility: Move between crossing points"
+    ],
+    "losses": [
+      "Cannot guarantee any crossing sighting",
+      "Waiting at crossing points is time-intensive",
+      "Herds may cross early morning or at night",
+      "Trip focused on crossings may disappoint"
+    ]
+  },
+  "change_conditions": [
+    "If crossings are essential, stay minimum 4-5 nights near crossing points.",
+    "If trip is short, treat crossings as bonus not goal.",
+    "If willing to wait, guides can position for best odds with patience.",
+    "If dates are flexible, follow real-time migration reports before booking."
+  ],
+  "confidence": 0.70
+}

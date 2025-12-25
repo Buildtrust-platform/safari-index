@@ -1,0 +1,44 @@
+{
+  "topic_id": "peak-vs-value",
+  "outcome": "wait",
+  "headline": "Value season offers compelling wildlife with significant savings",
+  "summary": "Peak season (June-October in most regions) offers optimal conditions but 30-50% higher prices. Value/shoulder seasons provide excellent wildlife viewing with 20-40% savings, fewer crowds, and photogenic landscapes. The trade-off involves weather unpredictability and some road accessibility challenges. For flexible travelers, value season often delivers better overall experience.",
+  "assumptions": [
+    {
+      "id": "peak-prices",
+      "text": "Peak season rates are 30-50% higher than shoulder/value season.",
+      "confidence": 0.90
+    },
+    {
+      "id": "wildlife-present",
+      "text": "Wildlife is present year-round; concentration differs but viewing quality remains good.",
+      "confidence": 0.85
+    },
+    {
+      "id": "crowd-impact",
+      "text": "Peak season crowds can significantly impact exclusive sighting experiences.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "20-40% cost savings",
+      "Fewer tourists at sightings",
+      "Lush landscapes for photography",
+      "Better availability at top camps"
+    ],
+    "losses": [
+      "Potential for rain during drives",
+      "Some roads may be impassable",
+      "Vegetation thicker, harder spotting",
+      "Migration location less predictable"
+    ]
+  },
+  "change_conditions": [
+    "If seeing the Great Migration is your primary goal, peak timing matters more.",
+    "If you have fixed dates with no flexibility, compare actual pricing.",
+    "If traveling with young children, drier peak season may be more comfortable.",
+    "If photography is priority, shoulder season light is often superior."
+  ],
+  "confidence": 0.75
+}

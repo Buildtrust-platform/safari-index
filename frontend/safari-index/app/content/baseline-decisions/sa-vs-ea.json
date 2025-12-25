@@ -1,0 +1,44 @@
+{
+  "topic_id": "sa-vs-ea",
+  "outcome": "wait",
+  "headline": "South Africa suits self-drivers; East Africa offers classic safari",
+  "summary": "South Africa offers excellent value with self-drive options in Kruger and malaria-free alternatives in the Eastern Cape. East Africa (Tanzania, Kenya) provides the classic safari experience with vast ecosystems and the Great Migration. South Africa suits budget-conscious or self-reliant travelers. East Africa suits those wanting the quintessential safari narrative.",
+  "assumptions": [
+    {
+      "id": "sa-self-drive-viable",
+      "text": "South Africa's Kruger allows self-drive safari, significantly reducing costs.",
+      "confidence": 0.95
+    },
+    {
+      "id": "ea-migration-exclusive",
+      "text": "The Great Migration only occurs in East Africa (Tanzania and Kenya).",
+      "confidence": 0.95
+    },
+    {
+      "id": "sa-malaria-free-options",
+      "text": "South Africa offers malaria-free safari options in the Eastern Cape and some private reserves.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "South Africa: Self-drive option saves significant money",
+      "South Africa: Malaria-free alternatives available",
+      "East Africa: Great Migration spectacle",
+      "East Africa: Classic African safari narrative and scale"
+    ],
+    "losses": [
+      "South Africa: No migration equivalent",
+      "South Africa: Kruger can feel more vehicle-dense",
+      "East Africa: Requires guided vehicles in most parks",
+      "East Africa: Malaria prophylaxis required everywhere"
+    ]
+  },
+  "change_conditions": [
+    "If the migration is a priority, East Africa is the only option.",
+    "If self-drive appeals, South Africa is the clear choice.",
+    "If malaria avoidance is essential, South Africa offers alternatives.",
+    "If budget is primary, South Africa self-drive provides best value."
+  ],
+  "confidence": 0.75
+}

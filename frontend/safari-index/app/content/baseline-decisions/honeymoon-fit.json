@@ -1,0 +1,43 @@
+{
+  "topic_id": "honeymoon-fit",
+  "outcome": "book",
+  "headline": "Safari makes an exceptional honeymoon with the right structure",
+  "summary": "Safari honeymoons combine adventure with romance effectively when structured correctly. The best approach pairs 3-4 nights of safari with a beach extension or luxury lodge stay. Pure safari can feel intense for romance; the shared experience of wildlife creates lasting memories, but couples also need downtime together.",
+  "assumptions": [
+    {
+      "id": "combo-works-best",
+      "text": "Safari-beach combinations are the most popular and successful honeymoon format.",
+      "confidence": 0.90
+    },
+    {
+      "id": "private-vehicle-important",
+      "text": "Private vehicles allow couples to control their schedule and have intimate moments.",
+      "confidence": 0.85
+    },
+    {
+      "id": "romance-amenities-vary",
+      "text": "Not all safari camps offer romantic amenities; selection matters for honeymoons.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Unique shared adventure creates lasting bond",
+      "Luxury lodges offer exceptional romantic settings",
+      "Private dinners and sundowners available",
+      "Beach extension provides relaxation contrast"
+    ],
+    "losses": [
+      "Early wake-ups can feel unromantic",
+      "Shared vehicles mean less privacy",
+      "Focus on wildlife may limit couple time",
+      "Bush camps may lack spa and luxury amenities"
+    ]
+  },
+  "change_conditions": [
+    "If romance is the priority over wildlife, choose luxury lodges over authentic bush camps.",
+    "If budget allows, private vehicles and romantic camp upgrades enhance the experience.",
+    "If preferring pure relaxation, a beach-focused trip with brief safari may suit better."
+  ],
+  "confidence": 0.80
+}

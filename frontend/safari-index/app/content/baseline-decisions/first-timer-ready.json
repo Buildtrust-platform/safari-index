@@ -1,0 +1,41 @@
+{
+  "topic_id": "first-timer-ready",
+  "outcome": "book",
+  "headline": "Most travelers are ready; preparation matters more than experience",
+  "summary": "First-time safari travelers rarely need prior experience to have an exceptional trip. Readiness depends more on realistic expectations, appropriate physical fitness for your chosen style, and willingness to adapt to unpredictable wildlife schedules. A good operator handles the complexity; you focus on being present.",
+  "assumptions": [
+    {
+      "id": "no-prior-experience-needed",
+      "text": "Safari does not require prior wildlife or camping experience for most lodge-based trips.",
+      "confidence": 0.95
+    },
+    {
+      "id": "operator-handles-complexity",
+      "text": "Reputable operators manage logistics, safety, and interpretation; travelers need only show up prepared.",
+      "confidence": 0.90
+    },
+    {
+      "id": "physical-fitness-varies",
+      "text": "Physical requirements vary by trip style: lodge safaris are accessible; walking safaris require moderate fitness.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Fresh eyes often appreciate wildlife more than repeat visitors",
+      "Modern lodges offer comfort comparable to good hotels",
+      "Guides interpret everything; no prior knowledge required"
+    ],
+    "losses": [
+      "First trips may have unrealistic expectations about sighting frequency",
+      "Learning curve on photography and binocular use",
+      "May not know what questions to ask when booking"
+    ]
+  },
+  "change_conditions": [
+    "If planning a walking safari or mobile camping, assess physical fitness requirements specifically.",
+    "If traveling with young children, readiness depends on their adaptability to early mornings and long drives.",
+    "If health conditions require specific accommodations, confirm availability before booking."
+  ],
+  "confidence": 0.80
+}

@@ -1,0 +1,43 @@
+{
+  "topic_id": "family-young-kids",
+  "outcome": "wait",
+  "headline": "Safari with young children requires careful planning",
+  "summary": "Safari with children under 6 is possible but requires specific accommodations. Many camps have minimum age policies (often 6-12 years) due to safety and noise concerns. Family-friendly camps exist but limit options significantly. Children under 6 may not have the patience for long game drives or understand the need for quiet observation.",
+  "assumptions": [
+    {
+      "id": "age-restrictions-common",
+      "text": "Many camps have minimum age requirements of 6-12 years for game drives.",
+      "confidence": 0.95
+    },
+    {
+      "id": "attention-span-limitation",
+      "text": "Children under 6 typically lack patience for 3-4 hour game drives.",
+      "confidence": 0.85
+    },
+    {
+      "id": "family-camps-exist",
+      "text": "Family-friendly camps with no age restrictions exist but represent a smaller selection.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Creating lifelong memories and wildlife appreciation",
+      "Family-friendly camps offer specialized kids programs",
+      "Private vehicles allow flexible schedules",
+      "Some children are natural wildlife enthusiasts"
+    ],
+    "losses": [
+      "Significantly reduced camp options",
+      "Private vehicle costs increase substantially",
+      "Parents may miss sightings managing children",
+      "Malaria prophylaxis is harder with young children"
+    ]
+  },
+  "change_conditions": [
+    "If children are 6+, most camps become accessible and game drive patience improves.",
+    "If budget allows private vehicles and family suites, logistics become much easier.",
+    "If children are exceptionally patient or wildlife-obsessed, earlier travel may work."
+  ],
+  "confidence": 0.70
+}

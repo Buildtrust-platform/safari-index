@@ -1,0 +1,49 @@
+{
+  "topic_id": "tz-vs-ke",
+  "outcome": "book",
+  "headline": "Both are excellent; Tanzania offers scale, Kenya offers efficiency",
+  "summary": "For a first safari, both Tanzania and Kenya deliver exceptional experiences. Tanzania provides greater scale and ecosystem diversity through the Serengeti and Ngorongoro Crater. Kenya offers more efficient logistics and slightly lower costs, with the Masai Mara delivering concentrated wildlife in a compact area. The migration moves between both countries, so timing often determines the better choice.",
+  "assumptions": [
+    {
+      "id": "tz-larger-diverse",
+      "text": "Tanzania is larger with more diverse ecosystems, including Serengeti, Ngorongoro, and southern parks.",
+      "confidence": 0.95
+    },
+    {
+      "id": "ke-mara-compact",
+      "text": "The Masai Mara is smaller but offers high wildlife density in a compact area.",
+      "confidence": 0.90
+    },
+    {
+      "id": "migration-shared",
+      "text": "The Great Migration moves between Tanzania (November-June) and Kenya (July-October).",
+      "confidence": 0.95
+    },
+    {
+      "id": "ke-lower-cost",
+      "text": "Kenya generally has slightly lower costs than Tanzania for equivalent experiences.",
+      "confidence": 0.80
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Tanzania: Serengeti scale and variety across ecosystems",
+      "Tanzania: Ngorongoro Crater uniqueness",
+      "Kenya: Accessibility and efficient logistics",
+      "Kenya: Generally lower costs"
+    ],
+    "losses": [
+      "Tanzania: More transit time between parks",
+      "Tanzania: Higher overall costs",
+      "Kenya: Higher vehicle density in the Mara",
+      "Kenya: Less wilderness feeling in popular areas"
+    ]
+  },
+  "change_conditions": [
+    "If the migration is the primary goal, timing determines whether Tanzania or Kenya is better positioned.",
+    "If budget is the primary constraint, Kenya typically offers better value.",
+    "If time is limited, Kenya works better for shorter trips due to accessibility.",
+    "If off-road game viewing matters, Kenya Mara allows it while Tanzania parks restrict it."
+  ],
+  "confidence": 0.80
+}

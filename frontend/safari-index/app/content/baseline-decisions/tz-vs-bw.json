@@ -1,0 +1,44 @@
+{
+  "topic_id": "tz-vs-bw",
+  "outcome": "wait",
+  "headline": "Tanzania and Botswana offer fundamentally different experiences",
+  "summary": "Tanzania provides accessible, diverse ecosystems with the Great Migration. Botswana offers exclusive, low-density experiences at 2-3x the cost. Tanzania suits first-timers and those wanting variety. Botswana suits repeat visitors seeking exclusivity and water-based activities. The choice depends on budget, experience level, and priority between diversity and exclusivity.",
+  "assumptions": [
+    {
+      "id": "botswana-premium-cost",
+      "text": "Botswana costs 2-3x more than Tanzania for equivalent quality experiences.",
+      "confidence": 0.95
+    },
+    {
+      "id": "tanzania-more-diverse",
+      "text": "Tanzania offers more ecosystem diversity: Serengeti, Ngorongoro, coastal, southern parks.",
+      "confidence": 0.90
+    },
+    {
+      "id": "botswana-water-focus",
+      "text": "Botswana's Okavango Delta offers unique water-based safari activities unavailable elsewhere.",
+      "confidence": 0.95
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Tanzania: Migration and Ngorongoro Crater uniqueness",
+      "Tanzania: Lower costs, more accessible",
+      "Botswana: Exceptional exclusivity and low vehicle density",
+      "Botswana: Mokoro, boat safaris, and water experiences"
+    ],
+    "losses": [
+      "Tanzania: Higher vehicle density in popular areas",
+      "Tanzania: Less exclusive feeling",
+      "Botswana: Very high costs limit trip length",
+      "Botswana: No migration or crater equivalent"
+    ]
+  },
+  "change_conditions": [
+    "If budget is limited, Tanzania provides better value per day.",
+    "If seeking water-based activities, Botswana is the clear choice.",
+    "If this is a first safari, Tanzania's diversity may be more appropriate.",
+    "If seeking exclusivity above all, Botswana delivers consistently."
+  ],
+  "confidence": 0.75
+}

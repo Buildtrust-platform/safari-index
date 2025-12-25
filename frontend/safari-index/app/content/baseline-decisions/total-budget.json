@@ -1,0 +1,49 @@
+{
+  "topic_id": "total-budget",
+  "outcome": "book",
+  "headline": "Budget depends on comfort level, destination, and trip length",
+  "summary": "Safari costs range from $150 per person per day for budget options to $3,000+ for ultra-luxury. For a mid-range Tanzania safari, expect $400-700 per person per day including accommodation, meals, game drives, and park fees. A 7-day trip typically costs $3,500-5,000 per person before international flights. Botswana costs 2-3x more than East Africa for equivalent quality.",
+  "assumptions": [
+    {
+      "id": "budget-tier-ranges",
+      "text": "Budget safaris run $150-300/day, mid-range $400-700/day, luxury $800-1,500/day, ultra-luxury $1,500-3,000+/day.",
+      "confidence": 0.90
+    },
+    {
+      "id": "botswana-premium",
+      "text": "Botswana prices are 2-3x higher than East Africa due to high-cost, low-volume tourism policy.",
+      "confidence": 0.95
+    },
+    {
+      "id": "internal-flights",
+      "text": "Internal flights add $200-500 per person per segment in Tanzania.",
+      "confidence": 0.85
+    },
+    {
+      "id": "gorilla-premium",
+      "text": "Adding gorilla trekking requires budgeting $1,500+ per person for Rwanda permits or $700+ for Uganda.",
+      "confidence": 0.95
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Higher budget: Better guides, locations, and comfort between drives",
+      "Mid-range: Good balance of quality and value",
+      "Budget: More days in the bush for the same total spend",
+      "Luxury: Exceptional service and often better concession access"
+    ],
+    "losses": [
+      "Higher budget: Significant cost that may limit trip length",
+      "Mid-range: Neither the cheapest nor the best",
+      "Budget: Compromises on accommodation, guides, and vehicle privacy",
+      "Luxury: May feel the wildlife justifies a simpler approach"
+    ]
+  },
+  "change_conditions": [
+    "If traveling solo, add 30-50% for single supplements at most camps.",
+    "If Botswana is included, budget needs to increase 2-3x compared to East Africa.",
+    "If internal flights are needed in Tanzania, add $500-1,000 per person total.",
+    "If gorillas are included, add $2,000+ per person for permits and logistics."
+  ],
+  "confidence": 0.80
+}

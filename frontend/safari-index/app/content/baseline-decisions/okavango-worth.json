@@ -1,0 +1,44 @@
+{
+  "topic_id": "okavango-worth",
+  "outcome": "wait",
+  "headline": "Okavango is exceptional but the premium requires justification",
+  "summary": "The Okavango Delta offers unique water-based safari experiences unavailable elsewhere: mokoro rides, boat safaris, and wildlife along channels. However, it costs 2-3x more than East African alternatives. For first-time safari travelers, the premium may not be worth paying before experiencing more accessible destinations. For those seeking something genuinely different, it delivers.",
+  "assumptions": [
+    {
+      "id": "significant-premium",
+      "text": "Okavango Delta camps cost 2-3x more than equivalent East African options.",
+      "confidence": 0.95
+    },
+    {
+      "id": "water-experience-unique",
+      "text": "The water-based safari experience is genuinely unique to the Okavango.",
+      "confidence": 0.95
+    },
+    {
+      "id": "wildlife-comparable",
+      "text": "Wildlife density and variety is comparable to, not superior to, East Africa.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Unique mokoro and boat safari experiences",
+      "Low tourist density and exclusive feeling",
+      "Stunning water-based landscapes",
+      "Exceptional camps and service standards"
+    ],
+    "losses": [
+      "2-3x higher costs than East Africa",
+      "No migration equivalent",
+      "Seasonal flooding affects accessibility",
+      "Premium may not feel justified for first-timers"
+    ]
+  },
+  "change_conditions": [
+    "If water-based activities are specifically desired, Okavango is worth the premium.",
+    "If this is a first safari, East Africa may provide better value for the experience.",
+    "If budget allows and seeking exclusivity, Okavango delivers consistently.",
+    "If returning for a second or third safari, Okavango offers genuine novelty."
+  ],
+  "confidence": 0.75
+}

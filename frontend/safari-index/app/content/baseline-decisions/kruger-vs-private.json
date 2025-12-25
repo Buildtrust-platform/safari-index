@@ -1,0 +1,44 @@
+{
+  "topic_id": "kruger-vs-private",
+  "outcome": "wait",
+  "headline": "Private reserves offer more; Kruger offers value",
+  "summary": "Kruger National Park allows self-drive and offers excellent value. Adjacent private reserves like Sabi Sands offer off-road driving, night drives, walking safaris, and fewer vehicles at sightings. The private reserve experience is significantly better but costs 3-5x more. The choice depends on whether the enhanced experience justifies the premium.",
+  "assumptions": [
+    {
+      "id": "private-more-activities",
+      "text": "Private reserves offer off-road, night drives, and walking safaris not available in Kruger.",
+      "confidence": 0.95
+    },
+    {
+      "id": "significant-cost-difference",
+      "text": "Private reserves cost 3-5x more than Kruger self-drive or rest camps.",
+      "confidence": 0.90
+    },
+    {
+      "id": "wildlife-similar",
+      "text": "Wildlife populations are shared between Kruger and adjacent private reserves.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Kruger: Self-drive flexibility and value",
+      "Kruger: Large park with diverse habitats",
+      "Private: Off-road tracking and positioning",
+      "Private: Night drives and walking safaris"
+    ],
+    "losses": [
+      "Kruger: On-road only, no night drives",
+      "Kruger: More vehicles at sightings",
+      "Private: 3-5x higher costs",
+      "Private: Smaller traversing area"
+    ]
+  },
+  "change_conditions": [
+    "If budget is primary concern, Kruger self-drive provides exceptional value.",
+    "If leopard sightings are priority, Sabi Sands has the best odds in Africa.",
+    "If wanting the full safari experience with guides, private reserves deliver.",
+    "If combining with self-drive adventure, Kruger fits the approach better."
+  ],
+  "confidence": 0.80
+}

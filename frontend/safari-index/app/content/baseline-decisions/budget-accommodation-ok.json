@@ -1,0 +1,44 @@
+{
+  "topic_id": "budget-accommodation-ok",
+  "outcome": "book",
+  "headline": "Budget accommodations work if expectations are managed",
+  "summary": "Budget safari accommodations (basic lodges, public camp sites, or simple tented camps) can deliver good wildlife experiences at 50-70% cost savings. The tradeoffs are less comfortable beds, shared facilities, larger groups, and less experienced guides. For travelers prioritizing time in the bush over comfort, budget works. The wildlife is the same.",
+  "assumptions": [
+    {
+      "id": "wildlife-same",
+      "text": "Wildlife in budget areas is the same as luxury areas within the same park.",
+      "confidence": 0.90
+    },
+    {
+      "id": "comfort-differs",
+      "text": "Budget accommodations have basic facilities, shared bathrooms, and simple meals.",
+      "confidence": 0.90
+    },
+    {
+      "id": "guide-quality-varies",
+      "text": "Budget operators often have less experienced guides than premium operators.",
+      "confidence": 0.80
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Significant cost savings (50-70%)",
+      "More days in the bush for same budget",
+      "Authentic camping experience if desired",
+      "Same wildlife as luxury camps"
+    ],
+    "losses": [
+      "Basic facilities and comfort",
+      "Larger groups and shared vehicles",
+      "Less experienced guides often",
+      "Less attention to dietary needs"
+    ]
+  },
+  "change_conditions": [
+    "If comfort is important, budget may disappoint.",
+    "If guide quality matters, invest in better operators even with basic camps.",
+    "If dietary restrictions exist, confirm accommodation capabilities.",
+    "If traveling with family, comfort compromises may be harder."
+  ],
+  "confidence": 0.80
+}

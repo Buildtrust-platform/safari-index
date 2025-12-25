@@ -1,0 +1,44 @@
+{
+  "topic_id": "camp-hopping",
+  "outcome": "wait",
+  "headline": "Multiple camps add variety but consume travel time",
+  "summary": "Moving between camps provides ecosystem variety and avoids single-location fatigue. However, each move costs half a day of game viewing to transit and settle. For trips under 6 days, one or two camps is often better. For longer trips, 2-3 camps provides good variety without excessive transit. More than 3 camps rarely adds value.",
+  "assumptions": [
+    {
+      "id": "transit-cost",
+      "text": "Each camp move typically costs half a day of game viewing time.",
+      "confidence": 0.85
+    },
+    {
+      "id": "variety-benefit",
+      "text": "Different camps in different ecosystems provide genuine variety.",
+      "confidence": 0.85
+    },
+    {
+      "id": "fatigue-factor",
+      "text": "Staying in one place for 5+ nights can feel repetitive for some travelers.",
+      "confidence": 0.75
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Ecosystem variety across different areas",
+      "Avoids single-location fatigue",
+      "Different camp styles and experiences",
+      "Better coverage of large parks"
+    ],
+    "losses": [
+      "Transit time reduces game viewing",
+      "Packing and unpacking logistics",
+      "Less depth in any single area",
+      "More complex planning and costs"
+    ]
+  },
+  "change_conditions": [
+    "If trip is under 6 days, stick to 1-2 camps.",
+    "If specific ecosystem variety is desired, plan camps accordingly.",
+    "If avoiding fatigue, 3 nights per camp is a good minimum.",
+    "If depth in one area matters, stay put and explore thoroughly."
+  ],
+  "confidence": 0.75
+}

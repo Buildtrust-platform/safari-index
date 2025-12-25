@@ -1,0 +1,44 @@
+{
+  "topic_id": "tz-jul",
+  "outcome": "book",
+  "headline": "July is peak dry season with migration heading north",
+  "summary": "July is excellent for Tanzania safari with dry conditions and the migration moving through central and northern Serengeti. This is the beginning of the dry season river crossing period. Wildlife viewing is easy with animals concentrated around water. This is also peak season with higher prices and more visitors.",
+  "assumptions": [
+    {
+      "id": "dry-season-peak",
+      "text": "July is dry season with excellent game viewing conditions.",
+      "confidence": 0.90
+    },
+    {
+      "id": "migration-location",
+      "text": "Migration is typically in central to northern Serengeti in July.",
+      "confidence": 0.85
+    },
+    {
+      "id": "peak-pricing",
+      "text": "July is peak season with highest prices and demand.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Excellent dry season viewing conditions",
+      "Migration in northern Serengeti",
+      "Possible river crossing sightings",
+      "Reliable weather"
+    ],
+    "losses": [
+      "Peak season pricing",
+      "More crowded than shoulder months",
+      "Best camps book far in advance",
+      "Dusty conditions"
+    ]
+  },
+  "change_conditions": [
+    "If river crossings are priority, consider August-September for more consistent crossings.",
+    "If budget is constrained, shoulder months offer similar wildlife at lower prices.",
+    "If specific camps desired, book 6-9 months ahead.",
+    "If avoiding crowds, early July is typically less busy than August."
+  ],
+  "confidence": 0.85
+}

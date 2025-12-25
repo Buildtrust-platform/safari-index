@@ -1,0 +1,43 @@
+{
+  "topic_id": "rwanda-gorillas-worth",
+  "outcome": "book",
+  "headline": "Gorilla trekking is worth the cost for most travelers",
+  "summary": "At $1,500 per permit in Rwanda, gorilla trekking is expensive but delivers an encounter unlike any other wildlife experience. The hour spent with a habituated gorilla family is consistently rated as life-changing by those who do it. For travelers who can afford it without financial strain, it is generally worth prioritizing over additional safari days.",
+  "assumptions": [
+    {
+      "id": "permit-cost-high",
+      "text": "Rwanda gorilla permits cost $1,500 per person; Uganda permits cost $700.",
+      "confidence": 0.95
+    },
+    {
+      "id": "experience-rated-exceptional",
+      "text": "Gorilla trekking is consistently rated as a peak travel experience by those who do it.",
+      "confidence": 0.90
+    },
+    {
+      "id": "encounter-guaranteed",
+      "text": "Gorilla sightings are essentially guaranteed with habituated groups.",
+      "confidence": 0.95
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Unique, life-changing wildlife encounter",
+      "Gorilla sighting is essentially guaranteed",
+      "Supports conservation of endangered species",
+      "One hour of close proximity to gorilla family"
+    ],
+    "losses": [
+      "Very high permit cost ($1,500 Rwanda)",
+      "Trek can be physically demanding (1-6 hours hiking)",
+      "Only one hour with gorillas after reaching them",
+      "Weather can make trekking challenging"
+    ]
+  },
+  "change_conditions": [
+    "If the permit cost would cause financial strain, consider Uganda at $700 per permit.",
+    "If physical fitness is limited, confirm porter availability and average trek lengths.",
+    "If already planning multiple safaris, consider whether gorillas should be first priority."
+  ],
+  "confidence": 0.85
+}

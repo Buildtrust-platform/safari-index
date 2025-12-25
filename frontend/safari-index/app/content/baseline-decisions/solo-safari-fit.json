@@ -1,0 +1,42 @@
+{
+  "topic_id": "solo-safari-fit",
+  "outcome": "book",
+  "headline": "Solo safari works well with the right structure",
+  "summary": "Solo travelers can have excellent safari experiences, particularly on group departures or at camps with communal dining. The main considerations are cost (single supplements add 30-50%) and social preference. Solo travelers often find safari uniquely rewarding as guides provide personalized attention and fellow travelers share the experience at meals.",
+  "assumptions": [
+    {
+      "id": "single-supplement-cost",
+      "text": "Most lodges charge 30-50% single supplements for solo occupancy.",
+      "confidence": 0.90
+    },
+    {
+      "id": "group-departures-available",
+      "text": "Group departures eliminate single supplements and provide built-in social interaction.",
+      "confidence": 0.85
+    },
+    {
+      "id": "communal-dining-common",
+      "text": "Most safari camps have communal dining, creating natural social opportunities.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Complete flexibility in itinerary and pace",
+      "Personalized guide attention",
+      "Natural social opportunities at communal meals",
+      "Group departures eliminate single supplements"
+    ],
+    "losses": [
+      "Single supplements add 30-50% to accommodation costs",
+      "Private vehicle costs not shared",
+      "No travel companion for downtime between drives"
+    ]
+  },
+  "change_conditions": [
+    "If budget is constrained, group departures eliminate single supplements entirely.",
+    "If preferring solitude, private camps with in-room dining can accommodate.",
+    "If safety is a concern, established safari circuits are very safe for solo travelers."
+  ],
+  "confidence": 0.80
+}

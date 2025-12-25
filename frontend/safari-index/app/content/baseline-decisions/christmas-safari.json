@@ -1,0 +1,44 @@
+{
+  "topic_id": "christmas-safari",
+  "outcome": "book",
+  "headline": "Christmas safari works but requires early booking",
+  "summary": "December-January is peak season for safari with good weather and wildlife. However, it is also the most expensive and busiest time. Booking 9-12 months ahead is essential for best camps. The experience is excellent if booked early; last-minute travelers will find limited options at premium prices.",
+  "assumptions": [
+    {
+      "id": "peak-demand",
+      "text": "Christmas/New Year is peak demand period with highest prices.",
+      "confidence": 0.95
+    },
+    {
+      "id": "early-booking-essential",
+      "text": "Popular camps book 9-12 months ahead for Christmas period.",
+      "confidence": 0.90
+    },
+    {
+      "id": "good-conditions",
+      "text": "Weather and wildlife conditions are generally good in December-January.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Good weather and wildlife conditions",
+      "Family-friendly timing for school holidays",
+      "Festive atmosphere at many camps",
+      "Migration in southern Serengeti (calving buildup)"
+    ],
+    "losses": [
+      "Highest prices of the year",
+      "Most crowded period",
+      "Best camps book out early",
+      "Minimum stay requirements common"
+    ]
+  },
+  "change_conditions": [
+    "If booking less than 6 months ahead, expect limited options.",
+    "If budget is constrained, consider shoulder periods instead.",
+    "If specific camps are desired, book 12 months ahead minimum.",
+    "If flexibility exists, late November or mid-January offer similar conditions with less demand."
+  ],
+  "confidence": 0.80
+}

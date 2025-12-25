@@ -1,0 +1,49 @@
+{
+  "topic_id": "self-drive-safari",
+  "outcome": "wait",
+  "headline": "Self-drive works in specific destinations; guided is better for most",
+  "summary": "Self-drive safari is viable in South Africa (Kruger), Namibia (Etosha), and some Kenya parks. It offers freedom and significant cost savings but sacrifices expert guide knowledge and tracking ability. For first-time visitors wanting to maximize wildlife interpretation, guided safaris typically deliver more value. Self-drive suits experienced travelers comfortable with navigation who prioritize independence over expertise.",
+  "assumptions": [
+    {
+      "id": "self-drive-viable-destinations",
+      "text": "Self-drive is viable in Kruger (South Africa), Etosha (Namibia), and some Kenya parks.",
+      "confidence": 0.95
+    },
+    {
+      "id": "tz-bw-guided-only",
+      "text": "Tanzania and Botswana require guided vehicles in most parks and reserves.",
+      "confidence": 0.95
+    },
+    {
+      "id": "no-guide-interpretation",
+      "text": "Self-drive means no expert interpretation of animal behavior, tracks, or ecology.",
+      "confidence": 0.95
+    },
+    {
+      "id": "cost-savings",
+      "text": "Self-drive is significantly cheaper than guided lodge safaris, often 50-70% less.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Complete freedom and flexibility in schedule",
+      "Significant cost savings compared to guided options",
+      "Your own vehicle and pace",
+      "Sense of adventure and discovery"
+    ],
+    "losses": [
+      "No expert guide knowledge or tracking skills",
+      "May miss sightings that guides would find",
+      "Responsibility for navigation and logistics",
+      "No off-road tracking in national parks"
+    ]
+  },
+  "change_conditions": [
+    "If guide interpretation is valued, self-drive may disappoint compared to guided alternatives.",
+    "If the destination does not allow self-drive (Tanzania, Botswana), guided is the only option.",
+    "If budget is not a primary concern, guided adds significant educational value.",
+    "If nervous about driving in Africa, guided provides comfort and safety."
+  ],
+  "confidence": 0.75
+}

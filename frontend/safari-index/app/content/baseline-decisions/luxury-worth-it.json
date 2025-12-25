@@ -1,0 +1,44 @@
+{
+  "topic_id": "luxury-worth-it",
+  "outcome": "wait",
+  "headline": "Luxury adds comfort between drives, not wildlife quality",
+  "summary": "Luxury camps offer exceptional comfort, service, food, and often better locations with private concession access. However, the wildlife is the same. The value of luxury is in the experience between drives and the exclusivity of location. For first-time visitors focused purely on wildlife, mid-range camps deliver 90% of the experience at 50% of the cost.",
+  "assumptions": [
+    {
+      "id": "wildlife-same",
+      "text": "Wildlife quality depends on location, not camp luxury level.",
+      "confidence": 0.90
+    },
+    {
+      "id": "concession-access",
+      "text": "Luxury camps often have private concession access with fewer vehicles.",
+      "confidence": 0.85
+    },
+    {
+      "id": "between-drives",
+      "text": "Luxury primarily enhances comfort between drives, not during them.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Exceptional food, service, and accommodation",
+      "Often private concession access",
+      "Exclusivity and fewer vehicles",
+      "Memorable non-game-drive experience"
+    ],
+    "losses": [
+      "Significantly higher costs",
+      "May feel excessive focus on comfort over bush",
+      "Some luxury camps prioritize comfort over authenticity",
+      "Cost may limit trip length"
+    ]
+  },
+  "change_conditions": [
+    "If comfort between drives matters as much as wildlife, luxury delivers.",
+    "If budget allows without limiting trip length, luxury enhances overall experience.",
+    "If purely wildlife-focused, mid-range with good guides may be better value.",
+    "If celebrating special occasion, luxury creates memorable moments."
+  ],
+  "confidence": 0.75
+}

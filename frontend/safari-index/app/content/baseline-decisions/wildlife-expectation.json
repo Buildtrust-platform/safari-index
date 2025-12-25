@@ -1,0 +1,43 @@
+{
+  "topic_id": "wildlife-expectation",
+  "outcome": "book",
+  "headline": "Expect abundant wildlife, but specific sightings are never guaranteed",
+  "summary": "On a well-planned safari, you will see significant wildlife. The Big Five (lion, leopard, elephant, rhino, buffalo) are likely but not guaranteed on every trip. Leopard and rhino are the hardest; lion, elephant, and buffalo are almost certain in good areas. Managing expectations about specific species while appreciating overall wildlife abundance leads to satisfaction.",
+  "assumptions": [
+    {
+      "id": "big-five-likelihood",
+      "text": "In prime areas, 4 of 5 Big Five species are typically seen; all 5 requires luck.",
+      "confidence": 0.85
+    },
+    {
+      "id": "leopard-hardest",
+      "text": "Leopard is the most elusive Big Five member; some areas have better odds.",
+      "confidence": 0.90
+    },
+    {
+      "id": "general-abundance",
+      "text": "Total wildlife abundance in good areas exceeds most first-timers' expectations.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Overall wildlife abundance typically exceeds expectations",
+      "Lion, elephant, and buffalo sightings are highly likely",
+      "Unexpected sightings often become highlights",
+      "Bird diversity and smaller animals reward attention"
+    ],
+    "losses": [
+      "Specific species cannot be guaranteed",
+      "Leopard and rhino require luck and patience",
+      "Kill sightings depend entirely on timing",
+      "Migration timing is unpredictable"
+    ]
+  },
+  "change_conditions": [
+    "If leopard is a priority, choose known leopard territories like Sabi Sands or South Luangwa.",
+    "If rhino is essential, include areas with healthy rhino populations explicitly.",
+    "If specific behaviors (kills, river crossings) matter, extend trip length for more chances."
+  ],
+  "confidence": 0.80
+}

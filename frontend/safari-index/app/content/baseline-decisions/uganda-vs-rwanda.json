@@ -1,0 +1,49 @@
+{
+  "topic_id": "uganda-vs-rwanda",
+  "outcome": "wait",
+  "headline": "Rwanda offers efficiency; Uganda offers value and variety",
+  "summary": "Rwanda and Uganda both provide exceptional gorilla encounters. Rwanda charges $1,500 per permit but delivers a polished, efficient experience—gorilla trekking is possible in a 2-3 day trip. Uganda charges $700 per permit but requires longer, rougher travel. Uganda also offers chimps and other primates as add-ons. The right choice depends on whether you prioritize time efficiency or budget and wildlife variety.",
+  "assumptions": [
+    {
+      "id": "permit-price-difference",
+      "text": "Rwanda permits cost $1,500; Uganda permits cost $700 (2024 pricing).",
+      "confidence": 0.95
+    },
+    {
+      "id": "rwanda-compact",
+      "text": "Rwanda is compact with good roads; gorilla trekking is accessible in 2-3 days.",
+      "confidence": 0.90
+    },
+    {
+      "id": "uganda-rough-transit",
+      "text": "Uganda requires 8-10 hour drives from Kampala to Bwindi or Mgahinga on sometimes rough roads.",
+      "confidence": 0.90
+    },
+    {
+      "id": "uganda-primate-variety",
+      "text": "Uganda offers chimp trekking in Kibale and other primate experiences not available in Rwanda.",
+      "confidence": 0.95
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Rwanda: Efficiency and polished infrastructure",
+      "Rwanda: Quick 2-3 day trip possible",
+      "Uganda: Significant cost savings ($800+ per person)",
+      "Uganda: Chimps and other primates available"
+    ],
+    "losses": [
+      "Rwanda: Double the permit cost",
+      "Rwanda: Fewer add-on wildlife options",
+      "Uganda: Long, rough road transfers",
+      "Uganda: More rugged infrastructure"
+    ]
+  },
+  "change_conditions": [
+    "If time is limited to 2-3 days, Rwanda is the only practical option.",
+    "If budget matters more than comfort, Uganda saves $800+ per person on permits alone.",
+    "If chimps interest you alongside gorillas, Uganda combines both efficiently.",
+    "If wanting polish and ease, Rwanda provides a significantly smoother experience."
+  ],
+  "confidence": 0.75
+}

@@ -1,0 +1,44 @@
+{
+  "topic_id": "fly-vs-drive",
+  "outcome": "wait",
+  "headline": "Flying saves time; driving offers flexibility and saves money",
+  "summary": "Internal flights in Tanzania save significant time (7-hour drives become 1-hour flights) but add $200-500 per person per segment. Driving offers flexibility, scenic variety, and lower costs but consumes game viewing time. For short trips, flying is often worth the premium. For longer trips or budget focus, driving can work well.",
+  "assumptions": [
+    {
+      "id": "time-savings",
+      "text": "Flights convert 6-8 hour drives into 1-hour flights.",
+      "confidence": 0.90
+    },
+    {
+      "id": "cost-premium",
+      "text": "Internal flights add $200-500 per person per segment.",
+      "confidence": 0.85
+    },
+    {
+      "id": "luggage-restrictions",
+      "text": "Bush flights have strict luggage limits (15-20kg soft-sided only).",
+      "confidence": 0.95
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Flying: Significant time savings",
+      "Flying: Less fatigue from road travel",
+      "Driving: Scenic variety and stops",
+      "Driving: Significant cost savings"
+    ],
+    "losses": [
+      "Flying: $200-500 per segment per person",
+      "Flying: Strict luggage limits",
+      "Driving: Half-day or more consumed in transit",
+      "Driving: Fatigue on rough roads"
+    ]
+  },
+  "change_conditions": [
+    "If trip is under 7 days, flying likely worth the time savings.",
+    "If budget is primary concern, drive distances under 4 hours.",
+    "If scenic variety appeals, some driving adds to the experience.",
+    "If luggage is bulky, driving avoids bush flight restrictions."
+  ],
+  "confidence": 0.80
+}

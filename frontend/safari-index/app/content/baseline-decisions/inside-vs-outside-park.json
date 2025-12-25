@@ -1,0 +1,44 @@
+{
+  "topic_id": "inside-vs-outside-park",
+  "outcome": "wait",
+  "headline": "Inside offers early access; outside may offer night drives",
+  "summary": "Camps inside national parks offer immediate access at gate opening and eliminate transit time. Camps outside parks (in private conservancies or nearby) often offer activities not permitted inside: night drives, walking safaris, and off-road driving. The choice depends on which activities matter more than pure park access timing.",
+  "assumptions": [
+    {
+      "id": "inside-early-access",
+      "text": "Inside camps provide game viewing from dawn without transit time.",
+      "confidence": 0.90
+    },
+    {
+      "id": "outside-more-activities",
+      "text": "Private conservancies often allow night drives, walks, and off-road driving.",
+      "confidence": 0.90
+    },
+    {
+      "id": "wildlife-may-differ",
+      "text": "Wildlife in conservancies may be less dense than inside prime park areas.",
+      "confidence": 0.75
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Inside: Immediate access at first light",
+      "Inside: Prime wildlife areas",
+      "Outside: Night drives and walking safaris",
+      "Outside: Often more exclusive with fewer vehicles"
+    ],
+    "losses": [
+      "Inside: No night drives typically",
+      "Inside: On-road only in national parks",
+      "Outside: Transit time to park gates",
+      "Outside: Wildlife density may be lower"
+    ]
+  },
+  "change_conditions": [
+    "If night drives are priority, outside/private concessions are essential.",
+    "If maximum wildlife exposure matters, inside camps in prime areas.",
+    "If exclusivity is valued, private conservancies often have fewer vehicles.",
+    "If combining both, split nights between inside and private areas."
+  ],
+  "confidence": 0.75
+}

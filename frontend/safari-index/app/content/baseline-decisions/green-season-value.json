@@ -1,0 +1,44 @@
+{
+  "topic_id": "green-season-value",
+  "outcome": "book",
+  "headline": "Green season offers genuine value with adjusted expectations",
+  "summary": "Green season (November-May in East Africa) offers 30-40% lower prices, fewer tourists, dramatic skies, and lush landscapes. Wildlife is present year-round but more dispersed. For budget-conscious travelers or repeat visitors seeking a different experience, green season provides excellent value. First-timers prioritizing easy viewing may prefer dry season.",
+  "assumptions": [
+    {
+      "id": "price-savings",
+      "text": "Green season prices are typically 30-40% lower than peak dry season.",
+      "confidence": 0.90
+    },
+    {
+      "id": "wildlife-present",
+      "text": "Wildlife is present year-round; only concentration and visibility change.",
+      "confidence": 0.90
+    },
+    {
+      "id": "rain-pattern",
+      "text": "Rain typically falls in afternoon; mornings are usually clear for game drives.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "30-40% lower prices",
+      "Fewer tourists and vehicles",
+      "Dramatic skies for photography",
+      "Bird diversity peaks with migrants"
+    ],
+    "losses": [
+      "Wildlife more dispersed in vegetation",
+      "Afternoon rain can disrupt drives",
+      "Some roads become impassable",
+      "Viewing requires more patience"
+    ]
+  },
+  "change_conditions": [
+    "If budget is the primary constraint, green season savings may enable longer trips.",
+    "If photography is priority, green season skies often produce more dramatic images.",
+    "If ease of viewing is essential, dry season is more reliable.",
+    "If traveling during green season, adjust expectations and embrace the different experience."
+  ],
+  "confidence": 0.80
+}

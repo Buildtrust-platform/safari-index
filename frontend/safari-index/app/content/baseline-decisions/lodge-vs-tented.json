@@ -1,0 +1,44 @@
+{
+  "topic_id": "lodge-vs-tented",
+  "outcome": "wait",
+  "headline": "Both deliver excellent experiences with different atmospheres",
+  "summary": "Permanent lodges offer more conventional hotel-like comfort with solid walls and consistent amenities. Tented camps offer immersive bush atmosphere while still providing excellent comfort (proper beds, en-suite bathrooms). Luxury tented camps are not camping. The choice is about atmosphere preference, not comfort level.",
+  "assumptions": [
+    {
+      "id": "tented-still-comfortable",
+      "text": "Quality tented camps have proper beds, en-suite bathrooms, and excellent service.",
+      "confidence": 0.95
+    },
+    {
+      "id": "atmosphere-different",
+      "text": "Tented camps feel more connected to the bush; lodges feel more hotel-like.",
+      "confidence": 0.90
+    },
+    {
+      "id": "cost-varies",
+      "text": "Cost depends more on location and exclusivity than tent vs. lodge structure.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Lodge: Conventional hotel-like comfort",
+      "Lodge: Often better for families with children",
+      "Tented: Immersive bush atmosphere",
+      "Tented: Sounds of wildlife at night"
+    ],
+    "losses": [
+      "Lodge: Less connected to environment",
+      "Lodge: Can feel less authentic",
+      "Tented: Canvas walls (psychological, not practical concern)",
+      "Tented: May feel less secure for some travelers"
+    ]
+  },
+  "change_conditions": [
+    "If bush atmosphere is priority, quality tented camps deliver uniquely.",
+    "If conventional hotel comfort is important, lodges may feel more familiar.",
+    "If traveling with young children, some may prefer solid-walled lodges.",
+    "If wildlife sounds at night appeal, tented camps provide this experience."
+  ],
+  "confidence": 0.80
+}

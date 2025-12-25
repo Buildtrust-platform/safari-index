@@ -1,0 +1,44 @@
+{
+  "topic_id": "calving-season",
+  "outcome": "book",
+  "headline": "Calving season offers exceptional predator action",
+  "summary": "The calving season (late January through March) in southern Serengeti is one of the best times for predator sightings. Thousands of wildebeest give birth daily, attracting lions, cheetahs, and hyenas. The landscape is green and photogenic. This is a green season experience with occasional rain but exceptional wildlife action.",
+  "assumptions": [
+    {
+      "id": "calving-timing",
+      "text": "Calving peaks in February in the southern Serengeti and Ndutu area.",
+      "confidence": 0.90
+    },
+    {
+      "id": "predator-concentration",
+      "text": "Predators concentrate around calving herds for easy hunting.",
+      "confidence": 0.90
+    },
+    {
+      "id": "green-season-conditions",
+      "text": "This is green season with afternoon rain possible but mornings usually clear.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Exceptional predator action and hunting sightings",
+      "Thousands of births visible daily at peak",
+      "Lower prices than dry season",
+      "Green landscape for photography"
+    ],
+    "losses": [
+      "Afternoon rain can disrupt drives",
+      "Roads can be muddy",
+      "Not the iconic dry savannah imagery",
+      "Some camps closed in Ndutu area"
+    ]
+  },
+  "change_conditions": [
+    "If predator action is the priority, calving season is hard to beat.",
+    "If the classic dry savannah look matters for photography, dry season is better.",
+    "If weather reliability is important, dry season offers more certainty.",
+    "If dates are fixed in Feb-Mar, lean into the calving experience."
+  ],
+  "confidence": 0.85
+}

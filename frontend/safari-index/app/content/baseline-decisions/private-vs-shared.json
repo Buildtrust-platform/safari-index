@@ -1,0 +1,44 @@
+{
+  "topic_id": "private-vs-shared",
+  "outcome": "wait",
+  "headline": "Private vehicles offer flexibility; shared offers value",
+  "summary": "Private vehicles provide schedule flexibility, photography positioning, and personalized guide attention. Shared vehicles save significant money (often 30-50%) and provide social interaction. For serious photographers or those with specific interests, private is worth the premium. For most first-time visitors, shared vehicles deliver excellent experiences at better value.",
+  "assumptions": [
+    {
+      "id": "cost-difference",
+      "text": "Private vehicles typically cost 30-50% more than shared arrangements.",
+      "confidence": 0.85
+    },
+    {
+      "id": "flexibility-benefit",
+      "text": "Private vehicles allow control over schedule, stops, and positioning.",
+      "confidence": 0.95
+    },
+    {
+      "id": "shared-quality",
+      "text": "Shared vehicle experiences are still excellent with good guides.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Private: Complete schedule control",
+      "Private: Optimal positioning for photography",
+      "Shared: Significant cost savings",
+      "Shared: Social interaction with fellow travelers"
+    ],
+    "losses": [
+      "Private: 30-50% higher costs",
+      "Private: Solo travelers pay full vehicle cost",
+      "Shared: Fixed schedules and timings",
+      "Shared: Positioning compromises with others"
+    ]
+  },
+  "change_conditions": [
+    "If serious about photography, private is strongly recommended.",
+    "If budget is primary concern, shared delivers great value.",
+    "If traveling as couple or group, private cost per person becomes more reasonable.",
+    "If specific wildlife interests exist, private allows focused time at sightings."
+  ],
+  "confidence": 0.80
+}

@@ -1,0 +1,44 @@
+{
+  "topic_id": "ideal-length",
+  "outcome": "book",
+  "headline": "7-10 days is ideal for most first safari experiences",
+  "summary": "For first-time safari travelers, 7-10 days on the ground in Africa (including safari and any extensions) provides the ideal balance. This allows 5-7 days of actual safari, time to recover from jet lag, and possibly a beach or cultural extension. Shorter trips feel rushed; longer trips may experience diminishing returns on wildlife novelty.",
+  "assumptions": [
+    {
+      "id": "jet-lag-recovery",
+      "text": "1-2 days for jet lag recovery improves the overall safari experience.",
+      "confidence": 0.85
+    },
+    {
+      "id": "diminishing-returns",
+      "text": "After 7-8 days of safari, wildlife novelty begins to diminish for most travelers.",
+      "confidence": 0.75
+    },
+    {
+      "id": "extension-value",
+      "text": "Beach or cultural extensions add variety to an Africa trip.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "7-10 days allows relaxed pacing",
+      "Time for extensions without rushing safari",
+      "Good odds for wildlife variety",
+      "Jet lag recovery built in"
+    ],
+    "losses": [
+      "Longer time off work required",
+      "Higher total trip cost",
+      "May feel long for some travelers",
+      "Returns diminish after initial novelty"
+    ]
+  },
+  "change_conditions": [
+    "If vacation time is limited, prioritize safari days over extensions.",
+    "If budget is fixed, 7 quality days may be better than 10 budget days.",
+    "If repeat visitor, longer or shorter trips may suit based on goals.",
+    "If combining specific activities (gorillas, beach), plan around those."
+  ],
+  "confidence": 0.80
+}

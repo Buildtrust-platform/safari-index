@@ -1,0 +1,43 @@
+{
+  "topic_id": "multigenerational",
+  "outcome": "book",
+  "headline": "Safari works well for multiple generations with planning",
+  "summary": "Multigenerational safari travel can be exceptional when accommodations and activities match the least mobile family member. Family units or villas keep groups together while allowing private space. The key is selecting camps with flexible activity options, good accessibility, and family dining arrangements.",
+  "assumptions": [
+    {
+      "id": "accessibility-varies",
+      "text": "Camp accessibility varies significantly; some have steep stairs or long walks to rooms.",
+      "confidence": 0.90
+    },
+    {
+      "id": "family-units-available",
+      "text": "Many camps offer family units or villas that accommodate 4-8 people together.",
+      "confidence": 0.85
+    },
+    {
+      "id": "activity-flexibility",
+      "text": "Better camps offer activity flexibility so different generations can choose different options.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Shared family experience across generations",
+      "Family units keep groups together",
+      "Grandparents and grandchildren bond over wildlife",
+      "Private vehicles accommodate different paces"
+    ],
+    "losses": [
+      "Must book to least mobile member's capabilities",
+      "Family units limit camp selection",
+      "Coordinating schedules across generations",
+      "Higher costs for multiple rooms and private vehicles"
+    ]
+  },
+  "change_conditions": [
+    "If any family member has significant mobility limitations, confirm specific camp accessibility.",
+    "If traveling with both young children and elderly relatives, select camps that accommodate both.",
+    "If budget is shared, clarify expectations about accommodation levels upfront."
+  ],
+  "confidence": 0.80
+}

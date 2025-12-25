@@ -1,0 +1,44 @@
+{
+  "topic_id": "splurge-allocation",
+  "outcome": "book",
+  "headline": "Strategic splurging maximizes impact on safari experience",
+  "summary": "When allocating a safari splurge budget, prioritize in this order: guide quality (private vehicle with excellent guide), location (inside park or prime conservancy), and finally accommodation luxury. A skilled guide in a basic camp creates better memories than average guiding at a luxury lodge. If upgrading accommodation, invest in one exceptional property rather than spreading across all nights.",
+  "assumptions": [
+    {
+      "id": "guide-roi",
+      "text": "Exceptional guides transform safaris more than any other factor.",
+      "confidence": 0.95
+    },
+    {
+      "id": "location-timing",
+      "text": "Being in the right place at dawn/dusk matters more than room thread count.",
+      "confidence": 0.90
+    },
+    {
+      "id": "one-splurge",
+      "text": "One memorable luxury experience often creates better trip narrative than distributed upgrades.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Exceptional sightings from expert guidance",
+      "Prime timing with inside-park location",
+      "One unforgettable luxury experience",
+      "Better value than spreading budget thin"
+    ],
+    "losses": [
+      "Other nights at standard level",
+      "May highlight quality differences",
+      "Requires research to identify where to splurge",
+      "Premium for top guides not always transparent"
+    ]
+  },
+  "change_conditions": [
+    "If honeymoon or celebration, consistent luxury level may matter more.",
+    "If wildlife is secondary to relaxation, accommodation quality takes priority.",
+    "If you've done multiple safaris, you may value exclusive camps over guiding.",
+    "If photography-focused, invest in vehicle positioning over room quality."
+  ],
+  "confidence": 0.80
+}

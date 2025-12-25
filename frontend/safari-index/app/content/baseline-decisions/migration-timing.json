@@ -1,0 +1,44 @@
+{
+  "topic_id": "migration-timing",
+  "outcome": "wait",
+  "headline": "Migration timing is predictable by region, not by exact date",
+  "summary": "The Great Migration follows a general annual pattern, but exact locations and timing vary year to year. The herds are generally in southern Serengeti for calving (January-March), central Serengeti (April-May), northern Serengeti and Mara (July-October), and returning south (November-December). River crossings depend on rain and cannot be precisely scheduled.",
+  "assumptions": [
+    {
+      "id": "pattern-predictable",
+      "text": "The general migration pattern is predictable by season and region.",
+      "confidence": 0.90
+    },
+    {
+      "id": "exact-timing-variable",
+      "text": "Exact timing varies by 2-4 weeks depending on rainfall.",
+      "confidence": 0.90
+    },
+    {
+      "id": "crossings-unpredictable",
+      "text": "River crossing timing cannot be precisely predicted or guaranteed.",
+      "confidence": 0.95
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Calving (Jan-Mar): Predator action, dramatic births",
+      "Northern Serengeti/Mara (Jul-Oct): River crossings possible",
+      "Shoulder months: Fewer crowds, still good wildlife",
+      "Flexible dates: Better accommodation availability"
+    ],
+    "losses": [
+      "Cannot guarantee seeing specific migration events",
+      "Peak migration months have highest prices and crowds",
+      "River crossings require luck and patience",
+      "Short trips may miss migration if timing is off"
+    ]
+  },
+  "change_conditions": [
+    "If river crossings are the priority, July-October in northern Serengeti or Mara is best.",
+    "If calving and predator action appeal, January-March in southern Serengeti.",
+    "If dates are fixed, adjust location expectations to where migration likely is.",
+    "If flexible, book last-minute to follow current migration reports."
+  ],
+  "confidence": 0.75
+}

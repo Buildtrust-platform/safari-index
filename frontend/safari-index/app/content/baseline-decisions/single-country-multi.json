@@ -1,0 +1,44 @@
+{
+  "topic_id": "single-country-multi",
+  "outcome": "wait",
+  "headline": "Single country offers depth; multi-country adds complexity",
+  "summary": "For most first-time travelers, staying in one country provides a more coherent, less logistically complex experience. Multi-country trips make sense when combining genuinely different experiences (safari plus gorillas, for example). The added flights, border crossings, and logistics of multi-country trips rarely justify the complexity for wildlife viewing alone.",
+  "assumptions": [
+    {
+      "id": "single-country-simpler",
+      "text": "Single-country trips have simpler logistics, fewer flights, and more coherent experiences.",
+      "confidence": 0.95
+    },
+    {
+      "id": "multi-adds-value-sometimes",
+      "text": "Multi-country trips add value when combining genuinely different experiences.",
+      "confidence": 0.85
+    },
+    {
+      "id": "wildlife-overlap",
+      "text": "Wildlife in adjacent East African countries overlaps significantly.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Single: Simpler logistics and fewer flights",
+      "Single: Deeper exploration of one ecosystem",
+      "Multi: Genuinely different experiences combined",
+      "Multi: Gorillas plus traditional safari possible"
+    ],
+    "losses": [
+      "Single: Miss unique experiences in other countries",
+      "Single: May feel limited if time allows more",
+      "Multi: Complex logistics and more travel days",
+      "Multi: Less depth in each destination"
+    ]
+  },
+  "change_conditions": [
+    "If wanting gorillas plus traditional safari, multi-country is necessary.",
+    "If trip length is 10+ days, multi-country becomes more viable.",
+    "If this is a first safari, single country likely provides better experience.",
+    "If specific unique experiences require different countries, multi-country is justified."
+  ],
+  "confidence": 0.75
+}

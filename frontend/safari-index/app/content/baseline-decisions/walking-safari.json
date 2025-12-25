@@ -1,0 +1,44 @@
+{
+  "topic_id": "walking-safari",
+  "outcome": "wait",
+  "headline": "Walking safari adds depth but requires the right context",
+  "summary": "Walking safaris offer an intimate, immersive experience impossible from vehicles. However, they require moderate fitness, are not available everywhere, and involve real (managed) risk. For first-time visitors, vehicle safari should be the priority. For repeat visitors or those specifically seeking immersion, walking safaris in places like South Luangwa or Mana Pools are exceptional.",
+  "assumptions": [
+    {
+      "id": "location-specific",
+      "text": "Quality walking safaris are available in limited locations (South Luangwa, Mana Pools, some private reserves).",
+      "confidence": 0.90
+    },
+    {
+      "id": "fitness-required",
+      "text": "Walking safaris require moderate fitness for 2-4 hour walks.",
+      "confidence": 0.85
+    },
+    {
+      "id": "vehicle-still-primary",
+      "text": "Even on walking-focused trips, vehicle drives remain the primary game viewing method.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Intimate connection with the bush",
+      "Focus on tracks, smaller creatures, and ecology",
+      "Physical engagement with the environment",
+      "Unique perspective on wildlife behavior"
+    ],
+    "losses": [
+      "Less wildlife coverage than vehicles",
+      "Cannot approach as closely as vehicles",
+      "Fitness requirements limit participation",
+      "Available in limited destinations"
+    ]
+  },
+  "change_conditions": [
+    "If this is a first safari, prioritize vehicle-based viewing first.",
+    "If specifically seeking walking, choose destinations known for it.",
+    "If fitness is limited, confirm walk duration and difficulty before booking.",
+    "If combining with standard safari, add walking component to a vehicle-based trip."
+  ],
+  "confidence": 0.75
+}

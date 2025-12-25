@@ -25,6 +25,7 @@ interface NavbarProps {
 }
 
 const NAV_LINKS = [
+  { label: 'Guides', href: '/guides' },
   { label: 'Decisions', href: '/decisions' },
   { label: 'Explore', href: '/explore' },
   { label: 'Compare', href: '/compare' },

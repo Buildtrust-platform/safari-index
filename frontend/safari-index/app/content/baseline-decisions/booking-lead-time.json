@@ -1,0 +1,44 @@
+{
+  "topic_id": "booking-lead-time",
+  "outcome": "wait",
+  "headline": "Lead time depends on season, camp popularity, and flexibility",
+  "summary": "Peak season (July-October, Christmas) at popular camps requires 6-12 months advance booking. Shoulder and green seasons can be booked 2-4 months ahead. Last-minute deals exist but limit options significantly. The more specific your requirements (dates, camps, activities), the earlier you should book.",
+  "assumptions": [
+    {
+      "id": "peak-needs-advance",
+      "text": "Peak season at popular camps requires 6-12 months advance booking.",
+      "confidence": 0.90
+    },
+    {
+      "id": "shoulder-more-flexible",
+      "text": "Shoulder and green seasons can typically be booked 2-4 months ahead.",
+      "confidence": 0.85
+    },
+    {
+      "id": "last-minute-possible",
+      "text": "Last-minute bookings are possible but limit camp and date options.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Early booking: Best camp and date selection",
+      "Early booking: Flight prices often lower",
+      "Last-minute: Possible discounts",
+      "Flexibility: More options at any lead time"
+    ],
+    "losses": [
+      "Early booking: Less flexibility to change",
+      "Early booking: Deposit required long in advance",
+      "Last-minute: Limited options, no top camps",
+      "Last-minute: Flights may be expensive"
+    ]
+  },
+  "change_conditions": [
+    "If traveling peak season, book 9-12 months ahead.",
+    "If flexible on dates and camps, 2-3 months may suffice.",
+    "If specific camps are essential, check their typical booking window.",
+    "If budget allows last-minute flexibility, deals can appear 4-6 weeks out."
+  ],
+  "confidence": 0.80
+}
