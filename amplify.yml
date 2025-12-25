@@ -7,6 +7,24 @@ applications:
           commands:
             - npm ci
             - npm run validate-env
+        postBuild:
+          commands:
+            # Sync images to S3/CloudFront CDN for long-term caching
+            - |
+              if [ -n "$ASSETS_S3_BUCKET" ]; then
+                echo "Syncing images to CDN bucket: $ASSETS_S3_BUCKET"
+                aws s3 sync public/images "s3://$ASSETS_S3_BUCKET/images" \
+                  --cache-control "public, max-age=31536000, immutable"
+                # Invalidate CloudFront cache if distribution ID is set
+                if [ -n "$CLOUDFRONT_DISTRIBUTION_ID" ]; then
+                  echo "Invalidating CloudFront cache..."
+                  aws cloudfront create-invalidation \
+                    --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID" \
+                    --paths "/images/*" || true
+                fi
+              else
+                echo "ASSETS_S3_BUCKET not set, skipping CDN sync"
+              fi
         build:
           commands:
             - echo "Building with NEXT_PUBLIC_APP_MODE=$NEXT_PUBLIC_APP_MODE"
