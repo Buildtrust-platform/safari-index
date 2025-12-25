@@ -16,10 +16,11 @@
  */
 
 import Link from 'next/link';
-import { ChevronDown, ArrowRight, MapPin, Calendar, Scale, ShieldOff, FileText, RefreshCw } from 'lucide-react';
+import { ChevronDown, ArrowRight, MapPin, Calendar, Scale, ShieldOff, FileText, RefreshCw, Map } from 'lucide-react';
 import { ImageBand, ImageBandContent, pageImages } from './components/visual';
 import { Navbar, PageGrid } from './components/layout';
 import { getPublishedTopics, type DecisionTopic } from './content/decision-topics';
+import { getAllTrips } from './content/trip-shapes/trips';
 
 /**
  * Scroll Indicator
@@ -176,10 +177,39 @@ function getFeaturedTopics(): DecisionTopic[] {
 }
 
 /**
+ * Trip Card for homepage - compact version
+ */
+function TripCard({ trip }: { trip: { id: string; title: string; subtitle: string } }) {
+  return (
+    <Link
+      href={`/trips/${trip.id}`}
+      prefetch={false}
+      className="group block"
+    >
+      <div className="p-4 rounded-xl bg-white border border-stone-200 hover:border-amber-300 hover:shadow-md transition-all duration-200">
+        <div className="flex items-center justify-between">
+          <div className="flex-1 min-w-0">
+            <h3 className="font-editorial text-base font-medium text-stone-900 group-hover:text-amber-700 transition-colors truncate">
+              {trip.title}
+            </h3>
+            <p className="text-sm text-stone-500 truncate">
+              {trip.subtitle}
+            </p>
+          </div>
+          <ArrowRight className="w-4 h-4 text-stone-400 group-hover:text-amber-600 transition-colors flex-shrink-0 ml-3" />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+/**
  * Homepage
  */
 export default function Home() {
   const featuredTopics = getFeaturedTopics();
+  const allTrips = getAllTrips();
+  const featuredTrips = allTrips.slice(0, 6);
 
   return (
     <>
@@ -209,13 +239,13 @@ export default function Home() {
             Clear judgments when timing, cost, and expectations matter.
           </p>
 
-          {/* CTAs */}
+          {/* CTAs - Decisions first, then Trips */}
           <div className="flex flex-col sm:flex-row gap-3 animate-fade-in-up animation-delay-300">
-            <PrimaryButton href="/explore">
+            <PrimaryButton href="/decisions">
               Explore decisions
             </PrimaryButton>
-            <SecondaryButton href="/explore?filter=when-to-go">
-              When to go
+            <SecondaryButton href="/trips">
+              Browse trip shapes
             </SecondaryButton>
           </div>
         </ImageBandContent>
@@ -275,7 +305,7 @@ export default function Home() {
 
           <div className="text-center mt-10">
             <Link
-              href="/explore"
+              href="/decisions"
               className="inline-flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-800 transition-colors"
             >
               View all decisions
@@ -286,10 +316,48 @@ export default function Home() {
       </section>
 
       {/* ================================================================
+          SECTION 3.5 — TRIP SHAPES
+          6 trip shapes for application context.
+          ================================================================ */}
+      <section className="bg-stone-50 py-20 md:py-28">
+        <PageGrid maxWidth="default">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
+                <Map className="w-5 h-5 text-amber-700" />
+              </div>
+              <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900">
+                Trip shapes
+              </h2>
+            </div>
+            <p className="text-stone-600 max-w-xl mx-auto">
+              Common safari itinerary patterns. Each links to the decisions that matter.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {featuredTrips.map((trip) => (
+              <TripCard key={trip.id} trip={trip} />
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link
+              href="/trips"
+              className="inline-flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-800 transition-colors"
+            >
+              View all trip shapes
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </PageGrid>
+      </section>
+
+      {/* ================================================================
           SECTION 4 — CATEGORY CLARIFICATION
           What Safari Index is not.
           ================================================================ */}
-      <section className="bg-stone-50 py-16 md:py-20">
+      <section className="bg-white py-16 md:py-20">
         <PageGrid maxWidth="narrow">
           <div className="text-center">
             <h2 className="font-editorial text-xl md:text-2xl font-semibold text-stone-900 mb-4">
@@ -338,17 +406,17 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
-                href="/explore"
+                href="/decisions"
                 className="group inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-white text-stone-900 hover:bg-stone-100"
               >
                 Explore decisions
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
-                href="/compare"
+                href="/trips"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-transparent text-white border border-white/40 hover:bg-white/10 hover:border-white/60"
               >
-                Compare
+                Browse trips
               </Link>
             </div>
           </div>
@@ -371,11 +439,14 @@ export default function Home() {
               <Link href="/" className="text-sm text-stone-400 hover:text-white transition-colors">
                 Home
               </Link>
-              <Link href="/explore" className="text-sm text-stone-400 hover:text-white transition-colors">
-                Explore
+              <Link href="/decisions" className="text-sm text-stone-400 hover:text-white transition-colors">
+                Decisions
               </Link>
-              <Link href="/compare" className="text-sm text-stone-400 hover:text-white transition-colors">
-                Compare
+              <Link href="/trips" className="text-sm text-stone-400 hover:text-white transition-colors">
+                Trips
+              </Link>
+              <Link href="/guides" className="text-sm text-stone-400 hover:text-white transition-colors">
+                Guides
               </Link>
               <Link href="/how-it-works" className="text-sm text-stone-400 hover:text-white transition-colors">
                 How it works

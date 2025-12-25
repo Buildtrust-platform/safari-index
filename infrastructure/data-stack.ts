@@ -26,6 +26,8 @@ export class DataStack extends cdk.Stack {
   public readonly reviewTable: dynamodb.Table;
   public readonly assuranceTable: dynamodb.Table;
   public readonly snapshotTable: dynamodb.Table;
+  public readonly inquiryTable: dynamodb.Table;
+  public readonly proposalTable: dynamodb.Table;
 
   constructor(scope: Construct, id: string, props: DataStackProps) {
     super(scope, id, props);
@@ -290,6 +292,84 @@ export class DataStack extends cdk.Stack {
       value: this.snapshotTable.tableName,
       description: 'DynamoDB table for decision snapshot cache',
       exportName: `${exportPrefix}SafariIndexSnapshotTableName`,
+    });
+
+    /**
+     * Inquiry Table
+     * Per Business Coat: captures trip inquiry intent for operator follow-up.
+     * No booking, no quotes - just lead capture with decision context.
+     *
+     * PK: inquiry_id
+     * GSI1: status + created_at (query by status, newest first)
+     */
+    this.inquiryTable = new dynamodb.Table(this, 'InquiryTable', {
+      tableName: `${resourcePrefix}safari-index-inquiries`,
+      partitionKey: {
+        name: 'inquiry_id',
+        type: dynamodb.AttributeType.STRING,
+      },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      removalPolicy: cdk.RemovalPolicy.RETAIN, // Inquiries are business-critical leads
+      pointInTimeRecovery: true,
+    });
+
+    // GSI1: Query by status + created_at (for ops listing by status)
+    this.inquiryTable.addGlobalSecondaryIndex({
+      indexName: 'status-created-index',
+      partitionKey: {
+        name: 'status',
+        type: dynamodb.AttributeType.STRING,
+      },
+      sortKey: {
+        name: 'created_at',
+        type: dynamodb.AttributeType.STRING,
+      },
+      projectionType: dynamodb.ProjectionType.ALL,
+    });
+
+    new cdk.CfnOutput(this, 'InquiryTableName', {
+      value: this.inquiryTable.tableName,
+      description: 'DynamoDB table for trip inquiries',
+      exportName: `${exportPrefix}SafariIndexInquiryTableName`,
+    });
+
+    /**
+     * Proposal Table
+     * Stores Safari Proposal Packs generated from inquiries.
+     * Shareable via public token, downloadable as PDF.
+     *
+     * PK: proposal_id
+     * GSI1: inquiry_id + created_at (find proposals for an inquiry)
+     */
+    this.proposalTable = new dynamodb.Table(this, 'ProposalTable', {
+      tableName: `${resourcePrefix}safari-index-proposals`,
+      partitionKey: {
+        name: 'proposal_id',
+        type: dynamodb.AttributeType.STRING,
+      },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      removalPolicy: cdk.RemovalPolicy.RETAIN, // Proposals are business-critical
+      pointInTimeRecovery: true,
+    });
+
+    // GSI1: Query by inquiry_id + created_at (find proposals for an inquiry)
+    this.proposalTable.addGlobalSecondaryIndex({
+      indexName: 'inquiry-created-index',
+      partitionKey: {
+        name: 'inquiry_id',
+        type: dynamodb.AttributeType.STRING,
+      },
+      sortKey: {
+        name: 'created_at',
+        type: dynamodb.AttributeType.STRING,
+      },
+      projectionType: dynamodb.ProjectionType.ALL,
+    });
+
+    new cdk.CfnOutput(this, 'ProposalTableName', {
+      value: this.proposalTable.tableName,
+      description: 'DynamoDB table for safari proposals',
+      exportName: `${exportPrefix}SafariIndexProposalTableName`,
     });
   }
 }

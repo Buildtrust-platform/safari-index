@@ -1,0 +1,158 @@
+/**
+ * Inquiry Notification Service
+ *
+ * Sends email notifications to operators when new inquiries are received.
+ * Uses AWS SES for reliable delivery.
+ *
+ * Per governance:
+ * - Plain text only, no marketing
+ * - No sequences, no automation
+ * - Single notification per inquiry
+ */
+
+import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
+import type { InquiryRecord } from '../contracts';
+
+// Configuration from environment
+const OPERATOR_EMAIL = process.env.OPERATOR_EMAIL;
+const SITE_ORIGIN = process.env.SITE_ORIGIN || process.env.NEXT_PUBLIC_SITE_ORIGIN || 'https://safariindex.com';
+const AWS_REGION = process.env.AWS_REGION || 'us-east-1';
+const FROM_EMAIL = process.env.FROM_EMAIL || 'notifications@safariindex.com';
+
+// Initialize SES client
+const sesClient = new SESClient({ region: AWS_REGION });
+
+/**
+ * Format budget band for display
+ */
+function formatBudgetBand(band: string): string {
+  const labels: Record<string, string> = {
+    'under-5k': 'Under $5,000',
+    '5k-10k': '$5,000 – $10,000',
+    '10k-20k': '$10,000 – $20,000',
+    '20k-35k': '$20,000 – $35,000',
+    'above-35k': 'Above $35,000',
+    'flexible': 'Flexible',
+  };
+  return labels[band] || band;
+}
+
+/**
+ * Format travel style for display
+ */
+function formatTravelStyle(style: string): string {
+  const labels: Record<string, string> = {
+    'solo': 'Solo traveler',
+    'couple': 'Couple',
+    'family-young-kids': 'Family with young children',
+    'family-teens': 'Family with teens',
+    'multigenerational': 'Multigenerational group',
+    'friends-group': 'Friends group',
+    'honeymoon': 'Honeymoon',
+  };
+  return labels[style] || style;
+}
+
+/**
+ * Format month number to name
+ */
+function formatMonth(month: number | null): string {
+  if (!month) return 'Not specified';
+  const months = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+  return months[month - 1] || 'Unknown';
+}
+
+/**
+ * Build date window string
+ */
+function formatDateWindow(month: number | null, year: number | null): string {
+  if (!month && !year) return 'Not specified';
+  if (month && year) return `${formatMonth(month)} ${year}`;
+  if (year) return `${year}`;
+  return formatMonth(month);
+}
+
+/**
+ * Send notification email to operator for new inquiry
+ */
+export async function sendInquiryNotification(inquiry: InquiryRecord): Promise<boolean> {
+  if (!OPERATOR_EMAIL) {
+    console.warn('[Inquiry Notification] OPERATOR_EMAIL not configured, skipping notification');
+    return false;
+  }
+
+  const dateWindow = formatDateWindow(inquiry.travel_month, inquiry.travel_year);
+  const opsUrl = `${SITE_ORIGIN}/ops/inquiries/${inquiry.inquiry_id}`;
+
+  // Build linked decisions list
+  const decisionsText = inquiry.linked_decision_ids.length > 0
+    ? inquiry.linked_decision_ids
+        .map(id => `  - ${SITE_ORIGIN}/decisions/${id}`)
+        .join('\n')
+    : '  (none linked)';
+
+  const subject = `New Safari Index inquiry: ${formatBudgetBand(inquiry.budget_band)}, ${dateWindow}`;
+
+  const body = `New inquiry received
+
+Inquiry ID: ${inquiry.inquiry_id}
+Created: ${new Date(inquiry.created_at).toLocaleString('en-US', { timeZone: 'Africa/Nairobi' })}
+
+TRAVELER DETAILS
+----------------
+Email: ${inquiry.email}
+WhatsApp: ${inquiry.whatsapp || 'Not provided'}
+Travelers: ${inquiry.traveler_count}
+Style: ${formatTravelStyle(inquiry.travel_style)}
+
+TRIP DETAILS
+------------
+Trip Shape: ${inquiry.trip_shape_id || 'Not selected'}
+Budget: ${formatBudgetBand(inquiry.budget_band)}
+Date Window: ${dateWindow}
+
+LINKED DECISIONS
+----------------
+${decisionsText}
+
+${inquiry.notes ? `NOTES\n-----\n${inquiry.notes}\n` : ''}
+SOURCE
+------
+${inquiry.source_path || 'Direct'}
+
+---
+View in ops: ${opsUrl}
+`;
+
+  try {
+    await sesClient.send(
+      new SendEmailCommand({
+        Source: FROM_EMAIL,
+        Destination: {
+          ToAddresses: [OPERATOR_EMAIL],
+        },
+        Message: {
+          Subject: {
+            Data: subject,
+            Charset: 'UTF-8',
+          },
+          Body: {
+            Text: {
+              Data: body,
+              Charset: 'UTF-8',
+            },
+          },
+        },
+      })
+    );
+
+    console.log(`[Inquiry Notification] Email sent to ${OPERATOR_EMAIL} for ${inquiry.inquiry_id}`);
+    return true;
+  } catch (error) {
+    console.error('[Inquiry Notification] Failed to send email:', error);
+    return false;
+  }
+}

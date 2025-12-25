@@ -25,6 +25,8 @@ interface ApiStackProps extends cdk.StackProps {
   eventTable: dynamodb.ITable;
   reviewTable: dynamodb.ITable;
   assuranceTable: dynamodb.ITable;
+  inquiryTable: dynamodb.ITable;
+  proposalTable: dynamodb.ITable;
 }
 
 export class ApiStack extends cdk.Stack {
@@ -60,6 +62,8 @@ export class ApiStack extends cdk.Stack {
         EVENT_TABLE: props.eventTable.tableName,
         REVIEW_TABLE: props.reviewTable.tableName,
         ASSURANCE_TABLE: props.assuranceTable.tableName,
+        INQUIRY_TABLE: props.inquiryTable.tableName,
+        PROPOSAL_TABLE: props.proposalTable.tableName,
         // Version tracking (per 10_data_model.md)
         LOGIC_VERSION: 'rules_v1.0',
         PROMPT_VERSION: 'prompt_v1.0',
@@ -75,12 +79,16 @@ export class ApiStack extends cdk.Stack {
     props.eventTable.grantWriteData(this.orchestratorLambda);
     props.reviewTable.grantWriteData(this.orchestratorLambda);
     props.assuranceTable.grantWriteData(this.orchestratorLambda);
+    props.inquiryTable.grantWriteData(this.orchestratorLambda);
+    props.proposalTable.grantWriteData(this.orchestratorLambda);
 
     // Grant Lambda permission to read from DynamoDB (for queries)
     props.decisionTable.grantReadData(this.orchestratorLambda);
     props.eventTable.grantReadData(this.orchestratorLambda);
     props.reviewTable.grantReadData(this.orchestratorLambda);
     props.assuranceTable.grantReadData(this.orchestratorLambda);
+    props.inquiryTable.grantReadData(this.orchestratorLambda);
+    props.proposalTable.grantReadData(this.orchestratorLambda);
 
     // Grant Lambda permission to invoke Bedrock
     this.orchestratorLambda.addToRolePolicy(
@@ -88,6 +96,15 @@ export class ApiStack extends cdk.Stack {
         effect: iam.Effect.ALLOW,
         actions: ['bedrock:InvokeModel'],
         resources: ['*'], // Bedrock doesn't support resource-level permissions
+      })
+    );
+
+    // Grant Lambda permission to send emails via SES (for inquiry notifications)
+    this.orchestratorLambda.addToRolePolicy(
+      new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        actions: ['ses:SendEmail', 'ses:SendRawEmail'],
+        resources: ['*'], // SES identity ARNs can be restricted in production
       })
     );
 

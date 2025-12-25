@@ -59,6 +59,8 @@ const apiStack = new ApiStack(app, `${stackPrefix}SafariIndexApiStack`, {
   eventTable: dataStack.eventTable,
   reviewTable: dataStack.reviewTable,
   assuranceTable: dataStack.assuranceTable,
+  inquiryTable: dataStack.inquiryTable,
+  proposalTable: dataStack.proposalTable,
 });
 
 // Ensure API stack is deployed after data stack

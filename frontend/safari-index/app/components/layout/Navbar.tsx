@@ -25,11 +25,11 @@ interface NavbarProps {
 }
 
 const NAV_LINKS = [
-  { label: 'Guides', href: '/guides' },
   { label: 'Decisions', href: '/decisions' },
+  { label: 'Trips', href: '/trips' },
+  { label: 'Guides', href: '/guides' },
   { label: 'Explore', href: '/explore' },
   { label: 'Compare', href: '/compare' },
-  { label: 'When to go', href: '/explore?filter=when-to-go' },
   { label: 'How it works', href: '/how-it-works' },
 ];
 

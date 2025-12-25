@@ -8,8 +8,10 @@
  * - Non-promotional
  *
  * This footer exists for citation integrity, not marketing.
+ * Includes methodology link for transparency per Business Reality Layer.
  */
 
+import Link from 'next/link';
 import { footer as footerStyles } from '../ui/styles';
 
 interface AttributionFooterProps {
@@ -32,7 +34,7 @@ export function AttributionFooter({
   });
 
   return (
-    <footer className={footerStyles} aria-label="Decision attribution">
+    <footer className={footerStyles} aria-label="Decision attribution" data-testid="attribution-footer">
       <p>Decision issued by Safari Index</p>
       <p className="mt-1">
         <span aria-label="Logic version">Logic: {logicVersion}</span>
@@ -45,6 +47,15 @@ export function AttributionFooter({
       </p>
       <p className="mt-1 font-mono text-xs select-all" aria-label="Decision ID">
         {decisionId}
+      </p>
+      <p className="mt-2">
+        <Link
+          href="/how-it-works"
+          className="text-amber-700 hover:text-amber-800 underline underline-offset-2 text-sm"
+          data-testid="methodology-link"
+        >
+          How our decisions are made
+        </Link>
       </p>
     </footer>
   );

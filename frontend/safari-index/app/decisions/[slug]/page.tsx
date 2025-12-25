@@ -43,6 +43,8 @@ import { RefusalRecoveryPanel } from '../../components/RefusalRecoveryPanel';
 import { ServiceDegradedRefusal } from '../../components/ServiceDegradedRefusal';
 import { PreflightWizard } from '../../components/PreflightWizard';
 import { BaselineFallbackBanner } from '../../components/BaselineFallbackBanner';
+import { TripPlanningCTA } from '../../components/TripPlanningCTA';
+import { LinkedTrips } from '../../components/LinkedTrips';
 import { getTopicBySlug, DecisionTopic } from '../../content/decision-topics';
 import {
   getBaselineDecision,
@@ -583,6 +585,12 @@ export default function DecisionPage() {
             outcome={d.outcome}
             confidence={d.confidence}
           />
+
+          {/* Linked Trips - trips where this decision matters */}
+          <LinkedTrips topicId={topic.topic_id} />
+
+          {/* Trip Planning CTA - quiet link to inquiry system */}
+          <TripPlanningCTA topicId={topic.topic_id} topicSlug={topic.slug} />
 
           <RelatedDecisions topics={relatedTopics} />
 

@@ -245,3 +245,171 @@ export const FollowUpSubscriptionSchema = z.object({
   confidence: z.number(),
 });
 export type FollowUpSubscription = z.infer<typeof FollowUpSubscriptionSchema>;
+
+// ============================================================================
+// Inquiry Contracts
+// ============================================================================
+
+/**
+ * Budget band enum
+ */
+export const BudgetBandSchema = z.enum([
+  'under-5k',
+  '5k-10k',
+  '10k-20k',
+  '20k-35k',
+  'above-35k',
+  'flexible',
+]);
+export type BudgetBand = z.infer<typeof BudgetBandSchema>;
+
+/**
+ * Travel style enum
+ */
+export const TravelStyleSchema = z.enum([
+  'solo',
+  'couple',
+  'family-young-kids',
+  'family-teens',
+  'multigenerational',
+  'friends-group',
+  'honeymoon',
+]);
+export type TravelStyle = z.infer<typeof TravelStyleSchema>;
+
+/**
+ * Inquiry status enum
+ */
+export const InquiryStatusSchema = z.enum([
+  'new',
+  'contacted',
+  'quoted',
+  'won',
+  'lost',
+]);
+export type InquiryStatus = z.infer<typeof InquiryStatusSchema>;
+
+/**
+ * Inquiry request payload (POST /api/inquire)
+ */
+export const InquiryRequestSchema = z.object({
+  trip_shape_id: z.string().nullable(),
+  budget_band: BudgetBandSchema,
+  travel_month: z.number().min(1).max(12).nullable(),
+  travel_year: z.number().min(2024).max(2030).nullable(),
+  traveler_count: z.number().min(1).max(20),
+  travel_style: TravelStyleSchema,
+  email: z.string().email(),
+  whatsapp: z.string().nullable(),
+  linked_decision_ids: z.array(z.string()),
+  notes: z.string().nullable(),
+  source_path: z.string().optional(),
+});
+export type InquiryRequest = z.infer<typeof InquiryRequestSchema>;
+
+/**
+ * Inquiry response (returned from POST /api/inquire)
+ */
+export const InquiryResponseSchema = z.object({
+  inquiry_id: z.string(),
+  created_at: z.string(),
+});
+export type InquiryResponse = z.infer<typeof InquiryResponseSchema>;
+
+/**
+ * Full inquiry record (stored in DynamoDB, returned from GET)
+ */
+export const InquiryRecordSchema = z.object({
+  inquiry_id: z.string(),
+  created_at: z.string(),
+  status: InquiryStatusSchema,
+  trip_shape_id: z.string().nullable(),
+  budget_band: BudgetBandSchema,
+  travel_month: z.number().nullable(),
+  travel_year: z.number().nullable(),
+  traveler_count: z.number(),
+  travel_style: TravelStyleSchema,
+  email: z.string(),
+  whatsapp: z.string().nullable(),
+  linked_decision_ids: z.array(z.string()),
+  notes: z.string().nullable(),
+  source_path: z.string().optional(),
+});
+export type InquiryRecord = z.infer<typeof InquiryRecordSchema>;
+
+/**
+ * Inquiry status update request (PATCH /api/ops/inquiries/[id])
+ */
+export const InquiryUpdateSchema = z.object({
+  status: InquiryStatusSchema.optional(),
+  notes: z.string().nullable().optional(),
+});
+export type InquiryUpdate = z.infer<typeof InquiryUpdateSchema>;
+
+// ============================================================================
+// Proposal Contracts
+// ============================================================================
+
+/**
+ * Proposal status enum
+ */
+export const ProposalStatusSchema = z.enum(['draft', 'sent']);
+export type ProposalStatus = z.infer<typeof ProposalStatusSchema>;
+
+/**
+ * Proposal create request (POST /api/ops/proposals)
+ */
+export const ProposalCreateSchema = z.object({
+  inquiry_id: z.string(),
+});
+export type ProposalCreate = z.infer<typeof ProposalCreateSchema>;
+
+/**
+ * Proposal update request (PATCH /api/ops/proposals/[id])
+ */
+export const ProposalUpdateSchema = z.object({
+  status: ProposalStatusSchema.optional(),
+  operator_name: z.string().nullable().optional(),
+  traveler_name: z.string().nullable().optional(),
+  intro_note: z.string().nullable().optional(),
+  recommended_trip_ids: z.array(z.string()).optional(),
+  recommended_decision_ids: z.array(z.string()).optional(),
+  pricing_notes: z.string().nullable().optional(),
+  next_steps: z.string().nullable().optional(),
+});
+export type ProposalUpdate = z.infer<typeof ProposalUpdateSchema>;
+
+/**
+ * Full proposal record (stored in DynamoDB)
+ */
+export const ProposalRecordSchema = z.object({
+  proposal_id: z.string(),
+  inquiry_id: z.string(),
+  created_at: z.string(),
+  updated_at: z.string(),
+  status: ProposalStatusSchema,
+  operator_name: z.string().nullable(),
+  traveler_name: z.string().nullable(),
+  intro_note: z.string().nullable(),
+  recommended_trip_ids: z.array(z.string()),
+  recommended_decision_ids: z.array(z.string()),
+  pricing_notes: z.string().nullable(),
+  next_steps: z.string().nullable(),
+  public_token: z.string(),
+});
+export type ProposalRecord = z.infer<typeof ProposalRecordSchema>;
+
+/**
+ * Public proposal response (GET /api/proposals/[token])
+ * Includes hydrated data for display
+ */
+export const ProposalPublicResponseSchema = z.object({
+  proposal: ProposalRecordSchema,
+  inquiry: InquiryRecordSchema.pick({
+    budget_band: true,
+    travel_month: true,
+    travel_year: true,
+    traveler_count: true,
+    travel_style: true,
+  }),
+});

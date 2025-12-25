@@ -23,6 +23,9 @@
     "ci": "npm run verify:p0 && npm run check-contracts && npm run lint && npm run build && npm run test"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.958.0",
+    "@aws-sdk/client-ses": "^3.958.0",
+    "@aws-sdk/lib-dynamodb": "^3.958.0",
     "lucide-react": "^0.562.0",
     "next": "16.1.0",
     "react": "19.2.3",

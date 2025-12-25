@@ -9,6 +9,7 @@
  * - Homepage
  * - Decision pages
  * - Guide pages (index, bucket hubs, topic guides)
+ * - Trip pages (index, individual trip archetypes)
  */
 
 import { MetadataRoute } from 'next';
@@ -20,12 +21,14 @@ import {
   getTopicById,
 } from '../lib/guide-builder';
 import { generateSlugFromId } from './content/p0-topics-bridge';
+import { getAllTrips } from './content/trip-shapes/trips';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://safariindex.com';
   const topics = getPublishedTopics();
   const bucketGuides = getAllBucketGuides();
   const p0TopicIds = getAllP0TopicIds();
+  const trips = getAllTrips();
 
   // Decision pages
   const decisionPages = topics.map((topic) => ({
@@ -69,6 +72,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
     .filter((page): page is NonNullable<typeof page> => page !== null);
 
+  // Trips index page
+  const tripsIndexPage = {
+    url: `${baseUrl}/trips`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  };
+
+  // Individual trip pages
+  const tripPages = trips.map((trip) => ({
+    url: `${baseUrl}/trips/${trip.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
   return [
     {
       url: baseUrl,
@@ -76,6 +95,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 1,
     },
+    tripsIndexPage,
+    ...tripPages,
     guidesIndexPage,
     ...bucketHubPages,
     ...topicGuidePages,
