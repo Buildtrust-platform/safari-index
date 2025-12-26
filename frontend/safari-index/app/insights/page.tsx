@@ -13,7 +13,10 @@ import { getTopicBySlug, type DecisionTopic } from '../content/decision-topics';
 import { ImageBand, ImageBandContent, pageImages } from '../components/visual';
 import { pageContainer } from '../ui/styles';
 // Initialize blog content
-import '../content/insights';
+import { initializeBlogs } from '../content/insights';
+
+// Ensure blogs are registered before render
+initializeBlogs();
 
 export default function InsightsHub() {
   const decisionSlugs = getDecisionsWithBlogs();

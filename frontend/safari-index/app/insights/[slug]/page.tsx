@@ -15,12 +15,14 @@ import { useParams, notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getTopicBySlug, type DecisionTopic } from '../../content/decision-topics';
 import { getBlogCollection } from '../../../lib/blog-loader';
-// Initialize blog content
-import '../../content/insights';
+import { initializeBlogs } from '../../content/insights';
 import { MarkdownRenderer } from '../../components/MarkdownRenderer';
 import { RelatedDecisions } from '../../components/RelatedDecisions';
 import { ImageBand, ImageBandContent, pageImages } from '../../components/visual';
 import { pageContainer } from '../../ui/styles';
+
+// Ensure blogs are registered before render
+initializeBlogs();
 
 export default function InsightPage() {
   const params = useParams();
