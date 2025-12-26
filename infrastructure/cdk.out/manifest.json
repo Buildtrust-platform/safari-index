@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::928622536086:role/cdk-hnb659fds-deploy-role-928622536086-eu-central-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::928622536086:role/cdk-hnb659fds-cfn-exec-role-928622536086-eu-central-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-928622536086-eu-central-1/9a3a090dec187aeb9d0bef265f73216d056d6eb02ad7b1f326073031b0969e26.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-928622536086-eu-central-1/0367b45b1aa4a8f330cc68c453cb298fb1f3ebab43815acd84211f94a2666fcd.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -114,6 +114,66 @@
             "data": "AssuranceTableName"
           }
         ],
+        "/SafariIndexDataStack/SnapshotTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "SnapshotTableDA0E0D82"
+            }
+          }
+        ],
+        "/SafariIndexDataStack/SnapshotTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SnapshotTableDA0E0D82"
+          }
+        ],
+        "/SafariIndexDataStack/SnapshotTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SnapshotTableName"
+          }
+        ],
+        "/SafariIndexDataStack/InquiryTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "InquiryTableD4FBEAAF"
+            }
+          }
+        ],
+        "/SafariIndexDataStack/InquiryTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InquiryTableD4FBEAAF"
+          }
+        ],
+        "/SafariIndexDataStack/InquiryTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InquiryTableName"
+          }
+        ],
+        "/SafariIndexDataStack/ProposalTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "ProposalTable0959F79B"
+            }
+          }
+        ],
+        "/SafariIndexDataStack/ProposalTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProposalTable0959F79B"
+          }
+        ],
+        "/SafariIndexDataStack/ProposalTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProposalTableName"
+          }
+        ],
         "/SafariIndexDataStack/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
@@ -144,6 +204,18 @@
             "data": "ExportsOutputFnGetAttAssuranceTable249FE877Arn5A26DAF0"
           }
         ],
+        "/SafariIndexDataStack/Exports/Output{\"Fn::GetAtt\":[\"InquiryTableD4FBEAAF\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttInquiryTableD4FBEAAFArnA85EFB59"
+          }
+        ],
+        "/SafariIndexDataStack/Exports/Output{\"Fn::GetAtt\":[\"ProposalTable0959F79B\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttProposalTable0959F79BArnB98C3BA1"
+          }
+        ],
         "/SafariIndexDataStack/Exports/Output{\"Ref\":\"DecisionTable2908AF27\"}": [
           {
             "type": "aws:cdk:logicalId",
@@ -166,6 +238,18 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "ExportsOutputRefAssuranceTable249FE877F0EC3A3F"
+          }
+        ],
+        "/SafariIndexDataStack/Exports/Output{\"Ref\":\"InquiryTableD4FBEAAF\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefInquiryTableD4FBEAAF520B43B0"
+          }
+        ],
+        "/SafariIndexDataStack/Exports/Output{\"Ref\":\"ProposalTable0959F79B\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefProposalTable0959F79B8E74CE9A"
           }
         ],
         "/SafariIndexDataStack/BootstrapVersion": [
@@ -200,7 +284,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::928622536086:role/cdk-hnb659fds-deploy-role-928622536086-eu-central-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::928622536086:role/cdk-hnb659fds-cfn-exec-role-928622536086-eu-central-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-928622536086-eu-central-1/6b345a985a087c00cbe6cb4feccf849dc6331c69816cda6d215af46cbce7915d.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-928622536086-eu-central-1/6398e15e645f93b85795a136a18d0a74afdcba8544a51d335e4dff876eb673f1.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [

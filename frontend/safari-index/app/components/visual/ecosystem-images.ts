@@ -158,3 +158,271 @@ export const pageImages = {
   decision: heroImages.decision,
   howItWorks: ecosystemImages[3], // montane-forest - contemplative
 } as const;
+
+// ============================================================================
+// Destination Images
+// ============================================================================
+
+/**
+ * Destination-specific hero images
+ *
+ * Documentary treatment: landscape-first, no posed tourists, no lodges.
+ * These are the primary visual for destination hubs and profiles.
+ */
+export interface DestinationImage {
+  id: string;
+  src: string;
+  alt: string;
+  /** Ecosystem tag for fallback matching */
+  ecosystem: EcosystemImage['tags'][number];
+}
+
+export const destinationImages: Record<string, DestinationImage> = {
+  tanzania: {
+    id: 'dest-tanzania',
+    src: '/images/destinations/tanzania-serengeti.jpg',
+    alt: 'Endless Serengeti grassland with scattered acacia trees under dramatic sky',
+    ecosystem: 'savannah',
+  },
+  kenya: {
+    id: 'dest-kenya',
+    src: '/images/destinations/kenya-mara.jpg',
+    alt: 'Rolling Masai Mara hills with seasonal river cutting through golden grass',
+    ecosystem: 'savannah',
+  },
+  botswana: {
+    id: 'dest-botswana',
+    src: '/images/destinations/botswana-delta.jpg',
+    alt: 'Aerial view of Okavango Delta waterways threading through green islands',
+    ecosystem: 'delta',
+  },
+  'south-africa': {
+    id: 'dest-south-africa',
+    src: '/images/destinations/south-africa-kruger.jpg',
+    alt: 'Classic bushveld with knob-thorn acacias and dry riverbed in winter',
+    ecosystem: 'savannah',
+  },
+  namibia: {
+    id: 'dest-namibia',
+    src: '/images/destinations/namibia-sossusvlei.jpg',
+    alt: 'Towering red dunes of Sossusvlei casting long shadows at dawn',
+    ecosystem: 'desert',
+  },
+  zambia: {
+    id: 'dest-zambia',
+    src: '/images/destinations/zambia-luangwa.jpg',
+    alt: 'South Luangwa river oxbow with hippo pods and distant woodland',
+    ecosystem: 'floodplain',
+  },
+  zimbabwe: {
+    id: 'dest-zimbabwe',
+    src: '/images/destinations/zimbabwe-mana.jpg',
+    alt: 'Mana Pools escarpment with albida trees and Zambezi in foreground',
+    ecosystem: 'floodplain',
+  },
+  uganda: {
+    id: 'dest-uganda',
+    src: '/images/destinations/uganda-bwindi.jpg',
+    alt: 'Mist-shrouded Bwindi Impenetrable Forest canopy at dawn',
+    ecosystem: 'forest',
+  },
+  rwanda: {
+    id: 'dest-rwanda',
+    src: '/images/destinations/rwanda-volcanoes.jpg',
+    alt: 'Virunga volcanic peaks emerging from bamboo forest and morning mist',
+    ecosystem: 'mountains',
+  },
+};
+
+/**
+ * Get destination image by ID, with fallback to ecosystem match
+ */
+export function getDestinationImage(destinationId: string): DestinationImage | EcosystemImage {
+  const dest = destinationImages[destinationId.toLowerCase()];
+  if (dest) return dest;
+
+  // Fallback: try to match by common naming patterns
+  const normalized = destinationId.toLowerCase().replace(/-/g, '');
+  for (const [key, img] of Object.entries(destinationImages)) {
+    if (normalized.includes(key.replace(/-/g, ''))) {
+      return img;
+    }
+  }
+
+  // Ultimate fallback: return first savannah ecosystem image
+  return getImagesByTag('savannah')[0] || ecosystemImages[0];
+}
+
+// ============================================================================
+// Activity Images (Placeholder Strategy)
+// ============================================================================
+
+/**
+ * Activity image hints and placeholder references
+ *
+ * STRATEGY: Activities use image_hint text fields in activity-primitives.ts.
+ * This registry provides optional upgrade paths when real images are added.
+ *
+ * Until real images are available, components should:
+ * 1. Use ecosystem images as contextual backgrounds
+ * 2. Display image_hint text as caption/alt guidance
+ * 3. Not block rendering on missing assets
+ */
+export interface ActivityImageRef {
+  activityId: string;
+  /** Path to image when available */
+  src: string | null;
+  /** Alt text for accessibility */
+  alt: string;
+  /** Fallback ecosystem tag */
+  fallbackEcosystem: EcosystemImage['tags'][number];
+  /** Whether real image is available */
+  hasImage: boolean;
+}
+
+/**
+ * Activity image registry - upgrade-safe placeholders
+ *
+ * Set hasImage: true and provide src when real documentary images are added.
+ * Components check hasImage before rendering activity-specific images.
+ */
+export const activityImageRefs: Record<string, ActivityImageRef> = {
+  'game-drive': {
+    activityId: 'game-drive',
+    src: '/images/activities/game-drive.jpg',
+    alt: 'Safari vehicle observing wildlife at dawn on African savanna',
+    fallbackEcosystem: 'savannah',
+    hasImage: true,
+  },
+  'walking-safari': {
+    activityId: 'walking-safari',
+    src: '/images/activities/walking-safari.jpg',
+    alt: 'Small group walking single file through African bush with guide',
+    fallbackEcosystem: 'savannah',
+    hasImage: true,
+  },
+  'night-drive': {
+    activityId: 'night-drive',
+    src: '/images/activities/night-drive.jpg',
+    alt: 'Spotlight revealing nocturnal wildlife in African bush',
+    fallbackEcosystem: 'savannah',
+    hasImage: true,
+  },
+  'boat-safari': {
+    activityId: 'boat-safari',
+    src: '/images/activities/boat-safari.jpg',
+    alt: 'Safari boat on African river with wildlife on banks',
+    fallbackEcosystem: 'delta',
+    hasImage: true,
+  },
+  mokoro: {
+    activityId: 'mokoro',
+    src: '/images/activities/mokoro.jpg',
+    alt: 'Traditional dugout canoe gliding through Okavango Delta channels',
+    fallbackEcosystem: 'delta',
+    hasImage: true,
+  },
+  'gorilla-trekking': {
+    activityId: 'gorilla-trekking',
+    src: '/images/activities/gorilla-trekking.jpg',
+    alt: 'Mountain gorilla in misty bamboo forest of Virunga',
+    fallbackEcosystem: 'forest',
+    hasImage: true,
+  },
+  'chimp-tracking': {
+    activityId: 'chimp-tracking',
+    src: '/images/activities/chimp-tracking.jpg',
+    alt: 'Rainforest canopy with dappled light in primate habitat',
+    fallbackEcosystem: 'forest',
+    hasImage: true,
+  },
+  'hot-air-balloon': {
+    activityId: 'hot-air-balloon',
+    src: '/images/activities/hot-air-balloon.jpg',
+    alt: 'Hot air balloon floating over Serengeti plains at sunrise',
+    fallbackEcosystem: 'savannah',
+    hasImage: true,
+  },
+  'canoe-safari': {
+    activityId: 'canoe-safari',
+    src: '/images/activities/canoe-safari.jpg',
+    alt: 'Canoes on Zambezi River with elephants on riverbank',
+    fallbackEcosystem: 'floodplain',
+    hasImage: true,
+  },
+  'fly-camping': {
+    activityId: 'fly-camping',
+    src: '/images/activities/fly-camping.jpg',
+    alt: 'Bedroll under mosquito net with African night sky',
+    fallbackEcosystem: 'savannah',
+    hasImage: true,
+  },
+  'horseback-safari': {
+    activityId: 'horseback-safari',
+    src: '/images/activities/horseback-safari.jpg',
+    alt: 'Riders on horseback crossing Okavango Delta waters',
+    fallbackEcosystem: 'delta',
+    hasImage: true,
+  },
+  'photographic-hide': {
+    activityId: 'photographic-hide',
+    src: '/images/activities/photographic-hide.jpg',
+    alt: 'Ground-level hide at waterhole with approaching wildlife',
+    fallbackEcosystem: 'savannah',
+    hasImage: true,
+  },
+  'cultural-visit': {
+    activityId: 'cultural-visit',
+    src: '/images/activities/cultural-visit.jpg',
+    alt: 'Traditional village setting in African landscape',
+    fallbackEcosystem: 'savannah',
+    hasImage: true,
+  },
+  'scenic-helicopter': {
+    activityId: 'scenic-helicopter',
+    src: '/images/activities/scenic-helicopter.jpg',
+    alt: 'Aerial view of African landscape from helicopter',
+    fallbackEcosystem: 'delta',
+    hasImage: true,
+  },
+  fishing: {
+    activityId: 'fishing',
+    src: '/images/activities/fishing.jpg',
+    alt: 'Angler on African river in boat with fishing rod',
+    fallbackEcosystem: 'floodplain',
+    hasImage: true,
+  },
+  'white-water-rafting': {
+    activityId: 'white-water-rafting',
+    src: '/images/activities/white-water-rafting.jpg',
+    alt: 'Raft navigating rapids on Nile River at Jinja',
+    fallbackEcosystem: 'floodplain',
+    hasImage: true,
+  },
+  'bungee-jumping': {
+    activityId: 'bungee-jumping',
+    src: '/images/activities/bungee-jumping.jpg',
+    alt: 'Victoria Falls Bridge with gorge and spray below',
+    fallbackEcosystem: 'floodplain',
+    hasImage: true,
+  },
+};
+
+/**
+ * Get activity image reference with fallback
+ */
+export function getActivityImageRef(activityId: string): ActivityImageRef | null {
+  return activityImageRefs[activityId] || null;
+}
+
+/**
+ * Get fallback ecosystem image for an activity
+ */
+export function getActivityFallbackImage(activityId: string): EcosystemImage {
+  const ref = activityImageRefs[activityId];
+  if (ref) {
+    const images = getImagesByTag(ref.fallbackEcosystem);
+    if (images.length > 0) return images[0];
+  }
+  return ecosystemImages[0];
+}

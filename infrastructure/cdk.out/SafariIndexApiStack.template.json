@@ -146,6 +146,58 @@
       },
       {
        "Action": [
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttInquiryTableD4FBEAAFArnA85EFB59"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttInquiryTableD4FBEAAFArnA85EFB59"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttProposalTable0959F79BArnB98C3BA1"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttProposalTable0959F79BArnB98C3BA1"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
         "dynamodb:BatchGetItem",
         "dynamodb:Query",
         "dynamodb:GetItem",
@@ -337,6 +389,106 @@
           [
            {
             "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttAssuranceTable249FE877Arn5A26DAF0"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttInquiryTableD4FBEAAFArnA85EFB59"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttInquiryTableD4FBEAAFArnA85EFB59"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttInquiryTableD4FBEAAFArnA85EFB59"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttInquiryTableD4FBEAAFArnA85EFB59"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttProposalTable0959F79BArnB98C3BA1"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttProposalTable0959F79BArnB98C3BA1"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttProposalTable0959F79BArnB98C3BA1"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttProposalTable0959F79BArnB98C3BA1"
            },
            "/index/*"
           ]
@@ -346,6 +498,14 @@
       },
       {
        "Action": "bedrock:InvokeModel",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ses:SendEmail",
+        "ses:SendRawEmail"
+       ],
        "Effect": "Allow",
        "Resource": "*"
       }
@@ -368,7 +528,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": "cdk-hnb659fds-assets-928622536086-eu-central-1",
-     "S3Key": "b043cb15129a43e2264a1af36251b7f65822b17d27952249af9656db8b55b53f.zip"
+     "S3Key": "36331bbad247de8498498579e07a43c158ad0faeeb67ce565b5660a3ef8cea91.zip"
     },
     "Environment": {
      "Variables": {
@@ -384,10 +544,16 @@
       "ASSURANCE_TABLE": {
        "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputRefAssuranceTable249FE877F0EC3A3F"
       },
+      "INQUIRY_TABLE": {
+       "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputRefInquiryTableD4FBEAAF520B43B0"
+      },
+      "PROPOSAL_TABLE": {
+       "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputRefProposalTable0959F79B8E74CE9A"
+      },
       "LOGIC_VERSION": "rules_v1.0",
       "PROMPT_VERSION": "prompt_v1.0",
-      "BEDROCK_REGION": "us-east-1",
-      "BEDROCK_MODEL_ID": "anthropic.claude-3-sonnet-20240229-v1:0"
+      "BEDROCK_REGION": "us-west-2",
+      "BEDROCK_MODEL_ID": "anthropic.claude-3-haiku-20240307-v1:0"
      }
     },
     "FunctionName": "safari-index-decision-orchestrator",
@@ -408,7 +574,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "SafariIndexApiStack/DecisionOrchestratorLambda/Resource",
-    "aws:asset:path": "asset.b043cb15129a43e2264a1af36251b7f65822b17d27952249af9656db8b55b53f",
+    "aws:asset:path": "asset.36331bbad247de8498498579e07a43c158ad0faeeb67ce565b5660a3ef8cea91",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }

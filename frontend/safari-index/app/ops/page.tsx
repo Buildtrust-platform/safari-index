@@ -26,6 +26,7 @@ import {
   RefreshCw,
   TrendingUp,
   Users,
+  BarChart3,
 } from 'lucide-react';
 import type { InquiryRecord, InquiryStatus, ProposalStatus } from '../../lib/contracts';
 
@@ -247,7 +248,7 @@ export default function OpsDashboardPage() {
           {!loading && !error && stats && (
             <div className="space-y-8">
               {/* Quick Navigation */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Link
                   href={`/ops/inquiries?ops_key=${opsKey}`}
                   className="flex items-center justify-between p-6 bg-white rounded-xl border border-stone-200 hover:border-stone-300 hover:shadow-sm transition-all group"
@@ -266,6 +267,26 @@ export default function OpsDashboardPage() {
                     </div>
                   </div>
                   <ChevronRight className="w-5 h-5 text-stone-400 group-hover:text-blue-600 transition-colors" />
+                </Link>
+
+                <Link
+                  href={`/ops/intelligence?ops_key=${opsKey}`}
+                  className="flex items-center justify-between p-6 bg-white rounded-xl border border-stone-200 hover:border-stone-300 hover:shadow-sm transition-all group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center">
+                      <BarChart3 className="w-6 h-6 text-amber-600" />
+                    </div>
+                    <div>
+                      <h2 className="font-semibold text-stone-900 group-hover:text-amber-700 transition-colors">
+                        Intelligence
+                      </h2>
+                      <p className="text-sm text-stone-500">
+                        Conversion analytics
+                      </p>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-stone-400 group-hover:text-amber-600 transition-colors" />
                 </Link>
 
                 <div className="flex items-center justify-between p-6 bg-white rounded-xl border border-stone-200 opacity-60">

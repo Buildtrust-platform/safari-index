@@ -64,6 +64,8 @@ export async function createInquiry(
     linked_decision_ids: request.linked_decision_ids,
     notes: request.notes,
     source_path: request.source_path,
+    // Attribution tracking (optional, never fails inquiry creation)
+    attribution: request.attribution,
   };
 
   await docClient.send(

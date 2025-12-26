@@ -60,7 +60,7 @@ test.describe('Inquiry System', () => {
 
     const inquiryCta = page.getByTestId('inquiry-cta');
     await expect(inquiryCta).toBeVisible();
-    await expect(inquiryCta).toContainText('Request a Trip Brief');
+    await expect(inquiryCta).toContainText('Plan this safari');
   });
 
   test('inquiry CTA links to inquiry page with trip parameter', async ({ page }) => {
@@ -68,7 +68,9 @@ test.describe('Inquiry System', () => {
 
     const inquiryCta = page.getByTestId('inquiry-cta');
     const href = await inquiryCta.getAttribute('href');
-    expect(href).toContain('/inquire?trip=classic-serengeti-ngorongoro');
+    // Updated: now uses trip_id param and includes selected_decision_ids for prefill
+    expect(href).toContain('/inquire?trip_id=classic-serengeti-ngorongoro');
+    expect(href).toContain('selected_decision_ids=');
   });
 });
 

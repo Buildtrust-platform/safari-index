@@ -28,7 +28,6 @@ import {
   CheckCircle2,
   AlertCircle,
   BookOpen,
-  FileText,
   DollarSign,
 } from 'lucide-react';
 import {
@@ -48,6 +47,7 @@ import {
 } from '../../../lib/trip-links';
 import { ImageBand, ImageBandContent, ecosystemImages } from '../../components/visual';
 import { Navbar } from '../../components/layout';
+import { TypicalDaySection, AccommodationSection } from '../../components/trips';
 
 /**
  * Generate static params for all trips
@@ -95,6 +95,17 @@ export async function generateMetadata({
       url: `/trips/${id}`,
     },
   };
+}
+
+/**
+ * Get primary destination ID for activity/accommodation sections
+ */
+function getPrimaryDestination(trip: TripArchetype): string {
+  // Filter out broad regional tags
+  const specific = trip.regions.filter(
+    (r) => !['east-africa', 'southern-africa'].includes(r)
+  );
+  return specific[0] || trip.regions[0];
 }
 
 /**
@@ -310,6 +321,15 @@ export default async function TripPage({
           </div>
         </section>
 
+        {/* What your days look like */}
+        <TypicalDaySection primaryDestination={getPrimaryDestination(trip)} />
+
+        {/* Where you'll stay */}
+        <AccommodationSection
+          primaryDestination={getPrimaryDestination(trip)}
+          comfortTier={trip.comfort_tier}
+        />
+
         {/* Typical cost range */}
         <section className="mb-8" data-testid="section-cost">
           <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-3">
@@ -439,9 +459,10 @@ export default async function TripPage({
         {/* Plan This Safari CTA */}
         <section className="mb-8" data-testid="section-inquiry">
           <Link
-            href={`/inquire?trip=${id}`}
+            href={`/inquire?trip_id=${id}${trip.linked_decisions.length > 0 ? `&selected_decision_ids=${encodeURIComponent(trip.linked_decisions.slice(0, 6).join(','))}` : ''}`}
             className="flex items-center justify-between p-6 bg-stone-900 rounded-xl text-white group hover:bg-stone-800 transition-colors"
             data-testid="inquiry-cta"
+            prefetch={false}
           >
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">

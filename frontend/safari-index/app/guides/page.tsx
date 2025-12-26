@@ -34,7 +34,8 @@ import {
   bucketToSlug,
 } from '../../lib/guide-builder';
 import { ImageBand, ImageBandContent, ecosystemImages } from '../components/visual';
-import { Navbar } from '../components/layout';
+import { Navbar, Footer } from '../components/layout';
+import { SearchAndFilters } from '../components/SearchAndFilters';
 
 /**
  * SEO Metadata - indexable with canonical
@@ -169,6 +170,17 @@ export default function GuidesIndexPage() {
         </ImageBandContent>
       </ImageBand>
 
+      {/* Search Section */}
+      <section className="bg-white py-8 border-b border-stone-200">
+        <div className="max-w-3xl mx-auto px-4 md:px-8">
+          <SearchAndFilters
+            context="default"
+            placeholder="Search guides... e.g., 'when to visit' or 'budget safari'"
+            compact
+          />
+        </div>
+      </section>
+
       {/* Main content */}
       <div className="max-w-4xl mx-auto px-4 md:px-8 py-8">
         {/* Orientation paragraph */}
@@ -213,44 +225,7 @@ export default function GuidesIndexPage() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-stone-900 text-white py-12 mt-16">
-        <div className="max-w-6xl mx-auto px-4 md:px-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <span className="font-editorial text-lg font-semibold">Safari Index</span>
-              <span className="text-stone-500 text-sm ml-2">Pan-African Decision System</span>
-            </div>
-
-            <div className="flex items-center gap-6">
-              <Link
-                href="/"
-                className="text-sm text-stone-400 hover:text-white transition-colors"
-              >
-                Home
-              </Link>
-              <Link
-                href="/guides"
-                className="text-sm text-stone-400 hover:text-white transition-colors"
-              >
-                Guides
-              </Link>
-              <Link
-                href="/decisions"
-                className="text-sm text-stone-400 hover:text-white transition-colors"
-              >
-                Decisions
-              </Link>
-              <Link
-                href="/how-it-works"
-                className="text-sm text-stone-400 hover:text-white transition-colors"
-              >
-                How it works
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer variant="decision-system" />
     </main>
   );
 }

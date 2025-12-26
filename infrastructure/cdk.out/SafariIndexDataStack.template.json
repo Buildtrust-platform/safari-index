@@ -309,6 +309,140 @@
     "aws:cdk:path": "SafariIndexDataStack/AssuranceTable/Resource"
    }
   },
+  "SnapshotTableDA0E0D82": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "topic_id",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "KeySchema": [
+     {
+      "AttributeName": "topic_id",
+      "KeyType": "HASH"
+     }
+    ],
+    "TableName": "safari-index-snapshots",
+    "TimeToLiveSpecification": {
+     "AttributeName": "expires_at_epoch",
+     "Enabled": true
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SafariIndexDataStack/SnapshotTable/Resource"
+   }
+  },
+  "InquiryTableD4FBEAAF": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "inquiry_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "status",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "created_at",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "status-created-index",
+      "KeySchema": [
+       {
+        "AttributeName": "status",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "inquiry_id",
+      "KeyType": "HASH"
+     }
+    ],
+    "PointInTimeRecoverySpecification": {
+     "PointInTimeRecoveryEnabled": true
+    },
+    "TableName": "safari-index-inquiries"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "SafariIndexDataStack/InquiryTable/Resource"
+   }
+  },
+  "ProposalTable0959F79B": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "proposal_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "inquiry_id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "created_at",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "inquiry-created-index",
+      "KeySchema": [
+       {
+        "AttributeName": "inquiry_id",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "created_at",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "proposal_id",
+      "KeyType": "HASH"
+     }
+    ],
+    "PointInTimeRecoverySpecification": {
+     "PointInTimeRecoveryEnabled": true
+    },
+    "TableName": "safari-index-proposals"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "SafariIndexDataStack/ProposalTable/Resource"
+   }
+  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
@@ -356,6 +490,33 @@
     "Name": "SafariIndexAssuranceTableName"
    }
   },
+  "SnapshotTableName": {
+   "Description": "DynamoDB table for decision snapshot cache",
+   "Value": {
+    "Ref": "SnapshotTableDA0E0D82"
+   },
+   "Export": {
+    "Name": "SafariIndexSnapshotTableName"
+   }
+  },
+  "InquiryTableName": {
+   "Description": "DynamoDB table for trip inquiries",
+   "Value": {
+    "Ref": "InquiryTableD4FBEAAF"
+   },
+   "Export": {
+    "Name": "SafariIndexInquiryTableName"
+   }
+  },
+  "ProposalTableName": {
+   "Description": "DynamoDB table for safari proposals",
+   "Value": {
+    "Ref": "ProposalTable0959F79B"
+   },
+   "Export": {
+    "Name": "SafariIndexProposalTableName"
+   }
+  },
   "ExportsOutputFnGetAttDecisionTable2908AF27Arn4224CD64": {
    "Value": {
     "Fn::GetAtt": [
@@ -400,6 +561,28 @@
     "Name": "SafariIndexDataStack:ExportsOutputFnGetAttAssuranceTable249FE877Arn5A26DAF0"
    }
   },
+  "ExportsOutputFnGetAttInquiryTableD4FBEAAFArnA85EFB59": {
+   "Value": {
+    "Fn::GetAtt": [
+     "InquiryTableD4FBEAAF",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "SafariIndexDataStack:ExportsOutputFnGetAttInquiryTableD4FBEAAFArnA85EFB59"
+   }
+  },
+  "ExportsOutputFnGetAttProposalTable0959F79BArnB98C3BA1": {
+   "Value": {
+    "Fn::GetAtt": [
+     "ProposalTable0959F79B",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "SafariIndexDataStack:ExportsOutputFnGetAttProposalTable0959F79BArnB98C3BA1"
+   }
+  },
   "ExportsOutputRefDecisionTable2908AF279047AB50": {
    "Value": {
     "Ref": "DecisionTable2908AF27"
@@ -430,6 +613,22 @@
    },
    "Export": {
     "Name": "SafariIndexDataStack:ExportsOutputRefAssuranceTable249FE877F0EC3A3F"
+   }
+  },
+  "ExportsOutputRefInquiryTableD4FBEAAF520B43B0": {
+   "Value": {
+    "Ref": "InquiryTableD4FBEAAF"
+   },
+   "Export": {
+    "Name": "SafariIndexDataStack:ExportsOutputRefInquiryTableD4FBEAAF520B43B0"
+   }
+  },
+  "ExportsOutputRefProposalTable0959F79B8E74CE9A": {
+   "Value": {
+    "Ref": "ProposalTable0959F79B"
+   },
+   "Export": {
+    "Name": "SafariIndexDataStack:ExportsOutputRefProposalTable0959F79B8E74CE9A"
    }
   }
  },

@@ -22,6 +22,7 @@ import {
 } from '../lib/guide-builder';
 import { generateSlugFromId } from './content/p0-topics-bridge';
 import { getAllTrips } from './content/trip-shapes/trips';
+import { getAllActivityIds } from './content/activities/activity-primitives';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://safariindex.com';
@@ -29,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const bucketGuides = getAllBucketGuides();
   const p0TopicIds = getAllP0TopicIds();
   const trips = getAllTrips();
+  const activityIds = getAllActivityIds();
 
   // Decision pages
   const decisionPages = topics.map((topic) => ({
@@ -88,6 +90,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  // Authority hub pages
+  const whenToGoPage = {
+    url: `${baseUrl}/when-to-go`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  };
+
+  const destinationsPage = {
+    url: `${baseUrl}/destinations`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  };
+
+  // Activities hub page
+  const activitiesIndexPage = {
+    url: `${baseUrl}/activities`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  };
+
+  // Individual activity pages
+  const activityPages = activityIds.map((activityId) => ({
+    url: `${baseUrl}/activities/${activityId}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
   return [
     {
       url: baseUrl,
@@ -95,6 +128,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 1,
     },
+    whenToGoPage,
+    destinationsPage,
+    activitiesIndexPage,
+    ...activityPages,
     tripsIndexPage,
     ...tripPages,
     guidesIndexPage,

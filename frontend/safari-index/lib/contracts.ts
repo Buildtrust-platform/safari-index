@@ -289,6 +289,54 @@ export const InquiryStatusSchema = z.enum([
 ]);
 export type InquiryStatus = z.infer<typeof InquiryStatusSchema>;
 
+// ============================================================================
+// Inquiry Attribution Contracts
+// ============================================================================
+
+/**
+ * Entry surface - the type of page where user entered the funnel
+ */
+export const EntrySurfaceSchema = z.enum([
+  'homepage',
+  'decisions-hub',
+  'decision-page',
+  'trip-page',
+  'guide-page',
+  'destinations',
+  'activities',
+  'when-to-go',
+  'compare',
+  'direct',
+  'unknown',
+]);
+export type EntrySurface = z.infer<typeof EntrySurfaceSchema>;
+
+/**
+ * Attribution data captured automatically
+ * All fields optional to ensure inquiry never fails due to tracking
+ */
+export const InquiryAttributionSchema = z.object({
+  /** Type of page where user first entered */
+  entry_surface: EntrySurfaceSchema.optional(),
+  /** Full path of first page visited */
+  first_touch_path: z.string().optional(),
+  /** Full path of page immediately before inquiry */
+  last_touch_path: z.string().optional(),
+  /** Referrer URL (external) */
+  referrer: z.string().optional(),
+  /** Guide ID if arrived via guide */
+  guide_id: z.string().optional(),
+  /** UTM campaign if present */
+  utm_campaign: z.string().optional(),
+  /** UTM source if present */
+  utm_source: z.string().optional(),
+  /** UTM medium if present */
+  utm_medium: z.string().optional(),
+  /** Session page count before inquiry */
+  pages_viewed: z.number().optional(),
+});
+export type InquiryAttribution = z.infer<typeof InquiryAttributionSchema>;
+
 /**
  * Inquiry request payload (POST /api/inquire)
  */
@@ -304,6 +352,8 @@ export const InquiryRequestSchema = z.object({
   linked_decision_ids: z.array(z.string()),
   notes: z.string().nullable(),
   source_path: z.string().optional(),
+  // Attribution fields (all optional, captured automatically)
+  attribution: InquiryAttributionSchema.optional(),
 });
 export type InquiryRequest = z.infer<typeof InquiryRequestSchema>;
 
@@ -334,6 +384,8 @@ export const InquiryRecordSchema = z.object({
   linked_decision_ids: z.array(z.string()),
   notes: z.string().nullable(),
   source_path: z.string().optional(),
+  // Attribution fields (stored as flat structure in DynamoDB)
+  attribution: InquiryAttributionSchema.optional(),
 });
 export type InquiryRecord = z.infer<typeof InquiryRecordSchema>;
 

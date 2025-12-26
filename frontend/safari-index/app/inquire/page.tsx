@@ -34,6 +34,7 @@ import {
   getTripById,
   TripArchetype,
 } from '../content/trip-shapes/trips';
+import { getItineraryById } from '../content/itineraries';
 import {
   InquiryFormState,
   BUDGET_BANDS,
@@ -45,6 +46,7 @@ import {
   isValidEmail,
   isValidWhatsApp,
 } from '../../lib/inquiry';
+import { getAttributionData } from '../../lib/attribution';
 
 /**
  * Form field wrapper with label
@@ -247,31 +249,128 @@ function TripSelector({
   );
 }
 
+// Session storage key for draft persistence
+const DRAFT_STORAGE_KEY = 'safari-inquiry-draft';
+
+/**
+ * Load draft from sessionStorage
+ */
+function loadDraft(): Partial<InquiryFormState> | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const stored = sessionStorage.getItem(DRAFT_STORAGE_KEY);
+    if (stored) {
+      return JSON.parse(stored);
+    }
+  } catch {
+    // Ignore parse errors
+  }
+  return null;
+}
+
+/**
+ * Save draft to sessionStorage
+ */
+function saveDraft(state: InquiryFormState): void {
+  if (typeof window === 'undefined') return;
+  try {
+    sessionStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    // Ignore storage errors
+  }
+}
+
+/**
+ * Clear draft from sessionStorage
+ */
+function clearDraft(): void {
+  if (typeof window === 'undefined') return;
+  try {
+    sessionStorage.removeItem(DRAFT_STORAGE_KEY);
+  } catch {
+    // Ignore storage errors
+  }
+}
+
 /**
  * Main inquiry form content (uses useSearchParams)
  */
 function InquiryFormContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const tripParam = searchParams.get('trip');
+
+  // Query param prefill support
+  const tripParam = searchParams.get('trip') || searchParams.get('trip_id');
+  const itineraryParam = searchParams.get('itinerary');
+  const decisionIdsParam = searchParams.get('selected_decision_ids');
 
   const allTrips = getAllTrips();
-  const preselectedTrip = tripParam ? getTripById(tripParam) : null;
 
-  const [formState, setFormState] = useState<InquiryFormState>({
-    tripShapeId: preselectedTrip?.id || null,
-    budgetBand: null,
-    travelMonth: null,
-    travelYear: null,
-    travelerCount: 2,
-    travelStyle: preselectedTrip ? inferTravelStyleFromTrip(preselectedTrip) : null,
-    email: '',
-    whatsapp: '',
-    notes: '',
+  // Support both trip shapes and itineraries - itineraries link to their trip shape
+  const itinerary = itineraryParam ? getItineraryById(itineraryParam) : null;
+  const preselectedTrip = tripParam
+    ? getTripById(tripParam)
+    : itinerary?.linked_trip_shape_id
+      ? getTripById(itinerary.linked_trip_shape_id)
+      : null;
+
+  // Get decision IDs from itinerary if present
+  const itineraryDecisionIds = itinerary?.linked_decisions || [];
+
+  // Parse prefilled decision IDs from query param
+  const prefilledDecisionIds = decisionIdsParam
+    ? decisionIdsParam.split(',').map(id => id.trim()).filter(Boolean)
+    : [];
+
+  // Initialize form state with prefill + draft recovery
+  const [formState, setFormState] = useState<InquiryFormState>(() => {
+    // Start with defaults
+    const defaults: InquiryFormState = {
+      tripShapeId: preselectedTrip?.id || null,
+      budgetBand: null,
+      travelMonth: null,
+      travelYear: null,
+      travelerCount: 2,
+      travelStyle: preselectedTrip ? inferTravelStyleFromTrip(preselectedTrip) : null,
+      email: '',
+      whatsapp: '',
+      notes: '',
+    };
+
+    // Try to load draft from sessionStorage (client-side only)
+    if (typeof window !== 'undefined') {
+      const draft = loadDraft();
+      if (draft) {
+        // Merge draft with defaults, but prefer URL params for trip
+        return {
+          ...defaults,
+          ...draft,
+          // URL params take precedence for trip selection
+          tripShapeId: preselectedTrip?.id || draft.tripShapeId || null,
+          travelStyle: preselectedTrip
+            ? inferTravelStyleFromTrip(preselectedTrip)
+            : draft.travelStyle || null,
+        };
+      }
+    }
+
+    return defaults;
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Track prefilled decision IDs separately (merged with trip-linked decisions on submit)
+  // Combine query param decisions with itinerary-linked decisions
+  const [additionalDecisionIds] = useState<string[]>([
+    ...prefilledDecisionIds,
+    ...itineraryDecisionIds,
+  ]);
+
+  // Persist draft on form state changes
+  useEffect(() => {
+    saveDraft(formState);
+  }, [formState]);
 
   // Update travel style when trip changes
   useEffect(() => {
@@ -336,6 +435,13 @@ function InquiryFormContent() {
     try {
       const trip = formState.tripShapeId ? getTripById(formState.tripShapeId) : null;
 
+      // Merge trip-linked decisions with prefilled decision IDs (deduplicated)
+      const tripDecisions = trip?.linked_decisions || [];
+      const allDecisionIds = [...new Set([...tripDecisions, ...additionalDecisionIds])];
+
+      // Capture attribution data (never fails)
+      const attribution = getAttributionData();
+
       // Build API request payload
       const payload = {
         trip_shape_id: formState.tripShapeId,
@@ -346,9 +452,11 @@ function InquiryFormContent() {
         travel_style: formState.travelStyle,
         email: formState.email,
         whatsapp: formState.whatsapp || null,
-        linked_decision_ids: trip?.linked_decisions || [],
+        linked_decision_ids: allDecisionIds,
         notes: formState.notes || null,
         source_path: window.location.pathname + window.location.search,
+        // Attribution data for conversion intelligence (all optional)
+        attribution: Object.keys(attribution).length > 0 ? attribution : undefined,
       };
 
       // Submit to API
@@ -364,6 +472,9 @@ function InquiryFormContent() {
       }
 
       const { inquiry_id } = await response.json();
+
+      // Clear draft after successful submission
+      clearDraft();
 
       // Navigate to confirmation with inquiry ID
       router.push(`/inquire/confirmation?id=${inquiry_id}`);
@@ -547,23 +658,26 @@ function InquiryFormContent() {
           </section>
 
           {/* Linked Decisions Preview */}
-          {selectedTrip && selectedTrip.linked_decisions.length > 0 && (
-            <section className="p-6 bg-stone-100 rounded-xl">
+          {((selectedTrip?.linked_decisions?.length ?? 0) > 0 || additionalDecisionIds.length > 0) && (
+            <section className="p-6 bg-stone-100 rounded-xl" data-testid="linked-decisions-preview">
               <h3 className="font-medium text-stone-900 mb-2">
-                Decisions linked to this trip
+                Decisions linked to this inquiry
               </h3>
               <p className="text-sm text-stone-600 mb-4">
                 Your trip brief will include these decision points for review.
               </p>
               <div className="flex flex-wrap gap-2">
-                {selectedTrip.linked_decisions.slice(0, 6).map((decisionId) => (
-                  <span
-                    key={decisionId}
-                    className="px-3 py-1 bg-white text-stone-700 text-sm rounded-full border border-stone-200"
-                  >
-                    {decisionId.replace(/-/g, ' ')}
-                  </span>
-                ))}
+                {[...new Set([...(selectedTrip?.linked_decisions || []), ...additionalDecisionIds])]
+                  .slice(0, 6)
+                  .map((decisionId) => (
+                    <span
+                      key={decisionId}
+                      className="px-3 py-1 bg-white text-stone-700 text-sm rounded-full border border-stone-200"
+                      data-testid="linked-decision-chip"
+                    >
+                      {decisionId.replace(/-/g, ' ')}
+                    </span>
+                  ))}
               </div>
             </section>
           )}

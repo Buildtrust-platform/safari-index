@@ -34,7 +34,7 @@ import {
 } from './when-to-go-data';
 import { cn } from '../ui/utils';
 import { ImageBand, ImageBandContent, pageImages } from '../components/visual';
-import { Navbar } from '../components/layout';
+import { Navbar, Footer } from '../components/layout';
 import { ArrowRight, Search, ChevronRight, MapPin, X, Compass, Calendar } from 'lucide-react';
 
 /**
@@ -579,32 +579,7 @@ function ExploreContent() {
         )}
       </div>
 
-      {/* Footer */}
-      <footer className="bg-stone-900 text-white py-12 mt-16">
-        <div className="max-w-6xl mx-auto px-4 md:px-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <span className="font-editorial text-lg font-semibold">Safari Index</span>
-              <span className="text-stone-500 text-sm ml-2">Pan-African Decision System</span>
-            </div>
-
-            <div className="flex items-center gap-6">
-              <Link href="/" className="text-sm text-stone-400 hover:text-white transition-colors">
-                Home
-              </Link>
-              <Link href="/decisions" className="text-sm text-stone-400 hover:text-white transition-colors">
-                All Decisions
-              </Link>
-              <Link href="/compare" className="text-sm text-stone-400 hover:text-white transition-colors">
-                Compare
-              </Link>
-              <Link href="/how-it-works" className="text-sm text-stone-400 hover:text-white transition-colors">
-                How it works
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer variant="decision-system" />
     </main>
   );
 }

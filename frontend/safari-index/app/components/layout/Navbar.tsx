@@ -25,9 +25,10 @@ interface NavbarProps {
 }
 
 const NAV_LINKS = [
+  { label: 'Destinations', href: '/destinations' },
+  { label: 'Activities', href: '/activities' },
   { label: 'Safaris', href: '/trips' },
   { label: 'Decisions', href: '/decisions' },
-  { label: 'Guides', href: '/guides' },
   { label: 'How it works', href: '/how-it-works' },
 ];
 

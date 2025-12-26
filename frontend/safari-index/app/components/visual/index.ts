@@ -21,11 +21,26 @@ export {
   getImagesByTag,
   getImageById,
   getRandomImage,
+  // Destination images
+  destinationImages,
+  getDestinationImage,
+  // Activity images
+  activityImageRefs,
+  getActivityImageRef,
+  getActivityFallbackImage,
 } from './ecosystem-images';
-export type { EcosystemImage, HeroImage } from './ecosystem-images';
+export type {
+  EcosystemImage,
+  HeroImage,
+  DestinationImage,
+  ActivityImageRef,
+} from './ecosystem-images';
 
 export { DecisionProcess, ProcessStepHighlight } from './DecisionProcess';
 export type { DecisionProcessProps } from './DecisionProcess';
 
 export { VerdictMoment } from './VerdictMoment';
 export type { VerdictMomentProps, OutcomeType as VerdictOutcomeType } from './VerdictMoment';
+
+export { TravelMap } from './TravelMap';
+export { RouteMap } from './RouteMap';

@@ -16,7 +16,7 @@
 
 import Link from 'next/link';
 import { DecisionProcess, ImageBand, ImageBandContent, pageImages } from '../components/visual';
-import { Navbar } from '../components/layout';
+import { Navbar, Footer } from '../components/layout';
 import {
   Heading2,
   Heading3,
@@ -251,32 +251,7 @@ export default function HowItWorksPage() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-stone-900 text-white py-12 mt-16">
-        <div className="max-w-6xl mx-auto px-4 md:px-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <span className="font-editorial text-lg font-semibold">Safari Index</span>
-              <span className="text-stone-500 text-sm ml-2">Pan-African Decision System</span>
-            </div>
-
-            <div className="flex items-center gap-6">
-              <Link href="/" className="text-sm text-stone-400 hover:text-white transition-colors">
-                Home
-              </Link>
-              <Link href="/decisions" className="text-sm text-stone-400 hover:text-white transition-colors">
-                All Decisions
-              </Link>
-              <Link href="/explore" className="text-sm text-stone-400 hover:text-white transition-colors">
-                Explore
-              </Link>
-              <Link href="/compare" className="text-sm text-stone-400 hover:text-white transition-colors">
-                Compare
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer variant="decision-system" />
     </main>
   );
 }

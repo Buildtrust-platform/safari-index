@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Source_Serif_4, Inter } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
+import AttributionTracker from "./components/AttributionTracker";
 
 /**
  * Editorial Font - Source Serif 4
@@ -64,6 +66,10 @@ export default function RootLayout({
       <body
         className={`${sourceSerif.variable} ${inter.variable} antialiased`}
       >
+        {/* Attribution tracker - invisible, session-only, never fails */}
+        <Suspense fallback={null}>
+          <AttributionTracker />
+        </Suspense>
         {children}
       </body>
     </html>

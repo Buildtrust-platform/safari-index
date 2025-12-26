@@ -3,25 +3,27 @@
 /**
  * Safari Index Homepage
  *
- * Professional safari operator arrival page with decision authority framing.
+ * Professional safari operator arrival page with rich visual presence.
  * Positions Safari Index as a serious safari company that uses logic-backed
  * decision support to plan better trips.
  *
  * Structure:
  * 1. ARRIVAL HERO - Operator positioning with African landscape
  * 2. OPERATOR CREDENTIALS - Factual trust signals
- * 3. HOW WE WORK - Decision-backed planning (3 pillars)
- * 4. REAL QUESTIONS - 6 decision cards from topic registry
- * 5. TRIP SHAPES - Commercial safari offerings
- * 6. ACCOUNTABILITY - Trust signals
- * 7. CALM CLOSE - Start planning CTA
+ * 3. DESTINATION SHOWCASE - Visual grid of key destinations
+ * 4. HOW WE WORK - Decision-backed planning (3 pillars)
+ * 5. EXPERIENCE GALLERY - Safari experiences mosaic
+ * 6. REAL QUESTIONS - 6 decision cards from topic registry
+ * 7. TRIP SHAPES - Commercial safari offerings with images
+ * 8. CALM CLOSE - Start planning CTA
  */
 
 import Link from 'next/link';
-import { ChevronDown, ArrowRight, MapPin, Calendar, Scale, ShieldOff, FileText, RefreshCw, Map } from 'lucide-react';
-import { ImageBand, ImageBandContent, pageImages } from './components/visual';
+import { ChevronDown, ArrowRight, MapPin, Calendar, Scale, ShieldOff, RefreshCw, Map, Compass } from 'lucide-react';
+import { ImageBand, ImageBandContent, pageImages, destinationImages, activityImageRefs, ecosystemImages } from './components/visual';
 import { Navbar, PageGrid } from './components/layout';
 import { OperatorCredentials } from './components/OperatorCredentials';
+import { SearchAndFilters } from './components/SearchAndFilters';
 import { getPublishedTopics, type DecisionTopic } from './content/decision-topics';
 import { getAllTrips } from './content/trip-shapes/trips';
 
@@ -77,6 +79,92 @@ function SecondaryButton({
       className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-transparent text-white border border-white/40 hover:bg-white/10 hover:border-white/60"
     >
       {children}
+    </Link>
+  );
+}
+
+/**
+ * Destination Card - Visual card for destination showcase
+ */
+function DestinationCard({
+  id,
+  name,
+  tagline,
+  featured,
+}: {
+  id: string;
+  name: string;
+  tagline: string;
+  featured?: boolean;
+}) {
+  const image = destinationImages[id];
+
+  return (
+    <Link
+      href={`/destinations#${id}`}
+      className={`group relative block overflow-hidden rounded-xl ${
+        featured ? 'md:col-span-2 md:row-span-2' : ''
+      }`}
+    >
+      <div className={`relative ${featured ? 'h-80 md:h-full' : 'h-48 md:h-56'}`}>
+        <img
+          src={image?.src || '/images/ecosystems/savannah-morning.jpg'}
+          alt={image?.alt || `${name} safari landscape`}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5">
+          <h3 className={`font-editorial font-semibold text-white mb-1 ${
+            featured ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl'
+          }`}>
+            {name}
+          </h3>
+          <p className={`text-white/70 ${featured ? 'text-sm md:text-base' : 'text-xs md:text-sm'}`}>
+            {tagline}
+          </p>
+        </div>
+        <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+          <ArrowRight className="w-4 h-4 text-white" />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+/**
+ * Experience Card - For the experience gallery
+ */
+function ExperienceCard({
+  activityId,
+  title,
+  description,
+}: {
+  activityId: string;
+  title: string;
+  description: string;
+}) {
+  const imageRef = activityImageRefs[activityId];
+  const imageSrc = imageRef?.hasImage ? imageRef.src : '/images/ecosystems/savannah-morning.jpg';
+
+  return (
+    <Link
+      href={`/activities/${activityId}`}
+      className="group relative block overflow-hidden rounded-xl h-64"
+    >
+      <img
+        src={imageSrc || '/images/ecosystems/savannah-morning.jpg'}
+        alt={imageRef?.alt || title}
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 p-5">
+        <h3 className="font-editorial text-lg font-semibold text-white mb-1">
+          {title}
+        </h3>
+        <p className="text-sm text-white/70 line-clamp-2">
+          {description}
+        </p>
+      </div>
     </Link>
   );
 }
@@ -143,12 +231,10 @@ function PillarCard({
 
 /**
  * Get 6 featured topics for the homepage
- * Priority order based on spec examples
  */
 function getFeaturedTopics(): DecisionTopic[] {
   const allTopics = getPublishedTopics();
 
-  // Priority slugs from spec (in order of preference)
   const prioritySlugs = [
     'tanzania-safari-february',
     'tanzania-vs-kenya-first-safari',
@@ -170,7 +256,6 @@ function getFeaturedTopics(): DecisionTopic[] {
     if (topic) featured.push(topic);
   }
 
-  // Fill remaining slots if needed
   for (const topic of allTopics) {
     if (featured.length >= 6) break;
     if (!featured.includes(topic)) featured.push(topic);
@@ -180,31 +265,66 @@ function getFeaturedTopics(): DecisionTopic[] {
 }
 
 /**
- * Trip Card for homepage - compact version
+ * Trip Card with image - for homepage showcase
  */
-function TripCard({ trip }: { trip: { id: string; title: string; subtitle: string } }) {
+function TripCardWithImage({ trip, index }: { trip: { id: string; title: string; subtitle: string }; index: number }) {
+  // Use different ecosystem images for variety
+  const ecosystemIndex = index % ecosystemImages.length;
+  const image = ecosystemImages[ecosystemIndex];
+
   return (
     <Link
       href={`/trips/${trip.id}`}
       prefetch={false}
       className="group block"
     >
-      <div className="p-4 rounded-xl bg-white border border-stone-200 hover:border-amber-300 hover:shadow-md transition-all duration-200">
-        <div className="flex items-center justify-between">
-          <div className="flex-1 min-w-0">
-            <h3 className="font-editorial text-base font-medium text-stone-900 group-hover:text-amber-700 transition-colors truncate">
-              {trip.title}
-            </h3>
-            <p className="text-sm text-stone-500 truncate">
-              {trip.subtitle}
-            </p>
+      <div className="rounded-xl bg-white border border-stone-200 hover:border-amber-300 hover:shadow-lg transition-all duration-200 overflow-hidden">
+        <div className="relative h-40 overflow-hidden">
+          <img
+            src={image?.src || '/images/ecosystems/savannah-morning.jpg'}
+            alt={image?.alt || 'Safari landscape'}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+        </div>
+        <div className="p-4">
+          <h3 className="font-editorial text-base font-medium text-stone-900 group-hover:text-amber-700 transition-colors mb-1">
+            {trip.title}
+          </h3>
+          <p className="text-sm text-stone-500 line-clamp-1">
+            {trip.subtitle}
+          </p>
+          <div className="flex items-center gap-2 mt-3 text-xs text-amber-700">
+            <Compass className="w-3.5 h-3.5" />
+            <span className="font-medium">View itinerary</span>
+            <ArrowRight className="w-3 h-3 ml-auto text-stone-400 group-hover:text-amber-600 transition-colors" />
           </div>
-          <ArrowRight className="w-4 h-4 text-stone-400 group-hover:text-amber-600 transition-colors flex-shrink-0 ml-3" />
         </div>
       </div>
     </Link>
   );
 }
+
+/**
+ * Featured destinations data
+ */
+const FEATURED_DESTINATIONS = [
+  { id: 'tanzania', name: 'Tanzania', tagline: 'Serengeti, Ngorongoro, and the birthplace of safari', featured: true },
+  { id: 'kenya', name: 'Kenya', tagline: 'Masai Mara conservancies and Laikipia' },
+  { id: 'botswana', name: 'Botswana', tagline: 'Okavango Delta and exclusive wilderness' },
+  { id: 'namibia', name: 'Namibia', tagline: 'Desert landscapes and Sossusvlei dunes' },
+  { id: 'rwanda', name: 'Rwanda', tagline: 'Mountain gorillas in the Virungas' },
+];
+
+/**
+ * Featured experiences data
+ */
+const FEATURED_EXPERIENCES = [
+  { activityId: 'game-drive', title: 'Game Drives', description: 'Classic safari exploration at dawn and dusk' },
+  { activityId: 'walking-safari', title: 'Walking Safaris', description: 'On foot with expert guides through the bush' },
+  { activityId: 'gorilla-trekking', title: 'Gorilla Trekking', description: 'Mountain gorilla encounters in volcanic forests' },
+  { activityId: 'hot-air-balloon', title: 'Balloon Safaris', description: 'Sunrise flights over the Serengeti plains' },
+];
 
 /**
  * Homepage
@@ -248,7 +368,7 @@ export default function Home() {
             Every decision is logic-backed. Every trip is custom-built.
           </p>
 
-          {/* CTAs - Trips first (commercial), then Decisions (how we work) */}
+          {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 animate-fade-in-up animation-delay-300">
             <PrimaryButton href="/trips">
               Browse safaris
@@ -263,20 +383,72 @@ export default function Home() {
       </ImageBand>
 
       {/* ================================================================
-          SECTION 1.5 — OPERATOR CREDENTIALS
+          SECTION 1.5 — SEARCH & EXPLORE
+          Search bar and filters immediately below hero.
+          ================================================================ */}
+      <section className="bg-white py-8 md:py-10 border-b border-stone-200">
+        <PageGrid maxWidth="default">
+          <div className="max-w-3xl mx-auto">
+            <SearchAndFilters />
+          </div>
+        </PageGrid>
+      </section>
+
+      {/* ================================================================
+          SECTION 1.75 — OPERATOR CREDENTIALS
           Factual trust signals. No slogans.
           ================================================================ */}
-      <section className="bg-white border-b border-stone-100 py-6">
+      <section className="bg-stone-50 border-b border-stone-100 py-6">
         <PageGrid maxWidth="default">
           <OperatorCredentials variant="full" />
         </PageGrid>
       </section>
 
       {/* ================================================================
-          SECTION 2 — HOW WE PLAN SAFARIS
+          SECTION 2 — DESTINATION SHOWCASE
+          Visual grid of key destinations.
+          ================================================================ */}
+      <section className="bg-stone-50 py-16 md:py-24">
+        <PageGrid maxWidth="default">
+          <div className="text-center mb-10">
+            <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900 mb-3">
+              Where we operate
+            </h2>
+            <p className="text-stone-600 max-w-xl mx-auto">
+              Private safaris across East and Southern Africa's most rewarding destinations.
+            </p>
+          </div>
+
+          {/* Destination Grid - Asymmetric layout for visual interest */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            {FEATURED_DESTINATIONS.map((dest) => (
+              <DestinationCard
+                key={dest.id}
+                id={dest.id}
+                name={dest.name}
+                tagline={dest.tagline}
+                featured={dest.featured}
+              />
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link
+              href="/destinations"
+              className="inline-flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-800 transition-colors"
+            >
+              View all destinations
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </PageGrid>
+      </section>
+
+      {/* ================================================================
+          SECTION 3 — HOW WE PLAN SAFARIS
           Decision-backed planning approach.
           ================================================================ */}
-      <section className="bg-gradient-to-b from-stone-50 to-white py-20 md:py-28">
+      <section className="bg-white py-20 md:py-28">
         <PageGrid maxWidth="narrow">
           <div className="text-center mb-14">
             <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900 mb-4">
@@ -308,15 +480,56 @@ export default function Home() {
       </section>
 
       {/* ================================================================
-          SECTION 3 — REAL QUESTIONS
+          SECTION 3.5 — EXPERIENCE GALLERY
+          Safari experiences mosaic.
+          ================================================================ */}
+      <section className="bg-stone-900 py-16 md:py-24">
+        <PageGrid maxWidth="default">
+          <div className="text-center mb-10">
+            <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-white mb-3">
+              Safari experiences
+            </h2>
+            <p className="text-stone-400 max-w-xl mx-auto">
+              From classic game drives to walking safaris and gorilla treks.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {FEATURED_EXPERIENCES.map((exp) => (
+              <ExperienceCard
+                key={exp.activityId}
+                activityId={exp.activityId}
+                title={exp.title}
+                description={exp.description}
+              />
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link
+              href="/activities"
+              className="inline-flex items-center gap-2 text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors"
+            >
+              Explore all activities
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </PageGrid>
+      </section>
+
+      {/* ================================================================
+          SECTION 4 — REAL QUESTIONS
           6 decision cards from topic registry.
           ================================================================ */}
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-stone-50 py-20 md:py-28">
         <PageGrid maxWidth="default">
           <div className="text-center mb-12">
             <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900 mb-4">
               Start with a real question
             </h2>
+            <p className="text-stone-600 max-w-xl mx-auto">
+              We publish our decision logic. Ask a question and get a clear, reasoned answer.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -338,10 +551,10 @@ export default function Home() {
       </section>
 
       {/* ================================================================
-          SECTION 3.5 — SAFARIS WE OPERATE
-          Trip shapes as commercial anchors.
+          SECTION 5 — SAFARIS WE OPERATE
+          Trip shapes with images.
           ================================================================ */}
-      <section className="bg-stone-50 py-20 md:py-28">
+      <section className="bg-white py-20 md:py-28">
         <PageGrid maxWidth="default">
           <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-3 mb-4">
@@ -358,9 +571,9 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {featuredTrips.map((trip) => (
-              <TripCard key={trip.id} trip={trip} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredTrips.map((trip, index) => (
+              <TripCardWithImage key={trip.id} trip={trip} index={index} />
             ))}
           </div>
 
@@ -377,41 +590,67 @@ export default function Home() {
       </section>
 
       {/* ================================================================
-          SECTION 4 — CATEGORY CLARIFICATION
-          What kind of operator Safari Index is.
+          SECTION 6 — CATEGORY CLARIFICATION WITH IMAGE
+          Visual statement about Safari Index.
           ================================================================ */}
-      <section className="bg-white py-16 md:py-20">
-        <PageGrid maxWidth="narrow">
-          <div className="text-center">
-            <h2 className="font-editorial text-xl md:text-2xl font-semibold text-stone-900 mb-4">
-              A different kind of safari operator
-            </h2>
-            <p className="font-editorial text-stone-600 leading-relaxed max-w-2xl mx-auto">
-              We plan and operate private safaris. We also publish the decision logic behind our recommendations.
-              You see exactly why we suggest what we suggest—and what would change our answer.
-            </p>
-          </div>
-        </PageGrid>
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={ecosystemImages.find(img => img.id === 'kopje-landscape')?.src || '/images/ecosystems/savannah-morning.jpg'}
+            alt="African landscape"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-stone-900/80" />
+        </div>
+        <div className="relative py-20 md:py-32">
+          <PageGrid maxWidth="narrow">
+            <div className="text-center">
+              <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-white mb-5">
+                A different kind of safari operator
+              </h2>
+              <p className="font-editorial text-lg text-stone-300 leading-relaxed max-w-2xl mx-auto mb-8">
+                We plan and operate private safaris. We also publish the decision logic behind our recommendations.
+                You see exactly why we suggest what we suggest—and what would change our answer.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link
+                  href="/how-it-works"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-white text-stone-900 hover:bg-stone-100"
+                >
+                  How it works
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/inquire"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-transparent text-white border border-white/40 hover:bg-white/10 hover:border-white/60"
+                >
+                  Start planning
+                </Link>
+              </div>
+            </div>
+          </PageGrid>
+        </div>
       </section>
 
       {/* ================================================================
-          SECTION 5 — ACCOUNTABILITY SIGNALS
-          Trust signals.
+          SECTION 7 — ACCOUNTABILITY SIGNALS
+          Trust signals with visual treatment.
           ================================================================ */}
-      <section className="bg-white py-16 md:py-20">
-        <PageGrid maxWidth="narrow">
-          <div className="space-y-4">
+      <section className="bg-stone-50 py-16 md:py-20">
+        <PageGrid maxWidth="default">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: FileText, text: 'Decisions are versioned and dated.' },
-              { icon: RefreshCw, text: 'Outcomes change when conditions change.' },
-              { icon: Calendar, text: 'Assurance preserves a decision as-issued.' },
-              { icon: ShieldOff, text: 'No commissions. No bookings. No incentives.' },
+              { icon: Calendar, title: 'Versioned & Dated', text: 'Every decision is timestamped and versioned.' },
+              { icon: RefreshCw, title: 'Conditions Change', text: 'Outcomes update when the facts change.' },
+              { icon: ShieldOff, title: 'No Incentives', text: 'No commissions, no bookings, no hidden agendas.' },
+              { icon: MapPin, title: 'Local Knowledge', text: 'Grounded in years of African safari experience.' },
             ].map((item, index) => (
-              <div key={index} className="flex items-center gap-4">
-                <div className="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center flex-shrink-0">
-                  <item.icon className="w-4 h-4 text-stone-500" />
+              <div key={index} className="text-center p-6 rounded-xl bg-white border border-stone-200">
+                <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center mx-auto mb-4">
+                  <item.icon className="w-5 h-5 text-stone-600" />
                 </div>
-                <p className="font-editorial text-stone-700">{item.text}</p>
+                <h3 className="font-medium text-stone-900 mb-1">{item.title}</h3>
+                <p className="text-sm text-stone-500">{item.text}</p>
               </div>
             ))}
           </div>
@@ -419,64 +658,103 @@ export default function Home() {
       </section>
 
       {/* ================================================================
-          SECTION 6 — START PLANNING
-          Final CTA - operator focused.
+          SECTION 8 — START PLANNING
+          Final CTA with image background.
           ================================================================ */}
-      <section className="bg-stone-900 text-white py-20 md:py-28">
-        <PageGrid maxWidth="narrow">
-          <div className="text-center">
-            <h2 className="font-editorial text-xl md:text-2xl text-white mb-3">
-              Ready to plan your safari?
-            </h2>
-            <p className="font-editorial text-stone-400 mb-8 max-w-lg mx-auto">
-              Browse our itineraries or start with the decisions that shape your trip.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link
-                href="/trips"
-                className="group inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-white text-stone-900 hover:bg-stone-100"
-              >
-                Browse safaris
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-              <Link
-                href="/inquire"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-transparent text-white border border-white/40 hover:bg-white/10 hover:border-white/60"
-              >
-                Start planning
-              </Link>
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={ecosystemImages.find(img => img.id === 'floodplain-evening')?.src || '/images/ecosystems/savannah-morning.jpg'}
+            alt="African sunset"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-stone-900/90 to-stone-900/70" />
+        </div>
+        <div className="relative py-24 md:py-32">
+          <PageGrid maxWidth="default">
+            <div className="max-w-lg">
+              <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-white mb-4">
+                Ready to plan your safari?
+              </h2>
+              <p className="font-editorial text-stone-300 mb-8">
+                Browse our itineraries, explore the decisions that shape your trip, or start a conversation with our team.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/trips"
+                  className="group inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-white text-stone-900 hover:bg-stone-100"
+                >
+                  Browse safaris
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                </Link>
+                <Link
+                  href="/inquire"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-amber-600 text-white hover:bg-amber-700"
+                >
+                  Start planning
+                </Link>
+              </div>
             </div>
-          </div>
-        </PageGrid>
+          </PageGrid>
+        </div>
       </section>
 
       {/* ================================================================
           FOOTER
           Safari operator identity.
           ================================================================ */}
-      <footer className="bg-stone-950 text-white py-10">
+      <footer className="bg-stone-950 text-white py-12">
         <PageGrid maxWidth="default">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <span className="font-editorial text-base font-semibold">Safari Index</span>
-              <span className="text-stone-500 text-sm ml-2">Private Safari Operator</span>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div className="md:col-span-2">
+              <span className="font-editorial text-xl font-semibold">Safari Index</span>
+              <p className="text-stone-400 text-sm mt-2 max-w-sm">
+                Private safari operator specializing in East and Southern Africa.
+                Logic-backed decisions. Custom-built itineraries.
+              </p>
             </div>
-
+            <div>
+              <h4 className="font-medium text-stone-300 mb-3">Explore</h4>
+              <div className="space-y-2">
+                <Link href="/trips" className="block text-sm text-stone-400 hover:text-white transition-colors">
+                  Safaris
+                </Link>
+                <Link href="/destinations" className="block text-sm text-stone-400 hover:text-white transition-colors">
+                  Destinations
+                </Link>
+                <Link href="/activities" className="block text-sm text-stone-400 hover:text-white transition-colors">
+                  Activities
+                </Link>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-medium text-stone-300 mb-3">Resources</h4>
+              <div className="space-y-2">
+                <Link href="/decisions" className="block text-sm text-stone-400 hover:text-white transition-colors">
+                  Decisions
+                </Link>
+                <Link href="/how-it-works" className="block text-sm text-stone-400 hover:text-white transition-colors">
+                  How it works
+                </Link>
+                <Link href="/inquire" className="block text-sm text-stone-400 hover:text-white transition-colors">
+                  Plan a Safari
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-stone-800 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <p className="text-stone-500 text-sm">
+              Safari Index · Private Safari Operator
+            </p>
             <div className="flex items-center gap-6">
-              <Link href="/" className="text-sm text-stone-400 hover:text-white transition-colors">
-                Home
-              </Link>
-              <Link href="/trips" className="text-sm text-stone-400 hover:text-white transition-colors">
-                Safaris
-              </Link>
-              <Link href="/decisions" className="text-sm text-stone-400 hover:text-white transition-colors">
-                Decisions
-              </Link>
               <Link href="/guides" className="text-sm text-stone-400 hover:text-white transition-colors">
                 Guides
               </Link>
-              <Link href="/how-it-works" className="text-sm text-stone-400 hover:text-white transition-colors">
-                How it works
+              <Link href="/when-to-go" className="text-sm text-stone-400 hover:text-white transition-colors">
+                When to Go
+              </Link>
+              <Link href="/compare" className="text-sm text-stone-400 hover:text-white transition-colors">
+                Compare
               </Link>
             </div>
           </div>

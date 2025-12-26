@@ -138,6 +138,8 @@ After deployment:
 ```
 NEXT_PUBLIC_APP_MODE=observation
 NEXT_PUBLIC_API_BASE=https://{api-id}.execute-api.{region}.amazonaws.com/v1
+OPERATOR_EMAIL=steve@safariindex.com
+FROM_EMAIL=notifications@safariindex.com
 ```
 
 ### Required for Staging
@@ -146,6 +148,8 @@ NEXT_PUBLIC_API_BASE=https://{api-id}.execute-api.{region}.amazonaws.com/v1
 NEXT_PUBLIC_APP_MODE=build
 NEXT_PUBLIC_API_BASE=https://{staging-api-id}.execute-api.{region}.amazonaws.com/v1
 ENABLE_DEV_PAGES=true
+OPERATOR_EMAIL=steve@safariindex.com
+FROM_EMAIL=notifications@safariindex.com
 ```
 
 ### Optional (Both Environments)
@@ -154,6 +158,14 @@ ENABLE_DEV_PAGES=true
 NEXT_PUBLIC_ASSETS_CDN_BASE=https://{distribution-id}.cloudfront.net
 SITE_ORIGIN=https://safariindex.com
 ```
+
+### Email Notification Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `OPERATOR_EMAIL` | Email address to receive inquiry notifications | Yes (for notifications) |
+| `FROM_EMAIL` | Sender email address (must be SES-verified) | Defaults to `notifications@safariindex.com` |
+| `AWS_REGION` | AWS region for SES | Defaults to `us-east-1` |
 
 ---
 
@@ -321,6 +333,55 @@ If webhook was missed or failed:
 | Banner shows "Payment processing" | Webhook delayed | User clicks "Refresh status" or waits |
 | 402 Payment Required | Webhook never received | Replay webhook from Stripe |
 | Banner persists after refresh | Backend didn't update | Check webhook logs, manual update if needed |
+
+---
+
+## Section H: SES Email Configuration
+
+### H.1 Verify Email Identities
+
+For inquiry notifications to work, you must verify email identities in SES:
+
+1. **AWS Console** → SES → Verified identities
+2. **Create identity** for sender email (`notifications@safariindex.com`)
+3. **Create identity** for operator email (`steve@safariindex.com`)
+4. Complete DNS verification (for domain) or click verification link (for email)
+
+### H.2 Move Out of SES Sandbox
+
+By default, SES is in sandbox mode (can only send to verified emails).
+
+To send to any email:
+
+1. **AWS Console** → SES → Account dashboard
+2. Click "Request production access"
+3. Fill out the form:
+   - Mail type: Transactional
+   - Use case: Safari trip inquiry notifications
+   - Expected sending volume: <100/day
+4. Wait for approval (usually 24-48 hours)
+
+### H.3 Set Environment Variables in Amplify
+
+1. **Amplify Console** → App → Hosting → Environment variables
+2. Add for both staging and production branches:
+   - `OPERATOR_EMAIL`: `steve@safariindex.com`
+   - `FROM_EMAIL`: `notifications@safariindex.com`
+   - `AWS_REGION`: `us-east-1` (or your SES region)
+
+### H.4 Verify Email Delivery
+
+After configuration:
+
+1. Submit a test inquiry on staging
+2. Check CloudWatch logs for the Amplify app
+3. Search for `[Inquiry Notification]` messages
+4. Verify email arrives at operator inbox
+
+Common issues:
+- "OPERATOR_EMAIL not configured" → Add env var in Amplify
+- SES SendEmail error → Check SES identity verification
+- No email received → Check spam folder, verify SES not in sandbox
 
 ---
 

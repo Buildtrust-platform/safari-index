@@ -19,8 +19,9 @@ import { DiffSummary } from './DiffSummary';
 import { computeDiff, type DiffModel } from './compare-diff';
 import { emptyPanel, type ComparePanel as PanelType } from './compare-types';
 import { ImageBand, ImageBandContent, pageImages } from '../components/visual';
-import { Navbar } from '../components/layout';
+import { Navbar, Footer } from '../components/layout';
 import { MetaRail } from '../components/layout/MetaRail';
+import { SearchAndFilters } from '../components/SearchAndFilters';
 import { ChevronRight, RefreshCw, Loader2, ArrowRight, Hash, Scale } from 'lucide-react';
 
 const API_ENDPOINT = `${API_BASE}/decision/evaluate`;
@@ -245,6 +246,17 @@ export default function ComparePage() {
         </ImageBandContent>
       </ImageBand>
 
+      {/* Search Section */}
+      <section className="bg-white py-8 border-b border-stone-200">
+        <div className="max-w-3xl mx-auto px-4 md:px-8">
+          <SearchAndFilters
+            context="decisions"
+            placeholder="Search decisions... e.g., 'Tanzania vs Kenya' or 'dry season'"
+            compact
+          />
+        </div>
+      </section>
+
       {/* Main content */}
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-8">
         {/* Selectors */}
@@ -378,32 +390,7 @@ export default function ComparePage() {
         )}
       </div>
 
-      {/* Footer */}
-      <footer className="bg-stone-900 text-white py-12 mt-16">
-        <div className="max-w-6xl mx-auto px-4 md:px-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <span className="font-editorial text-lg font-semibold">Safari Index</span>
-              <span className="text-stone-500 text-sm ml-2">Pan-African Decision System</span>
-            </div>
-
-            <div className="flex items-center gap-6">
-              <Link href="/" className="text-sm text-stone-400 hover:text-white transition-colors">
-                Home
-              </Link>
-              <Link href="/decisions" className="text-sm text-stone-400 hover:text-white transition-colors">
-                All Decisions
-              </Link>
-              <Link href="/explore" className="text-sm text-stone-400 hover:text-white transition-colors">
-                Explore
-              </Link>
-              <Link href="/how-it-works" className="text-sm text-stone-400 hover:text-white transition-colors">
-                How it works
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer variant="decision-system" />
     </main>
   );
 }
