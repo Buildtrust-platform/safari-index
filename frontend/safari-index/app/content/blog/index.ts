@@ -3,12 +3,6 @@
  *
  * Decision-anchored blog articles for Safari Index.
  * Every blog extends a decision with deeper context.
- *
- * Content requirements:
- * - 1,200–1,800 words per article
- * - 9 sections following strict template
- * - Max 6 related decisions, 3 trips, 3 guides
- * - Documentary tone, no hype
  */
 
 import { registerBlog, type BlogContent } from '../../../lib/blog-content';
@@ -24,55 +18,57 @@ const tzVsKeBlog: BlogContent = {
   wordCount: 1580,
   published: true,
 
-  whyNotSimple: `The Tanzania-versus-Kenya question appears on nearly every safari planning forum, often framed as if one country is objectively superior. This framing obscures the actual complexity: both countries share the same ecosystem, the same migration, and many of the same species. The differences are structural, not qualitative.
+  whyNotSimple: `You see this question everywhere. Safari forums, travel blogs, Reddit threads. People frame it like there's a winner and a loser. Tanzania fans say Kenya is overcrowded. Kenya fans say Tanzania is overpriced. Both miss the point.
 
-What makes this decision difficult is that the "right" answer shifts based on factors that travelers often don't know to consider: travel month, tolerance for vehicle density, budget band, and whether wilderness scale matters more than accessibility. A traveler visiting in August with a mid-range budget and low crowd tolerance will have a different optimal answer than someone visiting in February with a luxury budget and high photography priorities.
+These countries share the same ecosystem. The Great Migration doesn't stop at the border. The lions hunting in the Masai Mara are genetically the same as the lions hunting in the Serengeti. There's no "better wildlife" on either side.
 
-The decision also carries historical baggage. Decades of marketing have positioned the Masai Mara as "the" migration destination, while the Serengeti's vastly larger territory goes underappreciated. Neither framing is accurate. The migration is a single, continuous phenomenon that crosses an invisible political border.`,
+What actually differs is structure. Kenya is smaller, more accessible, and generally cheaper. Tanzania is vast, less crowded in most areas, and positions you differently relative to the migration throughout the year. The right answer depends on when you're going, what you're spending, and what kind of experience you want.`,
 
-  variables: `**Travel month** determines where the migration is. The herds are in the Masai Mara roughly July through October. They're in various parts of the Serengeti the rest of the year—southern plains for calving (January–February), central Serengeti (March–May), and northern Serengeti for river crossings (June–September). If your dates are fixed, this variable alone may determine your destination.
+  variables: `**When you travel** matters most. The herds are in Kenya's Masai Mara from roughly July through October. The rest of the year, they're somewhere in Tanzania's Serengeti. Southern plains for calving in January and February. Central Serengeti from March through May. Northern Serengeti for river crossings from June into September. If your dates are locked, this alone might make the decision for you.
 
-**Budget band** affects viability differently in each country. Kenya generally offers lower costs for equivalent quality—perhaps 10–20% less at mid-range properties. At the budget end, Tanzania has fewer reliable options, and quality varies more dramatically. At the luxury end, pricing converges. This matters most for travelers where budget is a binding constraint.
+**Your budget** plays out differently in each country. Kenya tends to cost 10 to 20 percent less for similar quality at the mid-range level. Tanzania has fewer reliable budget options and quality varies a lot at the lower end. At the luxury tier, prices are comparable. If you're watching costs carefully, Kenya gives you more room to work with.
 
-**Crowd tolerance** interacts with geography. The Masai Mara is 1,510 square kilometers. The Serengeti is 14,750 square kilometers—nearly ten times larger. Vehicle density in the Mara during peak season is simply higher per unit area. Travelers who find vehicle clusters around sightings uncomfortable will have more options for solitude in the Serengeti, though the most famous spots get congested in both countries.
+**How you feel about crowds** connects to geography. The Mara is about 1,500 square kilometers. The Serengeti is almost 15,000. That's roughly ten times the space. During peak season, vehicle density in the Mara is simply higher per square kilometer. If seeing other vehicles bothers you, the Serengeti's scale offers more escape routes.
 
-**Off-road access** is a genuine regulatory difference. In Kenyan conservancies and the Mara reserve, vehicles can drive off-road to approach animals. In Tanzanian national parks, vehicles must stay on designated tracks. For photographers needing specific angles, this distinction matters. Private concessions in Tanzania often allow off-road driving, but these carry premium pricing.
+**Photography requirements** can tip the balance. Kenya allows off-road driving to approach animals and get specific angles. Tanzanian national parks keep you on marked tracks. Private concessions in Tanzania often allow off-road access, but those come at premium prices.
 
-**Trip length** affects how each destination performs. The Serengeti rewards longer stays—its scale means moving between zones to follow wildlife or avoid crowds. Kenya's Mara is more compact and efficient for shorter trips where maximizing sightings per hour matters.`,
+**Trip length** affects which destination performs better. The Serengeti rewards longer stays because its size means moving between zones. The Mara's compactness makes it efficient for shorter trips.`,
 
-  tradeoffs: `**The efficiency-versus-wilderness trade-off.** The Mara's smaller size means higher sighting density per hour of driving. Travelers optimizing for "most animals seen" often do better there. But this same density means less of the feeling of being alone in a vast landscape. The Serengeti can deliver drives where you see no other vehicles for hours—and then find a leopard with no competition for viewing angles. Neither is wrong; they're different experiences.
+  tradeoffs: `The Mara is smaller, which means you see more animals per hour of driving. If you're optimizing for sighting density, that's an advantage. But smaller also means more vehicles converging on the same lions. You might find a leopard with fifteen Land Cruisers already parked around it.
 
-**The migration-access trade-off.** Travelers fixate on river crossings, but crossings are unpredictable and brief. You can spend three days positioned near the Mara River and miss every crossing. Meanwhile, calving season in the southern Serengeti (January–February) offers reliable predator action as lions and cheetahs hunt vulnerable newborns—and this period is less crowded than peak crossing season. The trade-off between dramatic-but-uncertain and reliable-but-different is often underweighted.
+The Serengeti offers the opposite. You can drive for two hours without seeing another vehicle. When you find something, you might have it to yourself. The trade is efficiency. Some drives are quiet.
 
-**The cost-versus-exclusivity trade-off.** Kenya's lower average costs come with higher average density. Tanzania's higher costs, especially in private concessions, buy genuine exclusivity. Travelers who choose Kenya for budget reasons sometimes find the crowd levels diminish their experience more than the savings enhanced it. The marginal cost of exclusivity is often lower than expected when amortized across a multi-day trip.`,
+People fixate on river crossings, but crossings are unpredictable. You can spend three days waiting at the Mara River and see nothing. Meanwhile, calving season in the southern Serengeti runs from January through February with consistent predator action as cheetahs and lions hunt newborn wildebeest. It's less famous but arguably more reliable.
 
-  misconceptions: `**"Kenya is for the migration, Tanzania is for everything else."** The migration is a single phenomenon that moves between both countries. It's in Tanzania roughly eight months of the year. This framing likely stems from decades of Mara-focused marketing during the July–October crossing window.
+Cost and exclusivity pull in opposite directions. Kenya's lower prices come with higher density. Tanzania's higher costs, especially in private concessions, buy genuine solitude. Some travelers choose Kenya to save money and then find the crowd levels undermine the experience they wanted.`,
 
-**"The Serengeti is too big to see anything."** Scale affects how you move, not what you see. Camps position in wildlife-rich zones. Guides know where to find concentrations. The risk of "driving through emptiness" is overstated; the benefit of solitude when you do find wildlife is understated.
+  misconceptions: `People say Kenya is for the migration and Tanzania is for everything else. That's backwards. The migration spends about eight months of the year in Tanzania. The Mara gets it for roughly four months. This myth probably comes from decades of marketing focused on the July through October crossing window.
 
-**"Tanzania is more expensive, so it must be better."** Tanzania's higher costs reflect park fees, logistics, and a smaller mid-range sector—not superior wildlife. Both destinations offer comparable encounters. The price difference funds infrastructure and access, not animal quality.
+The Serengeti is not too big to see anything. Camps position themselves in wildlife-rich zones. Guides communicate constantly about where animals are. The risk of driving through empty plains is overstated.
 
-**"You need to see river crossings to see the migration."** River crossings are one expression of the migration, not its totality. The herds are moving continuously. Calving, massing, and grazing are equally valid ways to experience the phenomenon.
+Tanzania's higher prices do not mean better wildlife. The extra cost covers park fees, internal flights, and a thinner mid-range sector. Both countries offer comparable animal encounters.
 
-**"First-timers should always start with Kenya because it's easier."** Ease of logistics is a real consideration, but it's not decisive. Tanzania's northern circuit is a well-worn route with established infrastructure. The complexity difference is marginal for travelers booking through competent operators.`,
+You don't need to see a river crossing to see the migration. Crossings are dramatic but brief. The migration is happening every day as millions of animals move, graze, give birth, and die. Calving season is the migration. The herds massing in the central Serengeti is the migration.
 
-  breaksDown: `**Fixed July–October dates with crossing priority:** If your dates are locked to peak crossing season and witnessing a crossing is your primary goal, the Mara's compact geography and crossing-point accessibility make it the logical choice. The decision doesn't require much deliberation.
+The idea that Kenya is easier for first-timers is marginally true but not decisive. Tanzania's northern circuit is a well-established route. If you're booking through a competent operator, the complexity difference is small.`,
 
-**Budget under $300/day per person:** At this level, Kenya has more reliable options. Tanzania's budget sector is thinner and more variable in quality. Travelers at this budget band face less actual choice.
+  breaksDown: `If your dates fall between July and October and you specifically want to see a river crossing, the Mara's geography makes that more accessible. You're not choosing between countries so much as accepting what the calendar offers.
 
-**Extreme crowd aversion with flexible dates:** If vehicle density is genuinely intolerable and you have date flexibility, Tanzania's scale and concession system offer more consistent solitude. The Mara's private conservancies provide some relief, but overall density remains higher.
+If your budget is under $300 per person per day, Kenya has more reliable options. Tanzania's budget sector is thin and inconsistent.
 
-**Photography with specific framing needs:** Off-road access for positioning is a hard requirement for some photographers. Kenya's regulatory environment is more permissive. Tanzania's park rules constrain angles.
+If crowds genuinely ruin the experience for you and your dates are flexible, Tanzania's scale and concession system offer more consistent solitude.
 
-**Very short trips (3–4 days):** The Mara's compactness delivers more efficient sightings for minimal safari time. The Serengeti rewards depth over efficiency.`,
+If you need off-road access for photography, Kenya's regulations are more permissive.
 
-  ourApproach: `This decision is evaluated using structured inputs: travel month, budget band, crowd tolerance, trip length, and experience level. The engine weighs these against known trade-offs between the two destinations, producing a verdict with explicit assumptions and conditions.
+If you only have three or four days, the Mara's compactness delivers more sightings in less time.`,
 
-The verdict is not a permanent recommendation. It reflects the input state at evaluation time. If your travel month shifts from August to February, the optimal answer may change. The decision includes change conditions that indicate when the verdict would flip.
+  ourApproach: `We evaluate this decision using your travel month, budget, crowd tolerance, trip length, and experience level. The system weighs these against the structural differences between destinations and produces a recommendation with explicit assumptions.
 
-Evidence underlying the decision includes park size data, pricing patterns from operator surveys, and crowd-density observations from guide networks. The decision is versioned; when new evidence changes the calculus, the logic updates.
+The verdict isn't permanent. It reflects your inputs at the time you ask. Change your travel month from August to February and the answer might flip.
 
-We do not recommend one country as universally superior. We recommend the destination that fits your constraints and priorities, with transparency about what we're assuming.`,
+We use park size data, pricing from operator surveys, and crowd observations from guide networks. When evidence changes, the logic updates.
+
+Neither country is universally better. The question is which one fits your specific constraints and priorities.`,
 
   relatedDecisions: [
     { slug: 'serengeti-vs-mara', title: 'Serengeti or Masai Mara?', type: 'decision' },
@@ -107,53 +103,53 @@ const firstTimerReadyBlog: BlogContent = {
   wordCount: 1420,
   published: true,
 
-  whyNotSimple: `"Am I ready?" is the question that stops most first-time safari planners. The answer is more nuanced than the tourism industry typically provides, because readiness isn't about physical preparation or packing lists. It's about expectation calibration.
+  whyNotSimple: `This question usually isn't really about readiness. When people ask it, they're often asking something else. Will I enjoy this? Can I handle it? What if I hate it?
 
-The single biggest factor determining safari satisfaction is whether your mental model matches reality. Documentary footage creates expectations that don't map to actual safari experience. Those crossing shots took days to capture. That leopard sleeping in the tree was one of perhaps three leopard sightings in a month of filming.
+Readiness for safari is not about fitness or packing the right clothes. It's about expectations. The gap between what people think safari is and what safari actually is creates most of the disappointment.
 
-This question also masks anxiety about the unknown. Travelers ask "Am I ready?" when they mean "Will I enjoy this?" or "Can I handle this?" These are different questions with different answers, and conflating them leads to poor decisions.`,
+Documentary footage has warped perception. Those river crossing shots took a film crew weeks to capture. That leopard draped over a branch was one of maybe three leopard sightings in a month of shooting. Real safari involves a lot of driving, a lot of looking, and encounters that happen on wildlife schedules, not yours.`,
 
-  variables: `**Flexibility mindset** is the most important variable. Wildlife operates on its own schedule. Plans change. Sightings happen or they don't. Travelers who need rigid control over their experience often struggle. Those who can embrace uncertainty tend to find every game drive rewarding, even without "big five" sightings.
+  variables: `**Your relationship with uncertainty** matters most. Wildlife does what it wants. Your guide might hear about lions five kilometers away and spend an hour getting there only to find they've moved. Plans change constantly. Game drives run long or get cut short depending on what's happening. If you need to know exactly what's happening and when, safari will frustrate you.
 
-**Comfort expectations** vary dramatically. Safari accommodations range from basic camping to suites rivaling five-star hotels. Even luxury camps are in the bush—insects exist, power may be limited, and climate control is often natural rather than mechanical. Understanding what "basic" and "luxury" actually mean in a bush context prevents disappointment.
+**What "comfortable" means to you** varies a lot. Safari lodges range from basic tents with shared bathrooms to suites with private pools. Even the expensive ones are in the bush. There are insects. Power goes out. The shower might be lukewarm. Understanding what you're signing up for prevents surprises.
 
-**Early morning tolerance** is non-negotiable. The best wildlife activity happens around dawn. Game drives typically depart at 5:30 or 6:00 AM. If you're incapable of being alert at this hour, you'll miss the most active period of every day. No amount of money changes this.
+**Early mornings are not optional.** Animals are most active around dawn. Game drives leave at 5:30 or 6:00 AM. This is when lions hunt, when leopards move, when everything is happening. If you physically cannot function before 8 AM, you'll miss the best part of every day.
 
-**Heat and dust tolerance** matters in most safari destinations. Afternoon temperatures often exceed 30°C. Game drives generate dust. Open vehicles expose you to elements. Climate-controlled vehicles exist at some properties, but they're the exception.
+**Heat and dust are standard.** Most safari destinations are warm. Open vehicles expose you to sun, wind, and dust. Some lodges have air-conditioned vehicles but most don't. If you can't tolerate heat, your destination options narrow significantly.
 
-**Malaria prophylaxis willingness** is a practical consideration. Most safari destinations are in malaria zones. This can be managed with medication and sensible precautions, but it cannot be eliminated. Travelers unwilling to take prophylaxis face constrained destination choices.`,
+**Malaria is a real consideration.** Most safari areas have malaria-carrying mosquitoes. Prophylaxis is effective but some people can't or won't take it. If that's you, destination options shrink to places like South Africa's Eastern Cape.`,
 
-  tradeoffs: `**Spontaneity versus predictability.** Safari rewards flexibility—staying longer at a sighting, changing plans when wildlife appears, accepting that schedules are suggestions. But this means less control over your day. Travelers who thrive on planned itineraries may find the looseness stressful rather than liberating.
+  tradeoffs: `Safari rewards flexibility but punishes rigidity. Staying an extra hour at a leopard sighting means lunch gets pushed back. Following a wild dog pack means skipping the scenic route you'd planned. People who thrive on structure often find this irritating rather than exciting.
 
-**Immersion versus comfort.** The most immersive experiences often come with fewer amenities. Walking safaris, fly camps, and mobile tented camps offer deeper connection to the environment. But they also mean fewer hot showers, simpler meals, and more exposure to elements. The trade-off between experience and comfort is real and personal.
+The most immersive experiences tend to have fewer amenities. Walking safaris put you on foot with wildlife but mean basic fly camps. Mobile tented camps follow the migration but offer simpler facilities than fixed lodges. You trade comfort for intensity.
 
-**Guide-led versus self-directed.** Safari is fundamentally guide-dependent. Your guide decides where to go, how long to stay, what to explain. This is expert-led rather than self-directed travel. Travelers who prefer to explore independently may find this frustrating, while those who appreciate curation will value it.
+Safari is guide-led travel. You don't decide where to go or how long to stay. Your guide does. Some people find this freeing. Others find it frustrating. If you prefer self-directed exploration, the dependency on guides might bother you.
 
-**The cost of over-preparing versus under-preparing.** Over-research creates rigid expectations that the bush will inevitably violate. Under-research leads to practical problems—wrong clothing, inappropriate expectations, missed opportunities. The balance is understanding fundamentals without scripting specifics.`,
+Research is double-edged. Too little and you show up with wrong expectations. Too much and you create a script the bush won't follow. The goal is understanding fundamentals without planning every moment.`,
 
-  misconceptions: `**"Safari is only for adventurous people."** Safari is fundamentally sitting in a vehicle watching animals. This requires patience and interest, not physical bravery. The "adventure" is in the wildlife encounters, not in danger or physical challenge.
+  misconceptions: `Safari is not an adventure sport. It's mostly sitting in a vehicle looking at animals. Physical bravery is not required. Patience and genuine interest in wildlife are.
 
-**"You need to be fit."** Most safaris involve sitting in vehicles for 3-4 hours at a stretch. You'll climb in and out of raised 4x4s and walk short distances in camp. Walking safaris require more fitness, but standard game drives do not.
+You don't need to be fit. Standard game drives involve sitting for three or four hours, climbing in and out of a raised vehicle, and walking short distances in camp. Walking safaris require more, but those are optional.
 
-**"It's dangerous."** Safari areas are professionally managed environments. Guides are trained in animal behavior and safety protocols. The statistical risk is lower than many common travel activities. Fear of wildlife danger is rarely a valid reason to avoid safari.
+Safari areas are not dangerous in the way people imagine. Guides are professionals. Camps have protocols. Statistically, you're safer on safari than driving to work. Fear of wildlife rarely justifies avoiding the trip.
 
-**"You won't see anything without a long trip."** Even 3-4 day safaris can deliver remarkable wildlife encounters. Longer trips increase variety and depth, but short safaris are not failures.
+Short trips are not failures. Four days in a good location with a good guide can deliver remarkable encounters. Longer trips add variety and increase your chances of rare sightings, but plenty of three-day safaris produce life-changing experiences.
 
-**"Only luxury is good."** Quality of wildlife experience correlates poorly with accommodation price. Mid-range camps in good locations often outperform luxury lodges in marginal areas. What you see depends on where you are and who guides you, not how expensive your room is.`,
+Expensive does not mean better wildlife. A mid-range camp in a prime location often outperforms a luxury lodge in a marginal area. What you see depends on where you are and who guides you, not how much your room costs.`,
 
-  breaksDown: `**When comfort requirements are non-negotiable.** If you need consistent air conditioning, Western-standard bathrooms, and no insects, safari will be challenging. Even luxury properties operate in bush conditions. The decision breaks down when comfort thresholds can't be met.
+  breaksDown: `If you need consistent air conditioning, Western-standard plumbing, and zero insects, safari becomes very difficult. Even luxury properties operate in bush conditions. Certain comfort requirements simply cannot be met.
 
-**When early mornings are impossible.** Some travelers genuinely cannot function at 5:30 AM regardless of motivation. If morning game drives are impossible, you'll miss significant wildlife activity. Afternoon drives are valuable but not equivalent.
+If morning game drives are physically impossible for you, you'll miss the most active wildlife period. Afternoon drives are valuable but not equivalent.
 
-**When flexibility is zero.** If you cannot tolerate plans changing, sightings being missed, or schedules shifting, safari's inherent unpredictability will be frustrating rather than exciting.
+If plans changing, sightings being missed, or schedules shifting causes real distress, safari's built-in unpredictability will work against you.
 
-**When health conditions preclude prophylaxis.** Certain medical conditions make malaria prophylaxis inadvisable. This limits destination options to malaria-free areas, which constrains safari choices significantly.`,
+If health conditions make malaria prophylaxis inadvisable, your destination options narrow to malaria-free areas, which limits choices significantly.`,
 
-  ourApproach: `This decision is evaluated using structured inputs: traveler experience level, comfort expectations, flexibility tolerance, and specific concerns or constraints. The engine assesses fit against what safari actually requires, not what marketing promises.
+  ourApproach: `We assess fit using your experience level, comfort expectations, flexibility tolerance, and any specific concerns or constraints. The system evaluates these against what safari actually requires, not what marketing materials promise.
 
-The verdict is not a judgment on readiness. It's a fit assessment. Some travelers are better suited to certain safari styles than others. A verdict of "conditional yes" isn't criticism—it's clarity about what conditions would optimize the experience.
+A verdict of "conditional yes" is not criticism. It means we've identified factors that would improve your experience if addressed. Maybe booking a lodge with air conditioning. Maybe choosing a malaria-free destination.
 
-We assume travelers want honest assessment rather than encouragement. If genuine constraints exist, we identify them. If concerns are unfounded, we explain why. The goal is informed decision-making, not safari-industry promotion.`,
+We assume you want honest assessment rather than encouragement. If real constraints exist, we name them. If concerns are unfounded, we explain why.`,
 
   relatedDecisions: [
     { slug: 'wildlife-expectation', title: 'What should I realistically expect to see?', type: 'decision' },
@@ -188,53 +184,51 @@ const migrationTimingBlog: BlogContent = {
   wordCount: 1350,
   published: true,
 
-  whyNotSimple: `The Great Migration is not an event. It's a continuous movement of 1.5 million wildebeest, plus zebras and gazelles, in an endless loop following the rain and the grass. Understanding this transforms how you plan around it.
+  whyNotSimple: `The migration is not an event. There's no opening ceremony. It doesn't start in one place and end in another. About 1.5 million wildebeest, along with hundreds of thousands of zebras and gazelles, move in a continuous loop across the Serengeti-Mara ecosystem. They follow the grass. The grass follows the rain. This has been happening for thousands of years.
 
-The herds never stop moving. There is no starting point and no ending point. They follow the grass, which follows the rain. The cycle has been running for millennia. What we call "the migration" is really us picking moments from this continuous process.
+When people ask about the "best time," they usually mean river crossings. Those dramatic shots of wildebeest plunging into crocodile-filled water. That's one expression of the migration. But the herds are migrating in January when they're calving. They're migrating in April when they're moving north. They're migrating in November when they're heading back south.
 
-This matters because the question "when is the best time?" has no single answer. It depends on what aspect of the migration interests you. River crossings are spectacular. Calving is dramatic. But the migration is happening in January and April and October—it just looks different in each location.`,
+The question isn't when the migration happens. It's what aspect of it interests you.`,
 
-  variables: `**Travel month** is the primary variable. Different months offer access to different phases of the migration cycle:
+  variables: `**Your travel month** determines what you'll see. December through March, the herds are in the southern Serengeti around Ndutu. Calving peaks in February with hundreds of thousands of births over a few weeks. Predators concentrate in the area, hunting vulnerable newborns.
 
-December through March: Herds concentrate in the southern Serengeti plains around Ndutu. This is calving season—hundreds of thousands of births over a few weeks, with predators hunting vulnerable newborns.
+April through May, the herds move northwest toward the central Serengeti. Rain is common. Some camps close. But the herds are on the move and vulnerable young animals still attract predators.
 
-April through May: The herds move northwest toward the central Serengeti. This is low season—rain is common, some camps close, but the herds are moving.
+June sees herds gathering in the central and western Serengeti. The Grumeti River gets crossings first.
 
-June: Herds gather in the central and western Serengeti, preparing for river crossings. The Grumeti River sees crossings first.
+July through October, herds cross into the northern Serengeti and Masai Mara. This is the famous river crossing window. The Mara River is the star.
 
-July through October: Herds cross into the northern Serengeti and Masai Mara. River crossings at the Mara River are possible throughout this window.
+November, the herds return south following early rains.
 
-November: Herds return south, following early rains.
+**How flexible you are** affects what's realistic. Crossings are unpredictable. The herds might cross at 7 AM before you arrive, or at 3 PM when you've left for lunch. Flexible dates and longer stays improve your odds. Fixed short trips during crossing season might miss every crossing.
 
-**Flexibility** affects outcome probability significantly. Crossings are unpredictable. A crossing might happen at 7am, before your vehicle arrives, or at 3pm when you've given up. Flexible dates and longer stays increase your chances of witnessing specific events.
+**Your weather tolerance** affects which months work. Green season from March through May offers lower prices and fewer crowds but includes rain and muddy roads. Dry season is more predictable but pricier and busier.`,
 
-**Weather tolerance** matters for shoulder seasons. Green season offers lower prices and fewer crowds, but also rain and mud. Dry season is more predictable but more expensive and crowded.`,
+  tradeoffs: `River crossings are dramatic but brief and unpredictable. You can position yourself at a crossing point for three days and see nothing happen. Calving season offers more consistent action. Predators are active all day, every day, hunting newborns. The trade is spectacle versus reliability.
 
-  tradeoffs: `**Drama versus reliability.** River crossings produce the most dramatic footage—thousands of wildebeest plunging into crocodile-filled water. But crossings are unpredictable and brief. Calving season offers more consistent action—predators are active, births happen throughout the day. The trade-off is between singular drama and sustained intensity.
+Peak season from July through September commands premium prices, often 30 to 50 percent higher than shoulder months. Crowds concentrate at famous crossing points. Shoulder months in June, October, and November cost less but offer less certainty about where the herds will be.
 
-**Peak season pricing versus value season access.** July through September commands premium prices and crowds. Shoulder months (June, October, November) offer better value but less certainty about migration location. The premium can be 30-50% above shoulder seasons.
+Booking the "best" camp for crossings doesn't guarantee herds. If the migration moves early or late relative to historical patterns, you might be in the right place at the wrong time. Flexible itineraries that can shift between camps cost more and require more logistics but track the herds more effectively.`,
 
-**Specific location versus herd proximity.** You can book the "best" camp for crossings and miss the herds entirely if they move early or late. Flexible multi-camp itineraries follow the herds but require more logistics and cost.`,
+  misconceptions: `The migration does not happen in August. August is when the most dramatic crossing footage gets shot. But the herds are somewhere in the ecosystem every month of the year.
 
-  misconceptions: `**"The migration happens in August."** The migration happens year-round. August is when crossing footage dominates social media. The herds are somewhere in the ecosystem every month.
+You don't need to see a crossing to see the migration. Millions of animals moving across the landscape is the migration. Crossings are one moment in a year-long cycle.
 
-**"You need to see a crossing to see the migration."** Crossings are one expression of the phenomenon. Millions of animals moving across the landscape, calving, grazing, and being hunted is the migration.
+Guides cannot predict exactly when crossings happen. They know where herds are gathering and which crossing points look likely. But no one knows when a lead wildebeest will decide to jump into the river. That animal makes the decision, and it might wait three days.
 
-**"Guides know exactly when crossings will happen."** Guides can predict where herds are gathering and which crossing points are likely. They cannot predict when a lead animal will decide to plunge into the river.
+Missing the migration doesn't mean missing wildlife. The Serengeti and Mara have resident populations of lions, elephants, leopards, cheetahs, giraffes, and hundreds of other species year-round.`,
 
-**"Bad timing means no wildlife."** The Serengeti and Mara have resident wildlife year-round. Even without migration herds, you'll see lions, elephants, leopards, and hundreds of other species.`,
+  breaksDown: `If you specifically want the river crossing shots you've seen in documentaries, July through October in the northern Serengeti or Masai Mara is the only window. The decision becomes positioning, not timing.
 
-  breaksDown: `**When crossing footage is the specific goal:** If you've seen the documentary shots and that's what you want, July through October in the northern Serengeti or Mara is the only window. The decision simplifies to maximizing positioning during that period.
+If your dates are fixed to a specific month, you're seeing whatever that month offers. Traveling in April means the central Serengeti and the post-calving movement. The decision becomes which camps position you best for that phase.
 
-**When dates are completely fixed:** If you can only travel in April, you're seeing the post-calving movement in the central Serengeti. That's what's available. The decision becomes which camps position you best for that phase.
+If budget constraints push you into green season from March through May, you accept wetter conditions and less predictable herd positions. That's the trade.`,
 
-**When budget is severely constrained:** Green season (March–May) offers lower prices but wetter conditions and less predictable migration positioning. If budget forces you into these months, accept the trade-offs.`,
+  ourApproach: `We evaluate this using your travel month, date flexibility, budget, and what aspect of the migration you prioritize. The system matches your dates to the migration's typical position and recommends where to be.
 
-  ourApproach: `This decision is evaluated using travel month, flexibility, budget, and priority (crossings vs. calving vs. general migration exposure). The engine matches input dates to the migration's typical position and recommends positioning accordingly.
+Uncertainty is built in. We can optimize your chances but not guarantee outcomes. Whether you see a crossing depends on the herds, not on us.
 
-We acknowledge the inherent uncertainty. No recommendation guarantees crossing sightings or calving action. We can optimize probability, not guarantee outcome.
-
-Evidence includes decades of migration pattern data, though yearly variation exists based on rainfall. The decision is updated when patterns shift.`,
+Our evidence includes decades of migration pattern data, though rainfall variation affects yearly patterns. When patterns shift, the logic updates.`,
 
   relatedDecisions: [
     { slug: 'river-crossings', title: 'Should I prioritize river crossings?', type: 'decision' },
@@ -266,7 +260,6 @@ registerBlog(migrationTimingBlog);
  * Initialize blogs - call this to ensure registration
  */
 export function initializeBlogs(): void {
-  // Re-register on demand (useful for hot reload)
   registerBlog(tzVsKeBlog);
   registerBlog(firstTimerReadyBlog);
   registerBlog(migrationTimingBlog);
