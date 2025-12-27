@@ -1,5 +1,3 @@
-'use client';
-
 /**
  * Safari Index Homepage
  *
@@ -16,6 +14,9 @@
  * 6. REAL QUESTIONS - 6 decision cards from topic registry
  * 7. TRIP SHAPES - Commercial safari offerings with images
  * 8. CALM CLOSE - Start planning CTA
+ *
+ * NOTE: This is a SERVER COMPONENT for SEO (faster indexing).
+ * Interactive parts (SearchAndFilters, NewsletterSignup) are client components.
  */
 
 import Link from 'next/link';

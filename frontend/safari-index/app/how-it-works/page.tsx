@@ -1,5 +1,3 @@
-'use client';
-
 /**
  * How It Works Page
  *
@@ -12,6 +10,9 @@
  * 3. How a decision is made (4-step diagram)
  * 4. Why refusals exist
  * 5. Change and accountability (versioning and stability)
+ *
+ * NOTE: This is a SERVER COMPONENT for SEO (faster indexing).
+ * Page contains no interactive elements.
  */
 
 import Link from 'next/link';
