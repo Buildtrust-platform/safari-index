@@ -117,6 +117,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   };
 
+  // Individual destination pages
+  const destinationSlugs = [
+    'tanzania',
+    'kenya',
+    'botswana',
+    'south-africa',
+    'namibia',
+    'zambia',
+    'rwanda',
+    'uganda',
+  ];
+  const destinationPages = destinationSlugs.map((slug) => ({
+    url: `${baseUrl}/destinations/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
   // Activities hub page
   const activitiesIndexPage = {
     url: `${baseUrl}/activities`,
@@ -234,6 +252,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     inquirePage,
     whenToGoPage,
     destinationsPage,
+    ...destinationPages,
     activitiesIndexPage,
     ...activityPages,
     tripsIndexPage,

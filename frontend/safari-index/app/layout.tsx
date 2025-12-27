@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Source_Serif_4, Inter } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
@@ -28,6 +28,12 @@ const inter = Inter({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
   title: {
     default: "Safari Index",
@@ -56,6 +62,25 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Organization JSON-LD structured data
+ * Helps search engines understand Safari Index as a business entity
+ */
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  name: "Safari Index",
+  description: "A Pan-African decision system for safari travel planning.",
+  url: "https://safariindex.com",
+  logo: "https://safariindex.com/logo.png",
+  sameAs: [],
+  areaServed: {
+    "@type": "Continent",
+    name: "Africa",
+  },
+  serviceType: "Safari Travel Planning",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -63,6 +88,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
+      </head>
       <body
         className={`${sourceSerif.variable} ${inter.variable} antialiased`}
       >
