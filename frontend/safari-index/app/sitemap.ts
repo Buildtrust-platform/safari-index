@@ -157,6 +157,38 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   };
 
+  // Compare page
+  const comparePage = {
+    url: `${baseUrl}/compare`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  };
+
+  // Explore page
+  const explorePage = {
+    url: `${baseUrl}/explore`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  };
+
+  // How It Works page
+  const howItWorksPage = {
+    url: `${baseUrl}/how-it-works`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  };
+
+  // Inquire page
+  const inquirePage = {
+    url: `${baseUrl}/inquire`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  };
+
   // Itineraries index page
   const itinerariesIndexPage = {
     url: `${baseUrl}/itineraries`,
@@ -196,6 +228,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 1,
     },
+    explorePage,
+    comparePage,
+    howItWorksPage,
+    inquirePage,
     whenToGoPage,
     destinationsPage,
     activitiesIndexPage,
