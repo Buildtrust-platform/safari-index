@@ -28,6 +28,7 @@ export class DataStack extends cdk.Stack {
   public readonly snapshotTable: dynamodb.Table;
   public readonly inquiryTable: dynamodb.Table;
   public readonly proposalTable: dynamodb.Table;
+  public readonly newsletterTable: dynamodb.Table;
 
   constructor(scope: Construct, id: string, props: DataStackProps) {
     super(scope, id, props);
@@ -370,6 +371,45 @@ export class DataStack extends cdk.Stack {
       value: this.proposalTable.tableName,
       description: 'DynamoDB table for safari proposals',
       exportName: `${exportPrefix}SafariIndexProposalTableName`,
+    });
+
+    /**
+     * Newsletter Subscribers Table
+     * Stores newsletter subscriptions for occasional updates.
+     * No email sending - just subscriber collection.
+     *
+     * PK: subscriber_id (deterministic hash of email)
+     * GSI1: status + created_at (query by subscription status)
+     */
+    this.newsletterTable = new dynamodb.Table(this, 'NewsletterTable', {
+      tableName: `${resourcePrefix}safari-index-newsletter`,
+      partitionKey: {
+        name: 'subscriber_id',
+        type: dynamodb.AttributeType.STRING,
+      },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      removalPolicy: cdk.RemovalPolicy.RETAIN, // Subscribers are valuable
+      pointInTimeRecovery: true,
+    });
+
+    // GSI1: Query by status + created_at (list subscribers by status)
+    this.newsletterTable.addGlobalSecondaryIndex({
+      indexName: 'status-created-index',
+      partitionKey: {
+        name: 'status',
+        type: dynamodb.AttributeType.STRING,
+      },
+      sortKey: {
+        name: 'created_at',
+        type: dynamodb.AttributeType.STRING,
+      },
+      projectionType: dynamodb.ProjectionType.ALL,
+    });
+
+    new cdk.CfnOutput(this, 'NewsletterTableName', {
+      value: this.newsletterTable.tableName,
+      description: 'DynamoDB table for newsletter subscribers',
+      exportName: `${exportPrefix}SafariIndexNewsletterTableName`,
     });
   }
 }

@@ -87,6 +87,9 @@ import {
 import { ImageBand, ImageBandContent, pageImages, VerdictMoment } from '../../components/visual';
 import { DependsOnStrip } from '../../components/DependsOnStrip';
 import { SectionDivider } from '../../components/ui/Divider';
+import { Navbar, Footer } from '../../components/layout';
+import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
 
 type PageState = 'pending' | 'loading' | 'success' | 'refusal' | 'error' | 'quality_failed' | 'baseline_fallback';
 
@@ -282,109 +285,242 @@ export default function DecisionPage() {
     const d = baselineDecision;
     const fitMisfit = deriveFitMisfitModel(topic, d.outcome);
 
-    // Handler for retry attempts
-    const handleRetry = async () => {
-      if (topic) {
-        await fetchDecision(topic);
+    // Get outcome styling
+    const getOutcomeColor = (outcome: string) => {
+      switch (outcome) {
+        case 'book': return 'bg-[#2F5D50] text-white';
+        case 'wait': return 'bg-[#8C6D2E] text-white';
+        case 'switch': return 'bg-[#3E5C76] text-white';
+        case 'discard': return 'bg-[#8A3F3B] text-white';
+        default: return 'bg-stone-500 text-white';
       }
     };
 
-    // Derive conditions for display
-    const primaryCondition = extractPrimaryCondition(d.assumptions, d.change_conditions);
-    const invalidatingCondition = extractInvalidatingCondition(d.change_conditions);
+    const getConfidenceLabel = (confidence: number) => {
+      if (confidence >= 0.7) return 'High';
+      if (confidence >= 0.4) return 'Medium';
+      return 'Low';
+    };
 
     return (
-      <>
-        {/* Cinematic Hero - same as success but with baseline context */}
+      <div className="min-h-screen bg-stone-50">
+        <Navbar variant="transparent" />
+
+        {/* Hero with safari imagery */}
         <ImageBand
           image={pageImages.decision}
-          height="decision-hero"
-          overlay="cinematic"
+          height="compare"
+          overlay="strong"
           align="center"
           priority
+          alwaysRender
         >
-          <ImageBandContent maxWidth="default">
-            {/* Eyebrow label */}
-            <span className="inline-block font-ui text-xs font-medium text-white/70 uppercase tracking-wider mb-3">
-              Baseline Decision
-            </span>
+          <ImageBandContent maxWidth="narrow" className="pt-24 pb-8">
+            <div className="text-center">
+              {/* Breadcrumb */}
+              <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
+                <Link href="/" className="hover:text-white transition-colors">
+                  Safari Index
+                </Link>
+                <ChevronRight className="w-4 h-4" />
+                <Link href="/decisions" className="hover:text-white transition-colors">
+                  Decisions
+                </Link>
+                <ChevronRight className="w-4 h-4" />
+                <span className="text-white">Decision</span>
+              </div>
 
-            {/* H1 Question - serif headline, short measure */}
-            <h1 className="font-editorial text-2xl md:text-3xl lg:text-4xl font-semibold text-white leading-snug tracking-tight mb-3 max-w-[22ch]">
-              {topic.question}
-            </h1>
+              {/* Title */}
+              <h1 className="font-editorial text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4">
+                {topic.question}
+              </h1>
 
-            {/* Context line - documentary framing */}
-            <p className="font-editorial text-white/80 text-base md:text-lg leading-relaxed mb-6 max-w-xl">
-              A decision with trade-offs. Read the conditions.
-            </p>
-
-            {/* Verdict Moment strip - no decision_id for baseline */}
-            <VerdictMoment
-              outcome={d.outcome}
-              headline={d.headline}
-              confidence={d.confidence}
-            />
+              {/* Context */}
+              <p className="text-white/80 text-lg max-w-xl mx-auto">
+                {topic.context_line}
+              </p>
+            </div>
           </ImageBandContent>
         </ImageBand>
 
-        {/* Body - Warm safari background */}
-        <main className={`${pageContainer} min-h-screen bg-gradient-to-b from-amber-50/30 via-stone-50 to-stone-100`}>
-          {/* No StructuredData for baseline - per SEO requirements */}
+        {/* Main content */}
+        <div className="max-w-3xl mx-auto px-4 md:px-8 py-12">
 
-          {/* Baseline Fallback Banner - above content */}
-          <BaselineFallbackBanner
-            topicId={topic.topic_id}
-            onRetry={handleRetry}
-          />
-
-          {/* Primary flow: VerdictCard → AnswerOwnershipBlock → Divider → DependsOnStrip */}
-          <VerdictCard
-            outcome={d.outcome}
-            headline={d.headline}
-            summary={d.summary}
-            confidence={d.confidence}
-          />
-
-          {/* Answer Ownership Block - quotable verdict for citation */}
-          <AnswerOwnershipBlock
-            question={topic.question}
-            outcome={d.outcome}
-            headline={d.headline}
-            summary={d.summary}
-            confidence={d.confidence}
-            primaryCondition={primaryCondition}
-            invalidatingCondition={invalidatingCondition}
-          />
+          {/* Verdict Card */}
+          <section className="mb-8">
+            <div className="bg-white rounded-2xl border border-stone-200 p-6 shadow-sm">
+              <div className="flex items-center justify-between mb-4">
+                <span className={`${getOutcomeColor(d.outcome)} px-3 py-1 rounded-lg text-sm font-medium capitalize`}>
+                  {d.outcome}
+                </span>
+                <span className="text-sm text-stone-500">
+                  Confidence: {getConfidenceLabel(d.confidence)}
+                </span>
+              </div>
+              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-3">
+                {d.headline}
+              </h2>
+              <p className="font-editorial text-stone-600 leading-relaxed">
+                {d.summary}
+              </p>
+            </div>
+          </section>
 
           <SectionDivider />
 
-          {/* What this depends on - key assumptions and change conditions */}
-          <DependsOnStrip
-            assumptions={d.assumptions}
-            changeConditions={d.change_conditions}
-          />
+          {/* Trade-offs */}
+          <section className="my-8">
+            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">Trade-offs</h2>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-white rounded-2xl border border-stone-200 p-5">
+                <h3 className="font-ui text-sm font-medium text-[#2F5D50] mb-3 uppercase tracking-wide">
+                  Gains
+                </h3>
+                <ul className="space-y-2">
+                  {d.tradeoffs.gains.map((gain, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="text-[#2F5D50] mt-0.5">+</span>
+                      <span className="text-stone-700">{gain}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-white rounded-2xl border border-stone-200 p-5">
+                <h3 className="font-ui text-sm font-medium text-[#8A3F3B] mb-3 uppercase tracking-wide">
+                  Losses
+                </h3>
+                <ul className="space-y-2">
+                  {d.tradeoffs.losses.map((loss, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="text-[#8A3F3B] mt-0.5">−</span>
+                      <span className="text-stone-700">{loss}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
 
-          <TradeoffLedger gains={d.tradeoffs.gains} losses={d.tradeoffs.losses} />
+          <SectionDivider />
 
-          <FitMisfitBlock rightFor={fitMisfit.rightFor} notIdealFor={fitMisfit.notIdealFor} />
+          {/* Assumptions */}
+          <section className="my-8">
+            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">Assumptions</h2>
+            <div className="bg-white rounded-2xl border border-stone-200 divide-y divide-stone-100">
+              {d.assumptions.map((assumption, i) => (
+                <div key={i} className="p-5">
+                  <p className="text-stone-900">{assumption.text}</p>
+                  <p className="text-sm text-stone-500 mt-1">
+                    Confidence: {Math.round(assumption.confidence * 100)}%
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
 
-          <AssumptionsBlock assumptions={d.assumptions} />
+          <SectionDivider />
 
-          <ChangeConditions conditions={d.change_conditions} />
+          {/* Change Conditions */}
+          <section className="my-8">
+            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">When this changes</h2>
+            <div className="bg-white rounded-2xl border border-stone-200 divide-y divide-stone-100">
+              {d.change_conditions.map((condition, i) => (
+                <div key={i} className="p-5">
+                  <p className="text-stone-700">{condition}</p>
+                </div>
+              ))}
+            </div>
+          </section>
 
-          <CTABar primary={{ label: 'Check fit for your dates', href: '/tools/safari-fit' }} />
+          <SectionDivider />
 
-          <RelatedDecisions topics={relatedTopics} />
+          {/* Who this is for */}
+          {(fitMisfit.rightFor.length > 0 || fitMisfit.notIdealFor.length > 0) && (
+            <section className="my-8">
+              <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">Who this is for</h2>
+              <div className="grid md:grid-cols-2 gap-4">
+                {fitMisfit.rightFor.length > 0 && (
+                  <div className="bg-white rounded-2xl border border-stone-200 p-5">
+                    <h3 className="font-ui text-sm font-medium text-[#2F5D50] mb-3 uppercase tracking-wide">
+                      Right for
+                    </h3>
+                    <ul className="space-y-2">
+                      {fitMisfit.rightFor.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="text-[#2F5D50] mt-0.5">✓</span>
+                          <span className="text-stone-700">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {fitMisfit.notIdealFor.length > 0 && (
+                  <div className="bg-white rounded-2xl border border-stone-200 p-5">
+                    <h3 className="font-ui text-sm font-medium text-stone-500 mb-3 uppercase tracking-wide">
+                      Not ideal for
+                    </h3>
+                    <ul className="space-y-2">
+                      {fitMisfit.notIdealFor.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="text-stone-400 mt-0.5">−</span>
+                          <span className="text-stone-600">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </section>
+          )}
 
-          {/* Attribution Footer - baseline source, no decision_id */}
-          <footer className={footerStyles} aria-label="Reference information">
-            <p className="text-stone-500 text-sm">
-              Source: Baseline snapshot for {topic.topic_id}
-            </p>
-          </footer>
-        </main>
-      </>
+          {/* Related Decisions */}
+          {relatedTopics.length > 0 && (
+            <>
+              <SectionDivider />
+              <section className="my-8">
+                <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">Related decisions</h2>
+                <div className="grid gap-3">
+                  {relatedTopics.slice(0, 3).map((related) => (
+                    <Link
+                      key={related.topic_id}
+                      href={`/decisions/${related.slug}`}
+                      className="block bg-white rounded-xl border border-stone-200 p-4 hover:border-amber-300 hover:shadow-sm transition-all"
+                    >
+                      <p className="font-medium text-stone-900 group-hover:text-amber-700">
+                        {related.question}
+                      </p>
+                      <p className="text-sm text-stone-500 mt-1">
+                        {related.context_line}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            </>
+          )}
+
+          {/* CTA */}
+          <div className="mt-12 text-center">
+            <div className="inline-block bg-white rounded-2xl border border-stone-200 p-8 max-w-lg">
+              <h3 className="font-editorial text-xl font-semibold text-stone-900 mb-2">
+                Need a personalized decision?
+              </h3>
+              <p className="text-stone-500 mb-6">
+                Start planning your safari with inputs tailored to your travel dates and preferences.
+              </p>
+              <Link
+                href="/inquire"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-stone-900 text-white rounded-lg font-medium hover:bg-stone-800 transition-colors"
+              >
+                Start planning
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <Footer variant="decision-system" />
+      </div>
     );
   }
 

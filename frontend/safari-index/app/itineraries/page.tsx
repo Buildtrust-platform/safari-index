@@ -15,19 +15,20 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import {
   MapPin,
-  Calendar,
   ChevronRight,
   ArrowRight,
   Compass,
   Clock,
   DollarSign,
+  Sparkles,
+  Globe,
+  Route,
+  FileText,
 } from 'lucide-react';
 import { Navbar, Footer } from '../components/layout';
-import { ImageBand, ImageBandContent, ecosystemImages } from '../components/visual';
+import { ImageBand, ImageBandContent, ecosystemImages, getDestinationImage } from '../components/visual';
 import { SearchAndFilters } from '../components/SearchAndFilters';
 import {
-  getAllItineraries,
-  getFeaturedItineraries,
   getItinerarySummaries,
   formatDurationBand,
   type ItinerarySummary,
@@ -83,11 +84,33 @@ function StyleBadge({ style }: { style: string }) {
 }
 
 /**
+ * Get image for itinerary based on region
+ */
+function getItineraryImage(region: string): { src: string; alt: string } {
+  // Map regions to destination images
+  const regionMap: Record<string, string> = {
+    'tanzania': 'tanzania',
+    'kenya': 'kenya',
+    'botswana': 'botswana',
+    'south-africa': 'south-africa',
+    'namibia': 'namibia',
+    'uganda-rwanda': 'rwanda',
+    'zambia': 'zambia',
+    'zimbabwe': 'zimbabwe',
+  };
+
+  const destKey = regionMap[region] || 'tanzania';
+  const destImage = getDestinationImage(destKey);
+  return { src: destImage.src, alt: destImage.alt };
+}
+
+/**
  * Itinerary card component
  */
 function ItineraryCard({ itinerary }: { itinerary: ItinerarySummary }) {
   const regionName = getRegionDisplayName(itinerary.region);
   const tierDisplay = getComfortTierDisplay(itinerary.comfort_tier);
+  const image = getItineraryImage(itinerary.region);
 
   return (
     <Link
@@ -96,11 +119,14 @@ function ItineraryCard({ itinerary }: { itinerary: ItinerarySummary }) {
       className="group block bg-white rounded-2xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-lg transition-all"
       data-testid="itinerary-card"
     >
-      {/* Image placeholder */}
-      <div className="relative h-40 bg-gradient-to-br from-stone-200 to-stone-300 overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <Compass className="w-12 h-12 text-stone-400/50" />
-        </div>
+      {/* Region image */}
+      <div className="relative h-40 overflow-hidden">
+        <img
+          src={image.src}
+          alt={image.alt}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
         {itinerary.is_featured && (
           <div className="absolute top-3 left-3">
             <span className="px-2 py-1 text-xs font-medium bg-amber-500 text-white rounded-full">
@@ -108,8 +134,8 @@ function ItineraryCard({ itinerary }: { itinerary: ItinerarySummary }) {
             </span>
           </div>
         )}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-          <p className="text-white/80 text-sm flex items-center gap-1.5">
+        <div className="absolute bottom-0 left-0 right-0 p-4">
+          <p className="text-white/90 text-sm flex items-center gap-1.5 font-medium">
             <MapPin className="w-3.5 h-3.5" />
             {regionName}
           </p>
@@ -161,6 +187,7 @@ function ItineraryCard({ itinerary }: { itinerary: ItinerarySummary }) {
  */
 function FeaturedItineraryCard({ itinerary }: { itinerary: ItinerarySummary }) {
   const regionName = getRegionDisplayName(itinerary.region);
+  const image = getItineraryImage(itinerary.region);
 
   return (
     <Link
@@ -170,11 +197,14 @@ function FeaturedItineraryCard({ itinerary }: { itinerary: ItinerarySummary }) {
       data-testid="featured-itinerary-card"
     >
       <div className="flex flex-col md:flex-row">
-        {/* Image placeholder */}
-        <div className="relative h-48 md:h-auto md:w-72 bg-gradient-to-br from-stone-200 to-stone-300 flex-shrink-0">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Compass className="w-16 h-16 text-stone-400/50" />
-          </div>
+        {/* Region image */}
+        <div className="relative h-48 md:h-auto md:w-72 flex-shrink-0 overflow-hidden">
+          <img
+            src={image.src}
+            alt={image.alt}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent md:bg-gradient-to-t" />
           <div className="absolute top-3 left-3">
             <span className="px-2 py-1 text-xs font-medium bg-amber-500 text-white rounded-full">
               Featured
@@ -222,7 +252,21 @@ function FeaturedItineraryCard({ itinerary }: { itinerary: ItinerarySummary }) {
 }
 
 /**
- * Region group component
+ * Region image index mapping
+ */
+const REGION_IMAGE_INDEX: Record<string, number> = {
+  'tanzania': 0, // savannah-morning
+  'kenya': 0,
+  'botswana': 1, // delta-channels
+  'uganda-rwanda': 3, // montane-forest
+  'namibia': 2, // desert-dunes
+  'south-africa': 5, // kopje-landscape
+  'zambia': 4, // floodplain-evening
+  'zimbabwe': 4, // floodplain-evening (similar to zambia)
+};
+
+/**
+ * Region group component with visual header
  */
 function RegionGroup({
   region,
@@ -232,19 +276,41 @@ function RegionGroup({
   itineraries: ItinerarySummary[];
 }) {
   const regionName = getRegionDisplayName(region as any) || region;
+  const bgImage = ecosystemImages[REGION_IMAGE_INDEX[region] || 0];
 
   return (
-    <section className="mb-12" data-testid={`region-${region}`}>
-      <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-2">
-        {regionName}
-      </h2>
-      <p className="text-stone-500 text-sm mb-6">
-        {itineraries.length} {itineraries.length === 1 ? 'itinerary' : 'itineraries'}
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {itineraries.map((itinerary) => (
-          <ItineraryCard key={itinerary.id} itinerary={itinerary} />
-        ))}
+    <section id={region} className="scroll-mt-24" data-testid={`region-${region}`}>
+      {/* Region header with image */}
+      <div className="relative rounded-t-2xl overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-stone-900/90 via-stone-900/70 to-stone-900/50 z-10" />
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${bgImage.src})` }}
+        />
+        <div className="relative z-20 p-5 md:p-6">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+              <Globe className="w-5 h-5 text-amber-400" />
+            </div>
+            <div>
+              <h2 className="font-editorial text-lg font-semibold text-white">
+                {regionName}
+              </h2>
+              <p className="text-white/70 text-sm">
+                {itineraries.length} {itineraries.length === 1 ? 'itinerary' : 'itineraries'}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Itineraries grid */}
+      <div className="bg-white rounded-b-2xl border border-t-0 border-stone-200 p-4 md:p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {itineraries.map((itinerary) => (
+            <ItineraryCard key={itinerary.id} itinerary={itinerary} />
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -264,8 +330,8 @@ export default function ItinerariesPage() {
     regionGroups[region].push(itinerary);
   });
 
-  // Order regions
-  const regionOrder = ['tanzania', 'kenya', 'botswana', 'uganda-rwanda', 'namibia', 'south-africa'];
+  // Order regions - include all regions where itineraries exist
+  const regionOrder = ['tanzania', 'kenya', 'botswana', 'uganda-rwanda', 'namibia', 'south-africa', 'zambia', 'zimbabwe'];
   const orderedRegions = regionOrder.filter((r) => regionGroups[r]?.length > 0);
 
   return (
@@ -311,12 +377,19 @@ export default function ItinerariesPage() {
               <br className="hidden md:block" />
               Each itinerary is decision-backed with clear trade-offs.
             </p>
+
+            {/* Stats */}
+            <div className="flex items-center justify-center gap-6 mt-6 text-white/60 text-sm">
+              <span>{allItineraries.length} itineraries</span>
+              <span className="w-1 h-1 rounded-full bg-white/40" />
+              <span>{orderedRegions.length} regions</span>
+            </div>
           </div>
         </ImageBandContent>
       </ImageBand>
 
       {/* Search Section */}
-      <section className="bg-white py-8 border-b border-stone-200">
+      <section className="bg-white py-6 border-b border-stone-200">
         <div className="max-w-3xl mx-auto px-4 md:px-8">
           <SearchAndFilters
             context="trips"
@@ -326,61 +399,119 @@ export default function ItinerariesPage() {
         </div>
       </section>
 
-      {/* Main content */}
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-8">
-        {/* Orientation paragraph */}
-        <div className="mb-8">
-          <p className="text-stone-600 leading-relaxed">
-            Each itinerary represents a proven route through Africa's safari destinations.
-            They are starting points, not fixed products. Segments can be adjusted,
-            accommodation tiers changed, and extensions added based on your decisions
-            and preferences.
-          </p>
+      {/* Tab Navigation - Switch between Trip Shapes and Itineraries */}
+      <section className="bg-stone-50 border-b border-stone-200">
+        <div className="max-w-5xl mx-auto px-4 md:px-8">
+          <nav className="flex gap-1" aria-label="Safari content type">
+            <Link
+              href="/trips"
+              className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-stone-500 hover:text-stone-700 hover:bg-white/50 rounded-t-lg transition-colors"
+            >
+              <Route className="w-4 h-4" />
+              Trip Shapes
+            </Link>
+            <Link
+              href="/itineraries"
+              className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-amber-700 border-b-2 border-amber-600 bg-white -mb-px rounded-t-lg"
+              aria-current="page"
+            >
+              <FileText className="w-4 h-4" />
+              Day-by-Day Itineraries
+              <span className="text-xs text-amber-600 bg-amber-100 px-1.5 py-0.5 rounded">
+                {allItineraries.length}
+              </span>
+            </Link>
+          </nav>
         </div>
+      </section>
 
-        {/* Featured itineraries */}
-        {featuredItineraries.length > 0 && (
-          <section className="mb-12" data-testid="featured-itineraries">
-            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-2">
-              Featured Itineraries
-            </h2>
-            <p className="text-stone-500 text-sm mb-6">
-              Popular routes for first-time planners
-            </p>
+      {/* Featured itineraries */}
+      {featuredItineraries.length > 0 && (
+        <section className="bg-white py-10 border-b border-stone-200" data-testid="featured-itineraries">
+          <div className="max-w-6xl mx-auto px-4 md:px-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-amber-700" />
+              </div>
+              <div>
+                <h2 className="font-editorial text-xl font-semibold text-stone-900">
+                  Featured Itineraries
+                </h2>
+                <p className="text-stone-500 text-sm">Popular routes for first-time planners</p>
+              </div>
+            </div>
             <div className="space-y-4">
               {featuredItineraries.map((itinerary) => (
                 <FeaturedItineraryCard key={itinerary.id} itinerary={itinerary} />
               ))}
             </div>
-          </section>
-        )}
+          </div>
+        </section>
+      )}
+
+      {/* Main content */}
+      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
+        {/* Region navigation */}
+        <nav className="mb-8" aria-label="Regions">
+          <h2 className="text-xs font-semibold text-stone-500 uppercase tracking-wide mb-3">
+            Browse by region
+          </h2>
+          <div className="flex flex-wrap gap-2" data-testid="region-nav">
+            {orderedRegions.map((region) => (
+              <a
+                key={region}
+                href={`#${region}`}
+                className="flex items-center gap-2 px-3 py-2 text-sm text-stone-600 bg-white rounded-lg border border-stone-200 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700 transition-colors whitespace-nowrap shadow-sm"
+              >
+                <Globe className="w-4 h-4" />
+                <span>{getRegionDisplayName(region as any)}</span>
+                <span className="text-xs text-stone-400 bg-stone-100 px-1.5 py-0.5 rounded">
+                  {regionGroups[region].length}
+                </span>
+              </a>
+            ))}
+          </div>
+        </nav>
 
         {/* By region */}
-        {orderedRegions.map((region) => (
-          <RegionGroup
-            key={region}
-            region={region}
-            itineraries={regionGroups[region]}
-          />
-        ))}
+        <div className="space-y-8">
+          {orderedRegions.map((region) => (
+            <RegionGroup
+              key={region}
+              region={region}
+              itineraries={regionGroups[region]}
+            />
+          ))}
+        </div>
 
         {/* CTA section */}
         <div className="mt-12 pt-8 border-t border-stone-200">
-          <div className="bg-stone-900 rounded-xl p-6 text-center">
-            <h3 className="font-editorial text-xl text-white mb-2">
-              Not seeing what you need?
-            </h3>
-            <p className="text-stone-400 text-sm mb-4 max-w-md mx-auto">
-              Share your preferences and we'll design a custom itinerary around your decisions.
-            </p>
-            <Link
-              href="/inquire"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-stone-900 rounded-lg font-medium hover:bg-stone-100 transition-colors"
-              prefetch={false}
-            >
-              Start planning
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+          <div className="bg-stone-900 rounded-2xl p-6 md:p-8">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <h3 className="font-editorial text-xl text-white mb-2">
+                  Not seeing what you need?
+                </h3>
+                <p className="text-stone-400 text-sm">
+                  Share your preferences and we'll design a custom itinerary.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/inquire"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-stone-900 rounded-lg font-medium hover:bg-stone-100 transition-colors text-sm"
+                >
+                  Start planning
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/trips"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-transparent text-white border border-white/30 rounded-lg font-medium hover:bg-white/10 transition-colors text-sm"
+                >
+                  Browse trips
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

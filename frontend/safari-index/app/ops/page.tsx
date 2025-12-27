@@ -27,6 +27,7 @@ import {
   TrendingUp,
   Users,
   BarChart3,
+  Mail,
 } from 'lucide-react';
 import type { InquiryRecord, InquiryStatus, ProposalStatus } from '../../lib/contracts';
 
@@ -289,20 +290,25 @@ export default function OpsDashboardPage() {
                   <ChevronRight className="w-5 h-5 text-stone-400 group-hover:text-amber-600 transition-colors" />
                 </Link>
 
-                <div className="flex items-center justify-between p-6 bg-white rounded-xl border border-stone-200 opacity-60">
+                <Link
+                  href={`/ops/newsletter?ops_key=${opsKey}`}
+                  className="flex items-center justify-between p-6 bg-white rounded-xl border border-stone-200 hover:border-stone-300 hover:shadow-sm transition-all group"
+                >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center">
-                      <FileText className="w-6 h-6 text-purple-600" />
+                    <div className="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
+                      <Mail className="w-6 h-6 text-green-600" />
                     </div>
                     <div>
-                      <h2 className="font-semibold text-stone-900">Proposals</h2>
+                      <h2 className="font-semibold text-stone-900 group-hover:text-green-700 transition-colors">
+                        Newsletter
+                      </h2>
                       <p className="text-sm text-stone-500">
-                        Access via inquiry detail pages
+                        Subscriber management
                       </p>
                     </div>
                   </div>
-                  <ChevronRight className="w-5 h-5 text-stone-400" />
-                </div>
+                  <ChevronRight className="w-5 h-5 text-stone-400 group-hover:text-green-600 transition-colors" />
+                </Link>
               </div>
 
               {/* Inquiry Stats */}

@@ -180,6 +180,9 @@ export interface Itinerary {
   // Trip shape linkage (if maps to existing shape)
   linked_trip_shape_id: string | null;
 
+  // Safari type linkage (categorization by traveler intent)
+  safari_type_id: string | null;
+
   // Flags
   is_featured: boolean;
   is_published: boolean;

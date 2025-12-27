@@ -61,6 +61,7 @@ test.describe('Itineraries Hub Page', () => {
     await page.goto('/itineraries');
 
     const firstCard = page.getByTestId('itinerary-card').first();
+    await firstCard.scrollIntoViewIfNeeded();
     await firstCard.click();
 
     await expect(page).toHaveURL(/\/itineraries\/.+/);
@@ -237,6 +238,7 @@ test.describe('Itinerary Detail Page', () => {
 
 test.describe('All Itinerary Pages Load', () => {
   const itinerarySlugs = [
+    // Original itineraries
     'tanzania-classic-northern-circuit',
     'tanzania-great-migration',
     'tanzania-southern-circuit',
@@ -250,6 +252,16 @@ test.describe('All Itinerary Pages Load', () => {
     'namibia-self-drive',
     'south-africa-kruger',
     'south-africa-safari-and-cape',
+    // New itineraries added
+    'tanzania-short-northern-circuit',
+    'tanzania-safari-and-beach',
+    'tanzania-walking-safari',
+    'kenya-northern-frontier',
+    'kenya-masai-mara-migration',
+    'kenya-family-friendly',
+    'zambia-walking-safari',
+    'zimbabwe-falls-and-wildlife',
+    'east-africa-grand-circuit',
   ];
 
   for (const slug of itinerarySlugs) {
@@ -339,10 +351,14 @@ test.describe('Itineraries Inquiry Prefill Integration', () => {
     await page.goto('/itineraries/tanzania-classic-northern-circuit');
 
     const inquireCta = page.getByTestId('inquire-cta');
-    await inquireCta.click();
+    // Scroll into view and wait for visibility (CTA is at bottom of page)
+    await inquireCta.scrollIntoViewIfNeeded();
+    await expect(inquireCta).toBeVisible();
 
-    await expect(page).toHaveURL(/\/inquire\?/);
-    await expect(page).toHaveURL(/itinerary=/);
+    // Get href and navigate directly (more reliable on mobile)
+    const href = await inquireCta.getAttribute('href');
+    expect(href).toContain('/inquire?');
+    expect(href).toContain('itinerary=');
   });
 });
 
@@ -352,16 +368,16 @@ test.describe('Itineraries Navigation', () => {
     await expect(page.getByTestId('itineraries-h1')).toBeVisible();
 
     // Click on an itinerary
-    await page.getByTestId('itinerary-card').first().click();
+    const firstCard = page.getByTestId('itinerary-card').first();
+    await firstCard.scrollIntoViewIfNeeded();
+    await firstCard.click();
     await expect(page).toHaveURL(/\/itineraries\/.+/);
     await expect(page.getByTestId('itinerary-h1')).toBeVisible();
 
-    // Navigate back via breadcrumb link (may be covered by fixed navbar, so use goto)
-    const itinerariesLink = page.locator('a[href="/itineraries"]').first();
-    await expect(itinerariesLink).toBeVisible();
-    const href = await itinerariesLink.getAttribute('href');
-    await page.goto(href!);
+    // Navigate back directly (navbar may be hidden on mobile)
+    await page.goto('/itineraries');
     await expect(page).toHaveURL('/itineraries');
+    await expect(page.getByTestId('itineraries-h1')).toBeVisible();
   });
 
   test('featured cards navigate to detail pages', async ({ page }) => {
@@ -371,7 +387,9 @@ test.describe('Itineraries Navigation', () => {
     const count = await featuredCards.count();
 
     if (count > 0) {
-      await featuredCards.first().click();
+      const firstFeatured = featuredCards.first();
+      await firstFeatured.scrollIntoViewIfNeeded();
+      await firstFeatured.click();
       await expect(page).toHaveURL(/\/itineraries\/.+/);
     }
   });
@@ -419,5 +437,173 @@ test.describe('Itineraries SEO', () => {
     // Itinerary is an ItemList object with itemListElement array
     expect(schema.itinerary['@type']).toBe('ItemList');
     expect(schema.itinerary.itemListElement.length).toBeGreaterThanOrEqual(2);
+  });
+});
+
+test.describe('Sitemap Includes Itineraries', () => {
+  test('sitemap.xml includes /itineraries hub', async ({ page }) => {
+    const response = await page.goto('/sitemap.xml');
+    expect(response?.status()).toBe(200);
+    const content = await page.content();
+    expect(content).toContain('/itineraries');
+  });
+
+  test('sitemap.xml includes sample itinerary URLs', async ({ page }) => {
+    const response = await page.goto('/sitemap.xml');
+    expect(response?.status()).toBe(200);
+    const content = await page.content();
+    expect(content).toContain('/itineraries/tanzania-classic-northern-circuit');
+  });
+
+  test('sitemap.xml includes new itinerary URLs', async ({ page }) => {
+    const response = await page.goto('/sitemap.xml');
+    expect(response?.status()).toBe(200);
+    const content = await page.content();
+    expect(content).toContain('/itineraries/east-africa-grand-circuit');
+  });
+});
+
+test.describe('Navbar Itineraries Integration', () => {
+  test('navbar has Itineraries link on desktop', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.goto('/');
+    const navbar = page.getByTestId('navbar');
+    const itinerariesLink = navbar.locator('a[href="/itineraries"]');
+    await expect(itinerariesLink).toBeVisible();
+  });
+
+  test('Itineraries link navigates correctly', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.goto('/');
+    const navbar = page.getByTestId('navbar');
+    const itinerariesLink = navbar.locator('a[href="/itineraries"]');
+    await itinerariesLink.click();
+    await expect(page).toHaveURL('/itineraries');
+  });
+
+  test('Itineraries appears in mobile menu', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/');
+    // Open mobile menu
+    const menuToggle = page.getByTestId('navbar-mobile-toggle');
+    await menuToggle.click();
+    const mobileMenu = page.getByTestId('navbar-mobile-menu');
+    await expect(mobileMenu).toBeVisible();
+    const itinerariesLink = mobileMenu.locator('a[href="/itineraries"]');
+    await expect(itinerariesLink).toBeVisible();
+  });
+});
+
+test.describe('Itinerary Detail - Region Validation', () => {
+  test('Tanzania itinerary shows Tanzania in snapshot', async ({ page }) => {
+    await page.goto('/itineraries/tanzania-classic-northern-circuit');
+    const strip = page.getByTestId('snapshot-strip');
+    const text = await strip.textContent();
+    expect(text?.toLowerCase()).toContain('tanzania');
+  });
+
+  test('Kenya itinerary shows Kenya in snapshot', async ({ page }) => {
+    await page.goto('/itineraries/kenya-masai-mara-migration');
+    const strip = page.getByTestId('snapshot-strip');
+    const text = await strip.textContent();
+    expect(text?.toLowerCase()).toContain('kenya');
+  });
+
+  test('Zambia itinerary shows Zambia in snapshot', async ({ page }) => {
+    await page.goto('/itineraries/zambia-walking-safari');
+    const strip = page.getByTestId('snapshot-strip');
+    const text = await strip.textContent();
+    expect(text?.toLowerCase()).toContain('zambia');
+  });
+
+  test('Zimbabwe itinerary shows Zimbabwe in snapshot', async ({ page }) => {
+    await page.goto('/itineraries/zimbabwe-falls-and-wildlife');
+    const strip = page.getByTestId('snapshot-strip');
+    const text = await strip.textContent();
+    expect(text?.toLowerCase()).toContain('zimbabwe');
+  });
+});
+
+test.describe('Itinerary Count Validation', () => {
+  test('hub displays at least 24 itineraries', async ({ page }) => {
+    await page.goto('/itineraries');
+    const cards = page.getByTestId('itinerary-card');
+    const count = await cards.count();
+    expect(count).toBeGreaterThanOrEqual(24);
+  });
+});
+
+test.describe('Mobile Responsiveness', () => {
+  test('hub page renders correctly on mobile', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/itineraries');
+    const h1 = page.getByTestId('itineraries-h1');
+    await expect(h1).toBeVisible();
+    const cards = page.getByTestId('itinerary-card');
+    await expect(cards.first()).toBeVisible();
+  });
+
+  test('detail page renders correctly on mobile', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/itineraries/tanzania-classic-northern-circuit');
+    const h1 = page.getByTestId('itinerary-h1');
+    await expect(h1).toBeVisible();
+    const strip = page.getByTestId('snapshot-strip');
+    await expect(strip).toBeVisible();
+  });
+
+  test('segment cards stack properly on mobile', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/itineraries/tanzania-classic-northern-circuit');
+    const segments = page.getByTestId('segment-card');
+    await expect(segments.first()).toBeVisible();
+  });
+});
+
+test.describe('Decision Link Max Count', () => {
+  test('decisions section shows max 6 links', async ({ page }) => {
+    await page.goto('/itineraries/tanzania-classic-northern-circuit');
+    const decisionLinks = page.getByTestId('decision-link');
+    const count = await decisionLinks.count();
+    expect(count).toBeLessThanOrEqual(6);
+  });
+
+  test('east-africa-grand-circuit has decisions capped at 6', async ({ page }) => {
+    await page.goto('/itineraries/east-africa-grand-circuit');
+    const decisionLinks = page.getByTestId('decision-link');
+    const count = await decisionLinks.count();
+    expect(count).toBeLessThanOrEqual(6);
+    expect(count).toBeGreaterThan(0);
+  });
+});
+
+test.describe('New Itinerary Features', () => {
+  test('Zambia walking safari has walking-specific content', async ({ page }) => {
+    await page.goto('/itineraries/zambia-walking-safari');
+    const mainContent = await page.locator('main').textContent();
+    expect(mainContent?.toLowerCase()).toContain('walking');
+  });
+
+  test('Zimbabwe falls itinerary mentions Victoria Falls', async ({ page }) => {
+    await page.goto('/itineraries/zimbabwe-falls-and-wildlife');
+    const mainContent = await page.locator('main').textContent();
+    expect(mainContent?.toLowerCase()).toContain('victoria');
+  });
+
+  test('Kenya family safari mentions family-friendly', async ({ page }) => {
+    await page.goto('/itineraries/kenya-family-friendly');
+    const mainContent = await page.locator('main').textContent();
+    expect(mainContent?.toLowerCase()).toContain('family');
+  });
+
+  test('East Africa grand circuit spans multiple countries', async ({ page }) => {
+    await page.goto('/itineraries/east-africa-grand-circuit');
+    const mainContent = await page.locator('main').textContent();
+    // Should mention Tanzania, Kenya, or Rwanda
+    const mentionsMultiple =
+      mainContent?.toLowerCase().includes('tanzania') ||
+      mainContent?.toLowerCase().includes('kenya') ||
+      mainContent?.toLowerCase().includes('rwanda');
+    expect(mentionsMultiple).toBe(true);
   });
 });

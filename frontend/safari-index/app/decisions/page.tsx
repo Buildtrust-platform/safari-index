@@ -4,15 +4,16 @@
  * Authoritative index for Safari Index's decision library.
  * Organizes P0 decision topics by domain (bucket).
  *
+ * Redesigned with:
+ * - Visual category headers with ecosystem imagery
+ * - Featured decisions section
+ * - Card-based topic grid
+ * - Improved visual hierarchy
+ *
  * Role:
  * - Authority index for all published decisions
  * - User orientation layer for planning domains
  * - Crawl and internal-linking control surface
- *
- * Data source: topic-inventory.ts (strategic metadata)
- * Slug generation: p0-topics-bridge.ts
- *
- * Launch visibility: P0 topics only
  */
 
 import Link from 'next/link';
@@ -29,6 +30,7 @@ import {
   ArrowRight,
   ChevronRight,
   Layers,
+  Sparkles,
 } from 'lucide-react';
 import {
   topicInventory,
@@ -37,7 +39,7 @@ import {
   type TopicInventoryItem,
 } from '../content/topic-inventory';
 import { generateSlugFromId } from '../content/p0-topics-bridge';
-import { ImageBand, ImageBandContent, pageImages } from '../components/visual';
+import { ImageBand, ImageBandContent, pageImages, ecosystemImages } from '../components/visual';
 import { Navbar, Footer } from '../components/layout';
 import { SearchAndFilters } from '../components/SearchAndFilters';
 
@@ -55,7 +57,7 @@ export const metadata: Metadata = {
 };
 
 /**
- * Bucket display metadata with icons and framing copy
+ * Bucket display metadata with icons, images, and framing copy
  */
 const BUCKET_CONFIG: Record<
   TopicBucket,
@@ -64,63 +66,64 @@ const BUCKET_CONFIG: Record<
     anchorId: string;
     framingCopy: string;
     icon: React.ElementType;
+    imageIndex: number;
   }
 > = {
   personal_fit: {
     title: 'Personal Fit',
     anchorId: 'personal-fit',
-    framingCopy:
-      'Is this trip right for you? These decisions help you assess whether safari matches your expectations, travel style, and group composition.',
+    framingCopy: 'Is safari right for you? Assess expectations, travel style, and group needs.',
     icon: Users,
+    imageIndex: 3, // montane-forest
   },
   destination_choice: {
-    title: 'Destination Choice',
+    title: 'Destinations',
     anchorId: 'destination-choice',
-    framingCopy:
-      'Where should you go? These comparisons help you choose between countries, parks, and regions based on your priorities and constraints.',
+    framingCopy: 'Where should you go? Compare countries, parks, and regions.',
     icon: MapPin,
+    imageIndex: 0, // savannah-morning
   },
   timing: {
     title: 'Timing',
     anchorId: 'timing',
-    framingCopy:
-      'When should you go? Safari timing affects wildlife, weather, crowds, and cost. These decisions help you pick the right window for your priorities.',
+    framingCopy: 'When to travel? Wildlife, weather, crowds, and cost vary by month.',
     icon: Calendar,
+    imageIndex: 4, // floodplain-evening
   },
   experience_type: {
     title: 'Experience Type',
     anchorId: 'experience-type',
-    framingCopy:
-      'What kind of safari do you want? Walking safaris, self-drive adventures, or group tours each offer different trade-offs.',
+    framingCopy: 'What kind of safari? Walking, self-drive, or guided options.',
     icon: Compass,
+    imageIndex: 5, // kopje-landscape
   },
   accommodation: {
     title: 'Accommodation',
     anchorId: 'accommodation',
-    framingCopy:
-      'Where should you stay? Lodges, tented camps, and budget options all exist across the safari spectrum.',
+    framingCopy: 'Where to stay? Lodges, tented camps, and budget options.',
     icon: Tent,
+    imageIndex: 6, // woodland-clearing
   },
   logistics: {
     title: 'Logistics',
     anchorId: 'logistics',
-    framingCopy:
-      'How do you make this work practically? Trip length, internal flights, and booking mechanics all require decisions.',
+    framingCopy: 'How to plan? Trip length, flights, and booking mechanics.',
     icon: Plane,
+    imageIndex: 7, // crater-highlands
   },
   risk_ethics: {
-    title: 'Risk and Ethics',
+    title: 'Risk & Ethics',
     anchorId: 'risk-ethics',
-    framingCopy:
-      'What should you be cautious about? Health zones, political stability, and ethical considerations factor into responsible travel.',
+    framingCopy: 'What to consider? Health, safety, and responsible travel.',
     icon: Shield,
+    imageIndex: 2, // desert-dunes
   },
   value_cost: {
-    title: 'Value and Cost',
+    title: 'Value & Cost',
     anchorId: 'value-cost',
-    framingCopy:
-      'Are you getting good value? These decisions help you set realistic budgets and allocate spending where it matters most.',
+    framingCopy: 'What does it cost? Set budgets and allocate spending wisely.',
     icon: DollarSign,
+    imageIndex: 1, // delta-channels
   },
 };
 
@@ -148,33 +151,115 @@ function getBucketsWithP0Topics(): TopicBucket[] {
 }
 
 /**
- * Topic link component
+ * Get featured topics (first from key buckets)
  */
-function TopicLink({ topic }: { topic: TopicInventoryItem }) {
+function getFeaturedTopics(): TopicInventoryItem[] {
+  const featured: TopicInventoryItem[] = [];
+  const priorityBuckets: TopicBucket[] = ['timing', 'destination_choice', 'personal_fit', 'value_cost'];
+
+  for (const bucket of priorityBuckets) {
+    const topics = getP0TopicsForBucket(bucket);
+    if (topics.length > 0 && featured.length < 6) {
+      featured.push(topics[0]);
+    }
+  }
+
+  // Fill remaining with any other P0 topics
+  const allP0 = topicInventory.filter((t) => t.launch_priority === 'P0');
+  for (const topic of allP0) {
+    if (featured.length >= 6) break;
+    if (!featured.find((f) => f.id === topic.id)) {
+      featured.push(topic);
+    }
+  }
+
+  return featured.slice(0, 6);
+}
+
+/**
+ * Topic card component - visual card style
+ */
+function TopicCard({ topic }: { topic: TopicInventoryItem }) {
   const slug = generateSlugFromId(topic.id);
+  const config = BUCKET_CONFIG[topic.bucket as TopicBucket];
+  const Icon = config.icon;
 
   return (
     <Link
       href={`/decisions/${slug}`}
       prefetch={false}
-      className="group flex items-center justify-between py-3 px-4 rounded-lg hover:bg-stone-50 transition-colors border border-transparent hover:border-stone-200"
+      className="group block bg-white rounded-xl border border-stone-200 p-4 hover:border-amber-300 hover:shadow-md transition-all"
       data-testid="topic-link"
     >
-      <span className="text-stone-700 group-hover:text-amber-700 transition-colors">
-        {topic.title}
-      </span>
-      <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-amber-600 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+      <div className="flex items-start gap-3">
+        <div className="w-9 h-9 rounded-lg bg-stone-100 group-hover:bg-amber-100 flex items-center justify-center flex-shrink-0 transition-colors">
+          <Icon className="w-4 h-4 text-stone-500 group-hover:text-amber-600 transition-colors" strokeWidth={1.5} />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h3 className="font-editorial text-sm font-medium text-stone-900 group-hover:text-amber-700 transition-colors line-clamp-2 mb-1">
+            {topic.title}
+          </h3>
+          <span className="text-xs text-stone-400">{config.title}</span>
+        </div>
+        <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all flex-shrink-0 mt-1" />
+      </div>
     </Link>
   );
 }
 
 /**
- * Bucket section component
+ * Featured topic card - larger with more detail
+ */
+function FeaturedTopicCard({ topic, index }: { topic: TopicInventoryItem; index: number }) {
+  const slug = generateSlugFromId(topic.id);
+  const config = BUCKET_CONFIG[topic.bucket as TopicBucket];
+  const Icon = config.icon;
+  const bgImage = ecosystemImages[index % ecosystemImages.length];
+
+  return (
+    <Link
+      href={`/decisions/${slug}`}
+      prefetch={false}
+      className="group block bg-white rounded-2xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-lg transition-all"
+      data-testid="featured-topic"
+    >
+      {/* Image header */}
+      <div className="relative h-28 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+          style={{ backgroundImage: `url(${bgImage.src})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+        <div className="absolute bottom-3 left-4 right-4">
+          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-xs font-medium bg-white/90 backdrop-blur-sm text-stone-700 rounded-full">
+            <Icon className="w-3 h-3" />
+            {config.title}
+          </span>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-4">
+        <h3 className="font-editorial text-base font-semibold text-stone-900 group-hover:text-amber-700 transition-colors line-clamp-2 mb-2">
+          {topic.title}
+        </h3>
+        <div className="flex items-center justify-between">
+          <span className="text-xs text-stone-400">Get verdict</span>
+          <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all" />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+/**
+ * Bucket section component with visual header
  */
 function BucketSection({ bucket }: { bucket: TopicBucket }) {
   const config = BUCKET_CONFIG[bucket];
   const topics = getP0TopicsForBucket(bucket);
   const Icon = config.icon;
+  const bgImage = ecosystemImages[config.imageIndex];
 
   if (topics.length === 0) {
     return null;
@@ -186,24 +271,33 @@ function BucketSection({ bucket }: { bucket: TopicBucket }) {
       className="scroll-mt-24"
       data-testid={`bucket-${config.anchorId}`}
     >
-      <div className="bg-white rounded-2xl border border-stone-200 p-6 md:p-8 shadow-sm">
-        {/* Section header */}
-        <div className="flex items-start gap-4 mb-6">
-          <div className="w-12 h-12 rounded-xl bg-stone-100 flex items-center justify-center flex-shrink-0 border border-stone-200">
-            <Icon className="w-6 h-6 text-stone-600" strokeWidth={1.5} />
-          </div>
-          <div>
-            <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-1">
-              {config.title}
-            </h2>
-            <p className="text-stone-500 text-sm">{config.framingCopy}</p>
+      {/* Category header with image */}
+      <div className="relative rounded-t-2xl overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-stone-900/90 via-stone-900/70 to-stone-900/50 z-10" />
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${bgImage.src})` }}
+        />
+        <div className="relative z-20 p-5 md:p-6">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+              <Icon className="w-5 h-5 text-amber-400" strokeWidth={1.5} />
+            </div>
+            <div>
+              <h2 className="font-editorial text-lg font-semibold text-white">
+                {config.title}
+              </h2>
+              <p className="text-white/70 text-sm">{config.framingCopy}</p>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Topic list */}
-        <div className="divide-y divide-stone-100">
+      {/* Topics grid */}
+      <div className="bg-white rounded-b-2xl border border-t-0 border-stone-200 p-4 md:p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {topics.map((topic) => (
-            <TopicLink key={topic.id} topic={topic} />
+            <TopicCard key={topic.id} topic={topic} />
           ))}
         </div>
       </div>
@@ -212,18 +306,20 @@ function BucketSection({ bucket }: { bucket: TopicBucket }) {
 }
 
 /**
- * Bucket navigation chip
+ * Bucket navigation chip with icon
  */
 function BucketNavChip({ bucket, count }: { bucket: TopicBucket; count: number }) {
   const config = BUCKET_CONFIG[bucket];
+  const Icon = config.icon;
 
   return (
     <a
       href={`#${config.anchorId}`}
-      className="flex items-center gap-2 px-4 py-2 text-sm text-stone-600 bg-white rounded-full border border-stone-200 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700 transition-colors whitespace-nowrap"
+      className="flex items-center gap-2 px-3 py-2 text-sm text-stone-600 bg-white rounded-lg border border-stone-200 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700 transition-colors whitespace-nowrap shadow-sm"
     >
+      <Icon className="w-4 h-4" />
       <span>{config.title}</span>
-      <span className="text-xs text-stone-400">({count})</span>
+      <span className="text-xs text-stone-400 bg-stone-100 px-1.5 py-0.5 rounded">{count}</span>
     </a>
   );
 }
@@ -234,6 +330,7 @@ function BucketNavChip({ bucket, count }: { bucket: TopicBucket; count: number }
 export default function DecisionsHubPage() {
   const p0Count = getP0TopicCount();
   const bucketsWithTopics = getBucketsWithP0Topics();
+  const featuredTopics = getFeaturedTopics();
 
   return (
     <main className="min-h-screen bg-stone-50">
@@ -275,41 +372,63 @@ export default function DecisionsHubPage() {
 
             {/* Subtitle */}
             <p className="text-white/80 text-lg max-w-xl mx-auto">
-              {p0Count} decisions across {bucketsWithTopics.length} domains.
+              {p0Count} decisions across {bucketsWithTopics.length} planning domains.
               <br className="hidden md:block" />
-              Find the guidance you need, organized by what you're deciding.
+              Clear verdicts with trade-offs stated upfront.
             </p>
+
+            {/* Stats */}
+            <div className="flex items-center justify-center gap-6 mt-6 text-white/60 text-sm">
+              <span>{p0Count} decisions</span>
+              <span className="w-1 h-1 rounded-full bg-white/40" />
+              <span>{bucketsWithTopics.length} categories</span>
+            </div>
           </div>
         </ImageBandContent>
       </ImageBand>
 
       {/* Search Section */}
-      <section className="bg-white py-8 border-b border-stone-200">
+      <section className="bg-white py-6 border-b border-stone-200">
         <div className="max-w-3xl mx-auto px-4 md:px-8">
           <SearchAndFilters
             context="decisions"
-            placeholder="Search decisions... e.g., 'when to visit Tanzania' or 'budget safari'"
+            placeholder="Search decisions... e.g., 'Tanzania February' or 'budget safari'"
             compact
           />
         </div>
       </section>
 
-      {/* Main content */}
-      <div className="max-w-4xl mx-auto px-4 md:px-8 py-8">
-        {/* Orientation paragraph */}
-        <div className="mb-8">
-          <p className="text-stone-600 leading-relaxed">
-            Safari planning involves interconnected decisions about where to go, when to travel,
-            how to structure your trip, and what trade-offs to accept. This page organizes our
-            decision coverage into {bucketsWithTopics.length} domains, each addressing a different
-            aspect of the planning process.
-          </p>
-        </div>
+      {/* Featured Decisions */}
+      {featuredTopics.length > 0 && (
+        <section className="bg-white py-10 border-b border-stone-200">
+          <div className="max-w-6xl mx-auto px-4 md:px-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-amber-700" />
+              </div>
+              <div>
+                <h2 className="font-editorial text-xl font-semibold text-stone-900">
+                  Popular Decisions
+                </h2>
+                <p className="text-stone-500 text-sm">Start with these common questions</p>
+              </div>
+            </div>
 
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {featuredTopics.map((topic, index) => (
+                <FeaturedTopicCard key={topic.id} topic={topic} index={index} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Main content */}
+      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
         {/* Bucket navigation */}
-        <nav className="mb-10" aria-label="Decision domains">
+        <nav className="mb-8" aria-label="Decision domains">
           <h2 className="text-xs font-semibold text-stone-500 uppercase tracking-wide mb-3">
-            Jump to domain
+            Browse by category
           </h2>
           <div className="flex flex-wrap gap-2" data-testid="bucket-nav">
             {bucketsWithTopics.map((bucket) => (
@@ -329,25 +448,35 @@ export default function DecisionsHubPage() {
           ))}
         </div>
 
-        {/* Close framing */}
+        {/* CTA section */}
         <div className="mt-12 pt-8 border-t border-stone-200">
-          <p className="text-stone-500 text-sm">
-            Looking for a specific topic?{' '}
-            <Link
-              href="/explore"
-              className="text-amber-600 hover:text-amber-700 underline underline-offset-2"
-            >
-              Explore all decisions
-            </Link>{' '}
-            or{' '}
-            <Link
-              href="/compare"
-              className="text-amber-600 hover:text-amber-700 underline underline-offset-2"
-            >
-              compare two decisions
-            </Link>{' '}
-            side by side.
-          </p>
+          <div className="bg-stone-900 rounded-2xl p-6 md:p-8">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <h3 className="font-editorial text-xl text-white mb-2">
+                  Not finding what you need?
+                </h3>
+                <p className="text-stone-400 text-sm">
+                  Explore all decisions or compare two options side by side.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/explore"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-stone-900 rounded-lg font-medium hover:bg-stone-100 transition-colors text-sm"
+                >
+                  Explore all
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/compare"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-transparent text-white border border-white/30 rounded-lg font-medium hover:bg-white/10 transition-colors text-sm"
+                >
+                  Compare decisions
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

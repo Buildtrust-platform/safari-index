@@ -161,15 +161,17 @@ function deriveTravelerProfiles(def: P0DecisionDefinition): string[] {
   const profiles: string[] = [];
 
   // Personal fit topics
+  // Note: First profile must be a valid API traveler_type:
+  // first_time, repeat, family, honeymoon, photographer, unknown
   if (id === 'first-timer-ready' || q.includes('first')) profiles.push('first_time');
-  if (id === 'solo-safari-fit' || q.includes('solo')) profiles.push('solo');
-  if (id === 'family-young-kids' || q.includes('children') || q.includes('kids')) profiles.push('families');
-  if (id === 'multigenerational') profiles.push('families', 'multigenerational');
-  if (id === 'honeymoon-fit' || q.includes('honeymoon')) profiles.push('couples', 'honeymoon');
+  if (id === 'solo-safari-fit' || q.includes('solo')) profiles.push('first_time', 'solo');
+  if (id === 'family-young-kids' || q.includes('children') || q.includes('kids')) profiles.push('family', 'families');
+  if (id === 'multigenerational') profiles.push('family', 'multigenerational');
+  if (id === 'honeymoon-fit' || q.includes('honeymoon')) profiles.push('honeymoon', 'couples');
 
-  // Budget-related
-  if (id.includes('budget') || q.includes('budget')) profiles.push('budget_conscious');
-  if (id === 'luxury-worth-it' || q.includes('luxury')) profiles.push('luxury');
+  // Budget-related (use first_time as fallback API type)
+  if (id.includes('budget') || q.includes('budget')) profiles.push('first_time', 'budget_conscious');
+  if (id === 'luxury-worth-it' || q.includes('luxury')) profiles.push('first_time', 'luxury');
 
   // Experience level
   if (q.includes('repeat') || id.includes('repeat')) profiles.push('repeat');

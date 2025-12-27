@@ -61,8 +61,14 @@ export function Footer({ variant = 'operator' }: FooterProps) {
               <Link href="/guides" className="block text-sm text-stone-400 hover:text-white transition-colors">
                 Guides
               </Link>
+              <Link href="/blog" className="block text-sm text-stone-400 hover:text-white transition-colors">
+                Insights
+              </Link>
               <Link href="/how-it-works" className="block text-sm text-stone-400 hover:text-white transition-colors">
                 How it works
+              </Link>
+              <Link href="/contact" className="block text-sm text-stone-400 hover:text-white transition-colors">
+                Contact
               </Link>
               <Link href="/inquire" className="block text-sm text-stone-400 hover:text-white transition-colors">
                 Plan a Safari

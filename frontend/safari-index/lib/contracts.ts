@@ -465,3 +465,60 @@ export const ProposalPublicResponseSchema = z.object({
     travel_style: true,
   }),
 });
+
+// ============================================================================
+// Newsletter Contracts
+// ============================================================================
+
+/**
+ * Newsletter subscription status
+ */
+export const NewsletterStatusSchema = z.enum(['subscribed', 'unsubscribed']);
+export type NewsletterStatus = z.infer<typeof NewsletterStatusSchema>;
+
+/**
+ * Newsletter source - where the subscription came from
+ */
+export const NewsletterSourceSchema = z.enum(['homepage', 'footer', 'other']);
+export type NewsletterSource = z.infer<typeof NewsletterSourceSchema>;
+
+/**
+ * Newsletter subscribe request (POST /api/newsletter)
+ */
+export const NewsletterSubscribeRequestSchema = z.object({
+  email: z.string().email(),
+  source: NewsletterSourceSchema.optional(),
+});
+export type NewsletterSubscribeRequest = z.infer<typeof NewsletterSubscribeRequestSchema>;
+
+/**
+ * Newsletter subscribe response
+ */
+export const NewsletterSubscribeResponseSchema = z.object({
+  ok: z.literal(true),
+  status: z.enum(['subscribed', 'already_subscribed', 'resubscribed']),
+});
+export type NewsletterSubscribeResponse = z.infer<typeof NewsletterSubscribeResponseSchema>;
+
+/**
+ * Newsletter subscriber record (stored in DynamoDB)
+ */
+export const NewsletterSubscriberRecordSchema = z.object({
+  subscriber_id: z.string(),
+  email: z.string(),
+  status: NewsletterStatusSchema,
+  source: NewsletterSourceSchema,
+  created_at: z.string(),
+  updated_at: z.string(),
+  last_ip: z.string().optional(),
+  user_agent: z.string().optional(),
+});
+export type NewsletterSubscriberRecord = z.infer<typeof NewsletterSubscriberRecordSchema>;
+
+/**
+ * Newsletter status update request (PATCH /api/ops/newsletter/[id])
+ */
+export const NewsletterUpdateSchema = z.object({
+  status: NewsletterStatusSchema,
+});
+export type NewsletterUpdate = z.infer<typeof NewsletterUpdateSchema>;

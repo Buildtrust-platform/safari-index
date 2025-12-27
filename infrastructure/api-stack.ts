@@ -27,6 +27,7 @@ interface ApiStackProps extends cdk.StackProps {
   assuranceTable: dynamodb.ITable;
   inquiryTable: dynamodb.ITable;
   proposalTable: dynamodb.ITable;
+  newsletterTable: dynamodb.ITable;
 }
 
 export class ApiStack extends cdk.Stack {
@@ -64,6 +65,7 @@ export class ApiStack extends cdk.Stack {
         ASSURANCE_TABLE: props.assuranceTable.tableName,
         INQUIRY_TABLE: props.inquiryTable.tableName,
         PROPOSAL_TABLE: props.proposalTable.tableName,
+        NEWSLETTER_TABLE: props.newsletterTable.tableName,
         // Version tracking (per 10_data_model.md)
         LOGIC_VERSION: 'rules_v1.0',
         PROMPT_VERSION: 'prompt_v1.0',
@@ -81,6 +83,7 @@ export class ApiStack extends cdk.Stack {
     props.assuranceTable.grantWriteData(this.orchestratorLambda);
     props.inquiryTable.grantWriteData(this.orchestratorLambda);
     props.proposalTable.grantWriteData(this.orchestratorLambda);
+    props.newsletterTable.grantWriteData(this.orchestratorLambda);
 
     // Grant Lambda permission to read from DynamoDB (for queries)
     props.decisionTable.grantReadData(this.orchestratorLambda);
@@ -89,6 +92,7 @@ export class ApiStack extends cdk.Stack {
     props.assuranceTable.grantReadData(this.orchestratorLambda);
     props.inquiryTable.grantReadData(this.orchestratorLambda);
     props.proposalTable.grantReadData(this.orchestratorLambda);
+    props.newsletterTable.grantReadData(this.orchestratorLambda);
 
     // Grant Lambda permission to invoke Bedrock
     this.orchestratorLambda.addToRolePolicy(

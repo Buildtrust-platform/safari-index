@@ -7,9 +7,11 @@
  *
  * Includes:
  * - Homepage
- * - Decision pages
- * - Guide pages (index, bucket hubs, topic guides)
+ * - Authority hubs (when-to-go, destinations, activities)
  * - Trip pages (index, individual trip archetypes)
+ * - Guide pages (index, bucket hubs, topic guides)
+ * - Decision pages
+ * - Blog pages (index, individual blog articles)
  */
 
 import { MetadataRoute } from 'next';
@@ -23,6 +25,10 @@ import {
 import { generateSlugFromId } from './content/p0-topics-bridge';
 import { getAllTrips } from './content/trip-shapes/trips';
 import { getAllActivityIds } from './content/activities/activity-primitives';
+import { getAllBlogs } from '../lib/blog-content';
+import { initializeBlogs } from './content/blog';
+import { getAllItineraries } from './content/itineraries';
+import { getPublishedSafariTypes } from './content/safari-types';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://safariindex.com';
@@ -31,6 +37,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const p0TopicIds = getAllP0TopicIds();
   const trips = getAllTrips();
   const activityIds = getAllActivityIds();
+  const itineraries = getAllItineraries();
+  const safariTypes = getPublishedSafariTypes();
+
+  // Initialize blogs to populate the registry
+  initializeBlogs();
+  const blogs = getAllBlogs();
 
   // Decision pages
   const decisionPages = topics.map((topic) => ({
@@ -121,6 +133,62 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  // Blog index page
+  const blogIndexPage = {
+    url: `${baseUrl}/blog`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  };
+
+  // Individual blog pages - per spec: monthly, priority 0.6
+  const blogPages = blogs.map((blog) => ({
+    url: `${baseUrl}/blog/decisions/${blog.decisionSlug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
+
+  // Contact page
+  const contactPage = {
+    url: `${baseUrl}/contact`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  };
+
+  // Itineraries index page
+  const itinerariesIndexPage = {
+    url: `${baseUrl}/itineraries`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  };
+
+  // Individual itinerary pages
+  const itineraryPages = itineraries.map((itinerary) => ({
+    url: `${baseUrl}/itineraries/${itinerary.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
+  // Safari Types index page
+  const safariTypesIndexPage = {
+    url: `${baseUrl}/safari-types`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  };
+
+  // Individual safari type pages
+  const safariTypePages = safariTypes.map((safariType) => ({
+    url: `${baseUrl}/safari-types/${safariType.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
   return [
     {
       url: baseUrl,
@@ -138,5 +206,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...bucketHubPages,
     ...topicGuidePages,
     ...decisionPages,
+    blogIndexPage,
+    ...blogPages,
+    contactPage,
+    itinerariesIndexPage,
+    ...itineraryPages,
+    safariTypesIndexPage,
+    ...safariTypePages,
   ];
 }

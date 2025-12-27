@@ -27,7 +27,7 @@ import {
   FileText,
   AlertCircle,
 } from 'lucide-react';
-import { Navbar } from '../components/layout';
+import { Navbar, Footer } from '../components/layout';
 import { ImageBand, ImageBandContent, ecosystemImages } from '../components/visual';
 import {
   getAllTrips,
@@ -529,200 +529,162 @@ function InquiryFormContent() {
       </ImageBand>
 
       {/* Form */}
-      <div className="max-w-2xl mx-auto px-4 md:px-8 py-12">
-        <form onSubmit={handleSubmit} className="space-y-8">
-          {/* Trip Shape Section */}
-          <section className="space-y-4">
-            <h2 className="font-editorial text-xl font-semibold text-stone-900">
-              Trip Shape
-            </h2>
-            <p className="text-sm text-stone-500">
-              Select a trip shape if you have one in mind, or continue without.
-            </p>
+      <div className="max-w-xl mx-auto px-4 md:px-6 py-12">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Trip Shape - optional starting point */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-stone-700">
+              Trip Shape <span className="text-stone-400 font-normal">(optional)</span>
+            </label>
             <TripSelector
               trips={allTrips}
               selectedId={formState.tripShapeId}
               onSelect={(id) => updateField('tripShapeId', id)}
             />
-          </section>
+          </div>
 
-          {/* Travel Details Section */}
-          <section className="space-y-6">
-            <h2 className="font-editorial text-xl font-semibold text-stone-900">
-              Travel Details
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Budget Band */}
-              <FormField
-                label="Budget Range"
-                required
-                icon={Wallet}
-                error={errors.budgetBand}
-              >
-                <SelectInput
-                  value={formState.budgetBand}
-                  onChange={(v) => updateField('budgetBand', v as InquiryFormState['budgetBand'])}
-                  options={BUDGET_BANDS}
-                  placeholder="Select budget range"
-                />
-              </FormField>
-
-              {/* Traveler Count */}
-              <FormField label="Number of Travelers" icon={Users}>
-                <SelectInput
-                  value={formState.travelerCount}
-                  onChange={(v) => updateField('travelerCount', parseInt(v, 10))}
-                  options={TRAVELER_COUNTS}
-                />
-              </FormField>
-
-              {/* Travel Month */}
-              <FormField label="Preferred Month" icon={Calendar}>
-                <SelectInput
-                  value={formState.travelMonth}
-                  onChange={(v) => updateField('travelMonth', v ? parseInt(v, 10) : null)}
-                  options={MONTH_OPTIONS}
-                  placeholder="Select month"
-                />
-              </FormField>
-
-              {/* Travel Year */}
-              <FormField label="Travel Year" icon={Calendar}>
-                <SelectInput
-                  value={formState.travelYear}
-                  onChange={(v) => updateField('travelYear', v ? parseInt(v, 10) : null)}
-                  options={yearOptions}
-                  placeholder="Select year"
-                />
-              </FormField>
-
-              {/* Travel Style */}
-              <div className="md:col-span-2">
-                <FormField
-                  label="Travel Style"
-                  required
-                  icon={Users}
-                  error={errors.travelStyle}
-                >
-                  <SelectInput
-                    value={formState.travelStyle}
-                    onChange={(v) => updateField('travelStyle', v as InquiryFormState['travelStyle'])}
-                    options={TRAVEL_STYLES}
-                    placeholder="Select travel style"
-                  />
-                </FormField>
-              </div>
+          {/* When are you traveling? - Month + Year side by side */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-stone-700">
+              When are you traveling?
+            </label>
+            <div className="grid grid-cols-2 gap-3">
+              <SelectInput
+                value={formState.travelMonth}
+                onChange={(v) => updateField('travelMonth', v ? parseInt(v, 10) : null)}
+                options={MONTH_OPTIONS}
+                placeholder="Month"
+              />
+              <SelectInput
+                value={formState.travelYear}
+                onChange={(v) => updateField('travelYear', v ? parseInt(v, 10) : null)}
+                options={yearOptions}
+                placeholder="Year"
+              />
             </div>
-          </section>
+          </div>
 
-          {/* Contact Section */}
-          <section className="space-y-6">
-            <h2 className="font-editorial text-xl font-semibold text-stone-900">
-              Contact Information
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Email */}
-              <FormField label="Email" required icon={Mail} error={errors.email}>
-                <TextInput
-                  type="email"
-                  value={formState.email}
-                  onChange={(v) => updateField('email', v)}
-                  placeholder="your@email.com"
-                />
-              </FormField>
-
-              {/* WhatsApp */}
-              <FormField label="WhatsApp" icon={Phone} error={errors.whatsapp}>
-                <TextInput
-                  type="tel"
-                  value={formState.whatsapp}
-                  onChange={(v) => updateField('whatsapp', v)}
-                  placeholder="+1 234 567 8900 (optional)"
-                />
-              </FormField>
-            </div>
-          </section>
-
-          {/* Notes Section */}
-          <section className="space-y-4">
-            <FormField label="Additional Notes" icon={FileText}>
-              <TextArea
-                value={formState.notes}
-                onChange={(v) => updateField('notes', v)}
-                placeholder="Anything else we should know about your trip plans..."
-                rows={4}
+          {/* Travelers + Budget side by side */}
+          <div className="grid grid-cols-2 gap-3">
+            <FormField label="Travelers" icon={Users}>
+              <SelectInput
+                value={formState.travelerCount}
+                onChange={(v) => updateField('travelerCount', parseInt(v, 10))}
+                options={TRAVELER_COUNTS}
               />
             </FormField>
-          </section>
 
-          {/* Linked Decisions Preview */}
+            <FormField label="Budget" required icon={Wallet} error={errors.budgetBand}>
+              <SelectInput
+                value={formState.budgetBand}
+                onChange={(v) => updateField('budgetBand', v as InquiryFormState['budgetBand'])}
+                options={BUDGET_BANDS}
+                placeholder="Select"
+              />
+            </FormField>
+          </div>
+
+          {/* Travel Style - full width */}
+          <FormField label="Travel Style" required error={errors.travelStyle}>
+            <SelectInput
+              value={formState.travelStyle}
+              onChange={(v) => updateField('travelStyle', v as InquiryFormState['travelStyle'])}
+              options={TRAVEL_STYLES}
+              placeholder="How do you like to travel?"
+            />
+          </FormField>
+
+          {/* Contact - Email required, WhatsApp optional */}
+          <div className="space-y-4 pt-2">
+            <FormField label="Email" required icon={Mail} error={errors.email}>
+              <TextInput
+                type="email"
+                value={formState.email}
+                onChange={(v) => updateField('email', v)}
+                placeholder="your@email.com"
+              />
+            </FormField>
+
+            <FormField label="WhatsApp" icon={Phone} error={errors.whatsapp}>
+              <TextInput
+                type="tel"
+                value={formState.whatsapp}
+                onChange={(v) => updateField('whatsapp', v)}
+                placeholder="+1 234 567 8900 (optional)"
+              />
+            </FormField>
+          </div>
+
+          {/* Notes - optional */}
+          <FormField label="Anything else?" icon={FileText}>
+            <TextArea
+              value={formState.notes}
+              onChange={(v) => updateField('notes', v)}
+              placeholder="Special requests, questions, or context..."
+              rows={3}
+            />
+          </FormField>
+
+          {/* Linked Decisions Preview - compact */}
           {((selectedTrip?.linked_decisions?.length ?? 0) > 0 || additionalDecisionIds.length > 0) && (
-            <section className="p-6 bg-stone-100 rounded-xl" data-testid="linked-decisions-preview">
-              <h3 className="font-medium text-stone-900 mb-2">
-                Decisions linked to this inquiry
-              </h3>
-              <p className="text-sm text-stone-600 mb-4">
-                Your trip brief will include these decision points for review.
+            <div className="p-4 bg-amber-50/50 rounded-lg border border-amber-100" data-testid="linked-decisions-preview">
+              <p className="text-sm text-stone-600 mb-2">
+                This inquiry links to relevant decisions:
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {[...new Set([...(selectedTrip?.linked_decisions || []), ...additionalDecisionIds])]
                   .slice(0, 6)
                   .map((decisionId) => (
                     <span
                       key={decisionId}
-                      className="px-3 py-1 bg-white text-stone-700 text-sm rounded-full border border-stone-200"
+                      className="px-2 py-0.5 bg-white text-stone-600 text-xs rounded border border-amber-200"
                       data-testid="linked-decision-chip"
                     >
                       {decisionId.replace(/-/g, ' ')}
                     </span>
                   ))}
               </div>
-            </section>
+            </div>
           )}
 
           {/* Submit Error */}
           {errors.submit && (
-            <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-              <p className="text-red-700">{errors.submit}</p>
+            <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-sm text-red-700">{errors.submit}</p>
             </div>
           )}
 
           {/* Submit Button */}
-          <div className="pt-4">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-stone-900 text-white font-medium rounded-xl hover:bg-stone-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              data-testid="inquire-submit"
-            >
-              {isSubmitting ? (
-                'Submitting...'
-              ) : (
-                <>
-                  <Send className="w-5 h-5" />
-                  Submit Trip Brief
-                </>
-              )}
-            </button>
-          </div>
-        </form>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-stone-900 text-white font-medium rounded-lg hover:bg-stone-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            data-testid="inquire-submit"
+          >
+            {isSubmitting ? (
+              'Submitting...'
+            ) : (
+              <>
+                <Send className="w-4 h-4" />
+                Submit Trip Brief
+              </>
+            )}
+          </button>
 
-        {/* Footer Note */}
-        <div className="mt-8 pt-8 border-t border-stone-200">
-          <p className="text-sm text-stone-500 text-center">
-            This captures your trip intent. No booking or payment is involved.
-            <br />
+          {/* Footer Note */}
+          <p className="text-center text-xs text-stone-400 pt-2">
+            No booking or payment. Just a conversation starter.{' '}
             <Link
               href="/how-it-works"
               className="text-amber-600 hover:text-amber-700 underline underline-offset-2"
             >
-              Learn how Safari Index works
+              How it works
             </Link>
           </p>
-        </div>
+        </form>
       </div>
+
+      <Footer />
     </main>
   );
 }

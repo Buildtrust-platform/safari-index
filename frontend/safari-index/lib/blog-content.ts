@@ -78,17 +78,22 @@ const blogRegistry: Map<string, BlogContent> = new Map();
 
 /**
  * Register a blog
+ *
+ * Link limits per editorial spec:
+ * - Related decisions: max 3 (same or adjacent bucket)
+ * - Related trips: max 2
+ * - Related guides: max 2
  */
 export function registerBlog(blog: BlogContent): void {
   // Validate link limits
-  if (blog.relatedDecisions.length > 6) {
-    console.warn(`Blog ${blog.decisionSlug}: Too many related decisions (max 6)`);
+  if (blog.relatedDecisions.length > 3) {
+    console.warn(`Blog ${blog.decisionSlug}: Too many related decisions (max 3)`);
   }
-  if (blog.relatedTrips.length > 3) {
-    console.warn(`Blog ${blog.decisionSlug}: Too many related trips (max 3)`);
+  if (blog.relatedTrips.length > 2) {
+    console.warn(`Blog ${blog.decisionSlug}: Too many related trips (max 2)`);
   }
-  if (blog.relatedGuides.length > 3) {
-    console.warn(`Blog ${blog.decisionSlug}: Too many related guides (max 3)`);
+  if (blog.relatedGuides.length > 2) {
+    console.warn(`Blog ${blog.decisionSlug}: Too many related guides (max 2)`);
   }
 
   blogRegistry.set(blog.decisionSlug, blog);
@@ -136,6 +141,12 @@ export function getBlogsByBucket(bucket: string): BlogContent[] {
 
 /**
  * Validate blog content meets requirements
+ *
+ * Per editorial spec:
+ * - Word count: 1200-1800
+ * - Related decisions: 1-3 (same or adjacent bucket)
+ * - Related trips: 1-2
+ * - Related guides: 0-2
  */
 export function validateBlog(blog: BlogContent): string[] {
   const errors: string[] = [];
@@ -146,11 +157,14 @@ export function validateBlog(blog: BlogContent): string[] {
   if (blog.wordCount > 1800) {
     errors.push(`Word count too high: ${blog.wordCount} (max 1800)`);
   }
-  if (blog.relatedDecisions.length < 4) {
-    errors.push(`Too few related decisions: ${blog.relatedDecisions.length} (min 4)`);
+  if (blog.relatedDecisions.length < 1) {
+    errors.push(`Too few related decisions: ${blog.relatedDecisions.length} (min 1)`);
   }
-  if (blog.relatedDecisions.length > 6) {
-    errors.push(`Too many related decisions: ${blog.relatedDecisions.length} (max 6)`);
+  if (blog.relatedDecisions.length > 3) {
+    errors.push(`Too many related decisions: ${blog.relatedDecisions.length} (max 3)`);
+  }
+  if (blog.relatedTrips.length > 2) {
+    errors.push(`Too many related trips: ${blog.relatedTrips.length} (max 2)`);
   }
   if (!blog.whyNotSimple || blog.whyNotSimple.length < 200) {
     errors.push('Section "Why Not Simple" too short or missing');

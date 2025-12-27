@@ -24,6 +24,7 @@ import { ImageBand, ImageBandContent, pageImages, destinationImages, activityIma
 import { Navbar, PageGrid } from './components/layout';
 import { OperatorCredentials } from './components/OperatorCredentials';
 import { SearchAndFilters } from './components/SearchAndFilters';
+import { NewsletterSignup } from './components/NewsletterSignup';
 import { getPublishedTopics, type DecisionTopic } from './content/decision-topics';
 import { getAllTrips } from './content/trip-shapes/trips';
 
@@ -407,59 +408,75 @@ export default function Home() {
       {/* ================================================================
           SECTION 2 — DESTINATION SHOWCASE
           Visual grid of key destinations.
+          Soft sand background for visual rhythm.
           ================================================================ */}
-      <section className="bg-stone-50 py-16 md:py-24">
-        <PageGrid maxWidth="default">
-          <div className="text-center mb-10">
-            <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900 mb-3">
-              Where we operate
-            </h2>
-            <p className="text-stone-600 max-w-xl mx-auto">
-              Private safaris across East and Southern Africa's most rewarding destinations.
-            </p>
-          </div>
+      <section className="relative py-12 md:py-16">
+        {/* Soft sand background */}
+        <div className="absolute inset-0 bg-[#F5F1E8]" />
+        <div className="relative">
+          <PageGrid maxWidth="wide">
+            <div className="text-center mb-8">
+              {/* Eyebrow label */}
+              <p className="text-xs font-medium text-stone-500 uppercase tracking-widest mb-2">
+                Where to go
+              </p>
+              <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900 mb-2">
+                Safari Destinations
+              </h2>
+              <p className="text-stone-600 max-w-xl mx-auto text-sm">
+                Private safaris across East and Southern Africa.
+              </p>
+            </div>
 
-          {/* Destination Grid - Asymmetric layout for visual interest */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {FEATURED_DESTINATIONS.map((dest) => (
-              <DestinationCard
-                key={dest.id}
-                id={dest.id}
-                name={dest.name}
-                tagline={dest.tagline}
-                featured={dest.featured}
-              />
-            ))}
-          </div>
+            {/* Destination Grid - Wider cards with more spacing */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+              {FEATURED_DESTINATIONS.map((dest) => (
+                <DestinationCard
+                  key={dest.id}
+                  id={dest.id}
+                  name={dest.name}
+                  tagline={dest.tagline}
+                  featured={dest.featured}
+                />
+              ))}
+            </div>
 
-          <div className="text-center mt-8">
-            <Link
-              href="/destinations"
-              className="inline-flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-800 transition-colors"
-            >
-              View all destinations
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </PageGrid>
+            <div className="text-center mt-6">
+              <Link
+                href="/destinations"
+                className="inline-flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-800 transition-colors"
+              >
+                View all destinations
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </PageGrid>
+        </div>
       </section>
+
+      {/* Section divider */}
+      <div className="h-px bg-gradient-to-r from-transparent via-stone-200 to-transparent" />
 
       {/* ================================================================
           SECTION 3 — HOW WE PLAN SAFARIS
           Decision-backed planning approach.
           ================================================================ */}
-      <section className="bg-white py-20 md:py-28">
-        <PageGrid maxWidth="narrow">
-          <div className="text-center mb-14">
-            <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900 mb-4">
+      <section className="bg-white py-12 md:py-16">
+        <PageGrid maxWidth="default">
+          <div className="text-center mb-8">
+            {/* Eyebrow label */}
+            <p className="text-xs font-medium text-stone-500 uppercase tracking-widest mb-2">
+              Our Approach
+            </p>
+            <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900 mb-2">
               How we plan safaris
             </h2>
-            <p className="text-stone-600 max-w-xl mx-auto">
+            <p className="text-stone-600 max-w-xl mx-auto text-sm">
               Every safari we operate starts with clear decisions about timing, expectations, and trade-offs.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 max-w-4xl mx-auto">
             <PillarCard
               icon={Scale}
               title="Clear verdicts"
@@ -482,19 +499,28 @@ export default function Home() {
       {/* ================================================================
           SECTION 3.5 — EXPERIENCE GALLERY
           Safari experiences mosaic.
+          Light neutral background for visual rhythm.
           ================================================================ */}
-      <section className="bg-stone-900 py-16 md:py-24">
-        <PageGrid maxWidth="default">
-          <div className="text-center mb-10">
-            <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-white mb-3">
-              Safari experiences
+      <section className="relative py-12 md:py-16">
+        {/* Light neutral gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-stone-50 to-stone-100" />
+        <div className="relative">
+        <PageGrid maxWidth="wide">
+          <div className="text-center mb-8">
+            {/* Eyebrow label */}
+            <p className="text-xs font-medium text-stone-500 uppercase tracking-widest mb-2">
+              What to do
+            </p>
+            <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900 mb-2">
+              Safari Experiences
             </h2>
-            <p className="text-stone-400 max-w-xl mx-auto">
+            <p className="text-stone-600 max-w-xl mx-auto text-sm">
               From classic game drives to walking safaris and gorilla treks.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* Wider card grid with increased spacing */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {FEATURED_EXPERIENCES.map((exp) => (
               <ExperienceCard
                 key={exp.activityId}
@@ -505,82 +531,94 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="text-center mt-8">
+          <div className="text-center mt-6">
             <Link
               href="/activities"
-              className="inline-flex items-center gap-2 text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-800 transition-colors"
             >
               Explore all activities
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </PageGrid>
+        </div>
       </section>
 
       {/* ================================================================
           SECTION 4 — REAL QUESTIONS
           6 decision cards from topic registry.
+          Full-width background band.
           ================================================================ */}
-      <section className="bg-stone-50 py-20 md:py-28">
-        <PageGrid maxWidth="default">
-          <div className="text-center mb-12">
-            <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900 mb-4">
-              Start with a real question
-            </h2>
-            <p className="text-stone-600 max-w-xl mx-auto">
-              We publish our decision logic. Ask a question and get a clear, reasoned answer.
-            </p>
-          </div>
+      <section className="relative py-12 md:py-16">
+        {/* Full-width warm background band */}
+        <div className="absolute inset-0 bg-gradient-to-b from-amber-50/50 via-stone-50 to-white" />
+        <div className="relative">
+          <PageGrid maxWidth="wide">
+            <div className="text-center mb-8">
+              {/* Eyebrow label */}
+              <p className="text-xs font-medium text-amber-700 uppercase tracking-widest mb-2">
+                Decision Support
+              </p>
+              <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900 mb-2">
+                Start with a real question
+              </h2>
+              <p className="text-stone-600 max-w-xl mx-auto text-sm">
+                We publish our decision logic. Ask a question and get a clear, reasoned answer.
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {featuredTopics.map((topic) => (
-              <QuestionCard key={topic.topic_id} topic={topic} />
-            ))}
-          </div>
+            {/* Wider card grid with increased spacing */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {featuredTopics.map((topic) => (
+                <QuestionCard key={topic.topic_id} topic={topic} />
+              ))}
+            </div>
 
-          <div className="text-center mt-10">
-            <Link
-              href="/decisions"
-              className="inline-flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-800 transition-colors"
-            >
-              View all decisions
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </PageGrid>
+            <div className="text-center mt-6">
+              <Link
+                href="/decisions"
+                className="inline-flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-800 transition-colors"
+              >
+                View all decisions
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </PageGrid>
+        </div>
       </section>
 
       {/* ================================================================
           SECTION 5 — SAFARIS WE OPERATE
           Trip shapes with images.
+          Charcoal background for visual contrast.
           ================================================================ */}
-      <section className="bg-white py-20 md:py-28">
-        <PageGrid maxWidth="default">
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
-                <Map className="w-5 h-5 text-amber-700" />
-              </div>
-              <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-stone-900">
-                Safaris we operate
-              </h2>
-            </div>
-            <p className="text-stone-600 max-w-xl mx-auto">
+      <section className="bg-stone-800 py-12 md:py-16">
+        <PageGrid maxWidth="wide">
+          <div className="text-center mb-8">
+            {/* Eyebrow label */}
+            <p className="text-xs font-medium text-stone-400 uppercase tracking-widest mb-2">
+              Trip shapes
+            </p>
+            <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-white mb-2">
+              Sample Itineraries
+            </h2>
+            <p className="text-stone-300 max-w-xl mx-auto text-sm">
               Private itineraries across East and Southern Africa.
               Each is custom-built around the decisions that matter for your trip.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Wider card grid with increased spacing */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {featuredTrips.map((trip, index) => (
               <TripCardWithImage key={trip.id} trip={trip} index={index} />
             ))}
           </div>
 
-          <div className="text-center mt-10">
+          <div className="text-center mt-6">
             <Link
               href="/trips"
-              className="inline-flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-800 transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors"
             >
               View all safari itineraries
               <ArrowRight className="w-4 h-4" />
@@ -602,13 +640,13 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-stone-900/80" />
         </div>
-        <div className="relative py-20 md:py-32">
+        <div className="relative py-14 md:py-20">
           <PageGrid maxWidth="narrow">
             <div className="text-center">
-              <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-white mb-5">
+              <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-white mb-3">
                 A different kind of safari operator
               </h2>
-              <p className="font-editorial text-lg text-stone-300 leading-relaxed max-w-2xl mx-auto mb-8">
+              <p className="font-editorial text-base text-stone-300 leading-relaxed max-w-2xl mx-auto mb-6">
                 We plan and operate private safaris. We also publish the decision logic behind our recommendations.
                 You see exactly why we suggest what we suggest—and what would change our answer.
               </p>
@@ -636,24 +674,34 @@ export default function Home() {
           SECTION 7 — ACCOUNTABILITY SIGNALS
           Trust signals with visual treatment.
           ================================================================ */}
-      <section className="bg-stone-50 py-16 md:py-20">
+      <section className="bg-stone-50 py-10 md:py-12">
         <PageGrid maxWidth="default">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { icon: Calendar, title: 'Versioned & Dated', text: 'Every decision is timestamped and versioned.' },
               { icon: RefreshCw, title: 'Conditions Change', text: 'Outcomes update when the facts change.' },
               { icon: ShieldOff, title: 'No Incentives', text: 'No commissions, no bookings, no hidden agendas.' },
               { icon: MapPin, title: 'Local Knowledge', text: 'Grounded in years of African safari experience.' },
             ].map((item, index) => (
-              <div key={index} className="text-center p-6 rounded-xl bg-white border border-stone-200">
-                <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center mx-auto mb-4">
-                  <item.icon className="w-5 h-5 text-stone-600" />
+              <div key={index} className="text-center p-4 rounded-xl bg-white border border-stone-200">
+                <div className="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center mx-auto mb-3">
+                  <item.icon className="w-4 h-4 text-stone-600" />
                 </div>
-                <h3 className="font-medium text-stone-900 mb-1">{item.title}</h3>
-                <p className="text-sm text-stone-500">{item.text}</p>
+                <h3 className="font-medium text-stone-900 text-sm mb-1">{item.title}</h3>
+                <p className="text-xs text-stone-500">{item.text}</p>
               </div>
             ))}
           </div>
+        </PageGrid>
+      </section>
+
+      {/* ================================================================
+          SECTION 7.5 — NEWSLETTER
+          Newsletter signup near footer, calm tone.
+          ================================================================ */}
+      <section className="bg-stone-900 py-10 md:py-12 border-t border-stone-800">
+        <PageGrid maxWidth="narrow">
+          <NewsletterSignup />
         </PageGrid>
       </section>
 
@@ -670,13 +718,13 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-stone-900/90 to-stone-900/70" />
         </div>
-        <div className="relative py-24 md:py-32">
+        <div className="relative py-14 md:py-20">
           <PageGrid maxWidth="default">
             <div className="max-w-lg">
-              <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-white mb-4">
+              <h2 className="font-editorial text-2xl md:text-3xl font-semibold text-white mb-3">
                 Ready to plan your safari?
               </h2>
-              <p className="font-editorial text-stone-300 mb-8">
+              <p className="font-editorial text-stone-300 text-sm mb-6">
                 Browse our itineraries, explore the decisions that shape your trip, or start a conversation with our team.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
@@ -703,7 +751,7 @@ export default function Home() {
           FOOTER
           Safari operator identity.
           ================================================================ */}
-      <footer className="bg-stone-950 text-white py-12">
+      <footer className="bg-stone-950 text-white py-10">
         <PageGrid maxWidth="default">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div className="md:col-span-2">
@@ -735,6 +783,9 @@ export default function Home() {
                 </Link>
                 <Link href="/how-it-works" className="block text-sm text-stone-400 hover:text-white transition-colors">
                   How it works
+                </Link>
+                <Link href="/contact" className="block text-sm text-stone-400 hover:text-white transition-colors">
+                  Contact
                 </Link>
                 <Link href="/inquire" className="block text-sm text-stone-400 hover:text-white transition-colors">
                   Plan a Safari

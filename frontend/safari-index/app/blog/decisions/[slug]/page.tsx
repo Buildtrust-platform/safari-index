@@ -1,34 +1,99 @@
-'use client';
-
 /**
  * Decision Blog Page
  *
- * Individual blog article anchored to a decision.
- * Follows strict 9-section template.
+ * Static, indexable blog article anchored to a decision.
+ * Uses generateMetadata for SEO and generateStaticParams for static generation.
+ *
+ * Structure per editorial spec:
+ * 1. Intro (context-setting)
+ * 2. Decision Spine (visible decision block)
+ * 3. Core Analysis Sections
+ * 4. Supporting Decisions (max 3)
+ * 5. Trip Embedding (max 2)
+ * 6. Optional Deep Reading (max 2)
+ * 7. Closing with CTA to /inquire
  */
 
-import { useParams, notFound } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getBlogByDecision } from '../../../../lib/blog-content';
+import type { Metadata } from 'next';
+import { getBlogByDecision, getAllBlogs } from '../../../../lib/blog-content';
 import { getTopicBySlug } from '../../../content/decision-topics';
 import {
   BlogHeader,
   BlogSchema,
   BlogSection,
   DecisionAnchor,
+  DecisionSpine,
   RelatedContent,
 } from '../../_components';
-import { ImageBand, ImageBandContent, pageImages } from '../../../components/visual';
+import { ImageBand, pageImages } from '../../../components/visual';
+import { Navbar, Footer } from '../../../components/layout';
 import { pageContainer } from '../../../ui/styles';
 // Initialize blog content
 import { initializeBlogs } from '../../../content/blog';
 
-// Ensure blogs are registered before render
+// Ensure blogs are registered at build time
 initializeBlogs();
 
-export default function DecisionBlogPage() {
-  const params = useParams();
-  const slug = params?.slug as string;
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+/**
+ * Generate static params for all published blogs
+ */
+export async function generateStaticParams() {
+  initializeBlogs();
+  const blogs = getAllBlogs();
+  return blogs.map((blog) => ({
+    slug: blog.decisionSlug,
+  }));
+}
+
+/**
+ * Generate metadata for SEO
+ */
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  initializeBlogs();
+  const blog = getBlogByDecision(slug);
+
+  if (!blog || !blog.published) {
+    return {
+      title: 'Article Not Found | Safari Index',
+    };
+  }
+
+  const canonicalUrl = `/blog/decisions/${slug}`;
+
+  return {
+    title: `${blog.title} | Safari Index`,
+    description: blog.subtitle,
+    robots: 'index, follow',
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: blog.title,
+      description: blog.subtitle,
+      type: 'article',
+      url: canonicalUrl,
+      publishedTime: blog.updatedAt,
+      modifiedTime: blog.updatedAt,
+      authors: ['Safari Index'],
+      section: 'Safari Planning',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: blog.title,
+      description: blog.subtitle,
+    },
+  };
+}
+
+export default async function DecisionBlogPage({ params }: PageProps) {
+  const { slug } = await params;
 
   // Get the blog content
   const blog = getBlogByDecision(slug);
@@ -41,7 +106,8 @@ export default function DecisionBlogPage() {
     // Check if decision exists but no blog
     if (topic) {
       return (
-        <>
+        <main className="min-h-screen bg-stone-50">
+          <Navbar />
           <ImageBand
             image={pageImages.decision}
             height="decision"
@@ -49,7 +115,7 @@ export default function DecisionBlogPage() {
             align="center"
           />
 
-          <main className={pageContainer}>
+          <div className={pageContainer}>
             <div className="mb-6">
               <Link
                 href={`/decisions/${slug}`}
@@ -72,8 +138,9 @@ export default function DecisionBlogPage() {
                 In the meantime, see the decision for the quick verdict.
               </p>
             </div>
-          </main>
-        </>
+          </div>
+          <Footer />
+        </main>
       );
     }
 
@@ -83,7 +150,9 @@ export default function DecisionBlogPage() {
   const canonicalUrl = `https://safariindex.com/blog/decisions/${slug}`;
 
   return (
-    <>
+    <main className="min-h-screen bg-stone-50">
+      <Navbar />
+
       {/* Article Schema */}
       <BlogSchema blog={blog} canonicalUrl={canonicalUrl} />
 
@@ -96,9 +165,9 @@ export default function DecisionBlogPage() {
         priority
       />
 
-      <main className={`${pageContainer} min-h-screen bg-gradient-to-b from-amber-50/30 via-stone-50 to-stone-100`}>
-        <article className="max-w-3xl">
-          {/* Header with decision link */}
+      <div className={`${pageContainer} min-h-screen bg-gradient-to-b from-amber-50/30 via-stone-50 to-stone-100`}>
+        <article className="max-w-3xl" data-testid="blog-article">
+          {/* 1. Header (Intro) */}
           <BlogHeader
             title={blog.title}
             subtitle={blog.subtitle}
@@ -106,56 +175,59 @@ export default function DecisionBlogPage() {
             updatedAt={blog.updatedAt}
           />
 
-          {/* Section 1: Why This Decision Is Not Simple */}
+          {/* 2. Decision Spine - visible decision block */}
+          <DecisionSpine
+            decisionSlug={blog.decisionSlug}
+            decisionTitle={blog.title}
+          />
+
+          {/* 3. Core Analysis Sections */}
           <BlogSection
             heading="Why This Decision Is Not Simple"
             content={blog.whyNotSimple}
           />
 
-          {/* Section 2: The Variables That Change the Answer */}
           <BlogSection
             heading="The Variables That Change the Answer"
             content={blog.variables}
           />
 
-          {/* Section 3: Trade-offs People Underestimate */}
           <BlogSection
             heading="Trade-offs People Underestimate"
             content={blog.tradeoffs}
           />
 
-          {/* Section 4: Common Misconceptions */}
           <BlogSection
             heading="Common Misconceptions"
             content={blog.misconceptions}
           />
 
-          {/* Section 5: When This Decision Breaks Down */}
           <BlogSection
             heading="When This Decision Breaks Down"
             content={blog.breaksDown}
           />
 
-          {/* Section 6: How Safari Index Approaches This Decision */}
           <BlogSection
             heading="How Safari Index Approaches This Decision"
             content={blog.ourApproach}
           />
 
-          {/* Related Content */}
+          {/* 4-6. Related Content (decisions, trips, guides) */}
           <RelatedContent
             decisions={blog.relatedDecisions}
             trips={blog.relatedTrips}
             guides={blog.relatedGuides}
           />
 
-          {/* Bottom anchor to decision */}
+          {/* 7. Closing with CTA */}
           <DecisionAnchor
             decisionSlug={blog.decisionSlug}
             title={blog.title}
           />
         </article>
-      </main>
-    </>
+      </div>
+
+      <Footer />
+    </main>
   );
 }

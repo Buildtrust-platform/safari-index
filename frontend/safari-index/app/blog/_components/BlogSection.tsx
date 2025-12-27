@@ -2,10 +2,14 @@
  * Blog Section Component
  *
  * Renders a single section of blog content.
- * Handles paragraph splitting and basic formatting.
+ * Handles:
+ * - Paragraph splitting
+ * - Bold formatting (**text**)
+ * - Internal links [text](/path)
  */
 
 import { type ReactNode } from 'react';
+import Link from 'next/link';
 
 interface BlogSectionProps {
   heading: string;
@@ -37,13 +41,13 @@ export function BlogSection({ heading, content }: BlogSectionProps) {
                         <strong className="font-semibold text-stone-900">
                           {boldMatch[1]}
                         </strong>
-                        {boldMatch[2]}
+                        {renderInlineFormatting(boldMatch[2])}
                       </p>
                     );
                   }
                   return (
                     <p key={lineIdx} className="text-stone-700 leading-relaxed">
-                      {line}
+                      {renderInlineFormatting(line)}
                     </p>
                   );
                 })}
@@ -64,27 +68,69 @@ export function BlogSection({ heading, content }: BlogSectionProps) {
 }
 
 /**
- * Render inline bold formatting
+ * Render inline formatting (bold and links)
+ * Supports:
+ * - **bold text**
+ * - [link text](/path)
  */
 function renderInlineFormatting(text: string): ReactNode[] {
   const parts: ReactNode[] = [];
   let remaining = text;
   let keyIdx = 0;
 
+  // Combined regex for bold and links
+  // Matches either **bold** or [text](url)
+  const formatRegex = /(\*\*(.+?)\*\*)|(\[([^\]]+)\]\(([^)]+)\))/;
+
   while (remaining.length > 0) {
-    const boldMatch = remaining.match(/\*\*(.+?)\*\*/);
-    if (boldMatch && boldMatch.index !== undefined) {
-      // Add text before bold
-      if (boldMatch.index > 0) {
-        parts.push(remaining.slice(0, boldMatch.index));
+    const match = remaining.match(formatRegex);
+
+    if (match && match.index !== undefined) {
+      // Add text before the match
+      if (match.index > 0) {
+        parts.push(remaining.slice(0, match.index));
       }
-      // Add bold text
-      parts.push(
-        <strong key={`b-${keyIdx++}`} className="font-semibold">
-          {boldMatch[1]}
-        </strong>
-      );
-      remaining = remaining.slice(boldMatch.index + boldMatch[0].length);
+
+      if (match[1]) {
+        // Bold match: **text**
+        parts.push(
+          <strong key={`b-${keyIdx++}`} className="font-semibold">
+            {match[2]}
+          </strong>
+        );
+      } else if (match[3]) {
+        // Link match: [text](url)
+        const linkText = match[4];
+        const linkUrl = match[5];
+
+        // Internal links use Next.js Link
+        if (linkUrl.startsWith('/')) {
+          parts.push(
+            <Link
+              key={`l-${keyIdx++}`}
+              href={linkUrl}
+              className="text-amber-700 hover:text-amber-800 underline underline-offset-2"
+            >
+              {linkText}
+            </Link>
+          );
+        } else {
+          // External links
+          parts.push(
+            <a
+              key={`l-${keyIdx++}`}
+              href={linkUrl}
+              className="text-amber-700 hover:text-amber-800 underline underline-offset-2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {linkText}
+            </a>
+          );
+        }
+      }
+
+      remaining = remaining.slice(match.index + match[0].length);
     } else {
       parts.push(remaining);
       break;

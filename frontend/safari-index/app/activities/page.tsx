@@ -1,14 +1,12 @@
 /**
  * Activities Hub Page
  *
- * Static, indexable hub for safari activities authority layer.
- * No Bedrock calls - purely deterministic content from inventory.
- *
- * Per governance:
- * - Documentary, operator-grade tone
- * - No hype or promotional language
- * - Internal links with question titles
- * - Honest about trade-offs and limitations
+ * Consistent design with other hub pages:
+ * - Hero with icon, title, subtitle, stats
+ * - Search section
+ * - Featured activities grid
+ * - Category sections with visual headers
+ * - CTA footer
  */
 
 import Link from 'next/link';
@@ -35,7 +33,6 @@ import {
   activityPrimitives,
   ActivityCategory,
 } from '../content/activities/activity-primitives';
-import { getDecisionsByRegion, LINK_LIMITS } from '../../lib/internal-links';
 
 export const metadata: Metadata = {
   title: 'Safari Activities | Safari Index',
@@ -55,40 +52,48 @@ export const metadata: Metadata = {
 };
 
 /**
- * Category icon mapping
+ * Category configuration with icons and images
  */
-function getCategoryIcon(category: ActivityCategory) {
-  switch (category) {
-    case 'vehicle':
-      return <Car className="w-5 h-5" />;
-    case 'water':
-      return <Waves className="w-5 h-5" />;
-    case 'foot':
-      return <Footprints className="w-5 h-5" />;
-    case 'aerial':
-      return <Plane className="w-5 h-5" />;
-    case 'specialty':
-      return <Sparkles className="w-5 h-5" />;
+const CATEGORY_CONFIG: Record<
+  ActivityCategory,
+  {
+    name: string;
+    description: string;
+    icon: React.ElementType;
+    imageIndex: number;
   }
-}
-
-/**
- * Category display name
- */
-function getCategoryName(category: ActivityCategory): string {
-  switch (category) {
-    case 'vehicle':
-      return 'Vehicle-Based';
-    case 'water':
-      return 'Water-Based';
-    case 'foot':
-      return 'On Foot';
-    case 'aerial':
-      return 'Aerial';
-    case 'specialty':
-      return 'Specialty';
-  }
-}
+> = {
+  vehicle: {
+    name: 'Vehicle-Based',
+    description: 'Classic game drives and 4x4 adventures',
+    icon: Car,
+    imageIndex: 0, // savannah-morning
+  },
+  water: {
+    name: 'Water-Based',
+    description: 'Boat safaris, mokoro, and canoe adventures',
+    icon: Waves,
+    imageIndex: 1, // delta-channels
+  },
+  foot: {
+    name: 'On Foot',
+    description: 'Walking safaris and bush experiences',
+    icon: Footprints,
+    imageIndex: 4, // floodplain-evening
+  },
+  aerial: {
+    name: 'Aerial',
+    description: 'Balloon rides and scenic flights',
+    icon: Plane,
+    imageIndex: 7, // crater-highlands
+  },
+  specialty: {
+    name: 'Specialty',
+    description: 'Gorilla trekking, night drives, and unique experiences',
+    icon: Sparkles,
+    imageIndex: 3, // montane-forest
+  },
+};
 
 /**
  * Physical effort display
@@ -128,86 +133,178 @@ function groupByCategory() {
 }
 
 /**
- * Activity card component
+ * Featured activity card with large image
  */
-function ActivityCard({ activity }: { activity: typeof activityPrimitives[0] }) {
-  const effortDisplay = getEffortDisplay(activity.physical_effort);
+function FeaturedActivityCard({ activity }: { activity: typeof activityPrimitives[0] }) {
+  const config = CATEGORY_CONFIG[activity.category];
+  const Icon = config.icon;
   const activityImage = getActivityImageRef(activity.id);
+  const effortDisplay = getEffortDisplay(activity.physical_effort);
 
   return (
     <Link
       href={`/activities/${activity.id}`}
-      className="group block bg-white rounded-xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-md transition-all"
-      data-testid="activity-card"
+      className="group block bg-white rounded-2xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-lg transition-all"
+      data-testid="featured-activity"
     >
-      {/* Activity Image */}
-      {activityImage?.hasImage && activityImage.src && (
-        <div className="relative h-32 overflow-hidden">
+      {/* Image */}
+      <div className="relative h-36 overflow-hidden">
+        {activityImage?.hasImage && activityImage.src ? (
           <img
             src={activityImage.src}
             alt={activityImage.alt}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-        </div>
-      )}
-
-      <div className="p-5">
-        {/* Header */}
-        <div className="flex items-start justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center text-stone-600 group-hover:bg-amber-100 group-hover:text-amber-700 transition-colors">
-              {getCategoryIcon(activity.category)}
-            </div>
-            <h3 className="font-editorial text-lg font-semibold text-stone-900 group-hover:text-amber-700 transition-colors">
-              {activity.name}
-            </h3>
-          </div>
-          <span className={`px-2 py-1 text-xs rounded-full ${effortDisplay.color}`}>
+        ) : (
+          <div
+            className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+            style={{ backgroundImage: `url(${ecosystemImages[config.imageIndex].src})` }}
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+        <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
+          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-xs font-medium bg-white/90 backdrop-blur-sm text-stone-700 rounded-full">
+            <Icon className="w-3 h-3" />
+            {config.name}
+          </span>
+          <span className={`px-2 py-0.5 text-xs rounded-full ${effortDisplay.color}`}>
             {effortDisplay.label}
           </span>
         </div>
+      </div>
 
-        {/* Description */}
-        <p className="text-stone-600 text-sm mb-4 line-clamp-2">
-          {activity.what_it_is}
-        </p>
-
-        {/* Who it's for */}
-        <div className="mb-3">
-          <span className="text-xs text-stone-500 uppercase tracking-wide">Best for</span>
-          <p className="text-sm text-stone-700 mt-1">{activity.who_it_is_for}</p>
-        </div>
-
-        {/* Trade-offs preview */}
-        <div className="flex items-center gap-2 text-xs text-stone-500">
-          <span className="text-green-600">+ {activity.trade_offs.gains.split(',')[0]}</span>
-          <span className="text-stone-300">|</span>
-          <span className="text-red-600">- {activity.trade_offs.losses.split(',')[0]}</span>
-        </div>
-
-        {/* Destinations count */}
-        <div className="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-sm">
-          <span className="text-stone-500">
-            Available in {activity.where_possible.length} destinations
+      {/* Content */}
+      <div className="p-4">
+        <h3 className="font-editorial text-lg font-semibold text-stone-900 group-hover:text-amber-700 transition-colors mb-1">
+          {activity.name}
+        </h3>
+        <p className="text-stone-500 text-sm line-clamp-2 mb-3">{activity.what_it_is}</p>
+        <div className="flex items-center justify-between">
+          <span className="text-xs text-stone-400">
+            {activity.where_possible.length} destinations
           </span>
-          <ArrowRight className="w-4 h-4 text-stone-400 group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
+          <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all" />
         </div>
       </div>
     </Link>
   );
 }
 
+/**
+ * Activity card in category grid
+ */
+function ActivityCard({ activity }: { activity: typeof activityPrimitives[0] }) {
+  const config = CATEGORY_CONFIG[activity.category];
+  const Icon = config.icon;
+  const effortDisplay = getEffortDisplay(activity.physical_effort);
+
+  return (
+    <Link
+      href={`/activities/${activity.id}`}
+      className="group block bg-white rounded-xl border border-stone-200 p-4 hover:border-amber-300 hover:shadow-md transition-all"
+      data-testid="activity-card"
+    >
+      <div className="flex items-start gap-3">
+        <div className="w-10 h-10 rounded-lg bg-stone-100 group-hover:bg-amber-100 flex items-center justify-center flex-shrink-0 transition-colors">
+          <Icon className="w-5 h-5 text-stone-500 group-hover:text-amber-600 transition-colors" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-start justify-between mb-1">
+            <h3 className="font-editorial text-base font-semibold text-stone-900 group-hover:text-amber-700 transition-colors">
+              {activity.name}
+            </h3>
+            <span className={`px-2 py-0.5 text-xs rounded-full flex-shrink-0 ml-2 ${effortDisplay.color}`}>
+              {effortDisplay.label}
+            </span>
+          </div>
+          <p className="text-stone-500 text-sm line-clamp-2 mb-2">{activity.what_it_is}</p>
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-stone-400">
+              {activity.where_possible.length} destinations
+            </span>
+            <ArrowRight className="w-3.5 h-3.5 text-stone-300 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all" />
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+/**
+ * Category section with visual header
+ */
+function CategorySection({ category, activities }: { category: ActivityCategory; activities: typeof activityPrimitives }) {
+  const config = CATEGORY_CONFIG[category];
+  const Icon = config.icon;
+  const bgImage = ecosystemImages[config.imageIndex];
+
+  if (activities.length === 0) return null;
+
+  return (
+    <section id={category} className="scroll-mt-24" data-testid={`category-${category}`}>
+      {/* Category header with image */}
+      <div className="relative rounded-t-2xl overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-stone-900/90 via-stone-900/70 to-stone-900/50 z-10" />
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${bgImage.src})` }}
+        />
+        <div className="relative z-20 p-5 md:p-6">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+              <Icon className="w-5 h-5 text-amber-400" />
+            </div>
+            <div>
+              <h2 className="font-editorial text-lg font-semibold text-white">
+                {config.name}
+              </h2>
+              <p className="text-white/70 text-sm">{config.description}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Activities grid */}
+      <div className="bg-white rounded-b-2xl border border-t-0 border-stone-200 p-4 md:p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {activities.map((activity) => (
+            <ActivityCard key={activity.id} activity={activity} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * Category navigation chip
+ */
+function CategoryNavChip({ category, count }: { category: ActivityCategory; count: number }) {
+  const config = CATEGORY_CONFIG[category];
+  const Icon = config.icon;
+
+  return (
+    <a
+      href={`#${category}`}
+      className="flex items-center gap-2 px-3 py-2 text-sm text-stone-600 bg-white rounded-lg border border-stone-200 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700 transition-colors whitespace-nowrap shadow-sm"
+    >
+      <Icon className="w-4 h-4" />
+      <span>{config.name}</span>
+      <span className="text-xs text-stone-400 bg-stone-100 px-1.5 py-0.5 rounded">{count}</span>
+    </a>
+  );
+}
+
 export default function ActivitiesPage() {
   const groupedActivities = groupByCategory();
   const categories: ActivityCategory[] = ['vehicle', 'water', 'foot', 'aerial', 'specialty'];
+  const totalActivities = activityPrimitives.length;
 
-  // Get some cross-cutting decisions for the bottom section
-  const timingDecisions = getDecisionsByRegion('', 6).filter(
-    (d) =>
-      d.anchorText.toLowerCase().includes('when') ||
-      d.anchorText.toLowerCase().includes('season')
-  );
+  // Get featured activities (first from each category)
+  const featuredActivities = categories
+    .map((cat) => groupedActivities[cat][0])
+    .filter(Boolean)
+    .slice(0, 6);
 
   return (
     <main className="min-h-screen bg-stone-50">
@@ -248,16 +345,23 @@ export default function ActivitiesPage() {
 
             {/* Subtitle */}
             <p className="text-white/80 text-lg max-w-xl mx-auto">
-              What you'll actually do on safari.
+              {totalActivities} activities across {categories.length} categories.
               <br className="hidden md:block" />
-              Each activity has its character, demands, and rewards.
+              Each has its character, demands, and rewards.
             </p>
+
+            {/* Stats */}
+            <div className="flex items-center justify-center gap-6 mt-6 text-white/60 text-sm">
+              <span>{totalActivities} activities</span>
+              <span className="w-1 h-1 rounded-full bg-white/40" />
+              <span>{categories.length} categories</span>
+            </div>
           </div>
         </ImageBandContent>
       </ImageBand>
 
       {/* Search Section */}
-      <section className="bg-white py-8 border-b border-stone-200">
+      <section className="bg-white py-6 border-b border-stone-200">
         <div className="max-w-3xl mx-auto px-4 md:px-8">
           <SearchAndFilters
             context="activities"
@@ -268,98 +372,86 @@ export default function ActivitiesPage() {
         </div>
       </section>
 
-      {/* Quick nav by category */}
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-6">
-        <div className="flex flex-wrap gap-2 justify-center">
-          {categories.map((cat) => (
-            <a
-              key={cat}
-              href={`#${cat}`}
-              className="flex items-center gap-2 px-4 py-2 bg-white border border-stone-200 text-stone-700 text-sm rounded-full hover:border-amber-300 hover:text-amber-700 transition-colors"
-            >
-              {getCategoryIcon(cat)}
-              {getCategoryName(cat)}
-            </a>
-          ))}
+      {/* Featured Activities */}
+      <section className="bg-white py-10 border-b border-stone-200">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-amber-700" />
+            </div>
+            <div>
+              <h2 className="font-editorial text-xl font-semibold text-stone-900">
+                Popular Activities
+              </h2>
+              <p className="text-stone-500 text-sm">Most common safari experiences</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {featuredActivities.map((activity) => (
+              <FeaturedActivityCard key={activity.id} activity={activity} />
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* Main content */}
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-8">
+      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
+        {/* Category navigation */}
+        <nav className="mb-8" aria-label="Activity categories">
+          <h2 className="text-xs font-semibold text-stone-500 uppercase tracking-wide mb-3">
+            Browse by category
+          </h2>
+          <div className="flex flex-wrap gap-2" data-testid="category-nav">
+            {categories.map((category) => (
+              <CategoryNavChip
+                key={category}
+                category={category}
+                count={groupedActivities[category].length}
+              />
+            ))}
+          </div>
+        </nav>
+
         {/* Category sections */}
-        {categories.map((category) => {
-          const activities = groupedActivities[category];
-          if (activities.length === 0) return null;
+        <div className="space-y-8" data-testid="category-sections">
+          {categories.map((category) => (
+            <CategorySection
+              key={category}
+              category={category}
+              activities={groupedActivities[category]}
+            />
+          ))}
+        </div>
 
-          return (
-            <section key={category} id={category} className="mb-12 scroll-mt-24">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-lg bg-stone-900 flex items-center justify-center text-white">
-                  {getCategoryIcon(category)}
-                </div>
-                <h2 className="font-editorial text-2xl font-semibold text-stone-900">
-                  {getCategoryName(category)} Activities
-                </h2>
-              </div>
-
-              <div
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-                data-testid={`activity-category-${category}`}
-              >
-                {activities.map((activity) => (
-                  <ActivityCard key={activity.id} activity={activity} />
-                ))}
-              </div>
-            </section>
-          );
-        })}
-
-        {/* Timing considerations */}
-        {timingDecisions.length > 0 && (
-          <section className="mt-12 pt-8 border-t border-stone-200">
-            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-2">
-              When Activities Are Best
-            </h2>
-            <p className="text-stone-600 mb-4">
-              Activity availability often depends on season, water levels, and weather.
-            </p>
-            <div className="bg-white rounded-xl border border-stone-200 divide-y divide-stone-100">
-              {timingDecisions.slice(0, LINK_LIMITS.decisions).map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="flex items-center justify-between px-6 py-4 hover:bg-stone-50 transition-colors group"
-                  title={link.title}
-                  prefetch={false}
-                  data-testid="timing-decision-link"
-                >
-                  <span className="text-stone-700 group-hover:text-amber-700 transition-colors">
-                    {link.anchorText}
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-stone-400 group-hover:text-amber-600 transition-colors" />
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* CTA */}
+        {/* CTA section */}
         <div className="mt-12 pt-8 border-t border-stone-200">
-          <div className="bg-stone-900 rounded-xl p-6 text-center">
-            <h3 className="font-editorial text-xl text-white mb-2">
-              Not sure which activities suit you?
-            </h3>
-            <p className="text-stone-400 text-sm mb-4 max-w-md mx-auto">
-              Share your preferences and we'll design an itinerary with the right activity mix.
-            </p>
-            <Link
-              href="/inquire"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-stone-900 rounded-lg font-medium hover:bg-stone-100 transition-colors"
-              prefetch={false}
-            >
-              Start planning
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+          <div className="bg-stone-900 rounded-2xl p-6 md:p-8">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <h3 className="font-editorial text-xl text-white mb-2">
+                  Not sure which activities suit you?
+                </h3>
+                <p className="text-stone-400 text-sm">
+                  Share your preferences and we'll design the right activity mix.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/inquire"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-stone-900 rounded-lg font-medium hover:bg-stone-100 transition-colors text-sm"
+                >
+                  Start planning
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/itineraries"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-transparent text-white border border-white/30 rounded-lg font-medium hover:bg-white/10 transition-colors text-sm"
+                >
+                  Browse itineraries
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
