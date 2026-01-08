@@ -3,8 +3,7 @@
  *
  * Pan-African documentary imagery for Safari Index staging pages.
  *
- * PLACEHOLDER IMAGES: These paths point to /public/images/ecosystems/.
- * Replace with actual documentary photographs that meet these criteria:
+ * Licensed images from Envato Elements. These paths point to /public/images/ecosystems/.
  *
  * Requirements (per 01_brand_voice.md):
  * - Documentary/observational style
@@ -40,7 +39,7 @@ export const ecosystemImages: EcosystemImage[] = [
   {
     id: 'savannah-morning',
     src: '/images/ecosystems/savannah-morning.jpg',
-    alt: 'Overcast savannah plain with distant acacia silhouettes at dawn',
+    alt: 'Three giraffes standing in golden African savannah grassland at dawn',
     tags: ['savannah'],
   },
   {
@@ -82,8 +81,14 @@ export const ecosystemImages: EcosystemImage[] = [
   {
     id: 'crater-highlands',
     src: '/images/ecosystems/crater-highlands.jpg',
-    alt: 'Highland grassland with volcanic crater rim in distance',
+    alt: 'Wildebeest grazing in Ngorongoro Crater with misty highlands in background',
     tags: ['mountains', 'savannah'],
+  },
+  {
+    id: 'savannah-wildlife',
+    src: '/images/ecosystems/savannah-wildlife.jpg',
+    alt: 'Wild giraffes and zebras together on the African plains',
+    tags: ['savannah'],
   },
 ];
 
@@ -128,12 +133,17 @@ export const heroImages: Record<string, HeroImage> = {
   home: {
     id: 'home-hero',
     src: '/images/heroes/home-hero.jpg',
-    alt: 'Expansive African savannah at golden hour with acacia trees silhouetted against warm sky',
+    alt: 'Herd of African elephants walking in front of Mount Kilimanjaro at sunset',
   },
   explore: {
     id: 'explore-hero',
     src: '/images/heroes/explore-hero.jpg',
-    alt: 'Wide grassland vista with scattered wildlife in the distance under open African sky',
+    alt: 'The Great Migration - vast herds of wildebeest crossing the African savannah',
+  },
+  migration: {
+    id: 'migration-hero',
+    src: '/images/heroes/migration-hero.jpg',
+    alt: 'Dramatic wildebeest river crossing during the Great Migration in Kenya',
   },
   compare: {
     id: 'compare-hero',
@@ -181,13 +191,19 @@ export const destinationImages: Record<string, DestinationImage> = {
   tanzania: {
     id: 'dest-tanzania',
     src: '/images/destinations/tanzania-serengeti.jpg',
-    alt: 'Endless Serengeti grassland with scattered acacia trees under dramatic sky',
+    alt: 'Plains zebras in the Serengeti National Park, Tanzania',
+    ecosystem: 'savannah',
+  },
+  'tanzania-ngorongoro': {
+    id: 'dest-tanzania-ngorongoro',
+    src: '/images/destinations/tanzania-ngorongoro.jpg',
+    alt: 'Herd of African buffaloes grazing in Ngorongoro Crater, Tanzania',
     ecosystem: 'savannah',
   },
   kenya: {
     id: 'dest-kenya',
     src: '/images/destinations/kenya-mara.jpg',
-    alt: 'Rolling Masai Mara hills with seasonal river cutting through golden grass',
+    alt: 'Group of buffalos in the Masai Mara National Reserve, Kenya',
     ecosystem: 'savannah',
   },
   botswana: {
@@ -229,7 +245,13 @@ export const destinationImages: Record<string, DestinationImage> = {
   rwanda: {
     id: 'dest-rwanda',
     src: '/images/destinations/rwanda-volcanoes.jpg',
-    alt: 'Virunga volcanic peaks emerging from bamboo forest and morning mist',
+    alt: 'Mountain gorilla in natural habitat in Volcanoes National Park, Rwanda',
+    ecosystem: 'mountains',
+  },
+  'south-africa-lodge': {
+    id: 'dest-south-africa-lodge',
+    src: '/images/destinations/south-africa-lodge.jpg',
+    alt: 'Safari lodge in the Drakensberg mountains, South Africa',
     ecosystem: 'mountains',
   },
 };
@@ -290,7 +312,35 @@ export const activityImageRefs: Record<string, ActivityImageRef> = {
   'game-drive': {
     activityId: 'game-drive',
     src: '/images/activities/game-drive.jpg',
-    alt: 'Safari vehicle observing wildlife at dawn on African savanna',
+    alt: 'Safari touring vehicle among wildebeest and zebras on game drive',
+    fallbackEcosystem: 'savannah',
+    hasImage: true,
+  },
+  'wildlife-viewing': {
+    activityId: 'wildlife-viewing',
+    src: '/images/activities/wildlife-viewing.jpg',
+    alt: 'Cheetah family resting in African savannah grassland',
+    fallbackEcosystem: 'savannah',
+    hasImage: true,
+  },
+  'big-cats': {
+    activityId: 'big-cats',
+    src: '/images/activities/big-cats.jpg',
+    alt: 'Male and female lions resting on sandy ground',
+    fallbackEcosystem: 'savannah',
+    hasImage: true,
+  },
+  'river-crossing': {
+    activityId: 'river-crossing',
+    src: '/images/activities/river-crossing.jpg',
+    alt: 'Zebra dashing through water during wildebeest migration river crossing',
+    fallbackEcosystem: 'floodplain',
+    hasImage: true,
+  },
+  migration: {
+    activityId: 'migration',
+    src: '/images/activities/migration.jpg',
+    alt: 'Wildebeest and zebras jumping during Great Migration river crossing',
     fallbackEcosystem: 'savannah',
     hasImage: true,
   },
@@ -325,7 +375,7 @@ export const activityImageRefs: Record<string, ActivityImageRef> = {
   'gorilla-trekking': {
     activityId: 'gorilla-trekking',
     src: '/images/activities/gorilla-trekking.jpg',
-    alt: 'Mountain gorilla in misty bamboo forest of Virunga',
+    alt: 'Mountain gorilla in natural rainforest habitat',
     fallbackEcosystem: 'forest',
     hasImage: true,
   },
