@@ -1,0 +1,44 @@
+{
+  "topic_id": "uganda-vs-tanzania-endemic-birding",
+  "outcome": "book",
+  "headline": "Uganda offers higher endemic density for forest birding; Tanzania excels for Eastern Arc specialties",
+  "summary": "Uganda's Albertine Rift forests (Bwindi, Kibale, Rwenzori) hold 40+ endemic species in accessible habitats, making it the top East African destination for forest birding efficiency. Tanzania's Eastern Arc Mountains (Udzungwa, Usambara, Uluguru) hold different endemics but require more challenging logistics and have less developed birding infrastructure. For most birders, Uganda delivers more endemics per day with better guide quality. Tanzania becomes essential only for specific Eastern Arc targets like the Udzungwa Forest Partridge or Usambara Eagle-Owl.",
+  "assumptions": [
+    {
+      "id": "albertine-density",
+      "text": "Uganda's Albertine Rift forests are more accessible and have higher endemic species density per site.",
+      "confidence": 0.90
+    },
+    {
+      "id": "guide-quality-uganda",
+      "text": "Uganda has more experienced forest birding guides due to established gorilla trekking infrastructure.",
+      "confidence": 0.85
+    },
+    {
+      "id": "eastern-arc-unique",
+      "text": "Tanzania's Eastern Arc endemics cannot be seen anywhere else - they are not Albertine Rift duplicates.",
+      "confidence": 0.95
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Uganda: Shorter travel between endemic-rich sites (Bwindi to Kibale in 1 day)",
+      "Uganda: Gorilla trekking combines naturally with forest birding logistics",
+      "Tanzania: Eastern Arc species found nowhere else if on life list",
+      "Tanzania: Combine Serengeti savannah with Udzungwa forest in one trip"
+    ],
+    "losses": [
+      "Uganda: Miss all Eastern Arc endemics (different biogeographic region)",
+      "Uganda: Fewer savannah birding opportunities than Tanzania",
+      "Tanzania: Eastern Arc sites have fewer lodging options and guides",
+      "Tanzania: Long transfers between Eastern Arc sites and northern circuit"
+    ]
+  },
+  "change_conditions": [
+    "If gorilla trekking is also planned, Uganda combines both with superior forest birding.",
+    "If specific Eastern Arc species are life birds, Tanzania is the only option.",
+    "If first Africa birding trip, Uganda's infrastructure makes it easier entry.",
+    "If combining with migration viewing, Tanzania integrates both better despite less forest access."
+  ],
+  "confidence": 0.85
+}

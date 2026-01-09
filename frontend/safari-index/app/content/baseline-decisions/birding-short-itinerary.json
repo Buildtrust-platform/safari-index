@@ -1,0 +1,44 @@
+{
+  "topic_id": "birding-short-itinerary",
+  "outcome": "book",
+  "headline": "A focused 5-6 day birding safari can yield 250-300 species in the right location",
+  "summary": "Meaningful birding is absolutely possible in under 7 days if the itinerary focuses on a single habitat-rich region rather than multi-destination hopping. Kenya's Rift Valley lakes (Naivasha, Baringo, Bogoria) or Uganda's forest corridor (Bwindi to Queen Elizabeth) can deliver 250-300 species in 5-6 days with a specialist guide. The key is eliminating transit days and maximizing dawn-to-dusk field time in species-dense locations.",
+  "assumptions": [
+    {
+      "id": "location-focus",
+      "text": "Single-region focus outperforms multi-destination travel for short birding trips.",
+      "confidence": 0.90
+    },
+    {
+      "id": "guide-impact",
+      "text": "A specialist birding guide adds 30-50 species to a short trip versus a generalist guide.",
+      "confidence": 0.85
+    },
+    {
+      "id": "dawn-dusk-essential",
+      "text": "Maximum birding time (dawn to dusk) is essential for short trips to hit species targets.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "5-6 focused days often outperform 10 scattered days for species count",
+      "Single region means no transit days lost to airports and long drives",
+      "Short trip forces prioritization of target species over completionism",
+      "Cost-effective way to test if Africa birding warrants longer return trip"
+    ],
+    "losses": [
+      "Miss habitat diversity available in longer multi-region itineraries",
+      "No buffer for weather disruptions or site closures",
+      "Cannot combine distant highlights (Serengeti + Bwindi requires 10+ days)",
+      "Exhausting pace with no rest days built in"
+    ]
+  },
+  "change_conditions": [
+    "If specific rare species are targets, verify they are reliably found in your chosen region.",
+    "If combining birding with Big Five, extend to 8-10 days for reasonable coverage of both.",
+    "If first Africa trip, consider 5-day birding focus + 2-day wildlife extension.",
+    "If traveling from Europe, jet lag may reduce effectiveness of days 1-2."
+  ],
+  "confidence": 0.85
+}

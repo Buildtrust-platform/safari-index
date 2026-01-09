@@ -18,8 +18,8 @@ const walkingSafariBlog: BlogContent = {
   wordCount: 1420,
   published: true,
   heroImage: {
-    src: '/images/activities/walking-safari.jpg',
-    alt: 'Safari tourists on guided game drive in Serengeti savannah',
+    src: '/images/ecosystems/savannah-wildlife.jpg',
+    alt: 'Wild giraffes and zebras together on the African plains',
   },
 
   whyNotSimple: `Walking safari is a different category of experience from vehicle-based safari. It is not "safari but walking." It is a fundamentally different relationship with the landscape and animals.

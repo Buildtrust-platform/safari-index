@@ -1,0 +1,44 @@
+{
+  "topic_id": "migratory-bird-peak-timing",
+  "outcome": "wait",
+  "headline": "Late November through February offers peak Palearctic migrant diversity across East Africa",
+  "summary": "Palearctic migrants arrive in East Africa from late October, with peak numbers and diversity from late November through February. Early migrants (September-October) include raptors and some warblers, but many species do not reach full numbers until December. By March, return migration begins and plumage deteriorates. For maximum migrant species counts, target December-January when both European and Asian breeding birds are established in African wintering quarters.",
+  "assumptions": [
+    {
+      "id": "arrival-spread",
+      "text": "Different migrant species arrive over a 6-8 week window, not simultaneously.",
+      "confidence": 0.90
+    },
+    {
+      "id": "peak-window",
+      "text": "December-January represents peak migrant diversity before any species begin return movement.",
+      "confidence": 0.90
+    },
+    {
+      "id": "location-variation",
+      "text": "Arrival timing varies by 2-3 weeks between northern Kenya and southern Tanzania.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "December-January: Maximum migrant species present simultaneously",
+      "November-December: Many migrants still in fresh non-breeding plumage",
+      "Early rains bring insect hatches that concentrate migrants at feeding sites",
+      "Migrant raptors (steppe eagle, Montagu's harrier) easier in this window"
+    ],
+    "losses": [
+      "December-January coincides with peak holiday pricing",
+      "Green season conditions may complicate access to some sites",
+      "Some migrants are passage-only (September/April) and missed in mid-winter",
+      "Warblers in non-breeding plumage present identification challenges"
+    ]
+  },
+  "change_conditions": [
+    "If raptor migration is the focus, September-October in northern Kenya (Tsavo) is optimal.",
+    "If avoiding crowds matters, early November or late February offer 80% of migrants with fewer tourists.",
+    "If combining with calving season viewing, January-February in Tanzania serves both interests.",
+    "If specific passage migrants are targets, research their exact East African timing."
+  ],
+  "confidence": 0.85
+}

@@ -347,9 +347,10 @@ export const activityImageRefs: Record<string, ActivityImageRef> = {
   'walking-safari': {
     activityId: 'walking-safari',
     src: '/images/activities/walking-safari.jpg',
-    alt: 'Safari tourists on guided game drive in Serengeti savannah',
+    alt: 'Safari vehicle driving through golden savannah grassland with dust trail',
     fallbackEcosystem: 'savannah',
     hasImage: true,
+    // NOTE: Image shows game drive vehicle, not walking safari - needs replacement
   },
   'night-drive': {
     activityId: 'night-drive',
@@ -368,9 +369,10 @@ export const activityImageRefs: Record<string, ActivityImageRef> = {
   mokoro: {
     activityId: 'mokoro',
     src: '/images/activities/mokoro.jpg',
-    alt: 'People sailing traditional boats through calm waters',
+    alt: 'Silhouette of boat with passengers on calm water at sunset',
     fallbackEcosystem: 'delta',
     hasImage: true,
+    // NOTE: Image shows motorboat at sunset, not traditional mokoro dugout - needs replacement
   },
   'gorilla-trekking': {
     activityId: 'gorilla-trekking',
@@ -396,9 +398,10 @@ export const activityImageRefs: Record<string, ActivityImageRef> = {
   'canoe-safari': {
     activityId: 'canoe-safari',
     src: '/images/activities/canoe-safari.jpg',
-    alt: 'Woman wading through water pushing traditional canoe',
+    alt: 'Woman wading through delta waters beside safari boat in tall reeds',
     fallbackEcosystem: 'floodplain',
     hasImage: true,
+    // NOTE: Image shows motorboat, not canoe - needs replacement
   },
   'fly-camping': {
     activityId: 'fly-camping',
@@ -413,6 +416,7 @@ export const activityImageRefs: Record<string, ActivityImageRef> = {
     alt: 'Zebra herd crossing the Mara River during migration',
     fallbackEcosystem: 'savannah',
     hasImage: true,
+    // NOTE: Image shows zebra river crossing, not horseback safari - needs replacement
   },
   'photographic-hide': {
     activityId: 'photographic-hide',
@@ -456,7 +460,110 @@ export const activityImageRefs: Record<string, ActivityImageRef> = {
     fallbackEcosystem: 'floodplain',
     hasImage: true,
   },
+  'bird-watching': {
+    activityId: 'bird-watching',
+    src: '/images/activities/birding/lilac-breasted-roller.jpg',
+    alt: 'Lilac-breasted roller perched on branch displaying iridescent plumage',
+    fallbackEcosystem: 'savannah',
+    hasImage: true,
+  },
 };
+
+// ============================================================================
+// Birding Images
+// ============================================================================
+
+/**
+ * Birding-specific imagery for the birding vertical
+ *
+ * Documentary treatment: birds in natural habitat, no staged shots.
+ * Focus on species identification, behavior, and habitat context.
+ */
+export interface BirdingImage {
+  id: string;
+  src: string;
+  alt: string;
+  /** Bird species or category for matching */
+  category: 'iconic-species' | 'behavior' | 'habitat' | 'equipment' | 'migration';
+  /** Primary regions where this species/scene occurs */
+  regions?: string[];
+}
+
+export const birdingImages: BirdingImage[] = [
+  {
+    id: 'lilac-breasted-roller',
+    src: '/images/activities/birding/lilac-breasted-roller.jpg',
+    alt: 'Lilac-breasted roller perched on branch displaying iridescent plumage',
+    category: 'iconic-species',
+    regions: ['kenya', 'tanzania', 'botswana', 'south-africa', 'namibia'],
+  },
+  {
+    id: 'bee-eater',
+    src: '/images/activities/birding/bee-eater.jpg',
+    alt: 'Carmine bee-eater with vibrant red and blue plumage on natural perch',
+    category: 'iconic-species',
+    regions: ['zambia', 'botswana', 'zimbabwe', 'tanzania'],
+  },
+  {
+    id: 'african-hoopoe',
+    src: '/images/activities/birding/african-hoopoe.jpg',
+    alt: 'African hoopoe with distinctive crest foraging on ground',
+    category: 'iconic-species',
+    regions: ['kenya', 'tanzania', 'south-africa', 'namibia'],
+  },
+  {
+    id: 'yellow-billed-hornbill',
+    src: '/images/activities/birding/yellow-billed-hornbill.jpg',
+    alt: 'Yellow-billed hornbill perched on branch in savannah woodland',
+    category: 'iconic-species',
+    regions: ['kenya', 'tanzania', 'botswana', 'south-africa'],
+  },
+  {
+    id: 'roller-in-flight',
+    src: '/images/activities/birding/roller-in-flight.jpg',
+    alt: 'Lilac-breasted roller in flight showing full wingspan and colors',
+    category: 'behavior',
+    regions: ['kenya', 'tanzania', 'botswana'],
+  },
+  {
+    id: 'bird-photography',
+    src: '/images/activities/birding/bird-photography.jpg',
+    alt: 'Photographer with telephoto lens capturing birds in natural habitat',
+    category: 'equipment',
+  },
+  {
+    id: 'birding-binoculars',
+    src: '/images/activities/birding/birding-binoculars.jpg',
+    alt: 'Birder using binoculars to observe wildlife in African bush',
+    category: 'equipment',
+  },
+];
+
+/**
+ * Get birding images by category
+ */
+export function getBirdingImagesByCategory(
+  category: BirdingImage['category']
+): BirdingImage[] {
+  return birdingImages.filter((img) => img.category === category);
+}
+
+/**
+ * Get birding image by ID
+ */
+export function getBirdingImageById(id: string): BirdingImage | undefined {
+  return birdingImages.find((img) => img.id === id);
+}
+
+/**
+ * Get birding images for a specific region
+ */
+export function getBirdingImagesForRegion(region: string): BirdingImage[] {
+  const regionLower = region.toLowerCase();
+  return birdingImages.filter(
+    (img) => img.regions?.some((r) => r.toLowerCase().includes(regionLower))
+  );
+}
 
 /**
  * Get activity image reference with fallback

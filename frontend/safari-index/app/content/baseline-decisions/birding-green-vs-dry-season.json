@@ -1,0 +1,44 @@
+{
+  "topic_id": "birding-green-vs-dry-season",
+  "outcome": "wait",
+  "headline": "Season choice depends on whether you prioritize migrants or resident breeding displays",
+  "summary": "Green season (November-April) offers Palearctic migrants in fresh plumage, resident birds in breeding dress, and higher overall species counts. Dry season (June-October) provides better visibility in sparse vegetation, easier access to waterholes where birds concentrate, and more comfortable birding conditions. Neither season is definitively better - the decision hinges on your target species list and tolerance for challenging field conditions.",
+  "assumptions": [
+    {
+      "id": "migratory-timing",
+      "text": "Palearctic migrants are present from November through March in most East African locations.",
+      "confidence": 0.95
+    },
+    {
+      "id": "breeding-plumage",
+      "text": "Resident species display breeding plumage and behavior during early rains (November-December).",
+      "confidence": 0.90
+    },
+    {
+      "id": "visibility-tradeoff",
+      "text": "Dense green season vegetation reduces visibility but increases overall bird activity.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Green season: 30-40% higher species counts with migrants present",
+      "Green season: Breeding displays, nest building, courtship behavior",
+      "Dry season: Easier bird photography with sparse backgrounds",
+      "Dry season: Waterhole concentration makes species predictable"
+    ],
+    "losses": [
+      "Green season: Muddy roads may limit access to forest habitats",
+      "Green season: Skulking behavior in dense vegetation frustrates identification",
+      "Dry season: Miss all Palearctic migrants and inter-African migrants",
+      "Dry season: Resident species in dull non-breeding plumage"
+    ]
+  },
+  "change_conditions": [
+    "If your target list includes specific Palearctic migrants (e.g., warblers, raptors), green season is mandatory.",
+    "If combining birding with Big Five game viewing as primary goal, dry season optimizes both.",
+    "If photography is the priority, dry season backgrounds and waterhole setups produce cleaner images.",
+    "If visiting Uganda or Rwanda for forest endemics, seasonality matters less than for savannah birding."
+  ],
+  "confidence": 0.80
+}

@@ -1,0 +1,44 @@
+{
+  "topic_id": "birding-combined-big-five",
+  "outcome": "switch",
+  "headline": "Combining serious birding with Big Five requires separate morning sessions and a specialist guide",
+  "summary": "Serious birding and Big Five game viewing have fundamentally different paces and priorities. Birders need slow vehicle movement, frequent stops for skulkers, and early morning hours when bird activity peaks. Big Five viewing often requires covering ground quickly to find predators. The solution is splitting the day: dedicated birding walks or drives in the first two hours of dawn, then switching to mammal-focused game drives. This requires booking a camp with a specialist birding guide, not just a generalist.",
+  "assumptions": [
+    {
+      "id": "pace-conflict",
+      "text": "Birding pace (frequent stops, scanning canopy) conflicts with predator tracking (covering ground).",
+      "confidence": 0.95
+    },
+    {
+      "id": "guide-specialization",
+      "text": "Most safari guides are generalists; dedicated ornithologist guides are rare and cost more.",
+      "confidence": 0.90
+    },
+    {
+      "id": "dawn-competition",
+      "text": "Both birding and predator activity peak in the first 2 hours after dawn.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Split-day approach: 200+ species possible while still seeing Big Five",
+      "Private vehicle allows pace flexibility between birding and mammal modes",
+      "Walking safaris combine birding with ground-level wildlife experience",
+      "Some lodges offer dedicated birding guides alongside game drive guides"
+    ],
+    "losses": [
+      "Cannot maximize both - expect 60-70% of potential for each interest",
+      "Specialist guides add $150-300/day above standard guiding costs",
+      "Fellow travelers in shared vehicles may resent birding stops",
+      "Optimal birding locations may not overlap with best Big Five areas"
+    ]
+  },
+  "change_conditions": [
+    "If traveling with non-birding companions, book separate vehicles rather than compromise both experiences.",
+    "If Big Five is the stated priority, add dedicated birding walks at camp rather than slowing drives.",
+    "If species count matters, choose destinations like Uganda where forest birding and primates combine naturally.",
+    "If on a budget, accept general wildlife birding on standard drives rather than paying for specialist guides."
+  ],
+  "confidence": 0.85
+}

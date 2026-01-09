@@ -1,0 +1,44 @@
+{
+  "topic_id": "birding-photography-compatibility",
+  "outcome": "wait",
+  "headline": "Bird photography and listing are compatible with planning, but purists in each group will feel compromised",
+  "summary": "Bird photography requires different equipment, patience levels, and vehicle positioning than species listing. Photographers need 500-600mm lenses, sturdy tripod mounts, and extended time at single subjects. Listers prioritize covering ground and habitat diversity. The two approaches can coexist in the same trip if expectations are managed: designate specific sessions for photography (hides, waterholes) and others for covering ground. Solo travelers or private vehicles accommodate both better than shared group dynamics.",
+  "assumptions": [
+    {
+      "id": "equipment-weight",
+      "text": "Professional bird photography gear weighs 8-12kg and exceeds light aircraft luggage limits.",
+      "confidence": 0.90
+    },
+    {
+      "id": "patience-tradeoff",
+      "text": "Quality bird photography requires 15-30 minutes per subject; listing pace is 2-3 minutes per species.",
+      "confidence": 0.85
+    },
+    {
+      "id": "vehicle-positioning",
+      "text": "Photographers need specific angles and backgrounds; listers accept any view for identification.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Photography hides eliminate pace conflict with dedicated setups",
+      "Morning listing, afternoon photography sessions can optimize both",
+      "Record shots support identification when listing under time pressure",
+      "Private vehicle allows switching modes without group friction"
+    ],
+    "losses": [
+      "Cannot maximize both in same session - choose one priority per drive",
+      "Heavy camera gear limits mobility for forest birding walks",
+      "Light aircraft luggage limits force compromise on optics or camera body",
+      "Group dynamics suffer when photographer delays at single subject"
+    ]
+  },
+  "change_conditions": [
+    "If photography is primary, book lodges with dedicated hides (Zimanga, Mashatu) rather than mobile game drives.",
+    "If listing is primary, carry compact camera for record shots rather than full photography rig.",
+    "If traveling with non-photographer birders, agree on session splits before departure.",
+    "If flying between camps, ship heavy gear ahead or accept using camp equipment."
+  ],
+  "confidence": 0.80
+}

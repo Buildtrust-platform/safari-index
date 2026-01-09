@@ -74,6 +74,14 @@ import peakVsValue from './peak-vs-value.json';
 import cheapWarning from './cheap-warning.json';
 import splurgeAllocation from './splurge-allocation.json';
 
+// Birding
+import birdingGreenVsDrySeason from './birding-green-vs-dry-season.json';
+import birdingCombinedBigFive from './birding-combined-big-five.json';
+import ugandaVsTanzaniaEndemicBirding from './uganda-vs-tanzania-endemic-birding.json';
+import migratoryBirdPeakTiming from './migratory-bird-peak-timing.json';
+import birdingPhotographyCompatibility from './birding-photography-compatibility.json';
+import birdingShortItinerary from './birding-short-itinerary.json';
+
 import type { Outcome, Assumption, Tradeoffs } from '../../../lib/contracts';
 
 /**
@@ -156,6 +164,14 @@ export const baselineDecisions: Record<string, BaselineDecision> = {
   'peak-vs-value': peakVsValue as BaselineDecision,
   'cheap-warning': cheapWarning as BaselineDecision,
   'splurge-allocation': splurgeAllocation as BaselineDecision,
+
+  // Birding
+  'birding-green-vs-dry-season': birdingGreenVsDrySeason as BaselineDecision,
+  'birding-combined-big-five': birdingCombinedBigFive as BaselineDecision,
+  'uganda-vs-tanzania-endemic-birding': ugandaVsTanzaniaEndemicBirding as BaselineDecision,
+  'migratory-bird-peak-timing': migratoryBirdPeakTiming as BaselineDecision,
+  'birding-photography-compatibility': birdingPhotographyCompatibility as BaselineDecision,
+  'birding-short-itinerary': birdingShortItinerary as BaselineDecision,
 };
 
 /**
