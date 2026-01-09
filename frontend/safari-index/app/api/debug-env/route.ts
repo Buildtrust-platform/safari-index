@@ -35,7 +35,7 @@ export async function GET(request: Request) {
     // Timestamp to verify fresh response
     timestamp: new Date().toISOString(),
     // Build identifier to verify deployment
-    build_commit: 'e7e5314',
+    build_commit: '7902878-rebuild',
   });
 }
 
