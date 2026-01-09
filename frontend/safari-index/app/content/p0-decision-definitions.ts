@@ -2345,4 +2345,352 @@ export const p0DecisionDefinitions: P0DecisionDefinition[] = [
       'Budget tier not specified',
     ],
   },
+
+  // ============================================================
+  // BIRDING (6 P0 topics)
+  // ============================================================
+  {
+    id: 'birding-green-vs-dry-season',
+    question: 'Is green season or dry season better for safari birding?',
+    required_inputs: [
+      customInput({
+        key: 'birding_context.primary_interest',
+        label: 'Primary birding interest',
+        description: 'Migratory species, residents, or both',
+        example: 'migratory species',
+      }),
+      customInput({
+        key: 'birding_context.photography_priority',
+        label: 'Photography priority',
+        description: 'How important is bird photography vs listing',
+        example: 'listing is primary',
+      }),
+      customInput({
+        key: 'request.constraints.travel_dates',
+        label: 'Travel dates',
+        description: 'When you can travel affects available options',
+        example: 'November-December',
+      }),
+    ],
+    optional_inputs: [
+      inp('destinations_considered'),
+      customInput({
+        key: 'birding_context.target_species',
+        label: 'Target species',
+        description: 'Specific species you want to see',
+        example: 'Palearctic migrants',
+      }),
+      inp('physical_fitness', {
+        description: 'Tolerance for challenging field conditions',
+      }),
+    ],
+    assumptions: [
+      'Palearctic migrants present November through March in East Africa',
+      'Resident species display breeding plumage during early rains (November-December)',
+      'Dry season offers better visibility but fewer migrant species',
+      'Green season can add 150-200 species to potential list',
+      'Dense vegetation reduces detection rate even when species diversity is higher',
+      'Forest birding is less affected by seasonality than savannah',
+    ],
+    tradeoffs: [
+      { gain: 'Green season: 30-40% higher species counts with migrants', loss: 'Access issues and dense vegetation' },
+      { gain: 'Dry season: Better visibility and photography', loss: 'Miss all Palearctic migrants' },
+      { gain: 'Green season: Breeding displays and behavior', loss: 'Unpredictable weather' },
+      { gain: 'Dry season: Waterhole concentration', loss: 'Dull non-breeding plumage' },
+    ],
+    change_conditions: [
+      'If target list includes specific Palearctic migrants, green season is mandatory',
+      'If photography is priority, dry season backgrounds produce cleaner images',
+      'If combining with Big Five as primary goal, dry season optimizes both',
+      'If visiting Uganda/Rwanda for forest endemics, seasonality matters less',
+    ],
+    refusal_triggers: [
+      'Primary birding interest not specified',
+      'Travel flexibility not indicated when timing is critical',
+    ],
+  },
+  {
+    id: 'birding-combined-big-five',
+    question: 'Can I combine serious birding with Big Five game viewing?',
+    required_inputs: [
+      customInput({
+        key: 'birding_context.intensity',
+        label: 'Birding intensity',
+        description: 'How serious is your birding (casual, dedicated, intensive)',
+        example: 'dedicated',
+      }),
+      customInput({
+        key: 'safari_context.big_five_priority',
+        label: 'Big Five priority',
+        description: 'How important are Big Five sightings relative to birds',
+        example: 'secondary to birds',
+      }),
+      inp('group_composition', {
+        description: 'Who you are traveling with and their interests',
+      }),
+    ],
+    optional_inputs: [
+      inp('trip_length', {
+        description: 'Total safari duration in days',
+      }),
+      inp('destinations_considered'),
+      customInput({
+        key: 'birding_context.guide_requirement',
+        label: 'Guide specialization',
+        description: 'Whether you need a specialized birding guide',
+        example: 'essential',
+      }),
+    ],
+    assumptions: [
+      'Birding pace conflicts with predator tracking (frequent stops vs covering ground)',
+      'Both activities peak at dawn, creating direct competition',
+      'Most safari guides identify 100-150 common birds; specialists know 400+',
+      'Shared vehicles default to majority interest',
+      'Split-day approach can yield 250 species with decent mammal sightings',
+      'Private vehicle adds 30-50% to costs but transforms flexibility',
+    ],
+    tradeoffs: [
+      { gain: 'Combined approach: See both birds and mammals', loss: 'Maximize neither—expect 60-70% of each' },
+      { gain: 'Private vehicle: Pace flexibility', loss: 'Significant cost increase' },
+      { gain: 'Specialist guide: 50+ extra species', loss: '$150-300/day additional cost' },
+      { gain: 'Split-day approach: Morning birding, afternoon mammals', loss: 'Miss some dawn predator action' },
+    ],
+    change_conditions: [
+      'If traveling with non-birders, book separate vehicles',
+      'If 300+ species is the goal, Big Five becomes secondary',
+      'If specific mammal sightings are bucket-list items, protect those mornings',
+      'If dates allow, extend trip to accommodate both properly',
+    ],
+    refusal_triggers: [
+      'Birding intensity not specified',
+      'Group composition not indicated when interests may conflict',
+    ],
+  },
+  {
+    id: 'uganda-vs-tanzania-endemic-birding',
+    question: 'Uganda or Tanzania for endemic forest birding?',
+    required_inputs: [
+      customInput({
+        key: 'birding_context.target_endemics',
+        label: 'Target endemic region',
+        description: 'Albertine Rift (Uganda) vs Eastern Arc (Tanzania) endemics',
+        example: 'Albertine Rift species',
+      }),
+      customInput({
+        key: 'birding_context.shoebill_priority',
+        label: 'Shoebill priority',
+        description: 'How important is seeing Shoebill',
+        example: 'must-see',
+      }),
+      inp('trip_length'),
+    ],
+    optional_inputs: [
+      inp('budget_band'),
+      customInput({
+        key: 'birding_context.combine_with_primates',
+        label: 'Primate interest',
+        description: 'Whether you want to combine with gorilla/chimp trekking',
+        example: 'yes, gorillas essential',
+      }),
+      inp('physical_fitness', {
+        description: 'Forest trails are steep and muddy',
+      }),
+    ],
+    assumptions: [
+      'Albertine Rift (Uganda) holds 40+ endemic species in accessible habitats',
+      'Eastern Arc (Tanzania) holds 30+ different endemics with zero overlap',
+      'Uganda has more experienced forest birding guides',
+      'Shoebill is reliably found only at Mabamba Swamp, Uganda',
+      'Uganda combines gorilla trekking with forest birding efficiently',
+      'Tanzania Eastern Arc sites are geographically scattered with thin infrastructure',
+    ],
+    tradeoffs: [
+      { gain: 'Uganda: Higher endemic density per day', loss: 'Miss all Eastern Arc species' },
+      { gain: 'Tanzania: Unique Eastern Arc endemics', loss: 'Harder logistics, fewer guides' },
+      { gain: 'Uganda: Gorilla/chimp trekking integration', loss: 'No Serengeti connection' },
+      { gain: 'Tanzania: Combine with migration', loss: 'Compromised endemic coverage' },
+    ],
+    change_conditions: [
+      'If Shoebill is mandatory, Uganda is the only viable option',
+      'If specific Eastern Arc species are life birds, Tanzania is required',
+      'If combining with gorilla trekking, Uganda is more efficient',
+      'If first Africa forest birding trip, Uganda delivers more per day',
+    ],
+    refusal_triggers: [
+      'Target endemic region not specified',
+      'Trip length insufficient for forest birding (under 10 days)',
+    ],
+  },
+  {
+    id: 'migratory-bird-peak-timing',
+    question: 'When is peak timing for Palearctic migrants on safari?',
+    required_inputs: [
+      customInput({
+        key: 'birding_context.target_migrants',
+        label: 'Target migrant groups',
+        description: 'Raptors, waders, passerines, or general diversity',
+        example: 'general diversity',
+      }),
+      inp('destinations_considered', {
+        description: 'Northern vs southern affects arrival timing by 2-3 weeks',
+      }),
+      customInput({
+        key: 'request.constraints.travel_dates',
+        label: 'Travel dates',
+        description: 'Your available travel window',
+        example: 'November-February',
+      }),
+    ],
+    optional_inputs: [
+      inp('budget_band', {
+        description: 'Peak migrant season coincides with peak pricing',
+      }),
+      customInput({
+        key: 'birding_context.specific_targets',
+        label: 'Specific target species',
+        description: 'Any must-see migrant species',
+        example: 'Steppe Eagle',
+      }),
+    ],
+    assumptions: [
+      'Palearctic migrants arrive October through December, peak diversity December-February',
+      'Different species peak at different times within the window',
+      'Waders arrive earlier than passerines',
+      'Raptor passage concentrated September-November southbound',
+      'Some species are passage-only, not present during African winter',
+      'Peak pricing coincides with December-January migrant peak',
+    ],
+    tradeoffs: [
+      { gain: 'December-January: Maximum species diversity', loss: 'Peak pricing and crowds' },
+      { gain: 'November: Fresh plumage, building diversity', loss: 'Not all species arrived yet' },
+      { gain: 'March: Return migration, breeding plumage', loss: 'Many species already departed' },
+      { gain: 'Early November or late February: 80% diversity', loss: 'Miss some species; thinner coverage' },
+    ],
+    change_conditions: [
+      'If specific raptor migration is the goal, September-October in northern Kenya',
+      'If waders are priority, water levels matter more than calendar',
+      'If avoiding peak pricing, early November or late February',
+      'If combining with calving, January-February serves both',
+    ],
+    refusal_triggers: [
+      'Target migrant groups not specified',
+      'Travel window outside October-April',
+    ],
+  },
+  {
+    id: 'birding-photography-compatibility',
+    question: 'Is birding compatible with wildlife photography goals?',
+    required_inputs: [
+      customInput({
+        key: 'birding_context.primary_goal',
+        label: 'Primary goal',
+        description: 'Building portfolio vs species listing',
+        example: 'species listing',
+      }),
+      customInput({
+        key: 'photography_context.equipment_weight',
+        label: 'Equipment weight',
+        description: 'Professional telephoto rigs vs compact cameras',
+        example: 'professional rig (8-12kg)',
+      }),
+      customInput({
+        key: 'logistics_context.internal_flights',
+        label: 'Internal flights',
+        description: 'Whether itinerary includes light aircraft',
+        example: 'yes, 2 flights',
+      }),
+    ],
+    optional_inputs: [
+      customInput({
+        key: 'photography_context.target_shots',
+        label: 'Target shots',
+        description: 'Types of images sought (portraits, flight, behavior)',
+        example: 'portraits and behavior',
+      }),
+      inp('destinations_considered'),
+      inp('trip_length'),
+    ],
+    assumptions: [
+      'Quality bird photography requires 500-600mm lenses (2-4kg)',
+      'Light aircraft baggage limits typically 15kg total',
+      'Photographers need extended time per subject; listers need brief views',
+      'Record shots serve listing but not portfolio goals',
+      'Waterhole hides eliminate pace conflict',
+      'Private vehicle allows mode-switching between listing and photography',
+    ],
+    tradeoffs: [
+      { gain: 'Photography hides: Portfolio-quality images', loss: 'Limited species visiting' },
+      { gain: 'Morning listing, afternoon photography', loss: 'Requires discipline and planning' },
+      { gain: 'Record shots: Identification value', loss: 'Not portfolio quality' },
+      { gain: 'Compact camera: Weight savings', loss: 'Limited reach for bird photography' },
+    ],
+    change_conditions: [
+      'If building serious portfolio, book lodges with dedicated hides',
+      'If listing is primary, carry compact camera for documentation only',
+      'If flying between camps, ship heavy gear or accept compromise',
+      'If traveling with non-photographer, agree on session splits',
+    ],
+    refusal_triggers: [
+      'Primary goal (portfolio vs list) not specified',
+      'Equipment weight not indicated when flights are planned',
+    ],
+  },
+  {
+    id: 'birding-short-itinerary',
+    question: 'Can I have a meaningful birding safari in under 7 days?',
+    required_inputs: [
+      inp('trip_length', {
+        label: 'Available days',
+        description: 'Total days for birding (not including travel)',
+      }),
+      customInput({
+        key: 'birding_context.goal_type',
+        label: 'Birding goal',
+        description: 'Specific targets vs regional flavor vs quality sightings',
+        example: 'quality East African specials',
+      }),
+      customInput({
+        key: 'birding_context.geographic_flexibility',
+        label: 'Geographic flexibility',
+        description: 'Single region focus vs multi-region',
+        example: 'single region acceptable',
+      }),
+    ],
+    optional_inputs: [
+      inp('destinations_considered'),
+      customInput({
+        key: 'birding_context.guide_booked',
+        label: 'Specialist guide',
+        description: 'Whether specialist guide is pre-booked',
+        example: 'named guide booked',
+      }),
+      inp('physical_fitness', {
+        description: 'Stamina for dawn-to-dusk intensive birding',
+      }),
+    ],
+    assumptions: [
+      'Single-region focus outperforms multi-destination for short trips',
+      'Kenya Rift Valley or Uganda forest corridor can yield 250-300 species in 5-6 days',
+      'Specialist guide adds 50+ species to short trip totals',
+      'Dawn-to-dusk birding is exhausting; fatigue reduces observation quality',
+      'Short trips favor common species over rare skulkers',
+      'Transit days are wasted days on short birding trips',
+    ],
+    tradeoffs: [
+      { gain: '5-6 focused days: 250-300 species possible', loss: 'Single region only' },
+      { gain: 'Intensive pace: Maximum species per day', loss: 'Exhaustion by day 4-5' },
+      { gain: 'Single region: No transit waste', loss: 'Miss other habitat diversity' },
+      { gain: 'Specialist guide: Dramatic species boost', loss: 'Premium cost for short duration' },
+    ],
+    change_conditions: [
+      'If species count is goal, Kenya Rift Valley or Uganda corridor',
+      'If specific targets, verify they are in chosen region',
+      'If combining with mammals, extend to 8-10 days',
+      'If first Africa birding, short trip tests if longer return is warranted',
+    ],
+    refusal_triggers: [
+      'Trip length under 4 days—insufficient for meaningful birding',
+      'Multi-region expectations with under 7 days',
+    ],
+  },
 ];
