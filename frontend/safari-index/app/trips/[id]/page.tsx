@@ -47,7 +47,7 @@ import {
 } from '../../../lib/trip-links';
 import { ImageBand, ImageBandContent, ecosystemImages } from '../../components/visual';
 import { Navbar } from '../../components/layout';
-import { TypicalDaySection, AccommodationSection } from '../../components/trips';
+import { TypicalDaySection, AccommodationSection, ExclusionBlock, CostSignalSection } from '../../components/trips';
 
 /**
  * Generate static params for all trips
@@ -321,6 +321,9 @@ export default async function TripPage({
           </div>
         </section>
 
+        {/* Not for you if - Exclusion block */}
+        <ExclusionBlock trip={trip} />
+
         {/* What your days look like */}
         <TypicalDaySection primaryDestination={getPrimaryDestination(trip)} />
 
@@ -330,24 +333,8 @@ export default async function TripPage({
           comfortTier={trip.comfort_tier}
         />
 
-        {/* Typical cost range */}
-        <section className="mb-8" data-testid="section-cost">
-          <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-3">
-            Typical cost range
-          </h2>
-          <div className="bg-white rounded-xl border border-stone-200 p-6">
-            <div className="flex items-center gap-4 mb-3">
-              <DollarSign className="w-6 h-6 text-amber-600" />
-              <span className="text-2xl font-semibold text-stone-900">
-                {formatCostBand(trip.cost_band)}
-              </span>
-            </div>
-            <p className="text-stone-600 text-sm">{trip.cost_band.note}</p>
-            <p className="text-stone-500 text-xs mt-3">
-              Based on 2024 operator rates. Actual costs vary by season, accommodation choice, and group size.
-            </p>
-          </div>
-        </section>
+        {/* Typical cost range - Enhanced with logic disclaimers */}
+        <CostSignalSection trip={trip} />
 
         {/* Decisions to confirm */}
         {decisionLinks.length > 0 && (

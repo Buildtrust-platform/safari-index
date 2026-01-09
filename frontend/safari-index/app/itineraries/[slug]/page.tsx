@@ -39,6 +39,7 @@ import {
 } from 'lucide-react';
 import { Navbar, Footer } from '../../components/layout';
 import { ImageBand, ImageBandContent, ecosystemImages, RouteMap } from '../../components/visual';
+import { ProvenanceSection } from '../../components/itineraries';
 import { ItineraryJsonLd, getBaseUrl } from './ItineraryJsonLd';
 import {
   getItineraryBySlug,
@@ -695,6 +696,9 @@ export default async function ItineraryDetailPage({ params }: PageProps) {
             </h2>
             <SeasonSection itinerary={itinerary} />
           </section>
+
+          {/* Itinerary Provenance - Why this route works */}
+          <ProvenanceSection itinerary={itinerary} />
 
           {/* Trade-offs */}
           <section data-testid="trade-offs">

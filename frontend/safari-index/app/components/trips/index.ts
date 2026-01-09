@@ -6,3 +6,5 @@
 
 export { TypicalDaySection } from './TypicalDaySection';
 export { AccommodationSection } from './AccommodationSection';
+export { ExclusionBlock } from './ExclusionBlock';
+export { CostSignalSection } from './CostSignalSection';
