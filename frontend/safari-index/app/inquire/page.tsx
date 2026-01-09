@@ -40,6 +40,8 @@ import {
   PRIORITY_OPTIONS,
   MONTH_OPTIONS,
   COUNTRY_OPTIONS,
+  DESTINATION_OPTIONS,
+  DURATION_OPTIONS,
   getDefaultPlanningBriefState,
   getYearOptions,
   planningBriefToPayload,
@@ -259,6 +261,23 @@ function BriefSummary({
   onEdit: (step: number) => void;
 }) {
   const monthLabel = MONTH_OPTIONS.find((m) => m.value === state.travelMonth)?.label || '';
+  const destLabel = DESTINATION_OPTIONS.find((d) => d.value === state.destination)?.label || '';
+  const durationLabel = DURATION_OPTIONS.find((d) => d.value === state.duration)?.label || '';
+
+  // Format timing based on flexibility
+  let timingValue = '';
+  if (state.flexibility === 'fixed' && state.fixedStartDate) {
+    const startDate = new Date(state.fixedStartDate);
+    const endDate = state.fixedEndDate ? new Date(state.fixedEndDate) : null;
+    const formatDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    timingValue = endDate
+      ? `${formatDate(startDate)} - ${formatDate(endDate)} (fixed dates)`
+      : `${formatDate(startDate)} (fixed start)`;
+  } else if (monthLabel && state.travelYear) {
+    timingValue = `${monthLabel} ${state.travelYear}${state.flexibility ? ` (${formatFlexibility(state.flexibility).toLowerCase()})` : ''}`;
+  } else {
+    timingValue = 'Not specified';
+  }
 
   return (
     <div className="bg-stone-100 rounded-xl p-5 mb-6">
@@ -272,8 +291,18 @@ function BriefSummary({
           onEdit={() => onEdit(1)}
         />
         <SummaryRow
+          label="Destination"
+          value={destLabel || 'Not selected'}
+          onEdit={() => onEdit(2)}
+        />
+        <SummaryRow
           label="Timing"
-          value={`${monthLabel} ${state.travelYear}${state.flexibility ? ` (${formatFlexibility(state.flexibility).toLowerCase()})` : ''}`}
+          value={timingValue}
+          onEdit={() => onEdit(2)}
+        />
+        <SummaryRow
+          label="Duration"
+          value={durationLabel || 'Not selected'}
           onEdit={() => onEdit(2)}
         />
         <SummaryRow
@@ -577,59 +606,22 @@ function PlanningBriefForm() {
             </div>
           )}
 
-          {/* Step 2: Timing & Flexibility */}
+          {/* Step 2: Timing, Destination & Duration */}
           {currentStep === 2 && (
             <div>
               <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-2">
-                When are you thinking of traveling?
+                When, where, and how long?
               </h2>
               <p className="text-sm text-stone-500 mb-6">
-                Safari timing affects wildlife, weather, crowds, and cost. If you have flexibility,
-                we can optimize around these factors.
+                Safari timing affects wildlife, weather, crowds, and cost. Destination and duration
+                shape what is realistic.
               </p>
 
               <div className="space-y-6">
-                {/* Month/Year selectors */}
+                {/* Flexibility - moved up */}
                 <div>
                   <label className="block text-sm font-medium text-stone-700 mb-2">
-                    Preferred month
-                  </label>
-                  <div className="grid grid-cols-2 gap-3">
-                    <select
-                      value={state.travelMonth || ''}
-                      onChange={(e) =>
-                        updateField('travelMonth', e.target.value ? parseInt(e.target.value) : null)
-                      }
-                      className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
-                    >
-                      <option value="">Select month</option>
-                      {MONTH_OPTIONS.map((opt) => (
-                        <option key={opt.value} value={opt.value}>
-                          {opt.label}
-                        </option>
-                      ))}
-                    </select>
-                    <select
-                      value={state.travelYear || ''}
-                      onChange={(e) =>
-                        updateField('travelYear', e.target.value ? parseInt(e.target.value) : null)
-                      }
-                      className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
-                    >
-                      <option value="">Select year</option>
-                      {yearOptions.map((opt) => (
-                        <option key={opt.value} value={opt.value}>
-                          {opt.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                {/* Flexibility */}
-                <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-2">
-                    Flexibility
+                    Date flexibility
                   </label>
                   <div className="space-y-2">
                     {TIMING_FLEXIBILITY.map((opt) => (
@@ -661,6 +653,147 @@ function PlanningBriefForm() {
                           )}
                         </div>
                         <span className="text-stone-700">{opt.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Fixed dates - calendar picker */}
+                {state.flexibility === 'fixed' && (
+                  <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl">
+                    <label className="block text-sm font-medium text-amber-800 mb-3">
+                      Your fixed travel dates
+                    </label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-xs text-amber-700 mb-1">Start date</label>
+                        <input
+                          type="date"
+                          value={state.fixedStartDate || ''}
+                          onChange={(e) => updateField('fixedStartDate', e.target.value || null)}
+                          min={new Date().toISOString().split('T')[0]}
+                          className="w-full px-3 py-2 bg-white border border-amber-300 rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-amber-700 mb-1">End date</label>
+                        <input
+                          type="date"
+                          value={state.fixedEndDate || ''}
+                          onChange={(e) => updateField('fixedEndDate', e.target.value || null)}
+                          min={state.fixedStartDate || new Date().toISOString().split('T')[0]}
+                          className="w-full px-3 py-2 bg-white border border-amber-300 rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Month/Year selectors - for non-fixed dates */}
+                {state.flexibility !== 'fixed' && (
+                  <div>
+                    <label className="block text-sm font-medium text-stone-700 mb-2">
+                      Preferred travel window
+                    </label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <select
+                        value={state.travelMonth || ''}
+                        onChange={(e) =>
+                          updateField('travelMonth', e.target.value ? parseInt(e.target.value) : null)
+                        }
+                        className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+                      >
+                        <option value="">Select month</option>
+                        {MONTH_OPTIONS.map((opt) => (
+                          <option key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </option>
+                        ))}
+                      </select>
+                      <select
+                        value={state.travelYear || ''}
+                        onChange={(e) =>
+                          updateField('travelYear', e.target.value ? parseInt(e.target.value) : null)
+                        }
+                        className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+                      >
+                        <option value="">Select year</option>
+                        {yearOptions.map((opt) => (
+                          <option key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                {/* Destination */}
+                <div>
+                  <label className="block text-sm font-medium text-stone-700 mb-2">
+                    Destination preference
+                  </label>
+                  <select
+                    value={state.destination || ''}
+                    onChange={(e) => updateField('destination', e.target.value || null)}
+                    className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+                  >
+                    <option value="">Select destination</option>
+                    <optgroup label="East Africa">
+                      {DESTINATION_OPTIONS.filter((d) => d.region === 'east').map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Southern Africa">
+                      {DESTINATION_OPTIONS.filter((d) => d.region === 'south').map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </option>
+                      ))}
+                    </optgroup>
+                  </select>
+                </div>
+
+                {/* Duration */}
+                <div>
+                  <label className="block text-sm font-medium text-stone-700 mb-2">
+                    Trip duration
+                  </label>
+                  <div className="space-y-2">
+                    {DURATION_OPTIONS.map((opt) => (
+                      <label
+                        key={opt.value}
+                        className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-colors ${
+                          state.duration === opt.value
+                            ? 'border-amber-500 bg-amber-50'
+                            : 'border-stone-200 hover:border-stone-300'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <input
+                            type="radio"
+                            name="duration"
+                            value={opt.value}
+                            checked={state.duration === opt.value}
+                            onChange={() => updateField('duration', opt.value)}
+                            className="sr-only"
+                          />
+                          <div
+                            className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                              state.duration === opt.value
+                                ? 'border-amber-500 bg-amber-500'
+                                : 'border-stone-300'
+                            }`}
+                          >
+                            {state.duration === opt.value && (
+                              <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                            )}
+                          </div>
+                          <span className="text-stone-700 font-medium">{opt.label}</span>
+                        </div>
+                        <span className="text-sm text-stone-500">{opt.description}</span>
                       </label>
                     ))}
                   </div>

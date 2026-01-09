@@ -251,15 +251,22 @@ export type FollowUpSubscription = z.infer<typeof FollowUpSubscriptionSchema>;
 // ============================================================================
 
 /**
- * Budget band enum
+ * Budget band enum - includes both legacy and new values
  */
 export const BudgetBandSchema = z.enum([
+  // Legacy values (backwards compatibility)
   'under-5k',
   '5k-10k',
   '10k-20k',
   '20k-35k',
   'above-35k',
   'flexible',
+  // New values (decision-led brief)
+  '3k-6k',
+  '6k-10k',
+  '10k-15k',
+  '15k-plus',
+  'not-sure',
 ]);
 export type BudgetBand = z.infer<typeof BudgetBandSchema>;
 

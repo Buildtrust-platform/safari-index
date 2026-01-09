@@ -176,6 +176,38 @@ export const PRIORITY_OPTIONS: { value: TravelerPriority; label: string }[] = [
 ];
 
 /**
+ * Safari destination options
+ */
+export const DESTINATION_OPTIONS: { value: string; label: string; region: 'east' | 'south' }[] = [
+  // East Africa
+  { value: 'tanzania', label: 'Tanzania', region: 'east' },
+  { value: 'kenya', label: 'Kenya', region: 'east' },
+  { value: 'uganda', label: 'Uganda', region: 'east' },
+  { value: 'rwanda', label: 'Rwanda', region: 'east' },
+  // Southern Africa
+  { value: 'botswana', label: 'Botswana', region: 'south' },
+  { value: 'south-africa', label: 'South Africa', region: 'south' },
+  { value: 'zambia', label: 'Zambia', region: 'south' },
+  { value: 'zimbabwe', label: 'Zimbabwe', region: 'south' },
+  { value: 'namibia', label: 'Namibia', region: 'south' },
+  // Multi-country
+  { value: 'multi-east', label: 'Multiple East African countries', region: 'east' },
+  { value: 'multi-south', label: 'Multiple Southern African countries', region: 'south' },
+  { value: 'undecided', label: 'Not yet decided', region: 'east' },
+];
+
+/**
+ * Duration options for trip length
+ */
+export const DURATION_OPTIONS: { value: string; label: string; description: string }[] = [
+  { value: '5-7', label: '5-7 days', description: 'Single destination focus' },
+  { value: '8-10', label: '8-10 days', description: 'One or two areas in depth' },
+  { value: '11-14', label: '11-14 days', description: 'Multiple regions possible' },
+  { value: '15-plus', label: '15+ days', description: 'Comprehensive coverage' },
+  { value: 'flexible', label: 'Flexible', description: 'Open to recommendations' },
+];
+
+/**
  * Common countries for dropdown
  */
 export const COUNTRY_OPTIONS = [
@@ -261,6 +293,13 @@ export interface PlanningBriefState {
   travelMonth: number | null;
   travelYear: number | null;
   flexibility: TimingFlexibility | null;
+  // For fixed dates - exact start/end dates
+  fixedStartDate: string | null; // ISO date string
+  fixedEndDate: string | null;   // ISO date string
+
+  // Step 2b: Destination & Duration
+  destination: string | null;
+  duration: string | null;
 
   // Step 3: Budget
   budgetBand: BudgetBand | null;
@@ -308,6 +347,10 @@ export function getDefaultPlanningBriefState(): PlanningBriefState {
     travelMonth: normalizedMonth,
     travelYear: defaultYear,
     flexibility: 'few-weeks',
+    fixedStartDate: null,
+    fixedEndDate: null,
+    destination: null,
+    duration: null,
     budgetBand: null,
     travelerCount: 2,
     childrenCount: 0,
@@ -372,11 +415,31 @@ function buildNotesFromBrief(state: PlanningBriefState): string {
     }
   }
 
+  if (state.destination) {
+    const dest = DESTINATION_OPTIONS.find(d => d.value === state.destination);
+    if (dest) {
+      parts.push(`Destination: ${dest.label}`);
+    }
+  }
+
+  if (state.duration) {
+    const dur = DURATION_OPTIONS.find(d => d.value === state.duration);
+    if (dur) {
+      parts.push(`Duration: ${dur.label}`);
+    }
+  }
+
   if (state.flexibility) {
     const flex = TIMING_FLEXIBILITY.find(f => f.value === state.flexibility);
     if (flex) {
       parts.push(`Flexibility: ${flex.label}`);
     }
+  }
+
+  if (state.fixedStartDate && state.fixedEndDate) {
+    parts.push(`Fixed dates: ${state.fixedStartDate} to ${state.fixedEndDate}`);
+  } else if (state.fixedStartDate) {
+    parts.push(`Fixed start date: ${state.fixedStartDate}`);
   }
 
   if (state.childrenCount > 0) {
