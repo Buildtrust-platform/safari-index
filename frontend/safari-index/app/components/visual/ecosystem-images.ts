@@ -191,7 +191,7 @@ export const destinationImages: Record<string, DestinationImage> = {
   tanzania: {
     id: 'dest-tanzania',
     src: '/images/destinations/tanzania-serengeti.jpg',
-    alt: 'Plains zebras in the Serengeti National Park, Tanzania',
+    alt: 'Herds of wildebeest grazing in the Serengeti National Park, Tanzania',
     ecosystem: 'savannah',
   },
   'tanzania-ngorongoro': {
@@ -203,25 +203,25 @@ export const destinationImages: Record<string, DestinationImage> = {
   kenya: {
     id: 'dest-kenya',
     src: '/images/destinations/kenya-mara.jpg',
-    alt: 'Group of buffalos in the Masai Mara National Reserve, Kenya',
+    alt: 'Sweeping landscape of Masai Mara National Reserve, Kenya',
     ecosystem: 'savannah',
   },
   botswana: {
     id: 'dest-botswana',
     src: '/images/destinations/botswana-delta.jpg',
-    alt: 'Aerial view of Okavango Delta channels winding through green islands',
+    alt: 'Elephants wading through the Okavango Delta waters, Botswana',
     ecosystem: 'delta',
   },
   'south-africa': {
     id: 'dest-south-africa',
     src: '/images/destinations/south-africa-kruger.jpg',
-    alt: 'African buffalos grazing in Kruger National Park, South Africa',
+    alt: 'Plains zebras in Kruger National Park, South Africa',
     ecosystem: 'savannah',
   },
   namibia: {
     id: 'dest-namibia',
     src: '/images/destinations/namibia-sossusvlei.jpg',
-    alt: 'Iconic red sand dunes of Sossusvlei in the Namib Desert, Namibia',
+    alt: 'Aerial view of the vast Namib Desert landscape, Namibia',
     ecosystem: 'desert',
   },
   zambia: {
@@ -326,7 +326,7 @@ export const activityImageRefs: Record<string, ActivityImageRef> = {
   'big-cats': {
     activityId: 'big-cats',
     src: '/images/activities/big-cats.jpg',
-    alt: 'Male and female lions resting on sandy ground',
+    alt: 'Pride of lions walking towards the camera in African savannah',
     fallbackEcosystem: 'savannah',
     hasImage: true,
   },
@@ -389,7 +389,7 @@ export const activityImageRefs: Record<string, ActivityImageRef> = {
   'hot-air-balloon': {
     activityId: 'hot-air-balloon',
     src: '/images/activities/hot-air-balloon.jpg',
-    alt: 'Hot air balloon floating over Masai Mara National Reserve at sunrise',
+    alt: 'Hot air balloon safari over Masai Mara National Reserve, Kenya',
     fallbackEcosystem: 'savannah',
     hasImage: true,
   },
@@ -410,8 +410,8 @@ export const activityImageRefs: Record<string, ActivityImageRef> = {
   'horseback-safari': {
     activityId: 'horseback-safari',
     src: '/images/activities/horseback-safari.jpg',
-    alt: 'Oryx running past zebras in Namibian savannah',
-    fallbackEcosystem: 'delta',
+    alt: 'Zebra herd crossing the Mara River during migration',
+    fallbackEcosystem: 'savannah',
     hasImage: true,
   },
   'photographic-hide': {
