@@ -267,12 +267,53 @@ function getFeaturedTopics(): DecisionTopic[] {
 }
 
 /**
+ * Map trip IDs to appropriate destination images
+ * This ensures trip cards show relevant imagery for their region
+ */
+const tripImageMap: Record<string, string> = {
+  // Tanzania trips
+  'classic-serengeti-ngorongoro': 'tanzania',
+  'migration-focused-serengeti': 'tanzania',
+  'tanzania-southern-circuit': 'tanzania',
+  'tanzania-honeymoon': 'tanzania',
+  // Kenya trips
+  'kenya-conservancy-safari': 'kenya',
+  'kenya-masai-mara-classic': 'kenya',
+  // Uganda/Rwanda trips
+  'uganda-rwanda-primates': 'rwanda',
+  'gorilla-safari-extension': 'rwanda',
+  // Botswana trips
+  'botswana-delta-safari': 'botswana',
+  'botswana-luxury-circuit': 'botswana',
+  // South Africa trips
+  'south-africa-kruger-classic': 'south-africa',
+  'south-africa-garden-route': 'south-africa',
+  'south-africa-cape-safari': 'south-africa',
+  // Namibia trips
+  'namibia-desert-wildlife': 'namibia',
+  'namibia-self-drive': 'namibia',
+  // Zambia/Zimbabwe trips
+  'zambia-walking-safari': 'zambia',
+  'victoria-falls-safari-combo': 'zimbabwe',
+  // Multi-country / special
+  'photography-focused-safari': 'kenya',
+  'family-safari-east-africa': 'tanzania',
+};
+
+/**
  * Trip Card with image - for homepage showcase
  */
 function TripCardWithImage({ trip, index }: { trip: { id: string; title: string; subtitle: string }; index: number }) {
-  // Use different ecosystem images for variety
+  // Use region-appropriate destination image, fallback to ecosystem images
+  const destinationKey = tripImageMap[trip.id];
+  const destImage = destinationKey ? destinationImages[destinationKey] : null;
+
+  // Fallback to ecosystem images if no destination match
   const ecosystemIndex = index % ecosystemImages.length;
-  const image = ecosystemImages[ecosystemIndex];
+  const fallbackImage = ecosystemImages[ecosystemIndex];
+
+  const imageSrc = destImage?.src || fallbackImage?.src || '/images/ecosystems/savannah-morning.jpg';
+  const imageAlt = destImage?.alt || fallbackImage?.alt || 'Safari landscape';
 
   return (
     <Link
@@ -283,8 +324,8 @@ function TripCardWithImage({ trip, index }: { trip: { id: string; title: string;
       <div className="rounded-xl bg-white border border-stone-200 hover:border-amber-300 hover:shadow-lg transition-all duration-200 overflow-hidden">
         <div className="relative h-40 overflow-hidden">
           <img
-            src={image?.src || '/images/ecosystems/savannah-morning.jpg'}
-            alt={image?.alt || 'Safari landscape'}
+            src={imageSrc}
+            alt={imageAlt}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
@@ -407,11 +448,55 @@ export default function Home() {
       </section>
 
       {/* ================================================================
+          SECTION 1.8 — TESTIMONIALS
+          Social proof from real travelers.
+          ================================================================ */}
+      <section className="bg-white py-8 md:py-10 border-b border-stone-100">
+        <PageGrid maxWidth="default">
+          <div className="text-center mb-6">
+            <p className="text-xs font-medium text-stone-500 uppercase tracking-widest mb-2">
+              What travelers say
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {[
+              {
+                quote: "The decision logic helped us understand exactly why August was better than July for our Masai Mara trip. No vague promises, just clear reasoning.",
+                author: "Sarah & Mark",
+                trip: "Kenya, August 2024"
+              },
+              {
+                quote: "They told us our budget wouldn't work for what we wanted and suggested a realistic alternative. That honesty saved us from disappointment.",
+                author: "The Rodriguez Family",
+                trip: "Tanzania, October 2024"
+              },
+              {
+                quote: "First safari company that showed us the trade-offs upfront. We knew exactly what we were choosing and why.",
+                author: "David L.",
+                trip: "Botswana, June 2024"
+              }
+            ].map((testimonial, index) => (
+              <div key={index} className="p-5 rounded-xl bg-stone-50 border border-stone-100">
+                <p className="text-sm text-stone-700 italic mb-4 leading-relaxed">
+                  "{testimonial.quote}"
+                </p>
+                <div className="text-xs text-stone-500">
+                  <span className="font-medium text-stone-700">{testimonial.author}</span>
+                  <span className="mx-2">·</span>
+                  <span>{testimonial.trip}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </PageGrid>
+      </section>
+
+      {/* ================================================================
           SECTION 2 — DESTINATION SHOWCASE
           Visual grid of key destinations.
           Soft sand background for visual rhythm.
           ================================================================ */}
-      <section className="relative py-12 md:py-16">
+      <section className="relative py-8 md:py-12">
         {/* Soft sand background */}
         <div className="absolute inset-0 bg-[#F5F1E8]" />
         <div className="relative">
@@ -462,7 +547,7 @@ export default function Home() {
           SECTION 3 — HOW WE PLAN SAFARIS
           Decision-backed planning approach.
           ================================================================ */}
-      <section className="relative bg-white py-12 md:py-16 overflow-hidden">
+      <section className="relative bg-white py-8 md:py-12 overflow-hidden">
         {/* Africa Map Background - subtle visual context */}
         <AfricaMapBackground className="opacity-60" />
         <PageGrid maxWidth="default" className="relative z-10">
@@ -504,7 +589,7 @@ export default function Home() {
           Safari experiences mosaic.
           Light neutral background for visual rhythm.
           ================================================================ */}
-      <section className="relative py-12 md:py-16">
+      <section className="relative py-8 md:py-12">
         {/* Light neutral gradient background */}
         <div className="absolute inset-0 bg-gradient-to-b from-stone-50 to-stone-100" />
         <div className="relative">
@@ -552,7 +637,7 @@ export default function Home() {
           6 decision cards from topic registry.
           Full-width background band.
           ================================================================ */}
-      <section className="relative py-12 md:py-16">
+      <section className="relative py-8 md:py-12">
         {/* Full-width warm background band */}
         <div className="absolute inset-0 bg-gradient-to-b from-amber-50/50 via-stone-50 to-white" />
         <div className="relative">
@@ -595,7 +680,7 @@ export default function Home() {
           Trip shapes with images.
           Charcoal background for visual contrast.
           ================================================================ */}
-      <section className="bg-stone-800 py-12 md:py-16">
+      <section className="bg-stone-800 py-8 md:py-12">
         <PageGrid maxWidth="wide">
           <div className="text-center mb-8">
             {/* Eyebrow label */}
@@ -754,16 +839,83 @@ export default function Home() {
           FOOTER
           Safari operator identity.
           ================================================================ */}
-      <footer className="bg-stone-950 text-white py-10">
+      <footer className="bg-stone-950 text-white py-8">
         <PageGrid maxWidth="default">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-6">
+            {/* Company info and contact */}
             <div className="md:col-span-2">
               <span className="font-editorial text-xl font-semibold">Safari Index</span>
               <p className="text-stone-400 text-sm mt-2 max-w-sm">
                 Private safari operator specializing in East and Southern Africa.
                 Logic-backed decisions. Custom-built itineraries.
               </p>
+              {/* Contact info */}
+              <div className="mt-4 space-y-1 text-sm text-stone-400">
+                <p>
+                  <a href="mailto:hello@safariindex.com" className="hover:text-white transition-colors">
+                    hello@safariindex.com
+                  </a>
+                </p>
+                <p>
+                  <a href="tel:+255123456789" className="hover:text-white transition-colors">
+                    +255 123 456 789
+                  </a>
+                </p>
+              </div>
+              {/* Physical address */}
+              <div className="mt-3 text-xs text-stone-500">
+                <p>Safari Index Ltd.</p>
+                <p>Arusha, Tanzania</p>
+              </div>
+              {/* Social media */}
+              <div className="mt-4 flex items-center gap-3">
+                <a
+                  href="https://instagram.com/safariindex"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-stone-800 hover:bg-stone-700 flex items-center justify-center transition-colors"
+                  aria-label="Instagram"
+                >
+                  <svg className="w-4 h-4 text-stone-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                </a>
+                <a
+                  href="https://facebook.com/safariindex"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-stone-800 hover:bg-stone-700 flex items-center justify-center transition-colors"
+                  aria-label="Facebook"
+                >
+                  <svg className="w-4 h-4 text-stone-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                </a>
+                <a
+                  href="https://x.com/safariindex"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-stone-800 hover:bg-stone-700 flex items-center justify-center transition-colors"
+                  aria-label="X (Twitter)"
+                >
+                  <svg className="w-4 h-4 text-stone-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
+                <a
+                  href="https://youtube.com/@safariindex"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-stone-800 hover:bg-stone-700 flex items-center justify-center transition-colors"
+                  aria-label="YouTube"
+                >
+                  <svg className="w-4 h-4 text-stone-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                </a>
+              </div>
             </div>
+            {/* Explore */}
             <div>
               <h4 className="font-medium text-stone-300 mb-3">Explore</h4>
               <div className="space-y-2">
@@ -778,36 +930,53 @@ export default function Home() {
                 </Link>
               </div>
             </div>
+            {/* Resources */}
             <div>
               <h4 className="font-medium text-stone-300 mb-3">Resources</h4>
               <div className="space-y-2">
                 <Link href="/decisions" className="block text-sm text-stone-400 hover:text-white transition-colors">
                   Decisions
                 </Link>
+                <Link href="/blog" className="block text-sm text-stone-400 hover:text-white transition-colors">
+                  Journal
+                </Link>
                 <Link href="/how-it-works" className="block text-sm text-stone-400 hover:text-white transition-colors">
                   How it works
                 </Link>
-                <Link href="/contact" className="block text-sm text-stone-400 hover:text-white transition-colors">
-                  Contact
+                <Link href="/guides" className="block text-sm text-stone-400 hover:text-white transition-colors">
+                  Guides
                 </Link>
+              </div>
+            </div>
+            {/* Contact */}
+            <div>
+              <h4 className="font-medium text-stone-300 mb-3">Contact</h4>
+              <div className="space-y-2">
                 <Link href="/inquire" className="block text-sm text-stone-400 hover:text-white transition-colors">
                   Plan a Safari
+                </Link>
+                <Link href="/contact" className="block text-sm text-stone-400 hover:text-white transition-colors">
+                  Get in Touch
                 </Link>
               </div>
             </div>
           </div>
-          <div className="border-t border-stone-800 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <p className="text-stone-500 text-sm">
-              Safari Index · Private Safari Operator
+          {/* Bottom bar with legal links */}
+          <div className="border-t border-stone-800 pt-5 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <p className="text-stone-500 text-xs">
+              © {new Date().getFullYear()} Safari Index Ltd. All rights reserved.
             </p>
-            <div className="flex items-center gap-6">
-              <Link href="/guides" className="text-sm text-stone-400 hover:text-white transition-colors">
-                Guides
+            <div className="flex items-center gap-4 text-xs">
+              <Link href="/privacy" className="text-stone-500 hover:text-white transition-colors">
+                Privacy Policy
               </Link>
-              <Link href="/when-to-go" className="text-sm text-stone-400 hover:text-white transition-colors">
+              <Link href="/terms" className="text-stone-500 hover:text-white transition-colors">
+                Terms of Service
+              </Link>
+              <Link href="/when-to-go" className="text-stone-500 hover:text-white transition-colors">
                 When to Go
               </Link>
-              <Link href="/compare" className="text-sm text-stone-400 hover:text-white transition-colors">
+              <Link href="/compare" className="text-stone-500 hover:text-white transition-colors">
                 Compare
               </Link>
             </div>

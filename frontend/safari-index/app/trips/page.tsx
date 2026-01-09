@@ -90,10 +90,106 @@ const DURATION_FILTERS = [
 ];
 
 /**
- * Get image for trip based on primary region
+ * Trip-specific image mapping
+ * Each trip gets a unique, relevant image to avoid repetition
  */
-function getTripImage(regions: RegionTag[]): { src: string; alt: string } {
-  // Find first specific country/region
+const tripImageMap: Record<string, { src: string; alt: string }> = {
+  // Tanzania trips - use different Tanzania/ecosystem images
+  'classic-serengeti-ngorongoro': {
+    src: '/images/destinations/tanzania-serengeti.jpg',
+    alt: 'Herds of wildebeest grazing in the Serengeti National Park, Tanzania',
+  },
+  'migration-focused-serengeti': {
+    src: '/images/activities/migration.jpg',
+    alt: 'Wildebeest and zebras jumping during Great Migration river crossing',
+  },
+  'tanzania-southern-circuit': {
+    src: '/images/destinations/tanzania-ngorongoro.jpg',
+    alt: 'Herd of African buffaloes grazing in Ngorongoro Crater, Tanzania',
+  },
+  // Kenya trips
+  'classic-kenya-safari': {
+    src: '/images/destinations/kenya-mara.jpg',
+    alt: 'Sweeping landscape of Masai Mara National Reserve, Kenya',
+  },
+  'kenya-conservancy-focused': {
+    src: '/images/activities/big-cats.jpg',
+    alt: 'Pride of lions walking towards the camera in African savannah',
+  },
+  // Botswana trips
+  'okavango-delta-immersion': {
+    src: '/images/destinations/botswana-delta.jpg',
+    alt: 'Elephants wading through the Okavango Delta waters, Botswana',
+  },
+  'botswana-diverse-ecosystems': {
+    src: '/images/ecosystems/delta-channels.jpg',
+    alt: 'Aerial view of Okavango Delta waterways winding through lush green islands',
+  },
+  // South Africa trips
+  'kruger-greater-kruger': {
+    src: '/images/destinations/south-africa-kruger.jpg',
+    alt: 'Plains zebras in Kruger National Park, South Africa',
+  },
+  'south-africa-combo': {
+    src: '/images/destinations/south-africa-lodge.jpg',
+    alt: 'Safari lodge in the Drakensberg mountains, South Africa',
+  },
+  // Uganda/Rwanda trips
+  'rwanda-gorilla-focused': {
+    src: '/images/destinations/rwanda-volcanoes.jpg',
+    alt: 'Mountain gorilla in natural habitat in Volcanoes National Park, Rwanda',
+  },
+  'uganda-primate-safari': {
+    src: '/images/destinations/uganda-bwindi.jpg',
+    alt: 'Lush green rainforest canopy of Bwindi Impenetrable Forest, Uganda',
+  },
+  // Namibia trips
+  'namibia-highlights': {
+    src: '/images/destinations/namibia-sossusvlei.jpg',
+    alt: 'Aerial view of the vast Namib Desert landscape, Namibia',
+  },
+  'namibia-self-drive': {
+    src: '/images/ecosystems/desert-dunes.jpg',
+    alt: 'Vast Namib Desert landscape with red sand dunes stretching to horizon',
+  },
+  // Zambia/Zimbabwe trips
+  'zambia-walking-safari': {
+    src: '/images/destinations/zambia-luangwa.jpg',
+    alt: 'Hippopotamus in river waters of South Luangwa, Zambia',
+  },
+  'victoria-falls-safari-combo': {
+    src: '/images/destinations/zimbabwe-mana.jpg',
+    alt: 'Golden sunset over Zimbabwe landscape with silhouetted trees',
+  },
+  // Special interest trips
+  'photography-focused-safari': {
+    src: '/images/activities/wildlife-viewing.jpg',
+    alt: 'Cheetah family resting in African savannah grassland',
+  },
+  'family-multigenerational': {
+    src: '/images/ecosystems/savannah-wildlife.jpg',
+    alt: 'Wild giraffes and zebras together on the African plains',
+  },
+  'honeymoon-romance-safari': {
+    src: '/images/ecosystems/floodplain-evening.jpg',
+    alt: 'Hippopotamus in Botswana river at sunset with golden light reflections',
+  },
+  'budget-first-safari': {
+    src: '/images/ecosystems/savannah-morning.jpg',
+    alt: 'Three giraffes standing in golden African savannah grassland at dawn',
+  },
+};
+
+/**
+ * Get image for trip - uses specific mapping first, then falls back to region
+ */
+function getTripImage(tripId: string, regions: RegionTag[]): { src: string; alt: string } {
+  // Check for specific trip mapping first
+  if (tripImageMap[tripId]) {
+    return tripImageMap[tripId];
+  }
+
+  // Fallback to region-based mapping
   const regionMap: Record<string, string> = {
     'tanzania': 'tanzania',
     'kenya': 'kenya',
@@ -127,7 +223,7 @@ function TripCard({ trip }: { trip: TripArchetype }) {
     .map((r) => getRegionDisplayName(r))
     .join(', ') || getRegionDisplayName(trip.regions[0]);
 
-  const image = getTripImage(trip.regions);
+  const image = getTripImage(trip.id, trip.regions);
 
   return (
     <Link

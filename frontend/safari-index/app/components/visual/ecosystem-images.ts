@@ -349,8 +349,7 @@ export const activityImageRefs: Record<string, ActivityImageRef> = {
     src: '/images/activities/walking-safari.jpg',
     alt: 'Safari vehicle driving through golden savannah grassland with dust trail',
     fallbackEcosystem: 'savannah',
-    hasImage: true,
-    // NOTE: Image shows game drive vehicle, not walking safari - needs replacement
+    hasImage: false, // Image mismatch: shows game drive vehicle, not walking safari - use fallback
   },
   'night-drive': {
     activityId: 'night-drive',
@@ -371,8 +370,7 @@ export const activityImageRefs: Record<string, ActivityImageRef> = {
     src: '/images/activities/mokoro.jpg',
     alt: 'Silhouette of boat with passengers on calm water at sunset',
     fallbackEcosystem: 'delta',
-    hasImage: true,
-    // NOTE: Image shows motorboat at sunset, not traditional mokoro dugout - needs replacement
+    hasImage: false, // Image mismatch: shows motorboat at sunset, not traditional mokoro dugout - use fallback
   },
   'gorilla-trekking': {
     activityId: 'gorilla-trekking',
@@ -400,8 +398,7 @@ export const activityImageRefs: Record<string, ActivityImageRef> = {
     src: '/images/activities/canoe-safari.jpg',
     alt: 'Woman wading through delta waters beside safari boat in tall reeds',
     fallbackEcosystem: 'floodplain',
-    hasImage: true,
-    // NOTE: Image shows motorboat, not canoe - needs replacement
+    hasImage: false, // Image mismatch: shows motorboat, not canoe - use fallback
   },
   'fly-camping': {
     activityId: 'fly-camping',
@@ -415,8 +412,7 @@ export const activityImageRefs: Record<string, ActivityImageRef> = {
     src: '/images/activities/horseback-safari.jpg',
     alt: 'Zebra herd crossing the Mara River during migration',
     fallbackEcosystem: 'savannah',
-    hasImage: true,
-    // NOTE: Image shows zebra river crossing, not horseback safari - needs replacement
+    hasImage: false, // Image mismatch: shows zebra river crossing, not horseback safari - use fallback
   },
   'photographic-hide': {
     activityId: 'photographic-hide',
