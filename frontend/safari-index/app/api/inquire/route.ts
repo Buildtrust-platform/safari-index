@@ -56,7 +56,19 @@ export async function POST(request: Request) {
       created_at,
     });
   } catch (error) {
-    console.error('[Inquiry API] Error creating inquiry:', error);
+    // Enhanced logging for debugging AWS/DynamoDB issues
+    const errorDetails = {
+      name: error instanceof Error ? error.name : 'Unknown',
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack?.split('\n').slice(0, 3).join('\n') : undefined,
+    };
+    console.error('[Inquiry API] Error creating inquiry:', JSON.stringify(errorDetails, null, 2));
+    console.error('[Inquiry API] Environment check:', {
+      hasAwsAccessKey: !!process.env.AWS_ACCESS_KEY_ID,
+      hasAwsSecretKey: !!process.env.AWS_SECRET_ACCESS_KEY,
+      awsRegion: process.env.AWS_REGION || 'not set',
+      inquiryTable: process.env.INQUIRY_TABLE || 'safari-index-inquiries (default)',
+    });
     return NextResponse.json(
       { error: 'Unable to process inquiry. Please try again.' },
       { status: 500 }
