@@ -280,19 +280,21 @@ function BriefSummary({
   }
 
   return (
-    <div className="bg-stone-100 rounded-xl p-5 mb-6">
-      <h3 className="text-sm font-medium text-stone-500 uppercase tracking-wide mb-4">
-        Your Planning Brief Summary
-      </h3>
-      <div className="space-y-3">
+    <div className="bg-stone-100 rounded-lg p-4 mb-5">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-xs font-medium text-stone-500 uppercase tracking-wide">
+          Brief Summary
+        </h3>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2 text-sm">
         <SummaryRow
-          label="Safari type"
-          value={state.safariIntent ? formatSafariIntent(state.safariIntent) : 'Not selected'}
+          label="Type"
+          value={state.safariIntent ? formatSafariIntent(state.safariIntent) : '-'}
           onEdit={() => onEdit(1)}
         />
         <SummaryRow
           label="Destination"
-          value={destLabel || 'Not selected'}
+          value={destLabel || '-'}
           onEdit={() => onEdit(2)}
         />
         <SummaryRow
@@ -302,33 +304,35 @@ function BriefSummary({
         />
         <SummaryRow
           label="Duration"
-          value={durationLabel || 'Not selected'}
+          value={durationLabel || '-'}
           onEdit={() => onEdit(2)}
         />
         <SummaryRow
-          label="Budget band"
-          value={state.budgetBand ? formatBudgetBandLabel(state.budgetBand) : 'Not selected'}
+          label="Budget"
+          value={state.budgetBand ? formatBudgetBandLabel(state.budgetBand) : '-'}
           onEdit={() => onEdit(3)}
         />
         <SummaryRow
           label="Travelers"
-          value={`${state.travelerCount} adult${state.travelerCount !== 1 ? 's' : ''}${state.childrenCount > 0 ? `, ${state.childrenCount} child${state.childrenCount !== 1 ? 'ren' : ''}` : ''}`}
+          value={`${state.travelerCount}${state.childrenCount > 0 ? ` + ${state.childrenCount} kids` : ''}`}
           onEdit={() => onEdit(4)}
         />
-        {state.priorities.length > 0 && (
-          <SummaryRow
-            label="Top priorities"
-            value={formatPriorities(state.priorities)}
-            onEdit={() => onEdit(4)}
-          />
-        )}
-        {state.specificRequests && (
-          <SummaryRow label="Notes" value={state.specificRequests} onEdit={() => onEdit(4)} />
-        )}
       </div>
-      <p className="text-xs text-stone-500 mt-4 pt-4 border-t border-stone-200">
-        Review your brief before submitting. We use this to build your initial planning direction.
-      </p>
+      {(state.priorities.length > 0 || state.specificRequests) && (
+        <div className="mt-3 pt-3 border-t border-stone-200 text-sm">
+          {state.priorities.length > 0 && (
+            <div className="flex items-start justify-between gap-2">
+              <div>
+                <span className="text-xs text-stone-500">Priorities:</span>
+                <span className="text-stone-700 ml-1">{formatPriorities(state.priorities)}</span>
+              </div>
+              <button type="button" onClick={() => onEdit(4)} className="text-stone-400 hover:text-stone-600 p-0.5">
+                <Pencil className="w-3 h-3" />
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -343,59 +347,45 @@ function SummaryRow({
   onEdit: () => void;
 }) {
   return (
-    <div className="flex items-start justify-between gap-4">
-      <div className="flex-1 min-w-0">
-        <span className="text-xs text-stone-500 uppercase tracking-wide">{label}</span>
-        <p className="text-stone-900 text-sm truncate">{value}</p>
+    <div className="flex items-start justify-between gap-1 group">
+      <div className="min-w-0">
+        <span className="text-xs text-stone-500 block">{label}</span>
+        <p className="text-stone-800 text-sm truncate">{value}</p>
       </div>
       <button
         type="button"
         onClick={onEdit}
-        className="text-stone-400 hover:text-stone-600 p-1"
+        className="text-stone-300 hover:text-stone-500 p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
       >
-        <Pencil className="w-3.5 h-3.5" />
+        <Pencil className="w-3 h-3" />
       </button>
     </div>
   );
 }
 
 /**
- * What happens next section
+ * What happens next section - compact grid layout
  */
 function WhatHappensNext() {
   return (
-    <div className="mt-8 pt-6 border-t border-stone-200">
-      <h3 className="font-medium text-stone-900 mb-4">What Happens After You Submit</h3>
-      <div className="space-y-4 text-sm text-stone-600">
-        <div>
-          <p className="font-medium text-stone-900">We review your brief manually.</p>
-          <p>
-            Every submission is read by a safari planner, not processed by automation. We look at
-            your timing, budget, priorities, and any constraints to determine whether we can help.
-          </p>
+    <div className="mt-6 pt-5 border-t border-stone-200">
+      <h3 className="font-medium text-stone-900 mb-3 text-sm">What happens next</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-stone-600">
+        <div className="p-3 bg-stone-50 rounded-lg">
+          <p className="font-medium text-stone-800 mb-1">Manual review</p>
+          <p className="text-xs">Every brief is read by a planner, not automation.</p>
         </div>
-        <div>
-          <p className="font-medium text-stone-900">We may ask clarifying questions.</p>
-          <p>
-            If something is unclear or if your priorities conflict, we will ask before assuming.
-            This is normal and helps us avoid proposing the wrong thing.
-          </p>
+        <div className="p-3 bg-stone-50 rounded-lg">
+          <p className="font-medium text-stone-800 mb-1">We may ask questions</p>
+          <p className="text-xs">If priorities conflict, we ask before assuming.</p>
         </div>
-        <div>
-          <p className="font-medium text-stone-900">We may decline.</p>
-          <p>
-            If your constraints cannot produce a trip that meets your expectations — timing
-            impossible, budget insufficient for goals, or ethical conflicts — we will say so
-            directly. We do not propose trips we would not book ourselves.
-          </p>
+        <div className="p-3 bg-stone-50 rounded-lg">
+          <p className="font-medium text-stone-800 mb-1">We may decline</p>
+          <p className="text-xs">If constraints are impossible, we say so directly.</p>
         </div>
-        <div>
-          <p className="font-medium text-stone-900">You will receive a planning direction.</p>
-          <p>
-            If we can help, you will receive an initial proposal with destination logic, trade-offs
-            explained, rough cost context, and next steps. This is not a quote — it is a planning
-            framework to react to.
-          </p>
+        <div className="p-3 bg-stone-50 rounded-lg">
+          <p className="font-medium text-stone-800 mb-1">Planning direction</p>
+          <p className="text-xs">If we can help, you get a proposal to react to.</p>
         </div>
       </div>
     </div>
@@ -553,43 +543,40 @@ function PlanningBriefForm() {
       <Navbar variant="solid" />
 
       {/* Header */}
-      <div className="bg-stone-900 pt-24 pb-8">
-        <div className="max-w-xl mx-auto px-4 md:px-6">
-          <div className="flex items-center gap-2 text-stone-400 text-sm mb-4">
+      <div className="bg-stone-900 pt-24 pb-6">
+        <div className="max-w-2xl mx-auto px-4 md:px-8">
+          <div className="flex items-center gap-2 text-stone-400 text-sm mb-3">
             <Link href="/" className="hover:text-white transition-colors">
               Safari Index
             </Link>
             <ChevronRight className="w-4 h-4" />
             <span className="text-stone-300">Planning Brief</span>
           </div>
-          <h1 className="font-editorial text-2xl md:text-3xl font-semibold text-white mb-3">
-            Start Your Safari Planning Brief
+          <h1 className="font-editorial text-2xl md:text-3xl font-semibold text-white mb-2">
+            Safari Planning Brief
           </h1>
-          <p className="text-stone-400 text-sm leading-relaxed">
-            This brief helps us understand what you are looking for before we build anything. We
-            will ask about timing, budget, and priorities — then respond with a planning approach
-            tailored to your constraints. If something does not make sense, we will say so.
+          <p className="text-stone-400 text-sm">
+            Tell us what you are looking for. We respond with a planning approach or explain why we cannot help.
           </p>
         </div>
       </div>
 
       {/* Form */}
-      <div className="max-w-xl mx-auto px-4 md:px-6 py-8">
-        <div className="bg-white rounded-2xl border border-stone-200 p-6 md:p-8 shadow-sm">
+      <div className="max-w-2xl mx-auto px-4 md:px-8 py-6">
+        <div className="bg-white rounded-2xl border border-stone-200 p-5 md:p-6 shadow-sm">
           <ProgressBar currentStep={currentStep} />
 
           {/* Step 1: Safari Intent */}
           {currentStep === 1 && (
             <div>
-              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-2">
-                What kind of safari are you planning?
+              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-1">
+                What kind of safari?
               </h2>
-              <p className="text-sm text-stone-500 mb-6">
-                This helps us understand which decisions matter most for your trip. You can refine
-                this later.
+              <p className="text-sm text-stone-500 mb-4">
+                Select the option that best describes your trip.
               </p>
 
-              <div className="space-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {SAFARI_INTENTS.map((intent) => (
                   <IntentCard
                     key={intent.value}
@@ -601,7 +588,7 @@ function PlanningBriefForm() {
               </div>
 
               {errors.safariIntent && (
-                <p className="mt-4 text-sm text-red-600">{errors.safariIntent}</p>
+                <p className="mt-3 text-sm text-red-600">{errors.safariIntent}</p>
               )}
             </div>
           )}
@@ -609,61 +596,40 @@ function PlanningBriefForm() {
           {/* Step 2: Timing, Destination & Duration */}
           {currentStep === 2 && (
             <div>
-              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-2">
+              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-1">
                 When, where, and how long?
               </h2>
-              <p className="text-sm text-stone-500 mb-6">
-                Safari timing affects wildlife, weather, crowds, and cost. Destination and duration
-                shape what is realistic.
+              <p className="text-sm text-stone-500 mb-4">
+                Timing affects wildlife, weather, and cost.
               </p>
 
-              <div className="space-y-6">
-                {/* Flexibility - moved up */}
+              <div className="space-y-5">
+                {/* Flexibility as inline chips */}
                 <div>
                   <label className="block text-sm font-medium text-stone-700 mb-2">
                     Date flexibility
                   </label>
-                  <div className="space-y-2">
+                  <div className="flex flex-wrap gap-2">
                     {TIMING_FLEXIBILITY.map((opt) => (
-                      <label
+                      <button
                         key={opt.value}
-                        className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
+                        type="button"
+                        onClick={() => updateField('flexibility', opt.value)}
+                        className={`px-4 py-2 rounded-lg border text-sm font-medium transition-all ${
                           state.flexibility === opt.value
-                            ? 'border-amber-500 bg-amber-50'
-                            : 'border-stone-200 hover:border-stone-300'
+                            ? 'border-amber-500 bg-amber-50 text-amber-800'
+                            : 'border-stone-200 bg-white text-stone-700 hover:border-stone-300'
                         }`}
                       >
-                        <input
-                          type="radio"
-                          name="flexibility"
-                          value={opt.value}
-                          checked={state.flexibility === opt.value}
-                          onChange={() => updateField('flexibility', opt.value)}
-                          className="sr-only"
-                        />
-                        <div
-                          className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                            state.flexibility === opt.value
-                              ? 'border-amber-500 bg-amber-500'
-                              : 'border-stone-300'
-                          }`}
-                        >
-                          {state.flexibility === opt.value && (
-                            <div className="w-1.5 h-1.5 rounded-full bg-white" />
-                          )}
-                        </div>
-                        <span className="text-stone-700">{opt.label}</span>
-                      </label>
+                        {opt.label}
+                      </button>
                     ))}
                   </div>
                 </div>
 
                 {/* Fixed dates - calendar picker */}
                 {state.flexibility === 'fixed' && (
-                  <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl">
-                    <label className="block text-sm font-medium text-amber-800 mb-3">
-                      Your fixed travel dates
-                    </label>
+                  <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
                     <div className="grid grid-cols-2 gap-3">
                       <div>
                         <label className="block text-xs text-amber-700 mb-1">Start date</label>
@@ -689,54 +655,67 @@ function PlanningBriefForm() {
                   </div>
                 )}
 
-                {/* Month/Year selectors - for non-fixed dates */}
+                {/* Month/Year and Destination inline */}
                 {state.flexibility !== 'fixed' && (
-                  <div>
-                    <label className="block text-sm font-medium text-stone-700 mb-2">
-                      Preferred travel window
-                    </label>
-                    <div className="grid grid-cols-2 gap-3">
-                      <select
-                        value={state.travelMonth || ''}
-                        onChange={(e) =>
-                          updateField('travelMonth', e.target.value ? parseInt(e.target.value) : null)
-                        }
-                        className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
-                      >
-                        <option value="">Select month</option>
-                        {MONTH_OPTIONS.map((opt) => (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <select
+                      value={state.travelMonth || ''}
+                      onChange={(e) =>
+                        updateField('travelMonth', e.target.value ? parseInt(e.target.value) : null)
+                      }
+                      className="w-full px-3 py-2.5 bg-white border border-stone-200 rounded-lg text-stone-900 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+                    >
+                      <option value="">Month</option>
+                      {MONTH_OPTIONS.map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </option>
+                      ))}
+                    </select>
+                    <select
+                      value={state.travelYear || ''}
+                      onChange={(e) =>
+                        updateField('travelYear', e.target.value ? parseInt(e.target.value) : null)
+                      }
+                      className="w-full px-3 py-2.5 bg-white border border-stone-200 rounded-lg text-stone-900 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+                    >
+                      <option value="">Year</option>
+                      {yearOptions.map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </option>
+                      ))}
+                    </select>
+                    <select
+                      value={state.destination || ''}
+                      onChange={(e) => updateField('destination', e.target.value || null)}
+                      className="w-full px-3 py-2.5 bg-white border border-stone-200 rounded-lg text-stone-900 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+                    >
+                      <option value="">Destination</option>
+                      <optgroup label="East Africa">
+                        {DESTINATION_OPTIONS.filter((d) => d.region === 'east').map((opt) => (
                           <option key={opt.value} value={opt.value}>
                             {opt.label}
                           </option>
                         ))}
-                      </select>
-                      <select
-                        value={state.travelYear || ''}
-                        onChange={(e) =>
-                          updateField('travelYear', e.target.value ? parseInt(e.target.value) : null)
-                        }
-                        className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
-                      >
-                        <option value="">Select year</option>
-                        {yearOptions.map((opt) => (
+                      </optgroup>
+                      <optgroup label="Southern Africa">
+                        {DESTINATION_OPTIONS.filter((d) => d.region === 'south').map((opt) => (
                           <option key={opt.value} value={opt.value}>
                             {opt.label}
                           </option>
                         ))}
-                      </select>
-                    </div>
+                      </optgroup>
+                    </select>
                   </div>
                 )}
 
-                {/* Destination */}
-                <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-2">
-                    Destination preference
-                  </label>
+                {/* Destination for fixed dates */}
+                {state.flexibility === 'fixed' && (
                   <select
                     value={state.destination || ''}
                     onChange={(e) => updateField('destination', e.target.value || null)}
-                    className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+                    className="w-full px-3 py-2.5 bg-white border border-stone-200 rounded-lg text-stone-900 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
                   >
                     <option value="">Select destination</option>
                     <optgroup label="East Africa">
@@ -754,47 +733,27 @@ function PlanningBriefForm() {
                       ))}
                     </optgroup>
                   </select>
-                </div>
+                )}
 
-                {/* Duration */}
+                {/* Duration as inline chips */}
                 <div>
                   <label className="block text-sm font-medium text-stone-700 mb-2">
                     Trip duration
                   </label>
-                  <div className="space-y-2">
+                  <div className="flex flex-wrap gap-2">
                     {DURATION_OPTIONS.map((opt) => (
-                      <label
+                      <button
                         key={opt.value}
-                        className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-colors ${
+                        type="button"
+                        onClick={() => updateField('duration', opt.value)}
+                        className={`px-4 py-2 rounded-lg border text-sm transition-all ${
                           state.duration === opt.value
-                            ? 'border-amber-500 bg-amber-50'
-                            : 'border-stone-200 hover:border-stone-300'
+                            ? 'border-amber-500 bg-amber-50 text-amber-800 font-medium'
+                            : 'border-stone-200 bg-white text-stone-700 hover:border-stone-300'
                         }`}
                       >
-                        <div className="flex items-center gap-3">
-                          <input
-                            type="radio"
-                            name="duration"
-                            value={opt.value}
-                            checked={state.duration === opt.value}
-                            onChange={() => updateField('duration', opt.value)}
-                            className="sr-only"
-                          />
-                          <div
-                            className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                              state.duration === opt.value
-                                ? 'border-amber-500 bg-amber-500'
-                                : 'border-stone-300'
-                            }`}
-                          >
-                            {state.duration === opt.value && (
-                              <div className="w-1.5 h-1.5 rounded-full bg-white" />
-                            )}
-                          </div>
-                          <span className="text-stone-700 font-medium">{opt.label}</span>
-                        </div>
-                        <span className="text-sm text-stone-500">{opt.description}</span>
-                      </label>
+                        {opt.label}
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -805,16 +764,14 @@ function PlanningBriefForm() {
           {/* Step 3: Budget Reality */}
           {currentStep === 3 && (
             <div>
-              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-2">
-                What budget range feels realistic for this trip?
+              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-1">
+                Budget range per person
               </h2>
-              <p className="text-sm text-stone-500 mb-6">
-                These are per-person land costs, excluding international flights. Safari pricing
-                varies significantly by season, destination, and accommodation tier. We will provide
-                specific context in your proposal.
+              <p className="text-sm text-stone-500 mb-4">
+                Land costs only, excluding international flights.
               </p>
 
-              <div className="space-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {BUDGET_BAND_OPTIONS.map((option) => (
                   <BudgetCard
                     key={option.value}
@@ -826,7 +783,7 @@ function PlanningBriefForm() {
               </div>
 
               {errors.budgetBand && (
-                <p className="mt-4 text-sm text-red-600">{errors.budgetBand}</p>
+                <p className="mt-3 text-sm text-red-600">{errors.budgetBand}</p>
               )}
             </div>
           )}
@@ -834,26 +791,25 @@ function PlanningBriefForm() {
           {/* Step 4: Travelers & Priorities */}
           {currentStep === 4 && (
             <div>
-              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-2">
-                Who is traveling, and what matters most?
+              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-1">
+                Travelers and priorities
               </h2>
-              <p className="text-sm text-stone-500 mb-6">
-                Every safari involves trade-offs. Knowing your priorities helps us recommend the
-                right shape, not just the popular one.
+              <p className="text-sm text-stone-500 mb-4">
+                This helps us recommend the right trip shape.
               </p>
 
-              <div className="space-y-6">
-                {/* Traveler counts */}
-                <div className="space-y-4 p-4 bg-stone-50 rounded-xl">
+              <div className="space-y-5">
+                {/* Traveler counts - inline on desktop */}
+                <div className="grid grid-cols-2 gap-4 p-4 bg-stone-50 rounded-lg">
                   <NumberStepper
-                    label="Number of travelers"
+                    label="Adults"
                     value={state.travelerCount}
                     onChange={(v) => updateField('travelerCount', v)}
                     min={1}
                     max={12}
                   />
                   <NumberStepper
-                    label="Children under 12"
+                    label="Children (under 12)"
                     value={state.childrenCount}
                     onChange={(v) => updateField('childrenCount', v)}
                     min={0}
@@ -864,7 +820,7 @@ function PlanningBriefForm() {
                 {/* Priorities */}
                 <div>
                   <label className="block text-sm font-medium text-stone-700 mb-2">
-                    Top priorities (select up to 3)
+                    Top priorities (up to 3)
                   </label>
                   <div className="flex flex-wrap gap-2">
                     {PRIORITY_OPTIONS.map((option) => (
@@ -882,15 +838,14 @@ function PlanningBriefForm() {
                 {/* Specific requests */}
                 <div>
                   <label className="block text-sm font-medium text-stone-700 mb-2">
-                    Anything specific you want to see or do?{' '}
-                    <span className="text-stone-400 font-normal">(optional)</span>
+                    Specific requests <span className="text-stone-400 font-normal">(optional)</span>
                   </label>
                   <textarea
                     value={state.specificRequests}
                     onChange={(e) => updateField('specificRequests', e.target.value)}
                     placeholder="Gorilla trekking, Great Migration, specific parks..."
                     rows={2}
-                    className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 resize-none"
+                    className="w-full px-3 py-2.5 bg-white border border-stone-200 rounded-lg text-stone-900 text-sm placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 resize-none"
                   />
                 </div>
               </div>
@@ -900,103 +855,107 @@ function PlanningBriefForm() {
           {/* Step 5: Contact & Confirmation */}
           {currentStep === 5 && (
             <div>
-              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-2">
-                Where should we send your planning brief?
+              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-1">
+                Contact details
               </h2>
-              <p className="text-sm text-stone-500 mb-6">
-                We respond within two business days. If your request involves constraints we cannot
-                resolve, we will tell you directly rather than propose something that does not fit.
+              <p className="text-sm text-stone-500 mb-4">
+                We respond within 48 hours, or explain why we cannot help.
               </p>
 
               {/* Summary */}
               <BriefSummary state={state} onEdit={setCurrentStep} />
 
-              {/* Contact fields */}
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-2">
-                    Your name <span className="text-amber-600">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    value={state.name}
-                    onChange={(e) => updateField('name', e.target.value)}
-                    placeholder="Full name"
-                    className={`w-full px-4 py-3 bg-white border rounded-lg text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 ${
-                      errors.name ? 'border-red-300' : 'border-stone-200'
-                    }`}
-                  />
-                  {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+              {/* Contact fields - more compact layout */}
+              <div className="space-y-3">
+                {/* Name and Email inline on desktop */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-sm font-medium text-stone-700 mb-1">
+                      Name <span className="text-amber-600">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={state.name}
+                      onChange={(e) => updateField('name', e.target.value)}
+                      placeholder="Full name"
+                      className={`w-full px-3 py-2.5 bg-white border rounded-lg text-stone-900 text-sm placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 ${
+                        errors.name ? 'border-red-300' : 'border-stone-200'
+                      }`}
+                    />
+                    {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-stone-700 mb-1">
+                      Email <span className="text-amber-600">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      value={state.email}
+                      onChange={(e) => updateField('email', e.target.value)}
+                      placeholder="your@email.com"
+                      className={`w-full px-3 py-2.5 bg-white border rounded-lg text-stone-900 text-sm placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 ${
+                        errors.email ? 'border-red-300' : 'border-stone-200'
+                      }`}
+                    />
+                    {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
+                  </div>
+                </div>
+
+                {/* Country and Phone inline */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-sm font-medium text-stone-700 mb-1">
+                      Country <span className="text-amber-600">*</span>
+                    </label>
+                    <select
+                      value={state.country}
+                      onChange={(e) => updateField('country', e.target.value)}
+                      className={`w-full px-3 py-2.5 bg-white border rounded-lg text-stone-900 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 ${
+                        errors.country ? 'border-red-300' : 'border-stone-200'
+                      }`}
+                    >
+                      <option value="">Select country</option>
+                      {COUNTRY_OPTIONS.map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.country && <p className="mt-1 text-xs text-red-600">{errors.country}</p>}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-stone-700 mb-1">
+                      Phone <span className="text-stone-400 font-normal">(optional)</span>
+                    </label>
+                    <input
+                      type="tel"
+                      value={state.phone}
+                      onChange={(e) => updateField('phone', e.target.value)}
+                      placeholder="+1 234 567 8900"
+                      className="w-full px-3 py-2.5 bg-white border border-stone-200 rounded-lg text-stone-900 text-sm placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-2">
-                    Email address <span className="text-amber-600">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    value={state.email}
-                    onChange={(e) => updateField('email', e.target.value)}
-                    placeholder="your@email.com"
-                    className={`w-full px-4 py-3 bg-white border rounded-lg text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 ${
-                      errors.email ? 'border-red-300' : 'border-stone-200'
-                    }`}
-                  />
-                  {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-2">
-                    Country <span className="text-amber-600">*</span>
-                  </label>
-                  <select
-                    value={state.country}
-                    onChange={(e) => updateField('country', e.target.value)}
-                    className={`w-full px-4 py-3 bg-white border rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 ${
-                      errors.country ? 'border-red-300' : 'border-stone-200'
-                    }`}
-                  >
-                    <option value="">Select country</option>
-                    {COUNTRY_OPTIONS.map((opt) => (
-                      <option key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.country && <p className="mt-1 text-sm text-red-600">{errors.country}</p>}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-2">
-                    Phone <span className="text-stone-400 font-normal">(optional)</span>
-                  </label>
-                  <input
-                    type="tel"
-                    value={state.phone}
-                    onChange={(e) => updateField('phone', e.target.value)}
-                    placeholder="+1 234 567 8900"
-                    className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-2">
-                    Anything else we should know?{' '}
-                    <span className="text-stone-400 font-normal">(optional)</span>
+                  <label className="block text-sm font-medium text-stone-700 mb-1">
+                    Additional notes <span className="text-stone-400 font-normal">(optional)</span>
                   </label>
                   <textarea
                     value={state.additionalNotes}
                     onChange={(e) => updateField('additionalNotes', e.target.value)}
-                    placeholder="Previous safari experience, concerns, constraints, questions..."
-                    rows={3}
-                    className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 resize-none"
+                    placeholder="Previous experience, questions, constraints..."
+                    rows={2}
+                    className="w-full px-3 py-2.5 bg-white border border-stone-200 rounded-lg text-stone-900 text-sm placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 resize-none"
                   />
                 </div>
               </div>
 
               {/* Submit error */}
               {errors.submit && (
-                <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
                   <p className="text-sm text-red-700">{errors.submit}</p>
                 </div>
               )}
