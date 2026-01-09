@@ -191,38 +191,53 @@ function FeaturedActivityCard({ activity }: { activity: typeof activityPrimitive
 }
 
 /**
- * Activity card in category grid
+ * Activity card in category grid - with thumbnail image
  */
 function ActivityCard({ activity }: { activity: typeof activityPrimitives[0] }) {
   const config = CATEGORY_CONFIG[activity.category];
   const Icon = config.icon;
   const effortDisplay = getEffortDisplay(activity.physical_effort);
+  const activityImage = getActivityImageRef(activity.id);
 
   return (
     <Link
       href={`/activities/${activity.id}`}
-      className="group block bg-white rounded-xl border border-stone-200 p-4 hover:border-amber-300 hover:shadow-md transition-all"
+      className="group block bg-white rounded-xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-md transition-all"
       data-testid="activity-card"
     >
-      <div className="flex items-start gap-3">
-        <div className="w-10 h-10 rounded-lg bg-stone-100 group-hover:bg-amber-100 flex items-center justify-center flex-shrink-0 transition-colors">
-          <Icon className="w-5 h-5 text-stone-500 group-hover:text-amber-600 transition-colors" />
+      <div className="flex">
+        {/* Thumbnail image */}
+        <div className="w-24 h-28 flex-shrink-0 overflow-hidden">
+          {activityImage?.hasImage && activityImage.src ? (
+            <img
+              src={activityImage.src}
+              alt={activityImage.alt}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          ) : (
+            <div
+              className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-300"
+              style={{ backgroundImage: `url(${ecosystemImages[config.imageIndex].src})` }}
+            />
+          )}
         </div>
-        <div className="flex-1 min-w-0">
+
+        {/* Content */}
+        <div className="flex-1 min-w-0 p-3">
           <div className="flex items-start justify-between mb-1">
-            <h3 className="font-editorial text-base font-semibold text-stone-900 group-hover:text-amber-700 transition-colors">
+            <h3 className="font-editorial text-base font-semibold text-stone-900 group-hover:text-amber-700 transition-colors line-clamp-1">
               {activity.name}
             </h3>
-            <span className={`px-2 py-0.5 text-xs rounded-full flex-shrink-0 ml-2 ${effortDisplay.color}`}>
-              {effortDisplay.label}
-            </span>
+            <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all flex-shrink-0 ml-2" />
           </div>
           <p className="text-stone-500 text-sm line-clamp-2 mb-2">{activity.what_it_is}</p>
-          <div className="flex items-center justify-between text-xs">
+          <div className="flex items-center gap-2 text-xs">
+            <span className={`px-2 py-0.5 rounded-full ${effortDisplay.color}`}>
+              {effortDisplay.label}
+            </span>
             <span className="text-stone-400">
               {activity.where_possible.length} destinations
             </span>
-            <ArrowRight className="w-3.5 h-3.5 text-stone-300 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all" />
           </div>
         </div>
       </div>

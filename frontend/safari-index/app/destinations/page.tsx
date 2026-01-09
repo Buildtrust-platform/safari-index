@@ -155,7 +155,7 @@ function FeaturedDestinationCard({ destination }: { destination: typeof DESTINAT
 }
 
 /**
- * Destination card in grid
+ * Destination card in grid - with large thumbnail image
  */
 function DestinationCard({ destination }: { destination: typeof DESTINATIONS[0] }) {
   const destImage = getDestinationImage(destination.id);
@@ -164,12 +164,12 @@ function DestinationCard({ destination }: { destination: typeof DESTINATIONS[0] 
     <Link
       href={`/destinations/${destination.id}`}
       id={destination.id}
-      className="group block bg-white rounded-xl border border-stone-200 p-4 hover:border-amber-300 hover:shadow-md transition-all scroll-mt-24"
+      className="group block bg-white rounded-xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-md transition-all scroll-mt-24"
       data-testid="destination-card"
     >
-      <div className="flex items-start gap-4">
-        {/* Thumbnail */}
-        <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+      <div className="flex">
+        {/* Large thumbnail */}
+        <div className="w-28 h-32 flex-shrink-0 overflow-hidden">
           <img
             src={destImage.src}
             alt={destImage.alt}
@@ -178,11 +178,14 @@ function DestinationCard({ destination }: { destination: typeof DESTINATIONS[0] 
         </div>
 
         {/* Content */}
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 p-3">
           <div className="flex items-start justify-between mb-1">
-            <h3 className="font-editorial text-base font-semibold text-stone-900 group-hover:text-amber-700 transition-colors">
-              {destination.name}
-            </h3>
+            <div>
+              <h3 className="font-editorial text-base font-semibold text-stone-900 group-hover:text-amber-700 transition-colors">
+                {destination.name}
+              </h3>
+              <span className="text-xs text-amber-700">{destination.region}</span>
+            </div>
             <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
           </div>
           <p className="text-stone-500 text-sm line-clamp-2 mb-2">{destination.description}</p>

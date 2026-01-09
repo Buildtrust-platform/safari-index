@@ -177,31 +177,46 @@ function getFeaturedTopics(): TopicInventoryItem[] {
 }
 
 /**
- * Topic card component - visual card style
+ * Topic card component - visual card style with thumbnail
  */
-function TopicCard({ topic }: { topic: TopicInventoryItem }) {
+function TopicCard({ topic, imageIndex }: { topic: TopicInventoryItem; imageIndex: number }) {
   const slug = generateSlugFromId(topic.id);
   const config = BUCKET_CONFIG[topic.bucket as TopicBucket];
   const Icon = config.icon;
+  const bgImage = ecosystemImages[imageIndex % ecosystemImages.length];
 
   return (
     <Link
       href={`/decisions/${slug}`}
       prefetch={false}
-      className="group block bg-white rounded-xl border border-stone-200 p-4 hover:border-amber-300 hover:shadow-md transition-all"
+      className="group block bg-white rounded-xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-md transition-all"
       data-testid="topic-link"
     >
-      <div className="flex items-start gap-3">
-        <div className="w-9 h-9 rounded-lg bg-stone-100 group-hover:bg-amber-100 flex items-center justify-center flex-shrink-0 transition-colors">
-          <Icon className="w-4 h-4 text-stone-500 group-hover:text-amber-600 transition-colors" strokeWidth={1.5} />
+      <div className="flex">
+        {/* Thumbnail image */}
+        <div className="w-20 h-24 flex-shrink-0 overflow-hidden relative">
+          <div
+            className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-300"
+            style={{ backgroundImage: `url(${bgImage.src})` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/20" />
         </div>
-        <div className="flex-1 min-w-0">
-          <h3 className="font-editorial text-sm font-medium text-stone-900 group-hover:text-amber-700 transition-colors line-clamp-2 mb-1">
-            {topic.title}
-          </h3>
-          <span className="text-xs text-stone-400">{config.title}</span>
+
+        {/* Content */}
+        <div className="flex-1 min-w-0 p-3">
+          <div className="flex items-start gap-2 mb-1">
+            <div className="w-6 h-6 rounded bg-stone-100 group-hover:bg-amber-100 flex items-center justify-center flex-shrink-0 transition-colors">
+              <Icon className="w-3 h-3 text-stone-500 group-hover:text-amber-600 transition-colors" strokeWidth={1.5} />
+            </div>
+            <h3 className="font-editorial text-sm font-medium text-stone-900 group-hover:text-amber-700 transition-colors line-clamp-2 flex-1">
+              {topic.title}
+            </h3>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-stone-400">{config.title}</span>
+            <ArrowRight className="w-3.5 h-3.5 text-stone-300 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all" />
+          </div>
         </div>
-        <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all flex-shrink-0 mt-1" />
       </div>
     </Link>
   );
@@ -296,8 +311,8 @@ function BucketSection({ bucket }: { bucket: TopicBucket }) {
       {/* Topics grid */}
       <div className="bg-white rounded-b-2xl border border-t-0 border-stone-200 p-4 md:p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {topics.map((topic) => (
-            <TopicCard key={topic.id} topic={topic} />
+          {topics.map((topic, index) => (
+            <TopicCard key={topic.id} topic={topic} imageIndex={config.imageIndex + index} />
           ))}
         </div>
       </div>

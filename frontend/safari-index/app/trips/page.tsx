@@ -203,25 +203,25 @@ const REGION_SECTIONS = [
     id: 'east-africa',
     name: 'East Africa',
     description: 'Tanzania, Kenya, and the Great Migration circuit',
-    imageIndex: 0, // savannah-morning
+    imageId: 'savannah-wildlife', // savannah image
   },
   {
     id: 'southern-africa',
     name: 'Southern Africa',
     description: 'Botswana, South Africa, Namibia, Zambia, and Zimbabwe',
-    imageIndex: 1, // delta-channels
+    imageId: 'delta-channels', // delta image
   },
   {
     id: 'uganda-rwanda',
     name: 'Uganda & Rwanda',
     description: 'Mountain gorillas and primate-focused safaris',
-    imageIndex: 3, // montane-forest
+    imageId: 'montane-forest', // forest image
   },
   {
     id: 'special',
     name: 'Special Interest',
     description: 'Photography, honeymoon, family, and budget-focused trips',
-    imageIndex: 5, // kopje-landscape
+    imageId: 'kopje-landscape', // kopje image
   },
 ];
 
@@ -235,7 +235,7 @@ function RegionSection({
   section: typeof REGION_SECTIONS[0];
   trips: TripArchetype[];
 }) {
-  const bgImage = ecosystemImages[section.imageIndex];
+  const bgImage = ecosystemImages.find(img => img.id === section.imageId) || ecosystemImages[0];
 
   if (trips.length === 0) return null;
 
