@@ -120,16 +120,16 @@ const activityFallbackMap: Record<string, { src: string; alt: string }> = {
     alt: 'Safari boat cruising past hippos in African river',
   },
   mokoro: {
-    src: '/images/destinations/botswana-okavango.jpg',
-    alt: 'Aerial view of the Okavango Delta waterways and islands, Botswana',
+    src: '/images/activities/mokoro.jpg',
+    alt: 'Traditional mokoro canoe on the Okavango Delta waterways',
   },
   'canoe-safari': {
     src: '/images/ecosystems/delta-channels.jpg',
     alt: 'Aerial view of Okavango Delta waterways winding through lush green islands',
   },
   kayaking: {
-    src: '/images/destinations/zambia.jpg',
-    alt: 'Walking safari guide leading guests through the South Luangwa bush',
+    src: '/images/activities/canoe-safari.jpg',
+    alt: 'Kayaking on African waterways',
   },
   fishing: {
     src: '/images/activities/fishing.jpg',
@@ -144,12 +144,12 @@ const activityFallbackMap: Record<string, { src: string; alt: string }> = {
     alt: 'Hippopotamus in Botswana river at sunset with golden light reflections',
   },
   'source-of-nile': {
-    src: '/images/destinations/uganda.jpg',
-    alt: 'Chimpanzee in the tropical forest of Kibale National Park, Uganda',
+    src: '/images/destinations/uganda-bwindi.jpg',
+    alt: 'Scenic views from Uganda',
   },
   // On foot activities
   'walking-safari': {
-    src: '/images/activities/bush-walk.jpg',
+    src: '/images/activities/walking-safari.jpg',
     alt: 'Guided walking safari through African bush with armed ranger',
   },
   'gorilla-trekking': {
@@ -173,12 +173,12 @@ const activityFallbackMap: Record<string, { src: string; alt: string }> = {
     alt: 'Wild giraffes and zebras together on the African plains',
   },
   'golden-monkey-tracking': {
-    src: '/images/destinations/rwanda.jpg',
-    alt: 'Mountain gorilla family in the misty Volcanoes National Park, Rwanda',
+    src: '/images/destinations/rwanda-volcanoes.jpg',
+    alt: 'Misty Volcanoes National Park, Rwanda',
   },
   'bird-watching': {
-    src: '/images/activities/bird-watching.jpg',
-    alt: 'Colorful African bird perched in natural habitat',
+    src: '/images/ecosystems/woodland-clearing.jpg',
+    alt: 'Woodland habitat perfect for bird watching',
   },
   'mountain-biking': {
     src: '/images/destinations/namibia-sossusvlei.jpg',
@@ -190,12 +190,12 @@ const activityFallbackMap: Record<string, { src: string; alt: string }> = {
     alt: 'Hot air balloon floating over the Masai Mara at sunrise',
   },
   'scenic-helicopter': {
-    src: '/images/activities/scenic-flight.jpg',
-    alt: 'Light aircraft flying over vast African wilderness landscape',
+    src: '/images/activities/scenic-helicopter.jpg',
+    alt: 'Helicopter flying over vast African wilderness landscape',
   },
   'zip-lining': {
-    src: '/images/destinations/zimbabwe.jpg',
-    alt: 'Victoria Falls rainbow mist with Zambezi River, Zimbabwe',
+    src: '/images/destinations/zimbabwe-mana.jpg',
+    alt: 'Dramatic Zimbabwe landscape near Victoria Falls',
   },
   // Specialty activities
   'bungee-jumping': {

@@ -106,16 +106,16 @@ const itineraryImageMap: Record<string, { src: string; alt: string }> = {
     alt: 'Safari vehicle observing wildlife on an early morning game drive',
   },
   'tanzania-safari-and-beach': {
-    src: '/images/destinations/zanzibar.jpg',
-    alt: 'Crystal-clear turquoise waters and white sand beach in Zanzibar',
+    src: '/images/ecosystems/delta-channels.jpg',
+    alt: 'Serene waterways perfect for beach and safari combination trips',
   },
   'tanzania-walking-safari': {
-    src: '/images/activities/bush-walk.jpg',
+    src: '/images/activities/walking-safari.jpg',
     alt: 'Guided walking safari through African bush with armed ranger',
   },
   // Kenya itineraries (5)
   'kenya-classic-safari': {
-    src: '/images/destinations/kenya-masai-mara.jpg',
+    src: '/images/destinations/kenya-mara.jpg',
     alt: 'Lions resting in the golden grass of the Masai Mara, Kenya',
   },
   'kenya-private-conservancies': {
@@ -123,38 +123,38 @@ const itineraryImageMap: Record<string, { src: string; alt: string }> = {
     alt: 'Spotlight illuminating wildlife during an evening game drive',
   },
   'kenya-northern-frontier': {
-    src: '/images/destinations/kenya-samburu.jpg',
-    alt: 'Reticulated giraffe in the arid landscape of Samburu National Reserve',
+    src: '/images/activities/big-cats.jpg',
+    alt: 'Lions in the northern Kenya wilderness',
   },
   'kenya-masai-mara-migration': {
     src: '/images/activities/hot-air-balloon.jpg',
     alt: 'Hot air balloon floating over the Masai Mara at sunrise',
   },
   'kenya-family-friendly': {
-    src: '/images/destinations/kenya-amboseli.jpg',
-    alt: 'Elephant herd with Mount Kilimanjaro backdrop in Amboseli, Kenya',
+    src: '/images/ecosystems/savannah-wildlife.jpg',
+    alt: 'Wildlife on the African plains, perfect for family safaris',
   },
   // Botswana itineraries (3)
   'botswana-okavango-delta': {
-    src: '/images/destinations/botswana-okavango.jpg',
+    src: '/images/destinations/botswana-delta.jpg',
     alt: 'Aerial view of the Okavango Delta waterways and islands, Botswana',
   },
   'botswana-delta-desert-pans': {
-    src: '/images/activities/scenic-flight.jpg',
-    alt: 'Light aircraft flying over vast African wilderness landscape',
+    src: '/images/activities/scenic-helicopter.jpg',
+    alt: 'Scenic flight over vast African wilderness landscape',
   },
   'botswana-luxury-fly-in': {
-    src: '/images/destinations/botswana-chobe.jpg',
-    alt: 'Elephants crossing the Chobe River at sunset, Botswana',
+    src: '/images/ecosystems/delta-channels.jpg',
+    alt: 'Pristine Okavango Delta channels, Botswana',
   },
   // Uganda/Rwanda itineraries (3)
   'rwanda-gorilla-trek': {
-    src: '/images/destinations/rwanda.jpg',
+    src: '/images/destinations/rwanda-volcanoes.jpg',
     alt: 'Mountain gorilla family in the misty Volcanoes National Park, Rwanda',
   },
   'uganda-primate-safari': {
-    src: '/images/destinations/uganda.jpg',
-    alt: 'Chimpanzee in the tropical forest of Kibale National Park, Uganda',
+    src: '/images/destinations/uganda-bwindi.jpg',
+    alt: 'Primates in the tropical forest of Uganda',
   },
   'uganda-rwanda-primate-expedition': {
     src: '/images/activities/gorilla-trekking.jpg',
@@ -166,8 +166,8 @@ const itineraryImageMap: Record<string, { src: string; alt: string }> = {
     alt: 'Towering red sand dunes of Sossusvlei at sunrise, Namibia',
   },
   'namibia-self-drive': {
-    src: '/images/destinations/namibia-etosha.jpg',
-    alt: 'Zebras and oryx gathering at an Etosha National Park waterhole',
+    src: '/images/ecosystems/desert-dunes.jpg',
+    alt: 'Dramatic desert landscape perfect for self-drive adventures',
   },
   // South Africa itineraries (2)
   'south-africa-kruger': {
@@ -175,23 +175,23 @@ const itineraryImageMap: Record<string, { src: string; alt: string }> = {
     alt: 'Leopard resting on a tree branch in Kruger National Park',
   },
   'south-africa-safari-and-cape': {
-    src: '/images/destinations/south-africa-cape.jpg',
-    alt: 'Cape Town coastline with Table Mountain in the background',
+    src: '/images/destinations/south-africa-lodge.jpg',
+    alt: 'South African safari lodge with scenic views',
   },
   // Zambia itinerary (1)
   'zambia-walking-safari': {
-    src: '/images/destinations/zambia.jpg',
+    src: '/images/destinations/zambia-luangwa.jpg',
     alt: 'Walking safari guide leading guests through the South Luangwa bush',
   },
   // Zimbabwe itinerary (1)
   'zimbabwe-falls-and-wildlife': {
-    src: '/images/destinations/zimbabwe.jpg',
-    alt: 'Victoria Falls rainbow mist with Zambezi River, Zimbabwe',
+    src: '/images/destinations/zimbabwe-mana.jpg',
+    alt: 'Mana Pools National Park wildlife, Zimbabwe',
   },
   // Multi-country itinerary (1)
   'east-africa-grand-circuit': {
-    src: '/images/activities/sundowner.jpg',
-    alt: 'Sundowner drinks with panoramic views over the African savannah',
+    src: '/images/ecosystems/savannah-morning.jpg',
+    alt: 'Golden savannah at dawn, the quintessential East Africa experience',
   },
 };
 
