@@ -17,6 +17,10 @@ const walkingSafariBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1420,
   published: true,
+  heroImage: {
+    src: '/images/activities/walking-safari.jpg',
+    alt: 'Safari tourists on guided game drive in Serengeti savannah',
+  },
 
   whyNotSimple: `Walking safari is a different category of experience from vehicle-based safari. It is not "safari but walking." It is a fundamentally different relationship with the landscape and animals.
 
@@ -93,6 +97,10 @@ const selfDriveBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1380,
   published: true,
+  heroImage: {
+    src: '/images/destinations/south-africa-kruger.jpg',
+    alt: 'Plains zebras in Kruger National Park, South Africa',
+  },
 
   whyNotSimple: `Self-drive safari means renting a vehicle and navigating African national parks yourself. No guide. No driver. Your schedule. Your choices. Your responsibility.
 
@@ -167,6 +175,10 @@ const privateVsSharedBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1360,
   published: true,
+  heroImage: {
+    src: '/images/activities/game-drive.jpg',
+    alt: 'Safari touring vehicle among wildebeest and zebras on game drive',
+  },
 
   whyNotSimple: `Private vehicle means your group has a dedicated guide and vehicle. You control the schedule. You decide how long to stay at sightings. You negotiate among yourselves, not with strangers.
 
@@ -241,6 +253,10 @@ const lodgeVsTentedBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1400,
   published: true,
+  heroImage: {
+    src: '/images/activities/fly-camping.jpg',
+    alt: 'Milky Way galaxy over Lake Naivasha camp under African night sky',
+  },
 
   whyNotSimple: `The terminology creates confusion. A safari "tent" is not what you pitched at summer camp. Luxury tented camps have king beds, private bathrooms, running water, and electricity. The "tent" is canvas walls and a canvas roof, not roughing it.
 

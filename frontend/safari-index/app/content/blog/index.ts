@@ -35,6 +35,10 @@ const tzVsKeBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1580,
   published: true,
+  heroImage: {
+    src: '/images/destinations/kenya-mara.jpg',
+    alt: 'Sweeping landscape of Masai Mara National Reserve, Kenya',
+  },
 
   whyNotSimple: `You see this question everywhere. Safari forums, travel blogs, Reddit threads. People frame it like there is a winner and a loser. Tanzania fans say Kenya is overcrowded. Kenya fans say Tanzania is overpriced. Both miss the point.
 
@@ -114,6 +118,10 @@ const firstTimerReadyBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1420,
   published: true,
+  heroImage: {
+    src: '/images/activities/wildlife-viewing.jpg',
+    alt: 'Cheetah family resting in African savannah grassland',
+  },
 
   whyNotSimple: `This question usually is not really about readiness. When people ask it, they are often asking something else. Will I enjoy this? Can I handle it? What if I hate it?
 
@@ -189,6 +197,10 @@ const migrationTimingBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1350,
   published: true,
+  heroImage: {
+    src: '/images/heroes/migration-hero.jpg',
+    alt: 'Dramatic wildebeest river crossing during the Great Migration in Kenya',
+  },
 
   whyNotSimple: `The migration is not an event. There is no opening ceremony. It does not start in one place and end in another. About 1.5 million wildebeest, along with hundreds of thousands of zebras and gazelles, move in a continuous loop across the Serengeti-Mara ecosystem. They follow the grass. The grass follows the rain. This has been happening for thousands of years.
 

@@ -156,9 +156,9 @@ export default async function DecisionBlogPage({ params }: PageProps) {
       {/* Article Schema */}
       <BlogSchema blog={blog} canonicalUrl={canonicalUrl} />
 
-      {/* Hero */}
+      {/* Hero - use blog-specific image if available, otherwise default */}
       <ImageBand
-        image={pageImages.decision}
+        image={blog.heroImage || pageImages.decision}
         height="decision"
         overlay="standard"
         align="center"

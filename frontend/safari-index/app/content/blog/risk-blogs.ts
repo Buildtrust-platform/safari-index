@@ -17,6 +17,10 @@ const malariaZonesBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1480,
   published: true,
+  heroImage: {
+    src: '/images/destinations/south-africa-kruger.jpg',
+    alt: 'Plains zebras in Kruger National Park, South Africa',
+  },
 
   whyNotSimple: `Malaria is a serious disease. It is also a manageable risk that millions of travelers navigate successfully every year. The question is not simply yes or no but rather what your specific situation is and what level of risk management you find acceptable.
 

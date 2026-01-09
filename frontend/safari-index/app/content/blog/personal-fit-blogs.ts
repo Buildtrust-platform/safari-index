@@ -17,6 +17,10 @@ export const soloSafariBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1380,
   published: true,
+  heroImage: {
+    src: '/images/activities/wildlife-viewing.jpg',
+    alt: 'Cheetah family resting in African savannah grassland',
+  },
 
   whyNotSimple: `Solo travel in cities is straightforward. You book a hotel, walk around, eat when you want. Safari is different. The economics work differently. The social structure of camps changes the experience. And some of what makes safari meaningful is harder to access alone.
 
@@ -91,6 +95,10 @@ export const familyYoungKidsBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1450,
   published: true,
+  heroImage: {
+    src: '/images/destinations/botswana-delta.jpg',
+    alt: 'Elephants wading through the Okavango Delta waters, Botswana',
+  },
 
   whyNotSimple: `Parents ask this question expecting a clear yes or no. The reality is more complicated. Safari with young children is absolutely possible. Thousands of families do it successfully. But it requires specific planning, costs more than adult-only travel, and involves trade-offs that some families accept happily while others find frustrating.
 
@@ -165,6 +173,10 @@ export const multigenerationalBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1320,
   published: true,
+  heroImage: {
+    src: '/images/ecosystems/savannah-morning.jpg',
+    alt: 'Three giraffes standing in golden African savannah grassland at dawn',
+  },
 
   whyNotSimple: `Multigenerational safari sounds wonderful in concept. Grandparents sharing the African bush with grandchildren. Three generations bonding over wildlife. The reality involves logistics that wedding planners would find challenging.
 
@@ -237,6 +249,10 @@ export const honeymoonBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1340,
   published: true,
+  heroImage: {
+    src: '/images/ecosystems/floodplain-evening.jpg',
+    alt: 'Hippopotamus in Botswana river at sunset with golden light reflections',
+  },
 
   whyNotSimple: `Safari honeymoons have become popular for good reason. Sharing extraordinary wildlife moments with your new spouse creates memories that differ from any beach resort. But safari is not automatically romantic. Dust, 5am wake-ups, and shared vehicles with strangers can undermine romance as easily as they can enhance it.
 
@@ -311,6 +327,10 @@ export const bigFiveExpectationsBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1280,
   published: true,
+  heroImage: {
+    src: '/images/activities/big-cats.jpg',
+    alt: 'Pride of lions walking towards the camera in African savannah',
+  },
 
   whyNotSimple: `The Big Five has become safari's marketing default. Lion, leopard, elephant, buffalo, rhino. Travelers arrive with a mental checklist, expecting to tick off all five. Some destinations encourage this expectation because it is easy to sell.
 

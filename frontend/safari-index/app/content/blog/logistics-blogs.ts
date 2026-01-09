@@ -17,6 +17,10 @@ const fiveDaysSafariBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1320,
   published: true,
+  heroImage: {
+    src: '/images/ecosystems/savannah-wildlife.jpg',
+    alt: 'Wild giraffes and zebras together on the African plains',
+  },
 
   whyNotSimple: `Five days means different things depending on how you count. Five nights in the bush with ten game drives is substantial. Three nights in the bush because two days are transit is limited. The number of safari days matters more than the number of calendar days.
 
@@ -89,6 +93,10 @@ const idealLengthBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1380,
   published: true,
+  heroImage: {
+    src: '/images/activities/migration.jpg',
+    alt: 'Wildebeest and zebras jumping during Great Migration river crossing',
+  },
 
   whyNotSimple: `The question assumes an optimal answer exists independent of your constraints. It does not. The ideal length is whatever fits your budget, schedule, and how much safari specifically you want relative to other travel priorities.
 
@@ -165,6 +173,10 @@ const flyVsDriveBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1340,
   published: true,
+  heroImage: {
+    src: '/images/activities/scenic-flight.jpg',
+    alt: 'Safari bush plane flying over African savannah landscape',
+  },
 
   whyNotSimple: `Flying saves time. Driving costs less and sometimes includes game viewing en route. The simple answer would be "fly if you can afford it" but this misses nuances.
 
@@ -241,6 +253,10 @@ const beachExtensionBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1360,
   published: true,
+  heroImage: {
+    src: '/images/activities/beach-relaxation.jpg',
+    alt: 'Tropical beach with turquoise waters and white sand in Zanzibar',
+  },
 
   whyNotSimple: `Safari and beach is the classic East Africa combination. Zanzibar after Tanzania safari. Diani or Mombasa after Kenya safari. The pattern is common because the geography works.
 
@@ -317,6 +333,10 @@ const agentVsDirectBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1400,
   published: true,
+  heroImage: {
+    src: '/images/ecosystems/crater-highlands.jpg',
+    alt: 'Wildebeest grazing in Ngorongoro Crater with misty highlands in background',
+  },
 
   whyNotSimple: `The internet has made direct booking possible for almost everything. Why would safari be different? Because safari involves more complexity, less standardization, and higher stakes than typical travel booking.
 

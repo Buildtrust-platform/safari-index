@@ -22,6 +22,14 @@ export interface RelatedLink {
 }
 
 /**
+ * Blog hero image reference
+ */
+export interface BlogHeroImage {
+  src: string;
+  alt: string;
+}
+
+/**
  * Blog content structure matching the editorial template
  */
 export interface BlogContent {
@@ -39,6 +47,9 @@ export interface BlogContent {
 
   /** Word count for validation */
   wordCount: number;
+
+  /** Optional hero image - if not provided, uses default decision hero */
+  heroImage?: BlogHeroImage;
 
   /** Section 1: Why This Decision Is Not Simple */
   whyNotSimple: string;

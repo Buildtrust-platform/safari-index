@@ -18,6 +18,10 @@ export const tanzaniaVsBotswanaBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1380,
   published: true,
+  heroImage: {
+    src: '/images/destinations/tanzania-serengeti.jpg',
+    alt: 'Herds of wildebeest grazing in the Serengeti National Park, Tanzania',
+  },
 
   whyNotSimple: `Tanzania and Botswana both deliver world-class safari. But they deliver it in fundamentally different ways at fundamentally different prices. Treating them as interchangeable options misses what makes each destination distinctive.
 
@@ -90,6 +94,10 @@ export const southAfricaVsEastAfricaBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1420,
   published: true,
+  heroImage: {
+    src: '/images/destinations/south-africa-kruger.jpg',
+    alt: 'Plains zebras in Kruger National Park, South Africa',
+  },
 
   whyNotSimple: `South Africa and East Africa both offer excellent safari. But they represent fundamentally different approaches to the experience. The differences go beyond wildlife to include health considerations, driving options, infrastructure, and the overall style of travel.
 
@@ -162,6 +170,10 @@ export const rwandaGorillasBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1350,
   published: true,
+  heroImage: {
+    src: '/images/activities/gorilla-trekking.jpg',
+    alt: 'Group of mountain gorillas in Rwanda rainforest habitat',
+  },
 
   whyNotSimple: `Rwanda gorilla permits cost $1,500 per person. For that price, you get approximately one hour with a gorilla family after a trek that might last anywhere from 30 minutes to 6 hours. By any conventional tourism math, this is expensive.
 
@@ -234,6 +246,10 @@ export const ugandaVsRwandaBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1280,
   published: true,
+  heroImage: {
+    src: '/images/destinations/uganda-bwindi.jpg',
+    alt: 'Lush green rainforest canopy of Bwindi Impenetrable Forest, Uganda',
+  },
 
   whyNotSimple: `Both countries offer encounters with the same mountain gorilla population. The gorillas in Rwanda's Volcanoes National Park and Uganda's Bwindi Impenetrable Forest are the same species, same conservation status, same extraordinary experience.
 
@@ -306,6 +322,10 @@ export const okavangoBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1320,
   published: true,
+  heroImage: {
+    src: '/images/ecosystems/delta-channels.jpg',
+    alt: 'Aerial view of Okavango Delta waterways winding through lush green islands',
+  },
 
   whyNotSimple: `The Okavango Delta costs roughly twice what comparable safari elsewhere would cost. A week that might run $8,000 in Tanzania runs $15,000 or more in Botswana's Delta. This is not price gouging. It reflects deliberate government policy to limit tourist numbers through high-cost, low-volume tourism.
 
@@ -378,6 +398,10 @@ export const serengetiVsMaraBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1350,
   published: true,
+  heroImage: {
+    src: '/images/heroes/migration-hero.jpg',
+    alt: 'Dramatic wildebeest river crossing during the Great Migration in Kenya',
+  },
 
   whyNotSimple: `The Serengeti and Masai Mara are the same ecosystem divided by a political border. The Great Migration flows between them. The wildlife is identical. Lions in the Mara are cousins of lions in the Serengeti.
 
@@ -454,6 +478,10 @@ export const krugerVsPrivateBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1280,
   published: true,
+  heroImage: {
+    src: '/images/destinations/south-africa-lodge.jpg',
+    alt: 'Safari lodge in the Drakensberg mountains, South Africa',
+  },
 
   whyNotSimple: `Greater Kruger is one ecosystem with two fundamentally different access models. The national park offers self-drive safari where you control everything. Private reserves flanking the park offer guided experiences with expert trackers and off-road access.
 
@@ -528,6 +556,10 @@ export const singleVsMultiCountryBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1250,
   published: true,
+  heroImage: {
+    src: '/images/activities/hot-air-balloon.jpg',
+    alt: 'Hot air balloon safari over Masai Mara National Reserve, Kenya',
+  },
 
   whyNotSimple: `The temptation to see everything in one trip is understandable. You are traveling far. Why not add Kenya to Tanzania? Or Botswana after Rwanda? Combining countries seems efficient.
 

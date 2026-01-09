@@ -17,6 +17,10 @@ const safariTotalBudgetBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1440,
   published: true,
+  heroImage: {
+    src: '/images/activities/game-drive.jpg',
+    alt: 'Safari touring vehicle among wildebeest and zebras on game drive',
+  },
 
   whyNotSimple: `Safari costs span an enormous range. A week of safari can cost under $2,000 per person or over $20,000 per person depending on choices. Generic budget advice is useless without knowing what you want.
 
@@ -93,6 +97,10 @@ const tanzaniaBudgetBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1380,
   published: true,
+  heroImage: {
+    src: '/images/destinations/tanzania-serengeti.jpg',
+    alt: 'Herds of wildebeest grazing in the Serengeti National Park, Tanzania',
+  },
 
   whyNotSimple: `Tanzania is more expensive than Kenya for comparable experiences. Park fees are higher. The budget sector is thinner and less reliable. The standard mid-range starting point costs more.
 
@@ -167,6 +175,10 @@ const peakVsValueBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1400,
   published: true,
+  heroImage: {
+    src: '/images/activities/river-crossing.jpg',
+    alt: 'Zebra dashing through water during wildebeest migration river crossing',
+  },
 
   whyNotSimple: `Peak season pricing reflects demand, not proportional quality improvement. Camps charge more because they can, because everyone wants to travel then. The question is whether what peak season delivers justifies paying 30-50 percent more.
 
@@ -239,6 +251,10 @@ const cheapSafariWarningBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1340,
   published: true,
+  heroImage: {
+    src: '/images/ecosystems/savannah-morning.jpg',
+    alt: 'Three giraffes standing in golden African savannah grassland at dawn',
+  },
 
   whyNotSimple: `Safari has costs that cannot be avoided—park fees, fuel, vehicle maintenance, guide salaries, camp operations. When prices drop too low, something is being cut. The question is what.
 
@@ -315,6 +331,10 @@ const splurgeVsSaveBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1420,
   published: true,
+  heroImage: {
+    src: '/images/destinations/botswana-delta.jpg',
+    alt: 'Elephants wading through the Okavango Delta waters, Botswana',
+  },
 
   whyNotSimple: `Safari spending has diminishing returns in some areas and genuine value in others. A $1,500 per night camp is not five times better than a $300 per night camp. But some upgrades deliver disproportionate value while others are pure luxury with marginal experiential impact.
 

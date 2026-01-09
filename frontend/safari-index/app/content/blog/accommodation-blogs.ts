@@ -17,6 +17,10 @@ const luxurySafariBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1450,
   published: true,
+  heroImage: {
+    src: '/images/destinations/south-africa-lodge.jpg',
+    alt: 'Safari lodge in the Drakensberg mountains, South Africa',
+  },
 
   whyNotSimple: `The price gap between mid-range and luxury safari can be significant. A week at a mid-range camp might cost what three days at a luxury property costs. The question of worth depends on what "luxury" means and what you value.
 
@@ -93,6 +97,10 @@ const budgetSafariBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1420,
   published: true,
+  heroImage: {
+    src: '/images/activities/game-drive.jpg',
+    alt: 'Safari touring vehicle among wildebeest and zebras on game drive',
+  },
 
   whyNotSimple: `Budget safari exists but the term means different things in different contexts. What counts as budget in Botswana is mid-range in Tanzania is expensive in South Africa. The baseline costs of different destinations vary dramatically.
 
@@ -169,6 +177,10 @@ const insideOutsideParkBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1350,
   published: true,
+  heroImage: {
+    src: '/images/ecosystems/woodland-clearing.jpg',
+    alt: 'Busy waterhole in Etosha National Park with zebras and other wildlife',
+  },
 
   whyNotSimple: `National parks have gates that open and close. Staying inside the park means you are there when gates close. Staying outside means you drive to the gate each day, potentially losing time to access.
 
@@ -245,6 +257,10 @@ const multipleCampsBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1360,
   published: true,
+  heroImage: {
+    src: '/images/activities/hot-air-balloon.jpg',
+    alt: 'Hot air balloon safari over Masai Mara National Reserve, Kenya',
+  },
 
   whyNotSimple: `Safari itineraries range from single-camp stays to moving every one or two nights. More camps means more ecosystems, more variety, more chances for different sightings. But it also means transit time, packing and unpacking, and less depth in each location.
 

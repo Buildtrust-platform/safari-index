@@ -17,6 +17,10 @@ const maraRiverCrossingsBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1380,
   published: true,
+  heroImage: {
+    src: '/images/activities/river-crossing.jpg',
+    alt: 'Zebra dashing through water during wildebeest migration river crossing',
+  },
 
   whyNotSimple: `River crossings are the most requested, most photographed, and most misunderstood element of the Great Migration. That footage you have seen of wildebeest plunging into crocodile-filled water while dust swirls and chaos erupts took professional film crews months of waiting to capture.
 
@@ -87,6 +91,10 @@ const calvingSeasonBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1340,
   published: true,
+  heroImage: {
+    src: '/images/activities/big-cats.jpg',
+    alt: 'Pride of lions walking towards the camera in African savannah',
+  },
 
   whyNotSimple: `River crossings get all the attention. Calving season gets overlooked. This is a marketing failure, not a wildlife reality.
 
@@ -157,6 +165,10 @@ const greenSeasonBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1420,
   published: true,
+  heroImage: {
+    src: '/images/ecosystems/savannah-wildlife.jpg',
+    alt: 'Wild giraffes and zebras together on the African plains',
+  },
 
   whyNotSimple: `Green season is the industry's rebrand of what used to be called low season or rainy season. The renaming was marketing, but the underlying value proposition is real.
 
@@ -229,6 +241,10 @@ const christmasSafariBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1320,
   published: true,
+  heroImage: {
+    src: '/images/ecosystems/savannah-morning.jpg',
+    alt: 'Three giraffes standing in golden African savannah grassland at dawn',
+  },
 
   whyNotSimple: `Christmas falls during different seasons depending on where you go. In East Africa, December is the short dry season between rains. In Southern Africa, December is summer and the start of the wet season. These are meaningfully different conditions.
 
@@ -301,6 +317,10 @@ const tanzaniaFebruaryBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1280,
   published: true,
+  heroImage: {
+    src: '/images/destinations/tanzania-serengeti.jpg',
+    alt: 'Herds of wildebeest grazing in the Serengeti National Park, Tanzania',
+  },
 
   whyNotSimple: `February in Tanzania is calving season in the Serengeti. This is arguably the best wildlife spectacle anywhere in Africa, yet most travelers have never heard of it. The marketing around river crossings has overshadowed the equally dramatic predator-prey theater of the southern plains.
 
@@ -373,6 +393,10 @@ const tanzaniaJulyBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1300,
   published: true,
+  heroImage: {
+    src: '/images/activities/migration.jpg',
+    alt: 'Wildebeest and zebras jumping during Great Migration river crossing',
+  },
 
   whyNotSimple: `July is dry season in Tanzania. Weather is predictable. Wildlife concentrates around water. Roads are good. On paper, July is straightforward.
 
@@ -445,6 +469,10 @@ const kenyaAugustBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1340,
   published: true,
+  heroImage: {
+    src: '/images/destinations/kenya-mara.jpg',
+    alt: 'Sweeping landscape of Masai Mara National Reserve, Kenya',
+  },
 
   whyNotSimple: `August is the heart of Kenya's peak season. The Great Migration is in the Masai Mara. The weather is dry. The wildlife viewing is arguably the best it gets all year.
 
@@ -517,6 +545,10 @@ const botswanaJuneBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1300,
   published: true,
+  heroImage: {
+    src: '/images/destinations/botswana-delta.jpg',
+    alt: 'Elephants wading through the Okavango Delta waters, Botswana',
+  },
 
   whyNotSimple: `June in Botswana is the beginning of dry season, but in the Okavango Delta, it is also peak flood season. These seem contradictory but are not. The Okavango's floods come from Angolan rains months earlier, arriving in the delta as Botswana's dry season begins.
 
@@ -589,6 +621,10 @@ const tanzaniaDrySeasonBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1320,
   published: true,
+  heroImage: {
+    src: '/images/ecosystems/crater-highlands.jpg',
+    alt: 'Wildebeest grazing in Ngorongoro Crater with misty highlands in background',
+  },
 
   whyNotSimple: `The advice to "only visit in dry season" is outdated but persistent. It originated when safari infrastructure was more limited and wet season travel was genuinely difficult. Modern camps are better equipped, roads are better maintained, and the value proposition of shoulder and green seasons is better understood.
 
@@ -661,6 +697,10 @@ const bookingLeadTimeBlog: BlogContent = {
   updatedAt: '2025-01',
   wordCount: 1380,
   published: true,
+  heroImage: {
+    src: '/images/activities/game-drive.jpg',
+    alt: 'Safari touring vehicle among wildebeest and zebras on game drive',
+  },
 
   whyNotSimple: `The generic advice is "book early." But early varies dramatically by season, destination, and what you want. A green season safari in Zambia has different booking dynamics than August in the Masai Mara.
 
