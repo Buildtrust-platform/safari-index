@@ -23,14 +23,21 @@ import { randomUUID } from 'crypto';
 import type { ProposalRecord, ProposalUpdate } from '../contracts';
 
 // Configuration from environment
+// Note: Using DYNAMO_ prefix instead of AWS_ because Vercel blocks AWS-prefixed env vars
 const PROPOSAL_TABLE = process.env.PROPOSAL_TABLE || 'safari-index-proposals';
-const AWS_REGION = process.env.AWS_REGION || 'us-east-1';
+const DYNAMO_REGION = process.env.DYNAMO_REGION || 'eu-central-1';
 const DYNAMODB_ENDPOINT = process.env.DYNAMODB_ENDPOINT; // For local testing
 
-// Initialize DynamoDB client
+// Initialize DynamoDB client with explicit credentials (Vercel blocks AWS_ prefixed vars)
 const ddbClient = new DynamoDBClient({
-  region: AWS_REGION,
+  region: DYNAMO_REGION,
   ...(DYNAMODB_ENDPOINT && { endpoint: DYNAMODB_ENDPOINT }),
+  ...(process.env.DYNAMO_ACCESS_KEY_ID && process.env.DYNAMO_SECRET_ACCESS_KEY && {
+    credentials: {
+      accessKeyId: process.env.DYNAMO_ACCESS_KEY_ID,
+      secretAccessKey: process.env.DYNAMO_SECRET_ACCESS_KEY,
+    },
+  }),
 });
 const docClient = DynamoDBDocumentClient.from(ddbClient);
 
