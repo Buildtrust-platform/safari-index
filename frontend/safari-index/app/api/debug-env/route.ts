@@ -5,9 +5,13 @@
 
 import { NextResponse } from 'next/server';
 
-export async function GET() {
-  // Only show in non-production or with debug flag
-  const isDebug = process.env.DEBUG_ENV === 'true' || process.env.NODE_ENV !== 'production';
+export async function GET(request: Request) {
+  // Allow access with secret query param or DEBUG_ENV flag
+  const { searchParams } = new URL(request.url);
+  const secret = searchParams.get('secret');
+  const isDebug = process.env.DEBUG_ENV === 'true' ||
+                  process.env.NODE_ENV !== 'production' ||
+                  secret === 'safari2024debug';
 
   if (!isDebug) {
     return NextResponse.json({ error: 'Not available' }, { status: 403 });
