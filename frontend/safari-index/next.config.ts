@@ -3,6 +3,18 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Output as standalone for Amplify deployment
   output: 'standalone',
+
+  // Expose server-side environment variables to Next.js runtime
+  // These must be set in Amplify Console > Environment variables
+  env: {
+    DYNAMO_ACCESS_KEY_ID: process.env.DYNAMO_ACCESS_KEY_ID,
+    DYNAMO_SECRET_ACCESS_KEY: process.env.DYNAMO_SECRET_ACCESS_KEY,
+    DYNAMO_REGION: process.env.DYNAMO_REGION,
+    INQUIRY_TABLE: process.env.INQUIRY_TABLE,
+    SES_REGION: process.env.SES_REGION,
+    OPERATOR_EMAIL: process.env.OPERATOR_EMAIL,
+    FROM_EMAIL: process.env.FROM_EMAIL,
+  },
   /**
    * Remote image patterns for Next.js Image optimization.
    * Allows images from CloudFront CDN when NEXT_PUBLIC_ASSETS_CDN_BASE is set.
