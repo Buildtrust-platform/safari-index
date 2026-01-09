@@ -15,19 +15,20 @@ import type { InquiryRecord } from '../contracts';
 
 // Initialize SES client lazily to pick up env vars at runtime
 // SES may be in a different region than DynamoDB (SES_REGION takes precedence)
-// Note: Using non-AWS-prefixed vars because Vercel blocks AWS_ prefix
+// Supports both AWS_ (Amplify) and DYNAMO_ (Vercel) prefixed env vars
 let _sesClient: SESClient | null = null;
 function getSesClient(): SESClient {
   if (!_sesClient) {
-    const region = process.env.SES_REGION || process.env.DYNAMO_REGION || 'us-east-1';
-    _sesClient = new SESClient({
-      region,
-      ...(process.env.DYNAMO_ACCESS_KEY_ID && process.env.DYNAMO_SECRET_ACCESS_KEY && {
-        credentials: {
+    const region = process.env.SES_REGION || process.env.AWS_REGION || process.env.DYNAMO_REGION || 'us-east-1';
+    const credentials = process.env.DYNAMO_ACCESS_KEY_ID && process.env.DYNAMO_SECRET_ACCESS_KEY
+      ? {
           accessKeyId: process.env.DYNAMO_ACCESS_KEY_ID,
           secretAccessKey: process.env.DYNAMO_SECRET_ACCESS_KEY,
-        },
-      }),
+        }
+      : undefined;
+    _sesClient = new SESClient({
+      region,
+      ...(credentials && { credentials }),
     });
   }
   return _sesClient;
@@ -130,7 +131,7 @@ export async function sendInquiryNotification(inquiry: InquiryRecord): Promise<b
     operator_email: operatorEmail ? redactEmail(operatorEmail) : 'NOT_SET',
     from_email: redactEmail(fromEmail),
     region,
-    has_credentials: Boolean(process.env.DYNAMO_ACCESS_KEY_ID),
+    has_credentials: Boolean(process.env.AWS_ACCESS_KEY_ID || process.env.DYNAMO_ACCESS_KEY_ID),
   });
 
   if (!operatorEmail) {
@@ -241,7 +242,7 @@ View in ops: ${opsUrl}
         console.error(`  Then click the verification link in your email inbox.`);
       }
       if (errCode === 'InvalidClientTokenId' || errMessage.includes('security token')) {
-        console.error(`${logPrefix} HINT: AWS credentials not found. Check DYNAMO_ACCESS_KEY_ID and DYNAMO_SECRET_ACCESS_KEY.`);
+        console.error(`${logPrefix} HINT: AWS credentials not found. Check AWS_ACCESS_KEY_ID or DYNAMO_ACCESS_KEY_ID env vars.`);
       }
     }
 

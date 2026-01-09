@@ -22,21 +22,28 @@ import { randomUUID } from 'crypto';
 import type { InquiryRecord, InquiryRequest, InquiryStatus } from '../contracts';
 
 // Configuration from environment
-// Note: Using DYNAMO_ prefix instead of AWS_ because Vercel blocks AWS-prefixed env vars
+// Supports both AWS_ (Amplify) and DYNAMO_ (Vercel) prefixed env vars
 const INQUIRY_TABLE = process.env.INQUIRY_TABLE || 'safari-index-inquiries';
-const DYNAMO_REGION = process.env.DYNAMO_REGION || 'eu-central-1';
+const REGION = process.env.AWS_REGION || process.env.DYNAMO_REGION || 'eu-central-1';
 const DYNAMODB_ENDPOINT = process.env.DYNAMODB_ENDPOINT; // For local testing
 
-// Initialize DynamoDB client with explicit credentials (Vercel blocks AWS_ prefixed vars)
-const ddbClient = new DynamoDBClient({
-  region: DYNAMO_REGION,
-  ...(DYNAMODB_ENDPOINT && { endpoint: DYNAMODB_ENDPOINT }),
-  ...(process.env.DYNAMO_ACCESS_KEY_ID && process.env.DYNAMO_SECRET_ACCESS_KEY && {
-    credentials: {
+// Get credentials - AWS SDK auto-picks AWS_ vars, but explicitly handle DYNAMO_ for Vercel
+const getCredentials = () => {
+  if (process.env.DYNAMO_ACCESS_KEY_ID && process.env.DYNAMO_SECRET_ACCESS_KEY) {
+    return {
       accessKeyId: process.env.DYNAMO_ACCESS_KEY_ID,
       secretAccessKey: process.env.DYNAMO_SECRET_ACCESS_KEY,
-    },
-  }),
+    };
+  }
+  // Let AWS SDK handle credentials (AWS_ACCESS_KEY_ID, instance role, etc.)
+  return undefined;
+};
+
+// Initialize DynamoDB client
+const ddbClient = new DynamoDBClient({
+  region: REGION,
+  ...(DYNAMODB_ENDPOINT && { endpoint: DYNAMODB_ENDPOINT }),
+  ...(getCredentials() && { credentials: getCredentials() }),
 });
 const docClient = DynamoDBDocumentClient.from(ddbClient);
 

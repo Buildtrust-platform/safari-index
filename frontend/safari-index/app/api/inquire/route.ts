@@ -64,9 +64,9 @@ export async function POST(request: Request) {
     };
     console.error('[Inquiry API] Error creating inquiry:', JSON.stringify(errorDetails, null, 2));
     console.error('[Inquiry API] Environment check:', {
+      hasAwsAccessKey: !!process.env.AWS_ACCESS_KEY_ID,
       hasDynamoAccessKey: !!process.env.DYNAMO_ACCESS_KEY_ID,
-      hasDynamoSecretKey: !!process.env.DYNAMO_SECRET_ACCESS_KEY,
-      dynamoRegion: process.env.DYNAMO_REGION || 'eu-central-1 (default)',
+      region: process.env.AWS_REGION || process.env.DYNAMO_REGION || 'eu-central-1 (default)',
       inquiryTable: process.env.INQUIRY_TABLE || 'safari-index-inquiries (default)',
     });
     return NextResponse.json(
