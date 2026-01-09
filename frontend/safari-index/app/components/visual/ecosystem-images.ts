@@ -132,8 +132,8 @@ export interface HeroImage {
 export const heroImages: Record<string, HeroImage> = {
   home: {
     id: 'home-hero',
-    src: '/images/heroes/migration-hero.jpg',
-    alt: 'Dramatic wildebeest river crossing during the Great Migration in Kenya',
+    src: '/images/heroes/home-hero.jpg',
+    alt: 'Elephants wading through swamp waters in Amboseli, Kenya with Mount Kilimanjaro',
   },
   explore: {
     id: 'explore-hero',
