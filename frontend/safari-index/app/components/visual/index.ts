@@ -44,3 +44,4 @@ export type { VerdictMomentProps, OutcomeType as VerdictOutcomeType } from './Ve
 
 export { TravelMap } from './TravelMap';
 export { RouteMap } from './RouteMap';
+export { AfricaMapBackground } from './AfricaMapBackground';

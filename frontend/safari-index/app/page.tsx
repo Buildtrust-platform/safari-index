@@ -20,8 +20,8 @@
  */
 
 import Link from 'next/link';
-import { ChevronDown, ArrowRight, MapPin, Calendar, Scale, ShieldOff, RefreshCw, Map, Compass } from 'lucide-react';
-import { ImageBand, ImageBandContent, pageImages, destinationImages, activityImageRefs, ecosystemImages } from './components/visual';
+import { ChevronDown, ArrowRight, MapPin, Calendar, Scale, ShieldOff, RefreshCw, Compass } from 'lucide-react';
+import { ImageBand, ImageBandContent, pageImages, destinationImages, activityImageRefs, ecosystemImages, AfricaMapBackground } from './components/visual';
 import { Navbar, PageGrid } from './components/layout';
 import { OperatorCredentials } from './components/OperatorCredentials';
 import { SearchAndFilters } from './components/SearchAndFilters';
@@ -462,8 +462,10 @@ export default function Home() {
           SECTION 3 — HOW WE PLAN SAFARIS
           Decision-backed planning approach.
           ================================================================ */}
-      <section className="bg-white py-12 md:py-16">
-        <PageGrid maxWidth="default">
+      <section className="relative bg-white py-12 md:py-16 overflow-hidden">
+        {/* Africa Map Background - subtle visual context */}
+        <AfricaMapBackground className="opacity-60" />
+        <PageGrid maxWidth="default" className="relative z-10">
           <div className="text-center mb-8">
             {/* Eyebrow label */}
             <p className="text-xs font-medium text-stone-500 uppercase tracking-widest mb-2">
