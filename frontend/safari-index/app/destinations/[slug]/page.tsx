@@ -711,8 +711,9 @@ function formatActivityName(activityId: string): string {
 /**
  * Trip card component - Visual card with image header
  */
-function TripCard({ trip }: { trip: TripArchetype }) {
-  const destImage = getDestinationImage(trip.regions[0] === 'east-africa' ? 'tanzania' : trip.regions[0]);
+function TripCard({ trip, destinationId }: { trip: TripArchetype; destinationId: string }) {
+  // Use the current destination's image, not the trip's region
+  const destImage = getDestinationImage(destinationId);
 
   return (
     <Link
@@ -765,8 +766,9 @@ function TripCard({ trip }: { trip: TripArchetype }) {
 /**
  * Itinerary card component - Visual card with image header
  */
-function ItineraryCard({ itinerary }: { itinerary: ItinerarySummary }) {
-  const destImage = getDestinationImage(itinerary.region);
+function ItineraryCard({ itinerary, destinationId }: { itinerary: ItinerarySummary; destinationId: string }) {
+  // Use the current destination's image, not the itinerary's region
+  const destImage = getDestinationImage(destinationId);
 
   return (
     <Link
@@ -1236,7 +1238,7 @@ export default async function DestinationPage({
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
               {trips.map((trip) => (
-                <TripCard key={trip.id} trip={trip} />
+                <TripCard key={trip.id} trip={trip} destinationId={destination.id} />
               ))}
             </div>
           </section>
@@ -1268,7 +1270,7 @@ export default async function DestinationPage({
               </div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {itineraries.map((itinerary) => (
-                  <ItineraryCard key={itinerary.id} itinerary={itinerary} />
+                  <ItineraryCard key={itinerary.id} itinerary={itinerary} destinationId={destination.id} />
                 ))}
               </div>
             </section>
