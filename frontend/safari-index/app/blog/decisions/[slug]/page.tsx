@@ -163,6 +163,7 @@ export default async function DecisionBlogPage({ params }: PageProps) {
         overlay="standard"
         align="center"
         priority
+        alwaysRender
       />
 
       <div className={`${pageContainer} min-h-screen bg-gradient-to-b from-amber-50/30 via-stone-50 to-stone-100`}>
