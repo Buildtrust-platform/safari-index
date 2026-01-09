@@ -239,6 +239,44 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  // Decisions index page
+  const decisionsIndexPage = {
+    url: `${baseUrl}/decisions`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  };
+
+  // Refusals pages - demonstrating decision integrity
+  const refusalPages = [
+    {
+      url: `${baseUrl}/refusals/luxury-expectations-budget-mismatch`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/refusals/river-crossing-timing-impossible`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/refusals/too-many-parks-too-few-days`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+  ];
+
+  // Tools page
+  const safariFitToolPage = {
+    url: `${baseUrl}/tools/safari-fit`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  };
+
   return [
     {
       url: baseUrl,
@@ -268,5 +306,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...itineraryPages,
     safariTypesIndexPage,
     ...safariTypePages,
+    decisionsIndexPage,
+    ...refusalPages,
+    safariFitToolPage,
   ];
 }
