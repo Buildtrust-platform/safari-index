@@ -128,6 +128,429 @@ const BUCKET_CONFIG: Record<
 };
 
 /**
+ * Topic-specific image mapping
+ * Each decision topic gets a unique, relevant image to avoid repetition
+ */
+const topicImageMap: Record<string, { src: string; alt: string }> = {
+  // Personal Fit topics
+  'first-timer-ready': {
+    src: '/images/ecosystems/savannah-morning.jpg',
+    alt: 'Three giraffes standing in golden African savannah grassland at dawn',
+  },
+  'solo-safari-fit': {
+    src: '/images/activities/game-drive.jpg',
+    alt: 'Safari vehicle observing wildlife on an early morning game drive',
+  },
+  'family-young-kids': {
+    src: '/images/ecosystems/savannah-wildlife.jpg',
+    alt: 'Wild giraffes and zebras together on the African plains',
+  },
+  'family-teens': {
+    src: '/images/activities/bush-walk.jpg',
+    alt: 'Guided walking safari through African bush with armed ranger',
+  },
+  multigenerational: {
+    src: '/images/destinations/tanzania-serengeti.jpg',
+    alt: 'Herds of wildebeest grazing in the Serengeti National Park, Tanzania',
+  },
+  'mobility-challenges': {
+    src: '/images/destinations/south-africa-kruger.jpg',
+    alt: 'Leopard resting on a tree branch in Kruger National Park',
+  },
+  'honeymoon-fit': {
+    src: '/images/ecosystems/floodplain-evening.jpg',
+    alt: 'Hippopotamus in Botswana river at sunset with golden light reflections',
+  },
+  'anniversary-trip': {
+    src: '/images/activities/sundowner.jpg',
+    alt: 'Sundowner drinks with panoramic views over the African savannah',
+  },
+  'photographer-fit': {
+    src: '/images/activities/wildlife-viewing.jpg',
+    alt: 'Cheetah family resting in African savannah grassland',
+  },
+  'adventure-seeker': {
+    src: '/images/activities/hot-air-balloon.jpg',
+    alt: 'Hot air balloon floating over the Masai Mara at sunrise',
+  },
+  'repeat-visitor-value': {
+    src: '/images/destinations/botswana-okavango.jpg',
+    alt: 'Aerial view of the Okavango Delta waterways and islands, Botswana',
+  },
+  'wildlife-expectation': {
+    src: '/images/activities/big-cats.jpg',
+    alt: 'Pride of lions walking towards the camera in African savannah',
+  },
+  // Destination Choice topics
+  'tz-vs-ke': {
+    src: '/images/destinations/kenya-masai-mara.jpg',
+    alt: 'Lions resting in the golden grass of the Masai Mara, Kenya',
+  },
+  'tz-vs-bw': {
+    src: '/images/destinations/botswana-chobe.jpg',
+    alt: 'Elephants crossing the Chobe River at sunset, Botswana',
+  },
+  'ke-vs-bw': {
+    src: '/images/ecosystems/delta-channels.jpg',
+    alt: 'Aerial view of Okavango Delta waterways winding through lush green islands',
+  },
+  'sa-vs-ea': {
+    src: '/images/destinations/south-africa-cape.jpg',
+    alt: 'Cape Town coastline with Table Mountain in the background',
+  },
+  'rwanda-gorillas-worth': {
+    src: '/images/activities/gorilla-trekking.jpg',
+    alt: 'Group of mountain gorillas in Rwanda rainforest habitat',
+  },
+  'uganda-vs-rwanda': {
+    src: '/images/destinations/uganda.jpg',
+    alt: 'Chimpanzee in the tropical forest of Kibale National Park, Uganda',
+  },
+  'namibia-different': {
+    src: '/images/destinations/namibia-sossusvlei.jpg',
+    alt: 'Towering red sand dunes of Sossusvlei at sunrise, Namibia',
+  },
+  'zambia-value': {
+    src: '/images/destinations/zambia.jpg',
+    alt: 'Walking safari guide leading guests through the South Luangwa bush',
+  },
+  'zimbabwe-safe': {
+    src: '/images/destinations/zimbabwe.jpg',
+    alt: 'Victoria Falls rainbow mist with Zambezi River, Zimbabwe',
+  },
+  'okavango-worth': {
+    src: '/images/activities/boat-safari.jpg',
+    alt: 'Safari boat cruising past hippos in African river',
+  },
+  'serengeti-vs-mara': {
+    src: '/images/activities/migration.jpg',
+    alt: 'Wildebeest and zebras jumping during Great Migration river crossing',
+  },
+  'ngorongoro-worth': {
+    src: '/images/destinations/tanzania-ngorongoro.jpg',
+    alt: 'Panoramic view of Ngorongoro Crater from the rim, Tanzania',
+  },
+  'kruger-vs-private': {
+    src: '/images/activities/night-drive.jpg',
+    alt: 'Spotlight illuminating wildlife during an evening game drive',
+  },
+  'single-country-multi': {
+    src: '/images/activities/scenic-flight.jpg',
+    alt: 'Light aircraft flying over vast African wilderness landscape',
+  },
+  'off-beaten-path': {
+    src: '/images/ecosystems/woodland-clearing.jpg',
+    alt: 'Woodland clearing with filtered sunlight in African bush',
+  },
+  // Timing topics
+  'tz-dry-season': {
+    src: '/images/destinations/tanzania-serengeti.jpg',
+    alt: 'Herds of wildebeest grazing in the Serengeti National Park, Tanzania',
+  },
+  'migration-timing': {
+    src: '/images/activities/river-crossing.jpg',
+    alt: 'Wildebeest crossing the Mara River during the Great Migration',
+  },
+  'river-crossings': {
+    src: '/images/activities/migration.jpg',
+    alt: 'Wildebeest and zebras jumping during Great Migration river crossing',
+  },
+  'calving-season': {
+    src: '/images/ecosystems/savannah-morning.jpg',
+    alt: 'Three giraffes standing in golden African savannah grassland at dawn',
+  },
+  'green-season-value': {
+    src: '/images/ecosystems/montane-forest.jpg',
+    alt: 'Lush green montane forest with misty atmosphere',
+  },
+  'shoulder-season': {
+    src: '/images/ecosystems/floodplain-evening.jpg',
+    alt: 'Hippopotamus in Botswana river at sunset with golden light reflections',
+  },
+  'christmas-safari': {
+    src: '/images/destinations/kenya-amboseli.jpg',
+    alt: 'Elephant herd with Mount Kilimanjaro backdrop in Amboseli, Kenya',
+  },
+  'school-holidays': {
+    src: '/images/ecosystems/savannah-wildlife.jpg',
+    alt: 'Wild giraffes and zebras together on the African plains',
+  },
+  'tz-feb': {
+    src: '/images/destinations/tanzania-ngorongoro.jpg',
+    alt: 'Panoramic view of Ngorongoro Crater from the rim, Tanzania',
+  },
+  'tz-jul': {
+    src: '/images/activities/game-drive.jpg',
+    alt: 'Safari vehicle observing wildlife on an early morning game drive',
+  },
+  'ke-aug': {
+    src: '/images/destinations/kenya-masai-mara.jpg',
+    alt: 'Lions resting in the golden grass of the Masai Mara, Kenya',
+  },
+  'bw-jun': {
+    src: '/images/destinations/botswana-okavango.jpg',
+    alt: 'Aerial view of the Okavango Delta waterways and islands, Botswana',
+  },
+  'bw-peak-flood': {
+    src: '/images/ecosystems/delta-channels.jpg',
+    alt: 'Aerial view of Okavango Delta waterways winding through lush green islands',
+  },
+  'sa-winter': {
+    src: '/images/destinations/south-africa-kruger.jpg',
+    alt: 'Leopard resting on a tree branch in Kruger National Park',
+  },
+  'rain-impact': {
+    src: '/images/ecosystems/kopje-landscape.jpg',
+    alt: 'Rocky kopje outcrop in African savannah landscape',
+  },
+  'last-minute-timing': {
+    src: '/images/activities/sundowner.jpg',
+    alt: 'Sundowner drinks with panoramic views over the African savannah',
+  },
+  'booking-lead-time': {
+    src: '/images/activities/scenic-flight.jpg',
+    alt: 'Light aircraft flying over vast African wilderness landscape',
+  },
+  'weather-unpredictable': {
+    src: '/images/ecosystems/crater-highlands.jpg',
+    alt: 'Dramatic crater highlands landscape with volcanic features',
+  },
+  // Experience Type topics
+  'walking-safari': {
+    src: '/images/activities/bush-walk.jpg',
+    alt: 'Guided walking safari through African bush with armed ranger',
+  },
+  'night-drives': {
+    src: '/images/activities/night-drive.jpg',
+    alt: 'Black rhinos at artificially lit waterhole during night safari',
+  },
+  'balloon-safari': {
+    src: '/images/activities/hot-air-balloon.jpg',
+    alt: 'Hot air balloon floating over the Masai Mara at sunrise',
+  },
+  'mokoro-canoe': {
+    src: '/images/destinations/botswana-okavango.jpg',
+    alt: 'Aerial view of the Okavango Delta waterways and islands, Botswana',
+  },
+  'photo-safari-vs-regular': {
+    src: '/images/activities/photographic-hide.jpg',
+    alt: 'African elephant at waterhole from ground-level hide perspective',
+  },
+  'fly-camping': {
+    src: '/images/activities/fly-camping.jpg',
+    alt: 'Milky Way galaxy over Lake Naivasha camp under African night sky',
+  },
+  'mobile-vs-fixed': {
+    src: '/images/ecosystems/savannah-morning.jpg',
+    alt: 'Three giraffes standing in golden African savannah grassland at dawn',
+  },
+  'self-drive-safari': {
+    src: '/images/destinations/namibia-etosha.jpg',
+    alt: 'Zebras and oryx gathering at an Etosha National Park waterhole',
+  },
+  'private-vs-shared': {
+    src: '/images/activities/game-drive.jpg',
+    alt: 'Safari vehicle observing wildlife on an early morning game drive',
+  },
+  'group-tour-value': {
+    src: '/images/ecosystems/savannah-wildlife.jpg',
+    alt: 'Wild giraffes and zebras together on the African plains',
+  },
+  'conservation-experience': {
+    src: '/images/activities/chimp-tracking.jpg',
+    alt: 'Chimpanzee in tropical forest canopy',
+  },
+  'cultural-component': {
+    src: '/images/activities/cultural-visit.jpg',
+    alt: 'Traditional Maasai village cultural experience',
+  },
+  // Accommodation topics
+  'lodge-vs-tented': {
+    src: '/images/ecosystems/woodland-clearing.jpg',
+    alt: 'Woodland clearing with filtered sunlight in African bush',
+  },
+  'luxury-worth-it': {
+    src: '/images/activities/sundowner.jpg',
+    alt: 'Sundowner drinks with panoramic views over the African savannah',
+  },
+  'budget-accommodation-ok': {
+    src: '/images/ecosystems/savannah-morning.jpg',
+    alt: 'Three giraffes standing in golden African savannah grassland at dawn',
+  },
+  'inside-vs-outside-park': {
+    src: '/images/destinations/tanzania-serengeti.jpg',
+    alt: 'Herds of wildebeest grazing in the Serengeti National Park, Tanzania',
+  },
+  'all-inclusive-value': {
+    src: '/images/ecosystems/floodplain-evening.jpg',
+    alt: 'Hippopotamus in Botswana river at sunset with golden light reflections',
+  },
+  'camp-hopping': {
+    src: '/images/activities/scenic-flight.jpg',
+    alt: 'Light aircraft flying over vast African wilderness landscape',
+  },
+  'family-rooms': {
+    src: '/images/ecosystems/savannah-wildlife.jpg',
+    alt: 'Wild giraffes and zebras together on the African plains',
+  },
+  'private-pool-villa': {
+    src: '/images/destinations/botswana-okavango.jpg',
+    alt: 'Aerial view of the Okavango Delta waterways and islands, Botswana',
+  },
+  'small-vs-large-camp': {
+    src: '/images/activities/wildlife-viewing.jpg',
+    alt: 'Cheetah family resting in African savannah grassland',
+  },
+  'owner-run-camps': {
+    src: '/images/ecosystems/kopje-landscape.jpg',
+    alt: 'Rocky kopje outcrop in African savannah landscape',
+  },
+  'treehouse-unique': {
+    src: '/images/ecosystems/montane-forest.jpg',
+    alt: 'Lush green montane forest with misty atmosphere',
+  },
+  // Logistics topics
+  'trip-length': {
+    src: '/images/activities/game-drive.jpg',
+    alt: 'Safari vehicle observing wildlife on an early morning game drive',
+  },
+  'ideal-length': {
+    src: '/images/destinations/kenya-masai-mara.jpg',
+    alt: 'Lions resting in the golden grass of the Masai Mara, Kenya',
+  },
+  'fly-vs-drive': {
+    src: '/images/activities/scenic-flight.jpg',
+    alt: 'Light aircraft flying over vast African wilderness landscape',
+  },
+  'charter-vs-scheduled': {
+    src: '/images/ecosystems/crater-highlands.jpg',
+    alt: 'Dramatic crater highlands landscape with volcanic features',
+  },
+  'beach-extension': {
+    src: '/images/destinations/zanzibar.jpg',
+    alt: 'Crystal-clear turquoise waters and white sand beach in Zanzibar',
+  },
+  'city-stopover': {
+    src: '/images/destinations/south-africa-cape.jpg',
+    alt: 'Cape Town coastline with Table Mountain in the background',
+  },
+  'visa-complexity': {
+    src: '/images/ecosystems/savannah-morning.jpg',
+    alt: 'Three giraffes standing in golden African savannah grassland at dawn',
+  },
+  'travel-insurance': {
+    src: '/images/activities/bush-walk.jpg',
+    alt: 'Guided walking safari through African bush with armed ranger',
+  },
+  'packing-weight': {
+    src: '/images/activities/scenic-flight.jpg',
+    alt: 'Light aircraft flying over vast African wilderness landscape',
+  },
+  'agent-vs-direct': {
+    src: '/images/ecosystems/delta-channels.jpg',
+    alt: 'Aerial view of Okavango Delta waterways winding through lush green islands',
+  },
+  'local-vs-international': {
+    src: '/images/destinations/tanzania-serengeti.jpg',
+    alt: 'Herds of wildebeest grazing in the Serengeti National Park, Tanzania',
+  },
+  'deposit-timing': {
+    src: '/images/activities/migration.jpg',
+    alt: 'Wildebeest and zebras jumping during Great Migration river crossing',
+  },
+  // Risk & Ethics topics
+  'malaria-decision': {
+    src: '/images/ecosystems/floodplain-evening.jpg',
+    alt: 'Hippopotamus in Botswana river at sunset with golden light reflections',
+  },
+  'yellow-fever': {
+    src: '/images/destinations/uganda.jpg',
+    alt: 'Chimpanzee in the tropical forest of Kibale National Park, Uganda',
+  },
+  'political-stability': {
+    src: '/images/destinations/kenya-amboseli.jpg',
+    alt: 'Elephant herd with Mount Kilimanjaro backdrop in Amboseli, Kenya',
+  },
+  'ethical-hunting': {
+    src: '/images/activities/wildlife-viewing.jpg',
+    alt: 'Cheetah family resting in African savannah grassland',
+  },
+  'volunteer-tourism': {
+    src: '/images/activities/cultural-visit.jpg',
+    alt: 'Traditional Maasai village cultural experience',
+  },
+  'orphanage-visits': {
+    src: '/images/ecosystems/montane-forest.jpg',
+    alt: 'Lush green montane forest with misty atmosphere',
+  },
+  'elephant-interaction': {
+    src: '/images/destinations/botswana-chobe.jpg',
+    alt: 'Elephants crossing the Chobe River at sunset, Botswana',
+  },
+  'carbon-offset': {
+    src: '/images/activities/scenic-flight.jpg',
+    alt: 'Light aircraft flying over vast African wilderness landscape',
+  },
+  'community-benefit': {
+    src: '/images/activities/cultural-visit.jpg',
+    alt: 'Traditional Maasai village cultural experience',
+  },
+  'photography-ethics': {
+    src: '/images/activities/photographic-hide.jpg',
+    alt: 'African elephant at waterhole from ground-level hide perspective',
+  },
+  // Value & Cost topics
+  'total-budget': {
+    src: '/images/ecosystems/savannah-morning.jpg',
+    alt: 'Three giraffes standing in golden African savannah grassland at dawn',
+  },
+  'budget-tanzania': {
+    src: '/images/destinations/tanzania-ngorongoro.jpg',
+    alt: 'Panoramic view of Ngorongoro Crater from the rim, Tanzania',
+  },
+  'hidden-costs': {
+    src: '/images/activities/hot-air-balloon.jpg',
+    alt: 'Hot air balloon floating over the Masai Mara at sunrise',
+  },
+  'tipping-guide': {
+    src: '/images/activities/game-drive.jpg',
+    alt: 'Safari vehicle observing wildlife on an early morning game drive',
+  },
+  'peak-vs-value': {
+    src: '/images/ecosystems/floodplain-evening.jpg',
+    alt: 'Hippopotamus in Botswana river at sunset with golden light reflections',
+  },
+  'cheap-warning': {
+    src: '/images/ecosystems/desert-dunes.jpg',
+    alt: 'Vast Namib Desert landscape with red sand dunes stretching to horizon',
+  },
+  'value-destinations': {
+    src: '/images/destinations/zambia.jpg',
+    alt: 'Walking safari guide leading guests through the South Luangwa bush',
+  },
+  'splurge-allocation': {
+    src: '/images/destinations/botswana-okavango.jpg',
+    alt: 'Aerial view of the Okavango Delta waterways and islands, Botswana',
+  },
+  // Birding topics
+  'birding-green-vs-dry-season': {
+    src: '/images/activities/bird-watching.jpg',
+    alt: 'Colorful African bird perched in natural habitat',
+  },
+};
+
+/**
+ * Get image for a topic - uses specific mapping first, then bucket fallback
+ */
+function getTopicImage(topicId: string, bucketImageIndex: number): { src: string; alt: string } {
+  if (topicImageMap[topicId]) {
+    return topicImageMap[topicId];
+  }
+  const ecosystemImage = ecosystemImages[bucketImageIndex % ecosystemImages.length];
+  return { src: ecosystemImage.src, alt: ecosystemImage.alt };
+}
+
+/**
  * Get P0 topics for a specific bucket
  */
 function getP0TopicsForBucket(bucket: TopicBucket): TopicInventoryItem[] {
@@ -179,11 +602,11 @@ function getFeaturedTopics(): TopicInventoryItem[] {
 /**
  * Topic card component - visual card style with thumbnail
  */
-function TopicCard({ topic, imageIndex }: { topic: TopicInventoryItem; imageIndex: number }) {
+function TopicCard({ topic }: { topic: TopicInventoryItem }) {
   const slug = generateSlugFromId(topic.id);
   const config = BUCKET_CONFIG[topic.bucket as TopicBucket];
   const Icon = config.icon;
-  const bgImage = ecosystemImages[imageIndex % ecosystemImages.length];
+  const image = getTopicImage(topic.id, config.imageIndex);
 
   return (
     <Link
@@ -197,7 +620,7 @@ function TopicCard({ topic, imageIndex }: { topic: TopicInventoryItem; imageInde
         <div className="w-20 h-24 flex-shrink-0 overflow-hidden relative">
           <div
             className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-300"
-            style={{ backgroundImage: `url(${bgImage.src})` }}
+            style={{ backgroundImage: `url(${image.src})` }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/20" />
         </div>
@@ -225,11 +648,11 @@ function TopicCard({ topic, imageIndex }: { topic: TopicInventoryItem; imageInde
 /**
  * Featured topic card - larger with more detail
  */
-function FeaturedTopicCard({ topic, index }: { topic: TopicInventoryItem; index: number }) {
+function FeaturedTopicCard({ topic }: { topic: TopicInventoryItem }) {
   const slug = generateSlugFromId(topic.id);
   const config = BUCKET_CONFIG[topic.bucket as TopicBucket];
   const Icon = config.icon;
-  const bgImage = ecosystemImages[index % ecosystemImages.length];
+  const image = getTopicImage(topic.id, config.imageIndex);
 
   return (
     <Link
@@ -242,7 +665,7 @@ function FeaturedTopicCard({ topic, index }: { topic: TopicInventoryItem; index:
       <div className="relative h-28 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-          style={{ backgroundImage: `url(${bgImage.src})` }}
+          style={{ backgroundImage: `url(${image.src})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         <div className="absolute bottom-3 left-4 right-4">
@@ -311,8 +734,8 @@ function BucketSection({ bucket }: { bucket: TopicBucket }) {
       {/* Topics grid */}
       <div className="bg-white rounded-b-2xl border border-t-0 border-stone-200 p-4 md:p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {topics.map((topic, index) => (
-            <TopicCard key={topic.id} topic={topic} imageIndex={config.imageIndex + index} />
+          {topics.map((topic) => (
+            <TopicCard key={topic.id} topic={topic} />
           ))}
         </div>
       </div>
@@ -430,8 +853,8 @@ export default function DecisionsHubPage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {featuredTopics.map((topic, index) => (
-                <FeaturedTopicCard key={topic.id} topic={topic} index={index} />
+              {featuredTopics.map((topic) => (
+                <FeaturedTopicCard key={topic.id} topic={topic} />
               ))}
             </div>
           </div>

@@ -96,6 +96,139 @@ const CATEGORY_CONFIG: Record<
 };
 
 /**
+ * Activity-specific fallback image mapping
+ * Used when activity image doesn't exist or has hasImage: false
+ * Each activity gets a unique, relevant fallback to avoid repetition
+ */
+const activityFallbackMap: Record<string, { src: string; alt: string }> = {
+  // Vehicle-based activities
+  'game-drive': {
+    src: '/images/activities/game-drive.jpg',
+    alt: 'Safari vehicle observing wildlife on an early morning game drive',
+  },
+  'night-drive': {
+    src: '/images/activities/night-drive.jpg',
+    alt: 'Black rhinos at artificially lit waterhole during night safari',
+  },
+  'photographic-hide': {
+    src: '/images/activities/photographic-hide.jpg',
+    alt: 'African elephant at waterhole from ground-level hide perspective',
+  },
+  // Water-based activities
+  'boat-safari': {
+    src: '/images/activities/boat-safari.jpg',
+    alt: 'Safari boat cruising past hippos in African river',
+  },
+  mokoro: {
+    src: '/images/destinations/botswana-okavango.jpg',
+    alt: 'Aerial view of the Okavango Delta waterways and islands, Botswana',
+  },
+  'canoe-safari': {
+    src: '/images/ecosystems/delta-channels.jpg',
+    alt: 'Aerial view of Okavango Delta waterways winding through lush green islands',
+  },
+  kayaking: {
+    src: '/images/destinations/zambia.jpg',
+    alt: 'Walking safari guide leading guests through the South Luangwa bush',
+  },
+  fishing: {
+    src: '/images/activities/fishing.jpg',
+    alt: 'Catch and release tiger fishing on African river',
+  },
+  'white-water-rafting': {
+    src: '/images/activities/white-water-rafting.jpg',
+    alt: 'Whitewater rafting near Victoria Falls on the Zambezi River',
+  },
+  'stand-up-paddleboarding': {
+    src: '/images/ecosystems/floodplain-evening.jpg',
+    alt: 'Hippopotamus in Botswana river at sunset with golden light reflections',
+  },
+  'source-of-nile': {
+    src: '/images/destinations/uganda.jpg',
+    alt: 'Chimpanzee in the tropical forest of Kibale National Park, Uganda',
+  },
+  // On foot activities
+  'walking-safari': {
+    src: '/images/activities/bush-walk.jpg',
+    alt: 'Guided walking safari through African bush with armed ranger',
+  },
+  'gorilla-trekking': {
+    src: '/images/activities/gorilla-trekking.jpg',
+    alt: 'Group of mountain gorillas in Rwanda rainforest habitat',
+  },
+  'chimp-tracking': {
+    src: '/images/activities/chimp-tracking.jpg',
+    alt: 'Chimpanzee in tropical forest canopy',
+  },
+  'cultural-visit': {
+    src: '/images/activities/cultural-visit.jpg',
+    alt: 'Traditional Maasai village cultural experience',
+  },
+  'fly-camping': {
+    src: '/images/activities/fly-camping.jpg',
+    alt: 'Milky Way galaxy over Lake Naivasha camp under African night sky',
+  },
+  'horseback-safari': {
+    src: '/images/ecosystems/savannah-wildlife.jpg',
+    alt: 'Wild giraffes and zebras together on the African plains',
+  },
+  'golden-monkey-tracking': {
+    src: '/images/destinations/rwanda.jpg',
+    alt: 'Mountain gorilla family in the misty Volcanoes National Park, Rwanda',
+  },
+  'bird-watching': {
+    src: '/images/activities/bird-watching.jpg',
+    alt: 'Colorful African bird perched in natural habitat',
+  },
+  'mountain-biking': {
+    src: '/images/destinations/namibia-sossusvlei.jpg',
+    alt: 'Towering red sand dunes of Sossusvlei at sunrise, Namibia',
+  },
+  // Aerial activities
+  'hot-air-balloon': {
+    src: '/images/activities/hot-air-balloon.jpg',
+    alt: 'Hot air balloon floating over the Masai Mara at sunrise',
+  },
+  'scenic-helicopter': {
+    src: '/images/activities/scenic-flight.jpg',
+    alt: 'Light aircraft flying over vast African wilderness landscape',
+  },
+  'zip-lining': {
+    src: '/images/destinations/zimbabwe.jpg',
+    alt: 'Victoria Falls rainbow mist with Zambezi River, Zimbabwe',
+  },
+  // Specialty activities
+  'bungee-jumping': {
+    src: '/images/activities/bungee-jumping.jpg',
+    alt: 'Bungee jumping over Victoria Falls gorge',
+  },
+  'quad-biking': {
+    src: '/images/ecosystems/desert-dunes.jpg',
+    alt: 'Vast Namib Desert landscape with red sand dunes stretching to horizon',
+  },
+};
+
+/**
+ * Get image for activity - uses activity image if available, then fallback map, then category default
+ */
+function getActivityImage(activityId: string, categoryImageIndex: number): { src: string; alt: string } {
+  // First check if activity has its own valid image
+  const activityImage = getActivityImageRef(activityId);
+  if (activityImage?.hasImage && activityImage.src) {
+    return { src: activityImage.src, alt: activityImage.alt };
+  }
+
+  // Then check fallback map for specific alternative
+  if (activityFallbackMap[activityId]) {
+    return activityFallbackMap[activityId];
+  }
+
+  // Finally fall back to category ecosystem image
+  const ecosystemImage = ecosystemImages[categoryImageIndex];
+  return { src: ecosystemImage.src, alt: ecosystemImage.alt };
+}
+
+/**
  * Physical effort display
  */
 function getEffortDisplay(effort: string): { label: string; color: string } {
@@ -138,7 +271,7 @@ function groupByCategory() {
 function FeaturedActivityCard({ activity }: { activity: typeof activityPrimitives[0] }) {
   const config = CATEGORY_CONFIG[activity.category];
   const Icon = config.icon;
-  const activityImage = getActivityImageRef(activity.id);
+  const image = getActivityImage(activity.id, config.imageIndex);
   const effortDisplay = getEffortDisplay(activity.physical_effort);
 
   return (
@@ -149,18 +282,11 @@ function FeaturedActivityCard({ activity }: { activity: typeof activityPrimitive
     >
       {/* Image */}
       <div className="relative h-36 overflow-hidden">
-        {activityImage?.hasImage && activityImage.src ? (
-          <img
-            src={activityImage.src}
-            alt={activityImage.alt}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-        ) : (
-          <div
-            className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-            style={{ backgroundImage: `url(${ecosystemImages[config.imageIndex].src})` }}
-          />
-        )}
+        <img
+          src={image.src}
+          alt={image.alt}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
           <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-xs font-medium bg-white/90 backdrop-blur-sm text-stone-700 rounded-full">
@@ -195,9 +321,8 @@ function FeaturedActivityCard({ activity }: { activity: typeof activityPrimitive
  */
 function ActivityCard({ activity }: { activity: typeof activityPrimitives[0] }) {
   const config = CATEGORY_CONFIG[activity.category];
-  const Icon = config.icon;
   const effortDisplay = getEffortDisplay(activity.physical_effort);
-  const activityImage = getActivityImageRef(activity.id);
+  const image = getActivityImage(activity.id, config.imageIndex);
 
   return (
     <Link
@@ -208,18 +333,11 @@ function ActivityCard({ activity }: { activity: typeof activityPrimitives[0] }) 
       <div className="flex">
         {/* Thumbnail image */}
         <div className="w-24 h-28 flex-shrink-0 overflow-hidden">
-          {activityImage?.hasImage && activityImage.src ? (
-            <img
-              src={activityImage.src}
-              alt={activityImage.alt}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-          ) : (
-            <div
-              className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-300"
-              style={{ backgroundImage: `url(${ecosystemImages[config.imageIndex].src})` }}
-            />
-          )}
+          <img
+            src={image.src}
+            alt={image.alt}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
         </div>
 
         {/* Content */}

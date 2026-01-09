@@ -84,10 +84,127 @@ function StyleBadge({ style }: { style: string }) {
 }
 
 /**
- * Get image for itinerary based on region
+ * Itinerary-specific image mapping
+ * Each itinerary gets a unique, relevant image to avoid repetition
  */
-function getItineraryImage(region: string): { src: string; alt: string } {
-  // Map regions to destination images
+const itineraryImageMap: Record<string, { src: string; alt: string }> = {
+  // Tanzania itineraries (6)
+  'tanzania-classic-northern-circuit': {
+    src: '/images/destinations/tanzania-serengeti.jpg',
+    alt: 'Herds of wildebeest grazing in the Serengeti National Park, Tanzania',
+  },
+  'tanzania-great-migration': {
+    src: '/images/activities/migration.jpg',
+    alt: 'Wildebeest and zebras jumping during Great Migration river crossing',
+  },
+  'tanzania-southern-circuit': {
+    src: '/images/destinations/tanzania-ngorongoro.jpg',
+    alt: 'Panoramic view of Ngorongoro Crater from the rim, Tanzania',
+  },
+  'tanzania-short-northern-circuit': {
+    src: '/images/activities/game-drive.jpg',
+    alt: 'Safari vehicle observing wildlife on an early morning game drive',
+  },
+  'tanzania-safari-and-beach': {
+    src: '/images/destinations/zanzibar.jpg',
+    alt: 'Crystal-clear turquoise waters and white sand beach in Zanzibar',
+  },
+  'tanzania-walking-safari': {
+    src: '/images/activities/bush-walk.jpg',
+    alt: 'Guided walking safari through African bush with armed ranger',
+  },
+  // Kenya itineraries (5)
+  'kenya-classic-safari': {
+    src: '/images/destinations/kenya-masai-mara.jpg',
+    alt: 'Lions resting in the golden grass of the Masai Mara, Kenya',
+  },
+  'kenya-private-conservancies': {
+    src: '/images/activities/night-drive.jpg',
+    alt: 'Spotlight illuminating wildlife during an evening game drive',
+  },
+  'kenya-northern-frontier': {
+    src: '/images/destinations/kenya-samburu.jpg',
+    alt: 'Reticulated giraffe in the arid landscape of Samburu National Reserve',
+  },
+  'kenya-masai-mara-migration': {
+    src: '/images/activities/hot-air-balloon.jpg',
+    alt: 'Hot air balloon floating over the Masai Mara at sunrise',
+  },
+  'kenya-family-friendly': {
+    src: '/images/destinations/kenya-amboseli.jpg',
+    alt: 'Elephant herd with Mount Kilimanjaro backdrop in Amboseli, Kenya',
+  },
+  // Botswana itineraries (3)
+  'botswana-okavango-delta': {
+    src: '/images/destinations/botswana-okavango.jpg',
+    alt: 'Aerial view of the Okavango Delta waterways and islands, Botswana',
+  },
+  'botswana-delta-desert-pans': {
+    src: '/images/activities/scenic-flight.jpg',
+    alt: 'Light aircraft flying over vast African wilderness landscape',
+  },
+  'botswana-luxury-fly-in': {
+    src: '/images/destinations/botswana-chobe.jpg',
+    alt: 'Elephants crossing the Chobe River at sunset, Botswana',
+  },
+  // Uganda/Rwanda itineraries (3)
+  'rwanda-gorilla-trek': {
+    src: '/images/destinations/rwanda.jpg',
+    alt: 'Mountain gorilla family in the misty Volcanoes National Park, Rwanda',
+  },
+  'uganda-primate-safari': {
+    src: '/images/destinations/uganda.jpg',
+    alt: 'Chimpanzee in the tropical forest of Kibale National Park, Uganda',
+  },
+  'uganda-rwanda-primate-expedition': {
+    src: '/images/activities/gorilla-trekking.jpg',
+    alt: 'Trekkers observing a silverback gorilla in its natural habitat',
+  },
+  // Namibia itineraries (2)
+  'namibia-highlights': {
+    src: '/images/destinations/namibia-sossusvlei.jpg',
+    alt: 'Towering red sand dunes of Sossusvlei at sunrise, Namibia',
+  },
+  'namibia-self-drive': {
+    src: '/images/destinations/namibia-etosha.jpg',
+    alt: 'Zebras and oryx gathering at an Etosha National Park waterhole',
+  },
+  // South Africa itineraries (2)
+  'south-africa-kruger': {
+    src: '/images/destinations/south-africa-kruger.jpg',
+    alt: 'Leopard resting on a tree branch in Kruger National Park',
+  },
+  'south-africa-safari-and-cape': {
+    src: '/images/destinations/south-africa-cape.jpg',
+    alt: 'Cape Town coastline with Table Mountain in the background',
+  },
+  // Zambia itinerary (1)
+  'zambia-walking-safari': {
+    src: '/images/destinations/zambia.jpg',
+    alt: 'Walking safari guide leading guests through the South Luangwa bush',
+  },
+  // Zimbabwe itinerary (1)
+  'zimbabwe-falls-and-wildlife': {
+    src: '/images/destinations/zimbabwe.jpg',
+    alt: 'Victoria Falls rainbow mist with Zambezi River, Zimbabwe',
+  },
+  // Multi-country itinerary (1)
+  'east-africa-grand-circuit': {
+    src: '/images/activities/sundowner.jpg',
+    alt: 'Sundowner drinks with panoramic views over the African savannah',
+  },
+};
+
+/**
+ * Get image for itinerary - uses specific mapping first, then falls back to region
+ */
+function getItineraryImage(slug: string, region: string): { src: string; alt: string } {
+  // Try itinerary-specific image first
+  if (itineraryImageMap[slug]) {
+    return itineraryImageMap[slug];
+  }
+
+  // Fall back to region-based mapping
   const regionMap: Record<string, string> = {
     'tanzania': 'tanzania',
     'kenya': 'kenya',
@@ -110,7 +227,7 @@ function getItineraryImage(region: string): { src: string; alt: string } {
 function ItineraryCard({ itinerary }: { itinerary: ItinerarySummary }) {
   const regionName = getRegionDisplayName(itinerary.region);
   const tierDisplay = getComfortTierDisplay(itinerary.comfort_tier);
-  const image = getItineraryImage(itinerary.region);
+  const image = getItineraryImage(itinerary.slug, itinerary.region);
 
   return (
     <Link
@@ -187,7 +304,7 @@ function ItineraryCard({ itinerary }: { itinerary: ItinerarySummary }) {
  */
 function FeaturedItineraryCard({ itinerary }: { itinerary: ItinerarySummary }) {
   const regionName = getRegionDisplayName(itinerary.region);
-  const image = getItineraryImage(itinerary.region);
+  const image = getItineraryImage(itinerary.slug, itinerary.region);
 
   return (
     <Link
