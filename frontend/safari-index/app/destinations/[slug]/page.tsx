@@ -80,35 +80,35 @@ interface GamePark {
  */
 const PARK_ACTIVITIES: Record<string, string[]> = {
   // Tanzania
-  'serengeti': ['game-drive', 'hot-air-balloon', 'walking-safari', 'fly-camping'],
-  'ngorongoro': ['game-drive', 'walking-safari', 'cultural-visit'],
+  'serengeti': ['game-drive', 'hot-air-balloon', 'walking-safari', 'fly-camping', 'bird-watching'],
+  'ngorongoro': ['game-drive', 'walking-safari', 'cultural-visit', 'bird-watching'],
   'tarangire': ['game-drive', 'walking-safari', 'bird-watching'],
   'lake-manyara': ['game-drive', 'bird-watching', 'cultural-visit'],
-  'ruaha': ['game-drive', 'walking-safari', 'fly-camping'],
-  'nyerere-selous': ['boat-safari', 'walking-safari', 'game-drive', 'fishing'],
-  'katavi': ['game-drive', 'walking-safari', 'fly-camping'],
+  'ruaha': ['game-drive', 'walking-safari', 'fly-camping', 'bird-watching'],
+  'nyerere-selous': ['boat-safari', 'walking-safari', 'game-drive', 'fishing', 'bird-watching'],
+  'katavi': ['game-drive', 'walking-safari', 'fly-camping', 'bird-watching'],
   // Kenya
-  'masai-mara': ['game-drive', 'hot-air-balloon', 'walking-safari', 'cultural-visit'],
+  'masai-mara': ['game-drive', 'hot-air-balloon', 'walking-safari', 'cultural-visit', 'bird-watching'],
   'amboseli': ['game-drive', 'bird-watching', 'cultural-visit'],
-  'samburu': ['game-drive', 'walking-safari', 'cultural-visit'],
-  'laikipia': ['walking-safari', 'horseback-safari', 'game-drive', 'night-drive'],
+  'samburu': ['game-drive', 'walking-safari', 'cultural-visit', 'bird-watching'],
+  'laikipia': ['walking-safari', 'horseback-safari', 'game-drive', 'night-drive', 'bird-watching'],
   'lake-nakuru': ['game-drive', 'bird-watching'],
-  'tsavo': ['game-drive', 'walking-safari'],
-  'mara-conservancies': ['game-drive', 'night-drive', 'walking-safari', 'cultural-visit'],
+  'tsavo': ['game-drive', 'walking-safari', 'bird-watching'],
+  'mara-conservancies': ['game-drive', 'night-drive', 'walking-safari', 'cultural-visit', 'bird-watching'],
   // Botswana
-  'okavango-delta': ['mokoro', 'boat-safari', 'walking-safari', 'game-drive', 'fly-camping'],
-  'chobe': ['boat-safari', 'game-drive', 'photographic-hide'],
-  'moremi': ['game-drive', 'mokoro', 'walking-safari'],
-  'linyanti': ['game-drive', 'boat-safari', 'walking-safari'],
-  'makgadikgadi': ['quad-biking', 'walking-safari', 'cultural-visit'],
-  'central-kalahari': ['game-drive', 'walking-safari', 'cultural-visit'],
+  'okavango-delta': ['mokoro', 'boat-safari', 'walking-safari', 'game-drive', 'fly-camping', 'bird-watching'],
+  'chobe': ['boat-safari', 'game-drive', 'photographic-hide', 'bird-watching'],
+  'moremi': ['game-drive', 'mokoro', 'walking-safari', 'bird-watching'],
+  'linyanti': ['game-drive', 'boat-safari', 'walking-safari', 'bird-watching'],
+  'makgadikgadi': ['quad-biking', 'walking-safari', 'cultural-visit', 'bird-watching'],
+  'central-kalahari': ['game-drive', 'walking-safari', 'cultural-visit', 'bird-watching'],
   // South Africa
-  'kruger': ['game-drive', 'walking-safari', 'night-drive'],
-  'sabi-sands': ['game-drive', 'walking-safari', 'night-drive', 'photographic-hide'],
-  'timbavati': ['game-drive', 'walking-safari', 'night-drive'],
-  'madikwe': ['game-drive', 'walking-safari', 'night-drive'],
-  'phinda': ['game-drive', 'walking-safari', 'boat-safari'],
-  'hluhluwe-imfolozi': ['game-drive', 'walking-safari'],
+  'kruger': ['game-drive', 'walking-safari', 'night-drive', 'bird-watching'],
+  'sabi-sands': ['game-drive', 'walking-safari', 'night-drive', 'photographic-hide', 'bird-watching'],
+  'timbavati': ['game-drive', 'walking-safari', 'night-drive', 'bird-watching'],
+  'madikwe': ['game-drive', 'walking-safari', 'night-drive', 'bird-watching'],
+  'phinda': ['game-drive', 'walking-safari', 'boat-safari', 'bird-watching'],
+  'hluhluwe-imfolozi': ['game-drive', 'walking-safari', 'bird-watching'],
   // Rwanda
   'volcanoes-np': ['gorilla-trekking', 'golden-monkey-tracking', 'bird-watching'],
   'akagera': ['game-drive', 'boat-safari', 'bird-watching'],
@@ -116,22 +116,26 @@ const PARK_ACTIVITIES: Record<string, string[]> = {
   // Uganda
   'bwindi': ['gorilla-trekking', 'bird-watching', 'cultural-visit'],
   'kibale': ['chimp-tracking', 'bird-watching', 'walking-safari'],
-  'queen-elizabeth': ['game-drive', 'boat-safari', 'chimp-tracking'],
-  'murchison-falls': ['game-drive', 'boat-safari', 'fishing'],
+  'queen-elizabeth': ['game-drive', 'boat-safari', 'chimp-tracking', 'bird-watching'],
+  'murchison-falls': ['game-drive', 'boat-safari', 'fishing', 'bird-watching'],
   'mgahinga': ['gorilla-trekking', 'golden-monkey-tracking', 'bird-watching'],
   // Namibia
-  'etosha': ['game-drive', 'photographic-hide'],
+  'etosha': ['game-drive', 'photographic-hide', 'bird-watching'],
   'sossusvlei': ['quad-biking', 'hot-air-balloon', 'walking-safari'],
   'damaraland': ['game-drive', 'walking-safari', 'cultural-visit'],
   'skeleton-coast': ['scenic-helicopter', 'walking-safari'],
   'caprivi': ['boat-safari', 'game-drive', 'fishing', 'bird-watching'],
   'namibrand': ['walking-safari', 'quad-biking'],
   // Zambia
-  'south-luangwa': ['walking-safari', 'game-drive', 'night-drive'],
-  'lower-zambezi': ['canoe-safari', 'game-drive', 'fishing', 'walking-safari'],
-  'kafue': ['game-drive', 'walking-safari', 'boat-safari'],
-  'north-luangwa': ['walking-safari'],
+  'south-luangwa': ['walking-safari', 'game-drive', 'night-drive', 'bird-watching'],
+  'lower-zambezi': ['canoe-safari', 'game-drive', 'fishing', 'walking-safari', 'bird-watching'],
+  'kafue': ['game-drive', 'walking-safari', 'boat-safari', 'bird-watching'],
+  'north-luangwa': ['walking-safari', 'bird-watching'],
   'victoria-falls': ['white-water-rafting', 'bungee-jumping', 'scenic-helicopter', 'kayaking'],
+  // Zimbabwe
+  'hwange': ['game-drive', 'walking-safari', 'night-drive', 'bird-watching'],
+  'mana-pools': ['walking-safari', 'canoe-safari', 'game-drive', 'bird-watching'],
+  'matobo': ['walking-safari', 'game-drive', 'cultural-visit', 'bird-watching'],
 };
 
 const GAME_PARKS: Record<string, GamePark[]> = {
@@ -195,6 +199,11 @@ const GAME_PARKS: Record<string, GamePark[]> = {
     { id: 'kafue', name: 'Kafue National Park', type: 'national-park', ecosystem: 'savannah', highlights: ['Remote wilderness', 'Cheetah', 'Large size'], bestFor: 'Off-grid experience' },
     { id: 'north-luangwa', name: 'North Luangwa National Park', type: 'national-park', ecosystem: 'savannah', highlights: ['Walking only', 'Buffalo herds', 'True wilderness'], bestFor: 'Serious walking safari' },
     { id: 'victoria-falls', name: 'Victoria Falls (Livingstone)', type: 'national-park', ecosystem: 'floodplain', highlights: ['World wonder', 'Activities hub', 'Devil\'s Pool'], bestFor: 'Iconic waterfall experience' },
+  ],
+  zimbabwe: [
+    { id: 'hwange', name: 'Hwange National Park', type: 'national-park', ecosystem: 'savannah', highlights: ['Elephant herds', 'Waterhole game viewing', 'Wild dogs'], bestFor: 'Elephant encounters and waterhole photography' },
+    { id: 'mana-pools', name: 'Mana Pools National Park', type: 'national-park', ecosystem: 'floodplain', highlights: ['Walking safaris', 'Canoe safaris', 'Wild dogs', 'Elephants'], bestFor: 'Walking and canoe safaris' },
+    { id: 'matobo', name: 'Matobo National Park', type: 'national-park', ecosystem: 'savannah', highlights: ['Rhino tracking', 'San rock art', 'Dramatic boulders'], bestFor: 'Rhino walks and cultural heritage' },
   ],
 };
 
