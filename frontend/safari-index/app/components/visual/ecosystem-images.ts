@@ -133,7 +133,7 @@ export const heroImages: Record<string, HeroImage> = {
   home: {
     id: 'home-hero',
     src: '/images/heroes/home-hero.jpg',
-    alt: 'Herd of African elephants walking in front of Mount Kilimanjaro at sunset',
+    alt: 'Elephants wading through swamp waters in Amboseli, Kenya with Mount Kilimanjaro',
   },
   explore: {
     id: 'explore-hero',
