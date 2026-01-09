@@ -209,7 +209,10 @@ function DestinationCard({ destination }: { destination: typeof DESTINATIONS[0] 
  */
 function RegionSection({ region, destinations }: { region: string; destinations: typeof DESTINATIONS }) {
   const isEastAfrica = region === 'East Africa';
-  const bgImage = ecosystemImages[isEastAfrica ? 0 : 1]; // savannah for East, delta for Southern
+  // Use region-appropriate images: savannah/giraffe for East Africa, Kruger zebras for Southern Africa
+  const bgImage = isEastAfrica
+    ? ecosystemImages.find(img => img.id === 'savannah-morning') || ecosystemImages[0]
+    : ecosystemImages.find(img => img.id === 'woodland-clearing') || ecosystemImages[0];
 
   return (
     <section className="scroll-mt-24" data-testid={`region-${region.toLowerCase().replace(' ', '-')}`}>
@@ -279,7 +282,7 @@ export default function DestinationsPage() {
 
       {/* Hero */}
       <ImageBand
-        image={ecosystemImages.find((img) => img.id === 'delta-channels') || ecosystemImages[0]}
+        image={ecosystemImages.find((img) => img.id === 'savannah-wildlife') || ecosystemImages[0]}
         height="explore"
         overlay="strong"
         align="center"

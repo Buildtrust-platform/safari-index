@@ -198,6 +198,32 @@
       },
       {
        "Action": [
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttNewsletterTable97F60020Arn54143260"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttNewsletterTable97F60020Arn54143260"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
         "dynamodb:BatchGetItem",
         "dynamodb:Query",
         "dynamodb:GetItem",
@@ -489,6 +515,56 @@
           [
            {
             "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttProposalTable0959F79BArnB98C3BA1"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttNewsletterTable97F60020Arn54143260"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttNewsletterTable97F60020Arn54143260"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttNewsletterTable97F60020Arn54143260"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputFnGetAttNewsletterTable97F60020Arn54143260"
            },
            "/index/*"
           ]
@@ -549,6 +625,9 @@
       },
       "PROPOSAL_TABLE": {
        "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputRefProposalTable0959F79B8E74CE9A"
+      },
+      "NEWSLETTER_TABLE": {
+       "Fn::ImportValue": "SafariIndexDataStack:ExportsOutputRefNewsletterTable97F60020525AAC94"
       },
       "LOGIC_VERSION": "rules_v1.0",
       "PROMPT_VERSION": "prompt_v1.0",

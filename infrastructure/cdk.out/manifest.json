@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::928622536086:role/cdk-hnb659fds-deploy-role-928622536086-eu-central-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::928622536086:role/cdk-hnb659fds-cfn-exec-role-928622536086-eu-central-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-928622536086-eu-central-1/0367b45b1aa4a8f330cc68c453cb298fb1f3ebab43815acd84211f94a2666fcd.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-928622536086-eu-central-1/c198986abafea097ada7f43e993a77049ca48420ce18e1bb9da5354b43d0747d.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -174,6 +174,26 @@
             "data": "ProposalTableName"
           }
         ],
+        "/SafariIndexDataStack/NewsletterTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "NewsletterTable97F60020"
+            }
+          }
+        ],
+        "/SafariIndexDataStack/NewsletterTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NewsletterTable97F60020"
+          }
+        ],
+        "/SafariIndexDataStack/NewsletterTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NewsletterTableName"
+          }
+        ],
         "/SafariIndexDataStack/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
@@ -216,6 +236,12 @@
             "data": "ExportsOutputFnGetAttProposalTable0959F79BArnB98C3BA1"
           }
         ],
+        "/SafariIndexDataStack/Exports/Output{\"Fn::GetAtt\":[\"NewsletterTable97F60020\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttNewsletterTable97F60020Arn54143260"
+          }
+        ],
         "/SafariIndexDataStack/Exports/Output{\"Ref\":\"DecisionTable2908AF27\"}": [
           {
             "type": "aws:cdk:logicalId",
@@ -252,6 +278,12 @@
             "data": "ExportsOutputRefProposalTable0959F79B8E74CE9A"
           }
         ],
+        "/SafariIndexDataStack/Exports/Output{\"Ref\":\"NewsletterTable97F60020\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefNewsletterTable97F60020525AAC94"
+          }
+        ],
         "/SafariIndexDataStack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
@@ -284,7 +316,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::928622536086:role/cdk-hnb659fds-deploy-role-928622536086-eu-central-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::928622536086:role/cdk-hnb659fds-cfn-exec-role-928622536086-eu-central-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-928622536086-eu-central-1/6398e15e645f93b85795a136a18d0a74afdcba8544a51d335e4dff876eb673f1.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-928622536086-eu-central-1/cb8bc554737a2c590d80188e277bec25839883ac18d98e73cf4c8b8aef0138a9.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
