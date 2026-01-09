@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
     SES_REGION: process.env.SES_REGION,
     OPERATOR_EMAIL: process.env.OPERATOR_EMAIL,
     FROM_EMAIL: process.env.FROM_EMAIL,
+    OPS_KEY: process.env.OPS_KEY,
   },
   /**
    * Remote image patterns for Next.js Image optimization.
