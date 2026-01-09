@@ -374,12 +374,13 @@ function ConfirmationContent() {
               className="font-editorial text-3xl md:text-4xl font-semibold text-white mb-3"
               data-testid="confirmation-h1"
             >
-              Your Safari Brief Has Been Received
+              Brief Received
             </h1>
 
             <p className="text-white/80 text-lg max-w-xl mx-auto">
-              Safari Index has recorded your planning requirements. Review the summary below
-              and confirm the decisions that will shape your trip.
+              Safari Index will review your brief and respond personally within 48 hours.
+              If your request contains constraints we cannot satisfy honestly,
+              we will explain why and suggest alternatives.
             </p>
           </div>
         </ImageBandContent>
@@ -507,26 +508,29 @@ function ConfirmationContent() {
         {/* Next Steps */}
         <section className="bg-stone-100 rounded-xl p-6">
           <h3 className="font-medium text-stone-900 mb-3">What happens next</h3>
-          <ul className="space-y-2 text-sm text-stone-600">
+          <ul className="space-y-3 text-sm text-stone-600">
             <li className="flex items-start gap-2">
               <span className="text-stone-400 mt-1">1.</span>
               <span>
-                Safari Index reviews your brief and confirms the decisions that apply.
+                Safari Index reviews your brief against our operator network and seasonal constraints.
               </span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-stone-400 mt-1">2.</span>
               <span>
-                We build a custom itinerary around your dates, preferences, and the logic of your decisions.
+                If we can build what you described, you receive a custom proposal with clear pricing.
               </span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-stone-400 mt-1">3.</span>
               <span>
-                You receive a proposal with clear pricing, trade-offs, and next steps.
+                If we cannot, we explain the constraint and offer alternatives or decline entirely.
               </span>
             </li>
           </ul>
+          <p className="text-xs text-stone-500 mt-4 pt-4 border-t border-stone-200">
+            Response time: typically within 48 hours. No automated emails. Every response is written personally.
+          </p>
         </section>
 
         {/* Footer Actions */}
