@@ -267,37 +267,31 @@ function getFeaturedTopics(): DecisionTopic[] {
 }
 
 /**
- * Map trip IDs to appropriate destination images
- * This ensures trip cards show relevant imagery for their region
+ * Map trip IDs to specific unique images
+ * Each of the first 6 trips (shown on homepage) gets a distinct image
  */
-const tripImageMap: Record<string, string> = {
-  // Tanzania trips
-  'classic-serengeti-ngorongoro': 'tanzania',
-  'migration-focused-serengeti': 'tanzania',
-  'tanzania-southern-circuit': 'tanzania',
-  'tanzania-honeymoon': 'tanzania',
-  // Kenya trips
-  'kenya-conservancy-safari': 'kenya',
-  'kenya-masai-mara-classic': 'kenya',
-  // Uganda/Rwanda trips
-  'uganda-rwanda-primates': 'rwanda',
-  'gorilla-safari-extension': 'rwanda',
-  // Botswana trips
-  'botswana-delta-safari': 'botswana',
-  'botswana-luxury-circuit': 'botswana',
-  // South Africa trips
-  'south-africa-kruger-classic': 'south-africa',
-  'south-africa-garden-route': 'south-africa',
-  'south-africa-cape-safari': 'south-africa',
-  // Namibia trips
-  'namibia-desert-wildlife': 'namibia',
-  'namibia-self-drive': 'namibia',
-  // Zambia/Zimbabwe trips
-  'zambia-walking-safari': 'zambia',
-  'victoria-falls-safari-combo': 'zimbabwe',
-  // Multi-country / special
-  'photography-focused-safari': 'kenya',
-  'family-safari-east-africa': 'tanzania',
+const tripImageMap: Record<string, { src: string; alt: string }> = {
+  // First 6 trips shown on homepage - each unique
+  'classic-serengeti-ngorongoro': { src: '/images/library/destinations/zebras-wildebeest-ngorongoro.jpg', alt: 'Zebras and wildebeest in Ngorongoro' },
+  'migration-focused-serengeti': { src: '/images/activities/migration.jpg', alt: 'Great Migration river crossing' },
+  'tanzania-southern-circuit': { src: '/images/library/wildlife/lion-couple-savanna.jpg', alt: 'Lions in Ruaha' },
+  'classic-kenya-safari': { src: '/images/library/wildlife/lion-portrait.jpg', alt: 'Lion in Masai Mara' },
+  'kenya-conservancy-focused': { src: '/images/library/wildlife/lioness-tree-shade.jpg', alt: 'Lioness in conservancy' },
+  'okavango-delta-immersion': { src: '/images/destinations/botswana-delta.jpg', alt: 'Okavango Delta aerial' },
+  // Additional trips with unique images
+  'botswana-diverse-ecosystems': { src: '/images/ecosystems/desert-dunes.jpg', alt: 'Makgadikgadi salt pans' },
+  'kruger-greater-kruger': { src: '/images/destinations/south-africa-kruger.jpg', alt: 'Kruger National Park' },
+  'south-africa-combo': { src: '/images/destinations/south-africa-lodge.jpg', alt: 'Cape Town and safari' },
+  'rwanda-gorilla-focused': { src: '/images/destinations/rwanda-volcanoes.jpg', alt: 'Volcanoes National Park' },
+  'uganda-primate-safari': { src: '/images/activities/chimp-tracking.jpg', alt: 'Chimpanzee tracking' },
+  'namibia-highlights': { src: '/images/destinations/namibia-sossusvlei.jpg', alt: 'Sossusvlei dunes' },
+  'namibia-self-drive': { src: '/images/library/destinations/ruacana-waterfall-namibia.jpg', alt: 'Namibia waterfall' },
+  'zambia-walking-safari': { src: '/images/destinations/zambia-luangwa.jpg', alt: 'South Luangwa' },
+  'victoria-falls-safari-combo': { src: '/images/library/destinations/african-waterfall-aerial.jpg', alt: 'Victoria Falls' },
+  'photography-focused-safari': { src: '/images/library/wildlife/leopard-with-cubs.jpg', alt: 'Leopard family' },
+  'family-multigenerational': { src: '/images/library/birding/family-camping-safari.jpg', alt: 'Family safari' },
+  'honeymoon-romance-safari': { src: '/images/library/destinations/tanzania-wildlife-sunset-1.jpg', alt: 'Romantic sunset' },
+  'budget-first-safari': { src: '/images/library/wildlife/elephants-kilimanjaro-amboseli.jpg', alt: 'Elephants with Kilimanjaro' },
 };
 
 /**
@@ -334,16 +328,15 @@ function TripCardWithImage({
   };
   index: number
 }) {
-  // Use region-appropriate destination image, fallback to ecosystem images
-  const destinationKey = tripImageMap[trip.id];
-  const destImage = destinationKey ? destinationImages[destinationKey] : null;
+  // Use unique image from map, fallback to ecosystem images
+  const tripImage = tripImageMap[trip.id];
 
-  // Fallback to ecosystem images if no destination match
+  // Fallback to ecosystem images if no specific image mapped
   const ecosystemIndex = index % ecosystemImages.length;
   const fallbackImage = ecosystemImages[ecosystemIndex];
 
-  const imageSrc = destImage?.src || fallbackImage?.src || '/images/ecosystems/savannah-morning.jpg';
-  const imageAlt = destImage?.alt || fallbackImage?.alt || 'Safari landscape';
+  const imageSrc = tripImage?.src || fallbackImage?.src || '/images/ecosystems/savannah-morning.jpg';
+  const imageAlt = tripImage?.alt || fallbackImage?.alt || 'Safari landscape';
 
   return (
     <Link
