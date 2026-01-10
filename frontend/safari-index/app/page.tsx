@@ -20,10 +20,9 @@
  */
 
 import Link from 'next/link';
-import { ChevronDown, ArrowRight, MapPin, Calendar, Scale, ShieldOff, RefreshCw, Users } from 'lucide-react';
+import { ChevronDown, ArrowRight, MapPin, Calendar, Scale, ShieldOff, RefreshCw, Users, Compass } from 'lucide-react';
 import { ImageBand, ImageBandContent, pageImages, destinationImages, activityImageRefs, ecosystemImages, AfricaMapBackground } from './components/visual';
 import { Navbar, PageGrid } from './components/layout';
-import { OperatorCredentials } from './components/OperatorCredentials';
 import { SearchAndFilters } from './components/SearchAndFilters';
 import { NewsletterSignup } from './components/NewsletterSignup';
 import { getPublishedTopics, type DecisionTopic } from './content/decision-topics';
@@ -462,12 +461,13 @@ export default function Home() {
       </ImageBand>
 
       {/* ================================================================
-          SECTION 1.5 — SEARCH & EXPLORE
-          Search bar and filters with smooth transition from hero.
+          SECTION 1.5 — SEARCH & CREDENTIALS
+          Search bar with quick links and operator credentials integrated.
           ================================================================ */}
-      <section className="bg-gradient-to-b from-stone-100 to-white py-8 md:py-10">
+      <section className="bg-gradient-to-b from-stone-100 to-stone-50 py-8 md:py-10 border-b border-stone-200">
         <PageGrid maxWidth="default">
-          <div className="max-w-3xl mx-auto">
+          {/* Search area */}
+          <div className="max-w-3xl mx-auto mb-8">
             <p className="text-center text-sm text-stone-500 mb-4">
               Search destinations, activities, or questions
             </p>
@@ -476,30 +476,63 @@ export default function Home() {
             {/* Quick links below search */}
             <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-sm">
               <span className="text-stone-400">Popular:</span>
-              <Link href="/decisions/tanzania-vs-kenya-first-safari" className="px-3 py-1.5 rounded-full bg-stone-100 text-stone-600 hover:bg-amber-100 hover:text-amber-700 transition-colors">
+              <Link href="/decisions/tanzania-vs-kenya-first-safari" className="px-3 py-1.5 rounded-full bg-white text-stone-600 hover:bg-amber-100 hover:text-amber-700 transition-colors border border-stone-200">
                 Tanzania vs Kenya
               </Link>
-              <Link href="/decisions/is-5-days-enough-for-safari" className="px-3 py-1.5 rounded-full bg-stone-100 text-stone-600 hover:bg-amber-100 hover:text-amber-700 transition-colors">
+              <Link href="/decisions/is-5-days-enough-for-safari" className="px-3 py-1.5 rounded-full bg-white text-stone-600 hover:bg-amber-100 hover:text-amber-700 transition-colors border border-stone-200">
                 How many days?
               </Link>
-              <Link href="/when-to-go" className="px-3 py-1.5 rounded-full bg-stone-100 text-stone-600 hover:bg-amber-100 hover:text-amber-700 transition-colors">
+              <Link href="/when-to-go" className="px-3 py-1.5 rounded-full bg-white text-stone-600 hover:bg-amber-100 hover:text-amber-700 transition-colors border border-stone-200">
                 Best time to go
               </Link>
-              <Link href="/decisions/safari-with-young-children" className="px-3 py-1.5 rounded-full bg-stone-100 text-stone-600 hover:bg-amber-100 hover:text-amber-700 transition-colors">
+              <Link href="/decisions/safari-with-young-children" className="px-3 py-1.5 rounded-full bg-white text-stone-600 hover:bg-amber-100 hover:text-amber-700 transition-colors border border-stone-200">
                 Family safaris
               </Link>
             </div>
           </div>
-        </PageGrid>
-      </section>
 
-      {/* ================================================================
-          SECTION 1.75 — OPERATOR CREDENTIALS
-          Factual trust signals. No slogans.
-          ================================================================ */}
-      <section className="bg-stone-50 border-b border-stone-100 py-6">
-        <PageGrid maxWidth="default">
-          <OperatorCredentials variant="full" />
+          {/* Divider */}
+          <div className="h-px bg-stone-200 max-w-2xl mx-auto mb-8" />
+
+          {/* Operator credentials - integrated */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-white border border-stone-200">
+              <div className="w-9 h-9 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0">
+                <MapPin className="w-4 h-4 text-amber-600" />
+              </div>
+              <div>
+                <p className="text-[10px] text-stone-400 uppercase tracking-wide">Coverage</p>
+                <p className="text-xs text-stone-700 font-medium">East & Southern Africa</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-white border border-stone-200">
+              <div className="w-9 h-9 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0">
+                <Users className="w-4 h-4 text-amber-600" />
+              </div>
+              <div>
+                <p className="text-[10px] text-stone-400 uppercase tracking-wide">Trip style</p>
+                <p className="text-xs text-stone-700 font-medium">Private, custom-built</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-white border border-stone-200">
+              <div className="w-9 h-9 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0">
+                <Compass className="w-4 h-4 text-amber-600" />
+              </div>
+              <div>
+                <p className="text-[10px] text-stone-400 uppercase tracking-wide">Operations</p>
+                <p className="text-xs text-stone-700 font-medium">Direct ground teams</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-white border border-stone-200">
+              <div className="w-9 h-9 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0">
+                <Scale className="w-4 h-4 text-amber-600" />
+              </div>
+              <div>
+                <p className="text-[10px] text-stone-400 uppercase tracking-wide">Approach</p>
+                <p className="text-xs text-stone-700 font-medium">Logic-backed decisions</p>
+              </div>
+            </div>
+          </div>
         </PageGrid>
       </section>
 
