@@ -86,12 +86,13 @@ function StyleBadge({ style }: { style: string }) {
 /**
  * Itinerary-specific image mapping
  * Each itinerary gets a unique, relevant image to avoid repetition
+ * Images from /images/library/ provide variety across all 41 itineraries
  */
 const itineraryImageMap: Record<string, { src: string; alt: string }> = {
-  // Tanzania itineraries (6)
+  // Tanzania itineraries (7)
   'tanzania-classic-northern-circuit': {
-    src: '/images/destinations/tanzania-serengeti.jpg',
-    alt: 'Herds of wildebeest grazing in the Serengeti National Park, Tanzania',
+    src: '/images/library/destinations/zebras-wildebeest-ngorongoro.jpg',
+    alt: 'Zebras and wildebeest grazing in Ngorongoro Crater, Tanzania',
   },
   'tanzania-great-migration': {
     src: '/images/activities/migration.jpg',
@@ -102,39 +103,59 @@ const itineraryImageMap: Record<string, { src: string; alt: string }> = {
     alt: 'Panoramic view of Ngorongoro Crater from the rim, Tanzania',
   },
   'tanzania-short-northern-circuit': {
-    src: '/images/activities/game-drive.jpg',
-    alt: 'Safari vehicle observing wildlife on an early morning game drive',
+    src: '/images/library/wildlife/lion-pride-resting.jpg',
+    alt: 'Lion pride resting on the Serengeti plains',
   },
   'tanzania-safari-and-beach': {
-    src: '/images/ecosystems/delta-channels.jpg',
-    alt: 'Serene waterways perfect for beach and safari combination trips',
+    src: '/images/library/destinations/rock-restaurant-zanzibar.jpg',
+    alt: 'The Rock restaurant over turquoise waters in Zanzibar',
   },
   'tanzania-walking-safari': {
     src: '/images/activities/walking-safari.jpg',
     alt: 'Guided walking safari through African bush with armed ranger',
   },
-  // Kenya itineraries (5)
+  'tanzania-selous-ruaha': {
+    src: '/images/library/wildlife/elephants-drinking-water.jpg',
+    alt: 'Elephant herd drinking water in Tanzania southern parks',
+  },
+  // Kenya itineraries (8)
   'kenya-classic-safari': {
-    src: '/images/destinations/kenya-mara.jpg',
-    alt: 'Lions resting in the golden grass of the Masai Mara, Kenya',
+    src: '/images/library/wildlife/lion-portrait.jpg',
+    alt: 'Majestic lion portrait in the Masai Mara, Kenya',
   },
   'kenya-private-conservancies': {
-    src: '/images/activities/night-drive.jpg',
-    alt: 'Spotlight illuminating wildlife during an evening game drive',
+    src: '/images/library/wildlife/leopard-with-cubs.jpg',
+    alt: 'Leopard mother with cubs in Kenya conservancy',
   },
   'kenya-northern-frontier': {
-    src: '/images/activities/big-cats.jpg',
-    alt: 'Lions in the northern Kenya wilderness',
+    src: '/images/library/wildlife/elephant-in-water-kenya.jpg',
+    alt: 'Elephant in Kenya national park waterhole',
   },
   'kenya-masai-mara-migration': {
     src: '/images/activities/hot-air-balloon.jpg',
     alt: 'Hot air balloon floating over the Masai Mara at sunrise',
   },
   'kenya-family-friendly': {
-    src: '/images/ecosystems/savannah-wildlife.jpg',
-    alt: 'Wildlife on the African plains, perfect for family safaris',
+    src: '/images/library/birding/friends-safari-vehicle.jpg',
+    alt: 'Happy family enjoying safari vehicle game drive',
   },
-  // Botswana itineraries (3)
+  'kenya-amboseli-tsavo': {
+    src: '/images/library/destinations/elephants-kilimanjaro-amboseli.jpg',
+    alt: 'Elephant herd with Mount Kilimanjaro backdrop in Amboseli',
+  },
+  'kenya-laikipia-samburu': {
+    src: '/images/library/wildlife/lion-couple-savanna.jpg',
+    alt: 'Lions in the golden savanna of northern Kenya',
+  },
+  'kenya-short-mara-safari': {
+    src: '/images/library/wildlife/lioness-tree-shade.jpg',
+    alt: 'Lioness resting in the shade of an acacia tree in the Mara',
+  },
+  'kenya-honeymoon-safari': {
+    src: '/images/library/wildlife/male-lion-crouching.jpg',
+    alt: 'Male lion in romantic golden light of the Mara',
+  },
+  // Botswana itineraries (4)
   'botswana-okavango-delta': {
     src: '/images/destinations/botswana-delta.jpg',
     alt: 'Aerial view of the Okavango Delta waterways and islands, Botswana',
@@ -147,11 +168,11 @@ const itineraryImageMap: Record<string, { src: string; alt: string }> = {
     src: '/images/ecosystems/delta-channels.jpg',
     alt: 'Pristine Okavango Delta channels, Botswana',
   },
-  // Uganda/Rwanda itineraries (3)
-  'rwanda-gorilla-trek': {
-    src: '/images/destinations/rwanda-volcanoes.jpg',
-    alt: 'Mountain gorilla family in the misty Volcanoes National Park, Rwanda',
+  'botswana-mobile-camping-safari': {
+    src: '/images/library/birding/family-camping-safari.jpg',
+    alt: 'Mobile camping safari experience in Botswana wilderness',
   },
+  // Uganda itineraries (4)
   'uganda-primate-safari': {
     src: '/images/destinations/uganda-bwindi.jpg',
     alt: 'Primates in the tropical forest of Uganda',
@@ -160,7 +181,24 @@ const itineraryImageMap: Record<string, { src: string; alt: string }> = {
     src: '/images/activities/gorilla-trekking.jpg',
     alt: 'Trekkers observing a silverback gorilla in its natural habitat',
   },
-  // Namibia itineraries (2)
+  'uganda-gorillas-and-wildlife': {
+    src: '/images/library/wildlife/elephants-queen-elizabeth-park.jpg',
+    alt: 'Elephants in Queen Elizabeth National Park, Uganda',
+  },
+  'uganda-wildlife-safari': {
+    src: '/images/library/wildlife/elephant-with-birds-uganda.jpg',
+    alt: 'Elephant with egrets in Uganda safari landscape',
+  },
+  // Rwanda itineraries (2)
+  'rwanda-gorilla-trek': {
+    src: '/images/destinations/rwanda-volcanoes.jpg',
+    alt: 'Mountain gorilla family in the misty Volcanoes National Park, Rwanda',
+  },
+  'rwanda-gorillas-and-savanna': {
+    src: '/images/library/wildlife/elephants-pair-uganda.jpg',
+    alt: 'Wildlife in Rwanda savanna landscape',
+  },
+  // Namibia itineraries (3)
   'namibia-highlights': {
     src: '/images/destinations/namibia-sossusvlei.jpg',
     alt: 'Towering red sand dunes of Sossusvlei at sunrise, Namibia',
@@ -169,7 +207,11 @@ const itineraryImageMap: Record<string, { src: string; alt: string }> = {
     src: '/images/ecosystems/desert-dunes.jpg',
     alt: 'Dramatic desert landscape perfect for self-drive adventures',
   },
-  // South Africa itineraries (2)
+  'namibia-skeleton-coast': {
+    src: '/images/library/destinations/ruacana-waterfall-namibia.jpg',
+    alt: 'Ruacana Falls on the Namibia border',
+  },
+  // South Africa itineraries (4)
   'south-africa-kruger': {
     src: '/images/destinations/south-africa-kruger.jpg',
     alt: 'Leopard resting on a tree branch in Kruger National Park',
@@ -178,20 +220,44 @@ const itineraryImageMap: Record<string, { src: string; alt: string }> = {
     src: '/images/destinations/south-africa-lodge.jpg',
     alt: 'South African safari lodge with scenic views',
   },
-  // Zambia itinerary (1)
+  'south-africa-family-safari': {
+    src: '/images/library/wildlife/lions-kalahari-desert.jpg',
+    alt: 'Lions in the South African wilderness',
+  },
+  'south-africa-short-safari': {
+    src: '/images/library/wildlife/buffalo-at-waterhole.jpg',
+    alt: 'Cape buffalo at waterhole in South Africa',
+  },
+  // Zambia itineraries (2)
   'zambia-walking-safari': {
     src: '/images/destinations/zambia-luangwa.jpg',
     alt: 'Walking safari guide leading guests through the South Luangwa bush',
   },
-  // Zimbabwe itinerary (1)
+  'zambia-classic-safari': {
+    src: '/images/library/wildlife/lions-feeding.jpg',
+    alt: 'Lions in the wild Zambian bush',
+  },
+  'zambia-victoria-falls-safari': {
+    src: '/images/library/destinations/african-waterfall-aerial.jpg',
+    alt: 'Aerial view of Victoria Falls',
+  },
+  // Zimbabwe itineraries (3)
   'zimbabwe-falls-and-wildlife': {
     src: '/images/destinations/zimbabwe-mana.jpg',
     alt: 'Mana Pools National Park wildlife, Zimbabwe',
   },
+  'zimbabwe-hwange-mana-pools': {
+    src: '/images/library/wildlife/african-wildlife-sanctuary.jpg',
+    alt: 'Wildlife sanctuary in Zimbabwe national parks',
+  },
+  'zimbabwe-mana-pools-canoe': {
+    src: '/images/library/destinations/boat-cliffs-african-coast.jpg',
+    alt: 'Canoe safari on the Zambezi River at Mana Pools',
+  },
   // Multi-country itinerary (1)
   'east-africa-grand-circuit': {
-    src: '/images/ecosystems/savannah-morning.jpg',
-    alt: 'Golden savannah at dawn, the quintessential East Africa experience',
+    src: '/images/library/destinations/tanzania-wildlife-sunset-1.jpg',
+    alt: 'Golden savannah sunset, the quintessential East Africa experience',
   },
 };
 
