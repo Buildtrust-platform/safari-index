@@ -157,7 +157,10 @@ export async function POST(request: NextRequest) {
           let errorMessage = 'I apologize, but I am unable to respond right now. Please try again or contact us directly.';
 
           if (error instanceof Error) {
-            if (error.name === 'AccessDeniedException' || error.message.includes('access')) {
+            if (error.name === 'ThrottlingException' || error.message.includes('throttl') || error.message.includes('Too many tokens')) {
+              errorMessage = 'Our assistant is experiencing high demand. Please try again in a few minutes, or contact us directly at hello@safariindex.com.';
+              console.error('Bedrock throttling - consider requesting quota increase in AWS Service Quotas');
+            } else if (error.name === 'AccessDeniedException' || error.message.includes('access')) {
               errorMessage = 'The AI assistant is not yet configured. Please contact us directly at hello@safariindex.com or schedule a call.';
               console.error('Bedrock access denied - ensure model is enabled in AWS Bedrock console and IAM permissions are set');
             } else if (error.name === 'ValidationException') {
