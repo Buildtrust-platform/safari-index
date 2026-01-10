@@ -23,7 +23,7 @@ export const tanzaniaVsBotswanaBlog: BlogContent = {
     alt: 'Herds of wildebeest grazing in the Serengeti National Park, Tanzania',
   },
 
-  whyNotSimple: `Tanzania and Botswana both deliver world-class safari. But they deliver it in fundamentally different ways at fundamentally different prices. Treating them as interchangeable options misses what makes each destination distinctive.
+  whyNotSimple: `Tanzania and Botswana both deliver excellent safari. But they deliver it in fundamentally different ways at fundamentally different prices. Treating them as interchangeable options misses what makes each destination distinctive.
 
 Tanzania offers the Great Migration, volcanic landscapes, and a range of options from budget to ultra-luxury. Botswana offers water-based safari, strict low-volume tourism, and consistent exclusivity, but at 2 to 3 times the cost.
 
@@ -181,7 +181,7 @@ But gorilla trekking is not conventional tourism. Mountain gorillas are critical
 
 The question is whether this specific experience justifies the cost for you, given what else $1,500 could buy on safari.`,
 
-  variables: `**Your gorilla priority determines value perception.** If mountain gorillas are a bucket-list obsession, the permit cost is the price of admission to something irreplaceable. If gorillas are "nice to have," the same money might serve you better elsewhere.
+  variables: `**Your gorilla priority determines value perception.** If mountain gorillas are your primary goal, the permit cost is the price of admission to something irreplaceable. If gorillas are "nice to have," the same money might serve you better elsewhere.
 
 **Physical fitness affects the experience.** Trekking can be strenuous. Trails are steep, often muddy, and at altitude (2,500 to 4,000 meters). Some treks take 30 minutes to reach the gorillas. Others take 6 hours. You cannot choose. Fitness does not guarantee a short trek, but poor fitness makes a long trek miserable.
 

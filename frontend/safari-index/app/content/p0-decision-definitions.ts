@@ -275,7 +275,7 @@ export const p0DecisionDefinitions: P0DecisionDefinition[] = [
     tradeoffs: [
       { gain: 'Unique, adventurous start to marriage', loss: 'Traditional beach/relaxation honeymoon' },
       { gain: 'Shared awe at wildlife encounters', loss: 'Early mornings and dust' },
-      { gain: 'Unforgettable stories to tell', loss: 'Higher cost for romantic properties' },
+      { gain: 'Stories worth telling', loss: 'Higher cost for romantic properties' },
       { gain: 'Combination safari-beach options', loss: 'More logistics and travel time' },
     ],
     change_conditions: [
@@ -2458,7 +2458,7 @@ export const p0DecisionDefinitions: P0DecisionDefinition[] = [
     change_conditions: [
       'If traveling with non-birders, book separate vehicles',
       'If 300+ species is the goal, Big Five becomes secondary',
-      'If specific mammal sightings are bucket-list items, protect those mornings',
+      'If specific mammal sightings are priorities, protect those mornings',
       'If dates allow, extend trip to accommodate both properly',
     ],
     refusal_triggers: [

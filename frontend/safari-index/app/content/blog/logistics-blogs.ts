@@ -60,7 +60,7 @@ If you want multiple parks with meaningful time in each, five days is limiting. 
 
 If specific rare sightings are goals (wild dogs, aardvark, pangolin), five days may not provide enough time for probability to work in your favor.
 
-If this is a once-in-a-lifetime trip and you can extend, more days generally improve experience. The question is whether the improvement justifies the cost and time.`,
+If this is a significant trip and you can extend, more days generally improve experience. The question is whether the improvement justifies the cost and time.`,
 
   ourApproach: `We evaluate trip length using your goals, budget, and how your days are actually structured. We optimize itinerary design to maximize safari time within your constraints.
 

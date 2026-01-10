@@ -737,7 +737,7 @@ export const safariTypes: SafariType[] = [
     },
 
     best_for: [
-      'Travelers on once-in-a-lifetime trips',
+      'Travelers on significant milestone trips',
       'Those wanting maximum variety',
       'Travelers comfortable with logistics',
       'Those with sufficient time for extended itinerary',
@@ -762,7 +762,7 @@ export const safariTypes: SafariType[] = [
     },
 
     commercial_notes: {
-      why_converts: 'Appeals to maximize value of long journey, bucket list framing',
+      why_converts: 'Appeals to maximize value of long journey, must-do framing',
       typical_objections: [
         'Is it too rushed?',
         'How difficult are the border crossings?',

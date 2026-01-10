@@ -356,7 +356,7 @@ export const destinationProfiles: DestinationActivityProfile[] = [
     ],
     signature_experience: {
       title: 'Adventure Capital: Jinja on the Nile',
-      description: 'Jinja is East Africa\'s adventure capital—where the White Nile begins its 6,650km journey to the Mediterranean. World-class white water rafting, bungee jumping, kayaking, and zip-lining combine with cultural heritage. The perfect counterpoint to gorilla trekking.',
+      description: 'Jinja is East Africa\'s adventure capital. The White Nile begins its 6,650km journey to the Mediterranean here. White water rafting, bungee jumping, kayaking, and zip-lining combine with cultural heritage. A strong counterpoint to gorilla trekking.',
       image_hint: 'Rafting team navigating massive Nile rapids at Jinja with spray and excitement',
     },
     typical_day: {
@@ -365,7 +365,7 @@ export const destinationProfiles: DestinationActivityProfile[] = [
       midday: 'Return to lodge for lunch and rest (forest trekking is humid)',
       afternoon: 'Boat safari on Kazinga Channel, forest birding walk, or Jinja adventure activity',
       evening: 'Dinner with views of crater lakes, forest edge, or Nile sunset',
-      night: 'Listen to forest sounds—tree hyrax screams are unforgettable, or Jinja riverside sounds',
+      night: 'Listen to forest sounds. Tree hyrax screams are distinctive, or Jinja riverside sounds',
     },
   },
   {

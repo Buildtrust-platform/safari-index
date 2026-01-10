@@ -33,7 +33,7 @@ const DESTINATION_NAMES: Record<string, { name: string; description: string }> =
   },
   'south-africa': {
     name: 'South Africa',
-    description: 'Accessible safari destination with malaria-free options and world-class private reserves.',
+    description: 'Accessible safari destination with malaria-free options and excellent private reserves.',
   },
   namibia: {
     name: 'Namibia',

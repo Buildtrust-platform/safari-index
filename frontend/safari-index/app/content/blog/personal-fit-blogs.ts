@@ -102,7 +102,7 @@ export const familyYoungKidsBlog: BlogContent = {
 
   whyNotSimple: `Parents ask this question expecting a clear yes or no. The reality is more complicated. Safari with young children is absolutely possible. Thousands of families do it successfully. But it requires specific planning, costs more than adult-only travel, and involves trade-offs that some families accept happily while others find frustrating.
 
-The question is not whether your child is "ready" in some abstract sense. Children adapt remarkably well. The question is whether the logistics, costs, and activity limitations work for your specific family. A 4-year-old who loves animals might have a magical time. That same child, tired and jet-lagged, might make everyone miserable on a 5-hour game drive.
+The question is not whether your child is "ready" in some abstract sense. Children adapt remarkably well. The question is whether the logistics, costs, and activity limitations work for your specific family. A 4-year-old who loves animals might have an extraordinary time. That same child, tired and jet-lagged, might make everyone miserable on a 5-hour game drive.
 
 Understanding the real constraints helps you make a realistic decision rather than an idealized one.`,
 
@@ -182,7 +182,7 @@ export const multigenerationalBlog: BlogContent = {
 
 Different generations have different stamina, different interests, different tolerance for early mornings and bumpy roads. A 70-year-old with mobility limitations experiences safari differently than a 35-year-old parent or a 10-year-old child. Finding common ground that works for everyone requires careful planning, not optimistic assumptions.
 
-The question is not whether it can be done. It absolutely can, and the results can be magical. The question is how to structure it so everyone has a good experience rather than everyone compromising to the point of no one being satisfied.`,
+The question is not whether it can be done. It absolutely can, and the results can be deeply rewarding. The question is how to structure it so everyone has a good experience rather than everyone compromising to the point of no one being satisfied.`,
 
   variables: `**Mobility determines what is possible.** Safari vehicles require climbing in and out of raised seats. Walking between lodges involves uneven terrain. If any family member has significant mobility limitations, this affects which lodges and activities work. Some properties have accessibility features. Many do not. This must be researched in advance.
 

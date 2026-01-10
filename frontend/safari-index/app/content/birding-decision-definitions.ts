@@ -727,7 +727,7 @@ export const birdingDecisionDefinitions: BirdingDecisionDefinition[] = [
     ],
     change_conditions: [
       'If private vehicle with sympathetic guide, conflicts manageable',
-      'If specific predator encounter is bucket-list, accept birding sacrifice',
+      'If specific predator encounter is a priority, accept birding sacrifice',
       'If serious birding is goal, request no radio interruptions',
       'If companions are mammal-focused, separate vehicles may be necessary',
     ],

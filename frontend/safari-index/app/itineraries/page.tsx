@@ -81,7 +81,7 @@ export default function ItinerariesPage() {
 
             {/* Subtitle */}
             <p className="text-white/80 text-lg max-w-xl mx-auto">
-              {allItineraries.length} curated routes across Africa.
+              {allItineraries.length} safari routes across Africa.
               <br className="hidden md:block" />
               Each itinerary is decision-backed with clear trade-offs.
             </p>

@@ -129,7 +129,7 @@ Photography compatibility is often assumed. Bird photography and mammal photogra
 
 If 300+ species is the goal, accept that Big Five becomes secondary. Structure the trip around birding with mammals as incidental encounters rather than targets.
 
-If specific mammal sightings are bucket-list items (a kill, a river crossing, a specific animal), protect those mornings even at the cost of birding time.
+If specific mammal sightings are priorities (a kill, a river crossing, a specific animal), protect those mornings even at the cost of birding time.
 
 If combining interests is genuinely important and dates allow, extend the trip. Ten days accommodates both better than seven. Fourteen days is genuinely comfortable.`,
 

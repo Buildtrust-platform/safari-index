@@ -172,7 +172,7 @@ export const activityPrimitives: ActivityPrimitive[] = [
     physical_effort: 'high',
     risk_notes: 'Altitude 2,400-3,000m; steep terrain; 2-6 hour hikes typical',
     trade_offs: {
-      gains: 'Transformative, once-in-a-lifetime encounter with great apes',
+      gains: 'Profound encounter with great apes; irreplaceable experience',
       losses: 'Physical demand significant; permit cost high ($700-1,500)',
     },
     image_hint: 'Mountain gorilla silverback in misty forest with trekkers observing from distance',
@@ -403,7 +403,7 @@ export const activityPrimitives: ActivityPrimitive[] = [
     physical_effort: 'high',
     risk_notes: 'Grade 5 rapids are serious; swims happen; reputable operators mandatory; age limits apply',
     trade_offs: {
-      gains: 'World-class rapids; exhilarating experience; memorable adventure add-on',
+      gains: 'Exceptional rapids; exhilarating experience; memorable adventure add-on',
       losses: 'Full day commitment; physically exhausting; some risk of injury; time away from wildlife',
     },
     image_hint: 'Rafting team navigating massive white water rapid on the Nile at Jinja Uganda',
@@ -426,7 +426,7 @@ export const activityPrimitives: ActivityPrimitive[] = [
     physical_effort: 'low',
     risk_notes: 'Medical screening required; weight limits apply; reputable operators only',
     trade_offs: {
-      gains: 'Unforgettable adrenaline rush; bragging rights; iconic African adventure',
+      gains: 'Intense adrenaline rush; bragging rights; iconic African adventure',
       losses: 'Brief experience for high cost; genuine fear factor; not for everyone',
     },
     image_hint: 'Person mid-bungee jump from Victoria Falls Bridge with gorge and spray below',

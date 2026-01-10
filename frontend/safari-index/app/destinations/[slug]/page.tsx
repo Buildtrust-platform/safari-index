@@ -363,7 +363,7 @@ const DESTINATIONS_DATA: Record<string, DestinationDetails> = {
       gains: [
         'Self-drive makes it accessible and flexible',
         'Malaria-free options available',
-        'World-class city experiences',
+        'Cape Town and Johannesburg add urban options',
         'Good value compared to other destinations',
       ],
       losses: [
