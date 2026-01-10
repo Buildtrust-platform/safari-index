@@ -1,36 +1,24 @@
 /**
  * Chat API Route
  *
- * AI-powered safari planning assistant using AWS Bedrock (Claude).
+ * AI-powered safari planning assistant using Anthropic Claude API directly.
  * Provides instant answers to traveler questions.
  *
  * Features:
  * - Streaming responses for better UX
  * - Context-aware safari knowledge
- * - Rate limiting by email/session
  * - Conversation history tracking
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import {
-  BedrockRuntimeClient,
-  ConverseStreamCommand,
-  Message,
-  ContentBlock,
-} from '@aws-sdk/client-bedrock-runtime';
+import Anthropic from '@anthropic-ai/sdk';
 import { FAQS } from '../../content/faqs';
 
-// Bedrock region - us-east-1 has best Claude model availability
-// Note: Must enable Claude 3 Haiku in AWS Bedrock console Model Access
-const BEDROCK_REGION = process.env.BEDROCK_REGION || 'us-east-1';
+// Anthropic client - uses ANTHROPIC_API_KEY env var
+const anthropic = new Anthropic();
 
-// Bedrock client - uses default credential chain (IAM role in Amplify)
-const bedrockClient = new BedrockRuntimeClient({
-  region: BEDROCK_REGION,
-});
-
-// Model ID - Claude 3 Haiku for cost efficiency
-const MODEL_ID = process.env.BEDROCK_MODEL_ID || 'anthropic.claude-3-haiku-20240307-v1:0';
+// Model - Claude 3 Haiku for cost efficiency ($0.25/1M input, $1.25/1M output)
+const MODEL = 'claude-3-haiku-20240307';
 
 // Build FAQ context for the assistant
 function buildFAQContext(): string {
@@ -78,11 +66,19 @@ interface ChatRequest {
   message: string;
   email: string;
   conversationHistory?: ChatMessage[];
-  sessionId?: string;
 }
 
 export async function POST(request: NextRequest) {
   try {
+    // Check for API key
+    if (!process.env.ANTHROPIC_API_KEY) {
+      console.error('ANTHROPIC_API_KEY not configured');
+      return NextResponse.json(
+        { error: 'Chat service not configured' },
+        { status: 503 }
+      );
+    }
+
     const body: ChatRequest = await request.json();
     const { message, email, conversationHistory = [] } = body;
 
@@ -101,22 +97,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Build conversation for Bedrock
-    const messages: Message[] = [];
+    // Build messages array for Claude
+    const messages: { role: 'user' | 'assistant'; content: string }[] = [];
 
-    // Add conversation history
+    // Add conversation history (last 10 messages)
     for (const msg of conversationHistory.slice(-10)) {
-      // Keep last 10 messages
       messages.push({
         role: msg.role,
-        content: [{ text: msg.content } as ContentBlock],
+        content: msg.content,
       });
     }
 
     // Add current user message
     messages.push({
       role: 'user',
-      content: [{ text: message } as ContentBlock],
+      content: message,
     });
 
     // Create streaming response
@@ -124,54 +119,40 @@ export async function POST(request: NextRequest) {
     const stream = new ReadableStream({
       async start(controller) {
         try {
-          const command = new ConverseStreamCommand({
-            modelId: MODEL_ID,
-            system: [{ text: SYSTEM_PROMPT }],
+          const response = await anthropic.messages.create({
+            model: MODEL,
+            max_tokens: 1024,
+            system: SYSTEM_PROMPT,
             messages,
-            inferenceConfig: {
-              maxTokens: 1024,
-              temperature: 0.7,
-              topP: 0.9,
-            },
+            stream: true,
           });
 
-          const response = await bedrockClient.send(command);
-
-          if (response.stream) {
-            for await (const event of response.stream) {
-              if (event.contentBlockDelta?.delta?.text) {
-                const text = event.contentBlockDelta.delta.text;
-                controller.enqueue(
-                  encoder.encode(`data: ${JSON.stringify({ text })}\n\n`)
-                );
-              }
+          for await (const event of response) {
+            if (
+              event.type === 'content_block_delta' &&
+              event.delta.type === 'text_delta'
+            ) {
+              controller.enqueue(
+                encoder.encode(`data: ${JSON.stringify({ text: event.delta.text })}\n\n`)
+              );
             }
           }
 
           controller.enqueue(encoder.encode('data: [DONE]\n\n'));
           controller.close();
         } catch (error) {
-          console.error('Bedrock streaming error:', error);
+          console.error('Anthropic streaming error:', error);
 
-          // Provide helpful error message based on error type
-          let errorMessage = 'I apologize, but I am unable to respond right now. Please try again or contact us directly.';
+          let errorMessage = 'I apologize, but I am unable to respond right now. Please try again or contact us directly at hello@safariindex.com.';
 
-          if (error instanceof Error) {
-            if (error.name === 'ThrottlingException' || error.message.includes('throttl') || error.message.includes('Too many tokens')) {
-              errorMessage = 'Our assistant is experiencing high demand. Please try again in a few minutes, or contact us directly at hello@safariindex.com.';
-              console.error('Bedrock throttling - consider requesting quota increase in AWS Service Quotas');
-            } else if (error.name === 'AccessDeniedException' || error.message.includes('access')) {
-              errorMessage = 'The AI assistant is not yet configured. Please contact us directly at hello@safariindex.com or schedule a call.';
-              console.error('Bedrock access denied - ensure model is enabled in AWS Bedrock console and IAM permissions are set');
-            } else if (error.name === 'ValidationException') {
-              errorMessage = 'I had trouble understanding that. Could you rephrase your question?';
-            }
+          if (error instanceof Anthropic.RateLimitError) {
+            errorMessage = 'Our assistant is experiencing high demand. Please try again in a moment.';
+          } else if (error instanceof Anthropic.AuthenticationError) {
+            errorMessage = 'The AI assistant is not yet configured. Please contact us directly.';
           }
 
           controller.enqueue(
-            encoder.encode(
-              `data: ${JSON.stringify({ text: errorMessage })}\n\n`
-            )
+            encoder.encode(`data: ${JSON.stringify({ text: errorMessage })}\n\n`)
           );
           controller.enqueue(encoder.encode('data: [DONE]\n\n'));
           controller.close();
