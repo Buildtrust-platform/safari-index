@@ -3,7 +3,8 @@ import { Source_Serif_4, Inter } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
 import AttributionTracker from "./components/AttributionTracker";
-import { ChatWidget } from "./components/ChatWidget";
+// Chat widget disabled - requires ANTHROPIC_API_KEY
+// import { ChatWidget } from "./components/ChatWidget";
 
 /**
  * Editorial Font - Source Serif 4
@@ -105,8 +106,7 @@ export default function RootLayout({
           <AttributionTracker />
         </Suspense>
         {children}
-        {/* AI Chat Widget - floating on all pages */}
-        <ChatWidget />
+        {/* AI Chat Widget - disabled until ANTHROPIC_API_KEY is configured */}
       </body>
     </html>
   );
