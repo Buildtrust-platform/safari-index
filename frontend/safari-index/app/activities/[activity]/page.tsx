@@ -72,19 +72,19 @@ export async function generateMetadata({
 
   if (!activity) {
     return {
-      title: 'Activity Not Found | Safari Index',
+      title: 'Activity Not Found | Vurara Safaris',
     };
   }
 
   return {
-    title: `${activity.name} Safari | Safari Index`,
+    title: `${activity.name} Safari | Vurara Safaris`,
     description: `${activity.what_it_is} Learn who ${activity.name.toLowerCase()} suits, where it's available, and what to expect.`,
     robots: 'index, follow',
     alternates: {
       canonical: `/activities/${activity.id}`,
     },
     openGraph: {
-      title: `${activity.name} Safari | Safari Index`,
+      title: `${activity.name} Safari | Vurara Safaris`,
       description: activity.what_it_is,
       type: 'article',
       url: `/activities/${activity.id}`,
@@ -346,7 +346,7 @@ export default async function ActivityPage({
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <Link href="/activities" className="hover:text-white transition-colors">
@@ -522,7 +522,7 @@ export default async function ActivityPage({
         <div className="max-w-6xl mx-auto px-4 md:px-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
-              <span className="font-editorial text-lg font-semibold">Safari Index</span>
+              <span className="font-editorial text-lg font-semibold">Vurara Safaris</span>
               <span className="text-stone-500 text-sm ml-2">Private Safari Operator</span>
             </div>
 

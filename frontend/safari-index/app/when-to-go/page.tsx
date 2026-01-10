@@ -32,15 +32,15 @@ import {
 } from '../../lib/internal-links';
 
 export const metadata: Metadata = {
-  title: 'When to Go on Safari | Safari Index',
+  title: 'When to Go on Safari | Vurara Safaris',
   description:
-    'Plan your safari timing with Safari Index. Understand dry seasons, migration patterns, and regional weather to choose the right months for your trip.',
+    'Plan your safari timing with Vurara Safaris. Understand dry seasons, migration patterns, and regional weather to choose the right months for your trip.',
   robots: 'index, follow',
   alternates: {
     canonical: '/when-to-go',
   },
   openGraph: {
-    title: 'When to Go on Safari | Safari Index',
+    title: 'When to Go on Safari | Vurara Safaris',
     description:
       'Safari timing decisions: dry season vs green season, migration months, and regional weather patterns across East and Southern Africa.',
     type: 'website',
@@ -120,7 +120,7 @@ export default function WhenToGoPage() {
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <span className="text-white">When to Go</span>

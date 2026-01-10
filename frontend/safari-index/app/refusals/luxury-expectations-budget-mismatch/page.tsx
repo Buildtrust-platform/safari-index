@@ -1,7 +1,7 @@
 /**
  * Refusal Example: Budget-Expectation Mismatch
  *
- * Demonstrates how Safari Index refuses plans where stated
+ * Demonstrates how Vurara Safaris refuses plans where stated
  * expectations cannot be met within stated budget constraints.
  *
  * Static educational content. No backend logic.
@@ -12,8 +12,8 @@ import { Navbar, Footer } from '../../components/layout';
 import { ChevronRight, DollarSign, XCircle, TrendingDown, Home, Plane, Calendar } from 'lucide-react';
 
 export const metadata = {
-  title: 'Refusal Example: Budget Mismatch | Safari Index',
-  description: 'Why Safari Index refused a safari plan requesting luxury lodges and fly-in access on a mid-range budget.',
+  title: 'Refusal Example: Budget Mismatch | Vurara Safaris',
+  description: 'Why Vurara Safaris refused a safari plan requesting luxury lodges and fly-in access on a mid-range budget.',
 };
 
 export default function BudgetRefusalPage() {
@@ -27,7 +27,7 @@ export default function BudgetRefusalPage() {
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-stone-400 text-sm mb-6">
             <Link href="/" className="hover:text-white transition-colors">
-              Safari Index
+              Vurara Safaris
             </Link>
             <ChevronRight className="w-4 h-4" />
             <Link href="/how-it-works" className="hover:text-white transition-colors">
@@ -47,7 +47,7 @@ export default function BudgetRefusalPage() {
             Why this safari plan was refused
           </h1>
           <p className="text-stone-300 text-lg max-w-2xl">
-            Safari Index refuses plans when stated expectations fundamentally
+            Vurara Safaris refuses plans when stated expectations fundamentally
             conflict with stated budget constraints. Recommending a plan that
             cannot deliver what the traveler expects causes disappointment.
           </p>
@@ -253,17 +253,17 @@ export default function BudgetRefusalPage() {
           </div>
         </section>
 
-        {/* Why Safari Index refuses */}
+        {/* Why Vurara Safaris refuses */}
         <section className="mb-10">
           <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
-            Why Safari Index refuses instead of guessing
+            Why Vurara Safaris refuses instead of guessing
           </h2>
           <div className="bg-stone-100 rounded-xl border border-stone-200 p-6">
             <p className="text-stone-700 leading-relaxed">
               Some operators would book this client into budget camps and call it
               &ldquo;luxury&rdquo; because the word appears in the marketing. The traveler
               arrives expecting private plunge pools and finds shared facilities.
-              Safari Index refuses to participate in this mismatch. When expectations
+              Vurara Safaris refuses to participate in this mismatch. When expectations
               and budget are incompatible, we state that clearly rather than deliver
               a compromised experience dressed up with misleading language.
             </p>
@@ -292,7 +292,7 @@ export default function BudgetRefusalPage() {
               href="/how-it-works"
               className="block text-amber-700 hover:text-amber-800"
             >
-              How Safari Index makes decisions
+              How Vurara Safaris makes decisions
             </Link>
           </div>
         </section>

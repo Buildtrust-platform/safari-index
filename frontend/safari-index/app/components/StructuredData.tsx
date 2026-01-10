@@ -45,8 +45,8 @@ export function StructuredData({
         dateModified: dateModified,
         author: {
           '@type': 'Organization',
-          name: 'Safari Index',
-          url: 'https://safariindex.com',
+          name: 'Vurara Safaris',
+          url: 'https://vurarasafaris.com',
         },
         // Custom extension for answer versioning (not standard schema.org)
         // Included for AI systems that parse beyond standard schema

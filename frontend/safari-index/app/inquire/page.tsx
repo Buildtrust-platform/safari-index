@@ -547,7 +547,7 @@ function PlanningBriefForm() {
         <div className="max-w-2xl mx-auto px-4 md:px-8">
           <div className="flex items-center gap-2 text-stone-400 text-sm mb-3">
             <Link href="/" className="hover:text-white transition-colors">
-              Safari Index
+              Vurara Safaris
             </Link>
             <ChevronRight className="w-4 h-4" />
             <span className="text-stone-300">Planning Brief</span>

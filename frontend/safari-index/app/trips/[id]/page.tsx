@@ -1,7 +1,7 @@
 /**
  * Trip Archetype Page
  *
- * Safari Index-operated itinerary shape with:
+ * Vurara Safaris-operated itinerary shape with:
  * - Hero with operator badge and snapshot strip
  * - What this trip is for
  * - What you trade off
@@ -12,7 +12,7 @@
  *
  * Per governance: documentary, calm, safari-native tone.
  * No hype, emojis, or exclamation marks.
- * Positions Safari Index as the operator.
+ * Positions Vurara Safaris as the operator.
  */
 
 import Link from 'next/link';
@@ -72,7 +72,7 @@ export async function generateMetadata({
 
   if (!trip) {
     return {
-      title: 'Trip Not Found | Safari Index',
+      title: 'Trip Not Found | Vurara Safaris',
     };
   }
 
@@ -82,15 +82,15 @@ export async function generateMetadata({
     .join(', ') || getRegionDisplayName(trip.regions[0]);
 
   return {
-    title: `${trip.title} | Private Safari | Safari Index`,
-    description: `${trip.subtitle}. A Safari Index-operated private safari: ${formatDuration(trip.duration_days)} in ${regions}. Custom-built around your decisions.`,
+    title: `${trip.title} | Private Safari | Vurara Safaris`,
+    description: `${trip.subtitle}. A Vurara Safaris-operated private safari: ${formatDuration(trip.duration_days)} in ${regions}. Custom-built around your decisions.`,
     robots: 'index, follow',
     alternates: {
       canonical: `/trips/${id}`,
     },
     openGraph: {
-      title: `${trip.title} | Safari Index`,
-      description: `Private safari operated by Safari Index. ${trip.what_this_trip_is_for}`,
+      title: `${trip.title} | Vurara Safaris`,
+      description: `Private safari operated by Vurara Safaris. ${trip.what_this_trip_is_for}`,
       type: 'article',
       url: `/trips/${id}`,
     },
@@ -197,7 +197,7 @@ export default async function TripPage({
               data-testid="breadcrumb"
             >
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <Link
@@ -214,7 +214,7 @@ export default async function TripPage({
             {/* Operator badge */}
             <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium text-white/80 bg-white/10 rounded-full mb-4">
               <Compass className="w-3 h-3" />
-              Safari Index Operated
+              Vurara Safaris Operated
             </span>
 
             {/* Title */}
@@ -456,7 +456,7 @@ export default async function TripPage({
                 <Compass className="w-6 h-6 text-amber-400" />
               </div>
               <div>
-                <p className="font-medium text-lg">Plan this safari with Safari Index</p>
+                <p className="font-medium text-lg">Plan this safari with Vurara Safaris</p>
                 <p className="text-stone-400 text-sm">
                   Private, custom-built around your dates and preferences
                 </p>
@@ -469,7 +469,7 @@ export default async function TripPage({
         {/* Close framing */}
         <div className="mt-12 pt-8 border-t border-stone-200">
           <p className="text-stone-500 text-sm">
-            This is a Safari Index-operated itinerary shape. Every trip is custom-built.{' '}
+            This is a Vurara Safaris-operated itinerary shape. Every trip is custom-built.{' '}
             <Link
               href="/trips"
               className="text-amber-600 hover:text-amber-700 underline underline-offset-2"
@@ -493,7 +493,7 @@ export default async function TripPage({
         <div className="max-w-6xl mx-auto px-4 md:px-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
-              <span className="font-editorial text-lg font-semibold">Safari Index</span>
+              <span className="font-editorial text-lg font-semibold">Vurara Safaris</span>
               <span className="text-stone-500 text-sm ml-2">Private Safari Operator</span>
             </div>
 

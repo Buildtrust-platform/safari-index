@@ -17,14 +17,14 @@ test.describe('/contact page', () => {
     expect(response?.status()).toBe(200);
   });
 
-  test('has correct H1: Contact Safari Index', async ({ page }) => {
+  test('has correct H1: Contact Vurara Safaris', async ({ page }) => {
     await page.goto('/contact');
     // Wait for page to fully hydrate including image band client component
     await page.waitForLoadState('domcontentloaded');
     // The h1 is inside a client component, so we need to wait for it
     const h1 = page.getByTestId('contact-h1');
     await expect(h1).toBeVisible({ timeout: 15000 });
-    await expect(h1).toHaveText('Contact Safari Index');
+    await expect(h1).toHaveText('Contact Vurara Safaris');
   });
 
   test('has correct page title', async ({ page }) => {
@@ -56,7 +56,7 @@ test.describe('/contact page', () => {
     await expect(trustBlock).toBeVisible();
 
     // Should contain operator credentials content
-    await expect(trustBlock).toContainText(/Safari Index/i);
+    await expect(trustBlock).toContainText(/Vurara Safaris/i);
   });
 
   test('Plan a Safari CTA links to /inquire', async ({ page }) => {

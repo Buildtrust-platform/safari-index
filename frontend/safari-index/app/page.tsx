@@ -1,8 +1,8 @@
 /**
- * Safari Index Homepage
+ * Vurara Safaris Homepage
  *
  * Professional safari operator arrival page with rich visual presence.
- * Positions Safari Index as a serious safari company that uses logic-backed
+ * Positions Vurara Safaris as a serious safari company that uses logic-backed
  * decision support to plan better trips.
  *
  * Structure:
@@ -204,7 +204,7 @@ function QuestionCard({ topic }: { topic: DecisionTopic }) {
 }
 
 /**
- * Pillar Card - Three pillars of what Safari Index does
+ * Pillar Card - Three pillars of what Vurara Safaris does
  */
 function PillarCard({
   title,
@@ -809,7 +809,7 @@ export default function Home() {
 
       {/* ================================================================
           SECTION 6 — CATEGORY CLARIFICATION WITH IMAGE
-          Visual statement about Safari Index.
+          Visual statement about Vurara Safaris.
           ================================================================ */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
@@ -864,7 +864,7 @@ export default function Home() {
               Built by safari operators
             </h2>
             <p className="text-stone-600 text-sm leading-relaxed mb-4">
-              Safari Index was founded by operators who spent years planning trips across East and Southern Africa.
+              Vurara Safaris was founded by operators who spent years planning trips across East and Southern Africa.
               We built the decision system we wished existed. One that shows you exactly why we recommend what we recommend, and what would change our answer.
             </p>
             <Link
@@ -964,7 +964,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-6">
             {/* Company info and contact */}
             <div className="md:col-span-2">
-              <span className="font-editorial text-xl font-semibold">Safari Index</span>
+              <span className="font-editorial text-xl font-semibold">Vurara Safaris</span>
               <p className="text-stone-400 text-sm mt-2 max-w-sm">
                 Private safari operator specializing in East and Southern Africa.
                 Logic-backed decisions. Custom-built itineraries.
@@ -972,8 +972,8 @@ export default function Home() {
               {/* Contact info */}
               <div className="mt-4 space-y-1 text-sm text-stone-400">
                 <p>
-                  <a href="mailto:hello@safariindex.com" className="hover:text-white transition-colors">
-                    hello@safariindex.com
+                  <a href="mailto:hello@vurarasafaris.com" className="hover:text-white transition-colors">
+                    hello@vurarasafaris.com
                   </a>
                 </p>
                 <p>
@@ -984,7 +984,7 @@ export default function Home() {
               </div>
               {/* Physical address */}
               <div className="mt-3 text-xs text-stone-500">
-                <p>Safari Index Ltd.</p>
+                <p>Vurara Safaris Ltd.</p>
                 <p>Arusha, Tanzania</p>
               </div>
               {/* Social media */}
@@ -1084,7 +1084,7 @@ export default function Home() {
           {/* Bottom bar with legal links */}
           <div className="border-t border-stone-800 pt-5 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <p className="text-stone-500 text-xs">
-              © {new Date().getFullYear()} Safari Index Ltd. All rights reserved.
+              © {new Date().getFullYear()} Vurara Safaris Ltd. All rights reserved.
             </p>
             <div className="flex items-center gap-4 text-xs">
               <Link href="/privacy" className="text-stone-500 hover:text-white transition-colors">

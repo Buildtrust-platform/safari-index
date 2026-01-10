@@ -1,7 +1,7 @@
 /**
  * Refusal Example: Logistics Overload
  *
- * Demonstrates how Safari Index refuses plans that attempt
+ * Demonstrates how Vurara Safaris refuses plans that attempt
  * to cover too many parks in too few days by road.
  *
  * Static educational content. No backend logic.
@@ -12,8 +12,8 @@ import { Navbar, Footer } from '../../components/layout';
 import { ChevronRight, Route, XCircle, Clock, Car, Zap, MapPin } from 'lucide-react';
 
 export const metadata = {
-  title: 'Refusal Example: Too Many Parks | Safari Index',
-  description: 'Why Safari Index refused a safari plan attempting 5 parks in 6 days by road, resulting in unsustainable driving and minimal game time.',
+  title: 'Refusal Example: Too Many Parks | Vurara Safaris',
+  description: 'Why Vurara Safaris refused a safari plan attempting 5 parks in 6 days by road, resulting in unsustainable driving and minimal game time.',
 };
 
 export default function LogisticsRefusalPage() {
@@ -27,7 +27,7 @@ export default function LogisticsRefusalPage() {
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-stone-400 text-sm mb-6">
             <Link href="/" className="hover:text-white transition-colors">
-              Safari Index
+              Vurara Safaris
             </Link>
             <ChevronRight className="w-4 h-4" />
             <Link href="/how-it-works" className="hover:text-white transition-colors">
@@ -47,7 +47,7 @@ export default function LogisticsRefusalPage() {
             Why this safari plan was refused
           </h1>
           <p className="text-stone-300 text-lg max-w-2xl">
-            Safari Index refuses plans when logistical constraints make the
+            Vurara Safaris refuses plans when logistical constraints make the
             experience unsustainable. Excessive driving leaves insufficient
             time for wildlife viewing and causes traveler fatigue.
           </p>
@@ -261,16 +261,16 @@ export default function LogisticsRefusalPage() {
           </p>
         </section>
 
-        {/* Why Safari Index refuses */}
+        {/* Why Vurara Safaris refuses */}
         <section className="mb-10">
           <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
-            Why Safari Index refuses instead of guessing
+            Why Vurara Safaris refuses instead of guessing
           </h2>
           <div className="bg-stone-100 rounded-xl border border-stone-200 p-6">
             <p className="text-stone-700 leading-relaxed">
               Many safari operators will book this itinerary because it generates revenue.
               The traveler discovers the problem only when they are exhausted on day 3,
-              having spent more time on dusty roads than watching wildlife. Safari Index
+              having spent more time on dusty roads than watching wildlife. Vurara Safaris
               refuses this plan upfront because the outcome is predictable: dissatisfaction.
               A shorter, focused itinerary delivers a better experience than an ambitious
               one that cannot be executed well.
@@ -300,7 +300,7 @@ export default function LogisticsRefusalPage() {
               href="/how-it-works"
               className="block text-amber-700 hover:text-amber-800"
             >
-              How Safari Index makes decisions
+              How Vurara Safaris makes decisions
             </Link>
           </div>
         </section>

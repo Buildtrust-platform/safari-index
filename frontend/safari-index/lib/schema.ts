@@ -5,7 +5,7 @@
  * Generates schema.org compliant JSON-LD for rich snippets.
  */
 
-const BASE_URL = 'https://safariindex.com';
+const BASE_URL = 'https://vurarasafaris.com';
 
 /**
  * BreadcrumbList schema for navigation context
@@ -75,12 +75,12 @@ export function generateArticleSchema(props: ArticleSchemaProps) {
     dateModified: props.dateModified || props.datePublished,
     author: {
       '@type': 'Organization',
-      name: props.authorName || 'Safari Index',
+      name: props.authorName || 'Vurara Safaris',
       url: BASE_URL,
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Safari Index',
+      name: 'Vurara Safaris',
       url: BASE_URL,
       logo: {
         '@type': 'ImageObject',

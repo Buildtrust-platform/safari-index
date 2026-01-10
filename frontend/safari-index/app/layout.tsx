@@ -38,11 +38,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Safari Index",
-    template: "%s | Safari Index",
+    default: "Vurara Safaris",
+    template: "%s | Vurara Safaris",
   },
-  description: "A Pan-African decision system for safari travel planning. Issues a verdict or refuses responsibly.",
-  metadataBase: new URL(process.env.SITE_ORIGIN || "https://safariindex.com"),
+  description: "The truth of the wild, revealed. Logic-backed safari planning across East and Southern Africa.",
+  metadataBase: new URL(process.env.SITE_ORIGIN || "https://vurarasafaris.com"),
   alternates: {
     canonical: "/",
   },
@@ -53,28 +53,28 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Safari Index",
-    title: "Safari Index",
-    description: "A Pan-African decision system for safari travel planning.",
+    siteName: "Vurara Safaris",
+    title: "Vurara Safaris",
+    description: "The truth of the wild, revealed. Logic-backed safari planning across East and Southern Africa.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Safari Index",
-    description: "A Pan-African decision system for safari travel planning.",
+    title: "Vurara Safaris",
+    description: "The truth of the wild, revealed. Logic-backed safari planning across East and Southern Africa.",
   },
 };
 
 /**
  * Organization JSON-LD structured data
- * Helps search engines understand Safari Index as a business entity
+ * Helps search engines understand Vurara Safaris as a business entity
  */
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "TravelAgency",
-  name: "Safari Index",
-  description: "A Pan-African decision system for safari travel planning.",
-  url: "https://safariindex.com",
-  logo: "https://safariindex.com/logo.png",
+  name: "Vurara Safaris",
+  description: "The truth of the wild, revealed. Logic-backed safari planning across East and Southern Africa.",
+  url: "https://vurarasafaris.com",
+  logo: "https://vurarasafaris.com/logo.png",
   sameAs: [],
   areaServed: {
     "@type": "Continent",

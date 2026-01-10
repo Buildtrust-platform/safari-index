@@ -20,11 +20,11 @@ import {
 } from '../content/faqs';
 
 export const metadata: Metadata = {
-  title: 'Frequently Asked Questions | Safari Index',
+  title: 'Frequently Asked Questions | Vurara Safaris',
   description:
-    'Common questions about planning a safari with Safari Index. Answers about timing, costs, destinations, booking process, and travel logistics.',
+    'Common questions about planning a safari with Vurara Safaris. Answers about timing, costs, destinations, booking process, and travel logistics.',
   openGraph: {
-    title: 'Safari FAQ | Safari Index',
+    title: 'Safari FAQ | Vurara Safaris',
     description:
       'Answers to common safari planning questions. Timing, costs, destinations, and logistics.',
   },

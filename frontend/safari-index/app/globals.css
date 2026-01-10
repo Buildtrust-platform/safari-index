@@ -1,13 +1,24 @@
 @import "tailwindcss";
 
 /**
- * Safari Index Design System - Editorial Safari Authority
+ * Vurara Safaris Design System - Architectural Safari Authority
  *
- * Color tokens: Paper backgrounds, Editorial ink, Safari-industry signal colors
+ * Brand Colors:
+ * - Obsidian #0B0B0B: Depth, logic, clarity
+ * - Sandstone #D7C4A5: Grounded terrain, restraint
+ * - Technical Gold #A68942: Accent only (decision nodes, validation points)
+ *
  * Typography: Source Serif 4 (editorial), Inter (UI)
  */
 
 :root {
+  /* ==========================================================================
+   * VURARA CORE PALETTE - Earth-Logic System
+   * ========================================================================== */
+  --obsidian: #0B0B0B;
+  --sandstone: #D7C4A5;
+  --technical-gold: #A68942;
+
   /* ==========================================================================
    * PAPER BACKGROUNDS - Warm earth-toned safari palette
    * Evokes: aged field journals, sun-bleached savannah grass, dusty trails
@@ -18,19 +29,19 @@
   --paper-border: #CFC4B0;    /* Dried grass edge */
 
   /* ==========================================================================
-   * GOLD/SUN ACCENT - African sun, not luxury
-   * Reserved for atmospheric highlights, not decoration
+   * GOLD ACCENT - Technical Gold for decision points
+   * Reserved for: decision nodes, validation points, refusal markers
    * ========================================================================== */
-  --sun-base: #C4973B;        /* Golden hour light */
-  --sun-soft: #D4A94A;        /* Softer sun highlight */
+  --sun-base: #A68942;        /* Technical Gold - primary accent */
+  --sun-soft: #B99A4D;        /* Softer gold highlight */
   --sun-bg: #FAF6EB;          /* Warmest paper, touched by sun */
-  --sun-border: #E8D5A8;      /* Sun-kissed edge */
+  --sun-border: #D7C4A5;      /* Sandstone edge */
 
   /* ==========================================================================
    * INK COLORS - Editorial text hierarchy
    * ========================================================================== */
-  --ink-primary: #1F1F1D;
-  --ink-body: #2E2E2A;
+  --ink-primary: #0B0B0B;     /* Obsidian - primary text */
+  --ink-body: #1A1A18;
   --ink-meta: #6B6A63;
   --ink-muted: #9A978F;
 
@@ -92,7 +103,7 @@
   --color-neutral-600: var(--ink-body);
   --color-neutral-700: var(--ink-primary);
   --color-neutral-800: #1A1A18;
-  --color-neutral-900: #0F0F0E;
+  --color-neutral-900: var(--obsidian);
 
   /* Outcome colors for Tailwind */
   --color-outcome-book-bg: var(--outcome-book-bg);
@@ -120,10 +131,15 @@
   --color-sun-soft: var(--sun-soft);
   --color-sun-bg: var(--sun-bg);
   --color-sun-border: var(--sun-border);
+
+  /* Vurara brand colors */
+  --color-vurara-obsidian: var(--obsidian);
+  --color-vurara-sandstone: var(--sandstone);
+  --color-vurara-gold: var(--technical-gold);
 }
 
 /**
- * Dark mode is disabled for Safari Index
+ * Dark mode is disabled for Vurara Safaris
  * Editorial design requires consistent paper-toned backgrounds
  */
 
@@ -353,7 +369,7 @@ body {
 
 /**
  * Sun/Gold accent utilities
- * African sun - atmospheric, not decorative
+ * Technical Gold - for decision nodes, not decoration
  */
 .text-sun {
   color: var(--sun-base);
@@ -369,6 +385,33 @@ body {
 
 .border-sun-border {
   border-color: var(--sun-border);
+}
+
+/**
+ * Vurara brand color utilities
+ */
+.bg-vurara-obsidian {
+  background-color: var(--obsidian);
+}
+
+.text-vurara-obsidian {
+  color: var(--obsidian);
+}
+
+.bg-vurara-sandstone {
+  background-color: var(--sandstone);
+}
+
+.text-vurara-sandstone {
+  color: var(--sandstone);
+}
+
+.bg-vurara-gold {
+  background-color: var(--technical-gold);
+}
+
+.text-vurara-gold {
+  color: var(--technical-gold);
 }
 
 /**

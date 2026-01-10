@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     canonical: '/how-it-works',
   },
   openGraph: {
-    title: 'How Safari Index Works',
+    title: 'How Vurara Safaris Works',
     description:
       'The decision process, refusal policy, and accountability structure.',
     url: '/how-it-works',

@@ -2,7 +2,7 @@
  * Attribution Footer
  *
  * Per task requirements:
- * - "Decision issued by Safari Index"
+ * - "Decision issued by Vurara Safaris"
  * - Logic version + date
  * - No branding slogans
  * - Non-promotional
@@ -35,7 +35,7 @@ export function AttributionFooter({
 
   return (
     <footer className={footerStyles} aria-label="Decision attribution" data-testid="attribution-footer">
-      <p>Decision issued by Safari Index</p>
+      <p>Decision issued by Vurara Safaris</p>
       <p className="mt-1">
         <span aria-label="Logic version">Logic: {logicVersion}</span>
         <span aria-hidden="true"> &middot; </span>

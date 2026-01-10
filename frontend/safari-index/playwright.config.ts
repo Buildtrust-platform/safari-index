@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 /**
- * Playwright configuration for Safari Index visual smoke tests.
+ * Playwright configuration for Vurara Safaris visual smoke tests.
  *
  * Run with: npx playwright test
  * Run with UI: npx playwright test --ui

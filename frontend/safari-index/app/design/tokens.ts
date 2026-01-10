@@ -15,7 +15,7 @@
  * - Color must explain state, not decorate UI
  * - If a color does not convey meaning, it must be neutral
  *
- * These tokens define the visual vocabulary of Safari Index.
+ * These tokens define the visual vocabulary of Vurara Safaris.
  * STAGING-ONLY: Gated by isBuildMode() in consuming components.
  */
 

@@ -1,5 +1,5 @@
 /**
- * Newsletter E2E Tests - "Field Notes from Safari Index"
+ * Newsletter E2E Tests - "Field Notes from Vurara Safaris"
  *
  * Tests for:
  * - Homepage newsletter signup section with Field Notes branding
@@ -16,7 +16,7 @@ test.describe('Newsletter Signup', () => {
       await page.goto('/');
 
       // Newsletter section should be visible with Field Notes branding
-      const newsletterHeading = page.getByRole('heading', { name: 'Field Notes from Safari Index' });
+      const newsletterHeading = page.getByRole('heading', { name: 'Field Notes from Vurara Safaris' });
       await expect(newsletterHeading).toBeVisible();
 
       // Field Notes description should be present
@@ -48,7 +48,7 @@ test.describe('Newsletter Signup', () => {
       await page.waitForLoadState('domcontentloaded');
 
       // Scroll to newsletter section to ensure it's in viewport
-      const newsletterHeading = page.getByRole('heading', { name: 'Field Notes from Safari Index' });
+      const newsletterHeading = page.getByRole('heading', { name: 'Field Notes from Vurara Safaris' });
       await newsletterHeading.scrollIntoViewIfNeeded();
 
       // Find newsletter section elements
@@ -174,7 +174,7 @@ test.describe('Newsletter Signup', () => {
       await page.goto('/');
 
       // Find the newsletter section (contains the Field Notes heading)
-      const newsletterHeading = page.getByRole('heading', { name: 'Field Notes from Safari Index' });
+      const newsletterHeading = page.getByRole('heading', { name: 'Field Notes from Vurara Safaris' });
       await expect(newsletterHeading).toBeVisible();
 
       // The heading should have white/light text color
@@ -201,7 +201,7 @@ test.describe('Newsletter Signup', () => {
       await page.goto('/contact');
 
       // Newsletter section should be visible with Field Notes branding
-      const newsletterHeading = page.getByRole('heading', { name: 'Field Notes from Safari Index' });
+      const newsletterHeading = page.getByRole('heading', { name: 'Field Notes from Vurara Safaris' });
       await expect(newsletterHeading).toBeVisible();
 
       // Email input should be present

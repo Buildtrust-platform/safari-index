@@ -1,7 +1,7 @@
 /**
  * Itineraries E2E Tests
  *
- * Tests for the Safari Index Itinerary Layer.
+ * Tests for the Vurara Safaris Itinerary Layer.
  *
  * Coverage:
  * 1. /itineraries hub returns 200 and lists itineraries

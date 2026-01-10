@@ -1,8 +1,8 @@
 /**
  * Inquiry Confirmation Page
  *
- * Displays confirmation that Safari Index has received the safari brief.
- * Positions Safari Index as the operator who will plan the trip.
+ * Displays confirmation that Vurara Safaris has received the safari brief.
+ * Positions Vurara Safaris as the operator who will plan the trip.
  *
  * Per governance:
  * - No promises, timelines, or sales language
@@ -109,7 +109,7 @@ function RecoveryState() {
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <span className="text-white">Plan a Safari</span>
@@ -130,7 +130,7 @@ function RecoveryState() {
             </h1>
 
             <p className="text-white/80 text-lg max-w-xl mx-auto">
-              Safari Index operates private safaris across East and Southern Africa.
+              Vurara Safaris operates private safaris across East and Southern Africa.
               Tell us about your trip and we'll respond personally.
             </p>
           </div>
@@ -142,7 +142,7 @@ function RecoveryState() {
         {/* Recovery Card */}
         <section className="bg-white border border-stone-200 rounded-xl p-6 mb-8">
           <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
-            How Safari Index Works
+            How Vurara Safaris Works
           </h2>
 
           <ul className="space-y-4 text-stone-600">
@@ -353,7 +353,7 @@ function ConfirmationContent() {
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <Link href="/inquire" className="hover:text-white transition-colors">
@@ -378,7 +378,7 @@ function ConfirmationContent() {
             </h1>
 
             <p className="text-white/80 text-lg max-w-xl mx-auto">
-              Safari Index will review your brief and respond personally within 48 hours.
+              Vurara Safaris will review your brief and respond personally within 48 hours.
               If your request contains constraints we cannot satisfy honestly,
               we will explain why and suggest alternatives.
             </p>
@@ -512,7 +512,7 @@ function ConfirmationContent() {
             <li className="flex items-start gap-2">
               <span className="text-stone-400 mt-1">1.</span>
               <span>
-                Safari Index reviews your brief against our operator network and seasonal constraints.
+                Vurara Safaris reviews your brief against our operator network and seasonal constraints.
               </span>
             </li>
             <li className="flex items-start gap-2">

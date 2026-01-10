@@ -25,7 +25,7 @@ export default async function ActivityLayout({ params, children }: Props) {
   }
 
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Safari Index', url: '/' },
+    { name: 'Vurara Safaris', url: '/' },
     { name: 'Activities', url: '/activities' },
     { name: activityData.name, url: `/activities/${activity}` },
   ]);

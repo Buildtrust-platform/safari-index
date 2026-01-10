@@ -79,7 +79,7 @@ Phone: ${bookingRequest.phone || 'Not provided'}
 Notes from traveler:
 ${bookingRequest.notes || 'None'}
 
-Booked via Safari Index`,
+Booked via Vurara Safaris`,
       start: bookingRequest.slot_start,
       end: bookingRequest.slot_end,
       attendeeEmail: bookingRequest.email,

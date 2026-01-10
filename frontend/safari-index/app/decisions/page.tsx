@@ -1,7 +1,7 @@
 /**
  * Decisions Hub Page
  *
- * Authoritative index for Safari Index's decision library.
+ * Authoritative index for Vurara Safaris's decision library.
  * Organizes P0 decision topics by domain (bucket).
  *
  * Redesigned with:
@@ -47,7 +47,7 @@ import { SearchAndFilters } from '../components/SearchAndFilters';
  * SEO Metadata - indexable with canonical
  */
 export const metadata: Metadata = {
-  title: 'Safari Decisions | Safari Index',
+  title: 'Safari Decisions | Vurara Safaris',
   description:
     'Explore safari planning decisions across 8 domains: destinations, timing, experience types, accommodation, logistics, and more. Clear verdicts to guide your trip.',
   robots: 'index, follow',
@@ -789,7 +789,7 @@ export default function DecisionsHubPage() {
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <span className="text-white">Decisions</span>

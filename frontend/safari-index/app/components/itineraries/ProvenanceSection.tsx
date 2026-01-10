@@ -125,7 +125,7 @@ export function ProvenanceSection({ itinerary }: ProvenanceSectionProps) {
           <span className="font-medium text-stone-900">Decision provenance</span>
         </div>
         <p className="text-sm text-stone-600 mb-4">
-          Every Safari Index itinerary reflects specific trade-offs. Here is the reasoning behind this route:
+          Every Vurara Safaris itinerary reflects specific trade-offs. Here is the reasoning behind this route:
         </p>
         <div className="grid md:grid-cols-2 gap-4">
           {overallProvenance.map((reason, idx) => {
@@ -175,7 +175,7 @@ export function ProvenanceSection({ itinerary }: ProvenanceSectionProps) {
           href="/how-it-works"
           className="inline-flex items-center gap-2 text-sm text-amber-700 hover:text-amber-800 font-medium"
         >
-          How Safari Index makes decisions
+          How Vurara Safaris makes decisions
           <ArrowRight className="w-4 h-4" />
         </Link>
       </div>

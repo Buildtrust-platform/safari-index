@@ -1,7 +1,7 @@
 /**
  * Internal Linking Module
  *
- * Implements deterministic internal linking rules for Safari Index Guides.
+ * Implements deterministic internal linking rules for Vurara Safaris Guides.
  * Ensures related decisions are logically connected without circular spam.
  *
  * Linking rules:

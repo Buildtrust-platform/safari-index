@@ -216,7 +216,7 @@ export default function PublicProposalPage() {
 
               {/* Operator badge */}
               <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium text-white/80 bg-white/10 rounded-full mb-4">
-                Safari Index Proposal
+                Vurara Safaris Proposal
               </span>
 
               <h1 className="font-editorial text-3xl md:text-4xl font-semibold text-white mb-3">
@@ -230,7 +230,7 @@ export default function PublicProposalPage() {
               )}
 
               <p className="text-white/60 text-sm mt-2">
-                Operated by Safari Index
+                Operated by Vurara Safaris
               </p>
             </div>
           </ImageBandContent>
@@ -431,7 +431,7 @@ export default function PublicProposalPage() {
 
           {/* Footer attribution */}
           <div className="mt-12 text-center text-xs text-stone-400">
-            <p>Proposal prepared by Safari Index</p>
+            <p>Proposal prepared by Vurara Safaris</p>
             <p className="text-stone-500 mt-1">Private Safari Operator · East & Southern Africa</p>
             <p className="mt-2 font-mono">
               Ref: {proposal.proposal_id}

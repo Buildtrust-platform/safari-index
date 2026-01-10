@@ -586,19 +586,19 @@ export async function generateMetadata({
 
   if (!destination) {
     return {
-      title: 'Destination Not Found | Safari Index',
+      title: 'Destination Not Found | Vurara Safaris',
     };
   }
 
   return {
-    title: `${destination.name} Safari Guide | Safari Index`,
+    title: `${destination.name} Safari Guide | Vurara Safaris`,
     description: `${destination.description.slice(0, 155)}...`,
     robots: 'index, follow',
     alternates: {
       canonical: `/destinations/${destination.id}`,
     },
     openGraph: {
-      title: `${destination.name} Safari Guide | Safari Index`,
+      title: `${destination.name} Safari Guide | Vurara Safaris`,
       description: destination.tagline,
       type: 'article',
       url: `/destinations/${destination.id}`,
@@ -976,7 +976,7 @@ export default async function DestinationPage({
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <Link href="/destinations" className="hover:text-white transition-colors">

@@ -1,7 +1,7 @@
 /**
  * Refusal Example: Ethical Constraints
  *
- * Demonstrates how Safari Index refuses plans that involve
+ * Demonstrates how Vurara Safaris refuses plans that involve
  * activities or operators that violate ethical standards.
  *
  * Static educational content. No backend logic.
@@ -12,8 +12,8 @@ import { Navbar, Footer } from '../../components/layout';
 import { ChevronRight, Shield, XCircle, Heart, AlertTriangle, Users } from 'lucide-react';
 
 export const metadata = {
-  title: 'Refusal Example: Ethical Constraints | Safari Index',
-  description: 'Why Safari Index refused a safari plan requesting activities that harm wildlife or exploit local communities.',
+  title: 'Refusal Example: Ethical Constraints | Vurara Safaris',
+  description: 'Why Vurara Safaris refused a safari plan requesting activities that harm wildlife or exploit local communities.',
 };
 
 export default function EthicalRefusalPage() {
@@ -27,7 +27,7 @@ export default function EthicalRefusalPage() {
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-stone-400 text-sm mb-6">
             <Link href="/" className="hover:text-white transition-colors">
-              Safari Index
+              Vurara Safaris
             </Link>
             <ChevronRight className="w-4 h-4" />
             <Link href="/how-it-works" className="hover:text-white transition-colors">
@@ -47,7 +47,7 @@ export default function EthicalRefusalPage() {
             Why this safari plan was refused
           </h1>
           <p className="text-stone-300 text-lg max-w-2xl">
-            Safari Index refuses plans involving activities or operators
+            Vurara Safaris refuses plans involving activities or operators
             that harm wildlife, exploit communities, or violate conservation
             principles. Some requests cannot be accommodated regardless of budget.
           </p>
@@ -83,14 +83,14 @@ export default function EthicalRefusalPage() {
                 </p>
               </div>
               <div>
-                <p className="text-sm text-stone-500 mb-1">Why Safari Index refuses</p>
+                <p className="text-sm text-stone-500 mb-1">Why Vurara Safaris refuses</p>
                 <p className="text-stone-900">
                   Lion cub interaction facilities are directly linked to the
                   canned hunting industry and cub petting trauma cycles.
                   Elephant walking operations typically involve cruel training
                   methods. The requested lodge has documented exploitation of
                   local staff. These are not judgment calls&mdash;they are
-                  well-documented harms that Safari Index will not facilitate.
+                  well-documented harms that Vurara Safaris will not facilitate.
                 </p>
               </div>
             </div>
@@ -204,7 +204,7 @@ export default function EthicalRefusalPage() {
                 revenue sharing, and conservation partnerships. However, some
                 operators extract value while providing minimal wages, unsafe
                 working conditions, or displacing communities from traditional
-                lands. Safari Index maintains a list of operators with documented
+                lands. Vurara Safaris maintains a list of operators with documented
                 ethical violations and will not recommend them regardless of
                 their wildlife offerings or price points.
               </p>
@@ -242,7 +242,7 @@ export default function EthicalRefusalPage() {
                 <div>
                   <p className="font-medium text-stone-900">Choose verified ethical operators</p>
                   <p className="text-sm text-stone-500 mt-1">
-                    Safari Index works with operators who pay fair wages, invest
+                    Vurara Safaris works with operators who pay fair wages, invest
                     in communities, and maintain transparent conservation
                     practices. Many excellent lodges exist at similar price
                     points without the ethical concerns.
@@ -269,17 +269,17 @@ export default function EthicalRefusalPage() {
           </div>
         </section>
 
-        {/* Why Safari Index refuses */}
+        {/* Why Vurara Safaris refuses */}
         <section className="mb-10">
           <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
-            Why Safari Index refuses instead of guessing
+            Why Vurara Safaris refuses instead of guessing
           </h2>
           <div className="bg-stone-100 rounded-xl border border-stone-200 p-6">
             <p className="text-stone-700 leading-relaxed">
               These are not gray areas. The harm caused by cub interaction
               facilities, elephant walking operations, and exploitative lodges is
               extensively documented by conservation organizations, investigative
-              journalists, and animal welfare experts. Safari Index will not
+              journalists, and animal welfare experts. Vurara Safaris will not
               facilitate these activities even when clients specifically request
               them. We understand that travelers often don&apos;t know the
               background&mdash;the marketing is designed to obscure it. Our job is
@@ -311,7 +311,7 @@ export default function EthicalRefusalPage() {
               href="/how-it-works"
               className="block text-amber-700 hover:text-amber-800"
             >
-              How Safari Index makes decisions
+              How Vurara Safaris makes decisions
             </Link>
           </div>
         </section>

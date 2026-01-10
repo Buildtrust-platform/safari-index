@@ -143,17 +143,17 @@ function ArticleSchema({
     description: guide.decisionInOneLine,
     author: {
       '@type': 'Organization',
-      name: 'Safari Index',
-      url: 'https://safariindex.com',
+      name: 'Vurara Safaris',
+      url: 'https://vurarasafaris.com',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Safari Index',
-      url: 'https://safariindex.com',
+      name: 'Vurara Safaris',
+      url: 'https://vurarasafaris.com',
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://safariindex.com/guides/${bucketSlug}/${topicSlug}`,
+      '@id': `https://vurarasafaris.com/guides/${bucketSlug}/${topicSlug}`,
     },
     articleSection: getBucketConfig(guide.bucket).title,
     keywords: [
@@ -344,7 +344,7 @@ export default async function TopicGuidePage({
               data-testid="breadcrumb"
             >
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <Link
@@ -563,7 +563,7 @@ export default async function TopicGuidePage({
         <div className="max-w-6xl mx-auto px-4 md:px-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
-              <span className="font-editorial text-lg font-semibold">Safari Index</span>
+              <span className="font-editorial text-lg font-semibold">Vurara Safaris</span>
               <span className="text-stone-500 text-sm ml-2">Pan-African Decision System</span>
             </div>
 

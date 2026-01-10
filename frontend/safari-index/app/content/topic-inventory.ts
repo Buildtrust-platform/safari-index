@@ -1,7 +1,7 @@
 /**
  * Decision Topic Inventory
  *
- * Strategic planning registry for Safari Index decision topics.
+ * Strategic planning registry for Vurara Safaris decision topics.
  * This file defines WHAT topics exist and their launch/business attributes.
  * The operational decision-topics.ts defines HOW each topic works at runtime.
  *

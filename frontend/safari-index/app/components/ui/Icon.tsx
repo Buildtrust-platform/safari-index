@@ -103,7 +103,7 @@ export function Icon({
 // =============================================================================
 // ICON EXPORTS
 // =============================================================================
-// Curated icons for Safari Index use cases.
+// Curated icons for Vurara Safaris use cases.
 
 // Outcomes
 export {

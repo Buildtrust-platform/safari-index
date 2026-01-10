@@ -1,7 +1,7 @@
 /**
  * Refusals Index Page
  *
- * Lists all refusal example pages demonstrating Safari Index's
+ * Lists all refusal example pages demonstrating Vurara Safaris's
  * commitment to honest recommendations over sales volume.
  *
  * Static content. No backend logic.
@@ -13,8 +13,8 @@ import { ChevronRight, XCircle, DollarSign, Calendar, Map, Clock, Shield } from 
 import type { LucideIcon } from 'lucide-react';
 
 export const metadata = {
-  title: 'Refusal Examples | Safari Index',
-  description: 'Real examples of safari plans Safari Index has refused. We decline requests that cannot deliver what travelers expect.',
+  title: 'Refusal Examples | Vurara Safaris',
+  description: 'Real examples of safari plans Vurara Safaris has refused. We decline requests that cannot deliver what travelers expect.',
 };
 
 interface RefusalExample {
@@ -86,7 +86,7 @@ export default function RefusalsIndexPage() {
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-stone-400 text-sm mb-6">
             <Link href="/" className="hover:text-white transition-colors">
-              Safari Index
+              Vurara Safaris
             </Link>
             <ChevronRight className="w-4 h-4" />
             <span className="text-stone-300">Refusals</span>
@@ -96,7 +96,7 @@ export default function RefusalsIndexPage() {
             Plans We Have Refused
           </h1>
           <p className="text-stone-300 text-lg max-w-2xl">
-            Safari Index declines requests that cannot deliver what travelers
+            Vurara Safaris declines requests that cannot deliver what travelers
             expect. These are real examples of plans we refused rather than
             sell a compromised experience.
           </p>
@@ -200,7 +200,7 @@ export default function RefusalsIndexPage() {
             Planning a safari?
           </h2>
           <p className="text-stone-300 mb-6 max-w-lg mx-auto">
-            Start with honest expectations. Safari Index will tell you what is
+            Start with honest expectations. Vurara Safaris will tell you what is
             and is not possible given your constraints.
           </p>
           <Link

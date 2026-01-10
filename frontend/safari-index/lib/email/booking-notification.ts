@@ -70,7 +70,7 @@ interface BookingConfirmationData {
 export async function sendBookingConfirmation(data: BookingConfirmationData): Promise<boolean> {
   const logPrefix = '[Booking Notification]';
   const operatorEmail = process.env.OPERATOR_EMAIL;
-  const fromEmail = process.env.FROM_EMAIL || 'notifications@safariindex.com';
+  const fromEmail = process.env.FROM_EMAIL || 'notifications@vurarasafaris.com';
 
   if (!operatorEmail) {
     console.warn(`${logPrefix} OPERATOR_EMAIL not configured`);
@@ -80,10 +80,10 @@ export async function sendBookingConfirmation(data: BookingConfirmationData): Pr
   const formattedStart = formatDateTime(data.slot_start, data.timezone);
 
   // Send to traveler
-  const travelerSubject = `Confirmed: ${data.consultation_type} with Safari Index`;
+  const travelerSubject = `Confirmed: ${data.consultation_type} with Vurara Safaris`;
   const travelerBody = `Hi ${data.name},
 
-Your consultation with Safari Index is confirmed.
+Your consultation with Vurara Safaris is confirmed.
 
 BOOKING DETAILS
 ---------------
@@ -101,7 +101,7 @@ If you need to reschedule, reply to this email at least 24 hours before.
 
 Looking forward to speaking with you.
 
-Safari Index
+Vurara Safaris
 `;
 
   // Send to operator

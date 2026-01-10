@@ -30,7 +30,7 @@ function buildFAQContext(): string {
 }
 
 // System prompt for the safari assistant
-const SYSTEM_PROMPT = `You are a helpful safari planning assistant for Safari Index, a private safari operator specializing in East and Southern Africa.
+const SYSTEM_PROMPT = `You are a helpful safari planning assistant for Vurara Safaris, a private safari operator specializing in East and Southern Africa.
 
 Your role is to:
 - Answer questions about safari planning, destinations, timing, costs, and logistics
@@ -38,7 +38,7 @@ Your role is to:
 - Help travelers understand what to expect
 - Guide them toward scheduling a call or submitting an inquiry when appropriate
 
-Key information about Safari Index:
+Key information about Vurara Safaris:
 - Private safari operator (not a booking platform)
 - Covers Tanzania, Kenya, Botswana, Zimbabwe, Zambia, Namibia, South Africa, Rwanda, Uganda
 - Custom-built itineraries only (no set tours)
@@ -143,7 +143,7 @@ export async function POST(request: NextRequest) {
         } catch (error) {
           console.error('Anthropic streaming error:', error);
 
-          let errorMessage = 'I apologize, but I am unable to respond right now. Please try again or contact us directly at hello@safariindex.com.';
+          let errorMessage = 'I apologize, but I am unable to respond right now. Please try again or contact us directly at hello@vurarasafaris.com.';
 
           if (error instanceof Anthropic.RateLimitError) {
             errorMessage = 'Our assistant is experiencing high demand. Please try again in a moment.';

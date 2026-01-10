@@ -1,7 +1,7 @@
 /**
  * How It Works Page
  *
- * Explains Safari Index methodology, refusal policy, and accountability.
+ * Explains Vurara Safaris methodology, refusal policy, and accountability.
  * Premium safari aesthetic with ImageBand hero.
  *
  * Sections:
@@ -78,7 +78,7 @@ export default function HowItWorksPage() {
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <span className="text-white">How it works</span>
@@ -110,7 +110,7 @@ export default function HowItWorksPage() {
           <Heading2 className="mb-6">What it is</Heading2>
           <div className="bg-white rounded-2xl border border-stone-200 p-6 mb-4">
             <p className="text-stone-900 leading-relaxed">
-              Safari Index is a decision support system for safari travel planning.
+              Vurara Safaris is a decision support system for safari travel planning.
               It provides clear verdicts on common safari questions: when to go,
               where to stay, what to expect. Trade-offs and conditions are stated upfront.
             </p>
@@ -226,7 +226,7 @@ export default function HowItWorksPage() {
             <div className="bg-white rounded-2xl border border-stone-200 p-6">
               <Heading3 className="mb-2">Citation</Heading3>
               <Text variant="body" color="secondary">
-                Cite as: Safari Index. [Decision title]. Version [X]. [URL]. Accessed [date].
+                Cite as: Vurara Safaris. [Decision title]. Version [X]. [URL]. Accessed [date].
               </Text>
             </div>
           </div>

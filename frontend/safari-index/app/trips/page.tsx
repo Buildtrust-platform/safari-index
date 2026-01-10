@@ -1,7 +1,7 @@
 /**
  * Safaris Hub Page
  *
- * Safari Index-operated itinerary shapes. Each is custom-built around
+ * Vurara Safaris-operated itinerary shapes. Each is custom-built around
  * traveler decisions and preferences.
  *
  * Per governance: documentary, calm, safari-native tone. No hype, emojis,
@@ -41,17 +41,17 @@ import { SearchAndFilters } from '../components/SearchAndFilters';
  * SEO Metadata
  */
 export const metadata: Metadata = {
-  title: 'Private Safaris | Safari Index',
+  title: 'Private Safaris | Vurara Safaris',
   description:
-    'Private safaris operated by Safari Index. 20 itinerary shapes across East and Southern Africa, each custom-built around your decisions.',
+    'Private safaris operated by Vurara Safaris. 20 itinerary shapes across East and Southern Africa, each custom-built around your decisions.',
   robots: 'index, follow',
   alternates: {
     canonical: '/trips',
   },
   openGraph: {
-    title: 'Private Safaris | Safari Index',
+    title: 'Private Safaris | Vurara Safaris',
     description:
-      'Safari Index operates private safaris across Africa. From classic Serengeti circuits to gorilla treks and self-drive adventures.',
+      'Vurara Safaris operates private safaris across Africa. From classic Serengeti circuits to gorilla treks and self-drive adventures.',
     type: 'website',
     url: '/trips',
   },
@@ -429,7 +429,7 @@ export default function TripsHubPage() {
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <span className="text-white">Safaris</span>
@@ -438,7 +438,7 @@ export default function TripsHubPage() {
             {/* Operator badge */}
             <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium text-white/80 bg-white/10 rounded-full mb-4">
               <Compass className="w-3 h-3" />
-              Safari Index Operated
+              Vurara Safaris Operated
             </span>
 
             {/* Icon + Title */}

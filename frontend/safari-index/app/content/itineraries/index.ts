@@ -1,7 +1,7 @@
 /**
  * Itineraries Module - Barrel Export
  *
- * Production-ready itinerary layer for Safari Index.
+ * Production-ready itinerary layer for Vurara Safaris.
  * Provides bookable-feeling itineraries that remain decision-backed.
  */
 

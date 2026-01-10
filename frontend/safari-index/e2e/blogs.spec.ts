@@ -225,8 +225,8 @@ test.describe('/blog/decisions/[slug] individual blog pages', () => {
 
     await page.goto(href);
 
-    // Check title includes Safari Index
-    await expect(page).toHaveTitle(/Safari Index/i);
+    // Check title includes Vurara Safaris
+    await expect(page).toHaveTitle(/Vurara Safaris/i);
 
     // Check canonical URL
     const canonical = page.locator('link[rel="canonical"]');

@@ -39,7 +39,7 @@ import { SearchAndFilters } from '../components/SearchAndFilters';
  * SEO Metadata - indexable with canonical
  */
 export const metadata: Metadata = {
-  title: 'Safari Planning Guides | Safari Index',
+  title: 'Safari Planning Guides | Vurara Safaris',
   description:
     'In-depth safari planning guides across 8 domains: destinations, timing, accommodation, logistics, and more. Documentary-style guidance.',
   robots: 'index, follow',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     canonical: '/guides',
   },
   openGraph: {
-    title: 'Safari Planning Guides | Safari Index',
+    title: 'Safari Planning Guides | Vurara Safaris',
     description:
       'In-depth guides for safari planning decisions across 8 domains. Documentary-style guidance for informed travel choices.',
     type: 'website',
@@ -296,7 +296,7 @@ export default function GuidesIndexPage() {
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <span className="text-white">Guides</span>

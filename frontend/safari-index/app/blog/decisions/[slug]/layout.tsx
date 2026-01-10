@@ -29,7 +29,7 @@ export default async function BlogArticleLayout({ params, children }: Props) {
   }
 
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Safari Index', url: '/' },
+    { name: 'Vurara Safaris', url: '/' },
     { name: 'Blog', url: '/blog' },
     { name: blog.title, url: `/blog/decisions/${slug}` },
   ]);
@@ -39,7 +39,7 @@ export default async function BlogArticleLayout({ params, children }: Props) {
     description: blog.subtitle,
     url: `/blog/decisions/${slug}`,
     datePublished: new Date().toISOString(), // Blog content is evergreen
-    authorName: 'Safari Index',
+    authorName: 'Vurara Safaris',
   });
 
   return (

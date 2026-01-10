@@ -1,7 +1,7 @@
 /**
  * Guide Builder
  *
- * Deterministic content generation for Safari Index Guides.
+ * Deterministic content generation for Vurara Safaris Guides.
  * Composes guide content from topic-inventory, baselines, and evidence.
  *
  * Key principles:

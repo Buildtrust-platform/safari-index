@@ -19,7 +19,7 @@ export function DecisionAnchor({ decisionSlug, title }: DecisionAnchorProps) {
     <footer className="mt-12 pt-8 border-t border-stone-200 space-y-6">
       {/* Closing statement */}
       <p className="text-stone-700 leading-relaxed">
-        If this decision connects to your travel plans, you can plan a safari with Safari Index.
+        If this decision connects to your travel plans, you can plan a safari with Vurara Safaris.
       </p>
 
       {/* CTA */}

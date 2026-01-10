@@ -1,7 +1,7 @@
 /**
  * Operator Credentials Strip
  *
- * A quiet, factual credential strip establishing Safari Index as a
+ * A quiet, factual credential strip establishing Vurara Safaris as a
  * professional safari operator. No marketing slogans. Only facts.
  *
  * Per governance:
@@ -41,7 +41,7 @@ interface OperatorCredentialsProps {
 }
 
 /**
- * OperatorCredentials - Factual trust signals for Safari Index as operator
+ * OperatorCredentials - Factual trust signals for Vurara Safaris as operator
  */
 export function OperatorCredentials({
   variant = 'full',
@@ -121,7 +121,7 @@ export function OperatorStatement({ className = '' }: { className?: string }) {
       className={`text-stone-600 leading-relaxed ${className}`}
       data-testid="operator-statement"
     >
-      Safari Index plans and operates private safaris across East and Southern Africa.
+      Vurara Safaris plans and operates private safaris across East and Southern Africa.
       Every trip is custom-built. Every decision is logic-backed.
     </p>
   );
@@ -137,7 +137,7 @@ export function OperatorBadge({ className = '' }: { className?: string }) {
       data-testid="operator-badge"
     >
       <Compass className="w-3 h-3" />
-      Safari Index Operated
+      Vurara Safaris Operated
     </span>
   );
 }

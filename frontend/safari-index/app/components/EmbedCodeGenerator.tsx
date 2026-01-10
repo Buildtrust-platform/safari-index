@@ -27,7 +27,7 @@ export function EmbedCodeGenerator({
 }: EmbedCodeGeneratorProps) {
   const [copied, setCopied] = useState(false);
 
-  const embedUrl = `https://safariindex.com/embed/decision/${assuranceId}?v=${answerVersion}`;
+  const embedUrl = `https://vurarasafaris.com/embed/decision/${assuranceId}?v=${answerVersion}`;
 
   // Generate iframe code with fixed dimensions and no modification options
   const iframeCode = `<iframe
@@ -35,7 +35,7 @@ export function EmbedCodeGenerator({
   width="100%"
   height="400"
   style="max-width: 640px; border: none; overflow: hidden;"
-  title="Safari Index Decision"
+  title="Vurara Safaris Decision"
   loading="lazy"
   sandbox="allow-scripts allow-same-origin allow-popups"
 ></iframe>`;

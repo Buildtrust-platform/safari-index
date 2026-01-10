@@ -23,7 +23,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const BASE_URL = 'https://safariindex.com';
+const BASE_URL = 'https://vurarasafaris.com';
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -75,7 +75,7 @@ export default async function DecisionLayout({ params, children }: Props) {
 
   // Generate breadcrumb schema
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Safari Index', url: '/' },
+    { name: 'Vurara Safaris', url: '/' },
     { name: 'Decisions', url: '/decisions' },
     { name: topic.question, url: `/decisions/${topic.slug}` },
   ]);

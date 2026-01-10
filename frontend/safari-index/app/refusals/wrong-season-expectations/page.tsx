@@ -1,7 +1,7 @@
 /**
  * Refusal Example: Wrong Season Expectations
  *
- * Demonstrates how Safari Index refuses plans where seasonal
+ * Demonstrates how Vurara Safaris refuses plans where seasonal
  * timing makes the requested experience impossible.
  *
  * Static educational content. No backend logic.
@@ -12,8 +12,8 @@ import { Navbar, Footer } from '../../components/layout';
 import { ChevronRight, Calendar, XCircle, CloudRain, Sun, Thermometer } from 'lucide-react';
 
 export const metadata = {
-  title: 'Refusal Example: Wrong Season | Safari Index',
-  description: 'Why Safari Index refused a safari plan requesting dry season wildlife concentrations during peak green season.',
+  title: 'Refusal Example: Wrong Season | Vurara Safaris',
+  description: 'Why Vurara Safaris refused a safari plan requesting dry season wildlife concentrations during peak green season.',
 };
 
 export default function WrongSeasonRefusalPage() {
@@ -27,7 +27,7 @@ export default function WrongSeasonRefusalPage() {
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-stone-400 text-sm mb-6">
             <Link href="/" className="hover:text-white transition-colors">
-              Safari Index
+              Vurara Safaris
             </Link>
             <ChevronRight className="w-4 h-4" />
             <Link href="/how-it-works" className="hover:text-white transition-colors">
@@ -47,7 +47,7 @@ export default function WrongSeasonRefusalPage() {
             Why this safari plan was refused
           </h1>
           <p className="text-stone-300 text-lg max-w-2xl">
-            Safari Index refuses plans when seasonal conditions make the
+            Vurara Safaris refuses plans when seasonal conditions make the
             requested wildlife experience impossible. Booking against the
             seasons wastes money and creates disappointment.
           </p>
@@ -261,10 +261,10 @@ export default function WrongSeasonRefusalPage() {
           </div>
         </section>
 
-        {/* Why Safari Index refuses */}
+        {/* Why Vurara Safaris refuses */}
         <section className="mb-10">
           <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
-            Why Safari Index refuses instead of guessing
+            Why Vurara Safaris refuses instead of guessing
           </h2>
           <div className="bg-stone-100 rounded-xl border border-stone-200 p-6">
             <p className="text-stone-700 leading-relaxed">
@@ -301,7 +301,7 @@ export default function WrongSeasonRefusalPage() {
               href="/how-it-works"
               className="block text-amber-700 hover:text-amber-800"
             >
-              How Safari Index makes decisions
+              How Vurara Safaris makes decisions
             </Link>
           </div>
         </section>

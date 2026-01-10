@@ -2,7 +2,7 @@
  * Custom 404 Page
  *
  * User-friendly 404 page with navigation options.
- * Follows Safari Index design system.
+ * Follows Vurara Safaris design system.
  */
 
 import Link from 'next/link';

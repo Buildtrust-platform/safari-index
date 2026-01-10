@@ -27,7 +27,7 @@ export default async function TripLayout({ params, children }: Props) {
   }
 
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Safari Index', url: '/' },
+    { name: 'Vurara Safaris', url: '/' },
     { name: 'Trips', url: '/trips' },
     { name: trip.title, url: `/trips/${id}` },
   ]);

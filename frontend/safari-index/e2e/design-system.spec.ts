@@ -31,8 +31,8 @@ test.describe('Design System v1 - Staging Pages', () => {
     const topicCards = page.locator('a[href^="/decisions/"]');
     await expect(topicCards.first()).toBeVisible();
 
-    // Footer with Safari Index branding
-    await expect(page.locator('footer').getByText('Safari Index')).toBeVisible();
+    // Footer with Vurara Safaris branding
+    await expect(page.locator('footer').getByText('Vurara Safaris')).toBeVisible();
   });
 
   test('compare page renders with design system primitives', async ({ page }) => {
@@ -425,8 +425,8 @@ test.describe('Design System v1 - Authority Front Door', () => {
   test('homepage has correct structure and navigation links', async ({ page }) => {
     await page.goto('/');
 
-    // Should have "What Safari Index does" section (Orientation)
-    await expect(page.getByRole('heading', { name: 'What Safari Index does' })).toBeVisible();
+    // Should have "What Vurara Safaris does" section (Orientation)
+    await expect(page.getByRole('heading', { name: 'What Vurara Safaris does' })).toBeVisible();
 
     // Should have "Start with a real question" section (Real Questions)
     await expect(page.getByRole('heading', { name: 'Start with a real question' })).toBeVisible();
@@ -477,7 +477,7 @@ test.describe('Design System v1 - How It Works Page', () => {
     await expect(page.getByTestId('image-band')).not.toBeVisible();
 
     // Main heading should be visible
-    await expect(page.getByRole('heading', { name: 'How Safari Index works' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'How Vurara Safaris works' })).toBeVisible();
 
     // Should have all main sections (per corrected structure)
     await expect(page.getByRole('heading', { name: 'What it is' })).toBeVisible();
@@ -506,8 +506,8 @@ test.describe('Design System v1 - How It Works Page', () => {
   test('how-it-works page back link navigates to home', async ({ page }) => {
     await page.goto('/how-it-works');
 
-    // Click back to Safari Index link
-    await page.getByRole('link', { name: 'Back to Safari Index' }).click();
+    // Click back to Vurara Safaris link
+    await page.getByRole('link', { name: 'Back to Vurara Safaris' }).click();
 
     // Should navigate to homepage
     await expect(page).toHaveURL('/');

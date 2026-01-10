@@ -64,14 +64,14 @@ export async function generateMetadata({
   const guide = buildBucketGuide(bucket);
 
   return {
-    title: `${config.title} Guides | Safari Index`,
+    title: `${config.title} Guides | Vurara Safaris`,
     description: config.heroDescription + ' ' + (guide?.topics.length || 0) + ' in-depth guides.',
     robots: 'index, follow',
     alternates: {
       canonical: `/guides/${bucketSlug}`,
     },
     openGraph: {
-      title: `${config.title} Guides | Safari Index`,
+      title: `${config.title} Guides | Vurara Safaris`,
       description: config.heroDescription,
       type: 'website',
       url: `/guides/${bucketSlug}`,
@@ -201,7 +201,7 @@ export default async function BucketHubPage({
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <Link href="/guides" className="hover:text-white transition-colors">
@@ -316,7 +316,7 @@ export default async function BucketHubPage({
         <div className="max-w-6xl mx-auto px-4 md:px-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
-              <span className="font-editorial text-lg font-semibold">Safari Index</span>
+              <span className="font-editorial text-lg font-semibold">Vurara Safaris</span>
               <span className="text-stone-500 text-sm ml-2">Pan-African Decision System</span>
             </div>
 

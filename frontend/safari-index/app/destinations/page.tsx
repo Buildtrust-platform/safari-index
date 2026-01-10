@@ -28,7 +28,7 @@ import {
 import { SearchAndFilters } from '../components/SearchAndFilters';
 
 export const metadata: Metadata = {
-  title: 'Safari Destinations | Safari Index',
+  title: 'Safari Destinations | Vurara Safaris',
   description:
     'Safari destinations across East and Southern Africa. Tanzania, Kenya, Botswana, South Africa, Rwanda, Uganda, Namibia, Zambia, and Zimbabwe.',
   robots: 'index, follow',
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
     canonical: '/destinations',
   },
   openGraph: {
-    title: 'Safari Destinations | Safari Index',
+    title: 'Safari Destinations | Vurara Safaris',
     description:
-      'Plan your safari by destination. Explore Tanzania, Kenya, Botswana, South Africa, Rwanda, and more with Safari Index.',
+      'Plan your safari by destination. Explore Tanzania, Kenya, Botswana, South Africa, Rwanda, and more with Vurara Safaris.',
     type: 'website',
     url: '/destinations',
   },
@@ -297,7 +297,7 @@ export default function DestinationsPage() {
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <span className="text-white">Destinations</span>

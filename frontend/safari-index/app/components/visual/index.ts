@@ -1,7 +1,7 @@
 /**
  * Visual Components - Barrel Export
  *
- * Environmental context imagery for Safari Index staging pages.
+ * Environmental context imagery for Vurara Safaris staging pages.
  * All components are gated by isBuildMode() - production unchanged.
  */
 

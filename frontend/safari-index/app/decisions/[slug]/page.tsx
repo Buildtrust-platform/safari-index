@@ -320,7 +320,7 @@ export default function DecisionPage() {
               {/* Breadcrumb */}
               <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
                 <Link href="/" className="hover:text-white transition-colors">
-                  Safari Index
+                  Vurara Safaris
                 </Link>
                 <ChevronRight className="w-4 h-4" />
                 <Link href="/decisions" className="hover:text-white transition-colors">
@@ -606,7 +606,7 @@ export default function DecisionPage() {
     const primaryCondition = extractPrimaryCondition(d.assumptions, d.change_conditions);
     const invalidatingCondition = extractInvalidatingCondition(d.change_conditions);
 
-    const canonicalUrl = `https://safariindex.com/decisions/${slug}`;
+    const canonicalUrl = `https://vurarasafaris.com/decisions/${slug}`;
     const quotableVerdict = answerVersion?.quotableVerdict || d.summary;
 
     return (

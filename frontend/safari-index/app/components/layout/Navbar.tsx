@@ -7,9 +7,9 @@
  * Transparent on hero, solid on scroll.
  *
  * Structure:
- * - Left: Safari Index logo text
+ * - Left: Vurara Safaris logo text
  * - Primary nav: Explore decisions, Compare, When to go, How it works
- * - Right: Decision Assurance (quiet link)
+ * - Right: Plan a Safari CTA
  *
  * Mobile: Collapses into simple menu
  */
@@ -82,7 +82,7 @@ export function Navbar({ variant = 'transparent' }: NavbarProps) {
             )}
             data-testid="navbar-logo"
           >
-            Safari Index
+            Vurara Safaris
           </Link>
 
           {/* Desktop Navigation */}

@@ -1,11 +1,11 @@
 /**
- * Newsletter Signup Component - "Field Notes from Safari Index"
+ * Newsletter Signup Component - "Field Notes from Vurara Safaris"
  *
  * Client component for newsletter subscription with authority-first positioning.
  * Posts to /api/newsletter and handles success/error states.
  *
  * Per spec:
- * - Heading: 'Field Notes from Safari Index'
+ * - Heading: 'Field Notes from Vurara Safaris'
  * - Description: Seasonal insights, destination updates, planning frameworks
  * - Frequency: Monthly at most (explicitly stated)
  * - Privacy: No spam, no deals, unsubscribe anytime
@@ -96,7 +96,7 @@ export function NewsletterSignup({ source = 'homepage' }: NewsletterSignupProps)
       <div className="flex items-center justify-center gap-2 mb-4">
         <Compass className="w-5 h-5 text-amber-500" />
         <h3 className="font-editorial text-xl font-semibold text-white">
-          Field Notes from Safari Index
+          Field Notes from Vurara Safaris
         </h3>
       </div>
       <p className="text-sm text-stone-300 mb-2 max-w-md mx-auto leading-relaxed">

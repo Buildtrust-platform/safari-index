@@ -1,7 +1,7 @@
 /**
  * Trips Feature E2E Tests
  *
- * Tests for the Safari Index Trip Shapes layer.
+ * Tests for the Vurara Safaris Trip Shapes layer.
  *
  * Coverage:
  * 1. /trips returns 200 and lists 20 trips

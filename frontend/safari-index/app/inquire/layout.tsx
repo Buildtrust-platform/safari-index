@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     canonical: '/inquire',
   },
   openGraph: {
-    title: 'Plan a Safari | Safari Index',
+    title: 'Plan a Safari | Vurara Safaris',
     description:
       'Start planning your African safari with personalized recommendations.',
     url: '/inquire',

@@ -35,7 +35,7 @@ import {
 } from '../content/activities/activity-primitives';
 
 export const metadata: Metadata = {
-  title: 'Safari Activities | Safari Index',
+  title: 'Safari Activities | Vurara Safaris',
   description:
     'Safari activities from game drives to walking safaris, gorilla trekking to mokoro excursions. Understand what each activity offers, who it suits, and the trade-offs.',
   robots: 'index, follow',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     canonical: '/activities',
   },
   openGraph: {
-    title: 'Safari Activities | Safari Index',
+    title: 'Safari Activities | Vurara Safaris',
     description:
       'Explore safari activities: game drives, walking safaris, boat safaris, gorilla trekking, and more. Honest guidance on who each activity suits.',
     type: 'website',
@@ -457,7 +457,7 @@ export default function ActivitiesPage() {
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <span className="text-white">Activities</span>

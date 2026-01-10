@@ -49,7 +49,7 @@ test.describe('Trip page activity sections', () => {
 
     if (hasAccommodation) {
       // Should have the disclaimer about not listing specific lodges
-      await expect(page.getByText(/Safari Index doesn't list specific lodges/i)).toBeVisible();
+      await expect(page.getByText(/Vurara Safaris doesn't list specific lodges/i)).toBeVisible();
     }
   });
 

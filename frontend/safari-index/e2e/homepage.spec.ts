@@ -76,7 +76,7 @@ test.describe('Homepage Newsletter', () => {
     await page.goto('/');
 
     // Newsletter section with Field Notes branding
-    await expect(page.getByRole('heading', { name: 'Field Notes from Safari Index' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Field Notes from Vurara Safaris' })).toBeVisible();
     await expect(page.getByText('Occasional dispatches on safari planning')).toBeVisible();
     await expect(page.getByText('No deals, no spam. Published monthly at most.')).toBeVisible();
     await expect(page.getByText('Your email stays with us. Unsubscribe anytime.')).toBeVisible();
@@ -231,9 +231,9 @@ test.describe('Footer', () => {
     const footer = page.locator('footer');
     await expect(footer).toBeVisible();
 
-    // Footer contains Safari Index branding (use first() to handle multiple matches)
-    await expect(footer.getByText('Safari Index', { exact: true }).first()).toBeVisible();
-    await expect(footer.getByText('Safari Index · Private Safari Operator')).toBeVisible();
+    // Footer contains Vurara Safaris branding (use first() to handle multiple matches)
+    await expect(footer.getByText('Vurara Safaris', { exact: true }).first()).toBeVisible();
+    await expect(footer.getByText('Vurara Safaris · Private Safari Operator')).toBeVisible();
 
     // Footer navigation links - Explore column
     await expect(footer.getByRole('link', { name: 'Safaris' })).toBeVisible();
@@ -253,7 +253,7 @@ test.describe('Contact Page Newsletter', () => {
     await page.goto('/contact');
 
     // Newsletter section should be visible on contact page
-    await expect(page.getByRole('heading', { name: 'Field Notes from Safari Index' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Field Notes from Vurara Safaris' })).toBeVisible();
     await expect(page.getByText('No deals, no spam. Published monthly at most.')).toBeVisible();
   });
 });

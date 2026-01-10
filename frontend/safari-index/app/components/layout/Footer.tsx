@@ -1,7 +1,7 @@
 /**
  * Shared Footer Component
  *
- * Consistent footer across all Safari Index pages.
+ * Consistent footer across all Vurara Safaris pages.
  * Documentary, operator-grade tone. No promotional language.
  */
 
@@ -14,8 +14,8 @@ interface FooterProps {
 
 export function Footer({ variant = 'operator' }: FooterProps) {
   const tagline = variant === 'operator'
-    ? 'Private Safari Operator'
-    : 'Pan-African Decision System';
+    ? 'The Truth of the Wild, Revealed'
+    : 'Logic-Backed Safari Planning';
 
   return (
     <footer className="bg-stone-900 text-white py-12 mt-16">
@@ -23,7 +23,7 @@ export function Footer({ variant = 'operator' }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <span className="font-editorial text-xl font-semibold">Safari Index</span>
+            <span className="font-editorial text-xl font-semibold">Vurara Safaris</span>
             <p className="text-stone-400 text-sm mt-2 max-w-sm">
               {variant === 'operator'
                 ? 'Private safari operator specializing in East and Southern Africa. Logic-backed decisions. Custom-built itineraries.'
@@ -83,7 +83,7 @@ export function Footer({ variant = 'operator' }: FooterProps) {
         {/* Bottom bar */}
         <div className="border-t border-stone-800 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <p className="text-stone-500 text-sm">
-            Safari Index · {tagline}
+            Vurara Safaris · {tagline}
           </p>
           <div className="flex items-center gap-6">
             <Link href="/compare" className="text-sm text-stone-400 hover:text-white transition-colors">

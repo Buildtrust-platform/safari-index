@@ -1,7 +1,7 @@
 /**
  * Refusal Example: Timing Impossibility
  *
- * Demonstrates how Safari Index refuses plans that request
+ * Demonstrates how Vurara Safaris refuses plans that request
  * river crossings during periods with negligible probability.
  *
  * Static educational content. No backend logic.
@@ -12,8 +12,8 @@ import { Navbar, Footer } from '../../components/layout';
 import { ChevronRight, Calendar, XCircle, Clock, AlertTriangle, MapPin } from 'lucide-react';
 
 export const metadata = {
-  title: 'Refusal Example: River Crossing Timing | Safari Index',
-  description: 'Why Safari Index refused a safari plan requesting Mara River crossings in April, when crossing probability is below 5%.',
+  title: 'Refusal Example: River Crossing Timing | Vurara Safaris',
+  description: 'Why Vurara Safaris refused a safari plan requesting Mara River crossings in April, when crossing probability is below 5%.',
 };
 
 export default function TimingRefusalPage() {
@@ -27,7 +27,7 @@ export default function TimingRefusalPage() {
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-stone-400 text-sm mb-6">
             <Link href="/" className="hover:text-white transition-colors">
-              Safari Index
+              Vurara Safaris
             </Link>
             <ChevronRight className="w-4 h-4" />
             <Link href="/how-it-works" className="hover:text-white transition-colors">
@@ -47,7 +47,7 @@ export default function TimingRefusalPage() {
             Why this safari plan was refused
           </h1>
           <p className="text-stone-300 text-lg max-w-2xl">
-            Safari Index refuses plans when the requested experience has a negligible
+            Vurara Safaris refuses plans when the requested experience has a negligible
             probability of occurring. This protects travelers from building expectations
             around events that are unlikely to happen.
           </p>
@@ -191,17 +191,17 @@ export default function TimingRefusalPage() {
           </div>
         </section>
 
-        {/* Why Safari Index refuses */}
+        {/* Why Vurara Safaris refuses */}
         <section className="mb-10">
           <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
-            Why Safari Index refuses instead of guessing
+            Why Vurara Safaris refuses instead of guessing
           </h2>
           <div className="bg-stone-100 rounded-xl border border-stone-200 p-6">
             <p className="text-stone-700 leading-relaxed">
-              A weak recommendation is worse than no recommendation. If Safari Index
+              A weak recommendation is worse than no recommendation. If Vurara Safaris
               issued a verdict for this plan, the traveler would spend significant money
               and time pursuing an experience that cannot occur. Refusal protects the
-              traveler from regret and preserves the integrity of Safari Index verdicts.
+              traveler from regret and preserves the integrity of Vurara Safaris verdicts.
               When we say a plan works, it works. When it cannot work, we say so clearly.
             </p>
           </div>
@@ -229,7 +229,7 @@ export default function TimingRefusalPage() {
               href="/how-it-works"
               className="block text-amber-700 hover:text-amber-800"
             >
-              How Safari Index makes decisions
+              How Vurara Safaris makes decisions
             </Link>
           </div>
         </section>

@@ -61,14 +61,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!blog || !blog.published) {
     return {
-      title: 'Article Not Found | Safari Index',
+      title: 'Article Not Found | Vurara Safaris',
     };
   }
 
   const canonicalUrl = `/blog/decisions/${slug}`;
 
   return {
-    title: `${blog.title} | Safari Index`,
+    title: `${blog.title} | Vurara Safaris`,
     description: blog.subtitle,
     robots: 'index, follow',
     alternates: {
@@ -81,7 +81,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: canonicalUrl,
       publishedTime: blog.updatedAt,
       modifiedTime: blog.updatedAt,
-      authors: ['Safari Index'],
+      authors: ['Vurara Safaris'],
       section: 'Safari Planning',
     },
     twitter: {
@@ -147,7 +147,7 @@ export default async function DecisionBlogPage({ params }: PageProps) {
     notFound();
   }
 
-  const canonicalUrl = `https://safariindex.com/blog/decisions/${slug}`;
+  const canonicalUrl = `https://vurarasafaris.com/blog/decisions/${slug}`;
 
   return (
     <main className="min-h-screen bg-stone-50">
@@ -209,7 +209,7 @@ export default async function DecisionBlogPage({ params }: PageProps) {
           />
 
           <BlogSection
-            heading="How Safari Index Approaches This Decision"
+            heading="How Vurara Safaris Approaches This Decision"
             content={blog.ourApproach}
           />
 

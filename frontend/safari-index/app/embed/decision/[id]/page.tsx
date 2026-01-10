@@ -100,7 +100,7 @@ export default async function EmbedDecisionPage({
       answerVersion: requestedVersion || 'v1.0',
       logicVersion: artifact.logic_version,
       issuedAt: artifact.created_at,
-      canonicalUrl: `https://safariindex.com/assurance/${id}`,
+      canonicalUrl: `https://vurarasafaris.com/assurance/${id}`,
       decisionId: artifact.decision_id,
       isFlaggedForReview: artifact.review_status === 'pending_human_review',
     };
@@ -122,7 +122,7 @@ export default async function EmbedDecisionPage({
           answerVersion: currentVersion.version,
           logicVersion: currentVersion.logicVersion,
           issuedAt: currentVersion.issuedAt,
-          canonicalUrl: `https://safariindex.com${staticAnswer.canonicalUrl}`,
+          canonicalUrl: `https://vurarasafaris.com${staticAnswer.canonicalUrl}`,
           decisionId: `dec_embed_${staticAnswer.topicId}`,
           isFlaggedForReview: false,
         };
@@ -180,9 +180,9 @@ export default async function EmbedDecisionPage({
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="noindex, nofollow" />
-        <title>Safari Index Decision</title>
-        {/* Prevent framing by non-Safari Index domains in production */}
-        {/* <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self' *.safariindex.com" /> */}
+        <title>Vurara Safaris Decision</title>
+        {/* Prevent framing by non-Vurara Safaris domains in production */}
+        {/* <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self' *.vurarasafaris.com" /> */}
         <style
           dangerouslySetInnerHTML={{
             __html: `

@@ -68,7 +68,7 @@ export async function sendQuestionNotification(data: QuestionNotificationData): 
   }
 
   const operatorEmail = process.env.OPERATOR_EMAIL;
-  const fromEmail = process.env.FROM_EMAIL || 'notifications@safariindex.com';
+  const fromEmail = process.env.FROM_EMAIL || 'notifications@vurarasafaris.com';
   const region = process.env.SES_REGION || process.env.DYNAMO_REGION || 'us-east-1';
 
   console.log(`${logPrefix} Config check:`, {

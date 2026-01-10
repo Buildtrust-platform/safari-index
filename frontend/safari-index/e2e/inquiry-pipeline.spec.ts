@@ -49,8 +49,8 @@ test.describe('Inquiry Submission Flow', () => {
     // Should show recovery state, not error
     await expect(page.getByTestId('recovery-h1')).toHaveText('Start Your Safari Planning');
 
-    // Should explain how Safari Index works
-    await expect(page.getByText('How Safari Index Works')).toBeVisible();
+    // Should explain how Vurara Safaris works
+    await expect(page.getByText('How Vurara Safaris Works')).toBeVisible();
 
     // Should have Plan a Safari CTA linking to /inquire
     const cta = page.getByTestId('recovery-cta');

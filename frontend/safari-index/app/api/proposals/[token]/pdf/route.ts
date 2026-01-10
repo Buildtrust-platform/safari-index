@@ -290,7 +290,7 @@ export async function GET(_request: Request, { params }: RouteParams) {
   ` : '<div class="placeholder">No next steps specified</div>'}
 
   <div class="footer">
-    <p>Proposal prepared via Safari Index</p>
+    <p>Proposal prepared via Vurara Safaris</p>
     <p>Proposal ID: ${escapeHtml(proposal.proposal_id)}</p>
   </div>
 </body>

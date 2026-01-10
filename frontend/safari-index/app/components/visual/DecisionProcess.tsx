@@ -1,7 +1,7 @@
 /**
  * DecisionProcess Component
  *
- * Static 4-step diagram explaining how Safari Index makes decisions.
+ * Static 4-step diagram explaining how Vurara Safaris makes decisions.
  * Documentary aesthetic - calm, informational, no animation.
  *
  * Steps:
@@ -98,7 +98,7 @@ export interface DecisionProcessProps {
 /**
  * DecisionProcess - 4-step decision diagram
  *
- * Visual explanation of how Safari Index approaches decisions.
+ * Visual explanation of how Vurara Safaris approaches decisions.
  * Static, documentary treatment - no animations or interactivity.
  */
 export function DecisionProcess({ compact = false, className }: DecisionProcessProps) {

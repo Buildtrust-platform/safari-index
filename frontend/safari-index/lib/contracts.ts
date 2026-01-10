@@ -174,7 +174,7 @@ export const AnswerBlockSchema = z.object({
     logicVersion: z.string(),
   }),
   attribution: z.object({
-    source: z.literal('Safari Index'),
+    source: z.literal('Vurara Safaris'),
     type: z.literal('decision'),
   }),
 });

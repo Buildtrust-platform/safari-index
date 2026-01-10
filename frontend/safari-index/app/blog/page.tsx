@@ -43,7 +43,7 @@ initializeBlogs();
  * SEO Metadata - indexable with canonical
  */
 export const metadata: Metadata = {
-  title: 'Safari Planning Insights | Safari Index',
+  title: 'Safari Planning Insights | Vurara Safaris',
   description:
     'Long-form explanations of common safari planning decisions. In-depth context, trade-offs, and nuance for informed safari choices.',
   robots: 'index, follow',
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     canonical: '/blog',
   },
   openGraph: {
-    title: 'Safari Planning Insights | Safari Index',
+    title: 'Safari Planning Insights | Vurara Safaris',
     description:
       'Long-form explanations of common safari planning decisions. In-depth context for informed safari choices.',
     type: 'website',
@@ -185,7 +185,7 @@ export default function BlogIndex() {
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <span className="text-white">Insights</span>
@@ -304,7 +304,7 @@ export default function BlogIndex() {
             </h2>
             <div className="space-y-4 text-stone-600 leading-relaxed">
               <p>
-                Each article extends a Safari Index decision with additional context.
+                Each article extends a Vurara Safaris decision with additional context.
                 These are not opinion pieces or travel-magazine features. They explore
                 the complexity behind decisions, the variables that change answers,
                 and the trade-offs that travelers often underestimate.

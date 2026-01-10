@@ -2,7 +2,7 @@
  * Trip Planning CTA
  *
  * Operator-framed call-to-action linking from decisions to safari planning.
- * Positions Safari Index as the operator who will plan and execute the trip.
+ * Positions Vurara Safaris as the operator who will plan and execute the trip.
  *
  * Per governance:
  * - No hype or urgency
@@ -43,7 +43,7 @@ export function TripPlanningCTA({ topicId }: TripPlanningCTAProps) {
           </div>
           <div className="flex-1">
             <h3 className="font-medium text-stone-900 mb-1">
-              Plan this safari with Safari Index
+              Plan this safari with Vurara Safaris
             </h3>
             <p className="text-sm text-stone-600 mb-4">
               We operate private safaris across East and Southern Africa.

@@ -2,7 +2,7 @@
  * Birding Safari Hub Page
  *
  * Dedicated landing page for birding-focused travelers.
- * Showcases Safari Index expertise in this high-value niche.
+ * Showcases Vurara Safaris expertise in this high-value niche.
  *
  * Per governance: documentary tone, expertise signaling,
  * no fluff or generic content. Birders detect shallow
@@ -26,7 +26,7 @@ import {
 } from 'lucide-react';
 
 export const metadata = {
-  title: 'Birding Safaris | Safari Index',
+  title: 'Birding Safaris | Vurara Safaris',
   description: 'Expert-backed birding safari planning for East and Southern Africa. Seasonal timing, endemic hotspots, guide selection, and honest trade-offs.',
 };
 
@@ -115,7 +115,7 @@ export default function BirdingHubPage() {
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-stone-400 text-sm mb-6">
             <Link href="/" className="hover:text-white transition-colors">
-              Safari Index
+              Vurara Safaris
             </Link>
             <ChevronRight className="w-4 h-4" />
             <span className="text-stone-300">Birding Safaris</span>
@@ -131,7 +131,7 @@ export default function BirdingHubPage() {
             Birding Safaris
           </h1>
           <p className="text-stone-300 text-lg max-w-2xl mb-8">
-            Safari Index builds birding itineraries backed by seasonal data,
+            Vurara Safaris builds birding itineraries backed by seasonal data,
             habitat constraints, and honest trade-offs. We refuse requests
             that cannot deliver what birders actually want.
           </p>
@@ -157,10 +157,10 @@ export default function BirdingHubPage() {
       {/* Main content */}
       <div className="max-w-4xl mx-auto px-4 md:px-8 py-12">
 
-        {/* Why Safari Index for birding */}
+        {/* Why Vurara Safaris for birding */}
         <section className="mb-12">
           <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">
-            Why Safari Index for Birding
+            Why Vurara Safaris for Birding
           </h2>
           <div className="bg-white rounded-xl border border-stone-200 p-6">
             <p className="text-stone-700 leading-relaxed mb-4">
@@ -171,7 +171,7 @@ export default function BirdingHubPage() {
               standard game drive pace.
             </p>
             <p className="text-stone-700 leading-relaxed">
-              Safari Index approaches birding with the same constraint-based
+              Vurara Safaris approaches birding with the same constraint-based
               framework we apply to all safari planning: explicit trade-offs,
               refusal triggers for impossible requests, and honest assessment of
               what your specific trip can and cannot deliver.

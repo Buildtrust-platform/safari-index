@@ -78,19 +78,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!itinerary) {
     return {
-      title: 'Itinerary Not Found | Safari Index',
+      title: 'Itinerary Not Found | Vurara Safaris',
     };
   }
 
   return {
-    title: `${itinerary.title} | Safari Index`,
+    title: `${itinerary.title} | Vurara Safaris`,
     description: itinerary.meta_description,
     robots: 'index, follow',
     alternates: {
       canonical: `/itineraries/${itinerary.slug}`,
     },
     openGraph: {
-      title: `${itinerary.title} | Safari Index`,
+      title: `${itinerary.title} | Vurara Safaris`,
       description: itinerary.meta_description,
       type: 'website',
       url: `/itineraries/${itinerary.slug}`,
@@ -586,7 +586,7 @@ export default async function ItineraryDetailPage({ params }: PageProps) {
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <Link href="/itineraries" className="hover:text-white transition-colors">

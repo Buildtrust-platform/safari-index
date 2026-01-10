@@ -20,7 +20,7 @@ import { ItineraryList } from './ItineraryList';
 import { getItinerarySummaries } from '../content/itineraries';
 
 export const metadata: Metadata = {
-  title: 'Safari Itineraries | Safari Index',
+  title: 'Safari Itineraries | Vurara Safaris',
   description:
     'Production-ready safari itineraries across Tanzania, Kenya, Botswana, Namibia, Uganda, Rwanda, and South Africa. Decision-backed routes with clear trade-offs.',
   robots: 'index, follow',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     canonical: '/itineraries',
   },
   openGraph: {
-    title: 'Safari Itineraries | Safari Index',
+    title: 'Safari Itineraries | Vurara Safaris',
     description:
       'Explore 15 safari itineraries from classic Serengeti circuits to gorilla treks. Each route is decision-backed with clear trade-offs.',
     type: 'website',
@@ -60,7 +60,7 @@ export default function ItinerariesPage() {
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <span className="text-white">Itineraries</span>

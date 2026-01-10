@@ -70,19 +70,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!safariType) {
     return {
-      title: 'Safari Type Not Found | Safari Index',
+      title: 'Safari Type Not Found | Vurara Safaris',
     };
   }
 
   return {
-    title: `${safariType.name} Safari | Safari Index`,
+    title: `${safariType.name} Safari | Vurara Safaris`,
     description: `${safariType.positioning_line}. Learn about this safari style, who it's best for, and browse related itineraries.`,
     robots: 'index, follow',
     alternates: {
       canonical: `/safari-types/${safariType.id}`,
     },
     openGraph: {
-      title: `${safariType.name} Safari | Safari Index`,
+      title: `${safariType.name} Safari | Vurara Safaris`,
       description: safariType.positioning_line,
       type: 'website',
       url: `/safari-types/${safariType.id}`,
@@ -235,7 +235,7 @@ export default async function SafariTypeDetailPage({ params }: PageProps) {
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <Link href="/safari-types" className="hover:text-white transition-colors">

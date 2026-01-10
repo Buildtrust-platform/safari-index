@@ -111,7 +111,7 @@ export default function DevComponentsPage() {
         </div>
         <h1 className="text-3xl font-semibold text-gray-900">Component Preview</h1>
         <p className="mt-2 text-gray-600">
-          Visual regression testing for Safari Index components.
+          Visual regression testing for Vurara Safaris components.
         </p>
       </header>
 
@@ -236,7 +236,7 @@ export default function DevComponentsPage() {
               answerVersion="v1.0"
               logicVersion="v2.1"
               issuedAt="2024-12-21T10:30:00Z"
-              canonicalUrl="https://safariindex.com/decisions/tanzania-safari-february"
+              canonicalUrl="https://vurarasafaris.com/decisions/tanzania-safari-february"
               decisionId="dec_embed_preview"
               isFlaggedForReview={false}
             />
@@ -254,7 +254,7 @@ export default function DevComponentsPage() {
               answerVersion="v1.0"
               logicVersion="v2.1"
               issuedAt="2024-12-21T10:30:00Z"
-              canonicalUrl="https://safariindex.com/decisions/tanzania-safari-february"
+              canonicalUrl="https://vurarasafaris.com/decisions/tanzania-safari-february"
               decisionId="dec_embed_flagged"
               isFlaggedForReview={true}
             />

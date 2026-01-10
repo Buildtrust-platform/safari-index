@@ -62,7 +62,7 @@ export default async function DestinationLayout({ params, children }: Props) {
   }
 
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Safari Index', url: '/' },
+    { name: 'Vurara Safaris', url: '/' },
     { name: 'Destinations', url: '/destinations' },
     { name: destination.name, url: `/destinations/${slug}` },
   ]);

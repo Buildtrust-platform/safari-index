@@ -35,7 +35,7 @@ interface AnswerBlock {
     logicVersion: string;
   };
   attribution: {
-    source: 'Safari Index';
+    source: 'Vurara Safaris';
     type: 'decision';
   };
 }
@@ -59,14 +59,14 @@ function transformToAnswerBlock(va: VersionedAnswer): AnswerBlock | null {
       score: currentVersion.confidence,
       label: getConfidenceLabel(currentVersion.confidence),
     },
-    canonicalUrl: `https://safariindex.com${va.canonicalUrl}`,
+    canonicalUrl: `https://vurarasafaris.com${va.canonicalUrl}`,
     version: {
       current: currentVersion.version,
       issuedAt: currentVersion.issuedAt,
       logicVersion: currentVersion.logicVersion,
     },
     attribution: {
-      source: 'Safari Index',
+      source: 'Vurara Safaris',
       type: 'decision',
     },
   };
@@ -108,7 +108,7 @@ export async function GET(request: Request) {
           score: specificVersion.confidence,
           label: getConfidenceLabel(specificVersion.confidence),
         },
-        canonicalUrl: `https://safariindex.com${versionedAnswer.canonicalUrl}`,
+        canonicalUrl: `https://vurarasafaris.com${versionedAnswer.canonicalUrl}`,
         version: {
           requested: specificVersion.version,
           isCurrent: specificVersion.isCurrent,
@@ -117,7 +117,7 @@ export async function GET(request: Request) {
           supersededBy: specificVersion.supersededBy,
         },
         attribution: {
-          source: 'Safari Index',
+          source: 'Vurara Safaris',
           type: 'decision',
         },
       });
@@ -148,7 +148,7 @@ export async function GET(request: Request) {
     count: answers.length,
     answers,
     meta: {
-      source: 'Safari Index',
+      source: 'Vurara Safaris',
       description: 'Authoritative safari travel decisions',
       terms: 'Answers may be cited with attribution. Do not modify verdicts.',
       endpoints: {

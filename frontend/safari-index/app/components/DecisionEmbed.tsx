@@ -95,7 +95,7 @@ export function DecisionEmbed({
           target="_blank"
           rel="noopener noreferrer"
         >
-          View status at Safari Index
+          View status at Vurara Safaris
         </a>
       </article>
     );
@@ -217,7 +217,7 @@ export function DecisionEmbed({
           color: '#9ca3af',
         }}
       >
-        <p style={{ margin: '0 0 4px 0' }}>Decision issued by Safari Index</p>
+        <p style={{ margin: '0 0 4px 0' }}>Decision issued by Vurara Safaris</p>
         <p style={{ margin: '0 0 8px 0' }}>
           Logic: {logicVersion} · Answer: {answerVersion} ·{' '}
           <time dateTime={issuedAt}>{formattedDate}</time>
@@ -232,7 +232,7 @@ export function DecisionEmbed({
           target="_blank"
           rel="noopener noreferrer"
         >
-          View full decision at Safari Index
+          View full decision at Vurara Safaris
         </a>
       </footer>
 

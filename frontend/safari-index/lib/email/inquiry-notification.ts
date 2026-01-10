@@ -123,7 +123,7 @@ export async function sendInquiryNotification(inquiry: InquiryRecord): Promise<b
 
   // Configuration validation with structured logging
   const operatorEmail = process.env.OPERATOR_EMAIL;
-  const fromEmail = process.env.FROM_EMAIL || 'notifications@safariindex.com';
+  const fromEmail = process.env.FROM_EMAIL || 'notifications@vurarasafaris.com';
   const region = process.env.SES_REGION || process.env.DYNAMO_REGION || 'us-east-1';
 
   console.log(`${logPrefix} Config check:`, {
@@ -140,7 +140,7 @@ export async function sendInquiryNotification(inquiry: InquiryRecord): Promise<b
   }
 
   const dateWindow = formatDateWindow(inquiry.travel_month, inquiry.travel_year);
-  const siteOrigin = process.env.SITE_ORIGIN || process.env.NEXT_PUBLIC_SITE_ORIGIN || 'https://safariindex.com';
+  const siteOrigin = process.env.SITE_ORIGIN || process.env.NEXT_PUBLIC_SITE_ORIGIN || 'https://vurarasafaris.com';
   const opsUrl = `${siteOrigin}/ops/inquiries/${inquiry.inquiry_id}`;
 
   // Build linked decisions list
@@ -150,7 +150,7 @@ export async function sendInquiryNotification(inquiry: InquiryRecord): Promise<b
         .join('\n')
     : '  (none linked)';
 
-  const subject = `New Safari Index inquiry: ${formatBudgetBand(inquiry.budget_band)}, ${dateWindow}`;
+  const subject = `New Vurara Safaris inquiry: ${formatBudgetBand(inquiry.budget_band)}, ${dateWindow}`;
 
   const body = `New inquiry received
 

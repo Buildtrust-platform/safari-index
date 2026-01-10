@@ -71,7 +71,7 @@ ${data.canonicalUrl}
 
 ---
 
-This is an automated notification from Safari Index.
+This is an automated notification from Vurara Safaris.
 You subscribed to updates for this specific decision.
 No other emails will be sent.
 
@@ -111,15 +111,15 @@ export function generateFollowUpEmailSubject(data: FollowUpEmailData): string {
  * Logic version: rules_v1.0 → rules_v1.1
  *
  * View updated decision:
- * https://safariindex.com/decisions/tanzania-safari-february
+ * https://vurarasafaris.com/decisions/tanzania-safari-february
  *
  * ---
  *
- * This is an automated notification from Safari Index.
+ * This is an automated notification from Vurara Safaris.
  * You subscribed to updates for this specific decision.
  * No other emails will be sent.
  *
- * To unsubscribe: https://safariindex.com/decisions/tanzania-safari-february?unsubscribe=true
+ * To unsubscribe: https://vurarasafaris.com/decisions/tanzania-safari-february?unsubscribe=true
  *
  * Decision ID: dec_abc123def456
  */

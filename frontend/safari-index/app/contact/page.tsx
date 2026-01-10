@@ -22,21 +22,21 @@ import { QuickQuestionForm } from './QuickQuestionForm';
 import { BookingForm } from './BookingForm';
 
 // Environment variables with fallbacks
-const OPERATOR_EMAIL = process.env.OPERATOR_EMAIL || 'hello@safariindex.com';
+const OPERATOR_EMAIL = process.env.OPERATOR_EMAIL || 'hello@vurarasafaris.com';
 const OPERATOR_PHONE = process.env.OPERATOR_PHONE;
 
 export const metadata: Metadata = {
-  title: 'Contact | Safari Index',
+  title: 'Contact | Vurara Safaris',
   description:
-    'Contact Safari Index for safari planning questions, inquiries about our process, or updates on an existing trip request.',
+    'Contact Vurara Safaris for safari planning questions, inquiries about our process, or updates on an existing trip request.',
   robots: 'index, follow',
   alternates: {
     canonical: '/contact',
   },
   openGraph: {
-    title: 'Contact | Safari Index',
+    title: 'Contact | Vurara Safaris',
     description:
-      'Contact Safari Index for safari planning questions or existing inquiries.',
+      'Contact Vurara Safaris for safari planning questions or existing inquiries.',
     type: 'website',
     url: '/contact',
   },

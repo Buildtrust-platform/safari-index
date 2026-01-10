@@ -1,7 +1,7 @@
 /**
  * Ecosystem Image Set
  *
- * Pan-African documentary imagery for Safari Index staging pages.
+ * Pan-African documentary imagery for Vurara Safaris staging pages.
  *
  * Licensed images from Envato Elements. These paths point to /public/images/ecosystems/.
  *

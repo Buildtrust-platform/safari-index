@@ -45,7 +45,7 @@ test.describe('StagingShell', () => {
     await expect(page.getByRole('heading', { name: 'Explore decisions' })).toBeVisible();
 
     // Should have a link back to home
-    await expect(page.getByRole('link', { name: /Safari Index|Back/ })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Vurara Safaris|Back/ })).toBeVisible();
   });
 
   test('compare page loads correctly', async ({ page }) => {

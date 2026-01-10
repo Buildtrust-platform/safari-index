@@ -157,7 +157,7 @@ export function CostSignalSection({ trip }: CostSignalSectionProps) {
         {/* Disclaimer */}
         <div className="px-6 py-4 border-t border-stone-200 bg-white">
           <p className="text-xs text-stone-500">
-            These are cost bands, not quotes. Safari Index provides custom pricing
+            These are cost bands, not quotes. Vurara Safaris provides custom pricing
             based on your specific dates, group size, and accommodation preferences.
             Ranges reflect 2024-2025 operator rates and are updated periodically.
           </p>

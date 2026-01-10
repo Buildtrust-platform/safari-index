@@ -1,7 +1,7 @@
 /**
  * Guides Feature E2E Tests
  *
- * Tests for the Safari Index Guides authority content layer.
+ * Tests for the Vurara Safaris Guides authority content layer.
  *
  * Coverage:
  * 1. /guides loads and shows 8 buckets

@@ -31,7 +31,7 @@ import {
 } from '../content/safari-types';
 
 export const metadata: Metadata = {
-  title: 'Safari Types | Safari Index',
+  title: 'Safari Types | Vurara Safaris',
   description:
     'Discover which safari style matches your travel goals. From first-time classics to specialist wildlife experiences, find your ideal approach to an African safari.',
   robots: 'index, follow',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     canonical: '/safari-types',
   },
   openGraph: {
-    title: 'Safari Types | Safari Index',
+    title: 'Safari Types | Vurara Safaris',
     description:
       'Explore 10 safari types categorized by traveler intent. Find the right safari approach for your goals, preferences, and experience level.',
     type: 'website',
@@ -270,7 +270,7 @@ export default function SafariTypesPage() {
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">
-                Safari Index
+                Vurara Safaris
               </Link>
               <ChevronRight className="w-4 h-4" />
               <span className="text-white">Safari Types</span>

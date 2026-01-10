@@ -1,7 +1,7 @@
 /**
  * Blog Content Registry
  *
- * Decision-anchored blog articles for Safari Index.
+ * Decision-anchored blog articles for Vurara Safaris.
  * Every blog extends a decision with deeper context.
  *
  * Structure per editorial spec:

@@ -1,10 +1,10 @@
-# Safari Index robots.txt
+# Vurara Safaris robots.txt
 # Per 14_seo_generation.md: minimal, no tracking
 
 User-agent: *
 Allow: /
 
-Sitemap: https://safariindex.com/sitemap.xml
+Sitemap: https://vurarasafaris.com/sitemap.xml
 
 # Block non-content paths
 Disallow: /api/

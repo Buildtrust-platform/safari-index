@@ -22,13 +22,13 @@ export function BlogSchema({ blog, canonicalUrl }: BlogSchemaProps) {
     datePublished: blog.updatedAt,
     author: {
       '@type': 'Organization',
-      name: 'Safari Index',
-      url: 'https://safariindex.com',
+      name: 'Vurara Safaris',
+      url: 'https://vurarasafaris.com',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Safari Index',
-      url: 'https://safariindex.com',
+      name: 'Vurara Safaris',
+      url: 'https://vurarasafaris.com',
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
@@ -41,7 +41,7 @@ export function BlogSchema({ blog, canonicalUrl }: BlogSchemaProps) {
     },
     isPartOf: {
       '@type': 'WebPage',
-      '@id': `https://safariindex.com/decisions/${blog.decisionSlug}`,
+      '@id': `https://vurarasafaris.com/decisions/${blog.decisionSlug}`,
       name: blog.title,
     },
     wordCount: blog.wordCount,

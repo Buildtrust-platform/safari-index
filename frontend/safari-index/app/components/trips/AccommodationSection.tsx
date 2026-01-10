@@ -206,7 +206,7 @@ export function AccommodationSection({
       {/* Note about no lodge listings */}
       <div className="mt-4 p-4 bg-stone-100 rounded-lg">
         <p className="text-xs text-stone-600">
-          <strong>Note:</strong> Safari Index doesn't list specific lodges or camps.
+          <strong>Note:</strong> Vurara Safaris doesn't list specific lodges or camps.
           We select properties based on your preferences, timing, and availability during trip planning.
         </p>
       </div>

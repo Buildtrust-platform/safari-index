@@ -1,7 +1,7 @@
 /**
  * Blog Content Types and Registry
  *
- * Decision-anchored blog system for Safari Index.
+ * Decision-anchored blog system for Vurara Safaris.
  * Every blog extends a decision—no orphan blogs allowed.
  *
  * Structure:
@@ -66,7 +66,7 @@ export interface BlogContent {
   /** Section 5: When This Decision Breaks Down */
   breaksDown: string;
 
-  /** Section 6: How Safari Index Approaches This Decision */
+  /** Section 6: How Vurara Safaris Approaches This Decision */
   ourApproach: string;
 
   /** Related decisions (max 6) */

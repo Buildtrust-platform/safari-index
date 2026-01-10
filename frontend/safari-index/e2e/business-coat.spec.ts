@@ -1,7 +1,7 @@
 /**
  * Business Coat E2E Tests
  *
- * Tests for the Safari Index Business Coat features:
+ * Tests for the Vurara Safaris Business Coat features:
  * - Part A: Inquiry system
  * - Part B: Navigation and homepage
  * - Part C: Trip ⇄ Decision linking

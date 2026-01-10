@@ -80,7 +80,7 @@ function buildTouristTripSchema(itinerary: Itinerary, baseUrl: string) {
     // Provider
     provider: {
       '@type': 'TravelAgency',
-      name: 'Safari Index',
+      name: 'Vurara Safaris',
       url: baseUrl,
     },
     // Geographic coverage
@@ -143,5 +143,5 @@ export function getBaseUrl(): string {
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
   }
-  return 'https://safariindex.com';
+  return 'https://vurarasafaris.com';
 }
