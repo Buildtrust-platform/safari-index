@@ -432,7 +432,7 @@ export default function Home() {
       <section className="bg-white py-8 md:py-10 border-b border-stone-200">
         <PageGrid maxWidth="default">
           <div className="max-w-3xl mx-auto">
-            <SearchAndFilters />
+            <SearchAndFilters hero />
           </div>
         </PageGrid>
       </section>
