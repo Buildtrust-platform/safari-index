@@ -20,7 +20,7 @@
  */
 
 import Link from 'next/link';
-import { ChevronDown, ArrowRight, MapPin, Calendar, Scale, ShieldOff, RefreshCw, Compass } from 'lucide-react';
+import { ChevronDown, ArrowRight, MapPin, Calendar, Scale, ShieldOff, RefreshCw, Users } from 'lucide-react';
 import { ImageBand, ImageBandContent, pageImages, destinationImages, activityImageRefs, ecosystemImages, AfricaMapBackground } from './components/visual';
 import { Navbar, PageGrid } from './components/layout';
 import { OperatorCredentials } from './components/OperatorCredentials';
@@ -301,9 +301,39 @@ const tripImageMap: Record<string, string> = {
 };
 
 /**
+ * Format cost band for display
+ */
+function formatCostBand(costBand: { low: number; high: number }): string {
+  const formatK = (n: number) => n >= 1000 ? `$${(n / 1000).toFixed(0)}k` : `$${n}`;
+  return `${formatK(costBand.low)}–${formatK(costBand.high)}`;
+}
+
+/**
+ * Format duration for display
+ */
+function formatDuration(days: number | [number, number]): string {
+  if (Array.isArray(days)) {
+    return `${days[0]}–${days[1]} days`;
+  }
+  return `${days} days`;
+}
+
+/**
  * Trip Card with image - for homepage showcase
  */
-function TripCardWithImage({ trip, index }: { trip: { id: string; title: string; subtitle: string }; index: number }) {
+function TripCardWithImage({
+  trip,
+  index
+}: {
+  trip: {
+    id: string;
+    title: string;
+    subtitle: string;
+    cost_band?: { low: number; high: number };
+    duration_days?: number | [number, number];
+  };
+  index: number
+}) {
   // Use region-appropriate destination image, fallback to ecosystem images
   const destinationKey = tripImageMap[trip.id];
   const destImage = destinationKey ? destinationImages[destinationKey] : null;
@@ -329,6 +359,12 @@ function TripCardWithImage({ trip, index }: { trip: { id: string; title: string;
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          {/* Duration badge */}
+          {trip.duration_days && (
+            <div className="absolute top-3 left-3 px-2 py-1 text-xs font-medium bg-white/90 backdrop-blur-sm rounded-md text-stone-700">
+              {formatDuration(trip.duration_days)}
+            </div>
+          )}
         </div>
         <div className="p-4">
           <h3 className="font-editorial text-base font-medium text-stone-900 group-hover:text-amber-700 transition-colors mb-1">
@@ -337,10 +373,18 @@ function TripCardWithImage({ trip, index }: { trip: { id: string; title: string;
           <p className="text-sm text-stone-500 line-clamp-1">
             {trip.subtitle}
           </p>
-          <div className="flex items-center gap-2 mt-3 text-xs text-amber-700">
-            <Compass className="w-3.5 h-3.5" />
-            <span className="font-medium">View itinerary</span>
-            <ArrowRight className="w-3 h-3 ml-auto text-stone-400 group-hover:text-amber-600 transition-colors" />
+          <div className="flex items-center justify-between mt-3">
+            {/* Cost band */}
+            {trip.cost_band && (
+              <div className="text-xs text-stone-600">
+                <span className="font-medium text-stone-800">{formatCostBand(trip.cost_band)}</span>
+                <span className="text-stone-400"> /person</span>
+              </div>
+            )}
+            <div className="flex items-center gap-1.5 text-xs text-amber-700">
+              <span className="font-medium">Explore</span>
+              <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+            </div>
           </div>
         </div>
       </div>
@@ -405,19 +449,18 @@ export default function Home() {
             Safaris planned with clarity.
           </h1>
 
-          {/* Subhead - Operator identity */}
+          {/* Subhead - Operator identity with emotional hook */}
           <p className="font-editorial text-lg md:text-xl text-white/80 leading-relaxed mb-10 max-w-xl animate-fade-in-up animation-delay-200">
-            Safari Index plans and operates private safaris across Africa.
-            Every decision is logic-backed. Every trip is custom-built.
+            We plan private safaris across Africa—every decision logic-backed, every trip custom-built for you. No vague promises, just clear reasoning.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 animate-fade-in-up animation-delay-300">
             <PrimaryButton href="/trips">
-              Browse safaris
+              Find your safari
             </PrimaryButton>
             <SecondaryButton href="/decisions">
-              How we decide
+              See our thinking
             </SecondaryButton>
           </div>
         </ImageBandContent>
@@ -427,11 +470,14 @@ export default function Home() {
 
       {/* ================================================================
           SECTION 1.5 — SEARCH & EXPLORE
-          Search bar and filters immediately below hero.
+          Search bar and filters with smooth transition from hero.
           ================================================================ */}
-      <section className="bg-white py-8 md:py-10 border-b border-stone-200">
+      <section className="bg-gradient-to-b from-stone-100 to-white py-8 md:py-10">
         <PageGrid maxWidth="default">
           <div className="max-w-3xl mx-auto">
+            <p className="text-center text-sm text-stone-500 mb-4">
+              Search destinations, activities, or questions
+            </p>
             <SearchAndFilters hero />
           </div>
         </PageGrid>
@@ -708,7 +754,7 @@ export default function Home() {
               href="/trips"
               className="inline-flex items-center gap-2 text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors"
             >
-              View all safari itineraries
+              Explore all itineraries
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -759,6 +805,35 @@ export default function Home() {
       </section>
 
       {/* ================================================================
+          SECTION 6.5 — WHO WE ARE
+          Brief founder/team element for human connection.
+          ================================================================ */}
+      <section className="bg-white py-10 md:py-12 border-b border-stone-100">
+        <PageGrid maxWidth="default">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="w-16 h-16 rounded-full bg-stone-100 flex items-center justify-center mx-auto mb-4">
+              <Users className="w-7 h-7 text-stone-600" />
+            </div>
+            <h2 className="font-editorial text-xl md:text-2xl font-semibold text-stone-900 mb-3">
+              Built by safari operators
+            </h2>
+            <p className="text-stone-600 text-sm leading-relaxed mb-4">
+              Safari Index was founded by operators who spent years planning trips across East and Southern Africa.
+              We built the decision system we wished existed—one that shows you exactly why we recommend what we recommend,
+              and what would change our answer.
+            </p>
+            <Link
+              href="/how-it-works"
+              className="inline-flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-800 transition-colors"
+            >
+              Learn how we work
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </PageGrid>
+      </section>
+
+      {/* ================================================================
           SECTION 7 — ACCOUNTABILITY SIGNALS
           Trust signals with visual treatment.
           ================================================================ */}
@@ -766,10 +841,10 @@ export default function Home() {
         <PageGrid maxWidth="default">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { icon: Calendar, title: 'Versioned & Dated', text: 'Every decision is timestamped and versioned.' },
-              { icon: RefreshCw, title: 'Conditions Change', text: 'Outcomes update when the facts change.' },
-              { icon: ShieldOff, title: 'No Incentives', text: 'No commissions, no bookings, no hidden agendas.' },
-              { icon: MapPin, title: 'Local Knowledge', text: 'Grounded in years of African safari experience.' },
+              { icon: Calendar, title: 'Published reasoning', text: 'Every decision is timestamped and open to review.' },
+              { icon: RefreshCw, title: 'Always updated', text: 'Our advice changes when conditions change.' },
+              { icon: ShieldOff, title: 'Independent advice', text: 'No commissions or hidden incentives.' },
+              { icon: MapPin, title: 'Ground-level knowledge', text: 'Built on years of African safari experience.' },
             ].map((item, index) => (
               <div key={index} className="text-center p-4 rounded-xl bg-white border border-stone-200">
                 <div className="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center mx-auto mb-3">
@@ -820,14 +895,14 @@ export default function Home() {
                   href="/trips"
                   className="group inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-white text-stone-900 hover:bg-stone-100"
                 >
-                  Browse safaris
+                  Find your safari
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                 </Link>
                 <Link
                   href="/inquire"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-md transition-colors duration-200 bg-amber-600 text-white hover:bg-amber-700"
                 >
-                  Start planning
+                  Talk to our team
                 </Link>
               </div>
             </div>
