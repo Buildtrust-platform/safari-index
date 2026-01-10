@@ -36,9 +36,12 @@ export async function GET(request: Request) {
     );
   }
 
-  // Get the redirect URI from the current request
-  const url = new URL(request.url);
-  const redirectUri = `${url.origin}/api/auth/google`;
+  // Get the redirect URI - use forwarded headers for production (behind Amplify proxy)
+  const headers = new Headers(request.headers);
+  const forwardedHost = headers.get('x-forwarded-host') || headers.get('host');
+  const forwardedProto = headers.get('x-forwarded-proto') || 'https';
+  const origin = forwardedHost ? `${forwardedProto}://${forwardedHost}` : new URL(request.url).origin;
+  const redirectUri = `${origin}/api/auth/google`;
 
   // Start OAuth flow
   if (start) {
