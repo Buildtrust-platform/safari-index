@@ -23,8 +23,9 @@ export async function GET(request: Request) {
   const start = searchParams.get('start');
   const opsKey = searchParams.get('key');
 
-  // Require OPS_KEY for security
-  if (process.env.OPS_KEY && opsKey !== process.env.OPS_KEY) {
+  // Require OPS_KEY for security (skip if GOOGLE_REFRESH_TOKEN not yet set - first-time setup)
+  const isFirstTimeSetup = !process.env.GOOGLE_REFRESH_TOKEN;
+  if (!isFirstTimeSetup && process.env.OPS_KEY && opsKey !== process.env.OPS_KEY) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -59,8 +60,7 @@ export async function GET(request: Request) {
   // Handle callback with auth code
   if (code) {
     try {
-      // Get OPS_KEY from state parameter
-      const state = searchParams.get('state');
+      // Note: OPS_KEY passed via state parameter for callback auth if needed
 
       const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
         method: 'POST',
