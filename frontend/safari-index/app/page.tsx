@@ -472,6 +472,23 @@ export default function Home() {
               Search destinations, activities, or questions
             </p>
             <SearchAndFilters hero />
+
+            {/* Quick links below search */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-sm">
+              <span className="text-stone-400">Popular:</span>
+              <Link href="/decisions/tanzania-vs-kenya-first-safari" className="px-3 py-1.5 rounded-full bg-stone-100 text-stone-600 hover:bg-amber-100 hover:text-amber-700 transition-colors">
+                Tanzania vs Kenya
+              </Link>
+              <Link href="/decisions/is-5-days-enough-for-safari" className="px-3 py-1.5 rounded-full bg-stone-100 text-stone-600 hover:bg-amber-100 hover:text-amber-700 transition-colors">
+                How many days?
+              </Link>
+              <Link href="/when-to-go" className="px-3 py-1.5 rounded-full bg-stone-100 text-stone-600 hover:bg-amber-100 hover:text-amber-700 transition-colors">
+                Best time to go
+              </Link>
+              <Link href="/decisions/safari-with-young-children" className="px-3 py-1.5 rounded-full bg-stone-100 text-stone-600 hover:bg-amber-100 hover:text-amber-700 transition-colors">
+                Family safaris
+              </Link>
+            </div>
           </div>
         </PageGrid>
       </section>
