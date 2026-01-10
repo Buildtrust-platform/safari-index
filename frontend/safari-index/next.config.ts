@@ -15,6 +15,12 @@ const nextConfig: NextConfig = {
     OPERATOR_EMAIL: process.env.OPERATOR_EMAIL,
     FROM_EMAIL: process.env.FROM_EMAIL,
     OPS_KEY: process.env.OPS_KEY,
+    // Google Calendar integration
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+    GOOGLE_REFRESH_TOKEN: process.env.GOOGLE_REFRESH_TOKEN,
+    GOOGLE_CALENDAR_ID: process.env.GOOGLE_CALENDAR_ID,
+    BOOKING_TIMEZONE: process.env.BOOKING_TIMEZONE,
   },
   /**
    * Remote image patterns for Next.js Image optimization.
