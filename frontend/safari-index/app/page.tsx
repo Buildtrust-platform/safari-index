@@ -492,9 +492,12 @@ export default function Home() {
           </div>
 
           {/* Divider */}
-          <div className="h-px bg-stone-200 max-w-2xl mx-auto mb-8" />
+          <div className="h-px bg-stone-200 max-w-2xl mx-auto mb-6" />
 
           {/* Operator credentials - integrated */}
+          <p className="text-center text-xs font-medium text-stone-400 uppercase tracking-widest mb-4">
+            Who we are
+          </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
             <div className="flex items-center gap-3 p-3 rounded-lg bg-white border border-stone-200">
               <div className="w-9 h-9 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0">
