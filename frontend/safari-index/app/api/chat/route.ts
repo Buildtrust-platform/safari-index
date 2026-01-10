@@ -20,9 +20,13 @@ import {
 } from '@aws-sdk/client-bedrock-runtime';
 import { FAQS } from '../../content/faqs';
 
+// Bedrock region - us-east-1 has best Claude model availability
+// Note: Must enable Claude 3 Haiku in AWS Bedrock console Model Access
+const BEDROCK_REGION = process.env.BEDROCK_REGION || 'us-east-1';
+
 // Bedrock client - uses default credential chain (IAM role in Amplify)
 const bedrockClient = new BedrockRuntimeClient({
-  region: process.env.AWS_REGION || 'us-east-1',
+  region: BEDROCK_REGION,
 });
 
 // Model ID - Claude 3 Haiku for cost efficiency
@@ -148,11 +152,25 @@ export async function POST(request: NextRequest) {
           controller.close();
         } catch (error) {
           console.error('Bedrock streaming error:', error);
+
+          // Provide helpful error message based on error type
+          let errorMessage = 'I apologize, but I am unable to respond right now. Please try again or contact us directly.';
+
+          if (error instanceof Error) {
+            if (error.name === 'AccessDeniedException' || error.message.includes('access')) {
+              errorMessage = 'The AI assistant is not yet configured. Please contact us directly at hello@safariindex.com or schedule a call.';
+              console.error('Bedrock access denied - ensure model is enabled in AWS Bedrock console and IAM permissions are set');
+            } else if (error.name === 'ValidationException') {
+              errorMessage = 'I had trouble understanding that. Could you rephrase your question?';
+            }
+          }
+
           controller.enqueue(
             encoder.encode(
-              `data: ${JSON.stringify({ error: 'Failed to generate response' })}\n\n`
+              `data: ${JSON.stringify({ text: errorMessage })}\n\n`
             )
           );
+          controller.enqueue(encoder.encode('data: [DONE]\n\n'));
           controller.close();
         }
       },
