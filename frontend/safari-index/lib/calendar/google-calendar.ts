@@ -1,11 +1,8 @@
 /**
  * Google Calendar Integration
  *
- * Handles OAuth2 authentication and calendar operations for booking system.
- * Uses Google Calendar API to:
- * - Fetch free/busy information for availability
- * - Create calendar events for confirmed bookings
- * - Optionally create Google Meet links
+ * Uses direct Google Calendar API calls instead of googleapis SDK
+ * to reduce bundle size and memory usage during build.
  *
  * Required env vars:
  * - GOOGLE_CLIENT_ID: OAuth2 client ID
@@ -13,8 +10,6 @@
  * - GOOGLE_REFRESH_TOKEN: Long-lived refresh token for calendar access
  * - GOOGLE_CALENDAR_ID: Calendar ID to use (default: 'primary')
  */
-
-import { google, calendar_v3 } from 'googleapis';
 
 // Configuration
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
@@ -34,6 +29,10 @@ const BOOKING_TIMEZONE = process.env.BOOKING_TIMEZONE || 'Africa/Nairobi';
 // Buffer time between slots (minutes)
 const BUFFER_MINUTES = 15;
 
+// Token cache
+let cachedAccessToken: string | null = null;
+let tokenExpiry: number = 0;
+
 /**
  * Check if Google Calendar is configured
  */
@@ -42,24 +41,44 @@ export function isCalendarConfigured(): boolean {
 }
 
 /**
- * Get authenticated Google Calendar client
+ * Get a fresh access token using the refresh token
  */
-function getCalendarClient(): calendar_v3.Calendar | null {
+async function getAccessToken(): Promise<string | null> {
   if (!isCalendarConfigured()) {
-    console.warn('[Google Calendar] Not configured - missing credentials');
     return null;
   }
 
-  const oauth2Client = new google.auth.OAuth2(
-    GOOGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET
-  );
+  // Return cached token if still valid (with 5 min buffer)
+  if (cachedAccessToken && Date.now() < tokenExpiry - 300000) {
+    return cachedAccessToken;
+  }
 
-  oauth2Client.setCredentials({
-    refresh_token: GOOGLE_REFRESH_TOKEN,
-  });
+  try {
+    const response = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        client_id: GOOGLE_CLIENT_ID!,
+        client_secret: GOOGLE_CLIENT_SECRET!,
+        refresh_token: GOOGLE_REFRESH_TOKEN!,
+        grant_type: 'refresh_token',
+      }),
+    });
 
-  return google.calendar({ version: 'v3', auth: oauth2Client });
+    const data = await response.json();
+
+    if (data.error) {
+      console.error('[Google Calendar] Token refresh failed:', data.error);
+      return null;
+    }
+
+    cachedAccessToken = data.access_token;
+    tokenExpiry = Date.now() + (data.expires_in * 1000);
+    return cachedAccessToken;
+  } catch (error) {
+    console.error('[Google Calendar] Token refresh error:', error);
+    return null;
+  }
 }
 
 /**
@@ -138,7 +157,6 @@ export interface AvailableSlot {
  * Get available time slots for a given date
  */
 export async function getAvailableSlots(date: string): Promise<AvailableSlot[]> {
-  const calendar = getCalendarClient();
   const targetDate = new Date(date);
 
   // Generate all possible slots for the day
@@ -148,8 +166,10 @@ export async function getAvailableSlots(date: string): Promise<AvailableSlot[]> 
     return [];
   }
 
+  const accessToken = await getAccessToken();
+
   // If no calendar configured, return all slots as available (manual mode)
-  if (!calendar) {
+  if (!accessToken) {
     return allSlots.map(slot => ({
       start: slot.start.toISOString(),
       end: slot.end.toISOString(),
@@ -162,22 +182,39 @@ export async function getAvailableSlots(date: string): Promise<AvailableSlot[]> 
   const timeMax = allSlots[allSlots.length - 1].end.toISOString();
 
   try {
-    const response = await calendar.freebusy.query({
-      requestBody: {
+    const response = await fetch('https://www.googleapis.com/calendar/v3/freeBusy', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
         timeMin,
         timeMax,
         timeZone: BOOKING_TIMEZONE,
         items: [{ id: GOOGLE_CALENDAR_ID }],
-      },
+      }),
     });
 
-    const busyTimes = response.data.calendars?.[GOOGLE_CALENDAR_ID]?.busy || [];
+    const data = await response.json();
+
+    if (data.error) {
+      console.error('[Google Calendar] Free/busy error:', data.error);
+      // Fall back to all available
+      return allSlots.map(slot => ({
+        start: slot.start.toISOString(),
+        end: slot.end.toISOString(),
+        available: true,
+      }));
+    }
+
+    const busyTimes = data.calendars?.[GOOGLE_CALENDAR_ID]?.busy || [];
 
     // Mark slots as available/unavailable based on busy times
     return allSlots.map(slot => ({
       start: slot.start.toISOString(),
       end: slot.end.toISOString(),
-      available: isSlotAvailable(slot, busyTimes as { start: string; end: string }[]),
+      available: isSlotAvailable(slot, busyTimes),
     }));
   } catch (error) {
     console.error('[Google Calendar] Error fetching free/busy:', error);
@@ -212,15 +249,15 @@ export interface CreateEventResult {
 export async function createCalendarEvent(
   params: CreateEventParams
 ): Promise<CreateEventResult | null> {
-  const calendar = getCalendarClient();
+  const accessToken = await getAccessToken();
 
-  if (!calendar) {
+  if (!accessToken) {
     console.warn('[Google Calendar] Not configured - skipping event creation');
     return null;
   }
 
   try {
-    const event: calendar_v3.Schema$Event = {
+    const event: Record<string, unknown> = {
       summary: params.summary,
       description: params.description,
       start: {
@@ -256,17 +293,32 @@ export async function createCalendarEvent(
       };
     }
 
-    const response = await calendar.events.insert({
-      calendarId: GOOGLE_CALENDAR_ID,
-      requestBody: event,
-      conferenceDataVersion: params.createMeetLink ? 1 : 0,
-      sendUpdates: 'all', // Send email invites to attendees
+    const url = new URL(`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GOOGLE_CALENDAR_ID)}/events`);
+    if (params.createMeetLink) {
+      url.searchParams.set('conferenceDataVersion', '1');
+    }
+    url.searchParams.set('sendUpdates', 'all');
+
+    const response = await fetch(url.toString(), {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(event),
     });
 
+    const data = await response.json();
+
+    if (data.error) {
+      console.error('[Google Calendar] Event creation error:', data.error);
+      return null;
+    }
+
     return {
-      eventId: response.data.id || '',
-      meetLink: response.data.conferenceData?.entryPoints?.[0]?.uri || undefined,
-      htmlLink: response.data.htmlLink || '',
+      eventId: data.id || '',
+      meetLink: data.conferenceData?.entryPoints?.[0]?.uri || undefined,
+      htmlLink: data.htmlLink || '',
     };
   } catch (error) {
     console.error('[Google Calendar] Error creating event:', error);
@@ -278,19 +330,23 @@ export async function createCalendarEvent(
  * Cancel a calendar event
  */
 export async function cancelCalendarEvent(eventId: string): Promise<boolean> {
-  const calendar = getCalendarClient();
+  const accessToken = await getAccessToken();
 
-  if (!calendar) {
+  if (!accessToken) {
     return false;
   }
 
   try {
-    await calendar.events.delete({
-      calendarId: GOOGLE_CALENDAR_ID,
-      eventId,
-      sendUpdates: 'all', // Notify attendees
+    const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GOOGLE_CALENDAR_ID)}/events/${encodeURIComponent(eventId)}?sendUpdates=all`;
+
+    const response = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      },
     });
-    return true;
+
+    return response.ok;
   } catch (error) {
     console.error('[Google Calendar] Error cancelling event:', error);
     return false;
