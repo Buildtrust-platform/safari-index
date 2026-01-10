@@ -1,8 +1,10 @@
 /**
  * Contact Page
  *
- * Streamlined contact page with quick question form and clear CTAs.
- * Two paths: quick question (handled here) or full trip planning (/inquire).
+ * Streamlined contact page with three paths:
+ * 1. Schedule a call (consultation booking with Google Calendar)
+ * 2. Quick question (async email response)
+ * 3. Full trip planning (/inquire)
  *
  * Per governance:
  * - Documentary tone, no hype
@@ -12,9 +14,10 @@
 
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Mail, ArrowRight, Phone, Send } from 'lucide-react';
+import { Mail, ArrowRight, Phone, Send, Video } from 'lucide-react';
 import { Navbar, Footer, PageGrid } from '../components/layout';
 import { QuickQuestionForm } from './QuickQuestionForm';
+import { BookingForm } from './BookingForm';
 
 // Environment variables with fallbacks
 const OPERATOR_EMAIL = process.env.OPERATOR_EMAIL || 'hello@safariindex.com';
@@ -59,48 +62,59 @@ export default function ContactPage() {
         </PageGrid>
       </div>
 
-      {/* Main content - two clear options */}
+      {/* Main content - three paths */}
       <div className="py-12 md:py-16">
         <PageGrid maxWidth="default">
-          <div className="max-w-4xl mx-auto">
-            {/* Two paths grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-              {/* Path 1: Quick Question */}
-              <div className="p-6 rounded-xl bg-white border border-stone-200">
+          <div className="max-w-5xl mx-auto">
+            {/* Three paths grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+              {/* Path 1: Schedule a Call */}
+              <div className="lg:col-span-2 p-6 rounded-xl bg-white border border-stone-200">
                 <div className="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center mb-4">
-                  <Send className="w-5 h-5 text-amber-600" />
+                  <Video className="w-5 h-5 text-amber-600" />
                 </div>
                 <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-2">
-                  Quick Question
+                  Schedule a Call
                 </h2>
                 <p className="text-stone-500 text-sm mb-4">
-                  Best for timing questions, destination comparisons, or general safari advice.
+                  Book a 30-minute video call to discuss your safari plans. We will send a calendar invite with a meeting link.
                 </p>
-                <QuickQuestionForm />
+                <BookingForm />
               </div>
 
-              {/* Path 2: Plan a Trip */}
-              <div className="p-6 rounded-xl bg-stone-900 text-white">
-                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center mb-4">
-                  <ArrowRight className="w-5 h-5 text-white" />
+              {/* Right column - Quick options */}
+              <div className="space-y-6">
+                {/* Path 2: Quick Question */}
+                <div className="p-6 rounded-xl bg-white border border-stone-200">
+                  <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center mb-4">
+                    <Send className="w-5 h-5 text-stone-600" />
+                  </div>
+                  <h2 className="font-editorial text-lg font-semibold text-stone-900 mb-2">
+                    Quick Question
+                  </h2>
+                  <p className="text-stone-500 text-sm mb-4">
+                    Get an email response within 24 hours.
+                  </p>
+                  <QuickQuestionForm />
                 </div>
-                <h2 className="font-editorial text-xl font-semibold mb-2">
-                  Plan a Safari
-                </h2>
-                <p className="text-stone-400 text-sm mb-6">
-                  Ready to start planning? Our trip form captures your preferences so we can build a custom itinerary.
-                </p>
-                <Link
-                  href="/inquire"
-                  className="group inline-flex items-center gap-2 w-full justify-center px-6 py-3 text-sm font-medium rounded-lg bg-white text-stone-900 hover:bg-stone-100 transition-colors"
-                  data-testid="plan-safari-cta"
-                >
-                  Start Planning
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                </Link>
-                <p className="text-stone-500 text-xs text-center mt-3">
-                  Takes about 2 minutes
-                </p>
+
+                {/* Path 3: Plan a Trip */}
+                <div className="p-6 rounded-xl bg-stone-900 text-white">
+                  <h2 className="font-editorial text-lg font-semibold mb-2">
+                    Ready to Plan?
+                  </h2>
+                  <p className="text-stone-400 text-sm mb-4">
+                    Our trip form captures your preferences for a custom itinerary.
+                  </p>
+                  <Link
+                    href="/inquire"
+                    className="group inline-flex items-center gap-2 w-full justify-center px-5 py-2.5 text-sm font-medium rounded-lg bg-white text-stone-900 hover:bg-stone-100 transition-colors"
+                    data-testid="plan-safari-cta"
+                  >
+                    Start Planning
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                </div>
               </div>
             </div>
 

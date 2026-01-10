@@ -573,3 +573,89 @@ export const QuickQuestionRecordSchema = z.object({
   replied_at: z.string().optional(),
 });
 export type QuickQuestionRecord = z.infer<typeof QuickQuestionRecordSchema>;
+
+// ============================================================================
+// Consultation Booking Contracts
+// ============================================================================
+
+/**
+ * Booking status enum
+ */
+export const BookingStatusSchema = z.enum(['confirmed', 'cancelled', 'completed', 'no_show']);
+export type BookingStatus = z.infer<typeof BookingStatusSchema>;
+
+/**
+ * Consultation type enum
+ */
+export const ConsultationTypeSchema = z.enum(['intro_call', 'planning_session', 'follow_up']);
+export type ConsultationType = z.infer<typeof ConsultationTypeSchema>;
+
+/**
+ * Time slot - represents an available booking window
+ */
+export const TimeSlotSchema = z.object({
+  start: z.string(), // ISO datetime
+  end: z.string(), // ISO datetime
+  available: z.boolean(),
+});
+export type TimeSlot = z.infer<typeof TimeSlotSchema>;
+
+/**
+ * Available slots response (GET /api/booking/slots)
+ */
+export const AvailableSlotsResponseSchema = z.object({
+  date: z.string(), // YYYY-MM-DD
+  timezone: z.string(),
+  slots: z.array(TimeSlotSchema),
+});
+export type AvailableSlotsResponse = z.infer<typeof AvailableSlotsResponseSchema>;
+
+/**
+ * Booking request (POST /api/booking)
+ */
+export const BookingRequestSchema = z.object({
+  name: z.string().min(2).max(100),
+  email: z.string().email(),
+  phone: z.string().optional(),
+  consultation_type: ConsultationTypeSchema,
+  slot_start: z.string(), // ISO datetime
+  slot_end: z.string(), // ISO datetime
+  timezone: z.string(),
+  notes: z.string().max(500).optional(),
+  source_path: z.string().optional(),
+});
+export type BookingRequest = z.infer<typeof BookingRequestSchema>;
+
+/**
+ * Booking response
+ */
+export const BookingResponseSchema = z.object({
+  booking_id: z.string(),
+  created_at: z.string(),
+  calendar_event_id: z.string().optional(),
+  meeting_link: z.string().optional(),
+});
+export type BookingResponse = z.infer<typeof BookingResponseSchema>;
+
+/**
+ * Booking record (stored in DynamoDB)
+ */
+export const BookingRecordSchema = z.object({
+  booking_id: z.string(),
+  created_at: z.string(),
+  status: BookingStatusSchema,
+  name: z.string(),
+  email: z.string(),
+  phone: z.string().optional(),
+  consultation_type: ConsultationTypeSchema,
+  slot_start: z.string(),
+  slot_end: z.string(),
+  timezone: z.string(),
+  notes: z.string().optional(),
+  source_path: z.string().optional(),
+  calendar_event_id: z.string().optional(),
+  meeting_link: z.string().optional(),
+  cancelled_at: z.string().optional(),
+  cancel_reason: z.string().optional(),
+});
+export type BookingRecord = z.infer<typeof BookingRecordSchema>;
