@@ -46,6 +46,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/favicon.svg",
+  },
   robots: {
     index: true,
     follow: true,
@@ -56,11 +62,13 @@ export const metadata: Metadata = {
     siteName: "Vurara Safaris",
     title: "Vurara Safaris",
     description: "The truth of the wild, revealed. Logic-backed safari planning across East and Southern Africa.",
+    images: ["/logo.svg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Vurara Safaris",
     description: "The truth of the wild, revealed. Logic-backed safari planning across East and Southern Africa.",
+    images: ["/logo.svg"],
   },
 };
 
@@ -74,7 +82,7 @@ const organizationJsonLd = {
   name: "Vurara Safaris",
   description: "The truth of the wild, revealed. Logic-backed safari planning across East and Southern Africa.",
   url: "https://vurarasafaris.com",
-  logo: "https://vurarasafaris.com/logo.png",
+  logo: "https://vurarasafaris.com/logo.svg",
   sameAs: [],
   areaServed: {
     "@type": "Continent",

@@ -16,6 +16,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { cn } from '../../ui/utils';
 
@@ -76,13 +77,17 @@ export function Navbar({ variant = 'transparent' }: NavbarProps) {
           {/* Logo */}
           <Link
             href="/"
-            className={cn(
-              'font-editorial text-lg font-semibold tracking-tight transition-colors',
-              showSolid ? 'text-stone-900' : 'text-white'
-            )}
+            className="flex items-center gap-2"
             data-testid="navbar-logo"
           >
-            Vurara Safaris
+            <Image
+              src={showSolid ? '/logo.svg' : '/logo-white.svg'}
+              alt="Vurara Safaris"
+              width={160}
+              height={40}
+              className="h-8 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
