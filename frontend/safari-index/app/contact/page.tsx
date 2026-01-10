@@ -16,6 +16,8 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Mail, ArrowRight, Phone, Send, Video } from 'lucide-react';
 import { Navbar, Footer, PageGrid } from '../components/layout';
+import { FAQSection } from '../components/FAQSection';
+import { getFAQsForPage } from '../content/faqs';
 import { QuickQuestionForm } from './QuickQuestionForm';
 import { BookingForm } from './BookingForm';
 
@@ -143,35 +145,23 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Popular questions - drives to content */}
+            {/* FAQs relevant to contact/booking */}
             <div className="mt-12 pt-8 border-t border-stone-200">
-              <h3 className="text-center text-sm font-medium text-stone-500 uppercase tracking-wider mb-6">
-                Common Questions
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="bg-white rounded-xl border border-stone-200 p-6">
+                <FAQSection
+                  faqs={getFAQsForPage('contact')}
+                  heading="Common Questions"
+                  subheading="Quick answers about getting started"
+                  expandFirst
+                />
+              </div>
+              <div className="text-center mt-4">
                 <Link
-                  href="/decisions/tanzania-vs-kenya-first-safari"
-                  className="group p-4 rounded-lg bg-white border border-stone-200 hover:border-amber-300 transition-colors"
+                  href="/faq"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-800 transition-colors"
                 >
-                  <p className="text-sm font-medium text-stone-900 group-hover:text-amber-700">
-                    Tanzania or Kenya for first safari?
-                  </p>
-                </Link>
-                <Link
-                  href="/when-to-go"
-                  className="group p-4 rounded-lg bg-white border border-stone-200 hover:border-amber-300 transition-colors"
-                >
-                  <p className="text-sm font-medium text-stone-900 group-hover:text-amber-700">
-                    Best time to visit East Africa?
-                  </p>
-                </Link>
-                <Link
-                  href="/decisions/is-5-days-enough-for-safari"
-                  className="group p-4 rounded-lg bg-white border border-stone-200 hover:border-amber-300 transition-colors"
-                >
-                  <p className="text-sm font-medium text-stone-900 group-hover:text-amber-700">
-                    How many days do I need?
-                  </p>
+                  View all FAQs
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>
