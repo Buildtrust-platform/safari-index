@@ -529,3 +529,47 @@ export const NewsletterUpdateSchema = z.object({
   status: NewsletterStatusSchema,
 });
 export type NewsletterUpdate = z.infer<typeof NewsletterUpdateSchema>;
+
+// ============================================================================
+// Quick Question Contracts
+// ============================================================================
+
+/**
+ * Quick question status enum
+ */
+export const QuickQuestionStatusSchema = z.enum(['new', 'replied', 'closed']);
+export type QuickQuestionStatus = z.infer<typeof QuickQuestionStatusSchema>;
+
+/**
+ * Quick question request (POST /api/contact)
+ */
+export const QuickQuestionRequestSchema = z.object({
+  email: z.string().email(),
+  question: z.string().min(10).max(1000),
+  source_path: z.string().optional(),
+});
+export type QuickQuestionRequest = z.infer<typeof QuickQuestionRequestSchema>;
+
+/**
+ * Quick question response
+ */
+export const QuickQuestionResponseSchema = z.object({
+  question_id: z.string(),
+  created_at: z.string(),
+});
+export type QuickQuestionResponse = z.infer<typeof QuickQuestionResponseSchema>;
+
+/**
+ * Quick question record (stored in DynamoDB)
+ */
+export const QuickQuestionRecordSchema = z.object({
+  question_id: z.string(),
+  created_at: z.string(),
+  status: QuickQuestionStatusSchema,
+  email: z.string(),
+  question: z.string(),
+  source_path: z.string().optional(),
+  reply: z.string().optional(),
+  replied_at: z.string().optional(),
+});
+export type QuickQuestionRecord = z.infer<typeof QuickQuestionRecordSchema>;
