@@ -449,9 +449,9 @@ export default function Home() {
             Safaris planned with clarity.
           </h1>
 
-          {/* Subhead - Operator identity with emotional hook */}
+          {/* Subhead - Operator identity */}
           <p className="font-editorial text-lg md:text-xl text-white/80 leading-relaxed mb-10 max-w-xl animate-fade-in-up animation-delay-200">
-            We plan private safaris across Africa—every decision logic-backed, every trip custom-built for you. No vague promises, just clear reasoning.
+            We plan private safaris across Africa. Every decision is logic-backed. Every trip is built around what actually matters to you.
           </p>
 
           {/* CTAs */}
@@ -782,7 +782,7 @@ export default function Home() {
               </h2>
               <p className="font-editorial text-base text-stone-300 leading-relaxed max-w-2xl mx-auto mb-6">
                 We plan and operate private safaris. We also publish the decision logic behind our recommendations.
-                You see exactly why we suggest what we suggest—and what would change our answer.
+                You see exactly why we suggest what we suggest, and what would change our answer.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link
@@ -819,8 +819,7 @@ export default function Home() {
             </h2>
             <p className="text-stone-600 text-sm leading-relaxed mb-4">
               Safari Index was founded by operators who spent years planning trips across East and Southern Africa.
-              We built the decision system we wished existed—one that shows you exactly why we recommend what we recommend,
-              and what would change our answer.
+              We built the decision system we wished existed. One that shows you exactly why we recommend what we recommend, and what would change our answer.
             </p>
             <Link
               href="/how-it-works"
