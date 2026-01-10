@@ -73,7 +73,7 @@ export function Navbar({ variant = 'transparent' }: NavbarProps) {
       data-testid="navbar"
     >
       <div className="max-w-6xl mx-auto px-4 md:px-8">
-        <div className="flex items-center justify-between h-24 md:h-28">
+        <div className="flex items-center justify-between h-48 md:h-56">
           {/* Logo */}
           <Link
             href="/"
@@ -83,9 +83,9 @@ export function Navbar({ variant = 'transparent' }: NavbarProps) {
             <Image
               src={showSolid ? '/logo.svg' : '/logo-white.svg'}
               alt="Vurara Safaris"
-              width={300}
-              height={200}
-              className="h-20 md:h-24 w-auto"
+              width={600}
+              height={400}
+              className="h-40 md:h-48 w-auto"
               priority
             />
           </Link>
