@@ -780,13 +780,16 @@ function ItineraryCard({ itinerary, index }: { itinerary: ItinerarySummary; inde
 }
 
 /**
- * Compact game park card - streamlined for reduced scroll
+ * Compact game park card - links to dedicated park page
  */
 function GameParkCard({ park }: { park: GamePark }) {
   const parkImage = getParkImage(park);
 
   return (
-    <div className="group bg-white rounded-xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-md transition-all">
+    <Link
+      href={`/parks/${park.id}`}
+      className="group bg-white rounded-xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-md transition-all"
+    >
       <div className="flex">
         {/* Thumbnail */}
         <div className="w-20 h-20 flex-shrink-0 overflow-hidden">
@@ -798,9 +801,12 @@ function GameParkCard({ park }: { park: GamePark }) {
         </div>
         {/* Content */}
         <div className="flex-1 min-w-0 p-3">
-          <h4 className="font-medium text-stone-900 text-sm truncate mb-0.5">
-            {park.name}
-          </h4>
+          <div className="flex items-start justify-between">
+            <h4 className="font-medium text-stone-900 text-sm truncate mb-0.5 group-hover:text-amber-700 transition-colors">
+              {park.name}
+            </h4>
+            <ArrowRight className="w-3.5 h-3.5 text-stone-300 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all flex-shrink-0 ml-1" />
+          </div>
           <p className="text-stone-500 text-xs line-clamp-1 mb-1.5">{park.bestFor}</p>
           <div className="flex flex-wrap gap-1">
             {park.highlights.slice(0, 2).map((highlight) => (
@@ -814,7 +820,7 @@ function GameParkCard({ park }: { park: GamePark }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
