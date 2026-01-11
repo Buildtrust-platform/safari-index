@@ -500,7 +500,7 @@ export function ItineraryList({ itineraries }: ItineraryListProps) {
                     {/* Itineraries grid/list */}
                     <div className="bg-white rounded-b-2xl border border-t-0 border-stone-200 p-4 md:p-6">
                       {view === 'grid' ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                           {regionGroups[region].map((itinerary) => (
                             <ItineraryCardGrid key={itinerary.id} itinerary={itinerary} />
                           ))}
