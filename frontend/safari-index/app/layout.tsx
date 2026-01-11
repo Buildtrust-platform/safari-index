@@ -100,6 +100,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Google Search Console verification */}
+        <meta name="google-site-verification" content="XQ6HoEli8QA8YJyZOr_XxkNItorp_XRRDKbKptVb0kQ" />
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-4JP1TZ5R65"
