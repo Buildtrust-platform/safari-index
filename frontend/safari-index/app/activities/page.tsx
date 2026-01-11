@@ -1,12 +1,11 @@
 /**
  * Activities Hub Page
  *
- * Consistent design with other hub pages:
- * - Hero with icon, title, subtitle, stats
- * - Search section
- * - Featured activities grid
+ * Design:
+ * - Hero with icon, title, subtitle
+ * - Sticky category navigation
  * - Category sections with visual headers
- * - CTA footer
+ * - Inline CTA after first category
  */
 
 import Link from 'next/link';
@@ -265,59 +264,9 @@ function groupByCategory() {
   return groups;
 }
 
-/**
- * Featured activity card with large image
- */
-function FeaturedActivityCard({ activity }: { activity: typeof activityPrimitives[0] }) {
-  const config = CATEGORY_CONFIG[activity.category];
-  const Icon = config.icon;
-  const image = getActivityImage(activity.id, config.imageIndex);
-  const effortDisplay = getEffortDisplay(activity.physical_effort);
-
-  return (
-    <Link
-      href={`/activities/${activity.id}`}
-      className="group block bg-white rounded-2xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-lg transition-all"
-      data-testid="featured-activity"
-    >
-      {/* Image */}
-      <div className="relative h-36 overflow-hidden">
-        <img
-          src={image.src}
-          alt={image.alt}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-        <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
-          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-xs font-medium bg-white/90 backdrop-blur-sm text-stone-700 rounded-full">
-            <Icon className="w-3 h-3" />
-            {config.name}
-          </span>
-          <span className={`px-2 py-0.5 text-xs rounded-full ${effortDisplay.color}`}>
-            {effortDisplay.label}
-          </span>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-4">
-        <h3 className="font-editorial text-lg font-semibold text-stone-900 group-hover:text-amber-700 transition-colors mb-1">
-          {activity.name}
-        </h3>
-        <p className="text-stone-500 text-sm line-clamp-2 mb-3">{activity.what_it_is}</p>
-        <div className="flex items-center justify-between">
-          <span className="text-xs text-stone-400">
-            {activity.where_possible.length} destinations
-          </span>
-          <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all" />
-        </div>
-      </div>
-    </Link>
-  );
-}
 
 /**
- * Activity card in category grid - with thumbnail image
+ * Activity card in category grid - responsive layout
  */
 function ActivityCard({ activity }: { activity: typeof activityPrimitives[0] }) {
   const config = CATEGORY_CONFIG[activity.category];
@@ -330,9 +279,10 @@ function ActivityCard({ activity }: { activity: typeof activityPrimitives[0] }) 
       className="group block bg-white rounded-xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-md transition-all"
       data-testid="activity-card"
     >
-      <div className="flex">
-        {/* Thumbnail image */}
-        <div className="w-24 h-28 flex-shrink-0 overflow-hidden">
+      {/* Vertical on mobile, horizontal on larger screens */}
+      <div className="flex flex-col sm:flex-row">
+        {/* Image - taller on mobile, thumbnail on desktop */}
+        <div className="w-full h-32 sm:w-24 sm:h-28 flex-shrink-0 overflow-hidden">
           <img
             src={image.src}
             alt={image.alt}
@@ -343,7 +293,7 @@ function ActivityCard({ activity }: { activity: typeof activityPrimitives[0] }) 
         {/* Content */}
         <div className="flex-1 min-w-0 p-3">
           <div className="flex items-start justify-between mb-1">
-            <h3 className="font-editorial text-base font-semibold text-stone-900 group-hover:text-amber-700 transition-colors line-clamp-1">
+            <h3 className="font-editorial text-base font-semibold text-stone-900 group-hover:text-amber-700 transition-colors">
               {activity.name}
             </h3>
             <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all flex-shrink-0 ml-2" />
@@ -431,13 +381,7 @@ function CategoryNavChip({ category, count }: { category: ActivityCategory; coun
 export default function ActivitiesPage() {
   const groupedActivities = groupByCategory();
   const categories: ActivityCategory[] = ['vehicle', 'water', 'foot', 'aerial', 'specialty'];
-  const totalActivities = activityPrimitives.length;
 
-  // Get featured activities (first from each category)
-  const featuredActivities = categories
-    .map((cat) => groupedActivities[cat][0])
-    .filter(Boolean)
-    .slice(0, 6);
 
   return (
     <main className="min-h-screen bg-stone-50">
@@ -478,17 +422,10 @@ export default function ActivitiesPage() {
 
             {/* Subtitle */}
             <p className="text-white/80 text-lg max-w-xl mx-auto">
-              {totalActivities} activities across {categories.length} categories.
+              From game drives to gorilla trekking.
               <br className="hidden md:block" />
               Each has its character, demands, and rewards.
             </p>
-
-            {/* Stats */}
-            <div className="flex items-center justify-center gap-6 mt-6 text-white/60 text-sm">
-              <span>{totalActivities} activities</span>
-              <span className="w-1 h-1 rounded-full bg-white/40" />
-              <span>{categories.length} categories</span>
-            </div>
           </div>
         </ImageBandContent>
       </ImageBand>
@@ -505,37 +442,12 @@ export default function ActivitiesPage() {
         </div>
       </section>
 
-      {/* Featured Activities */}
-      <section className="bg-white py-10 border-b border-stone-200">
-        <div className="max-w-6xl mx-auto px-4 md:px-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-amber-700" />
-            </div>
-            <div>
-              <h2 className="font-editorial text-xl font-semibold text-stone-900">
-                Popular Activities
-              </h2>
-              <p className="text-stone-500 text-sm">Most common safari experiences</p>
-            </div>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {featuredActivities.map((activity) => (
-              <FeaturedActivityCard key={activity.id} activity={activity} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Main content */}
-      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
-        {/* Category navigation */}
-        <nav className="mb-8" aria-label="Activity categories">
-          <h2 className="text-xs font-semibold text-stone-500 uppercase tracking-wide mb-3">
-            Browse by category
-          </h2>
-          <div className="flex flex-wrap gap-2" data-testid="category-nav">
+      {/* Sticky category navigation */}
+      <nav className="sticky top-0 z-40 bg-white border-b border-stone-200 py-3" aria-label="Activity categories">
+        <div className="max-w-5xl mx-auto px-4 md:px-8">
+          <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide" data-testid="category-nav">
+            <span className="text-xs font-medium text-stone-400 uppercase tracking-wide whitespace-nowrap hidden sm:block">Categories</span>
             {categories.map((category) => (
               <CategoryNavChip
                 key={category}
@@ -544,48 +456,44 @@ export default function ActivitiesPage() {
               />
             ))}
           </div>
-        </nav>
-
-        {/* Category sections */}
-        <div className="space-y-8" data-testid="category-sections">
-          {categories.map((category) => (
-            <CategorySection
-              key={category}
-              category={category}
-              activities={groupedActivities[category]}
-            />
-          ))}
         </div>
+      </nav>
 
-        {/* CTA section */}
-        <div className="mt-12 pt-8 border-t border-stone-200">
-          <div className="bg-stone-900 rounded-2xl p-6 md:p-8">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <h3 className="font-editorial text-xl text-white mb-2">
-                  Not sure which activities suit you?
-                </h3>
-                <p className="text-stone-400 text-sm">
-                  Share your preferences and we'll design the right activity mix.
-                </p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link
-                  href="/inquire"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-stone-900 rounded-lg font-medium hover:bg-stone-100 transition-colors text-sm"
-                >
-                  Start planning
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  href="/itineraries"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-transparent text-white border border-white/30 rounded-lg font-medium hover:bg-white/10 transition-colors text-sm"
-                >
-                  Browse itineraries
-                </Link>
-              </div>
+      {/* Main content */}
+      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
+
+        {/* Category sections with inline CTA */}
+        <div className="space-y-8" data-testid="category-sections">
+          {categories.map((category, index) => (
+            <div key={category}>
+              <CategorySection
+                category={category}
+                activities={groupedActivities[category]}
+              />
+              {/* CTA after first category */}
+              {index === 0 && (
+                <div className="mt-8 bg-gradient-to-r from-amber-50 to-stone-50 rounded-xl border border-amber-200/50 p-5">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div>
+                      <p className="text-stone-900 font-medium">
+                        We'll build an itinerary with the right activity mix for you
+                      </p>
+                      <p className="text-stone-500 text-sm mt-0.5">
+                        Tell us your interests and fitness level
+                      </p>
+                    </div>
+                    <Link
+                      href="/inquire"
+                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-stone-900 text-white rounded-lg font-medium hover:bg-stone-800 transition-colors text-sm whitespace-nowrap"
+                    >
+                      Plan your safari
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
+          ))}
         </div>
       </div>
 
