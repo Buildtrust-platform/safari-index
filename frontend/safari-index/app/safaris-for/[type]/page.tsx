@@ -35,7 +35,7 @@ import {
 } from 'lucide-react';
 import { Navbar, Footer } from '../../components/layout';
 import { ImageBand, ImageBandContent, ecosystemImages, getDestinationImage } from '../../components/visual';
-import { getPublishedItineraries, formatDurationBand, type ItinerarySummary } from '../../content/itineraries';
+import { getItinerarySummaries, formatDurationBand, type ItinerarySummary, type ItineraryStyleTag } from '../../content/itineraries';
 import { formatCostBand, getRegionDisplayName } from '../../content/trip-shapes/trips';
 
 // Traveler type configurations
@@ -47,7 +47,7 @@ const TRAVELER_CONFIGS: Record<string, {
   color: string;
   iconColor: string;
   heroText: string;
-  filterFn: (itinerary: ItinerarySummary) => boolean;
+  styleTags: ItineraryStyleTag[];
   expectations: string[];
   considerations: string[];
   metaDescription: string;
@@ -60,7 +60,7 @@ const TRAVELER_CONFIGS: Record<string, {
     color: 'bg-green-100',
     iconColor: 'text-green-600',
     heroText: 'Your first safari should be memorable for the right reasons. These itineraries prioritize reliability, balanced pacing, and iconic wildlife encounters.',
-    filterFn: (it) => it.style_tags.includes('first-safari') || it.traveler_fit.includes('first-safari'),
+    styleTags: ['first-safari'],
     expectations: [
       'Iconic parks with high wildlife density',
       'Guides experienced with first-timer questions',
@@ -83,7 +83,7 @@ const TRAVELER_CONFIGS: Record<string, {
     color: 'bg-blue-100',
     iconColor: 'text-blue-600',
     heroText: 'Family safaris require different logistics. These itineraries include child-friendly lodges, appropriate activity levels, and experiences that engage all ages.',
-    filterFn: (it) => it.style_tags.includes('family') || it.traveler_fit.includes('family'),
+    styleTags: ['family'],
     expectations: [
       'Lodges with family rooms or connecting units',
       'Child-friendly game drives and activities',
@@ -106,7 +106,7 @@ const TRAVELER_CONFIGS: Record<string, {
     color: 'bg-indigo-100',
     iconColor: 'text-indigo-600',
     heroText: 'Photography safaris are about time at sightings, not distance covered. These itineraries prioritize light, position, and the patience to wait for the shot.',
-    filterFn: (it) => it.style_tags.includes('photography') || it.traveler_fit.includes('photography'),
+    styleTags: ['photography'],
     expectations: [
       'Private vehicle with no sharing',
       'Extended time at sightings (no "tick and move")',
@@ -129,7 +129,7 @@ const TRAVELER_CONFIGS: Record<string, {
     color: 'bg-pink-100',
     iconColor: 'text-pink-600',
     heroText: 'A honeymoon safari is not just a trip. These itineraries combine wildlife adventure with intimate experiences designed for couples.',
-    filterFn: (it) => it.style_tags.includes('honeymoon') || it.style_tags.includes('luxury') || it.traveler_fit.includes('honeymoon'),
+    styleTags: ['honeymoon', 'luxury'],
     expectations: [
       'Intimate camps with private experiences',
       'Private dining options (bush dinners, sundowners)',
@@ -152,7 +152,7 @@ const TRAVELER_CONFIGS: Record<string, {
     color: 'bg-amber-100',
     iconColor: 'text-amber-600',
     heroText: 'You have done the classics. These itineraries take you to remote corners, offer walking and specialist experiences, and reward those who already understand Africa.',
-    filterFn: (it) => it.style_tags.includes('adventure') || it.style_tags.includes('walking') || it.traveler_fit.includes('repeat-visitor') || it.traveler_fit.includes('adventure'),
+    styleTags: ['adventure', 'walking'],
     expectations: [
       'Remote reserves with lower visitor density',
       'Walking safari components',
@@ -175,7 +175,7 @@ const TRAVELER_CONFIGS: Record<string, {
     color: 'bg-teal-100',
     iconColor: 'text-teal-600',
     heroText: 'Some travelers have a specific goal. These itineraries are built around signature experiences that define the trip.',
-    filterFn: (it) => it.style_tags.includes('primate') || it.style_tags.includes('migration') || it.style_tags.includes('walking') || it.style_tags.includes('birding'),
+    styleTags: ['primate', 'migration', 'walking'],
     expectations: [
       'Itinerary structured around the core experience',
       'Timing aligned with wildlife/seasonal patterns',
@@ -308,8 +308,12 @@ export default async function SafarisForTypePage({
     notFound();
   }
 
-  const allItineraries = getPublishedItineraries();
-  const filteredItineraries = allItineraries.filter(config.filterFn);
+  // Get all itineraries and filter by style tags
+  const allItineraries = getItinerarySummaries();
+  const filteredItineraries = allItineraries.filter((it) =>
+    config.styleTags.some((tag) => it.style_tags.includes(tag))
+  );
+
   const Icon = config.icon;
 
   return (
@@ -337,7 +341,7 @@ export default async function SafarisForTypePage({
                 Safaris For You
               </Link>
               <ChevronRight className="w-4 h-4" />
-              <span className="text-white">{config.title.replace('Safaris for ', '')}</span>
+              <span className="text-white">{config.title.replace('Safaris for ', '').replace('Special Interest ', '')}</span>
             </div>
 
             <div className="flex items-center justify-center gap-3 mb-4">
