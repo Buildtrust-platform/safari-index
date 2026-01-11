@@ -980,8 +980,8 @@ export default function Home() {
                   </a>
                 </p>
                 <p>
-                  <a href="tel:+255123456789" className="hover:text-white transition-colors">
-                    +255 123 456 789
+                  <a href="tel:+31684123495" className="hover:text-white transition-colors">
+                    +31 6 84 123 495
                   </a>
                 </p>
               </div>
