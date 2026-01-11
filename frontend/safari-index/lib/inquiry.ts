@@ -350,7 +350,7 @@ export function getDefaultPlanningBriefState(): PlanningBriefState {
     fixedStartDate: null,
     fixedEndDate: null,
     destination: null,
-    duration: null,
+    duration: '8-10', // Most common duration for first-time safari travelers
     budgetBand: null,
     travelerCount: 2,
     childrenCount: 0,

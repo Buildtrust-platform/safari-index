@@ -57,23 +57,35 @@ import { getAttributionData } from '../../lib/attribution';
 const DRAFT_STORAGE_KEY = 'safari-planning-brief-draft';
 
 /**
- * Progress indicator - 5 segments
+ * Progress indicator - 5 segments with step label
  */
 function ProgressBar({ currentStep }: { currentStep: number }) {
+  const stepLabels = ['Safari type', 'Timing', 'Budget', 'Travelers', 'Contact'];
+
   return (
-    <div className="flex gap-1.5 mb-8">
-      {[1, 2, 3, 4, 5].map((step) => (
-        <div
-          key={step}
-          className={`h-1 flex-1 rounded-full transition-colors ${
-            step < currentStep
-              ? 'bg-stone-400'
-              : step === currentStep
-                ? 'bg-amber-600'
-                : 'bg-stone-200'
-          }`}
-        />
-      ))}
+    <div className="mb-6">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-xs font-medium text-stone-500">
+          Step {currentStep} of 5
+        </span>
+        <span className="text-xs text-stone-400">
+          {stepLabels[currentStep - 1]}
+        </span>
+      </div>
+      <div className="flex gap-1.5">
+        {[1, 2, 3, 4, 5].map((step) => (
+          <div
+            key={step}
+            className={`h-1 flex-1 rounded-full transition-colors ${
+              step < currentStep
+                ? 'bg-stone-400'
+                : step === currentStep
+                  ? 'bg-amber-600'
+                  : 'bg-stone-200'
+            }`}
+          />
+        ))}
+      </div>
     </div>
   );
 }
