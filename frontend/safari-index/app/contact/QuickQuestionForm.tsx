@@ -129,9 +129,9 @@ export function QuickQuestionForm() {
       {/* reCAPTCHA attribution (required when hiding badge) */}
       <p className="text-xs text-stone-400 text-center">
         Protected by reCAPTCHA.{' '}
-        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-stone-600">Privacy</a>
+        <a href="/privacy" className="underline hover:text-stone-600">Privacy</a>
         {' '}&{' '}
-        <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline hover:text-stone-600">Terms</a>
+        <a href="/terms" className="underline hover:text-stone-600">Terms</a>
       </p>
     </form>
   );
