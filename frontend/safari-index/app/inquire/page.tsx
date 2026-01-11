@@ -1036,6 +1036,14 @@ function PlanningBriefForm() {
         <p className="text-center text-xs text-stone-400 mt-6">
           No booking or payment. Your information is used only to build your planning brief.
         </p>
+
+        {/* reCAPTCHA attribution (required when hiding badge) */}
+        <p className="text-center text-xs text-stone-400 mt-2">
+          Protected by reCAPTCHA.{' '}
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-stone-600">Privacy</a>
+          {' '}&{' '}
+          <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline hover:text-stone-600">Terms</a>
+        </p>
       </div>
 
       <Footer />

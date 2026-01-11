@@ -490,3 +490,12 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;  /* Chrome, Safari, Opera */
 }
+
+/**
+ * Hide reCAPTCHA badge (invisible reCAPTCHA)
+ * Required text attribution is added to forms instead
+ * Per Google's terms: https://developers.google.com/recaptcha/docs/faq
+ */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
