@@ -359,7 +359,7 @@ function RegionSection({
 
       {/* Trips grid */}
       <div className="bg-white rounded-b-2xl border border-t-0 border-stone-200 p-4 md:p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {trips.map((trip) => (
             <TripCard key={trip.id} trip={trip} />
           ))}
@@ -479,7 +479,7 @@ export default function TripsHubPage() {
 
       {/* Sticky category navigation */}
       <nav className="sticky top-0 z-40 bg-white border-b border-stone-200 py-3" aria-label="Safari categories">
-        <div className="max-w-5xl mx-auto px-4 md:px-8">
+        <div className="max-w-5xl xl:max-w-6xl mx-auto px-4 md:px-8">
           <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide">
             <span className="text-xs font-medium text-stone-400 uppercase tracking-wide whitespace-nowrap hidden sm:block">Categories</span>
             {regionData.map(({ section, trips }) => (
@@ -506,7 +506,7 @@ export default function TripsHubPage() {
       </nav>
 
       {/* Main content */}
-      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
+      <div className="max-w-5xl xl:max-w-6xl mx-auto px-4 md:px-8 py-10">
         {/* Region sections with inline CTA after first */}
         <div className="space-y-8">
           {regionData.map(({ section, trips }, index) => (

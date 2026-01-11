@@ -202,7 +202,7 @@ function RegionSection({ region, destinations }: { region: string; destinations:
 
       {/* Destinations grid */}
       <div className="bg-white rounded-b-2xl border border-t-0 border-stone-200 p-4 md:p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           {destinations.map((destination) => (
             <DestinationCard key={destination.id} destination={destination} />
           ))}
@@ -296,7 +296,7 @@ export default function DestinationsPage() {
 
       {/* Sticky destination navigation */}
       <nav className="sticky top-0 z-40 bg-white border-b border-stone-200 py-3" aria-label="Destinations">
-        <div className="max-w-5xl mx-auto px-4 md:px-8">
+        <div className="max-w-5xl xl:max-w-6xl mx-auto px-4 md:px-8">
           <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide" data-testid="destination-nav">
             <span className="text-xs font-medium text-stone-400 uppercase tracking-wide whitespace-nowrap hidden sm:block">Destinations</span>
             {DESTINATIONS.map((destination) => (
@@ -307,7 +307,7 @@ export default function DestinationsPage() {
       </nav>
 
       {/* Main content */}
-      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
+      <div className="max-w-5xl xl:max-w-6xl mx-auto px-4 md:px-8 py-10">
 
         {/* Region sections with inline CTA */}
         <div className="space-y-8">

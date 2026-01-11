@@ -349,7 +349,7 @@ function CategorySection({ category, activities }: { category: ActivityCategory;
 
       {/* Activities grid */}
       <div className="bg-white rounded-b-2xl border border-t-0 border-stone-200 p-4 md:p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
           {activities.map((activity) => (
             <ActivityCard key={activity.id} activity={activity} />
           ))}
@@ -445,7 +445,7 @@ export default function ActivitiesPage() {
 
       {/* Sticky category navigation */}
       <nav className="sticky top-0 z-40 bg-white border-b border-stone-200 py-3" aria-label="Activity categories">
-        <div className="max-w-5xl mx-auto px-4 md:px-8">
+        <div className="max-w-5xl xl:max-w-6xl mx-auto px-4 md:px-8">
           <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide" data-testid="category-nav">
             <span className="text-xs font-medium text-stone-400 uppercase tracking-wide whitespace-nowrap hidden sm:block">Categories</span>
             {categories.map((category) => (
@@ -460,7 +460,7 @@ export default function ActivitiesPage() {
       </nav>
 
       {/* Main content */}
-      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
+      <div className="max-w-5xl xl:max-w-6xl mx-auto px-4 md:px-8 py-10">
 
         {/* Category sections with inline CTA */}
         <div className="space-y-8" data-testid="category-sections">

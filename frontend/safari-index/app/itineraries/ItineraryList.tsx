@@ -299,7 +299,7 @@ export function ItineraryList({ itineraries }: ItineraryListProps) {
     <div>
       {/* Filters Section */}
       <section className="bg-white py-6 border-b border-stone-200">
-        <div className="max-w-5xl mx-auto px-4 md:px-8">
+        <div className="max-w-5xl xl:max-w-6xl mx-auto px-4 md:px-8">
           <ItineraryFilters
             onFilterChange={handleFilterChange}
             totalCount={itineraries.length}
@@ -310,7 +310,7 @@ export function ItineraryList({ itineraries }: ItineraryListProps) {
 
       {/* Tab Navigation */}
       <section className="bg-stone-50 border-b border-stone-200">
-        <div className="max-w-5xl mx-auto px-4 md:px-8">
+        <div className="max-w-5xl xl:max-w-6xl mx-auto px-4 md:px-8">
           <nav className="flex gap-1" aria-label="Safari content type">
             <Link
               href="/trips"
@@ -335,7 +335,7 @@ export function ItineraryList({ itineraries }: ItineraryListProps) {
       </section>
 
       {/* Results */}
-      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
+      <div className="max-w-5xl xl:max-w-6xl mx-auto px-4 md:px-8 py-10">
         {filteredItineraries.length === 0 ? (
           /* No Results */
           <div className="text-center py-16">
@@ -418,7 +418,7 @@ export function ItineraryList({ itineraries }: ItineraryListProps) {
 
                     {/* Itineraries grid */}
                     <div className="bg-white rounded-b-2xl border border-t-0 border-stone-200 p-4 md:p-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                         {regionGroups[region].map((itinerary) => (
                           <ItineraryCard key={itinerary.id} itinerary={itinerary} />
                         ))}
