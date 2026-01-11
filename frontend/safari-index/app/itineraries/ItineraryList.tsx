@@ -20,6 +20,7 @@ import {
   Search,
 } from 'lucide-react';
 import { ViewToggle, useViewPreference } from '../components/ui/ViewToggle';
+import { SaveButton } from '../components/ui/SavedSafaris';
 import { ItineraryFilters, type FilterState } from '../components/ItineraryFilters';
 import { ecosystemImages, getDestinationImage } from '../components/visual';
 import {
@@ -144,71 +145,74 @@ function ItineraryCardGrid({ itinerary }: ItineraryCardProps) {
   const image = getItineraryImage(itinerary.slug, itinerary.region);
 
   return (
-    <Link
-      href={`/itineraries/${itinerary.slug}`}
-      prefetch={false}
-      className="group block bg-white rounded-2xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-lg transition-all"
-    >
-      {/* Image */}
-      <div className="relative h-40 overflow-hidden">
-        <img
-          src={image.src}
-          alt={image.alt}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-        {itinerary.is_featured && (
-          <div className="absolute top-3 left-3">
-            <span className="px-2 py-1 text-xs font-medium bg-amber-500 text-white rounded-full">
-              Featured
-            </span>
+    <div className="group relative bg-white rounded-2xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-lg transition-all">
+      <SaveButton
+        id={itinerary.slug}
+        type="itinerary"
+        size="sm"
+        className="absolute top-3 right-3 z-10"
+      />
+      <Link
+        href={`/itineraries/${itinerary.slug}`}
+        prefetch={false}
+        className="block"
+      >
+        <div className="relative h-40 overflow-hidden">
+          <img
+            src={image.src}
+            alt={image.alt}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          {itinerary.is_featured && (
+            <div className="absolute top-3 left-3">
+              <span className="px-2 py-1 text-xs font-medium bg-amber-500 text-white rounded-full">
+                Featured
+              </span>
+            </div>
+          )}
+          <div className="absolute bottom-0 left-0 right-0 p-4">
+            <p className="text-white/90 text-sm flex items-center gap-1.5 font-medium">
+              <MapPin className="w-3.5 h-3.5" />
+              {regionName}
+            </p>
           </div>
-        )}
-        <div className="absolute bottom-0 left-0 right-0 p-4">
-          <p className="text-white/90 text-sm flex items-center gap-1.5 font-medium">
-            <MapPin className="w-3.5 h-3.5" />
-            {regionName}
+        </div>
+
+        <div className="p-5">
+          <h3 className="font-editorial text-lg font-semibold text-stone-900 mb-1 group-hover:text-amber-700 transition-colors">
+            {itinerary.title}
+          </h3>
+          <p className="text-stone-500 text-sm mb-4 line-clamp-2">
+            {itinerary.subtitle}
           </p>
-        </div>
-      </div>
 
-      {/* Content */}
-      <div className="p-5">
-        <h3 className="font-editorial text-lg font-semibold text-stone-900 mb-1 group-hover:text-amber-700 transition-colors">
-          {itinerary.title}
-        </h3>
-        <p className="text-stone-500 text-sm mb-4 line-clamp-2">
-          {itinerary.subtitle}
-        </p>
-
-        {/* Style tags */}
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          {itinerary.style_tags.slice(0, 3).map((tag) => (
-            <StyleBadge key={tag} style={tag} />
-          ))}
-        </div>
-
-        {/* Meta row */}
-        <div className="flex items-center gap-4 text-sm text-stone-600 pt-3 border-t border-stone-100">
-          <div className="flex items-center gap-1.5">
-            <Clock className="w-4 h-4 text-stone-400" />
-            {formatDurationBand(itinerary.duration_band)}
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {itinerary.style_tags.slice(0, 3).map((tag) => (
+              <StyleBadge key={tag} style={tag} />
+            ))}
           </div>
-          <div className="flex items-center gap-1.5">
-            <DollarSign className="w-4 h-4 text-stone-400" />
-            {formatCostBand(itinerary.cost_band)}
+
+          <div className="flex items-center gap-4 text-sm text-stone-600 pt-3 border-t border-stone-100">
+            <div className="flex items-center gap-1.5">
+              <Clock className="w-4 h-4 text-stone-400" />
+              {formatDurationBand(itinerary.duration_band)}
+            </div>
+            <div className="flex items-center gap-1.5">
+              <DollarSign className="w-4 h-4 text-stone-400" />
+              {formatCostBand(itinerary.cost_band)}
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between mt-4">
+            <span className="text-xs text-stone-500 uppercase tracking-wide">
+              {tierDisplay}
+            </span>
+            <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-amber-600 group-hover:translate-x-0.5 transition-all" />
           </div>
         </div>
-
-        {/* Tier and CTA */}
-        <div className="flex items-center justify-between mt-4">
-          <span className="text-xs text-stone-500 uppercase tracking-wide">
-            {tierDisplay}
-          </span>
-          <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-amber-600 group-hover:translate-x-0.5 transition-all" />
-        </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 
@@ -221,67 +225,75 @@ function ItineraryCardList({ itinerary }: ItineraryCardProps) {
   const image = getItineraryImage(itinerary.slug, itinerary.region);
 
   return (
-    <Link
-      href={`/itineraries/${itinerary.slug}`}
-      prefetch={false}
-      className="group flex bg-white rounded-xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-md transition-all"
-    >
-      <div className="relative w-40 sm:w-48 md:w-56 flex-shrink-0 overflow-hidden">
-        <img
-          src={image.src}
-          alt={image.alt}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/10" />
-        {itinerary.is_featured && (
-          <div className="absolute top-3 left-3">
-            <span className="px-2 py-1 text-xs font-medium bg-amber-500 text-white rounded-full">
-              Featured
-            </span>
-          </div>
-        )}
-      </div>
-
-      <div className="flex-1 p-4 md:p-5 flex flex-col justify-between min-w-0">
-        <div>
-          <div className="flex items-start justify-between gap-3 mb-2">
-            <div className="min-w-0">
-              <div className="flex items-center gap-2 text-xs text-amber-700 mb-1">
-                <MapPin className="w-3 h-3" />
-                {regionName}
-              </div>
-              <h3 className="font-editorial text-lg font-semibold text-stone-900 group-hover:text-amber-800 transition-colors">
-                {itinerary.title}
-              </h3>
+    <div className="group relative flex bg-white rounded-xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-md transition-all">
+      <SaveButton
+        id={itinerary.slug}
+        type="itinerary"
+        size="sm"
+        className="absolute top-3 right-3 z-10"
+      />
+      <Link
+        href={`/itineraries/${itinerary.slug}`}
+        prefetch={false}
+        className="flex flex-1"
+      >
+        <div className="relative w-40 sm:w-48 md:w-56 flex-shrink-0 overflow-hidden">
+          <img
+            src={image.src}
+            alt={image.alt}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/10" />
+          {itinerary.is_featured && (
+            <div className="absolute top-3 left-3">
+              <span className="px-2 py-1 text-xs font-medium bg-amber-500 text-white rounded-full">
+                Featured
+              </span>
             </div>
-            <ArrowRight className="w-5 h-5 text-stone-300 group-hover:text-amber-600 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
-          </div>
-          <p className="text-stone-500 text-sm line-clamp-2 mb-3">{itinerary.subtitle}</p>
+          )}
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap gap-4 text-xs text-stone-500">
-            <span className="flex items-center gap-1">
-              <Clock className="w-3.5 h-3.5" />
-              {formatDurationBand(itinerary.duration_band)}
-            </span>
-            <span className="flex items-center gap-1">
-              <DollarSign className="w-3.5 h-3.5" />
-              {formatCostBand(itinerary.cost_band)}
-            </span>
-            <span className="text-stone-400 uppercase tracking-wide">
-              {tierDisplay}
-            </span>
+        <div className="flex-1 p-4 md:p-5 flex flex-col justify-between min-w-0">
+          <div>
+            <div className="flex items-start justify-between gap-3 mb-2">
+              <div className="min-w-0">
+                <div className="flex items-center gap-2 text-xs text-amber-700 mb-1">
+                  <MapPin className="w-3 h-3" />
+                  {regionName}
+                </div>
+                <h3 className="font-editorial text-lg font-semibold text-stone-900 group-hover:text-amber-800 transition-colors">
+                  {itinerary.title}
+                </h3>
+              </div>
+              <ArrowRight className="w-5 h-5 text-stone-300 group-hover:text-amber-600 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+            </div>
+            <p className="text-stone-500 text-sm line-clamp-2 mb-3">{itinerary.subtitle}</p>
           </div>
 
-          <div className="flex flex-wrap gap-1.5">
-            {itinerary.style_tags.slice(0, 3).map((tag) => (
-              <StyleBadge key={tag} style={tag} />
-            ))}
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap gap-4 text-xs text-stone-500">
+              <span className="flex items-center gap-1">
+                <Clock className="w-3.5 h-3.5" />
+                {formatDurationBand(itinerary.duration_band)}
+              </span>
+              <span className="flex items-center gap-1">
+                <DollarSign className="w-3.5 h-3.5" />
+                {formatCostBand(itinerary.cost_band)}
+              </span>
+              <span className="text-stone-400 uppercase tracking-wide">
+                {tierDisplay}
+              </span>
+            </div>
+
+            <div className="flex flex-wrap gap-1.5">
+              {itinerary.style_tags.slice(0, 3).map((tag) => (
+                <StyleBadge key={tag} style={tag} />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 
@@ -415,7 +427,6 @@ export function ItineraryList({ itineraries }: ItineraryListProps) {
       {/* Results */}
       <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 md:px-8 py-10">
         {filteredItineraries.length === 0 ? (
-          /* No Results */
           <div className="text-center py-16">
             <div className="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Search className="w-8 h-8 text-stone-400" />
@@ -472,7 +483,6 @@ export function ItineraryList({ itineraries }: ItineraryListProps) {
 
                 return (
                   <section key={region} id={region} className="scroll-mt-24">
-                    {/* Region header */}
                     <div className="relative rounded-t-2xl overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-r from-stone-900/90 via-stone-900/70 to-stone-900/50 z-10" />
                       <div
@@ -497,7 +507,6 @@ export function ItineraryList({ itineraries }: ItineraryListProps) {
                       </div>
                     </div>
 
-                    {/* Itineraries grid/list */}
                     <div className="bg-white rounded-b-2xl border border-t-0 border-stone-200 p-4 md:p-6">
                       {view === 'grid' ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">

@@ -17,7 +17,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Heart } from 'lucide-react';
+import { SavedCount } from '../ui/SavedSafaris';
 import { cn } from '../../ui/utils';
 
 interface NavbarProps {
@@ -29,7 +30,7 @@ const NAV_LINKS = [
   { label: 'Safaris', href: '/trips' },
   { label: 'Destinations', href: '/destinations' },
   { label: 'Activities', href: '/activities' },
-  { label: 'Decisions', href: '/decisions' },
+  { label: 'Wildlife Calendar', href: '/wildlife-calendar' },
   { label: 'Insights', href: '/blog' },
   { label: 'How it works', href: '/how-it-works' },
 ];
@@ -118,8 +119,22 @@ export function Navbar({ variant = 'transparent' }: NavbarProps) {
             ))}
           </div>
 
-          {/* Right side - Plan a Safari CTA (desktop) */}
-          <div className="hidden md:flex items-center">
+          {/* Right side - Saved + Plan a Safari CTA (desktop) */}
+          <div className="hidden md:flex items-center gap-2">
+            <Link
+              href="/saved"
+              className={cn(
+                'relative p-2 rounded-md transition-colors',
+                showSolid
+                  ? 'text-stone-600 hover:text-rose-600 hover:bg-stone-100'
+                  : 'text-white/80 hover:text-white hover:bg-white/10'
+              )}
+              aria-label="Saved safaris"
+              data-testid="navbar-saved-link"
+            >
+              <Heart className="w-5 h-5" />
+              <SavedCount />
+            </Link>
             <Link
               href="/inquire"
               className={cn(
@@ -173,7 +188,15 @@ export function Navbar({ variant = 'transparent' }: NavbarProps) {
                 {link.label}
               </Link>
             ))}
-            <div className="border-t border-stone-100 pt-3 mt-3">
+            <div className="border-t border-stone-100 pt-3 mt-3 space-y-2">
+              <Link
+                href="/saved"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 px-4 py-3 text-stone-700 hover:bg-stone-50 rounded-md transition-colors"
+              >
+                <Heart className="w-5 h-5" />
+                Saved Safaris
+              </Link>
               <Link
                 href="/inquire"
                 onClick={() => setIsMobileMenuOpen(false)}

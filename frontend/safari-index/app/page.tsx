@@ -476,6 +476,9 @@ export default function Home() {
             {/* Quick links below search */}
             <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-sm">
               <span className="text-stone-400">Popular:</span>
+              <Link href="/safari-quiz" className="px-3 py-1.5 rounded-full bg-amber-100 text-amber-700 hover:bg-amber-200 transition-colors border border-amber-200 font-medium">
+                Take the Quiz
+              </Link>
               <Link href="/decisions/tanzania-vs-kenya-first-safari" className="px-3 py-1.5 rounded-full bg-white text-stone-600 hover:bg-amber-100 hover:text-amber-700 transition-colors border border-stone-200">
                 Tanzania vs Kenya
               </Link>
