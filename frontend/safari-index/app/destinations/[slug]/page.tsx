@@ -647,9 +647,77 @@ function getItinerariesForDestination(regionTag: string): ItinerarySummary[] {
 }
 
 /**
- * Get ecosystem-based image for a park
+ * Park-specific image mapping to avoid repeated images
+ * Uses a mix of destination, ecosystem, and activity images
+ */
+const PARK_IMAGES: Record<string, { src: string; alt: string }> = {
+  // Tanzania
+  'serengeti': { src: '/images/destinations/tanzania-serengeti.jpg', alt: 'Serengeti endless plains' },
+  'ngorongoro': { src: '/images/destinations/tanzania-ngorongoro.jpg', alt: 'Ngorongoro Crater' },
+  'tarangire': { src: '/images/ecosystems/savannah-morning.jpg', alt: 'Tarangire baobab landscape' },
+  'lake-manyara': { src: '/images/ecosystems/woodland-clearing.jpg', alt: 'Lake Manyara woodland' },
+  'ruaha': { src: '/images/ecosystems/kopje-landscape.jpg', alt: 'Ruaha wilderness' },
+  'nyerere-selous': { src: '/images/ecosystems/delta-channels.jpg', alt: 'Selous waterways' },
+  'katavi': { src: '/images/ecosystems/floodplain-evening.jpg', alt: 'Katavi floodplains' },
+  // Kenya
+  'masai-mara': { src: '/images/destinations/kenya-mara.jpg', alt: 'Masai Mara savannah' },
+  'amboseli': { src: '/images/activities/wildlife-viewing.jpg', alt: 'Amboseli elephants with Kilimanjaro' },
+  'samburu': { src: '/images/ecosystems/savannah-wildlife.jpg', alt: 'Samburu wildlife' },
+  'laikipia': { src: '/images/activities/walking-safari.jpg', alt: 'Laikipia walking safari' },
+  'lake-nakuru': { src: '/images/activities/birding/lilac-breasted-roller.jpg', alt: 'Lake Nakuru birdlife' },
+  'tsavo': { src: '/images/ecosystems/kopje-landscape.jpg', alt: 'Tsavo red landscape' },
+  'mara-conservancies': { src: '/images/activities/game-drive.jpg', alt: 'Mara conservancy game drive' },
+  // Botswana
+  'okavango-delta': { src: '/images/destinations/botswana-delta.jpg', alt: 'Okavango Delta waterways' },
+  'chobe': { src: '/images/activities/boat-safari.jpg', alt: 'Chobe river safari' },
+  'moremi': { src: '/images/ecosystems/delta-channels.jpg', alt: 'Moremi game reserve' },
+  'linyanti': { src: '/images/ecosystems/floodplain-evening.jpg', alt: 'Linyanti wetlands' },
+  'makgadikgadi': { src: '/images/ecosystems/desert-dunes.jpg', alt: 'Makgadikgadi salt pans' },
+  'central-kalahari': { src: '/images/activities/big-cats.jpg', alt: 'Kalahari predators' },
+  // South Africa
+  'kruger': { src: '/images/destinations/south-africa-kruger.jpg', alt: 'Kruger National Park' },
+  'sabi-sands': { src: '/images/activities/big-cats.jpg', alt: 'Sabi Sands leopard territory' },
+  'timbavati': { src: '/images/ecosystems/savannah-morning.jpg', alt: 'Timbavati private reserve' },
+  'madikwe': { src: '/images/activities/game-drive.jpg', alt: 'Madikwe game viewing' },
+  'phinda': { src: '/images/ecosystems/woodland-clearing.jpg', alt: 'Phinda diverse habitats' },
+  'hluhluwe-imfolozi': { src: '/images/activities/walking-safari.jpg', alt: 'Hluhluwe rhino walks' },
+  // Rwanda
+  'volcanoes-np': { src: '/images/destinations/rwanda-volcanoes.jpg', alt: 'Volcanoes National Park' },
+  'akagera': { src: '/images/ecosystems/savannah-wildlife.jpg', alt: 'Akagera savannah' },
+  'nyungwe': { src: '/images/ecosystems/montane-forest.jpg', alt: 'Nyungwe rainforest' },
+  // Uganda
+  'bwindi': { src: '/images/destinations/uganda-bwindi.jpg', alt: 'Bwindi Impenetrable Forest' },
+  'kibale': { src: '/images/activities/chimp-tracking.jpg', alt: 'Kibale chimpanzees' },
+  'queen-elizabeth': { src: '/images/ecosystems/savannah-morning.jpg', alt: 'Queen Elizabeth National Park' },
+  'murchison-falls': { src: '/images/ecosystems/floodplain-evening.jpg', alt: 'Murchison Falls' },
+  'mgahinga': { src: '/images/ecosystems/montane-forest.jpg', alt: 'Mgahinga volcanoes' },
+  // Namibia
+  'etosha': { src: '/images/activities/photographic-hide.jpg', alt: 'Etosha waterhole' },
+  'sossusvlei': { src: '/images/destinations/namibia-sossusvlei.jpg', alt: 'Sossusvlei dunes' },
+  'damaraland': { src: '/images/ecosystems/desert-dunes.jpg', alt: 'Damaraland desert' },
+  'skeleton-coast': { src: '/images/activities/scenic-helicopter.jpg', alt: 'Skeleton Coast aerial' },
+  'caprivi': { src: '/images/ecosystems/delta-channels.jpg', alt: 'Caprivi waterways' },
+  'namibrand': { src: '/images/activities/fly-camping.jpg', alt: 'NamibRand stargazing' },
+  // Zambia
+  'south-luangwa': { src: '/images/destinations/zambia-luangwa.jpg', alt: 'South Luangwa' },
+  'lower-zambezi': { src: '/images/activities/canoe-safari.jpg', alt: 'Lower Zambezi canoeing' },
+  'kafue': { src: '/images/ecosystems/savannah-wildlife.jpg', alt: 'Kafue wilderness' },
+  'north-luangwa': { src: '/images/activities/walking-safari.jpg', alt: 'North Luangwa walking' },
+  'victoria-falls': { src: '/images/activities/white-water-rafting.jpg', alt: 'Victoria Falls activities' },
+  // Zimbabwe
+  'hwange': { src: '/images/activities/photographic-hide.jpg', alt: 'Hwange elephants' },
+  'mana-pools': { src: '/images/destinations/zimbabwe-mana.jpg', alt: 'Mana Pools' },
+  'matobo': { src: '/images/ecosystems/kopje-landscape.jpg', alt: 'Matobo rock formations' },
+};
+
+/**
+ * Get image for a park - uses specific mapping or falls back to ecosystem
  */
 function getParkImage(park: GamePark) {
+  if (PARK_IMAGES[park.id]) {
+    return PARK_IMAGES[park.id];
+  }
+  // Fallback to ecosystem-based image
   const images = getImagesByTag(park.ecosystem);
   return images.length > 0 ? images[0] : ecosystemImages[0];
 }
@@ -720,11 +788,21 @@ function formatActivityName(activityId: string): string {
 }
 
 /**
+ * Images for trip cards - rotates through different images to avoid repetition
+ */
+const TRIP_CARD_IMAGES = [
+  { src: '/images/activities/game-drive.jpg', alt: 'Safari game drive' },
+  { src: '/images/ecosystems/savannah-wildlife.jpg', alt: 'African wildlife' },
+  { src: '/images/activities/migration.jpg', alt: 'Wildlife migration' },
+  { src: '/images/ecosystems/savannah-morning.jpg', alt: 'Morning safari' },
+];
+
+/**
  * Trip card component - Visual card with image header
  */
-function TripCard({ trip, destinationId }: { trip: TripArchetype; destinationId: string }) {
-  // Use the current destination's image, not the trip's region
-  const destImage = getDestinationImage(destinationId);
+function TripCard({ trip, index }: { trip: TripArchetype; index: number }) {
+  // Rotate through different images based on index
+  const cardImage = TRIP_CARD_IMAGES[index % TRIP_CARD_IMAGES.length];
 
   return (
     <Link
@@ -734,8 +812,8 @@ function TripCard({ trip, destinationId }: { trip: TripArchetype; destinationId:
       {/* Image header */}
       <div className="relative h-32 overflow-hidden">
         <img
-          src={destImage.src}
-          alt={destImage.alt}
+          src={cardImage.src}
+          alt={cardImage.alt}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
@@ -775,11 +853,20 @@ function TripCard({ trip, destinationId }: { trip: TripArchetype; destinationId:
 }
 
 /**
+ * Images for itinerary cards - rotates through different images
+ */
+const ITINERARY_CARD_IMAGES = [
+  { src: '/images/activities/river-crossing.jpg', alt: 'River crossing' },
+  { src: '/images/ecosystems/crater-highlands.jpg', alt: 'Crater landscape' },
+  { src: '/images/activities/wildlife-viewing.jpg', alt: 'Wildlife viewing' },
+];
+
+/**
  * Itinerary card component - Visual card with image header
  */
-function ItineraryCard({ itinerary, destinationId }: { itinerary: ItinerarySummary; destinationId: string }) {
-  // Use the current destination's image, not the itinerary's region
-  const destImage = getDestinationImage(destinationId);
+function ItineraryCard({ itinerary, index }: { itinerary: ItinerarySummary; index: number }) {
+  // Rotate through different images based on index
+  const cardImage = ITINERARY_CARD_IMAGES[index % ITINERARY_CARD_IMAGES.length];
 
   return (
     <Link
@@ -789,8 +876,8 @@ function ItineraryCard({ itinerary, destinationId }: { itinerary: ItinerarySumma
       {/* Image header */}
       <div className="relative h-32 overflow-hidden">
         <img
-          src={destImage.src}
-          alt={destImage.alt}
+          src={cardImage.src}
+          alt={cardImage.alt}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
@@ -1112,6 +1199,27 @@ export default async function DestinationPage({
           </div>
         </section>
 
+        {/* CTA - placed after suitability section */}
+        <div className="my-8 bg-gradient-to-r from-amber-50 to-stone-50 rounded-xl border border-amber-200/50 p-5">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <p className="text-stone-900 font-medium">
+                Ready to plan your {destination.name} safari?
+              </p>
+              <p className="text-stone-500 text-sm mt-0.5">
+                Tell us what matters most to you
+              </p>
+            </div>
+            <Link
+              href="/inquire"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-stone-900 text-white rounded-lg font-medium hover:bg-stone-800 transition-colors text-sm whitespace-nowrap"
+            >
+              Start planning
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+
         <SectionDivider />
 
         {/* When to go */}
@@ -1257,8 +1365,8 @@ export default async function DestinationPage({
               </Link>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
-              {trips.map((trip) => (
-                <TripCard key={trip.id} trip={trip} destinationId={destination.id} />
+              {trips.map((trip, idx) => (
+                <TripCard key={trip.id} trip={trip} index={idx} />
               ))}
             </div>
           </section>
@@ -1289,32 +1397,14 @@ export default async function DestinationPage({
                 </Link>
               </div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {itineraries.map((itinerary) => (
-                  <ItineraryCard key={itinerary.id} itinerary={itinerary} destinationId={destination.id} />
+                {itineraries.map((itinerary, idx) => (
+                  <ItineraryCard key={itinerary.id} itinerary={itinerary} index={idx} />
                 ))}
               </div>
             </section>
           </>
         )}
 
-        {/* CTA */}
-        <div className="mt-12 text-center">
-          <div className="inline-block bg-white rounded-2xl border border-stone-200 p-8 max-w-lg">
-            <h3 className="font-editorial text-xl font-semibold text-stone-900 mb-2">
-              Plan your {destination.name} safari
-            </h3>
-            <p className="text-stone-500 mb-6">
-              Share your dates and preferences. We will build a custom itinerary.
-            </p>
-            <Link
-              href="/inquire"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-stone-900 text-white rounded-lg font-medium hover:bg-stone-800 transition-colors"
-            >
-              Start planning
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
       </div>
 
       <Footer variant="operator" />
