@@ -277,6 +277,70 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   };
 
+  // Wildlife Calendar page
+  const wildlifeCalendarPage = {
+    url: `${baseUrl}/wildlife-calendar`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  };
+
+  // Safari Quiz page
+  const safariQuizPage = {
+    url: `${baseUrl}/safari-quiz`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  };
+
+  // Safaris For hub page
+  const safarisForIndexPage = {
+    url: `${baseUrl}/safaris-for`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  };
+
+  // Safaris For type pages
+  const safarisForTypes = ['families', 'couples', 'solo', 'groups', 'seniors', 'photographers', 'first-timers'];
+  const safarisForPages = safarisForTypes.map((type) => ({
+    url: `${baseUrl}/safaris-for/${type}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
+  // FAQ page
+  const faqPage = {
+    url: `${baseUrl}/faq`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  };
+
+  // Birding page
+  const birdingPage = {
+    url: `${baseUrl}/birding`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  };
+
+  // Legal pages
+  const privacyPage = {
+    url: `${baseUrl}/privacy`,
+    lastModified: new Date(),
+    changeFrequency: 'yearly' as const,
+    priority: 0.3,
+  };
+
+  const termsPage = {
+    url: `${baseUrl}/terms`,
+    lastModified: new Date(),
+    changeFrequency: 'yearly' as const,
+    priority: 0.3,
+  };
+
   return [
     {
       url: baseUrl,
@@ -309,5 +373,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     decisionsIndexPage,
     ...refusalPages,
     safariFitToolPage,
+    wildlifeCalendarPage,
+    safariQuizPage,
+    safarisForIndexPage,
+    ...safarisForPages,
+    faqPage,
+    birdingPage,
+    privacyPage,
+    termsPage,
   ];
 }
