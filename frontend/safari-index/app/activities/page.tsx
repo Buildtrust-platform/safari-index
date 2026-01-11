@@ -479,7 +479,7 @@ export default function ActivitiesPage() {
                         We'll build an itinerary with the right activity mix for you
                       </p>
                       <p className="text-stone-500 text-sm mt-0.5">
-                        Tell us your interests and fitness level
+                        Tell us what matters most to you
                       </p>
                     </div>
                     <Link

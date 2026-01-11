@@ -1,12 +1,11 @@
 /**
  * Destinations Hub Page
  *
- * Consistent design with other hub pages:
- * - Hero with icon, title, subtitle, stats
- * - Search section
- * - Featured destinations grid
- * - Region-grouped sections with visual headers
- * - CTA footer
+ * Design:
+ * - Hero with icon, title, subtitle
+ * - Sticky destination navigation
+ * - Region sections with visual headers
+ * - Inline CTA after first region
  */
 
 import Link from 'next/link';
@@ -16,7 +15,6 @@ import {
   ChevronRight,
   ArrowRight,
   Globe,
-  Sparkles,
 } from 'lucide-react';
 import { Navbar, Footer } from '../components/layout';
 import {
@@ -111,51 +109,9 @@ const REGIONS = {
   'Southern Africa': ['botswana', 'south-africa', 'namibia', 'zambia'],
 };
 
-/**
- * Featured destination card with large image
- */
-function FeaturedDestinationCard({ destination }: { destination: typeof DESTINATIONS[0] }) {
-  const destImage = getDestinationImage(destination.id);
-
-  return (
-    <Link
-      href={`/destinations/${destination.id}`}
-      className="group block bg-white rounded-2xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-lg transition-all"
-      data-testid="featured-destination"
-    >
-      {/* Image */}
-      <div className="relative h-36 overflow-hidden">
-        <img
-          src={destImage.src}
-          alt={destImage.alt}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-        <div className="absolute bottom-3 left-4 right-4">
-          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-xs font-medium bg-white/90 backdrop-blur-sm text-stone-700 rounded-full">
-            <Globe className="w-3 h-3" />
-            {destination.region}
-          </span>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-4">
-        <h3 className="font-editorial text-lg font-semibold text-stone-900 group-hover:text-amber-700 transition-colors mb-1">
-          {destination.name}
-        </h3>
-        <p className="text-stone-500 text-sm line-clamp-2 mb-3">{destination.description}</p>
-        <div className="flex items-center justify-between">
-          <span className="text-xs text-stone-400">Explore</span>
-          <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all" />
-        </div>
-      </div>
-    </Link>
-  );
-}
 
 /**
- * Destination card in grid - with large thumbnail image
+ * Destination card in grid - responsive layout
  */
 function DestinationCard({ destination }: { destination: typeof DESTINATIONS[0] }) {
   const destImage = getDestinationImage(destination.id);
@@ -167,9 +123,10 @@ function DestinationCard({ destination }: { destination: typeof DESTINATIONS[0] 
       className="group block bg-white rounded-xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-md transition-all scroll-mt-24"
       data-testid="destination-card"
     >
-      <div className="flex">
-        {/* Large thumbnail */}
-        <div className="w-28 h-32 flex-shrink-0 overflow-hidden">
+      {/* Vertical on mobile, horizontal on larger screens */}
+      <div className="flex flex-col sm:flex-row">
+        {/* Image - taller on mobile, thumbnail on desktop */}
+        <div className="w-full h-32 sm:w-28 sm:h-32 flex-shrink-0 overflow-hidden">
           <img
             src={destImage.src}
             alt={destImage.alt}
@@ -275,7 +232,6 @@ function DestinationNavChip({ destination }: { destination: typeof DESTINATIONS[
 }
 
 export default function DestinationsPage() {
-  const featuredDestinations = DESTINATIONS.slice(0, 4);
   const eastAfricaDestinations = DESTINATIONS.filter((d) => REGIONS['East Africa'].includes(d.id));
   const southernAfricaDestinations = DESTINATIONS.filter((d) => REGIONS['Southern Africa'].includes(d.id));
 
@@ -318,17 +274,10 @@ export default function DestinationsPage() {
 
             {/* Subtitle */}
             <p className="text-white/80 text-lg max-w-xl mx-auto">
-              {DESTINATIONS.length} safari destinations across East and Southern Africa.
+              East and Southern Africa.
               <br className="hidden md:block" />
-              Each has its own character, wildlife, and trade-offs.
+              Each destination has its own character, wildlife, and trade-offs.
             </p>
-
-            {/* Stats */}
-            <div className="flex items-center justify-center gap-6 mt-6 text-white/60 text-sm">
-              <span>{DESTINATIONS.length} destinations</span>
-              <span className="w-1 h-1 rounded-full bg-white/40" />
-              <span>2 regions</span>
-            </div>
           </div>
         </ImageBandContent>
       </ImageBand>
@@ -344,78 +293,48 @@ export default function DestinationsPage() {
         </div>
       </section>
 
-      {/* Featured Destinations */}
-      <section className="bg-white py-10 border-b border-stone-200">
-        <div className="max-w-6xl mx-auto px-4 md:px-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-amber-700" />
-            </div>
-            <div>
-              <h2 className="font-editorial text-xl font-semibold text-stone-900">
-                Popular Destinations
-              </h2>
-              <p className="text-stone-500 text-sm">Where most first-time visitors go</p>
-            </div>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {featuredDestinations.map((destination) => (
-              <FeaturedDestinationCard key={destination.id} destination={destination} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Main content */}
-      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
-        {/* Destination navigation */}
-        <nav className="mb-8" aria-label="Destinations">
-          <h2 className="text-xs font-semibold text-stone-500 uppercase tracking-wide mb-3">
-            Jump to destination
-          </h2>
-          <div className="flex flex-wrap gap-2" data-testid="destination-nav">
+      {/* Sticky destination navigation */}
+      <nav className="sticky top-0 z-40 bg-white border-b border-stone-200 py-3" aria-label="Destinations">
+        <div className="max-w-5xl mx-auto px-4 md:px-8">
+          <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide" data-testid="destination-nav">
+            <span className="text-xs font-medium text-stone-400 uppercase tracking-wide whitespace-nowrap hidden sm:block">Destinations</span>
             {DESTINATIONS.map((destination) => (
               <DestinationNavChip key={destination.id} destination={destination} />
             ))}
           </div>
-        </nav>
-
-        {/* Region sections */}
-        <div className="space-y-8">
-          <RegionSection region="East Africa" destinations={eastAfricaDestinations} />
-          <RegionSection region="Southern Africa" destinations={southernAfricaDestinations} />
         </div>
+      </nav>
 
-        {/* CTA section */}
-        <div className="mt-12 pt-8 border-t border-stone-200">
-          <div className="bg-stone-900 rounded-2xl p-6 md:p-8">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <h3 className="font-editorial text-xl text-white mb-2">
-                  Not sure where to go?
-                </h3>
-                <p className="text-stone-400 text-sm">
-                  Share your preferences and we'll help you choose the right destination.
-                </p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3">
+      {/* Main content */}
+      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
+
+        {/* Region sections with inline CTA */}
+        <div className="space-y-8">
+          <div>
+            <RegionSection region="East Africa" destinations={eastAfricaDestinations} />
+            {/* CTA after first region */}
+            <div className="mt-8 bg-gradient-to-r from-amber-50 to-stone-50 rounded-xl border border-amber-200/50 p-5">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <p className="text-stone-900 font-medium">
+                    We'll recommend the right destination based on your priorities
+                  </p>
+                  <p className="text-stone-500 text-sm mt-0.5">
+                    Tell us what matters most to you
+                  </p>
+                </div>
                 <Link
                   href="/inquire"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-stone-900 rounded-lg font-medium hover:bg-stone-100 transition-colors text-sm"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-stone-900 text-white rounded-lg font-medium hover:bg-stone-800 transition-colors text-sm whitespace-nowrap"
                 >
-                  Start planning
+                  Plan your safari
                   <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  href="/decisions"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-transparent text-white border border-white/30 rounded-lg font-medium hover:bg-white/10 transition-colors text-sm"
-                >
-                  Browse decisions
                 </Link>
               </div>
             </div>
           </div>
+          <RegionSection region="Southern Africa" destinations={southernAfricaDestinations} />
         </div>
       </div>
 
