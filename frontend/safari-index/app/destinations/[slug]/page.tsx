@@ -56,6 +56,8 @@ import {
   type ItinerarySummary,
 } from '../../content/itineraries';
 import { getActivityById } from '../../content/activities/activity-primitives';
+import { WildlifeSightings } from '../../components/WildlifeSightings';
+import { getRegionSightings } from '../../content/wildlife-sightings';
 import { Car, Waves, Footprints, Plane as PlaneIcon, Sparkles } from 'lucide-react';
 
 /**
@@ -1065,6 +1067,15 @@ export default async function DestinationPage({
         )}
 
         <SectionDivider />
+
+        {/* Wildlife Sighting Probabilities */}
+        {getRegionSightings(destination.id).length > 0 && (
+          <section className="my-8">
+            <WildlifeSightings region={destination.id} />
+          </section>
+        )}
+
+        {getRegionSightings(destination.id).length > 0 && <SectionDivider />}
 
         {/* Who it is for / not for */}
         <section className="my-8">
