@@ -1,34 +1,37 @@
 'use client';
 
 /**
- * ReCAPTCHA v3 Integration
+ * ReCAPTCHA Enterprise Integration
  *
  * Invisible reCAPTCHA that runs in the background.
  * Provides spam protection without user interaction.
  *
  * Setup:
- * 1. Get site key from Google reCAPTCHA admin console
+ * 1. Get site key from Google Cloud reCAPTCHA Enterprise console
  * 2. Set NEXT_PUBLIC_RECAPTCHA_SITE_KEY in .env.local
- * 3. Set RECAPTCHA_SECRET_KEY in .env.local (for server-side verification)
+ * 3. Set RECAPTCHA_SECRET_KEY (API key) in .env.local (for server-side verification)
+ * 4. Set GCP_PROJECT_ID in .env.local (for Enterprise API)
  */
 
-import { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 import Script from 'next/script';
 
 const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-// Extend window for reCAPTCHA
+// Extend window for reCAPTCHA Enterprise
 declare global {
   interface Window {
     grecaptcha?: {
-      ready: (callback: () => void) => void;
-      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+      enterprise: {
+        ready: (callback: () => void) => void;
+        execute: (siteKey: string, options: { action: string }) => Promise<string>;
+      };
     };
   }
 }
 
 /**
- * Hook to get reCAPTCHA token
+ * Hook to get reCAPTCHA Enterprise token
  */
 export function useReCaptcha() {
   const getToken = useCallback(async (action: string): Promise<string | null> => {
@@ -37,15 +40,15 @@ export function useReCaptcha() {
       return null;
     }
 
-    if (!window.grecaptcha) {
-      console.warn('reCAPTCHA not loaded');
+    if (!window.grecaptcha?.enterprise) {
+      console.warn('reCAPTCHA Enterprise not loaded');
       return null;
     }
 
     return new Promise((resolve) => {
-      window.grecaptcha!.ready(async () => {
+      window.grecaptcha!.enterprise.ready(async () => {
         try {
-          const token = await window.grecaptcha!.execute(SITE_KEY, { action });
+          const token = await window.grecaptcha!.enterprise.execute(SITE_KEY, { action });
           resolve(token);
         } catch (error) {
           console.error('reCAPTCHA error:', error);
@@ -59,7 +62,7 @@ export function useReCaptcha() {
 }
 
 /**
- * ReCAPTCHA script loader component
+ * ReCAPTCHA Enterprise script loader component
  * Add this to your layout or the page with forms
  */
 export function ReCaptchaProvider({ children }: { children: React.ReactNode }) {
@@ -71,7 +74,7 @@ export function ReCaptchaProvider({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Script
-        src={`https://www.google.com/recaptcha/api.js?render=${SITE_KEY}`}
+        src={`https://www.google.com/recaptcha/enterprise.js?render=${SITE_KEY}`}
         strategy="lazyOnload"
       />
       {children}
@@ -80,17 +83,25 @@ export function ReCaptchaProvider({ children }: { children: React.ReactNode }) {
 }
 
 /**
- * Verify reCAPTCHA token on server side
+ * Verify reCAPTCHA Enterprise token on server side
  * Use this in your API routes
+ *
+ * Requires:
+ * - RECAPTCHA_SECRET_KEY: Google Cloud API key with reCAPTCHA Enterprise API enabled
+ * - GCP_PROJECT_ID: Your Google Cloud project ID
+ * - NEXT_PUBLIC_RECAPTCHA_SITE_KEY: The reCAPTCHA site key
  */
 export async function verifyReCaptchaToken(
   token: string,
   expectedAction: string
 ): Promise<{ success: boolean; score?: number; error?: string }> {
-  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+  const apiKey = process.env.RECAPTCHA_SECRET_KEY;
+  const projectId = process.env.GCP_PROJECT_ID;
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  if (!secretKey) {
-    // reCAPTCHA not configured, allow request
+  if (!apiKey || !projectId || !siteKey) {
+    // reCAPTCHA not fully configured, allow request
+    console.warn('reCAPTCHA Enterprise not fully configured, skipping verification');
     return { success: true };
   }
 
@@ -99,30 +110,49 @@ export async function verifyReCaptchaToken(
   }
 
   try {
-    const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+    // Enterprise API endpoint
+    const url = `https://recaptchaenterprise.googleapis.com/v1/projects/${projectId}/assessments?key=${apiKey}`;
+
+    const response = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `secret=${secretKey}&response=${token}`,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        event: {
+          token,
+          siteKey,
+          expectedAction,
+        },
+      }),
     });
 
     const data = await response.json();
 
-    if (!data.success) {
-      return { success: false, error: 'reCAPTCHA verification failed' };
+    if (data.error) {
+      console.error('reCAPTCHA Enterprise API error:', data.error);
+      return { success: false, error: data.error.message || 'API error' };
+    }
+
+    // Check token validity
+    if (!data.tokenProperties?.valid) {
+      return {
+        success: false,
+        error: `Invalid token: ${data.tokenProperties?.invalidReason || 'unknown'}`
+      };
     }
 
     // Check action matches
-    if (data.action !== expectedAction) {
+    if (data.tokenProperties?.action !== expectedAction) {
       return { success: false, error: 'reCAPTCHA action mismatch' };
     }
 
     // Score threshold (0.0 - 1.0, higher is more likely human)
     // 0.5 is Google's recommended threshold
-    if (data.score < 0.5) {
-      return { success: false, score: data.score, error: 'Low reCAPTCHA score' };
+    const score = data.riskAnalysis?.score ?? 0;
+    if (score < 0.5) {
+      return { success: false, score, error: 'Low reCAPTCHA score' };
     }
 
-    return { success: true, score: data.score };
+    return { success: true, score };
   } catch (error) {
     console.error('reCAPTCHA verification error:', error);
     // Fail open - allow request if verification service is down
