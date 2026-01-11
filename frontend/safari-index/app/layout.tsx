@@ -4,6 +4,8 @@ import Script from "next/script";
 import { Suspense } from "react";
 import "./globals.css";
 import AttributionTracker from "./components/AttributionTracker";
+import { CookieConsent } from "./components/CookieConsent";
+import { ReCaptchaProvider } from "./components/ReCaptcha";
 // Chat widget disabled - requires ANTHROPIC_API_KEY
 // import { ChatWidget } from "./components/ChatWidget";
 
@@ -146,8 +148,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <Suspense fallback={null}>
           <AttributionTracker />
         </Suspense>
-        {children}
-        {/* AI Chat Widget - disabled until ANTHROPIC_API_KEY is configured */}
+        <ReCaptchaProvider>
+          {children}
+        </ReCaptchaProvider>
+        {/* Cookie consent banner */}
+        <CookieConsent />
       </body>
     </html>
   );

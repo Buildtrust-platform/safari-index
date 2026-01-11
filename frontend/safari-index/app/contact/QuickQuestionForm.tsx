@@ -14,10 +14,12 @@
 
 import { useState } from 'react';
 import { Send, Check, AlertCircle } from 'lucide-react';
+import { useReCaptcha } from '../components/ReCaptcha';
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error';
 
 export function QuickQuestionForm() {
+  const { getToken } = useReCaptcha();
   const [email, setEmail] = useState('');
   const [question, setQuestion] = useState('');
   const [formState, setFormState] = useState<FormState>('idle');
@@ -33,6 +35,9 @@ export function QuickQuestionForm() {
     setErrorMessage('');
 
     try {
+      // Get reCAPTCHA token
+      const recaptchaToken = await getToken('contact_submit');
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -40,6 +45,7 @@ export function QuickQuestionForm() {
           email,
           question,
           source_path: typeof window !== 'undefined' ? window.location.pathname : '/contact',
+          recaptchaToken,
         }),
       });
 

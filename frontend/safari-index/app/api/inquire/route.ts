@@ -16,6 +16,7 @@ import { NextResponse } from 'next/server';
 import { InquiryRequestSchema } from '@/lib/contracts';
 import { createInquiry, getInquiry } from '@/lib/db/inquiry-store';
 import { sendInquiryNotification } from '@/lib/email/inquiry-notification';
+import { verifyReCaptchaToken } from '@/app/components/ReCaptcha';
 
 /**
  * POST /api/inquire
@@ -25,8 +26,23 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
+    // Verify reCAPTCHA token if provided
+    if (body.recaptchaToken) {
+      const recaptchaResult = await verifyReCaptchaToken(body.recaptchaToken, 'inquiry_submit');
+      if (!recaptchaResult.success) {
+        console.warn('[Inquiry API] reCAPTCHA failed:', recaptchaResult.error);
+        return NextResponse.json(
+          { error: 'Security verification failed. Please try again.' },
+          { status: 400 }
+        );
+      }
+    }
+
+    // Remove recaptchaToken from body before validation
+    const { recaptchaToken, ...requestBody } = body;
+
     // Validate request payload
-    const parseResult = InquiryRequestSchema.safeParse(body);
+    const parseResult = InquiryRequestSchema.safeParse(requestBody);
     if (!parseResult.success) {
       return NextResponse.json(
         {

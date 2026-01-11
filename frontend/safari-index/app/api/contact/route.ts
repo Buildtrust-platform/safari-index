@@ -15,6 +15,7 @@ import { NextResponse } from 'next/server';
 import { QuickQuestionRequestSchema } from '@/lib/contracts';
 import { createQuestion } from '@/lib/db/question-store';
 import { sendQuestionNotification } from '@/lib/email/question-notification';
+import { verifyReCaptchaToken } from '@/app/components/ReCaptcha';
 
 /**
  * POST /api/contact
@@ -24,8 +25,23 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
+    // Verify reCAPTCHA token if provided
+    if (body.recaptchaToken) {
+      const recaptchaResult = await verifyReCaptchaToken(body.recaptchaToken, 'contact_submit');
+      if (!recaptchaResult.success) {
+        console.warn('[Contact API] reCAPTCHA verification failed:', recaptchaResult.error);
+        return NextResponse.json(
+          { error: 'Security verification failed. Please try again.' },
+          { status: 400 }
+        );
+      }
+    }
+
+    // Remove recaptchaToken before validation
+    const { recaptchaToken, ...requestBody } = body;
+
     // Validate request payload
-    const parseResult = QuickQuestionRequestSchema.safeParse(body);
+    const parseResult = QuickQuestionRequestSchema.safeParse(requestBody);
     if (!parseResult.success) {
       return NextResponse.json(
         {

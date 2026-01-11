@@ -29,6 +29,7 @@ import {
   Pencil,
 } from 'lucide-react';
 import { Navbar, Footer } from '../components/layout';
+import { useReCaptcha } from '../components/ReCaptcha';
 import {
   PlanningBriefState,
   SafariIntent,
@@ -409,6 +410,7 @@ function WhatHappensNext() {
  */
 function PlanningBriefForm() {
   const router = useRouter();
+  const { getToken } = useReCaptcha();
   const [currentStep, setCurrentStep] = useState(1);
   const [state, setState] = useState<PlanningBriefState>(getDefaultPlanningBriefState);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -515,10 +517,14 @@ function PlanningBriefForm() {
     setIsSubmitting(true);
 
     try {
+      // Get reCAPTCHA token
+      const recaptchaToken = await getToken('inquiry_submit');
+
       const attribution = getAttributionData();
       const payload = {
         ...planningBriefToPayload(state),
         attribution: Object.keys(attribution).length > 0 ? attribution : undefined,
+        recaptchaToken,
       };
 
       const response = await fetch('/api/inquire', {
