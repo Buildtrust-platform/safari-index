@@ -31,11 +31,10 @@ import {
   Compass,
   ImageIcon,
 } from 'lucide-react';
-import { Navbar } from '../../components/layout';
+import { Navbar, Footer } from '../../components/layout';
 import {
   ImageBand,
   ImageBandContent,
-  ecosystemImages,
   getActivityImageRef,
   getActivityFallbackImage,
 } from '../../components/visual';
@@ -182,7 +181,7 @@ function DestinationSection({ activity }: { activity: ActivityPrimitive }) {
         <p className="text-stone-600 mb-4">
           {activity.name} is available in {destinationNames.length} destinations:
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
           {destinationNames.map((name) => {
             const destinationId = name.toLowerCase().replace(' ', '-');
             const profile = getProfileByDestination(destinationId);
@@ -425,20 +424,27 @@ export default async function ActivityPage({
           </div>
         </section>
 
-        {/* Physical effort details */}
-        <section className="mb-8">
-          <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
-            Physical Demands
-          </h2>
-          <div className="bg-white rounded-xl border border-stone-200 p-6">
-            <div className="flex items-center gap-3 mb-3">
-              <span className={`px-3 py-1 rounded-full text-sm font-medium ${effortDisplay.color}`}>
-                {effortDisplay.label}
-              </span>
+        {/* CTA - placed after suitability section */}
+        <div className="mb-8 bg-gradient-to-r from-amber-50 to-stone-50 rounded-xl border border-amber-200/50 p-5">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <p className="text-stone-900 font-medium">
+                Want to include {activity.name.toLowerCase()} in your safari?
+              </p>
+              <p className="text-stone-500 text-sm mt-0.5">
+                Tell us what matters most to you
+              </p>
             </div>
-            <p className="text-stone-700">{effortDisplay.description}</p>
+            <Link
+              href={`/inquire?activity=${activity.id}`}
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-stone-900 text-white rounded-lg font-medium hover:bg-stone-800 transition-colors text-sm whitespace-nowrap"
+              prefetch={false}
+            >
+              Start planning
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
-        </section>
+        </div>
 
         {/* Timing */}
         <section className="mb-8">
@@ -495,66 +501,9 @@ export default async function ActivityPage({
 
         {/* Related trips */}
         <RelatedTripsSection activity={activity} />
-
-        {/* CTA */}
-        <div className="mt-12 pt-8 border-t border-stone-200">
-          <div className="bg-stone-900 rounded-xl p-6 text-center">
-            <h3 className="font-editorial text-xl text-white mb-2">
-              Want to include {activity.name.toLowerCase()} in your safari?
-            </h3>
-            <p className="text-stone-400 text-sm mb-4 max-w-md mx-auto">
-              Share your preferences and we'll design an itinerary that includes this activity.
-            </p>
-            <Link
-              href={`/inquire?activity=${activity.id}`}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-stone-900 rounded-lg font-medium hover:bg-stone-100 transition-colors"
-              prefetch={false}
-            >
-              Start planning
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-stone-900 text-white py-12 mt-16">
-        <div className="max-w-6xl mx-auto px-4 md:px-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <span className="font-editorial text-lg font-semibold">Vurara Safaris</span>
-              <span className="text-stone-500 text-sm ml-2">Private Safari Operator</span>
-            </div>
-
-            <div className="flex items-center gap-6">
-              <Link
-                href="/"
-                className="text-sm text-stone-400 hover:text-white transition-colors"
-              >
-                Home
-              </Link>
-              <Link
-                href="/activities"
-                className="text-sm text-stone-400 hover:text-white transition-colors"
-              >
-                Activities
-              </Link>
-              <Link
-                href="/destinations"
-                className="text-sm text-stone-400 hover:text-white transition-colors"
-              >
-                Destinations
-              </Link>
-              <Link
-                href="/trips"
-                className="text-sm text-stone-400 hover:text-white transition-colors"
-              >
-                Safaris
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer variant="operator" />
     </main>
   );
 }
