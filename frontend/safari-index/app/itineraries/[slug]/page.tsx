@@ -326,38 +326,6 @@ function ActivitiesSection({ itinerary }: { itinerary: Itinerary }) {
 }
 
 /**
- * Decisions section
- */
-function DecisionsSection({ itinerary }: { itinerary: Itinerary }) {
-  return (
-    <div>
-      <p className="text-stone-600 mb-4">
-        Before finalizing this itinerary, consider these related decisions:
-      </p>
-      <div className="space-y-2">
-        {itinerary.linked_decisions.slice(0, 6).map((decisionId) => (
-          <Link
-            key={decisionId}
-            href={`/decisions/${decisionId}`}
-            prefetch={false}
-            className="flex items-center justify-between p-3 bg-white border border-stone-200 rounded-lg hover:border-amber-300 hover:bg-amber-50 transition-colors group"
-            data-testid="decision-link"
-          >
-            <div className="flex items-center gap-2">
-              <HelpCircle className="w-4 h-4 text-stone-400" />
-              <span className="text-sm text-stone-700 group-hover:text-amber-700">
-                {decisionId.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
-              </span>
-            </div>
-            <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-amber-600 transition-colors" />
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/**
  * Variants section
  */
 function VariantsSection({ itinerary }: { itinerary: Itinerary }) {
@@ -433,49 +401,46 @@ function VariantsSection({ itinerary }: { itinerary: Itinerary }) {
 }
 
 /**
- * Trade-offs section
+ * Advisory Panel - combines fit + trade-offs into single decision-focused section
  */
-function TradeOffsSection({ itinerary }: { itinerary: Itinerary }) {
+function AdvisoryPanel({ itinerary }: { itinerary: Itinerary }) {
   return (
-    <div className="space-y-3">
-      {itinerary.trade_offs.map((tradeoff, idx) => (
-        <div key={idx} className="flex gap-4 p-3 bg-stone-50 rounded-lg">
-          <div className="flex-1">
-            <div className="flex items-start gap-2 mb-1">
-              <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-              <span className="text-sm text-stone-700">{tradeoff.gain}</span>
-            </div>
-            <div className="flex items-start gap-2">
-              <AlertCircle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
-              <span className="text-sm text-stone-500">{tradeoff.cost}</span>
-            </div>
+    <div className="bg-white rounded-xl border border-stone-200 overflow-hidden">
+      {/* Fit section - side by side */}
+      <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-stone-200">
+        <div className="p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <Users className="w-4 h-4 text-green-600" />
+            <p className="text-sm font-medium text-green-800">Best for</p>
+          </div>
+          <p className="text-sm text-stone-600">{itinerary.who_this_is_for}</p>
+        </div>
+        <div className="p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <AlertCircle className="w-4 h-4 text-amber-600" />
+            <p className="text-sm font-medium text-amber-800">Not ideal for</p>
+          </div>
+          <p className="text-sm text-stone-600">{itinerary.who_this_is_not_for}</p>
+        </div>
+      </div>
+
+      {/* Trade-offs - compact list */}
+      {itinerary.trade_offs.length > 0 && (
+        <div className="border-t border-stone-200 p-4 bg-stone-50">
+          <p className="text-xs font-semibold text-stone-500 uppercase tracking-wide mb-3">Trade-offs</p>
+          <div className="grid md:grid-cols-2 gap-2">
+            {itinerary.trade_offs.map((tradeoff, idx) => (
+              <div key={idx} className="flex gap-3 text-sm">
+                <div className="flex-1">
+                  <span className="text-green-700">{tradeoff.gain}</span>
+                  <span className="text-stone-400 mx-1.5">/</span>
+                  <span className="text-amber-700">{tradeoff.cost}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
-  );
-}
-
-/**
- * Fit section
- */
-function FitSection({ itinerary }: { itinerary: Itinerary }) {
-  return (
-    <div className="grid md:grid-cols-2 gap-6">
-      <div className="p-4 bg-green-50 border border-green-200 rounded-xl">
-        <div className="flex items-center gap-2 mb-3">
-          <Users className="w-5 h-5 text-green-600" />
-          <p className="font-medium text-green-800">Who this is for</p>
-        </div>
-        <p className="text-sm text-green-700">{itinerary.who_this_is_for}</p>
-      </div>
-      <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl">
-        <div className="flex items-center gap-2 mb-3">
-          <AlertCircle className="w-5 h-5 text-amber-600" />
-          <p className="font-medium text-amber-800">Who this is not for</p>
-        </div>
-        <p className="text-sm text-amber-700">{itinerary.who_this_is_not_for}</p>
-      </div>
+      )}
     </div>
   );
 }
@@ -622,136 +587,100 @@ export default async function ItineraryDetailPage({ params }: PageProps) {
 
       {/* Main content */}
       <div className="max-w-4xl mx-auto px-4 md:px-8 py-8">
-        {/* Route summary */}
-        <div className="bg-white rounded-xl border border-stone-200 p-5 mb-8">
-          <p className="text-xs font-semibold text-stone-500 uppercase tracking-wide mb-2">
-            Route
-          </p>
-          <p className="font-editorial text-lg text-stone-900">{itinerary.route_summary}</p>
-        </div>
+        {/* Unified Route Section - summary + map + segments */}
+        <section className="mb-10" data-testid="route-section">
+          <div className="bg-white rounded-xl border border-stone-200 overflow-hidden">
+            {/* Route header with summary */}
+            <div className="p-5 border-b border-stone-200">
+              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-2">Your Route</h2>
+              <p className="text-stone-600">{itinerary.route_summary}</p>
+            </div>
 
-        {/* Route Map */}
-        <div className="bg-white rounded-xl border border-stone-200 p-5 mb-8" data-testid="travel-map">
-          <p className="text-xs font-semibold text-stone-500 uppercase tracking-wide mb-4">
-            Route Map
-          </p>
-          <RouteMap
-            segments={itinerary.core_segments.map((segment) => ({
-              id: segment.id,
-              location: segment.location,
-              order: segment.order,
-              nights: segment.nights,
-              travelMode: segment.transfers?.arrival?.toLowerCase().includes('flight') ||
-                segment.transfers?.arrival?.toLowerCase().includes('charter')
-                ? 'flight' as const
-                : 'road' as const,
-            }))}
-            region={itinerary.region}
-          />
-        </div>
+            {/* Route Map */}
+            <div className="p-5 border-b border-stone-200 bg-stone-50" data-testid="travel-map">
+              <RouteMap
+                segments={itinerary.core_segments.map((segment) => ({
+                  id: segment.id,
+                  location: segment.location,
+                  order: segment.order,
+                  nights: segment.nights,
+                  travelMode: segment.transfers?.arrival?.toLowerCase().includes('flight') ||
+                    segment.transfers?.arrival?.toLowerCase().includes('charter')
+                    ? 'flight' as const
+                    : 'road' as const,
+                }))}
+                region={itinerary.region}
+              />
+            </div>
+
+            {/* Segment cards */}
+            <div className="p-5">
+              <p className="text-xs font-semibold text-stone-500 uppercase tracking-wide mb-4">
+                Route Details
+              </p>
+              <div className="space-y-0">
+                {itinerary.core_segments.map((segment, idx) => (
+                  <SegmentCard
+                    key={segment.id}
+                    segment={segment}
+                    isLast={idx === itinerary.core_segments.length - 1}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Sections */}
-        <div className="space-y-12">
-          {/* Route Overview */}
-          <section data-testid="route-overview">
-            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">
-              Route Overview
-            </h2>
-            <div className="space-y-0">
-              {itinerary.core_segments.map((segment, idx) => (
-                <SegmentCard
-                  key={segment.id}
-                  segment={segment}
-                  isLast={idx === itinerary.core_segments.length - 1}
-                />
-              ))}
-            </div>
-          </section>
+        <div className="space-y-10">
+          {/* Typical Day + Activities side by side on desktop */}
+          <div className="grid lg:grid-cols-2 gap-6">
+            {/* What Your Days Look Like */}
+            <section data-testid="typical-day">
+              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
+                A Typical Day
+              </h2>
+              <div className="bg-white rounded-xl border border-stone-200 p-4 h-full">
+                <p className="text-xs text-stone-500 mb-3">
+                  Sample from {itinerary.core_segments[0]?.title || 'camp'}
+                </p>
+                <TypicalDaySection segment={itinerary.core_segments[0]} />
+              </div>
+            </section>
 
-          {/* What Your Days Look Like */}
-          <section data-testid="typical-day">
-            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">
-              What Your Days Look Like
-            </h2>
-            <div className="bg-white rounded-xl border border-stone-200 p-5">
-              <p className="text-sm text-stone-500 mb-4">
-                Sample schedule from {itinerary.core_segments[0]?.title || 'camp'}
-              </p>
-              <TypicalDaySection segment={itinerary.core_segments[0]} />
-            </div>
-          </section>
+            {/* Activities */}
+            <section data-testid="activities">
+              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
+                Activities
+              </h2>
+              <div className="bg-white rounded-xl border border-stone-200 p-4 h-full">
+                <ActivitiesSection itinerary={itinerary} />
+              </div>
+            </section>
+          </div>
 
-          {/* Activities */}
-          <section data-testid="activities">
-            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">
-              Activities Included
-            </h2>
-            <ActivitiesSection itinerary={itinerary} />
-          </section>
-
-          {/* Best Season */}
-          <section data-testid="best-season">
-            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">
-              Best Time to Go
-            </h2>
-            <SeasonSection itinerary={itinerary} />
-          </section>
-
-          {/* Itinerary Provenance - Why this route works */}
-          <ProvenanceSection itinerary={itinerary} />
-
-          {/* Trade-offs */}
-          <section data-testid="trade-offs">
-            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">
-              Trade-offs to Consider
-            </h2>
-            <TradeOffsSection itinerary={itinerary} />
-          </section>
-
-          {/* Who this is for */}
-          <section data-testid="fit">
-            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">
+          {/* Advisory Panel - combined fit + trade-offs */}
+          <section data-testid="advisory">
+            <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
               Is This Right for You?
             </h2>
-            <FitSection itinerary={itinerary} />
+            <AdvisoryPanel itinerary={itinerary} />
           </section>
 
-          {/* Variants */}
-          <section data-testid="variants">
-            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">
-              Customization Options
-            </h2>
-            <VariantsSection itinerary={itinerary} />
-          </section>
-
-          {/* Cost */}
-          <section data-testid="cost">
-            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">
-              Cost Context
-            </h2>
-            <CostSection itinerary={itinerary} />
-          </section>
-
-          {/* Decisions to confirm */}
-          <section data-testid="decisions">
-            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">
-              Decisions to Confirm
-            </h2>
-            <DecisionsSection itinerary={itinerary} />
-          </section>
-
-          {/* CTA */}
-          <section className="pt-8 border-t border-stone-200">
-            <div className="bg-stone-900 rounded-xl p-6 text-center">
-              <h3 className="font-editorial text-xl text-white mb-2">
-                Ready to plan this itinerary?
-              </h3>
-              <p className="text-stone-400 text-sm mb-4 max-w-md mx-auto">
-                Share your preferences and we'll customize this route around your decisions.
-              </p>
+          {/* Inline CTA - placed after advisory for decision momentum */}
+          <div className="bg-gradient-to-r from-amber-50 to-stone-50 rounded-xl border border-amber-200/50 p-5">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <p className="text-stone-900 font-medium">
+                  Like what you see?
+                </p>
+                <p className="text-stone-500 text-sm mt-0.5">
+                  We'll customize this route around your preferences
+                </p>
+              </div>
               <Link
                 href={`/inquire?${inquiryParams.toString()}`}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-stone-900 rounded-lg font-medium hover:bg-stone-100 transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-stone-900 text-white rounded-lg font-medium hover:bg-stone-800 transition-colors text-sm whitespace-nowrap"
                 prefetch={false}
                 data-testid="inquire-cta"
               >
@@ -759,7 +688,69 @@ export default async function ItineraryDetailPage({ params }: PageProps) {
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-          </section>
+          </div>
+
+          {/* Best Season + Provenance side by side */}
+          <div className="grid lg:grid-cols-2 gap-6">
+            <section data-testid="best-season">
+              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
+                Best Time to Go
+              </h2>
+              <SeasonSection itinerary={itinerary} />
+            </section>
+
+            <div>
+              <ProvenanceSection itinerary={itinerary} />
+            </div>
+          </div>
+
+          {/* Customization + Cost side by side */}
+          <div className="grid lg:grid-cols-2 gap-6">
+            {/* Variants/Customization - BEFORE cost */}
+            <section data-testid="variants">
+              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
+                Customization Options
+              </h2>
+              <div className="bg-white rounded-xl border border-stone-200 p-4">
+                <VariantsSection itinerary={itinerary} />
+              </div>
+            </section>
+
+            {/* Cost */}
+            <section data-testid="cost">
+              <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
+                Cost Context
+              </h2>
+              <CostSection itinerary={itinerary} />
+            </section>
+          </div>
+
+          {/* Decisions - compact, optional reading */}
+          {itinerary.linked_decisions.length > 0 && (
+            <section data-testid="decisions" className="bg-stone-50 rounded-xl p-5">
+              <h2 className="font-editorial text-lg font-semibold text-stone-900 mb-3">
+                Related Decisions
+              </h2>
+              <p className="text-sm text-stone-500 mb-4">
+                Questions to consider before booking
+              </p>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                {itinerary.linked_decisions.slice(0, 6).map((decisionId) => (
+                  <Link
+                    key={decisionId}
+                    href={`/decisions/${decisionId}`}
+                    prefetch={false}
+                    className="flex items-center gap-2 p-2.5 bg-white border border-stone-200 rounded-lg hover:border-amber-300 hover:bg-amber-50 transition-colors text-sm text-stone-700 hover:text-amber-700"
+                  >
+                    <HelpCircle className="w-3.5 h-3.5 text-stone-400 flex-shrink-0" />
+                    <span className="truncate">
+                      {decisionId.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </div>
 

@@ -42,7 +42,6 @@ import { InputReadinessPanel } from '../../components/InputReadinessPanel';
 import { RefusalRecoveryPanel } from '../../components/RefusalRecoveryPanel';
 import { ServiceDegradedRefusal } from '../../components/ServiceDegradedRefusal';
 import { PreflightWizard } from '../../components/PreflightWizard';
-import { BaselineFallbackBanner } from '../../components/BaselineFallbackBanner';
 import { TripPlanningCTA } from '../../components/TripPlanningCTA';
 import { LinkedTrips } from '../../components/LinkedTrips';
 import { getTopicBySlug, DecisionTopic } from '../../content/decision-topics';
@@ -366,157 +365,124 @@ export default function DecisionPage() {
             </div>
           </section>
 
-          <SectionDivider />
-
-          {/* Trade-offs */}
+          {/* Consolidated: Trade-offs + Fit in one section */}
           <section className="my-8">
-            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">Trade-offs</h2>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="bg-white rounded-2xl border border-stone-200 p-5">
-                <h3 className="font-ui text-sm font-medium text-[#2F5D50] mb-3 uppercase tracking-wide">
-                  Gains
-                </h3>
+            <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">What this means</h2>
+            <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden">
+              {/* Trade-offs row */}
+              <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-stone-100">
+                <div className="p-4">
+                  <h3 className="font-ui text-xs font-medium text-[#2F5D50] mb-2 uppercase tracking-wide">Gains</h3>
+                  <ul className="space-y-1">
+                    {d.tradeoffs.gains.map((gain, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm">
+                        <span className="text-[#2F5D50]">+</span>
+                        <span className="text-stone-700">{gain}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-ui text-xs font-medium text-[#8A3F3B] mb-2 uppercase tracking-wide">Losses</h3>
+                  <ul className="space-y-1">
+                    {d.tradeoffs.losses.map((loss, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm">
+                        <span className="text-[#8A3F3B]">−</span>
+                        <span className="text-stone-700">{loss}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Fit row - if available */}
+              {(fitMisfit.rightFor.length > 0 || fitMisfit.notIdealFor.length > 0) && (
+                <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-stone-100 border-t border-stone-100 bg-stone-50/50">
+                  {fitMisfit.rightFor.length > 0 && (
+                    <div className="p-4">
+                      <h3 className="font-ui text-xs font-medium text-[#2F5D50] mb-2 uppercase tracking-wide">Best for</h3>
+                      <ul className="space-y-1">
+                        {fitMisfit.rightFor.slice(0, 3).map((item, i) => (
+                          <li key={i} className="text-sm text-stone-600">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {fitMisfit.notIdealFor.length > 0 && (
+                    <div className="p-4">
+                      <h3 className="font-ui text-xs font-medium text-stone-500 mb-2 uppercase tracking-wide">Not ideal for</h3>
+                      <ul className="space-y-1">
+                        {fitMisfit.notIdealFor.slice(0, 3).map((item, i) => (
+                          <li key={i} className="text-sm text-stone-500">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* Assumptions + Change Conditions - compact */}
+          <section className="my-8 bg-stone-50 rounded-xl p-5">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="font-ui text-xs font-medium text-stone-500 mb-3 uppercase tracking-wide">Assumptions</h3>
                 <ul className="space-y-2">
-                  {d.tradeoffs.gains.map((gain, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="text-[#2F5D50] mt-0.5">+</span>
-                      <span className="text-stone-700">{gain}</span>
-                    </li>
+                  {d.assumptions.slice(0, 3).map((assumption, i) => (
+                    <li key={i} className="text-sm text-stone-600">{assumption.text}</li>
                   ))}
                 </ul>
               </div>
-              <div className="bg-white rounded-2xl border border-stone-200 p-5">
-                <h3 className="font-ui text-sm font-medium text-[#8A3F3B] mb-3 uppercase tracking-wide">
-                  Losses
-                </h3>
+              <div>
+                <h3 className="font-ui text-xs font-medium text-stone-500 mb-3 uppercase tracking-wide">When this changes</h3>
                 <ul className="space-y-2">
-                  {d.tradeoffs.losses.map((loss, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="text-[#8A3F3B] mt-0.5">−</span>
-                      <span className="text-stone-700">{loss}</span>
-                    </li>
+                  {d.change_conditions.slice(0, 3).map((condition, i) => (
+                    <li key={i} className="text-sm text-stone-600">{condition}</li>
                   ))}
                 </ul>
               </div>
             </div>
           </section>
 
-          <SectionDivider />
-
-          {/* Assumptions */}
-          <section className="my-8">
-            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">Assumptions</h2>
-            <div className="bg-white rounded-2xl border border-stone-200 divide-y divide-stone-100">
-              {d.assumptions.map((assumption, i) => (
-                <div key={i} className="p-5">
-                  <p className="text-stone-900">{assumption.text}</p>
-                  <p className="text-sm text-stone-500 mt-1">
-                    Confidence: {Math.round(assumption.confidence * 100)}%
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <SectionDivider />
-
-          {/* Change Conditions */}
-          <section className="my-8">
-            <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">When this changes</h2>
-            <div className="bg-white rounded-2xl border border-stone-200 divide-y divide-stone-100">
-              {d.change_conditions.map((condition, i) => (
-                <div key={i} className="p-5">
-                  <p className="text-stone-700">{condition}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <SectionDivider />
-
-          {/* Who this is for */}
-          {(fitMisfit.rightFor.length > 0 || fitMisfit.notIdealFor.length > 0) && (
-            <section className="my-8">
-              <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">Who this is for</h2>
-              <div className="grid md:grid-cols-2 gap-4">
-                {fitMisfit.rightFor.length > 0 && (
-                  <div className="bg-white rounded-2xl border border-stone-200 p-5">
-                    <h3 className="font-ui text-sm font-medium text-[#2F5D50] mb-3 uppercase tracking-wide">
-                      Right for
-                    </h3>
-                    <ul className="space-y-2">
-                      {fitMisfit.rightFor.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="text-[#2F5D50] mt-0.5">✓</span>
-                          <span className="text-stone-700">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {fitMisfit.notIdealFor.length > 0 && (
-                  <div className="bg-white rounded-2xl border border-stone-200 p-5">
-                    <h3 className="font-ui text-sm font-medium text-stone-500 mb-3 uppercase tracking-wide">
-                      Not ideal for
-                    </h3>
-                    <ul className="space-y-2">
-                      {fitMisfit.notIdealFor.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="text-stone-400 mt-0.5">−</span>
-                          <span className="text-stone-600">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+          {/* CTA - inline style */}
+          <div className="my-8 bg-gradient-to-r from-amber-50 to-stone-50 rounded-xl border border-amber-200/50 p-5">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <p className="text-stone-900 font-medium">Need a personalized decision?</p>
+                <p className="text-stone-500 text-sm mt-0.5">
+                  Start planning with your specific dates and preferences
+                </p>
               </div>
-            </section>
-          )}
-
-          {/* Related Decisions */}
-          {relatedTopics.length > 0 && (
-            <>
-              <SectionDivider />
-              <section className="my-8">
-                <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">Related decisions</h2>
-                <div className="grid gap-3">
-                  {relatedTopics.slice(0, 3).map((related) => (
-                    <Link
-                      key={related.topic_id}
-                      href={`/decisions/${related.slug}`}
-                      className="block bg-white rounded-xl border border-stone-200 p-4 hover:border-amber-300 hover:shadow-sm transition-all"
-                    >
-                      <p className="font-medium text-stone-900 group-hover:text-amber-700">
-                        {related.question}
-                      </p>
-                      <p className="text-sm text-stone-500 mt-1">
-                        {related.context_line}
-                      </p>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            </>
-          )}
-
-          {/* CTA */}
-          <div className="mt-12 text-center">
-            <div className="inline-block bg-white rounded-2xl border border-stone-200 p-8 max-w-lg">
-              <h3 className="font-editorial text-xl font-semibold text-stone-900 mb-2">
-                Need a personalized decision?
-              </h3>
-              <p className="text-stone-500 mb-6">
-                Start planning your safari with inputs tailored to your travel dates and preferences.
-              </p>
               <Link
                 href="/inquire"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-stone-900 text-white rounded-lg font-medium hover:bg-stone-800 transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-stone-900 text-white rounded-lg font-medium hover:bg-stone-800 transition-colors text-sm whitespace-nowrap"
               >
                 Start planning
                 <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
+
+          {/* Related Decisions - compact */}
+          {relatedTopics.length > 0 && (
+            <section className="my-8">
+              <h2 className="font-editorial text-lg font-semibold text-stone-900 mb-4">Related decisions</h2>
+              <div className="grid sm:grid-cols-2 gap-2">
+                {relatedTopics.slice(0, 4).map((related) => (
+                  <Link
+                    key={related.topic_id}
+                    href={`/decisions/${related.slug}`}
+                    className="block bg-white rounded-lg border border-stone-200 p-3 hover:border-amber-300 transition-all"
+                  >
+                    <p className="text-sm font-medium text-stone-900 line-clamp-1">
+                      {related.question}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
 
         <Footer variant="decision-system" />

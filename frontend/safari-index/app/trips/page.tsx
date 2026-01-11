@@ -18,9 +18,7 @@ import {
   ChevronRight,
   Map,
   DollarSign,
-  Sparkles,
   Globe,
-  Route,
   FileText,
 } from 'lucide-react';
 import {
@@ -400,9 +398,6 @@ export default function TripsHubPage() {
       t.id.includes('budget')
   );
 
-  // Featured trips (first 6 for featured section)
-  const featuredTrips = allTrips.slice(0, 6);
-
   // All region sections with their trips
   const regionData = [
     { section: REGION_SECTIONS[0], trips: eastAfricaTrips },
@@ -482,115 +477,66 @@ export default function TripsHubPage() {
         </div>
       </section>
 
-      {/* Tab Navigation - Switch between Trip Shapes and Itineraries */}
-      <section className="bg-stone-50 border-b border-stone-200">
+      {/* Sticky category navigation */}
+      <nav className="sticky top-0 z-40 bg-white border-b border-stone-200 py-3" aria-label="Safari categories">
         <div className="max-w-5xl mx-auto px-4 md:px-8">
-          <nav className="flex gap-1" aria-label="Safari content type">
-            <Link
-              href="/trips"
-              className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-amber-700 border-b-2 border-amber-600 bg-white -mb-px rounded-t-lg"
-              aria-current="page"
-            >
-              <Route className="w-4 h-4" />
-              Trip Shapes
-              <span className="text-xs text-amber-600 bg-amber-100 px-1.5 py-0.5 rounded">
-                {allTrips.length}
-              </span>
-            </Link>
-            <Link
-              href="/itineraries"
-              className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-stone-500 hover:text-stone-700 hover:bg-white/50 rounded-t-lg transition-colors"
-            >
-              <FileText className="w-4 h-4" />
-              Day-by-Day Itineraries
-            </Link>
-          </nav>
-        </div>
-      </section>
-
-      {/* Featured Safaris */}
-      <section className="bg-white py-10 border-b border-stone-200">
-        <div className="max-w-6xl mx-auto px-4 md:px-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-amber-700" />
-            </div>
-            <div>
-              <h2 className="font-editorial text-xl font-semibold text-stone-900">
-                Popular Safaris
-              </h2>
-              <p className="text-stone-500 text-sm">Most requested itinerary shapes</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {featuredTrips.map((trip) => (
-              <TripCard key={trip.id} trip={trip} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Main content */}
-      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
-        {/* Region navigation */}
-        <nav className="mb-8" aria-label="Safari categories">
-          <h2 className="text-xs font-semibold text-stone-500 uppercase tracking-wide mb-3">
-            Browse by category
-          </h2>
-          <div className="flex flex-wrap gap-2" data-testid="region-nav">
+          <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide">
+            <span className="text-xs font-medium text-stone-400 uppercase tracking-wide whitespace-nowrap hidden sm:block">Categories</span>
             {regionData.map(({ section, trips }) => (
               <a
                 key={section.id}
                 href={`#${section.id}`}
-                className="flex items-center gap-2 px-3 py-2 text-sm text-stone-600 bg-white rounded-lg border border-stone-200 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700 transition-colors whitespace-nowrap shadow-sm"
+                className="flex items-center gap-2 px-3 py-2 text-sm text-stone-600 bg-stone-50 rounded-lg border border-stone-200 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700 transition-colors whitespace-nowrap"
               >
-                <Globe className="w-4 h-4" />
                 <span>{section.name}</span>
-                <span className="text-xs text-stone-400 bg-stone-100 px-1.5 py-0.5 rounded">
+                <span className="text-xs text-stone-400 bg-white px-1.5 py-0.5 rounded">
                   {trips.length}
                 </span>
               </a>
             ))}
+            <Link
+              href="/itineraries"
+              className="flex items-center gap-1.5 px-3 py-2 text-sm text-stone-500 hover:text-amber-700 transition-colors whitespace-nowrap ml-auto"
+            >
+              <FileText className="w-4 h-4" />
+              Day-by-day itineraries
+            </Link>
           </div>
-        </nav>
-
-        {/* Region sections */}
-        <div className="space-y-8">
-          {regionData.map(({ section, trips }) => (
-            <RegionSection key={section.id} section={section} trips={trips} />
-          ))}
         </div>
+      </nav>
 
-        {/* CTA section */}
-        <div className="mt-12 pt-8 border-t border-stone-200">
-          <div className="bg-stone-900 rounded-2xl p-6 md:p-8">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <h3 className="font-editorial text-xl text-white mb-2">
-                  Ready to plan your safari?
-                </h3>
-                <p className="text-stone-400 text-sm">
-                  Tell us about your trip and we'll build a custom itinerary.
-                </p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link
-                  href="/inquire"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-stone-900 rounded-lg font-medium hover:bg-stone-100 transition-colors text-sm"
-                >
-                  Start planning
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  href="/itineraries"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-transparent text-white border border-white/30 rounded-lg font-medium hover:bg-white/10 transition-colors text-sm"
-                >
-                  Browse itineraries
-                </Link>
-              </div>
+      {/* Main content */}
+      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
+        {/* Region sections with inline CTA after first */}
+        <div className="space-y-8">
+          {regionData.map(({ section, trips }, index) => (
+            <div key={section.id}>
+              <RegionSection section={section} trips={trips} />
+
+              {/* Inline CTA after first region */}
+              {index === 0 && (
+                <div className="mt-8 bg-gradient-to-r from-amber-50 to-stone-50 rounded-xl border border-amber-200/50 p-5">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div>
+                      <p className="text-stone-900 font-medium">
+                        Not sure which safari fits your trip?
+                      </p>
+                      <p className="text-stone-500 text-sm mt-0.5">
+                        Tell us your priorities and we'll recommend the right shape
+                      </p>
+                    </div>
+                    <Link
+                      href="/inquire"
+                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-stone-900 text-white rounded-lg font-medium hover:bg-stone-800 transition-colors text-sm whitespace-nowrap"
+                    >
+                      Start planning
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
+          ))}
         </div>
       </div>
 

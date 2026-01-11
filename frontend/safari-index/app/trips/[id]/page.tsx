@@ -46,8 +46,8 @@ import {
   getTripVariants,
 } from '../../../lib/trip-links';
 import { ImageBand, ImageBandContent, ecosystemImages } from '../../components/visual';
-import { Navbar } from '../../components/layout';
-import { TypicalDaySection, AccommodationSection, ExclusionBlock, CostSignalSection } from '../../components/trips';
+import { Navbar, Footer } from '../../components/layout';
+import { TypicalDaySection, AccommodationSection, CostSignalSection, ExclusionBlock } from '../../components/trips';
 
 /**
  * Generate static params for all trips
@@ -277,52 +277,78 @@ export default async function TripPage({
           </div>
         </section>
 
-        {/* What this trip is for */}
-        <section className="mb-8" data-testid="section-fit">
+        {/* Advisory Panel - consolidated fit/trade-offs/exclusion */}
+        <section className="mb-8" data-testid="section-advisory">
           <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-3">
-            What this trip is for
+            Is this right for you?
           </h2>
-          <div className="bg-white rounded-xl border border-stone-200 p-6">
-            <div className="flex items-start gap-4">
-              <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
-              <p className="text-stone-700 leading-relaxed">{trip.what_this_trip_is_for}</p>
-            </div>
-            {/* Traveler fit tags */}
-            <div className="mt-4 pt-4 border-t border-stone-100">
-              <p className="text-xs text-stone-500 mb-2">Best suited for:</p>
-              <div className="flex flex-wrap gap-2">
-                {trip.traveler_fit.map((fit) => (
-                  <span
-                    key={fit}
-                    className="px-2.5 py-1 bg-stone-100 text-stone-600 text-xs rounded-full"
-                  >
-                    {fit.replace('-', ' ')}
-                  </span>
-                ))}
+          <div className="bg-white rounded-xl border border-stone-200 overflow-hidden">
+            {/* Fit + Trade-offs side by side */}
+            <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-stone-200">
+              {/* What this is for */}
+              <div className="p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <CheckCircle2 className="w-4 h-4 text-green-600" />
+                  <p className="text-sm font-medium text-green-800">Best for</p>
+                </div>
+                <p className="text-sm text-stone-600 mb-3">{trip.what_this_trip_is_for}</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {trip.traveler_fit.map((fit) => (
+                    <span
+                      key={fit}
+                      className="px-2 py-0.5 bg-green-50 text-green-700 text-xs rounded-full"
+                    >
+                      {fit.replace('-', ' ')}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Trade-offs */}
+              <div className="p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <AlertCircle className="w-4 h-4 text-amber-600" />
+                  <p className="text-sm font-medium text-amber-800">Trade-offs</p>
+                </div>
+                <ul className="space-y-1.5" data-testid="tradeoffs-list">
+                  {trip.what_you_trade_off.map((tradeoff, index) => (
+                    <li key={index} className="text-sm text-stone-600 flex items-start gap-2">
+                      <span className="text-amber-500 mt-1">•</span>
+                      {tradeoff}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
+
           </div>
         </section>
 
-        {/* What you trade off */}
-        <section className="mb-8" data-testid="section-tradeoffs">
-          <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-3">
-            What you trade off
-          </h2>
-          <div className="bg-white rounded-xl border border-stone-200 p-6">
-            <ul className="space-y-3" data-testid="tradeoffs-list">
-              {trip.what_you_trade_off.map((tradeoff, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <AlertCircle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-stone-700">{tradeoff}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* Not for you if - Exclusion block */}
+        {/* Exclusions - compact version */}
         <ExclusionBlock trip={trip} />
+
+        {/* Inline CTA - after suitability check */}
+        <div className="mb-8 bg-gradient-to-r from-amber-50 to-stone-50 rounded-xl border border-amber-200/50 p-5">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <p className="text-stone-900 font-medium">
+                Looks like a fit?
+              </p>
+              <p className="text-stone-500 text-sm mt-0.5">
+                We'll customize this around your dates and preferences
+              </p>
+            </div>
+            <Link
+              href={`/inquire?trip_id=${id}${trip.linked_decisions.length > 0 ? `&selected_decision_ids=${encodeURIComponent(trip.linked_decisions.slice(0, 6).join(','))}` : ''}`}
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-stone-900 text-white rounded-lg font-medium hover:bg-stone-800 transition-colors text-sm whitespace-nowrap"
+              prefetch={false}
+              data-testid="inline-cta"
+            >
+              Plan this safari
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
 
         {/* What your days look like */}
         <TypicalDaySection primaryDestination={getPrimaryDestination(trip)} />
@@ -336,53 +362,37 @@ export default async function TripPage({
         {/* Typical cost range - Enhanced with logic disclaimers */}
         <CostSignalSection trip={trip} />
 
-        {/* Decisions to confirm */}
-        {decisionLinks.length > 0 && (
-          <section className="mb-8" data-testid="section-decisions">
-            <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-3">
-              Decisions to confirm before you book
+        {/* Decisions + Guides combined - compact grid */}
+        {(decisionLinks.length > 0 || guideLinks.length > 0) && (
+          <section className="mb-8 bg-stone-50 rounded-xl p-5" data-testid="section-resources">
+            <h2 className="font-editorial text-lg font-semibold text-stone-900 mb-4">
+              Before you book
             </h2>
-            <div className="bg-white rounded-xl border border-stone-200 divide-y divide-stone-100">
-              {decisionLinks.map((link) => (
+            <div className="grid sm:grid-cols-2 gap-2">
+              {decisionLinks.slice(0, 4).map((link) => (
                 <Link
                   key={link.topicId}
                   href={link.href}
-                  className="flex items-center justify-between px-6 py-4 hover:bg-stone-50 transition-colors group"
+                  className="flex items-center gap-2 p-3 bg-white border border-stone-200 rounded-lg hover:border-amber-300 hover:bg-amber-50 transition-colors text-sm"
                   title={link.title}
                   prefetch={false}
                   data-testid="decision-link"
                 >
-                  <span className="text-stone-700 group-hover:text-amber-700 transition-colors">
-                    {link.anchorText}
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-stone-400 group-hover:text-amber-600 transition-colors" />
+                  <AlertCircle className="w-4 h-4 text-amber-500 flex-shrink-0" />
+                  <span className="text-stone-700 hover:text-amber-700 truncate">{link.anchorText}</span>
                 </Link>
               ))}
-            </div>
-          </section>
-        )}
-
-        {/* Guides worth reading */}
-        {guideLinks.length > 0 && (
-          <section className="mb-8" data-testid="section-guides">
-            <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-3">
-              Guides worth reading
-            </h2>
-            <div className="grid gap-3">
-              {guideLinks.map((link) => (
+              {guideLinks.slice(0, 2).map((link) => (
                 <Link
                   key={link.slug}
                   href={link.href}
-                  className="flex items-center gap-4 bg-white rounded-xl border border-stone-200 px-6 py-4 hover:bg-stone-50 hover:border-stone-300 transition-all group"
+                  className="flex items-center gap-2 p-3 bg-white border border-stone-200 rounded-lg hover:border-amber-300 hover:bg-amber-50 transition-colors text-sm"
                   title={link.title}
                   prefetch={false}
                   data-testid="guide-link"
                 >
-                  <BookOpen className="w-5 h-5 text-stone-400 group-hover:text-amber-600 transition-colors" />
-                  <span className="text-stone-700 group-hover:text-amber-700 transition-colors">
-                    {link.anchorText}
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-stone-400 group-hover:text-amber-600 transition-colors ml-auto" />
+                  <BookOpen className="w-4 h-4 text-stone-400 flex-shrink-0" />
+                  <span className="text-stone-700 hover:text-amber-700 truncate">{link.anchorText}</span>
                 </Link>
               ))}
             </div>
@@ -423,115 +433,27 @@ export default async function TripPage({
 
         {/* Assurance callout (if relevant) */}
         {trip.assurance_relevance && (
-          <section className="mb-8" data-testid="section-assurance">
-            <div className="bg-stone-100 rounded-xl p-6">
-              <h3 className="font-medium text-stone-900 mb-2">
-                High-stakes decisions ahead
-              </h3>
-              <p className="text-stone-600 text-sm mb-4">
-                This trip shape involves significant trade-offs. Consider Decision Assurance
-                for an evidence-backed review of your specific situation before committing.
-              </p>
+          <div className="mb-8 bg-stone-100 rounded-xl p-5">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <p className="font-medium text-stone-900">High-stakes decisions ahead</p>
+                <p className="text-stone-600 text-sm mt-0.5">
+                  Consider Decision Assurance for evidence-backed guidance
+                </p>
+              </div>
               <Link
                 href="/assurance/checkout"
-                className="inline-flex items-center gap-2 text-sm text-amber-700 hover:text-amber-800 font-medium"
+                className="inline-flex items-center gap-2 text-sm text-amber-700 hover:text-amber-800 font-medium whitespace-nowrap"
               >
-                Learn about Decision Assurance
+                Learn more
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-          </section>
+          </div>
         )}
-
-        {/* Plan This Safari CTA */}
-        <section className="mb-8" data-testid="section-inquiry">
-          <Link
-            href={`/inquire?trip_id=${id}${trip.linked_decisions.length > 0 ? `&selected_decision_ids=${encodeURIComponent(trip.linked_decisions.slice(0, 6).join(','))}` : ''}`}
-            className="flex items-center justify-between p-6 bg-stone-900 rounded-xl text-white group hover:bg-stone-800 transition-colors"
-            data-testid="inquiry-cta"
-            prefetch={false}
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
-                <Compass className="w-6 h-6 text-amber-400" />
-              </div>
-              <div>
-                <p className="font-medium text-lg">Plan this safari with Vurara Safaris</p>
-                <p className="text-stone-400 text-sm">
-                  Private, custom-built around your dates and preferences
-                </p>
-              </div>
-            </div>
-            <ArrowRight className="w-6 h-6 text-stone-400 group-hover:text-white group-hover:translate-x-1 transition-all" />
-          </Link>
-        </section>
-
-        {/* Close framing */}
-        <div className="mt-12 pt-8 border-t border-stone-200">
-          <p className="text-stone-500 text-sm">
-            This is a Vurara Safaris-operated itinerary shape. Every trip is custom-built.{' '}
-            <Link
-              href="/trips"
-              className="text-amber-600 hover:text-amber-700 underline underline-offset-2"
-            >
-              Browse other safaris
-            </Link>{' '}
-            or{' '}
-            <Link
-              href="/decisions"
-              className="text-amber-600 hover:text-amber-700 underline underline-offset-2"
-            >
-              explore the decisions that shape your trip
-            </Link>
-            .
-          </p>
-        </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-stone-900 text-white py-12 mt-16">
-        <div className="max-w-6xl mx-auto px-4 md:px-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <span className="font-editorial text-lg font-semibold">Vurara Safaris</span>
-              <span className="text-stone-500 text-sm ml-2">Private Safari Operator</span>
-            </div>
-
-            <div className="flex items-center gap-6">
-              <Link
-                href="/"
-                className="text-sm text-stone-400 hover:text-white transition-colors"
-              >
-                Home
-              </Link>
-              <Link
-                href="/trips"
-                className="text-sm text-stone-400 hover:text-white transition-colors"
-              >
-                Safaris
-              </Link>
-              <Link
-                href="/decisions"
-                className="text-sm text-stone-400 hover:text-white transition-colors"
-              >
-                Decisions
-              </Link>
-              <Link
-                href="/guides"
-                className="text-sm text-stone-400 hover:text-white transition-colors"
-              >
-                Guides
-              </Link>
-              <Link
-                href="/how-it-works"
-                className="text-sm text-stone-400 hover:text-white transition-colors"
-              >
-                How it works
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer variant="operator" />
     </main>
   );
 }

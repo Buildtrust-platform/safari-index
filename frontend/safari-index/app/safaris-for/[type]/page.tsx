@@ -366,68 +366,86 @@ export default async function SafarisForTypePage({
         </ImageBandContent>
       </ImageBand>
 
-      {/* Expectations and Considerations */}
-      <section className="bg-white py-8 border-b border-stone-200">
-        <div className="max-w-5xl mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* What to expect */}
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center">
+      {/* Advisory Panel - Expectations + Considerations */}
+      <section className="bg-white py-6 border-b border-stone-200">
+        <div className="max-w-4xl mx-auto px-4 md:px-8">
+          <div className="bg-stone-50 rounded-xl overflow-hidden">
+            <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-stone-200">
+              {/* What to expect */}
+              <div className="p-5">
+                <div className="flex items-center gap-2 mb-3">
                   <Check className="w-4 h-4 text-green-600" />
+                  <h2 className="text-sm font-medium text-green-800">What to expect</h2>
                 </div>
-                <h2 className="font-semibold text-stone-900">What to Expect</h2>
+                <ul className="space-y-1.5">
+                  {config.expectations.slice(0, 4).map((item, index) => (
+                    <li key={index} className="text-sm text-stone-600">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="space-y-2">
-                {config.expectations.map((item, index) => (
-                  <li key={index} className="flex items-start gap-2 text-sm text-stone-600">
-                    <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
 
-            {/* Considerations */}
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center">
+              {/* Considerations */}
+              <div className="p-5">
+                <div className="flex items-center gap-2 mb-3">
                   <AlertCircle className="w-4 h-4 text-amber-600" />
+                  <h2 className="text-sm font-medium text-amber-800">Things to consider</h2>
                 </div>
-                <h2 className="font-semibold text-stone-900">Things to Consider</h2>
+                <ul className="space-y-1.5">
+                  {config.considerations.map((item, index) => (
+                    <li key={index} className="text-sm text-stone-600">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="space-y-2">
-                {config.considerations.map((item, index) => (
-                  <li key={index} className="flex items-start gap-2 text-sm text-stone-600">
-                    <AlertCircle className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Itineraries */}
+      {/* Main content */}
       <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
-        <div className="mb-8">
-          <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-2">
+        {/* Inline CTA - before itineraries */}
+        <div className="mb-8 bg-gradient-to-r from-amber-50 to-stone-50 rounded-xl border border-amber-200/50 p-5">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <p className="text-stone-900 font-medium">
+                Want a personalized recommendation?
+              </p>
+              <p className="text-stone-500 text-sm mt-0.5">
+                Tell us your priorities and we'll suggest the right itinerary
+              </p>
+            </div>
+            <Link
+              href="/inquire"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-stone-900 text-white rounded-lg font-medium hover:bg-stone-800 transition-colors text-sm whitespace-nowrap"
+            >
+              Start planning
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Itineraries */}
+        <div className="mb-6">
+          <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-1">
             Recommended Itineraries
           </h2>
-          <p className="text-stone-600">
+          <p className="text-stone-500 text-sm">
             {filteredItineraries.length} itineraries matched to {config.subtitle.toLowerCase()}
           </p>
         </div>
 
         {filteredItineraries.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredItineraries.map((itinerary) => (
               <ItineraryCard key={itinerary.id} itinerary={itinerary} />
             ))}
           </div>
         ) : (
-          <div className="text-center py-12 bg-white rounded-2xl border border-stone-200">
+          <div className="text-center py-12 bg-white rounded-xl border border-stone-200">
             <p className="text-stone-600 mb-4">
               We are building itineraries for this category.
             </p>
@@ -441,35 +459,14 @@ export default async function SafarisForTypePage({
           </div>
         )}
 
-        {/* CTA section */}
-        <div className="mt-12 bg-stone-900 rounded-2xl p-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <h3 className="font-editorial text-xl text-white mb-2">
-                Need something more specific?
-              </h3>
-              <p className="text-stone-400 text-sm">
-                These itineraries are starting points. Share your preferences and we will customize.
-              </p>
-            </div>
-            <Link
-              href="/inquire"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-stone-900 font-medium rounded-lg hover:bg-stone-100 transition-colors"
-            >
-              Start planning
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Back link */}
-        <div className="mt-8 text-center">
+        {/* Browse other types */}
+        <div className="mt-10 pt-6 border-t border-stone-200 text-center">
           <Link
             href="/safaris-for"
-            className="inline-flex items-center gap-2 text-stone-500 hover:text-stone-700 transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-stone-500 hover:text-amber-700 transition-colors"
           >
             <ChevronRight className="w-4 h-4 rotate-180" />
-            View all traveler types
+            Browse other traveler types
           </Link>
         </div>
       </div>
