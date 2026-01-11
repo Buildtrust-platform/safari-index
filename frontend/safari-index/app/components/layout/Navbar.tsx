@@ -63,15 +63,24 @@ export function Navbar({ variant = 'transparent' }: NavbarProps) {
   const showSolid = variant === 'solid' || isScrolled;
 
   return (
-    <nav
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        showSolid
-          ? 'bg-white/95 backdrop-blur-sm border-b border-stone-200/80 shadow-sm'
-          : 'bg-transparent'
-      )}
-      data-testid="navbar"
-    >
+    <>
+      {/* Skip to main content link for accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-amber-600 focus:text-white focus:rounded-lg focus:outline-none"
+      >
+        Skip to main content
+      </a>
+      <nav
+        className={cn(
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+          showSolid
+            ? 'bg-white/95 backdrop-blur-sm border-b border-stone-200/80 shadow-sm'
+            : 'bg-transparent'
+        )}
+        data-testid="navbar"
+        aria-label="Main navigation"
+      >
       <div className="max-w-6xl mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
@@ -177,6 +186,7 @@ export function Navbar({ variant = 'transparent' }: NavbarProps) {
         </div>
       )}
     </nav>
+    </>
   );
 }
 

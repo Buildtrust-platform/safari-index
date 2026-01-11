@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-stone-50">
+    <main id="main-content" className="min-h-screen bg-stone-50">
       <Navbar variant="solid" />
 
       {/* Clean header - no hero image needed */}

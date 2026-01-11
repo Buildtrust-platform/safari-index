@@ -384,7 +384,7 @@ export default function ActivitiesPage() {
 
 
   return (
-    <main className="min-h-screen bg-stone-50">
+    <main id="main-content" className="min-h-screen bg-stone-50">
       <Navbar variant="transparent" />
 
       {/* Hero */}

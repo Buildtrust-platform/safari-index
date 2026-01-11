@@ -103,7 +103,7 @@ export default function WhenToGoPage() {
   const timingGuides = getGuidesByBucket('timing', LINK_LIMITS.guides);
 
   return (
-    <main className="min-h-screen bg-stone-50">
+    <main id="main-content" className="min-h-screen bg-stone-50">
       <Navbar variant="transparent" />
 
       {/* Hero */}

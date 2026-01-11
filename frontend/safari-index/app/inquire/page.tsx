@@ -541,7 +541,6 @@ function PlanningBriefForm() {
 
       router.push(`/inquire/confirmation?id=${inquiry_id}`);
     } catch (error) {
-      console.error('Failed to submit planning brief:', error);
       setErrors({
         submit: error instanceof Error ? error.message : 'Something went wrong. Please try again.',
       });
@@ -551,7 +550,7 @@ function PlanningBriefForm() {
   };
 
   return (
-    <main className="min-h-screen bg-stone-50">
+    <main id="main-content" className="min-h-screen bg-stone-50">
       <Navbar variant="solid" />
 
       {/* Header */}
@@ -882,47 +881,59 @@ function PlanningBriefForm() {
                 {/* Name and Email inline on desktop */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-sm font-medium text-stone-700 mb-1">
+                    <label htmlFor="inquiry-name" className="block text-sm font-medium text-stone-700 mb-1">
                       Name <span className="text-amber-600">*</span>
                     </label>
                     <input
+                      id="inquiry-name"
                       type="text"
                       value={state.name}
                       onChange={(e) => updateField('name', e.target.value)}
                       placeholder="Full name"
+                      aria-required="true"
+                      aria-invalid={errors.name ? 'true' : 'false'}
+                      aria-describedby={errors.name ? 'name-error' : undefined}
                       className={`w-full px-3 py-2.5 bg-white border rounded-lg text-stone-900 text-sm placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 ${
                         errors.name ? 'border-red-300' : 'border-stone-200'
                       }`}
                     />
-                    {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
+                    {errors.name && <p id="name-error" role="alert" className="mt-1 text-xs text-red-600">{errors.name}</p>}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-stone-700 mb-1">
+                    <label htmlFor="inquiry-email" className="block text-sm font-medium text-stone-700 mb-1">
                       Email <span className="text-amber-600">*</span>
                     </label>
                     <input
+                      id="inquiry-email"
                       type="email"
                       value={state.email}
                       onChange={(e) => updateField('email', e.target.value)}
                       placeholder="your@email.com"
+                      aria-required="true"
+                      aria-invalid={errors.email ? 'true' : 'false'}
+                      aria-describedby={errors.email ? 'email-error' : undefined}
                       className={`w-full px-3 py-2.5 bg-white border rounded-lg text-stone-900 text-sm placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 ${
                         errors.email ? 'border-red-300' : 'border-stone-200'
                       }`}
                     />
-                    {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
+                    {errors.email && <p id="email-error" role="alert" className="mt-1 text-xs text-red-600">{errors.email}</p>}
                   </div>
                 </div>
 
                 {/* Country and Phone inline */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-sm font-medium text-stone-700 mb-1">
+                    <label htmlFor="inquiry-country" className="block text-sm font-medium text-stone-700 mb-1">
                       Country <span className="text-amber-600">*</span>
                     </label>
                     <select
+                      id="inquiry-country"
                       value={state.country}
                       onChange={(e) => updateField('country', e.target.value)}
+                      aria-required="true"
+                      aria-invalid={errors.country ? 'true' : 'false'}
+                      aria-describedby={errors.country ? 'country-error' : undefined}
                       className={`w-full px-3 py-2.5 bg-white border rounded-lg text-stone-900 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 ${
                         errors.country ? 'border-red-300' : 'border-stone-200'
                       }`}
@@ -934,14 +945,15 @@ function PlanningBriefForm() {
                         </option>
                       ))}
                     </select>
-                    {errors.country && <p className="mt-1 text-xs text-red-600">{errors.country}</p>}
+                    {errors.country && <p id="country-error" role="alert" className="mt-1 text-xs text-red-600">{errors.country}</p>}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-stone-700 mb-1">
+                    <label htmlFor="inquiry-phone" className="block text-sm font-medium text-stone-700 mb-1">
                       Phone <span className="text-stone-400 font-normal">(optional)</span>
                     </label>
                     <input
+                      id="inquiry-phone"
                       type="tel"
                       value={state.phone}
                       onChange={(e) => updateField('phone', e.target.value)}
@@ -952,10 +964,11 @@ function PlanningBriefForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1">
+                  <label htmlFor="inquiry-notes" className="block text-sm font-medium text-stone-700 mb-1">
                     Additional notes <span className="text-stone-400 font-normal">(optional)</span>
                   </label>
                   <textarea
+                    id="inquiry-notes"
                     value={state.additionalNotes}
                     onChange={(e) => updateField('additionalNotes', e.target.value)}
                     placeholder="Previous experience, questions, constraints..."
@@ -967,7 +980,7 @@ function PlanningBriefForm() {
 
               {/* Submit error */}
               {errors.submit && (
-                <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
+                <div role="alert" className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
                   <p className="text-sm text-red-700">{errors.submit}</p>
                 </div>
               )}
@@ -1031,7 +1044,7 @@ export default function InquirePage() {
   return (
     <Suspense
       fallback={
-        <main className="min-h-screen bg-stone-50">
+        <main id="main-content" className="min-h-screen bg-stone-50">
           <Navbar variant="solid" />
           <div className="flex items-center justify-center h-[60vh]">
             <div className="text-stone-500">Loading...</div>

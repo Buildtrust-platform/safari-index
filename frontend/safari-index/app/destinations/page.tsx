@@ -236,7 +236,7 @@ export default function DestinationsPage() {
   const southernAfricaDestinations = DESTINATIONS.filter((d) => REGIONS['Southern Africa'].includes(d.id));
 
   return (
-    <main className="min-h-screen bg-stone-50">
+    <main id="main-content" className="min-h-screen bg-stone-50">
       <Navbar variant="transparent" />
 
       {/* Hero */}

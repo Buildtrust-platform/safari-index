@@ -414,7 +414,7 @@ export default function Home() {
   const featuredTrips = allTrips.slice(0, 6);
 
   return (
-    <>
+    <main id="main-content">
       {/* Navbar - transparent over hero */}
       <Navbar variant="transparent" />
 
@@ -1103,6 +1103,6 @@ export default function Home() {
           </div>
         </PageGrid>
       </footer>
-    </>
+    </main>
   );
 }

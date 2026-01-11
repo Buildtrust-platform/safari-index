@@ -13,7 +13,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { Calendar, Clock, User, Check, ChevronLeft, ChevronRight, Video, AlertCircle } from 'lucide-react';
+import { Calendar, Clock, User, Check, ChevronLeft, Video, AlertCircle } from 'lucide-react';
 import type { ConsultationType } from '@/lib/contracts';
 
 type FormStep = 'date' | 'time' | 'details' | 'success';
@@ -82,7 +82,9 @@ export function BookingForm() {
       .then(data => {
         if (data.config) setConfig(data.config);
       })
-      .catch(console.error);
+      .catch(() => {
+        // Silently fail - booking config is non-critical
+      });
   }, []);
 
   // Fetch slots when date changes
@@ -105,14 +107,6 @@ export function BookingForm() {
       .catch(() => setError('Unable to load available times'))
       .finally(() => setLoading(false));
   }, [formData.date]);
-
-  const formatDate = (date: Date) => {
-    return date.toLocaleDateString('en-US', {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-    });
-  };
 
   const formatTime = (isoString: string) => {
     return new Date(isoString).toLocaleTimeString('en-US', {
