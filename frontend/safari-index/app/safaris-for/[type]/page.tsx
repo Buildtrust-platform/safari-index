@@ -406,7 +406,7 @@ export default async function SafarisForTypePage({
       </section>
 
       {/* Main content */}
-      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
+      <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 md:px-8 py-10">
         {/* Inline CTA - before itineraries */}
         <div className="mb-8 bg-gradient-to-r from-amber-50 to-stone-50 rounded-xl border border-amber-200/50 p-5">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -439,7 +439,7 @@ export default async function SafarisForTypePage({
         </div>
 
         {filteredItineraries.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {filteredItineraries.map((itinerary) => (
               <ItineraryCard key={itinerary.id} itinerary={itinerary} />
             ))}

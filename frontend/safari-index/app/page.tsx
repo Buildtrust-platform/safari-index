@@ -789,7 +789,7 @@ export default function Home() {
           </div>
 
           {/* Wider card grid with increased spacing */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
             {featuredTrips.map((trip, index) => (
               <TripCardWithImage key={trip.id} trip={trip} index={index} />
             ))}

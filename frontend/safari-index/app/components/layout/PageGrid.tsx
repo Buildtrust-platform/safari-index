@@ -29,9 +29,9 @@ interface PageGridProps {
 }
 
 const maxWidthClasses = {
-  narrow: 'max-w-2xl',
-  default: 'max-w-4xl xl:max-w-5xl',
-  wide: 'max-w-6xl xl:max-w-7xl',
+  narrow: 'max-w-2xl xl:max-w-3xl',
+  default: 'max-w-5xl xl:max-w-6xl',
+  wide: 'max-w-6xl xl:max-w-7xl 2xl:max-w-[1400px]',
 };
 
 /**
