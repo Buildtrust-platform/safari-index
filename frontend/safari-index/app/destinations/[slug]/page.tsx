@@ -17,21 +17,16 @@ import type { Metadata } from 'next';
 import {
   ChevronRight,
   ArrowRight,
-  MapPin,
   Calendar,
   Plane,
   Sun,
   Cloud,
   ThermometerSun,
-  Users,
   DollarSign,
   Globe,
   Compass,
-  AlertTriangle,
   Route,
   FileText,
-  Trees,
-  Mountain,
 } from 'lucide-react';
 import { Navbar, Footer } from '../../components/layout';
 import {
@@ -51,14 +46,11 @@ import {
 } from '../../content/trip-shapes/trips';
 import {
   getItinerarySummaries,
-  getAllItineraries,
   formatDurationBand,
   type ItinerarySummary,
 } from '../../content/itineraries';
-import { getActivityById } from '../../content/activities/activity-primitives';
 import { WildlifeSightings } from '../../components/WildlifeSightings';
 import { getRegionSightings } from '../../content/wildlife-sightings';
-import { Car, Waves, Footprints, Plane as PlaneIcon, Sparkles } from 'lucide-react';
 
 /**
  * Ecosystem types for park images - matches EcosystemImage tags
@@ -76,69 +68,6 @@ interface GamePark {
   highlights: string[];
   bestFor: string;
 }
-
-/**
- * Park-to-activity mappings
- */
-const PARK_ACTIVITIES: Record<string, string[]> = {
-  // Tanzania
-  'serengeti': ['game-drive', 'hot-air-balloon', 'walking-safari', 'fly-camping', 'bird-watching'],
-  'ngorongoro': ['game-drive', 'walking-safari', 'cultural-visit', 'bird-watching'],
-  'tarangire': ['game-drive', 'walking-safari', 'bird-watching'],
-  'lake-manyara': ['game-drive', 'bird-watching', 'cultural-visit'],
-  'ruaha': ['game-drive', 'walking-safari', 'fly-camping', 'bird-watching'],
-  'nyerere-selous': ['boat-safari', 'walking-safari', 'game-drive', 'fishing', 'bird-watching'],
-  'katavi': ['game-drive', 'walking-safari', 'fly-camping', 'bird-watching'],
-  // Kenya
-  'masai-mara': ['game-drive', 'hot-air-balloon', 'walking-safari', 'cultural-visit', 'bird-watching'],
-  'amboseli': ['game-drive', 'bird-watching', 'cultural-visit'],
-  'samburu': ['game-drive', 'walking-safari', 'cultural-visit', 'bird-watching'],
-  'laikipia': ['walking-safari', 'horseback-safari', 'game-drive', 'night-drive', 'bird-watching'],
-  'lake-nakuru': ['game-drive', 'bird-watching'],
-  'tsavo': ['game-drive', 'walking-safari', 'bird-watching'],
-  'mara-conservancies': ['game-drive', 'night-drive', 'walking-safari', 'cultural-visit', 'bird-watching'],
-  // Botswana
-  'okavango-delta': ['mokoro', 'boat-safari', 'walking-safari', 'game-drive', 'fly-camping', 'bird-watching'],
-  'chobe': ['boat-safari', 'game-drive', 'photographic-hide', 'bird-watching'],
-  'moremi': ['game-drive', 'mokoro', 'walking-safari', 'bird-watching'],
-  'linyanti': ['game-drive', 'boat-safari', 'walking-safari', 'bird-watching'],
-  'makgadikgadi': ['quad-biking', 'walking-safari', 'cultural-visit', 'bird-watching'],
-  'central-kalahari': ['game-drive', 'walking-safari', 'cultural-visit', 'bird-watching'],
-  // South Africa
-  'kruger': ['game-drive', 'walking-safari', 'night-drive', 'bird-watching'],
-  'sabi-sands': ['game-drive', 'walking-safari', 'night-drive', 'photographic-hide', 'bird-watching'],
-  'timbavati': ['game-drive', 'walking-safari', 'night-drive', 'bird-watching'],
-  'madikwe': ['game-drive', 'walking-safari', 'night-drive', 'bird-watching'],
-  'phinda': ['game-drive', 'walking-safari', 'boat-safari', 'bird-watching'],
-  'hluhluwe-imfolozi': ['game-drive', 'walking-safari', 'bird-watching'],
-  // Rwanda
-  'volcanoes-np': ['gorilla-trekking', 'golden-monkey-tracking', 'bird-watching'],
-  'akagera': ['game-drive', 'boat-safari', 'bird-watching'],
-  'nyungwe': ['chimp-tracking', 'bird-watching', 'walking-safari'],
-  // Uganda
-  'bwindi': ['gorilla-trekking', 'bird-watching', 'cultural-visit'],
-  'kibale': ['chimp-tracking', 'bird-watching', 'walking-safari'],
-  'queen-elizabeth': ['game-drive', 'boat-safari', 'chimp-tracking', 'bird-watching'],
-  'murchison-falls': ['game-drive', 'boat-safari', 'fishing', 'bird-watching'],
-  'mgahinga': ['gorilla-trekking', 'golden-monkey-tracking', 'bird-watching'],
-  // Namibia
-  'etosha': ['game-drive', 'photographic-hide', 'bird-watching'],
-  'sossusvlei': ['quad-biking', 'hot-air-balloon', 'walking-safari'],
-  'damaraland': ['game-drive', 'walking-safari', 'cultural-visit'],
-  'skeleton-coast': ['scenic-helicopter', 'walking-safari'],
-  'caprivi': ['boat-safari', 'game-drive', 'fishing', 'bird-watching'],
-  'namibrand': ['walking-safari', 'quad-biking'],
-  // Zambia
-  'south-luangwa': ['walking-safari', 'game-drive', 'night-drive', 'bird-watching'],
-  'lower-zambezi': ['canoe-safari', 'game-drive', 'fishing', 'walking-safari', 'bird-watching'],
-  'kafue': ['game-drive', 'walking-safari', 'boat-safari', 'bird-watching'],
-  'north-luangwa': ['walking-safari', 'bird-watching'],
-  'victoria-falls': ['white-water-rafting', 'bungee-jumping', 'scenic-helicopter', 'kayaking'],
-  // Zimbabwe
-  'hwange': ['game-drive', 'walking-safari', 'night-drive', 'bird-watching'],
-  'mana-pools': ['walking-safari', 'canoe-safari', 'game-drive', 'bird-watching'],
-  'matobo': ['walking-safari', 'game-drive', 'cultural-visit', 'bird-watching'],
-};
 
 const GAME_PARKS: Record<string, GamePark[]> = {
   tanzania: [
@@ -723,71 +652,6 @@ function getParkImage(park: GamePark) {
 }
 
 /**
- * Get trips that feature a specific park
- */
-function getTripsForPark(parkName: string): TripArchetype[] {
-  const allTrips = getAllTrips();
-  const parkKeyword = parkName.toLowerCase().split(' ')[0]; // e.g., "Serengeti" from "Serengeti National Park"
-
-  return allTrips.filter((trip) =>
-    trip.core_parks_or_areas?.some((area) =>
-      area.toLowerCase().includes(parkKeyword)
-    )
-  ).slice(0, 2);
-}
-
-/**
- * Get itineraries that feature a specific park
- */
-function getItinerariesForPark(parkName: string): ItinerarySummary[] {
-  const allItineraries = getAllItineraries();
-  const parkKeyword = parkName.toLowerCase().split(' ')[0];
-
-  return allItineraries.filter((itin) =>
-    itin.core_segments?.some((seg) =>
-      seg.title.toLowerCase().includes(parkKeyword)
-    )
-  ).slice(0, 2);
-}
-
-/**
- * Get activity icon by activity ID
- */
-function getActivityIcon(activityId: string) {
-  switch (activityId) {
-    case 'game-drive':
-    case 'night-drive':
-      return <Car className="w-3.5 h-3.5" />;
-    case 'mokoro':
-    case 'boat-safari':
-    case 'canoe-safari':
-    case 'fishing':
-    case 'kayaking':
-      return <Waves className="w-3.5 h-3.5" />;
-    case 'walking-safari':
-    case 'gorilla-trekking':
-    case 'chimp-tracking':
-    case 'golden-monkey-tracking':
-      return <Footprints className="w-3.5 h-3.5" />;
-    case 'hot-air-balloon':
-    case 'scenic-helicopter':
-      return <PlaneIcon className="w-3.5 h-3.5" />;
-    default:
-      return <Sparkles className="w-3.5 h-3.5" />;
-  }
-}
-
-/**
- * Format activity ID to display name
- */
-function formatActivityName(activityId: string): string {
-  return activityId
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-}
-
-/**
  * Images for trip cards - rotates through different images to avoid repetition
  */
 const TRIP_CARD_IMAGES = [
@@ -916,114 +780,39 @@ function ItineraryCard({ itinerary, index }: { itinerary: ItinerarySummary; inde
 }
 
 /**
- * Game park card component - Enhanced with image, activities, trips/itineraries
+ * Compact game park card - streamlined for reduced scroll
  */
 function GameParkCard({ park }: { park: GamePark }) {
   const parkImage = getParkImage(park);
-  const activities = PARK_ACTIVITIES[park.id] || [];
-  const trips = getTripsForPark(park.name);
-  const itineraries = getItinerariesForPark(park.name);
-
-  const getTypeLabel = (type: string) => {
-    switch (type) {
-      case 'national-park': return 'National Park';
-      case 'reserve': return 'Game Reserve';
-      case 'conservancy': return 'Conservancy';
-      case 'conservation-area': return 'Conservation Area';
-      default: return type;
-    }
-  };
 
   return (
-    <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-lg transition-all">
-      {/* Image header */}
-      <div className="relative h-36 overflow-hidden">
-        <img
-          src={parkImage.src}
-          alt={parkImage.alt}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-        <div className="absolute bottom-3 left-3 right-3">
-          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-xs font-medium bg-white/90 backdrop-blur-sm text-stone-700 rounded-full">
-            <Mountain className="w-3 h-3" />
-            {getTypeLabel(park.type)}
-          </span>
+    <div className="group bg-white rounded-xl border border-stone-200 overflow-hidden hover:border-amber-300 hover:shadow-md transition-all">
+      <div className="flex">
+        {/* Thumbnail */}
+        <div className="w-20 h-20 flex-shrink-0 overflow-hidden">
+          <img
+            src={parkImage.src}
+            alt={parkImage.alt}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
         </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-4">
-        <h4 className="font-editorial text-base font-semibold text-stone-900 mb-1">
-          {park.name}
-        </h4>
-        <p className="text-stone-500 text-sm mb-3">{park.bestFor}</p>
-
-        {/* Highlights */}
-        <div className="flex flex-wrap gap-1 mb-3">
-          {park.highlights.slice(0, 3).map((highlight) => (
-            <span
-              key={highlight}
-              className="px-2 py-0.5 bg-stone-100 text-stone-600 text-xs rounded-full"
-            >
-              {highlight}
-            </span>
-          ))}
+        {/* Content */}
+        <div className="flex-1 min-w-0 p-3">
+          <h4 className="font-medium text-stone-900 text-sm truncate mb-0.5">
+            {park.name}
+          </h4>
+          <p className="text-stone-500 text-xs line-clamp-1 mb-1.5">{park.bestFor}</p>
+          <div className="flex flex-wrap gap-1">
+            {park.highlights.slice(0, 2).map((highlight) => (
+              <span
+                key={highlight}
+                className="px-1.5 py-0.5 bg-stone-100 text-stone-600 text-[10px] rounded"
+              >
+                {highlight}
+              </span>
+            ))}
+          </div>
         </div>
-
-        {/* Activities row */}
-        {activities.length > 0 && (
-          <div className="pt-3 border-t border-stone-100">
-            <p className="text-xs text-stone-400 mb-2">Activities</p>
-            <div className="flex flex-wrap gap-1.5">
-              {activities.slice(0, 4).map((actId) => (
-                <Link
-                  key={actId}
-                  href={`/activities/${actId}`}
-                  className="inline-flex items-center gap-1 px-2 py-1 bg-amber-50 text-amber-700 rounded-md text-xs hover:bg-amber-100 transition-colors"
-                  title={formatActivityName(actId)}
-                >
-                  {getActivityIcon(actId)}
-                  <span className="hidden sm:inline">{formatActivityName(actId)}</span>
-                </Link>
-              ))}
-              {activities.length > 4 && (
-                <span className="px-2 py-1 text-xs text-stone-400">
-                  +{activities.length - 4} more
-                </span>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* Featured in row */}
-        {(trips.length > 0 || itineraries.length > 0) && (
-          <div className="pt-3 mt-3 border-t border-stone-100">
-            <p className="text-xs text-stone-400 mb-2">Featured in</p>
-            <div className="flex flex-wrap gap-2">
-              {trips.slice(0, 1).map((trip) => (
-                <Link
-                  key={trip.id}
-                  href={`/trips/${trip.id}`}
-                  className="inline-flex items-center gap-1 text-xs text-stone-600 hover:text-amber-700 transition-colors"
-                >
-                  <Route className="w-3 h-3" />
-                  <span className="truncate max-w-[150px]">{trip.title}</span>
-                </Link>
-              ))}
-              {itineraries.slice(0, 1).map((itin) => (
-                <Link
-                  key={itin.slug}
-                  href={`/itineraries/${itin.slug}`}
-                  className="inline-flex items-center gap-1 text-xs text-stone-600 hover:text-amber-700 transition-colors"
-                >
-                  <FileText className="w-3 h-3" />
-                  <span className="truncate max-w-[150px]">{itin.title}</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
@@ -1131,21 +920,16 @@ export default async function DestinationPage({
 
         <SectionDivider />
 
-        {/* Game Parks Section */}
+        {/* Game Parks Section - Compact grid */}
         {gameParks.length > 0 && (
-          <section className="my-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
-                <Trees className="w-5 h-5 text-amber-700" />
-              </div>
-              <div>
-                <h2 className="font-editorial text-2xl font-semibold text-stone-900">
-                  Parks and Reserves
-                </h2>
-                <p className="text-stone-500 text-sm">{gameParks.length} protected areas in {destination.name}</p>
-              </div>
+          <section className="mb-10">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-editorial text-xl font-semibold text-stone-900">
+                Parks & Reserves
+              </h2>
+              <span className="text-sm text-stone-500">{gameParks.length} areas</span>
             </div>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {gameParks.map((park) => (
                 <GameParkCard key={park.name} park={park} />
               ))}
@@ -1153,54 +937,69 @@ export default async function DestinationPage({
           </section>
         )}
 
-        <SectionDivider />
-
         {/* Wildlife Sighting Probabilities */}
         {getRegionSightings(destination.id).length > 0 && (
-          <section className="my-8">
+          <section className="mb-10">
             <WildlifeSightings region={destination.id} />
           </section>
         )}
 
-        {getRegionSightings(destination.id).length > 0 && <SectionDivider />}
-
-        {/* Who it is for / not for */}
-        <section className="my-8">
-          <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">
-            Who this destination suits
+        {/* Advisory Panel - Combined suitability + trade-offs */}
+        <section className="mb-10">
+          <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
+            Is {destination.name} right for you?
           </h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-white rounded-2xl border border-stone-200 p-5">
-              <h3 className="font-ui text-sm font-medium text-[#2F5D50] mb-3 uppercase tracking-wide">
-                Best for
-              </h3>
-              <ul className="space-y-2">
-                {destination.bestFor.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <span className="text-[#2F5D50] mt-0.5">+</span>
-                    <span className="text-stone-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
+          <div className="bg-white rounded-xl border border-stone-200 overflow-hidden">
+            <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-stone-100">
+              {/* Best for */}
+              <div className="p-4">
+                <h3 className="text-sm font-medium text-[#2F5D50] mb-2">Best for</h3>
+                <ul className="space-y-1.5 text-sm">
+                  {destination.bestFor.map((item, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="text-[#2F5D50]">+</span>
+                      <span className="text-stone-700">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {/* Not ideal for */}
+              <div className="p-4">
+                <h3 className="text-sm font-medium text-stone-500 mb-2">Consider alternatives if</h3>
+                <ul className="space-y-1.5 text-sm">
+                  {destination.notIdealFor.map((item, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="text-stone-400">-</span>
+                      <span className="text-stone-600">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className="bg-white rounded-2xl border border-stone-200 p-5">
-              <h3 className="font-ui text-sm font-medium text-stone-500 mb-3 uppercase tracking-wide">
-                Not ideal for
-              </h3>
-              <ul className="space-y-2">
-                {destination.notIdealFor.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <span className="text-stone-400 mt-0.5">-</span>
-                    <span className="text-stone-600">{item}</span>
-                  </li>
-                ))}
-              </ul>
+            {/* Trade-offs row */}
+            <div className="border-t border-stone-100 grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-stone-100">
+              <div className="p-4 bg-stone-50/50">
+                <h3 className="text-sm font-medium text-[#2F5D50] mb-2">What you gain</h3>
+                <ul className="space-y-1 text-sm">
+                  {destination.tradeoffs.gains.slice(0, 3).map((gain, i) => (
+                    <li key={i} className="text-stone-700">• {gain}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="p-4 bg-stone-50/50">
+                <h3 className="text-sm font-medium text-[#8A3F3B] mb-2">What you trade</h3>
+                <ul className="space-y-1 text-sm">
+                  {destination.tradeoffs.losses.slice(0, 3).map((loss, i) => (
+                    <li key={i} className="text-stone-600">• {loss}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* CTA - placed after suitability section */}
-        <div className="my-8 bg-gradient-to-r from-amber-50 to-stone-50 rounded-xl border border-amber-200/50 p-5">
+        {/* CTA */}
+        <div className="mb-10 bg-gradient-to-r from-amber-50 to-stone-50 rounded-xl border border-amber-200/50 p-5">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <p className="text-stone-900 font-medium">
@@ -1220,189 +1019,131 @@ export default async function DestinationPage({
           </div>
         </div>
 
-        <SectionDivider />
-
-        {/* When to go */}
-        <section className="my-8">
-          <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">
-            When to go
+        {/* Planning Essentials - Combined timing + practical */}
+        <section className="mb-10">
+          <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
+            Planning essentials
           </h2>
-          <div className="bg-white rounded-2xl border border-stone-200 divide-y divide-stone-100">
-            <div className="p-5 flex items-start gap-4">
-              <Sun className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="font-medium text-stone-900">Peak Season</p>
-                <p className="text-stone-600 text-sm mt-1">{destination.whenToGo.peakSeason}</p>
+          <div className="grid md:grid-cols-2 gap-4">
+            {/* When to go */}
+            <div className="bg-white rounded-xl border border-stone-200 p-4">
+              <h3 className="font-medium text-stone-900 mb-3 flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-amber-600" />
+                When to go
+              </h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-start gap-2">
+                  <Sun className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <span className="font-medium text-stone-900">Peak: </span>
+                    <span className="text-stone-600">{destination.whenToGo.peakSeason}</span>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Cloud className="w-4 h-4 text-stone-400 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <span className="font-medium text-stone-900">Shoulder: </span>
+                    <span className="text-stone-600">{destination.whenToGo.shoulderSeason}</span>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2">
+                  <ThermometerSun className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <span className="font-medium text-stone-900">Green: </span>
+                    <span className="text-stone-600">{destination.whenToGo.greenSeason}</span>
+                  </div>
+                </div>
+                {destination.whenToGo.migrationNotes && (
+                  <div className="pt-2 mt-2 border-t border-stone-100 text-stone-600">
+                    <Compass className="w-3.5 h-3.5 inline mr-1 text-blue-500" />
+                    {destination.whenToGo.migrationNotes}
+                  </div>
+                )}
               </div>
             </div>
-            <div className="p-5 flex items-start gap-4">
-              <Cloud className="w-5 h-5 text-stone-400 mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="font-medium text-stone-900">Shoulder Season</p>
-                <p className="text-stone-600 text-sm mt-1">{destination.whenToGo.shoulderSeason}</p>
-              </div>
-            </div>
-            <div className="p-5 flex items-start gap-4">
-              <ThermometerSun className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="font-medium text-stone-900">Green Season</p>
-                <p className="text-stone-600 text-sm mt-1">{destination.whenToGo.greenSeason}</p>
-              </div>
-            </div>
-            {destination.whenToGo.migrationNotes && (
-              <div className="p-5 flex items-start gap-4">
-                <Compass className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+
+            {/* Practical info */}
+            <div className="bg-white rounded-xl border border-stone-200 p-4">
+              <h3 className="font-medium text-stone-900 mb-3 flex items-center gap-2">
+                <Plane className="w-4 h-4 text-stone-500" />
+                Practical info
+              </h3>
+              <div className="space-y-2 text-sm">
                 <div>
-                  <p className="font-medium text-stone-900">Wildlife Notes</p>
-                  <p className="text-stone-600 text-sm mt-1">{destination.whenToGo.migrationNotes}</p>
+                  <span className="font-medium text-stone-900">Gateway: </span>
+                  <span className="text-stone-600">{destination.practicalInfo.gateway}</span>
+                </div>
+                <div>
+                  <span className="font-medium text-stone-900">Visa: </span>
+                  <span className="text-stone-600">{destination.practicalInfo.visaRequired}</span>
+                </div>
+                <div>
+                  <span className="font-medium text-stone-900">Malaria: </span>
+                  <span className="text-stone-600">{destination.practicalInfo.malariaRisk}</span>
+                </div>
+                <div className="pt-2 mt-2 border-t border-stone-100">
+                  <span className="font-medium text-stone-900">Cost: </span>
+                  <span className={`font-medium ${costDisplay.color}`}>{costDisplay.label}</span>
+                  <span className="text-stone-500 block text-xs mt-0.5">{destination.parkFees}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Trips & Itineraries - Combined section */}
+        {(trips.length > 0 || itineraries.length > 0) && (
+          <section className="mb-10">
+            <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
+              Explore {destination.name}
+            </h2>
+
+            {/* Trips */}
+            {trips.length > 0 && (
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2 text-sm text-stone-600">
+                    <Route className="w-4 h-4" />
+                    <span className="font-medium">Trip shapes</span>
+                  </div>
+                  <Link
+                    href="/trips"
+                    className="text-xs text-amber-700 hover:text-amber-800 font-medium flex items-center gap-1"
+                  >
+                    View all <ArrowRight className="w-3 h-3" />
+                  </Link>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {trips.map((trip, idx) => (
+                    <TripCard key={trip.id} trip={trip} index={idx} />
+                  ))}
                 </div>
               </div>
             )}
-          </div>
-        </section>
 
-        <SectionDivider />
-
-        {/* Practical info */}
-        <section className="my-8">
-          <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">
-            Practical information
-          </h2>
-          <div className="bg-white rounded-2xl border border-stone-200 divide-y divide-stone-100">
-            <div className="p-5 flex items-start gap-4">
-              <Plane className="w-5 h-5 text-stone-400 mt-0.5 flex-shrink-0" />
+            {/* Itineraries */}
+            {itineraries.length > 0 && (
               <div>
-                <p className="font-medium text-stone-900">Gateway</p>
-                <p className="text-stone-600 text-sm mt-1">{destination.practicalInfo.gateway}</p>
-              </div>
-            </div>
-            <div className="p-5 flex items-start gap-4">
-              <Users className="w-5 h-5 text-stone-400 mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="font-medium text-stone-900">Visa</p>
-                <p className="text-stone-600 text-sm mt-1">{destination.practicalInfo.visaRequired}</p>
-              </div>
-            </div>
-            <div className="p-5 flex items-start gap-4">
-              <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="font-medium text-stone-900">Malaria Risk</p>
-                <p className="text-stone-600 text-sm mt-1">{destination.practicalInfo.malariaRisk}</p>
-              </div>
-            </div>
-            <div className="p-5 flex items-start gap-4">
-              <DollarSign className="w-5 h-5 text-stone-400 mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="font-medium text-stone-900">Cost Level</p>
-                <p className={`text-sm mt-1 font-medium ${costDisplay.color}`}>
-                  {costDisplay.label}
-                </p>
-                <p className="text-stone-500 text-sm">{destination.parkFees}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <SectionDivider />
-
-        {/* Trade-offs */}
-        <section className="my-8">
-          <h2 className="font-editorial text-2xl font-semibold text-stone-900 mb-6">
-            Trade-offs
-          </h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-white rounded-2xl border border-stone-200 p-5">
-              <h3 className="font-ui text-sm font-medium text-[#2F5D50] mb-3 uppercase tracking-wide">
-                Gains
-              </h3>
-              <ul className="space-y-2">
-                {destination.tradeoffs.gains.map((gain, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <span className="text-[#2F5D50] mt-0.5">+</span>
-                    <span className="text-stone-700">{gain}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-white rounded-2xl border border-stone-200 p-5">
-              <h3 className="font-ui text-sm font-medium text-[#8A3F3B] mb-3 uppercase tracking-wide">
-                Losses
-              </h3>
-              <ul className="space-y-2">
-                {destination.tradeoffs.losses.map((loss, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <span className="text-[#8A3F3B] mt-0.5">-</span>
-                    <span className="text-stone-700">{loss}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <SectionDivider />
-
-        {/* Trips for this destination */}
-        {trips.length > 0 && (
-          <section className="my-8">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center">
-                  <Route className="w-5 h-5 text-stone-600" />
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2 text-sm text-stone-600">
+                    <FileText className="w-4 h-4" />
+                    <span className="font-medium">Day-by-day itineraries</span>
+                  </div>
+                  <Link
+                    href="/itineraries"
+                    className="text-xs text-amber-700 hover:text-amber-800 font-medium flex items-center gap-1"
+                  >
+                    View all <ArrowRight className="w-3 h-3" />
+                  </Link>
                 </div>
-                <div>
-                  <h2 className="font-editorial text-2xl font-semibold text-stone-900">
-                    Safari trips in {destination.name}
-                  </h2>
-                  <p className="text-stone-500 text-sm">Trip shapes and planning templates</p>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {itineraries.map((itinerary, idx) => (
+                    <ItineraryCard key={itinerary.id} itinerary={itinerary} index={idx} />
+                  ))}
                 </div>
               </div>
-              <Link
-                href="/trips"
-                className="text-sm text-amber-700 hover:text-amber-800 font-medium flex items-center gap-1"
-              >
-                View all <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {trips.map((trip, idx) => (
-                <TripCard key={trip.id} trip={trip} index={idx} />
-              ))}
-            </div>
+            )}
           </section>
-        )}
-
-        {/* Itineraries for this destination */}
-        {itineraries.length > 0 && (
-          <>
-            <SectionDivider />
-            <section className="my-8">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center">
-                    <FileText className="w-5 h-5 text-stone-600" />
-                  </div>
-                  <div>
-                    <h2 className="font-editorial text-2xl font-semibold text-stone-900">
-                      Day-by-day itineraries
-                    </h2>
-                    <p className="text-stone-500 text-sm">Detailed route plans with daily activities</p>
-                  </div>
-                </div>
-                <Link
-                  href="/itineraries"
-                  className="text-sm text-amber-700 hover:text-amber-800 font-medium flex items-center gap-1"
-                >
-                  View all <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {itineraries.map((itinerary, idx) => (
-                  <ItineraryCard key={itinerary.id} itinerary={itinerary} index={idx} />
-                ))}
-              </div>
-            </section>
-          </>
         )}
 
       </div>
