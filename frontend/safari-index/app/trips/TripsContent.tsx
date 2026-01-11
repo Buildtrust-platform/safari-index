@@ -27,28 +27,55 @@ import {
 import { getDestinationImage, ecosystemImages } from '../components/visual';
 
 /**
- * Get trip image based on trip ID or regions
+ * Unique image mapping for each trip - no duplicates
+ */
+const tripImageMap: Record<string, { src: string; alt: string }> = {
+  // East Africa - Tanzania (3 trips)
+  'classic-serengeti-ngorongoro': { src: '/images/destinations/tanzania-serengeti.jpg', alt: 'Serengeti plains at sunrise' },
+  'migration-focused-serengeti': { src: '/images/activities/migration.jpg', alt: 'Great Migration wildebeest crossing' },
+  'tanzania-southern-circuit': { src: '/images/library/wildlife/lion-couple-savanna.jpg', alt: 'Lions in Ruaha National Park' },
+
+  // East Africa - Kenya (2 trips)
+  'classic-kenya-safari': { src: '/images/destinations/kenya-mara.jpg', alt: 'Masai Mara landscape' },
+  'kenya-conservancy-focused': { src: '/images/library/wildlife/lioness-tree-shade.jpg', alt: 'Lioness in private conservancy' },
+
+  // Southern Africa - Botswana (2 trips)
+  'okavango-delta-immersion': { src: '/images/destinations/botswana-delta.jpg', alt: 'Okavango Delta waterways' },
+  'botswana-diverse-ecosystems': { src: '/images/ecosystems/delta-channels.jpg', alt: 'Diverse Botswana ecosystems' },
+
+  // Southern Africa - South Africa (2 trips)
+  'kruger-greater-kruger': { src: '/images/destinations/south-africa-kruger.jpg', alt: 'Greater Kruger wildlife' },
+  'south-africa-combo': { src: '/images/destinations/south-africa-lodge.jpg', alt: 'South African safari lodge' },
+
+  // Uganda & Rwanda (2 trips)
+  'rwanda-gorilla-focused': { src: '/images/destinations/rwanda-volcanoes.jpg', alt: 'Volcanoes National Park' },
+  'uganda-primate-safari': { src: '/images/activities/gorilla-trekking.jpg', alt: 'Mountain gorilla encounter' },
+
+  // Southern Africa - Namibia (2 trips)
+  'namibia-highlights': { src: '/images/destinations/namibia-sossusvlei.jpg', alt: 'Sossusvlei dunes' },
+  'namibia-self-drive': { src: '/images/library/destinations/ruacana-waterfall-namibia.jpg', alt: 'Namibia self-drive adventure' },
+
+  // Southern Africa - Zambia (2 trips)
+  'zambia-walking-safari': { src: '/images/destinations/zambia-luangwa.jpg', alt: 'South Luangwa walking safari' },
+  'victoria-falls-safari-combo': { src: '/images/library/destinations/african-waterfall-aerial.jpg', alt: 'Victoria Falls aerial view' },
+
+  // Special Interest (4 trips)
+  'photography-focused-safari': { src: '/images/activities/photographic-hide.jpg', alt: 'Photography hide setup' },
+  'family-multigenerational': { src: '/images/library/birding/family-camping-safari.jpg', alt: 'Family safari experience' },
+  'honeymoon-romance-safari': { src: '/images/library/destinations/tanzania-wildlife-sunset-1.jpg', alt: 'Romantic safari sunset' },
+  'budget-first-safari': { src: '/images/destinations/tanzania-ngorongoro.jpg', alt: 'Ngorongoro Crater' },
+};
+
+/**
+ * Get trip image based on trip ID
  */
 function getTripImage(tripId: string, regions: string[]): { src: string; alt: string } {
-  const tripImageMap: Record<string, string> = {
-    'classic-serengeti-ngorongoro': 'tanzania',
-    'migration-focused-serengeti': 'tanzania',
-    'tanzania-southern-circuit': 'tanzania',
-    'kenya-masai-mara-conservancies': 'kenya',
-    'kenya-laikipia-samburu': 'kenya',
-    'botswana-okavango-delta': 'botswana',
-    'botswana-chobe-victoria-falls': 'botswana',
-    'south-africa-kruger-safari': 'south-africa',
-    'namibia-self-drive': 'namibia',
-    'rwanda-gorilla-experience': 'rwanda',
-    'uganda-gorilla-chimp-safari': 'uganda',
-  };
-
+  // Check for trip-specific image first
   if (tripImageMap[tripId]) {
-    const destImage = getDestinationImage(tripImageMap[tripId]);
-    return { src: destImage.src, alt: destImage.alt };
+    return tripImageMap[tripId];
   }
 
+  // Fallback to region-based image
   const regionMap: Record<string, string> = {
     'tanzania': 'tanzania',
     'kenya': 'kenya',

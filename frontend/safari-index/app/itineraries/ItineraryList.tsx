@@ -64,7 +64,7 @@ function StyleBadge({ style }: { style: string }) {
 
 // Comprehensive image mapping - unique image for each itinerary
 const itineraryImageMap: Record<string, { src: string; alt: string }> = {
-  // Tanzania (9 itineraries)
+  // Tanzania (7 itineraries) - all unique images
   'tanzania-classic-northern-circuit': { src: '/images/library/destinations/zebras-wildebeest-ngorongoro.jpg', alt: 'Zebras and wildebeest grazing in Ngorongoro Crater' },
   'tanzania-great-migration': { src: '/images/activities/migration.jpg', alt: 'Great Migration river crossing' },
   'tanzania-southern-circuit': { src: '/images/library/wildlife/lion-couple-savanna.jpg', alt: 'Lion pair in Ruaha savanna' },
@@ -73,52 +73,52 @@ const itineraryImageMap: Record<string, { src: string; alt: string }> = {
   'tanzania-walking-safari': { src: '/images/activities/walking-safari.jpg', alt: 'Walking safari in Tanzania' },
   'tanzania-selous-ruaha': { src: '/images/library/wildlife/elephants-drinking-water.jpg', alt: 'Elephants at waterhole in Selous' },
 
-  // Kenya (8 itineraries)
+  // Kenya (9 itineraries) - all unique images
   'kenya-classic-safari': { src: '/images/library/wildlife/lion-portrait.jpg', alt: 'Lion in Masai Mara' },
   'kenya-private-conservancies': { src: '/images/library/wildlife/lioness-tree-shade.jpg', alt: 'Lioness resting in private conservancy' },
   'kenya-northern-frontier': { src: '/images/library/wildlife/elephant-in-water-kenya.jpg', alt: 'Elephant at waterhole in Samburu' },
   'kenya-masai-mara-migration': { src: '/images/activities/river-crossing.jpg', alt: 'Wildebeest river crossing in Mara' },
   'kenya-family-friendly': { src: '/images/library/birding/family-camping-safari.jpg', alt: 'Family on safari in Kenya' },
-  'kenya-amboseli-tsavo': { src: '/images/library/destinations/elephants-kilimanjaro-amboseli.jpg', alt: 'Elephants with Kilimanjaro backdrop' },
+  'kenya-amboseli-tsavo': { src: '/images/library/wildlife/elephants-kilimanjaro-amboseli.jpg', alt: 'Elephants with Kilimanjaro backdrop' },
   'kenya-laikipia-samburu': { src: '/images/library/wildlife/african-wildlife-sanctuary.jpg', alt: 'Wildlife in Laikipia' },
   'kenya-short-mara-safari': { src: '/images/library/wildlife/lions-feeding.jpg', alt: 'Lions in Masai Mara' },
-  'kenya-honeymoon-safari': { src: '/images/library/destinations/tanzania-wildlife-sunset-1.jpg', alt: 'Romantic safari sunset' },
+  'kenya-honeymoon-safari': { src: '/images/destinations/kenya-mara.jpg', alt: 'Romantic sunset in Masai Mara' },
 
-  // Botswana (4 itineraries)
+  // Botswana (4 itineraries) - all unique images
   'botswana-okavango-delta': { src: '/images/destinations/botswana-delta.jpg', alt: 'Okavango Delta aerial view' },
   'botswana-delta-desert-pans': { src: '/images/ecosystems/desert-dunes.jpg', alt: 'Makgadikgadi salt pans' },
   'botswana-luxury-fly-in': { src: '/images/activities/scenic-helicopter.jpg', alt: 'Scenic flight over Okavango' },
   'botswana-mobile-camping-safari': { src: '/images/activities/fly-camping.jpg', alt: 'Mobile camping in Botswana' },
 
-  // Uganda (4 itineraries)
+  // Uganda (4 itineraries) - all unique images
   'uganda-primate-safari': { src: '/images/activities/chimp-tracking.jpg', alt: 'Chimpanzee tracking in Uganda' },
   'uganda-gorillas-and-wildlife': { src: '/images/activities/gorilla-trekking.jpg', alt: 'Mountain gorilla trekking' },
   'uganda-wildlife-safari': { src: '/images/library/wildlife/elephants-queen-elizabeth-uganda.jpg', alt: 'Elephants in Queen Elizabeth NP' },
-  'uganda-rwanda-primate-expedition': { src: '/images/library/wildlife/elephants-pair-uganda.jpg', alt: 'Wildlife in Uganda' },
+  'uganda-rwanda-primate-expedition': { src: '/images/ecosystems/montane-forest.jpg', alt: 'Primate habitat in montane forest' },
 
-  // Rwanda (3 itineraries)
+  // Rwanda (2 itineraries) - all unique images
   'rwanda-gorilla-trek': { src: '/images/destinations/rwanda-volcanoes.jpg', alt: 'Volcanoes National Park Rwanda' },
-  'rwanda-gorillas-and-savanna': { src: '/images/library/wildlife/elephant-with-birds-uganda.jpg', alt: 'Akagera savanna wildlife' },
+  'rwanda-gorillas-and-savanna': { src: '/images/destinations/uganda-bwindi.jpg', alt: 'Akagera savanna wildlife' },
 
-  // Namibia (3 itineraries)
+  // Namibia (3 itineraries) - all unique images
   'namibia-highlights': { src: '/images/destinations/namibia-sossusvlei.jpg', alt: 'Sossusvlei dunes' },
   'namibia-self-drive': { src: '/images/library/destinations/ruacana-waterfall-namibia.jpg', alt: 'Namibia self-drive adventure' },
-  'namibia-skeleton-coast': { src: '/images/library/destinations/african-blue-sky.jpg', alt: 'Skeleton Coast landscape' },
+  'namibia-skeleton-coast': { src: '/images/library/destinations/boat-cliffs-african-coast.jpg', alt: 'Skeleton Coast landscape' },
 
-  // South Africa (4 itineraries)
+  // South Africa (4 itineraries) - all unique images
   'south-africa-kruger': { src: '/images/destinations/south-africa-kruger.jpg', alt: 'Kruger National Park' },
   'south-africa-safari-and-cape': { src: '/images/destinations/south-africa-lodge.jpg', alt: 'Cape Town and safari lodge' },
   'south-africa-family-safari': { src: '/images/library/wildlife/leopard-with-cubs.jpg', alt: 'Leopard family in South Africa' },
   'south-africa-short-safari': { src: '/images/library/wildlife/buffalo-at-waterhole.jpg', alt: 'Buffalo at Kruger waterhole' },
 
-  // Zambia (3 itineraries)
+  // Zambia (3 itineraries) - all unique images
   'zambia-walking-safari': { src: '/images/destinations/zambia-luangwa.jpg', alt: 'South Luangwa walking safari' },
   'zambia-classic-safari': { src: '/images/library/wildlife/lion-pride-resting.jpg', alt: 'Lion pride in South Luangwa' },
   'zambia-victoria-falls-safari': { src: '/images/library/destinations/african-waterfall-aerial.jpg', alt: 'Victoria Falls aerial' },
 
-  // Zimbabwe (3 itineraries)
+  // Zimbabwe (3 itineraries) - all unique images
   'zimbabwe-falls-and-wildlife': { src: '/images/destinations/zimbabwe-mana.jpg', alt: 'Mana Pools Zimbabwe' },
-  'zimbabwe-hwange-mana-pools': { src: '/images/library/wildlife/elephants-queen-elizabeth-park.jpg', alt: 'Hwange elephants' },
+  'zimbabwe-hwange-mana-pools': { src: '/images/library/wildlife/male-lion-crouching.jpg', alt: 'Lion in Hwange National Park' },
   'zimbabwe-mana-pools-canoe': { src: '/images/activities/canoe-safari.jpg', alt: 'Canoe safari on Zambezi' },
 
   // Multi-country
