@@ -29,6 +29,13 @@ import {
   Eye,
   Globe,
   Tag,
+  ArrowRight,
+  Clock,
+  CheckCircle2,
+  XCircle,
+  Inbox,
+  Users,
+  FileText,
 } from 'lucide-react';
 import type { IntelligenceSummary } from '../../../lib/db/inquiry-intelligence';
 
@@ -290,6 +297,151 @@ export default function OpsIntelligencePage() {
                       '-'
                     )}
                   </p>
+                </div>
+              </div>
+
+              {/* Conversion Funnel */}
+              <div className="bg-white rounded-xl border border-stone-200 overflow-hidden">
+                <div className="px-6 py-4 border-b border-stone-100 flex items-center gap-3">
+                  <TrendingUp className="w-5 h-5 text-stone-400" />
+                  <h2 className="font-semibold text-stone-900">Conversion Funnel</h2>
+                </div>
+                <div className="p-6">
+                  {/* Funnel Stages */}
+                  <div className="flex flex-col md:flex-row items-stretch gap-2 mb-6">
+                    {/* New Stage */}
+                    <div className="flex-1 bg-blue-50 rounded-lg p-4 text-center">
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        <Inbox className="w-5 h-5 text-blue-600" />
+                        <span className="text-sm font-medium text-blue-700">New</span>
+                      </div>
+                      <p className="text-2xl font-semibold text-blue-900">
+                        {summary.conversion_funnel.new + summary.conversion_funnel.contacted +
+                         summary.conversion_funnel.quoted + summary.conversion_funnel.won +
+                         summary.conversion_funnel.lost}
+                      </p>
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="flex items-center justify-center text-stone-300 md:rotate-0 rotate-90">
+                      <div className="flex flex-col items-center">
+                        <ArrowRight className="w-5 h-5 hidden md:block" />
+                        <ArrowRight className="w-5 h-5 md:hidden rotate-90" />
+                        <span className="text-xs text-stone-500 font-medium">
+                          {summary.conversion_funnel.contacted_rate}%
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Contacted Stage */}
+                    <div className="flex-1 bg-purple-50 rounded-lg p-4 text-center">
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        <Users className="w-5 h-5 text-purple-600" />
+                        <span className="text-sm font-medium text-purple-700">Contacted</span>
+                      </div>
+                      <p className="text-2xl font-semibold text-purple-900">
+                        {summary.conversion_funnel.contacted + summary.conversion_funnel.quoted +
+                         summary.conversion_funnel.won}
+                      </p>
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="flex items-center justify-center text-stone-300 md:rotate-0 rotate-90">
+                      <div className="flex flex-col items-center">
+                        <ArrowRight className="w-5 h-5 hidden md:block" />
+                        <ArrowRight className="w-5 h-5 md:hidden rotate-90" />
+                        <span className="text-xs text-stone-500 font-medium">
+                          {summary.conversion_funnel.quoted_rate}%
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Quoted Stage */}
+                    <div className="flex-1 bg-amber-50 rounded-lg p-4 text-center">
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        <FileText className="w-5 h-5 text-amber-600" />
+                        <span className="text-sm font-medium text-amber-700">Quoted</span>
+                      </div>
+                      <p className="text-2xl font-semibold text-amber-900">
+                        {summary.conversion_funnel.quoted + summary.conversion_funnel.won}
+                      </p>
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="flex items-center justify-center text-stone-300 md:rotate-0 rotate-90">
+                      <div className="flex flex-col items-center">
+                        <ArrowRight className="w-5 h-5 hidden md:block" />
+                        <ArrowRight className="w-5 h-5 md:hidden rotate-90" />
+                        <span className="text-xs text-stone-500 font-medium">
+                          {summary.conversion_funnel.won_rate}%
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Won Stage */}
+                    <div className="flex-1 bg-green-50 rounded-lg p-4 text-center">
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        <CheckCircle2 className="w-5 h-5 text-green-600" />
+                        <span className="text-sm font-medium text-green-700">Won</span>
+                      </div>
+                      <p className="text-2xl font-semibold text-green-900">
+                        {summary.conversion_funnel.won}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Lost count */}
+                  {summary.conversion_funnel.lost > 0 && (
+                    <div className="flex items-center justify-center gap-2 mb-6 text-stone-500">
+                      <XCircle className="w-4 h-4 text-red-400" />
+                      <span className="text-sm">
+                        {summary.conversion_funnel.lost} lost
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Metrics Grid */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-stone-100">
+                    <div className="text-center">
+                      <p className="text-sm text-stone-500 mb-1">Overall Win Rate</p>
+                      <p className="text-xl font-semibold text-stone-900">
+                        {summary.conversion_funnel.overall_win_rate}%
+                      </p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-sm text-stone-500 mb-1 flex items-center justify-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        Avg to Contact
+                      </p>
+                      <p className="text-xl font-semibold text-stone-900">
+                        {summary.conversion_funnel.avg_days_to_contact !== null
+                          ? `${summary.conversion_funnel.avg_days_to_contact}d`
+                          : '-'}
+                      </p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-sm text-stone-500 mb-1 flex items-center justify-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        Avg to Quote
+                      </p>
+                      <p className="text-xl font-semibold text-stone-900">
+                        {summary.conversion_funnel.avg_days_to_quote !== null
+                          ? `${summary.conversion_funnel.avg_days_to_quote}d`
+                          : '-'}
+                      </p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-sm text-stone-500 mb-1 flex items-center justify-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        Avg to Win
+                      </p>
+                      <p className="text-xl font-semibold text-stone-900">
+                        {summary.conversion_funnel.avg_days_to_win !== null
+                          ? `${summary.conversion_funnel.avg_days_to_win}d`
+                          : '-'}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
 

@@ -33,8 +33,14 @@ import {
   Plus,
   Send,
   Loader2,
+  History,
+  MessageSquare,
+  ArrowRight,
+  CalendarPlus,
+  CheckCircle,
+  X,
 } from 'lucide-react';
-import type { InquiryRecord, InquiryStatus, ProposalRecord } from '../../../../lib/contracts';
+import type { InquiryRecord, InquiryStatus, ProposalRecord, ActivityRecord, FollowUpRecord, FollowUpType } from '../../../../lib/contracts';
 import { BUDGET_BANDS, TRAVEL_STYLES, MONTH_OPTIONS } from '../../../../lib/inquiry';
 
 /**
@@ -184,6 +190,19 @@ export default function OpsInquiryDetailPage() {
   const [loadingProposals, setLoadingProposals] = useState(false);
   const [creatingProposal, setCreatingProposal] = useState(false);
 
+  // Activity timeline state
+  const [activities, setActivities] = useState<ActivityRecord[]>([]);
+  const [loadingActivities, setLoadingActivities] = useState(false);
+
+  // Follow-up state
+  const [followups, setFollowups] = useState<FollowUpRecord[]>([]);
+  const [loadingFollowups, setLoadingFollowups] = useState(false);
+  const [showFollowupForm, setShowFollowupForm] = useState(false);
+  const [newFollowupDate, setNewFollowupDate] = useState('');
+  const [newFollowupType, setNewFollowupType] = useState<FollowUpType>('email');
+  const [newFollowupNotes, setNewFollowupNotes] = useState('');
+  const [creatingFollowup, setCreatingFollowup] = useState(false);
+
   useEffect(() => {
     const key = getOpsKey() || searchParams.get('ops_key');
     setOpsKey(key);
@@ -196,6 +215,8 @@ export default function OpsInquiryDetailPage() {
 
     fetchInquiry(key);
     fetchProposals(key);
+    fetchActivities(key);
+    fetchFollowups(key);
   }, [inquiryId, searchParams]);
 
   async function fetchProposals(key: string) {
@@ -213,6 +234,120 @@ export default function OpsInquiryDetailPage() {
       console.error('Failed to fetch proposals:', err);
     } finally {
       setLoadingProposals(false);
+    }
+  }
+
+  async function fetchActivities(key: string) {
+    setLoadingActivities(true);
+    try {
+      const response = await fetch(`/api/ops/inquiries/${inquiryId}?timeline=true`, {
+        headers: { 'x-ops-key': key },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setActivities(data.activities || []);
+      }
+    } catch (err) {
+      console.error('Failed to fetch activities:', err);
+    } finally {
+      setLoadingActivities(false);
+    }
+  }
+
+  async function fetchFollowups(key: string) {
+    setLoadingFollowups(true);
+    try {
+      const response = await fetch(`/api/ops/followups?inquiry_id=${inquiryId}`, {
+        headers: { 'x-ops-key': key },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setFollowups(data.followups || []);
+      }
+    } catch (err) {
+      console.error('Failed to fetch followups:', err);
+    } finally {
+      setLoadingFollowups(false);
+    }
+  }
+
+  async function handleCreateFollowup() {
+    if (!opsKey || !newFollowupDate) return;
+
+    setCreatingFollowup(true);
+    try {
+      const response = await fetch('/api/ops/followups', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-ops-key': opsKey,
+        },
+        body: JSON.stringify({
+          inquiry_id: inquiryId,
+          scheduled_for: new Date(newFollowupDate).toISOString(),
+          type: newFollowupType,
+          notes: newFollowupNotes || undefined,
+        }),
+      });
+
+      if (response.ok) {
+        // Refresh followups and activities
+        fetchFollowups(opsKey);
+        fetchActivities(opsKey);
+        // Reset form
+        setShowFollowupForm(false);
+        setNewFollowupDate('');
+        setNewFollowupNotes('');
+      }
+    } catch (err) {
+      console.error('Failed to create followup:', err);
+    } finally {
+      setCreatingFollowup(false);
+    }
+  }
+
+  async function handleCompleteFollowup(followupId: string) {
+    if (!opsKey) return;
+
+    try {
+      const response = await fetch(`/api/ops/followups/${followupId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-ops-key': opsKey,
+        },
+        body: JSON.stringify({ status: 'completed' }),
+      });
+
+      if (response.ok) {
+        fetchFollowups(opsKey);
+        fetchActivities(opsKey);
+      }
+    } catch (err) {
+      console.error('Failed to complete followup:', err);
+    }
+  }
+
+  async function handleSkipFollowup(followupId: string) {
+    if (!opsKey) return;
+
+    try {
+      const response = await fetch(`/api/ops/followups/${followupId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-ops-key': opsKey,
+        },
+        body: JSON.stringify({ status: 'skipped' }),
+      });
+
+      if (response.ok) {
+        fetchFollowups(opsKey);
+      }
+    } catch (err) {
+      console.error('Failed to skip followup:', err);
     }
   }
 
@@ -670,6 +805,268 @@ export default function OpsInquiryDetailPage() {
                               'Details'
                             )}
                           </Link>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Follow-ups Section */}
+              <div className="bg-white border border-stone-200 rounded-xl p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg font-semibold text-stone-900 flex items-center gap-2">
+                    <CalendarPlus className="w-5 h-5 text-stone-400" />
+                    Follow-ups
+                  </h2>
+                  <button
+                    onClick={() => setShowFollowupForm(!showFollowupForm)}
+                    className="flex items-center gap-2 px-4 py-2 text-sm bg-stone-100 text-stone-700 rounded-lg hover:bg-stone-200"
+                  >
+                    {showFollowupForm ? (
+                      <>
+                        <X className="w-4 h-4" />
+                        Cancel
+                      </>
+                    ) : (
+                      <>
+                        <Plus className="w-4 h-4" />
+                        Schedule
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {/* Create Follow-up Form */}
+                {showFollowupForm && (
+                  <div className="mb-4 p-4 bg-stone-50 rounded-lg border border-stone-200">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                      <div>
+                        <label className="block text-xs text-stone-500 uppercase tracking-wide mb-1">
+                          Date & Time
+                        </label>
+                        <input
+                          type="datetime-local"
+                          value={newFollowupDate}
+                          onChange={(e) => setNewFollowupDate(e.target.value)}
+                          className="w-full px-3 py-2 border border-stone-200 rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-stone-500 uppercase tracking-wide mb-1">
+                          Type
+                        </label>
+                        <select
+                          value={newFollowupType}
+                          onChange={(e) => setNewFollowupType(e.target.value as FollowUpType)}
+                          className="w-full px-3 py-2 border border-stone-200 rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                        >
+                          <option value="email">Email</option>
+                          <option value="call">Call</option>
+                          <option value="proposal_review">Proposal Review</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-xs text-stone-500 uppercase tracking-wide mb-1">
+                          Notes (optional)
+                        </label>
+                        <input
+                          type="text"
+                          value={newFollowupNotes}
+                          onChange={(e) => setNewFollowupNotes(e.target.value)}
+                          placeholder="Brief note..."
+                          className="w-full px-3 py-2 border border-stone-200 rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                        />
+                      </div>
+                    </div>
+                    <button
+                      onClick={handleCreateFollowup}
+                      disabled={creatingFollowup || !newFollowupDate}
+                      className="flex items-center gap-2 px-4 py-2 text-sm bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:opacity-50"
+                    >
+                      {creatingFollowup ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Scheduling...
+                        </>
+                      ) : (
+                        <>
+                          <CalendarPlus className="w-4 h-4" />
+                          Schedule Follow-up
+                        </>
+                      )}
+                    </button>
+                  </div>
+                )}
+
+                {/* Follow-ups List */}
+                {loadingFollowups ? (
+                  <div className="text-stone-500 text-sm">Loading follow-ups...</div>
+                ) : followups.length === 0 ? (
+                  <div className="text-stone-500 text-sm py-4 text-center border border-dashed border-stone-200 rounded-lg">
+                    No follow-ups scheduled. Click &quot;Schedule&quot; to add one.
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    {followups.map((followup) => {
+                      const isOverdue = followup.status === 'pending' && new Date(followup.scheduled_for) < new Date();
+                      return (
+                        <div
+                          key={followup.followup_id}
+                          className={`flex items-center justify-between p-3 rounded-lg ${
+                            followup.status === 'completed'
+                              ? 'bg-green-50 border border-green-100'
+                              : followup.status === 'skipped'
+                              ? 'bg-stone-50 border border-stone-100 opacity-60'
+                              : isOverdue
+                              ? 'bg-red-50 border border-red-100'
+                              : 'bg-amber-50 border border-amber-100'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                              followup.status === 'completed'
+                                ? 'bg-green-100'
+                                : followup.status === 'skipped'
+                                ? 'bg-stone-200'
+                                : isOverdue
+                                ? 'bg-red-100'
+                                : 'bg-amber-100'
+                            }`}>
+                              {followup.type === 'call' ? (
+                                <Phone className="w-4 h-4" />
+                              ) : followup.type === 'email' ? (
+                                <Mail className="w-4 h-4" />
+                              ) : (
+                                <FileText className="w-4 h-4" />
+                              )}
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium text-stone-900 capitalize">
+                                {followup.type.replace('_', ' ')}
+                                {isOverdue && <span className="ml-2 text-red-600 text-xs">Overdue</span>}
+                              </p>
+                              <p className="text-xs text-stone-500">
+                                {new Date(followup.scheduled_for).toLocaleString('en-US', {
+                                  month: 'short',
+                                  day: 'numeric',
+                                  hour: '2-digit',
+                                  minute: '2-digit',
+                                })}
+                                {followup.notes && ` - ${followup.notes}`}
+                              </p>
+                            </div>
+                          </div>
+                          {followup.status === 'pending' && (
+                            <div className="flex items-center gap-2">
+                              <button
+                                onClick={() => handleCompleteFollowup(followup.followup_id)}
+                                className="p-2 text-green-600 hover:bg-green-100 rounded-lg"
+                                title="Mark complete"
+                              >
+                                <CheckCircle className="w-4 h-4" />
+                              </button>
+                              <button
+                                onClick={() => handleSkipFollowup(followup.followup_id)}
+                                className="p-2 text-stone-400 hover:bg-stone-100 rounded-lg"
+                                title="Skip"
+                              >
+                                <X className="w-4 h-4" />
+                              </button>
+                            </div>
+                          )}
+                          {followup.status === 'completed' && (
+                            <span className="text-xs text-green-600 flex items-center gap-1">
+                              <CheckCircle className="w-3 h-3" />
+                              Completed
+                            </span>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Activity Timeline */}
+              <div className="bg-white border border-stone-200 rounded-xl p-6">
+                <h2 className="text-lg font-semibold text-stone-900 mb-4 flex items-center gap-2">
+                  <History className="w-5 h-5 text-stone-400" />
+                  Activity Timeline
+                </h2>
+
+                {loadingActivities ? (
+                  <div className="text-stone-500 text-sm">Loading activities...</div>
+                ) : activities.length === 0 ? (
+                  <div className="text-stone-500 text-sm py-4 text-center border border-dashed border-stone-200 rounded-lg">
+                    No activity recorded yet. Status changes and notes will appear here.
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {activities.map((activity) => (
+                      <div
+                        key={activity.activity_id}
+                        className="flex items-start gap-3 p-3 bg-stone-50 rounded-lg"
+                      >
+                        {/* Icon based on activity type */}
+                        <div className="mt-0.5">
+                          {activity.type === 'status_change' ? (
+                            <ArrowRight className="w-4 h-4 text-blue-500" />
+                          ) : activity.type === 'note_added' ? (
+                            <MessageSquare className="w-4 h-4 text-amber-500" />
+                          ) : activity.type === 'proposal_created' ? (
+                            <FileText className="w-4 h-4 text-purple-500" />
+                          ) : activity.type === 'proposal_sent' ? (
+                            <Send className="w-4 h-4 text-green-500" />
+                          ) : activity.type === 'followup_scheduled' ? (
+                            <CalendarPlus className="w-4 h-4 text-amber-500" />
+                          ) : activity.type === 'followup_completed' ? (
+                            <CheckCircle className="w-4 h-4 text-green-500" />
+                          ) : (
+                            <Clock className="w-4 h-4 text-stone-400" />
+                          )}
+                        </div>
+
+                        <div className="flex-1 min-w-0">
+                          {/* Activity description */}
+                          <p className="text-sm text-stone-900">
+                            {activity.type === 'status_change' && (
+                              <>
+                                Status changed from{' '}
+                                <span className="font-medium">{activity.old_value}</span>
+                                {' '}to{' '}
+                                <span className="font-medium">{activity.new_value}</span>
+                              </>
+                            )}
+                            {activity.type === 'note_added' && (
+                              <>
+                                Note added: <span className="text-stone-600">{activity.details}</span>
+                              </>
+                            )}
+                            {activity.type === 'proposal_created' && (
+                              <>Proposal created: {activity.details}</>
+                            )}
+                            {activity.type === 'proposal_sent' && (
+                              <>Proposal sent: {activity.details}</>
+                            )}
+                            {activity.type === 'followup_scheduled' && (
+                              <>Follow-up scheduled</>
+                            )}
+                            {activity.type === 'followup_completed' && (
+                              <>Follow-up completed</>
+                            )}
+                          </p>
+
+                          {/* Timestamp */}
+                          <p className="text-xs text-stone-500 mt-1">
+                            {new Date(activity.timestamp).toLocaleString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            })}
+                            {activity.actor && ` by ${activity.actor}`}
+                          </p>
                         </div>
                       </div>
                     ))}

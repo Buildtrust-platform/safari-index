@@ -393,6 +393,12 @@ export const InquiryRecordSchema = z.object({
   source_path: z.string().optional(),
   // Attribution fields (stored as flat structure in DynamoDB)
   attribution: InquiryAttributionSchema.optional(),
+  // Status change timestamps (CRM tracking)
+  contacted_at: z.string().optional(),
+  quoted_at: z.string().optional(),
+  won_at: z.string().optional(),
+  lost_at: z.string().optional(),
+  last_activity_at: z.string().optional(),
 });
 export type InquiryRecord = z.infer<typeof InquiryRecordSchema>;
 
@@ -659,3 +665,66 @@ export const BookingRecordSchema = z.object({
   cancel_reason: z.string().optional(),
 });
 export type BookingRecord = z.infer<typeof BookingRecordSchema>;
+
+// ============================================================================
+// Activity Tracking Contracts (CRM)
+// ============================================================================
+
+/**
+ * Activity type enum - types of tracked interactions
+ */
+export const ActivityTypeSchema = z.enum([
+  'status_change',
+  'note_added',
+  'proposal_created',
+  'proposal_sent',
+  'followup_scheduled',
+  'followup_completed',
+]);
+export type ActivityType = z.infer<typeof ActivityTypeSchema>;
+
+/**
+ * Activity record - tracks all interactions on an inquiry
+ */
+export const ActivityRecordSchema = z.object({
+  activity_id: z.string(),
+  inquiry_id: z.string(),
+  timestamp: z.string(),
+  type: ActivityTypeSchema,
+  actor: z.string().optional(), // Operator email
+  old_value: z.string().optional(),
+  new_value: z.string().optional(),
+  details: z.string().optional(),
+});
+export type ActivityRecord = z.infer<typeof ActivityRecordSchema>;
+
+// ============================================================================
+// Follow-up Scheduling Contracts (CRM)
+// ============================================================================
+
+/**
+ * Follow-up type enum
+ */
+export const FollowUpTypeSchema = z.enum(['call', 'email', 'proposal_review']);
+export type FollowUpType = z.infer<typeof FollowUpTypeSchema>;
+
+/**
+ * Follow-up status enum
+ */
+export const FollowUpStatusSchema = z.enum(['pending', 'completed', 'skipped']);
+export type FollowUpStatus = z.infer<typeof FollowUpStatusSchema>;
+
+/**
+ * Follow-up record - scheduled follow-up tasks
+ */
+export const FollowUpRecordSchema = z.object({
+  followup_id: z.string(),
+  inquiry_id: z.string(),
+  scheduled_for: z.string(),
+  type: FollowUpTypeSchema,
+  notes: z.string().optional(),
+  status: FollowUpStatusSchema,
+  created_at: z.string(),
+  completed_at: z.string().optional(),
+});
+export type FollowUpRecord = z.infer<typeof FollowUpRecordSchema>;

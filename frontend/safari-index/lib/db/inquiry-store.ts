@@ -153,20 +153,53 @@ export async function listRecentInquiries(limit: number = 100): Promise<InquiryR
 }
 
 /**
+ * Get status timestamp field name for a given status
+ */
+function getStatusTimestampField(status: InquiryStatus): string | null {
+  const mapping: Record<InquiryStatus, string | null> = {
+    new: null, // No timestamp for 'new' - uses created_at
+    contacted: 'contacted_at',
+    quoted: 'quoted_at',
+    won: 'won_at',
+    lost: 'lost_at',
+  };
+  return mapping[status];
+}
+
+/**
  * Update inquiry status and/or notes
+ * Automatically tracks status change timestamps and last_activity_at
  */
 export async function updateInquiry(
   inquiry_id: string,
   updates: { status?: InquiryStatus; notes?: string | null }
-): Promise<InquiryRecord | null> {
+): Promise<{ record: InquiryRecord | null; oldStatus?: InquiryStatus }> {
   const updateExpressions: string[] = [];
   const expressionAttributeNames: Record<string, string> = {};
   const expressionAttributeValues: Record<string, unknown> = {};
+
+  // Get current record to track old status
+  const currentRecord = await getInquiry(inquiry_id);
+  const oldStatus = currentRecord?.status;
+
+  const now = new Date().toISOString();
 
   if (updates.status !== undefined) {
     updateExpressions.push('#status = :status');
     expressionAttributeNames['#status'] = 'status';
     expressionAttributeValues[':status'] = updates.status;
+
+    // Set status-specific timestamp if this is the first time reaching this status
+    const timestampField = getStatusTimestampField(updates.status);
+    if (timestampField && currentRecord) {
+      // Only set timestamp if not already set (first time reaching this status)
+      const existingTimestamp = currentRecord[timestampField as keyof InquiryRecord];
+      if (!existingTimestamp) {
+        updateExpressions.push(`#${timestampField} = :${timestampField}`);
+        expressionAttributeNames[`#${timestampField}`] = timestampField;
+        expressionAttributeValues[`:${timestampField}`] = now;
+      }
+    }
   }
 
   if (updates.notes !== undefined) {
@@ -175,9 +208,14 @@ export async function updateInquiry(
     expressionAttributeValues[':notes'] = updates.notes;
   }
 
+  // Always update last_activity_at
+  updateExpressions.push('#last_activity_at = :last_activity_at');
+  expressionAttributeNames['#last_activity_at'] = 'last_activity_at';
+  expressionAttributeValues[':last_activity_at'] = now;
+
   if (updateExpressions.length === 0) {
     // Nothing to update, just return current record
-    return getInquiry(inquiry_id);
+    return { record: currentRecord, oldStatus };
   }
 
   const result = await docClient.send(
@@ -191,5 +229,8 @@ export async function updateInquiry(
     })
   );
 
-  return (result.Attributes as InquiryRecord) || null;
+  return {
+    record: (result.Attributes as InquiryRecord) || null,
+    oldStatus,
+  };
 }

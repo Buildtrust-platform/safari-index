@@ -28,6 +28,8 @@ import {
   Users,
   BarChart3,
   Mail,
+  MessageSquare,
+  Layers,
 } from 'lucide-react';
 import type { InquiryRecord, InquiryStatus, ProposalStatus } from '../../lib/contracts';
 
@@ -249,7 +251,28 @@ export default function OpsDashboardPage() {
           {!loading && !error && stats && (
             <div className="space-y-8">
               {/* Quick Navigation */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                {/* Unified Inbox - Featured */}
+                <Link
+                  href={`/ops/inbox?ops_key=${opsKey}`}
+                  className="flex items-center justify-between p-6 bg-gradient-to-r from-stone-800 to-stone-900 rounded-xl border border-stone-700 hover:from-stone-700 hover:to-stone-800 hover:shadow-md transition-all group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                      <Layers className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="font-semibold text-white group-hover:text-amber-300 transition-colors">
+                        Unified Inbox
+                      </h2>
+                      <p className="text-sm text-stone-400">
+                        All messages
+                      </p>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-stone-400 group-hover:text-amber-300 transition-colors" />
+                </Link>
+
                 <Link
                   href={`/ops/inquiries?ops_key=${opsKey}`}
                   className="flex items-center justify-between p-6 bg-white rounded-xl border border-stone-200 hover:border-stone-300 hover:shadow-sm transition-all group"
@@ -268,6 +291,26 @@ export default function OpsDashboardPage() {
                     </div>
                   </div>
                   <ChevronRight className="w-5 h-5 text-stone-400 group-hover:text-blue-600 transition-colors" />
+                </Link>
+
+                <Link
+                  href={`/ops/questions?ops_key=${opsKey}`}
+                  className="flex items-center justify-between p-6 bg-white rounded-xl border border-stone-200 hover:border-stone-300 hover:shadow-sm transition-all group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center">
+                      <MessageSquare className="w-6 h-6 text-purple-600" />
+                    </div>
+                    <div>
+                      <h2 className="font-semibold text-stone-900 group-hover:text-purple-700 transition-colors">
+                        Questions
+                      </h2>
+                      <p className="text-sm text-stone-500">
+                        Quick inquiries
+                      </p>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-stone-400 group-hover:text-purple-600 transition-colors" />
                 </Link>
 
                 <Link

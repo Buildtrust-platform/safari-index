@@ -11,7 +11,7 @@
  * - All operations are read-only
  */
 
-import type { InquiryRecord, EntrySurface } from '../contracts';
+import type { InquiryRecord, EntrySurface, InquiryStatus } from '../contracts';
 import { listRecentInquiries } from './inquiry-store';
 
 /**
@@ -42,6 +42,24 @@ export interface TripInfluenceStats {
 }
 
 /**
+ * Conversion funnel statistics
+ */
+export interface ConversionFunnelStats {
+  new: number;
+  contacted: number;
+  quoted: number;
+  won: number;
+  lost: number;
+  contacted_rate: number; // % of new that were contacted
+  quoted_rate: number; // % of contacted that were quoted
+  won_rate: number; // % of quoted that were won
+  overall_win_rate: number; // % of all inquiries that were won
+  avg_days_to_contact: number | null;
+  avg_days_to_quote: number | null;
+  avg_days_to_win: number | null;
+}
+
+/**
  * Complete intelligence summary
  */
 export interface IntelligenceSummary {
@@ -56,6 +74,7 @@ export interface IntelligenceSummary {
   utm_sources: { source: string; count: number }[];
   referrers: { referrer: string; count: number }[];
   avg_pages_viewed: number | null;
+  conversion_funnel: ConversionFunnelStats;
 }
 
 /**
@@ -217,6 +236,95 @@ export function calculateAvgPagesViewed(inquiries: InquiryRecord[]): number | nu
 }
 
 /**
+ * Calculate days between two ISO timestamps
+ */
+function daysBetween(start: string, end: string): number {
+  const startDate = new Date(start);
+  const endDate = new Date(end);
+  const diffMs = endDate.getTime() - startDate.getTime();
+  return diffMs / (1000 * 60 * 60 * 24);
+}
+
+/**
+ * Calculate conversion funnel statistics
+ */
+export function calculateConversionFunnel(inquiries: InquiryRecord[]): ConversionFunnelStats {
+  const statusCounts: Record<InquiryStatus, number> = {
+    new: 0,
+    contacted: 0,
+    quoted: 0,
+    won: 0,
+    lost: 0,
+  };
+
+  // Time tracking arrays
+  const daysToContact: number[] = [];
+  const daysToQuote: number[] = [];
+  const daysToWin: number[] = [];
+
+  for (const inquiry of inquiries) {
+    statusCounts[inquiry.status]++;
+
+    // Calculate days to contact (using contacted_at if available)
+    if (inquiry.contacted_at) {
+      daysToContact.push(daysBetween(inquiry.created_at, inquiry.contacted_at));
+    }
+
+    // Calculate days to quote (using quoted_at if available)
+    if (inquiry.quoted_at) {
+      daysToQuote.push(daysBetween(inquiry.created_at, inquiry.quoted_at));
+    }
+
+    // Calculate days to win (using won_at if available)
+    if (inquiry.won_at) {
+      daysToWin.push(daysBetween(inquiry.created_at, inquiry.won_at));
+    }
+  }
+
+  const total = inquiries.length;
+
+  // Count inquiries that have progressed past each stage
+  // An inquiry that is "contacted" has been contacted
+  // An inquiry that is "quoted" has been contacted AND quoted
+  // An inquiry that is "won" has been contacted AND quoted AND won
+  const contacted = statusCounts.contacted + statusCounts.quoted + statusCounts.won;
+  const quoted = statusCounts.quoted + statusCounts.won;
+  const won = statusCounts.won;
+
+  // Calculate rates
+  const contactedRate = total > 0 ? Math.round((contacted / total) * 100) : 0;
+  const quotedRate = contacted > 0 ? Math.round((quoted / contacted) * 100) : 0;
+  const wonRate = quoted > 0 ? Math.round((won / quoted) * 100) : 0;
+  const overallWinRate = total > 0 ? Math.round((won / total) * 100) : 0;
+
+  // Calculate averages
+  const avgDaysToContact = daysToContact.length > 0
+    ? Math.round((daysToContact.reduce((a, b) => a + b, 0) / daysToContact.length) * 10) / 10
+    : null;
+  const avgDaysToQuote = daysToQuote.length > 0
+    ? Math.round((daysToQuote.reduce((a, b) => a + b, 0) / daysToQuote.length) * 10) / 10
+    : null;
+  const avgDaysToWin = daysToWin.length > 0
+    ? Math.round((daysToWin.reduce((a, b) => a + b, 0) / daysToWin.length) * 10) / 10
+    : null;
+
+  return {
+    new: statusCounts.new,
+    contacted: statusCounts.contacted,
+    quoted: statusCounts.quoted,
+    won: statusCounts.won,
+    lost: statusCounts.lost,
+    contacted_rate: contactedRate,
+    quoted_rate: quotedRate,
+    won_rate: wonRate,
+    overall_win_rate: overallWinRate,
+    avg_days_to_contact: avgDaysToContact,
+    avg_days_to_quote: avgDaysToQuote,
+    avg_days_to_win: avgDaysToWin,
+  };
+}
+
+/**
  * Get complete intelligence summary
  * Main entry point for ops dashboard
  */
@@ -242,6 +350,7 @@ export async function getIntelligenceSummary(
     utm_sources: aggregateUtmSources(inquiries, 10),
     referrers: aggregateReferrers(inquiries, 10),
     avg_pages_viewed: calculateAvgPagesViewed(inquiries),
+    conversion_funnel: calculateConversionFunnel(inquiries),
   };
 }
 

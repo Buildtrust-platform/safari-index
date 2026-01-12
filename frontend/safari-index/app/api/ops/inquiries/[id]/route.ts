@@ -2,6 +2,7 @@
  * Ops Inquiry Detail API
  *
  * GET /api/ops/inquiries/[id] - Get inquiry by ID
+ * GET /api/ops/inquiries/[id]?timeline=true - Get inquiry with activity timeline
  * PATCH /api/ops/inquiries/[id] - Update inquiry status/notes
  *
  * Protected by OPS_KEY header check.
@@ -10,6 +11,7 @@
 
 import { NextResponse } from 'next/server';
 import { getInquiry, updateInquiry } from '@/lib/db/inquiry-store';
+import { getActivityTimeline, logStatusChange, logNoteAdded } from '@/lib/db/activity-store';
 import { InquiryUpdateSchema } from '@/lib/contracts';
 
 const OPS_KEY = process.env.OPS_KEY;
@@ -35,6 +37,7 @@ interface RouteParams {
 /**
  * GET /api/ops/inquiries/[id]
  * Get a single inquiry
+ * Add ?timeline=true to include activity timeline
  */
 export async function GET(request: Request, { params }: RouteParams) {
   // Verify authorization
@@ -44,10 +47,19 @@ export async function GET(request: Request, { params }: RouteParams) {
 
   try {
     const { id } = await params;
+    const { searchParams } = new URL(request.url);
+    const includeTimeline = searchParams.get('timeline') === 'true';
+
     const inquiry = await getInquiry(id);
 
     if (!inquiry) {
       return NextResponse.json({ error: 'Inquiry not found' }, { status: 404 });
+    }
+
+    // Optionally include activity timeline
+    if (includeTimeline) {
+      const activities = await getActivityTimeline(id);
+      return NextResponse.json({ inquiry, activities });
     }
 
     return NextResponse.json(inquiry);
@@ -63,6 +75,7 @@ export async function GET(request: Request, { params }: RouteParams) {
 /**
  * PATCH /api/ops/inquiries/[id]
  * Update inquiry status or notes
+ * Automatically logs activities for status changes and note additions
  */
 export async function PATCH(request: Request, { params }: RouteParams) {
   // Verify authorization
@@ -94,8 +107,32 @@ export async function PATCH(request: Request, { params }: RouteParams) {
       return NextResponse.json({ error: 'Inquiry not found' }, { status: 404 });
     }
 
-    // Apply updates
-    const updated = await updateInquiry(id, updates);
+    // Apply updates (now returns oldStatus for activity logging)
+    const { record: updated, oldStatus } = await updateInquiry(id, updates);
+
+    // Log activities asynchronously (don't block response)
+    const activityPromises: Promise<unknown>[] = [];
+
+    // Log status change if status was updated
+    if (updates.status && oldStatus && updates.status !== oldStatus) {
+      activityPromises.push(
+        logStatusChange(id, oldStatus, updates.status).catch((err) => {
+          console.warn('[Ops Inquiry API] Failed to log status change:', err);
+        })
+      );
+    }
+
+    // Log note addition if notes were updated and non-empty
+    if (updates.notes !== undefined && updates.notes && updates.notes !== existing.notes) {
+      activityPromises.push(
+        logNoteAdded(id, updates.notes).catch((err) => {
+          console.warn('[Ops Inquiry API] Failed to log note addition:', err);
+        })
+      );
+    }
+
+    // Wait for activity logging (fire-and-forget pattern causes issues in serverless)
+    await Promise.all(activityPromises);
 
     return NextResponse.json(updated);
   } catch (error) {
