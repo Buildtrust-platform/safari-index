@@ -12,23 +12,23 @@
 
 import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
 
-// Initialize SES client lazily to pick up env vars at runtime
-let _sesClient: SESClient | null = null;
+// Create fresh SES client for each request to ensure correct region
+// In serverless environments, cached clients may have stale configuration
 function getSesClient(): SESClient {
-  if (!_sesClient) {
-    const region = process.env.SES_REGION || process.env.AWS_REGION || process.env.DYNAMO_REGION || 'us-east-1';
-    const credentials = process.env.DYNAMO_ACCESS_KEY_ID && process.env.DYNAMO_SECRET_ACCESS_KEY
-      ? {
-          accessKeyId: process.env.DYNAMO_ACCESS_KEY_ID,
-          secretAccessKey: process.env.DYNAMO_SECRET_ACCESS_KEY,
-        }
-      : undefined;
-    _sesClient = new SESClient({
-      region,
-      ...(credentials && { credentials }),
-    });
-  }
-  return _sesClient;
+  const region = process.env.SES_REGION || process.env.AWS_REGION || process.env.DYNAMO_REGION || 'us-east-1';
+  const credentials = process.env.DYNAMO_ACCESS_KEY_ID && process.env.DYNAMO_SECRET_ACCESS_KEY
+    ? {
+        accessKeyId: process.env.DYNAMO_ACCESS_KEY_ID,
+        secretAccessKey: process.env.DYNAMO_SECRET_ACCESS_KEY,
+      }
+    : undefined;
+
+  console.log('[SES Client] Creating with region:', region, 'credentials:', credentials ? 'yes' : 'no');
+
+  return new SESClient({
+    region,
+    ...(credentials && { credentials }),
+  });
 }
 
 /**
