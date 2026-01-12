@@ -993,7 +993,7 @@ export default function Home() {
               {/* Social media */}
               <div className="mt-4 flex items-center gap-3">
                 <a
-                  href="https://instagram.com/safariindex"
+                  href="https://instagram.com/vurarasafaris"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 rounded-full bg-stone-800 hover:bg-stone-700 flex items-center justify-center transition-colors"
@@ -1004,7 +1004,7 @@ export default function Home() {
                   </svg>
                 </a>
                 <a
-                  href="https://facebook.com/safariindex"
+                  href="https://facebook.com/vurarasafaris"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 rounded-full bg-stone-800 hover:bg-stone-700 flex items-center justify-center transition-colors"
@@ -1015,7 +1015,7 @@ export default function Home() {
                   </svg>
                 </a>
                 <a
-                  href="https://x.com/safariindex"
+                  href="https://x.com/vurarasafaris"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 rounded-full bg-stone-800 hover:bg-stone-700 flex items-center justify-center transition-colors"
@@ -1026,7 +1026,7 @@ export default function Home() {
                   </svg>
                 </a>
                 <a
-                  href="https://youtube.com/@safariindex"
+                  href="https://youtube.com/@vurarasafaris"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 rounded-full bg-stone-800 hover:bg-stone-700 flex items-center justify-center transition-colors"
