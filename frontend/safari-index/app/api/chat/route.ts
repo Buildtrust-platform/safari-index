@@ -143,7 +143,7 @@ export async function POST(request: NextRequest) {
         } catch (error) {
           console.error('Anthropic streaming error:', error);
 
-          let errorMessage = 'I apologize, but I am unable to respond right now. Please try again or contact us directly at hello@vurarasafaris.com.';
+          let errorMessage = 'I apologize, but I am unable to respond right now. Please try again or contact us directly at info@vurarasafaris.com.';
 
           if (error instanceof Anthropic.RateLimitError) {
             errorMessage = 'Our assistant is experiencing high demand. Please try again in a moment.';

@@ -159,10 +159,10 @@ export default function PrivacyPage() {
               <p className="text-ink-body">
                 <strong>Email:</strong>{' '}
                 <a
-                  href="mailto:hello@vurarasafaris.com"
+                  href="mailto:info@vurarasafaris.com"
                   className="text-outcome-book-base hover:underline"
                 >
-                  hello@vurarasafaris.com
+                  info@vurarasafaris.com
                 </a>
               </p>
             </section>

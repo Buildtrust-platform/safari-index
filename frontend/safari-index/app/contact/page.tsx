@@ -22,7 +22,7 @@ import { QuickQuestionForm } from './QuickQuestionForm';
 import { BookingForm } from './BookingForm';
 
 // Environment variables with fallbacks
-const OPERATOR_EMAIL = process.env.OPERATOR_EMAIL || 'hello@vurarasafaris.com';
+const OPERATOR_EMAIL = process.env.OPERATOR_EMAIL || 'info@vurarasafaris.com';
 const OPERATOR_PHONE = process.env.OPERATOR_PHONE;
 
 export const metadata: Metadata = {

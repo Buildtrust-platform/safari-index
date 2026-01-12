@@ -169,7 +169,7 @@ export function ChatWidget() {
         {
           role: 'assistant',
           content:
-            'I apologize, but I encountered an error. Please try again or contact us directly at hello@vurarasafaris.com.',
+            'I apologize, but I encountered an error. Please try again or contact us directly at info@vurarasafaris.com.',
         },
       ]);
     } finally {

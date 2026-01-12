@@ -975,8 +975,8 @@ export default function Home() {
               {/* Contact info */}
               <div className="mt-4 space-y-1 text-sm text-stone-400">
                 <p>
-                  <a href="mailto:hello@vurarasafaris.com" className="hover:text-white transition-colors">
-                    hello@vurarasafaris.com
+                  <a href="mailto:info@vurarasafaris.com" className="hover:text-white transition-colors">
+                    info@vurarasafaris.com
                   </a>
                 </p>
                 <p>
