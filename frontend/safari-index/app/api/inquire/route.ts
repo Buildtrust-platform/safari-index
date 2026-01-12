@@ -58,13 +58,16 @@ export async function POST(request: Request) {
     // Create inquiry in DynamoDB
     const { inquiry_id, created_at } = await createInquiry(inquiryRequest);
 
-    // Send operator notification (fire-and-forget, don't block response)
-    // Retrieve full record for notification
+    // Send operator notification (await to ensure it completes before response)
+    // In serverless environments, fire-and-forget may not complete
     const fullRecord = await getInquiry(inquiry_id);
     if (fullRecord) {
-      sendInquiryNotification(fullRecord).catch((err) => {
+      try {
+        await sendInquiryNotification(fullRecord);
+      } catch (err) {
         console.error('[Inquiry API] Failed to send notification:', err);
-      });
+        // Don't fail the request if notification fails
+      }
     }
 
     return NextResponse.json({

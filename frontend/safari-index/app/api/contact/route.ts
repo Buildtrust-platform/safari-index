@@ -57,16 +57,20 @@ export async function POST(request: Request) {
     // Create question in DynamoDB
     const { question_id, created_at } = await createQuestion(questionRequest);
 
-    // Send operator notification (fire-and-forget)
-    sendQuestionNotification({
-      question_id,
-      created_at,
-      email: questionRequest.email,
-      question: questionRequest.question,
-      source_path: questionRequest.source_path,
-    }).catch((err) => {
+    // Send operator notification (await to ensure it completes before response)
+    // In serverless environments, fire-and-forget may not complete
+    try {
+      await sendQuestionNotification({
+        question_id,
+        created_at,
+        email: questionRequest.email,
+        question: questionRequest.question,
+        source_path: questionRequest.source_path,
+      });
+    } catch (err) {
       console.error('[Contact API] Failed to send notification:', err);
-    });
+      // Don't fail the request if notification fails
+    }
 
     return NextResponse.json({
       question_id,
