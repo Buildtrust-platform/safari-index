@@ -15,7 +15,7 @@ import { NextResponse } from 'next/server';
 import { QuickQuestionRequestSchema } from '@/lib/contracts';
 import { createQuestion } from '@/lib/db/question-store';
 import { sendQuestionNotification } from '@/lib/email/question-notification';
-import { verifyReCaptchaToken } from '@/app/components/ReCaptcha';
+import { verifyReCaptchaToken } from '@/lib/recaptcha';
 
 /**
  * POST /api/contact

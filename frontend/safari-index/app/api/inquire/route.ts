@@ -16,7 +16,7 @@ import { NextResponse } from 'next/server';
 import { InquiryRequestSchema } from '@/lib/contracts';
 import { createInquiry, getInquiry } from '@/lib/db/inquiry-store';
 import { sendInquiryNotification } from '@/lib/email/inquiry-notification';
-import { verifyReCaptchaToken } from '@/app/components/ReCaptcha';
+import { verifyReCaptchaToken } from '@/lib/recaptcha';
 
 /**
  * POST /api/inquire
