@@ -78,20 +78,55 @@ export const metadata: Metadata = {
 /**
  * Organization JSON-LD structured data
  * Helps search engines understand Vurara Safaris as a business entity
+ *
+ * Required fields for TravelAgency (LocalBusiness subtype):
+ * - name, address, image (for rich results)
  */
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "TravelAgency",
+  "@id": "https://vurarasafaris.com/#organization",
   name: "Vurara Safaris",
   description: "The truth of the wild, revealed. Logic-backed safari planning across East and Southern Africa.",
   url: "https://vurarasafaris.com",
-  logo: "https://vurarasafaris.com/logo.svg",
-  sameAs: [],
+  logo: {
+    "@type": "ImageObject",
+    url: "https://vurarasafaris.com/logo.svg",
+    width: 200,
+    height: 60,
+  },
+  image: "https://vurarasafaris.com/logo.svg",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Arusha",
+    addressLocality: "Arusha",
+    addressRegion: "Arusha Region",
+    addressCountry: "TZ",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: -3.3869,
+    longitude: 36.6830,
+  },
+  telephone: "+255 000 000 000",
+  email: "hello@vurarasafaris.com",
+  sameAs: [
+    "https://instagram.com/vurarasafaris",
+    "https://facebook.com/vurarasafaris",
+    "https://x.com/vurarasafaris",
+    "https://youtube.com/@vurarasafaris",
+  ],
   areaServed: {
     "@type": "Continent",
     name: "Africa",
   },
-  serviceType: "Safari Travel Planning",
+  priceRange: "$$$",
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "17:00",
+  },
 };
 
 export default function RootLayout({
