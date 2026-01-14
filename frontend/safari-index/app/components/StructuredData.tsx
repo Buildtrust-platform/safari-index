@@ -46,7 +46,7 @@ export function StructuredData({
         author: {
           '@type': 'Organization',
           name: 'Vurara Safaris',
-          url: 'https://vurarasafaris.com',
+          url: 'https://www.vurarasafaris.com',
         },
         // Custom extension for answer versioning (not standard schema.org)
         // Included for AI systems that parse beyond standard schema

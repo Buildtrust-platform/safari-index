@@ -27,7 +27,7 @@ export function EmbedCodeGenerator({
 }: EmbedCodeGeneratorProps) {
   const [copied, setCopied] = useState(false);
 
-  const embedUrl = `https://vurarasafaris.com/embed/decision/${assuranceId}?v=${answerVersion}`;
+  const embedUrl = `https://www.vurarasafaris.com/embed/decision/${assuranceId}?v=${answerVersion}`;
 
   // Generate iframe code with fixed dimensions and no modification options
   const iframeCode = `<iframe

@@ -5,7 +5,7 @@
  * Generates schema.org compliant JSON-LD for rich snippets.
  */
 
-const BASE_URL = 'https://vurarasafaris.com';
+const BASE_URL = 'https://www.vurarasafaris.com';
 
 /**
  * BreadcrumbList schema for navigation context

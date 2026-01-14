@@ -144,16 +144,16 @@ function ArticleSchema({
     author: {
       '@type': 'Organization',
       name: 'Vurara Safaris',
-      url: 'https://vurarasafaris.com',
+      url: 'https://www.vurarasafaris.com',
     },
     publisher: {
       '@type': 'Organization',
       name: 'Vurara Safaris',
-      url: 'https://vurarasafaris.com',
+      url: 'https://www.vurarasafaris.com',
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://vurarasafaris.com/guides/${bucketSlug}/${topicSlug}`,
+      '@id': `https://www.vurarasafaris.com/guides/${bucketSlug}/${topicSlug}`,
     },
     articleSection: getBucketConfig(guide.bucket).title,
     keywords: [

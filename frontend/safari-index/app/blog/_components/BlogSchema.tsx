@@ -23,12 +23,12 @@ export function BlogSchema({ blog, canonicalUrl }: BlogSchemaProps) {
     author: {
       '@type': 'Organization',
       name: 'Vurara Safaris',
-      url: 'https://vurarasafaris.com',
+      url: 'https://www.vurarasafaris.com',
     },
     publisher: {
       '@type': 'Organization',
       name: 'Vurara Safaris',
-      url: 'https://vurarasafaris.com',
+      url: 'https://www.vurarasafaris.com',
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
@@ -41,7 +41,7 @@ export function BlogSchema({ blog, canonicalUrl }: BlogSchemaProps) {
     },
     isPartOf: {
       '@type': 'WebPage',
-      '@id': `https://vurarasafaris.com/decisions/${blog.decisionSlug}`,
+      '@id': `https://www.vurarasafaris.com/decisions/${blog.decisionSlug}`,
       name: blog.title,
     },
     wordCount: blog.wordCount,

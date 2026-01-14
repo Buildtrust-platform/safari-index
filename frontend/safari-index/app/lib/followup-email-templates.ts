@@ -111,7 +111,7 @@ export function generateFollowUpEmailSubject(data: FollowUpEmailData): string {
  * Logic version: rules_v1.0 → rules_v1.1
  *
  * View updated decision:
- * https://vurarasafaris.com/decisions/tanzania-safari-february
+ * https://www.vurarasafaris.com/decisions/tanzania-safari-february
  *
  * ---
  *
@@ -119,7 +119,7 @@ export function generateFollowUpEmailSubject(data: FollowUpEmailData): string {
  * You subscribed to updates for this specific decision.
  * No other emails will be sent.
  *
- * To unsubscribe: https://vurarasafaris.com/decisions/tanzania-safari-february?unsubscribe=true
+ * To unsubscribe: https://www.vurarasafaris.com/decisions/tanzania-safari-february?unsubscribe=true
  *
  * Decision ID: dec_abc123def456
  */

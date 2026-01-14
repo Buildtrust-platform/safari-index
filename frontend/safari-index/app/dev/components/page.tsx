@@ -236,7 +236,7 @@ export default function DevComponentsPage() {
               answerVersion="v1.0"
               logicVersion="v2.1"
               issuedAt="2024-12-21T10:30:00Z"
-              canonicalUrl="https://vurarasafaris.com/decisions/tanzania-safari-february"
+              canonicalUrl="https://www.vurarasafaris.com/decisions/tanzania-safari-february"
               decisionId="dec_embed_preview"
               isFlaggedForReview={false}
             />
@@ -254,7 +254,7 @@ export default function DevComponentsPage() {
               answerVersion="v1.0"
               logicVersion="v2.1"
               issuedAt="2024-12-21T10:30:00Z"
-              canonicalUrl="https://vurarasafaris.com/decisions/tanzania-safari-february"
+              canonicalUrl="https://www.vurarasafaris.com/decisions/tanzania-safari-february"
               decisionId="dec_embed_flagged"
               isFlaggedForReview={true}
             />

@@ -147,7 +147,7 @@ export default async function DecisionBlogPage({ params }: PageProps) {
     notFound();
   }
 
-  const canonicalUrl = `https://vurarasafaris.com/blog/decisions/${slug}`;
+  const canonicalUrl = `https://www.vurarasafaris.com/blog/decisions/${slug}`;
 
   return (
     <main className="min-h-screen bg-stone-50">

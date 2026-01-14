@@ -100,7 +100,7 @@ export default async function EmbedDecisionPage({
       answerVersion: requestedVersion || 'v1.0',
       logicVersion: artifact.logic_version,
       issuedAt: artifact.created_at,
-      canonicalUrl: `https://vurarasafaris.com/assurance/${id}`,
+      canonicalUrl: `https://www.vurarasafaris.com/assurance/${id}`,
       decisionId: artifact.decision_id,
       isFlaggedForReview: artifact.review_status === 'pending_human_review',
     };
@@ -122,7 +122,7 @@ export default async function EmbedDecisionPage({
           answerVersion: currentVersion.version,
           logicVersion: currentVersion.logicVersion,
           issuedAt: currentVersion.issuedAt,
-          canonicalUrl: `https://vurarasafaris.com${staticAnswer.canonicalUrl}`,
+          canonicalUrl: `https://www.vurarasafaris.com${staticAnswer.canonicalUrl}`,
           decisionId: `dec_embed_${staticAnswer.topicId}`,
           isFlaggedForReview: false,
         };

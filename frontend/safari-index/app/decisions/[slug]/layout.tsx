@@ -23,7 +23,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const BASE_URL = 'https://vurarasafaris.com';
+const BASE_URL = 'https://www.vurarasafaris.com';
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;

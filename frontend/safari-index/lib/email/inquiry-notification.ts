@@ -138,7 +138,7 @@ export async function sendInquiryNotification(inquiry: InquiryRecord): Promise<b
   }
 
   const dateWindow = formatDateWindow(inquiry.travel_month, inquiry.travel_year);
-  const siteOrigin = process.env.SITE_ORIGIN || process.env.NEXT_PUBLIC_SITE_ORIGIN || 'https://vurarasafaris.com';
+  const siteOrigin = process.env.SITE_ORIGIN || process.env.NEXT_PUBLIC_SITE_ORIGIN || 'https://www.vurarasafaris.com';
   const opsUrl = `${siteOrigin}/ops/inquiries/${inquiry.inquiry_id}`;
 
   // Build linked decisions list

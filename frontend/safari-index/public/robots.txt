@@ -4,7 +4,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vurarasafaris.com/sitemap.xml
+Sitemap: https://www.vurarasafaris.com/sitemap.xml
 
 # Block non-content paths
 Disallow: /api/

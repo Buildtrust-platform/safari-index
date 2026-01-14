@@ -15,7 +15,7 @@ import { Metadata } from 'next';
  * Site origin for canonical URLs
  * Uses SITE_ORIGIN env var or defaults to production domain
  */
-export const SITE_ORIGIN = process.env.SITE_ORIGIN || 'https://vurarasafaris.com';
+export const SITE_ORIGIN = process.env.SITE_ORIGIN || 'https://www.vurarasafaris.com';
 
 /**
  * Get absolute canonical URL for a path

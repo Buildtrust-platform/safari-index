@@ -574,7 +574,7 @@ export default function DecisionPage() {
     const primaryCondition = extractPrimaryCondition(d.assumptions, d.change_conditions);
     const invalidatingCondition = extractInvalidatingCondition(d.change_conditions);
 
-    const canonicalUrl = `https://vurarasafaris.com/decisions/${slug}`;
+    const canonicalUrl = `https://www.vurarasafaris.com/decisions/${slug}`;
     const quotableVerdict = answerVersion?.quotableVerdict || d.summary;
 
     return (

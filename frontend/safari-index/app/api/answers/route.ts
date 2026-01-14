@@ -59,7 +59,7 @@ function transformToAnswerBlock(va: VersionedAnswer): AnswerBlock | null {
       score: currentVersion.confidence,
       label: getConfidenceLabel(currentVersion.confidence),
     },
-    canonicalUrl: `https://vurarasafaris.com${va.canonicalUrl}`,
+    canonicalUrl: `https://www.vurarasafaris.com${va.canonicalUrl}`,
     version: {
       current: currentVersion.version,
       issuedAt: currentVersion.issuedAt,
@@ -108,7 +108,7 @@ export async function GET(request: Request) {
           score: specificVersion.confidence,
           label: getConfidenceLabel(specificVersion.confidence),
         },
-        canonicalUrl: `https://vurarasafaris.com${versionedAnswer.canonicalUrl}`,
+        canonicalUrl: `https://www.vurarasafaris.com${versionedAnswer.canonicalUrl}`,
         version: {
           requested: specificVersion.version,
           isCurrent: specificVersion.isCurrent,
