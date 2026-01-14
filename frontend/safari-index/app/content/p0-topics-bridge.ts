@@ -86,6 +86,12 @@ export function generateSlugFromId(id: string): string {
     'budget-tanzania': 'tanzania-safari-on-budget',
     'cheap-warning': 'cheap-safari-warning',
     'splurge-allocation': 'safari-splurge-vs-save',
+
+    // Additional linked decisions (using IDs as slugs for backwards compatibility)
+    'ngorongoro-worth': 'ngorongoro-worth',
+    'off-beaten-path': 'off-beaten-path',
+    'bw-peak-flood': 'bw-peak-flood',
+    'mokoro-canoe': 'mokoro-canoe',
   };
 
   return slugMappings[id] || id.replace(/_/g, '-');
@@ -309,6 +315,10 @@ function generateContextLine(def: P0DecisionDefinition, inv?: TopicInventoryItem
     'peak-vs-value': 'Peak season costs more for better conditions.',
     'cheap-warning': 'Below market rates signal quality concerns.',
     'splurge-allocation': 'Guide quality matters more than room luxury.',
+    'ngorongoro-worth': 'The crater delivers Big Five density at premium cost.',
+    'off-beaten-path': 'Remote areas trade predictability for exclusivity.',
+    'bw-peak-flood': 'Flood timing determines which activities are possible.',
+    'mokoro-canoe': 'Mokoro adds unique perspectives when water levels allow.',
   };
 
   return contextLines[id] || `A decision with trade-offs. Read the conditions.`;

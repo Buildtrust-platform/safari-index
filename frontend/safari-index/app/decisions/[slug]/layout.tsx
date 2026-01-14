@@ -90,6 +90,8 @@ export default async function DecisionLayout({ params, children }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: renderJsonLd(breadcrumbSchema) }}
       />
+      {/* Server-rendered h1 for SEO - visually hidden, replaced by client h1 */}
+      <h1 className="sr-only">{topic.question}</h1>
       {children}
     </>
   );

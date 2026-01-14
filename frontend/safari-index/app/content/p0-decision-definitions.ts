@@ -2693,4 +2693,170 @@ export const p0DecisionDefinitions: P0DecisionDefinition[] = [
       'Multi-region expectations with under 7 days',
     ],
   },
+
+  // ============================================================
+  // ADDITIONAL LINKED DECISIONS
+  // ============================================================
+  {
+    id: 'ngorongoro-worth',
+    question: 'Is Ngorongoro Crater worth a full day?',
+    required_inputs: [
+      inp('trip_length'),
+      inp('traveler_type'),
+    ],
+    optional_inputs: [
+      inp('budget_band'),
+      customInput({
+        key: 'user_context.wildlife_priority',
+        label: 'Wildlife priority',
+        description: 'What wildlife you most want to see',
+        example: 'big-five',
+      }),
+    ],
+    assumptions: [
+      'Ngorongoro Crater is one of the most wildlife-dense areas in Africa',
+      'The crater floor is only 100 square miles but hosts 25,000+ large animals',
+      'Black rhino sightings are more likely here than anywhere else in Tanzania',
+      'Crater entry fees are among the highest in Africa ($295/person/day)',
+      'Game drives are restricted to the crater floor with no walking',
+    ],
+    tradeoffs: [
+      { gain: 'Near-guaranteed Big Five sightings in one day', loss: 'High park fees eat into budget' },
+      { gain: 'Unique caldra ecosystem found nowhere else', loss: 'Crowded with many vehicles' },
+      { gain: 'Best chance for black rhino in Tanzania', loss: 'No walking safaris allowed' },
+      { gain: 'Dramatic scenery with 2000ft crater walls', loss: 'Limited time on crater floor (6 hours max)' },
+    ],
+    change_conditions: [
+      'If on tight budget, crater fees may be better spent on extra Serengeti days',
+      'If rhino is a priority, crater is non-negotiable',
+      'If crowds bother you significantly, consider dry season early morning entry',
+      'If trip is 4 days or less, crater may consume too much time',
+    ],
+    refusal_triggers: [
+      'Trip under 3 days total—not enough time to justify crater visit',
+      'Budget under $200/day/person—crater fees not viable',
+    ],
+  },
+  {
+    id: 'off-beaten-path',
+    question: 'Should I choose a less-visited destination?',
+    required_inputs: [
+      inp('traveler_type'),
+      inp('budget_band'),
+      customInput({
+        key: 'user_context.crowd_tolerance',
+        label: 'Crowd tolerance',
+        description: 'How you feel about sharing sightings with other vehicles',
+        example: 'prefer-exclusive',
+      }),
+    ],
+    optional_inputs: [
+      inp('trip_length'),
+      inp('physical_fitness'),
+    ],
+    assumptions: [
+      'Remote areas offer exclusivity but with infrastructure trade-offs',
+      'Less-visited areas often have lower wildlife density than famous parks',
+      'Off-grid camps may have limited electricity, connectivity, and medical access',
+      'Charter flights are often required, adding significant cost',
+      'Guides in remote areas may be less experienced than in major circuits',
+    ],
+    tradeoffs: [
+      { gain: 'Genuine wilderness with few or no other visitors', loss: 'Less predictable wildlife encounters' },
+      { gain: 'More authentic connection to landscape', loss: 'Basic infrastructure and amenities' },
+      { gain: 'Supports conservation in undervisited areas', loss: 'Higher per-day costs due to logistics' },
+      { gain: 'Unique ecosystems not found in popular parks', loss: 'Longer travel times and charter requirements' },
+    ],
+    change_conditions: [
+      'If wildlife quantity is primary goal, stick to proven circuits',
+      'If you have mobility limitations, remote areas may not work',
+      'If on first safari, consider classic destinations first',
+      'If budget is limited, mainstream parks offer better value',
+    ],
+    refusal_triggers: [
+      'First-time safari with no Africa experience—remote too risky',
+      'Medical conditions requiring nearby facilities',
+    ],
+  },
+  {
+    id: 'bw-peak-flood',
+    question: 'When is peak flood in the Okavango?',
+    required_inputs: [
+      inp('travel_month'),
+      customInput({
+        key: 'user_context.activity_preference',
+        label: 'Activity preference',
+        description: 'Water activities vs land game drives',
+        example: 'mokoro-and-water',
+      }),
+    ],
+    optional_inputs: [
+      inp('budget_band'),
+      inp('trip_length'),
+    ],
+    assumptions: [
+      'Okavango flood originates from Angola rains 1000km away',
+      'Peak flood typically reaches the delta June-August',
+      'Flood timing varies by 2-4 weeks depending on rainfall patterns',
+      'Water levels determine which activities are possible where',
+      'Mokoro and boat safaris require sufficient water levels',
+    ],
+    tradeoffs: [
+      { gain: 'Peak flood (Jun-Aug) enables full water safari experience', loss: 'Higher prices during peak season' },
+      { gain: 'Water brings wildlife to islands and channels', loss: 'Some game drive areas become inaccessible' },
+      { gain: 'Best birdlife during and after flood', loss: 'Predator sightings less concentrated' },
+      { gain: 'Unique ecosystem at its most dramatic', loss: 'Weather can be cold in June-July' },
+    ],
+    change_conditions: [
+      'If mokoro is priority, aim for June-September when water levels support it',
+      'If big cats are priority, dry season (Aug-Oct) concentrates game on land',
+      'If budget-conscious, shoulder months (May, November) offer value',
+      'If flexible, track current water levels closer to travel',
+    ],
+    refusal_triggers: [
+      'December-March travel expecting peak flood—water levels lowest',
+      'Mokoro requirement with October-November dates—insufficient water',
+    ],
+  },
+  {
+    id: 'mokoro-canoe',
+    question: 'Should I prioritize mokoro/canoe safaris?',
+    required_inputs: [
+      inp('traveler_type'),
+      inp('travel_month'),
+      customInput({
+        key: 'user_context.water_comfort',
+        label: 'Water comfort',
+        description: 'Comfort level on small watercraft',
+        example: 'comfortable',
+      }),
+    ],
+    optional_inputs: [
+      inp('physical_fitness'),
+      inp('trip_length'),
+    ],
+    assumptions: [
+      'Mokoro is a traditional dugout canoe poled through shallow channels',
+      'Activity requires adequate water levels (typically May-September)',
+      'Mokoro offers unique low-angle wildlife viewing',
+      'Hippo presence creates inherent risk in waterways',
+      'Not all Okavango camps offer quality mokoro experiences',
+    ],
+    tradeoffs: [
+      { gain: 'Silent approach to wildlife at water level', loss: 'Limited to areas with sufficient water' },
+      { gain: 'Cultural connection to traditional Delta life', loss: 'Cannot cover large distances' },
+      { gain: 'Best way to experience aquatic birdlife', loss: 'Hippo risk requires experienced polers' },
+      { gain: 'Unique photography perspectives', loss: 'Weather-dependent activity' },
+    ],
+    change_conditions: [
+      'If visiting October-April, mokoro may not be available',
+      'If you have mobility issues, getting in/out of mokoro is challenging',
+      'If hippos make you nervous, boat safaris in larger craft are alternatives',
+      'If short on time, game drives cover more ground',
+    ],
+    refusal_triggers: [
+      'Travel dates November-March—water levels typically too low',
+      'Severe mobility limitations—mokoro ingress/egress not viable',
+    ],
+  },
 ];
