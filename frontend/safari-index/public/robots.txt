@@ -8,7 +8,10 @@ Sitemap: https://www.vurarasafaris.com/sitemap.xml
 
 # Block non-content paths
 Disallow: /api/
-Disallow: /_next/
 Disallow: /dev/
+Disallow: /ops/
 Disallow: /embed/
 Disallow: /assurance/
+
+# Allow static assets for proper rendering
+Allow: /_next/static/
