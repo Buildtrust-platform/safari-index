@@ -84,7 +84,7 @@ export function generateArticleSchema(props: ArticleSchemaProps) {
       url: BASE_URL,
       logo: {
         '@type': 'ImageObject',
-        url: `${BASE_URL}/logo.png`,
+        url: `${BASE_URL}/logo.svg`,
       },
     },
     ...(props.image && {

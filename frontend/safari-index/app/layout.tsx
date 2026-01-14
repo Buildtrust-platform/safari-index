@@ -95,7 +95,7 @@ const organizationJsonLd = {
     width: 200,
     height: 60,
   },
-  image: "https://www.vurarasafaris.com/logo.svg",
+  image: "https://www.vurarasafaris.com/images/heroes/home-hero.jpg",
   address: {
     "@type": "PostalAddress",
     streetAddress: "De Wetstraat 134",
