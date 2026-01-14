@@ -25,6 +25,24 @@ interface Props {
 
 const BASE_URL = 'https://www.vurarasafaris.com';
 
+/**
+ * Truncate title to fit within 70 character limit (including " | Vurara Safaris" suffix)
+ * Max question length: 52 characters
+ */
+function truncateTitle(question: string): string {
+  const MAX_LENGTH = 52;
+  if (question.length <= MAX_LENGTH) return question;
+
+  // Find the last space before the limit to avoid cutting words
+  const truncated = question.slice(0, MAX_LENGTH);
+  const lastSpace = truncated.lastIndexOf(' ');
+
+  if (lastSpace > MAX_LENGTH - 15) {
+    return truncated.slice(0, lastSpace);
+  }
+  return truncated;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const topic = getTopicBySlug(slug);
@@ -35,8 +53,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const truncatedTitle = truncateTitle(topic.question);
+
   return {
-    title: topic.question,
+    title: truncatedTitle,
     description: `${topic.context_line} A clear verdict on ${topic.destinations.join(', ')} with trade-offs, assumptions, and conditions.`,
     alternates: {
       canonical: `${BASE_URL}/decisions/${topic.slug}`,
