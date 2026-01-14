@@ -98,17 +98,16 @@ const organizationJsonLd = {
   image: "https://vurarasafaris.com/logo.svg",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Arusha",
-    addressLocality: "Arusha",
-    addressRegion: "Arusha Region",
-    addressCountry: "TZ",
+    streetAddress: "De Wetstraat 134",
+    addressLocality: "Ridderkerk",
+    addressCountry: "NL",
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: -3.3869,
-    longitude: 36.6830,
+    latitude: 51.8728,
+    longitude: 4.6003,
   },
-  telephone: "+255 000 000 000",
+  telephone: "+31614855683",
   email: "hello@vurarasafaris.com",
   sameAs: [
     "https://instagram.com/vurarasafaris",
