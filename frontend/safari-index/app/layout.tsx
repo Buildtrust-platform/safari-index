@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     template: "%s | Vurara Safaris",
   },
   description: "The truth of the wild, revealed. Logic-backed safari planning across East and Southern Africa.",
-  metadataBase: new URL(process.env.SITE_ORIGIN || "https://vurarasafaris.com"),
+  metadataBase: new URL(process.env.SITE_ORIGIN || "https://www.vurarasafaris.com"),
   alternates: {
     canonical: "/",
   },
@@ -85,17 +85,17 @@ export const metadata: Metadata = {
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "TravelAgency",
-  "@id": "https://vurarasafaris.com/#organization",
+  "@id": "https://www.vurarasafaris.com/#organization",
   name: "Vurara Safaris",
   description: "The truth of the wild, revealed. Logic-backed safari planning across East and Southern Africa.",
-  url: "https://vurarasafaris.com",
+  url: "https://www.vurarasafaris.com",
   logo: {
     "@type": "ImageObject",
-    url: "https://vurarasafaris.com/logo.svg",
+    url: "https://www.vurarasafaris.com/logo.svg",
     width: 200,
     height: 60,
   },
-  image: "https://vurarasafaris.com/logo.svg",
+  image: "https://www.vurarasafaris.com/logo.svg",
   address: {
     "@type": "PostalAddress",
     streetAddress: "De Wetstraat 134",

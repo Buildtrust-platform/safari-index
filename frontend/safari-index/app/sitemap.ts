@@ -31,7 +31,7 @@ import { getAllItineraries } from './content/itineraries';
 import { getPublishedSafariTypes } from './content/safari-types';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://vurarasafaris.com';
+  const baseUrl = 'https://www.vurarasafaris.com';
   const topics = getPublishedTopics();
   const bucketGuides = getAllBucketGuides();
   const p0TopicIds = getAllP0TopicIds();
