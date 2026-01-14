@@ -302,48 +302,50 @@ export default function DecisionPage() {
     };
 
     return (
-      <div className="min-h-screen bg-stone-50">
+      <article className="min-h-screen bg-stone-50" itemScope itemType="https://schema.org/Article">
         <Navbar variant="transparent" />
 
         {/* Hero with safari imagery */}
-        <ImageBand
-          image={pageImages.decision}
-          height="compare"
-          overlay="strong"
-          align="center"
-          priority
-          alwaysRender
-        >
-          <ImageBandContent maxWidth="narrow" className="pt-24 pb-8">
-            <div className="text-center">
-              {/* Breadcrumb */}
-              <div className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
-                <Link href="/" className="hover:text-white transition-colors">
-                  Vurara Safaris
-                </Link>
-                <ChevronRight className="w-4 h-4" />
-                <Link href="/decisions" className="hover:text-white transition-colors">
-                  Decisions
-                </Link>
-                <ChevronRight className="w-4 h-4" />
-                <span className="text-white">Decision</span>
+        <header>
+          <ImageBand
+            image={pageImages.decision}
+            height="compare"
+            overlay="strong"
+            align="center"
+            priority
+            alwaysRender
+          >
+            <ImageBandContent maxWidth="narrow" className="pt-24 pb-8">
+              <div className="text-center">
+                {/* Breadcrumb */}
+                <nav aria-label="Breadcrumb" className="flex items-center justify-center gap-2 text-white/60 text-sm mb-4">
+                  <Link href="/" className="hover:text-white transition-colors">
+                    Vurara Safaris
+                  </Link>
+                  <ChevronRight className="w-4 h-4" aria-hidden="true" />
+                  <Link href="/decisions" className="hover:text-white transition-colors">
+                    Decisions
+                  </Link>
+                  <ChevronRight className="w-4 h-4" aria-hidden="true" />
+                  <span className="text-white" aria-current="page">Decision</span>
+                </nav>
+
+                {/* Title */}
+                <h1 itemProp="headline" className="font-editorial text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4">
+                  {topic.question}
+                </h1>
+
+                {/* Context */}
+                <p itemProp="description" className="text-white/80 text-lg max-w-xl mx-auto">
+                  {topic.context_line}
+                </p>
               </div>
-
-              {/* Title */}
-              <h1 className="font-editorial text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4">
-                {topic.question}
-              </h1>
-
-              {/* Context */}
-              <p className="text-white/80 text-lg max-w-xl mx-auto">
-                {topic.context_line}
-              </p>
-            </div>
-          </ImageBandContent>
-        </ImageBand>
+            </ImageBandContent>
+          </ImageBand>
+        </header>
 
         {/* Main content */}
-        <div className="max-w-3xl mx-auto px-4 md:px-8 py-12">
+        <main className="max-w-3xl mx-auto px-4 md:px-8 py-12">
 
           {/* Verdict Card */}
           <section className="mb-8">
@@ -483,10 +485,10 @@ export default function DecisionPage() {
               </div>
             </section>
           )}
-        </div>
+        </main>
 
         <Footer variant="decision-system" />
-      </div>
+      </article>
     );
   }
 
@@ -576,41 +578,43 @@ export default function DecisionPage() {
     const quotableVerdict = answerVersion?.quotableVerdict || d.summary;
 
     return (
-      <>
+      <article itemScope itemType="https://schema.org/Article">
         {/* Cinematic Hero - Documentary opening with verdict moment */}
-        <ImageBand
-          image={pageImages.decision}
-          height="decision-hero"
-          overlay="cinematic"
-          align="center"
-          priority
-        >
-          <ImageBandContent maxWidth="default">
-            {/* Eyebrow label */}
-            <span className="inline-block font-ui text-xs font-medium text-white/70 uppercase tracking-wider mb-3">
-              Decision
-            </span>
+        <header>
+          <ImageBand
+            image={pageImages.decision}
+            height="decision-hero"
+            overlay="cinematic"
+            align="center"
+            priority
+          >
+            <ImageBandContent maxWidth="default">
+              {/* Eyebrow label */}
+              <span className="inline-block font-ui text-xs font-medium text-white/70 uppercase tracking-wider mb-3">
+                Decision
+              </span>
 
-            {/* H1 Question - serif headline, short measure */}
-            <h1 className="font-editorial text-2xl md:text-3xl lg:text-4xl font-semibold text-white leading-snug tracking-tight mb-3 max-w-[22ch]">
-              {topic.question}
-            </h1>
+              {/* H1 Question - serif headline, short measure */}
+              <h1 itemProp="headline" className="font-editorial text-2xl md:text-3xl lg:text-4xl font-semibold text-white leading-snug tracking-tight mb-3 max-w-[22ch]">
+                {topic.question}
+              </h1>
 
-            {/* Context line - documentary framing */}
-            <p className="font-editorial text-white/80 text-base md:text-lg leading-relaxed mb-6 max-w-xl">
-              A decision with trade-offs. Read the conditions.
-            </p>
+              {/* Context line - documentary framing */}
+              <p itemProp="description" className="font-editorial text-white/80 text-base md:text-lg leading-relaxed mb-6 max-w-xl">
+                A decision with trade-offs. Read the conditions.
+              </p>
 
-            {/* Verdict Moment strip */}
-            <VerdictMoment
-              outcome={d.outcome}
-              headline={d.headline}
-              confidence={d.confidence}
-              decisionId={decision.decision_id}
-              logicVersion={decision.metadata.logic_version}
-            />
-          </ImageBandContent>
-        </ImageBand>
+              {/* Verdict Moment strip */}
+              <VerdictMoment
+                outcome={d.outcome}
+                headline={d.headline}
+                confidence={d.confidence}
+                decisionId={decision.decision_id}
+                logicVersion={decision.metadata.logic_version}
+              />
+            </ImageBandContent>
+          </ImageBand>
+        </header>
 
         {/* Body - Warm safari background */}
         <main className={`${pageContainer} min-h-screen bg-gradient-to-b from-amber-50/30 via-stone-50 to-stone-100`}>
@@ -704,7 +708,7 @@ export default function DecisionPage() {
             issuedAt={issuedAt}
           />
         </main>
-      </>
+      </article>
     );
   }
 
