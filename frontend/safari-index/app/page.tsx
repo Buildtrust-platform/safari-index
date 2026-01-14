@@ -987,8 +987,8 @@ export default function Home() {
               </div>
               {/* Physical address */}
               <div className="mt-3 text-xs text-stone-500">
-                <p>Vurara Safaris Ltd.</p>
-                <p>Arusha, Tanzania</p>
+                <p>Vurara Safaris</p>
+                <p>De Wetstraat 134, Ridderkerk, Netherlands</p>
               </div>
               {/* Social media */}
               <div className="mt-4 flex items-center gap-3">
