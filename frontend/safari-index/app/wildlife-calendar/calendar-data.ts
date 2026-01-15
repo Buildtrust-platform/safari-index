@@ -134,6 +134,94 @@ export const WILDLIFE_EVENTS: WildlifeEvent[] = [
     destinations: ['uganda', 'tanzania'],
     species: ['chimpanzee'],
   },
+  // Zambia walking safari season
+  {
+    id: 'walking-safari-peak',
+    title: 'Walking Safari Peak',
+    description: 'South Luangwa\'s famous walking safaris are at their best in the dry season.',
+    months: [6, 7, 8, 9, 10],
+    destinations: ['zambia'],
+    highlight: true,
+  },
+  // Zambia emerald season
+  {
+    id: 'zambia-emerald-season',
+    title: 'Emerald Season',
+    description: 'Green season brings dramatic skies, newborn animals, and excellent birding.',
+    months: [12, 1, 2, 3],
+    destinations: ['zambia'],
+  },
+  // Carmine bee-eaters
+  {
+    id: 'carmine-bee-eaters',
+    title: 'Carmine Bee-Eater Colony',
+    description: 'Thousands of carmine bee-eaters nest in riverbanks along the Luangwa and Zambezi.',
+    months: [9, 10, 11],
+    destinations: ['zambia', 'zimbabwe'],
+    highlight: true,
+  },
+  // Hwange waterhole season
+  {
+    id: 'hwange-waterhole-peak',
+    title: 'Waterhole Wildlife Peak',
+    description: 'Dry season concentrates huge elephant herds at pumped waterholes. Spectacular viewing.',
+    months: [8, 9, 10],
+    destinations: ['zimbabwe'],
+    species: ['elephant'],
+    highlight: true,
+  },
+  // Mana Pools walking
+  {
+    id: 'mana-pools-walking',
+    title: 'Mana Pools Walking Season',
+    description: 'UNESCO World Heritage site opens for walking safaris. Unique close encounters.',
+    months: [5, 6, 7, 8, 9, 10],
+    destinations: ['zimbabwe'],
+  },
+  // Victoria Falls high water
+  {
+    id: 'vic-falls-high-water',
+    title: 'Victoria Falls Peak Flow',
+    description: 'The Smoke That Thunders at maximum. Spray visible for miles.',
+    months: [3, 4, 5],
+    destinations: ['zambia', 'zimbabwe'],
+    highlight: true,
+  },
+  // Victoria Falls low water
+  {
+    id: 'vic-falls-low-water',
+    title: 'Victoria Falls Swimming',
+    description: 'Low water allows swimming in Devil\'s Pool on the edge. Rock formations visible.',
+    months: [9, 10, 11],
+    destinations: ['zambia', 'zimbabwe'],
+  },
+  // Etosha waterhole season
+  {
+    id: 'etosha-waterhole-peak',
+    title: 'Etosha Waterhole Drama',
+    description: 'Dry season concentrates wildlife at floodlit waterholes. Night viewing exceptional.',
+    months: [6, 7, 8, 9, 10],
+    destinations: ['namibia'],
+    species: ['elephant', 'lion', 'rhino'],
+    highlight: true,
+  },
+  // Desert-adapted wildlife
+  {
+    id: 'desert-adapted-tracking',
+    title: 'Desert Wildlife Tracking',
+    description: 'Track desert-adapted elephants and rhinos in Damaraland. Cooler conditions.',
+    months: [5, 6, 7, 8],
+    destinations: ['namibia'],
+    species: ['elephant', 'rhino'],
+  },
+  // Skeleton Coast seals
+  {
+    id: 'cape-fur-seals',
+    title: 'Cape Fur Seal Colonies',
+    description: 'Massive seal colonies at Cape Cross. Pup births November-December.',
+    months: [11, 12, 1],
+    destinations: ['namibia'],
+  },
 ];
 
 /**
@@ -201,9 +289,9 @@ export const DESTINATIONS: Destination[] = [
   { id: 'rwanda', name: 'Rwanda', region: 'east-africa', parks: ['volcanoes-np'] },
   { id: 'botswana', name: 'Botswana', region: 'southern-africa', parks: ['okavango-delta', 'chobe'] },
   { id: 'south-africa', name: 'South Africa', region: 'southern-africa', parks: ['kruger', 'sabi-sands'] },
-  { id: 'zambia', name: 'Zambia', region: 'southern-africa', parks: [] },
-  { id: 'zimbabwe', name: 'Zimbabwe', region: 'southern-africa', parks: [] },
-  { id: 'namibia', name: 'Namibia', region: 'southern-africa', parks: [] },
+  { id: 'zambia', name: 'Zambia', region: 'southern-africa', parks: ['south-luangwa', 'lower-zambezi'] },
+  { id: 'zimbabwe', name: 'Zimbabwe', region: 'southern-africa', parks: ['hwange', 'mana-pools'] },
+  { id: 'namibia', name: 'Namibia', region: 'southern-africa', parks: ['etosha', 'damaraland'] },
 ];
 
 /**
