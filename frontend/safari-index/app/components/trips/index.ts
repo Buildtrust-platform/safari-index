@@ -8,3 +8,5 @@ export { TypicalDaySection } from './TypicalDaySection';
 export { AccommodationSection } from './AccommodationSection';
 export { ExclusionBlock } from './ExclusionBlock';
 export { CostSignalSection } from './CostSignalSection';
+export { DayByDayVisualization } from './DayByDayVisualization';
+export { TripQualificationSection } from './TripQualificationSection';
