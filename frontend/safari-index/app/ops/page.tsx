@@ -1,56 +1,42 @@
+'use client';
+
 /**
  * Ops Dashboard Home
  *
- * Intelligent dashboard showing actionable overview:
- * - Needs Attention section (urgent items)
- * - Recent Activity feed
- * - Weekly metrics with trends
- * - Quick navigation to all tools
+ * Focus view showing what needs action NOW:
+ * - Attention items (new inquiries, overdue follow-ups)
+ * - Weekly stats with trends
+ * - Pipeline overview
+ * - Recent activity feed
  *
- * Protected by x-ops-key header check.
+ * Keyboard shortcuts:
+ * - I: Go to Inbox
+ * - A: Go to Analytics
  */
 
-'use client';
-
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
+import { format, formatDistanceToNow } from 'date-fns';
 import {
-  LayoutDashboard,
   Inbox,
   AlertCircle,
   Clock,
   ChevronRight,
   RefreshCw,
-  TrendingUp,
-  TrendingDown,
-  Users,
-  BarChart3,
   Mail,
-  MessageSquare,
-  Layers,
   Calendar,
   Phone,
   FileText,
   CheckCircle2,
   ArrowUpRight,
   ArrowDownRight,
+  MessageSquare,
+  BarChart3,
+  Sparkles,
 } from 'lucide-react';
-
-/**
- * Get OPS_KEY from client-side
- */
-function getOpsKey(): string | null {
-  if (typeof window === 'undefined') return null;
-
-  const urlParams = new URLSearchParams(window.location.search);
-  const keyFromUrl = urlParams.get('ops_key');
-  if (keyFromUrl) {
-    localStorage.setItem('ops_key', keyFromUrl);
-    return keyFromUrl;
-  }
-
-  return localStorage.getItem('ops_key');
-}
+import { useOpsKey } from './components/hooks/useOpsKey';
 
 interface DashboardStats {
   needsAttention: {
@@ -80,17 +66,12 @@ interface DashboardStats {
     won: number;
     avgResponseTimeHours: number | null;
   };
-  trends: {
-    responseTimeChange: number | null;
-    inquiryVolumeChange: number;
-  };
   recentInquiries: Array<{
     inquiry_id: string;
     email: string;
-    trip_shape_id?: string;
+    status?: string;
     traveler_count: number;
     created_at: string;
-    elapsed: string;
   }>;
   upcomingFollowUps: Array<{
     followup_id: string;
@@ -101,59 +82,57 @@ interface DashboardStats {
   }>;
 }
 
-/**
- * Attention item card
- */
+// ============================================================
+// COMPONENTS
+// ============================================================
+
 function AttentionCard({
   icon: Icon,
-  color,
+  variant,
   count,
   label,
   subtext,
   href,
 }: {
   icon: React.ElementType;
-  color: 'red' | 'yellow' | 'blue';
+  variant: 'urgent' | 'warning' | 'info';
   count: number;
   label: string;
   subtext?: string;
   href: string;
 }) {
-  const colorClasses = {
-    red: {
-      bg: 'bg-red-50',
-      border: 'border-red-200',
-      icon: 'text-red-600',
+  const variants = {
+    urgent: {
+      bg: 'bg-red-50 dark:bg-red-900/20',
+      border: 'border-red-200 dark:border-red-800',
+      icon: 'text-red-600 dark:text-red-400',
       badge: 'bg-red-600',
-      hover: 'hover:border-red-300',
     },
-    yellow: {
-      bg: 'bg-amber-50',
-      border: 'border-amber-200',
-      icon: 'text-amber-600',
+    warning: {
+      bg: 'bg-amber-50 dark:bg-amber-900/20',
+      border: 'border-amber-200 dark:border-amber-800',
+      icon: 'text-amber-600 dark:text-amber-400',
       badge: 'bg-amber-600',
-      hover: 'hover:border-amber-300',
     },
-    blue: {
-      bg: 'bg-blue-50',
-      border: 'border-blue-200',
-      icon: 'text-blue-600',
+    info: {
+      bg: 'bg-blue-50 dark:bg-blue-900/20',
+      border: 'border-blue-200 dark:border-blue-800',
+      icon: 'text-blue-600 dark:text-blue-400',
       badge: 'bg-blue-600',
-      hover: 'hover:border-blue-300',
     },
   };
 
-  const colors = colorClasses[color];
+  const colors = variants[variant];
 
   if (count === 0) return null;
 
   return (
     <Link
       href={href}
-      className={`flex items-center justify-between p-4 rounded-xl border ${colors.bg} ${colors.border} ${colors.hover} transition-all group`}
+      className={`flex items-center justify-between p-4 rounded-xl border ${colors.bg} ${colors.border} hover:shadow-md transition-all group`}
     >
       <div className="flex items-center gap-3">
-        <div className={`w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-sm`}>
+        <div className="w-10 h-10 rounded-lg bg-white dark:bg-zinc-800 flex items-center justify-center shadow-sm">
           <Icon className={`w-5 h-5 ${colors.icon}`} />
         </div>
         <div>
@@ -161,55 +140,47 @@ function AttentionCard({
             <span className={`px-2 py-0.5 text-xs font-semibold rounded-full text-white ${colors.badge}`}>
               {count}
             </span>
-            <span className="font-medium text-stone-900">{label}</span>
+            <span className="font-medium text-stone-900 dark:text-white">{label}</span>
           </div>
           {subtext && (
-            <p className="text-sm text-stone-500 mt-0.5">{subtext}</p>
+            <p className="text-sm text-stone-500 dark:text-zinc-400 mt-0.5">{subtext}</p>
           )}
         </div>
       </div>
-      <ChevronRight className="w-5 h-5 text-stone-400 group-hover:translate-x-1 transition-transform" />
+      <ChevronRight className="w-5 h-5 text-stone-400 dark:text-zinc-500 group-hover:translate-x-1 transition-transform" />
     </Link>
   );
 }
 
-/**
- * Stat metric with optional trend
- */
-function MetricCard({
+function StatCard({
   label,
   value,
   previousValue,
   suffix,
-  showTrend = true,
   invertTrend = false,
 }: {
   label: string;
   value: number | string;
   previousValue?: number;
   suffix?: string;
-  showTrend?: boolean;
   invertTrend?: boolean;
 }) {
-  const numValue = typeof value === 'number' ? value : parseFloat(value);
+  const numValue = typeof value === 'number' ? value : parseFloat(value) || 0;
   const change = previousValue !== undefined ? numValue - previousValue : null;
   const isPositive = invertTrend ? (change !== null && change < 0) : (change !== null && change > 0);
   const isNegative = invertTrend ? (change !== null && change > 0) : (change !== null && change < 0);
 
   return (
-    <div className="p-4 bg-white rounded-xl border border-stone-200">
-      <p className="text-sm text-stone-500 mb-1">{label}</p>
+    <div className="p-4 bg-white dark:bg-zinc-900 rounded-xl border border-stone-200 dark:border-zinc-800">
+      <p className="text-sm text-stone-500 dark:text-zinc-400 mb-1">{label}</p>
       <div className="flex items-end gap-2">
-        <span className="text-2xl font-semibold text-stone-900">
-          {value}{suffix && <span className="text-lg font-normal text-stone-500">{suffix}</span>}
+        <span className="text-2xl font-semibold text-stone-900 dark:text-white">
+          {value}
+          {suffix && <span className="text-lg font-normal text-stone-500 dark:text-zinc-400">{suffix}</span>}
         </span>
-        {showTrend && change !== null && change !== 0 && (
-          <span className={`flex items-center text-sm ${isPositive ? 'text-green-600' : isNegative ? 'text-red-600' : 'text-stone-400'}`}>
-            {isPositive ? (
-              <ArrowUpRight className="w-4 h-4" />
-            ) : (
-              <ArrowDownRight className="w-4 h-4" />
-            )}
+        {change !== null && change !== 0 && (
+          <span className={`flex items-center text-sm ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-stone-400'}`}>
+            {isPositive ? <ArrowUpRight className="w-4 h-4" /> : <ArrowDownRight className="w-4 h-4" />}
             {Math.abs(change)}
           </span>
         )}
@@ -218,146 +189,87 @@ function MetricCard({
   );
 }
 
-/**
- * Quick action link
- */
-function QuickAction({
-  icon: Icon,
-  label,
-  sublabel,
-  href,
-  color,
-  featured,
+function PipelineBar({
+  stages,
 }: {
-  icon: React.ElementType;
-  label: string;
-  sublabel: string;
-  href: string;
-  color: string;
-  featured?: boolean;
+  stages: { label: string; count: number; color: string }[];
 }) {
-  if (featured) {
-    return (
-      <Link
-        href={href}
-        className="flex items-center justify-between p-5 bg-gradient-to-r from-stone-800 to-stone-900 rounded-xl border border-stone-700 hover:from-stone-700 hover:to-stone-800 transition-all group"
-      >
-        <div className="flex items-center gap-4">
-          <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center">
-            <Icon className="w-5 h-5 text-white" />
-          </div>
-          <div>
-            <h3 className="font-semibold text-white group-hover:text-amber-300 transition-colors">
-              {label}
-            </h3>
-            <p className="text-sm text-stone-400">{sublabel}</p>
-          </div>
-        </div>
-        <ChevronRight className="w-5 h-5 text-stone-500 group-hover:text-amber-300 group-hover:translate-x-1 transition-all" />
-      </Link>
-    );
-  }
+  const total = stages.reduce((sum, s) => sum + s.count, 0);
 
   return (
-    <Link
-      href={href}
-      className="flex items-center justify-between p-4 bg-white rounded-xl border border-stone-200 hover:border-stone-300 hover:shadow-sm transition-all group"
-    >
-      <div className="flex items-center gap-3">
-        <div className={`w-10 h-10 rounded-lg ${color} flex items-center justify-center`}>
-          <Icon className="w-5 h-5" />
-        </div>
-        <div>
-          <h3 className="font-medium text-stone-900 group-hover:text-stone-700 transition-colors">
-            {label}
-          </h3>
-          <p className="text-sm text-stone-500">{sublabel}</p>
-        </div>
+    <div className="bg-white dark:bg-zinc-900 rounded-xl border border-stone-200 dark:border-zinc-800 p-6">
+      <h3 className="text-sm font-medium text-stone-500 dark:text-zinc-400 uppercase tracking-wide mb-4">
+        Pipeline
+      </h3>
+      <div className="space-y-3">
+        {stages.map((stage) => {
+          const width = total > 0 ? (stage.count / total) * 100 : 0;
+          return (
+            <div key={stage.label} className="flex items-center gap-3">
+              <div className="w-24 text-sm text-stone-600 dark:text-zinc-400">{stage.label}</div>
+              <div className="flex-1 h-6 bg-stone-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: `${width}%` }}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                  className={`h-full ${stage.color} rounded-full`}
+                />
+              </div>
+              <div className="w-8 text-right text-sm font-medium text-stone-900 dark:text-white">
+                {stage.count}
+              </div>
+            </div>
+          );
+        })}
       </div>
-      <ChevronRight className="w-4 h-4 text-stone-400 group-hover:translate-x-1 transition-transform" />
-    </Link>
-  );
-}
-
-/**
- * Pipeline stage indicator
- */
-function PipelineStage({
-  label,
-  count,
-  icon: Icon,
-  color,
-  isLast,
-}: {
-  label: string;
-  count: number;
-  icon: React.ElementType;
-  color: string;
-  isLast?: boolean;
-}) {
-  return (
-    <div className="flex items-center">
-      <div className="flex flex-col items-center">
-        <div className={`w-10 h-10 rounded-full ${color} flex items-center justify-center`}>
-          <Icon className="w-5 h-5 text-white" />
-        </div>
-        <span className="text-xl font-semibold text-stone-900 mt-2">{count}</span>
-        <span className="text-xs text-stone-500">{label}</span>
-      </div>
-      {!isLast && (
-        <div className="w-8 h-0.5 bg-stone-200 mx-2 mt-[-24px]" />
-      )}
     </div>
   );
 }
 
+// ============================================================
+// MAIN COMPONENT
+// ============================================================
+
 export default function OpsDashboardPage() {
+  const router = useRouter();
+  const { opsKey, isAuthenticated, isLoading: authLoading, getAuthHeaders } = useOpsKey();
+
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [opsKey, setOpsKey] = useState<string | null>(null);
 
-  useEffect(() => {
-    const key = getOpsKey();
-    setOpsKey(key);
+  const fetchStats = useCallback(async () => {
+    if (!opsKey) return;
 
-    if (!key) {
-      setError('Access key required. Add ?ops_key=YOUR_KEY to the URL.');
-      setLoading(false);
-      return;
-    }
-
-    fetchStats(key);
-  }, []);
-
-  async function fetchStats(key: string) {
     setLoading(true);
     setError(null);
 
     try {
       const response = await fetch('/api/ops/dashboard', {
-        headers: { 'x-ops-key': key },
+        headers: getAuthHeaders(),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to load dashboard');
-      }
+      if (!response.ok) throw new Error('Failed to load dashboard');
 
       const data = await response.json();
       setStats(data);
     } catch (err) {
-      console.error('Failed to fetch dashboard stats:', err);
-      setError('Failed to load dashboard. Please try again.');
+      console.error('Failed to fetch dashboard:', err);
+      setError('Failed to load dashboard');
     } finally {
       setLoading(false);
     }
-  }
+  }, [opsKey, getAuthHeaders]);
 
-  const handleRefresh = () => {
-    if (opsKey) {
-      fetchStats(opsKey);
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchStats();
     }
-  };
+  }, [isAuthenticated, fetchStats]);
+
+  // Loading / auth states handled by layout
+  if (authLoading) return null;
+  if (!isAuthenticated) return null;
 
   const totalAttention = stats
     ? stats.needsAttention.newInquiries.count +
@@ -365,335 +277,258 @@ export default function OpsDashboardPage() {
       stats.needsAttention.dueFollowUps.count
     : 0;
 
-  return (
-    <>
-      <head>
-        <meta name="robots" content="noindex, nofollow" />
-      </head>
+  // Get greeting based on time
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
 
-      <main className="min-h-screen bg-stone-100">
+  return (
+    <div className="min-h-screen bg-stone-50 dark:bg-zinc-950 p-6">
+      <div className="max-w-5xl mx-auto space-y-8">
         {/* Header */}
-        <header className="bg-white border-b border-stone-200 sticky top-0 z-10">
-          <div className="max-w-6xl mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-stone-900 rounded-lg flex items-center justify-center">
-                  <LayoutDashboard className="w-4 h-4 text-white" />
-                </div>
-                <div>
-                  <h1 className="text-lg font-semibold text-stone-900">Vurara Ops</h1>
-                </div>
-              </div>
-              <button
-                onClick={handleRefresh}
-                disabled={loading}
-                className="flex items-center gap-2 px-3 py-2 text-sm text-stone-600 hover:text-stone-900 hover:bg-stone-100 rounded-lg transition-colors disabled:opacity-50"
-              >
-                <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-                Refresh
-              </button>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-semibold text-stone-900 dark:text-white">
+              {greeting}
+            </h1>
+            <p className="text-stone-500 dark:text-zinc-400">
+              {format(new Date(), 'EEEE, MMMM d')}
+            </p>
+          </div>
+          <button
+            onClick={fetchStats}
+            disabled={loading}
+            className="flex items-center gap-2 px-3 py-2 text-sm text-stone-600 dark:text-zinc-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-zinc-800 rounded-lg transition-colors disabled:opacity-50"
+          >
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+            Refresh
+          </button>
+        </div>
+
+        {/* Error state */}
+        {error && (
+          <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
+            <div className="flex items-center gap-2 text-red-700 dark:text-red-400">
+              <AlertCircle className="w-5 h-5" />
+              <p>{error}</p>
             </div>
           </div>
-        </header>
+        )}
 
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          {/* Error State */}
-          {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-              <div className="flex items-center gap-2 text-red-700">
-                <AlertCircle className="w-5 h-5" />
-                <p>{error}</p>
-              </div>
-            </div>
-          )}
+        {/* Loading state */}
+        {loading && !stats && (
+          <div className="flex items-center justify-center py-20">
+            <RefreshCw className="w-8 h-8 text-stone-400 dark:text-zinc-500 animate-spin" />
+          </div>
+        )}
 
-          {/* Loading State */}
-          {loading && (
-            <div className="flex items-center justify-center py-20">
-              <div className="text-center">
-                <RefreshCw className="w-8 h-8 text-stone-400 animate-spin mx-auto mb-3" />
-                <p className="text-stone-500">Loading dashboard...</p>
-              </div>
-            </div>
-          )}
-
-          {/* Dashboard Content */}
-          {!loading && !error && stats && (
-            <div className="space-y-8">
-              {/* Needs Attention Section */}
-              {totalAttention > 0 && (
-                <section>
-                  <h2 className="text-lg font-semibold text-stone-900 mb-4 flex items-center gap-2">
-                    <AlertCircle className="w-5 h-5 text-amber-500" />
-                    Needs Attention
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <AttentionCard
-                      icon={Inbox}
-                      color="red"
-                      count={stats.needsAttention.newInquiries.count}
-                      label="New Inquiries"
-                      subtext={stats.needsAttention.newInquiries.oldest ? `oldest: ${stats.needsAttention.newInquiries.oldest}` : undefined}
-                      href={`/ops/inquiries?status=new&ops_key=${opsKey}`}
-                    />
-                    <AttentionCard
-                      icon={Clock}
-                      color="yellow"
-                      count={stats.needsAttention.awaitingResponse.count}
-                      label="Awaiting Response"
-                      subtext={stats.needsAttention.awaitingResponse.oldest ? `oldest: ${stats.needsAttention.awaitingResponse.oldest}` : undefined}
-                      href={`/ops/inquiries?status=contacted&ops_key=${opsKey}`}
-                    />
-                    <AttentionCard
-                      icon={Calendar}
-                      color="blue"
-                      count={stats.needsAttention.dueFollowUps.count}
-                      label="Follow-ups Due"
-                      href={`/ops/inquiries?ops_key=${opsKey}`}
-                    />
-                  </div>
-                </section>
-              )}
-
-              {/* Quick Actions */}
+        {/* Dashboard content */}
+        {stats && (
+          <>
+            {/* Needs Attention */}
+            {totalAttention > 0 && (
               <section>
-                <h2 className="text-lg font-semibold text-stone-900 mb-4">Quick Actions</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  <QuickAction
-                    icon={Layers}
-                    label="Unified Inbox"
-                    sublabel="All messages"
-                    href={`/ops/inbox?ops_key=${opsKey}`}
-                    color="bg-stone-900 text-white"
-                    featured
-                  />
-                  <QuickAction
+                <h2 className="text-lg font-semibold text-stone-900 dark:text-white mb-4 flex items-center gap-2">
+                  <AlertCircle className="w-5 h-5 text-amber-500" />
+                  Needs Your Attention
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <AttentionCard
                     icon={Inbox}
-                    label="Inquiries"
-                    sublabel={`${stats.pipeline.total} total`}
-                    href={`/ops/inquiries?ops_key=${opsKey}`}
-                    color="bg-blue-100 text-blue-600"
-                  />
-                  <QuickAction
-                    icon={MessageSquare}
-                    label="Quick Questions"
-                    sublabel="Fast responses"
-                    href={`/ops/questions?ops_key=${opsKey}`}
-                    color="bg-purple-100 text-purple-600"
-                  />
-                  <QuickAction
-                    icon={BarChart3}
-                    label="Intelligence"
-                    sublabel="Analytics"
-                    href={`/ops/intelligence?ops_key=${opsKey}`}
-                    color="bg-amber-100 text-amber-600"
-                  />
-                </div>
-              </section>
-
-              {/* Pipeline Overview */}
-              <section>
-                <h2 className="text-lg font-semibold text-stone-900 mb-4">Pipeline Overview</h2>
-                <div className="bg-white rounded-xl border border-stone-200 p-6">
-                  <div className="flex items-center justify-center gap-4 overflow-x-auto">
-                    <PipelineStage
-                      label="New"
-                      count={stats.pipeline.new}
-                      icon={Inbox}
-                      color="bg-blue-500"
-                    />
-                    <PipelineStage
-                      label="Contacted"
-                      count={stats.pipeline.contacted}
-                      icon={Users}
-                      color="bg-amber-500"
-                    />
-                    <PipelineStage
-                      label="Quoted"
-                      count={stats.pipeline.quoted}
-                      icon={FileText}
-                      color="bg-purple-500"
-                    />
-                    <PipelineStage
-                      label="Won"
-                      count={stats.pipeline.won}
-                      icon={CheckCircle2}
-                      color="bg-green-500"
-                      isLast
-                    />
-                  </div>
-                </div>
-              </section>
-
-              {/* This Week Stats */}
-              <section>
-                <h2 className="text-lg font-semibold text-stone-900 mb-4">This Week</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <MetricCard
+                    variant="urgent"
+                    count={stats.needsAttention.newInquiries.count}
                     label="New Inquiries"
-                    value={stats.thisWeek.newInquiries}
-                    previousValue={stats.lastWeek.newInquiries}
+                    subtext={stats.needsAttention.newInquiries.oldest ? `Oldest: ${stats.needsAttention.newInquiries.oldest}` : undefined}
+                    href="/ops/inbox?status=new"
                   />
-                  <MetricCard
-                    label="Responses Sent"
-                    value={stats.thisWeek.contacted}
-                    previousValue={stats.lastWeek.contacted}
+                  <AttentionCard
+                    icon={Clock}
+                    variant="warning"
+                    count={stats.needsAttention.awaitingResponse.count}
+                    label="Awaiting Response"
+                    subtext={stats.needsAttention.awaitingResponse.oldest ? `Oldest: ${stats.needsAttention.awaitingResponse.oldest}` : undefined}
+                    href="/ops/inbox?status=contacted"
                   />
-                  <MetricCard
-                    label="Quotes Sent"
-                    value={stats.thisWeek.quoted}
-                    previousValue={stats.lastWeek.quoted}
-                  />
-                  <MetricCard
-                    label="Avg Response Time"
-                    value={stats.thisWeek.avgResponseTimeHours ?? '-'}
-                    previousValue={stats.lastWeek.avgResponseTimeHours ?? undefined}
-                    suffix="h"
-                    invertTrend
-                  />
-                </div>
-              </section>
-
-              {/* Two Column: Recent Inquiries & Upcoming Follow-ups */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Recent Inquiries */}
-                <section>
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-lg font-semibold text-stone-900">Recent Inquiries</h2>
-                    <Link
-                      href={`/ops/inquiries?ops_key=${opsKey}`}
-                      className="text-sm text-amber-600 hover:text-amber-700 flex items-center gap-1"
-                    >
-                      View all
-                      <ChevronRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-                  {stats.recentInquiries.length > 0 ? (
-                    <div className="bg-white rounded-xl border border-stone-200 divide-y divide-stone-100">
-                      {stats.recentInquiries.map((inquiry) => (
-                        <Link
-                          key={inquiry.inquiry_id}
-                          href={`/ops/inquiries/${inquiry.inquiry_id}?ops_key=${opsKey}`}
-                          className="flex items-center justify-between p-4 hover:bg-stone-50 transition-colors group"
-                        >
-                          <div className="flex items-center gap-3 min-w-0">
-                            <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
-                              <Inbox className="w-4 h-4 text-blue-600" />
-                            </div>
-                            <div className="min-w-0">
-                              <p className="font-medium text-stone-900 group-hover:text-amber-700 transition-colors truncate">
-                                {inquiry.email}
-                              </p>
-                              <p className="text-sm text-stone-500 truncate">
-                                {inquiry.trip_shape_id || 'General'} · {inquiry.traveler_count} travelers
-                              </p>
-                            </div>
-                          </div>
-                          <span className="text-sm text-stone-400 flex-shrink-0 ml-2">
-                            {inquiry.elapsed}
-                          </span>
-                        </Link>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="bg-white rounded-xl border border-stone-200 p-8 text-center">
-                      <Inbox className="w-10 h-10 text-stone-300 mx-auto mb-3" />
-                      <p className="text-stone-500">No new inquiries</p>
-                    </div>
-                  )}
-                </section>
-
-                {/* Upcoming Follow-ups */}
-                <section>
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-lg font-semibold text-stone-900">Upcoming Follow-ups</h2>
-                  </div>
-                  {stats.upcomingFollowUps.length > 0 ? (
-                    <div className="bg-white rounded-xl border border-stone-200 divide-y divide-stone-100">
-                      {stats.upcomingFollowUps.map((followup) => (
-                        <Link
-                          key={followup.followup_id}
-                          href={`/ops/inquiries/${followup.inquiry_id}?ops_key=${opsKey}`}
-                          className="flex items-center justify-between p-4 hover:bg-stone-50 transition-colors group"
-                        >
-                          <div className="flex items-center gap-3 min-w-0">
-                            <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                              followup.type === 'call'
-                                ? 'bg-green-50'
-                                : followup.type === 'email'
-                                ? 'bg-blue-50'
-                                : 'bg-purple-50'
-                            }`}>
-                              {followup.type === 'call' ? (
-                                <Phone className="w-4 h-4 text-green-600" />
-                              ) : followup.type === 'email' ? (
-                                <Mail className="w-4 h-4 text-blue-600" />
-                              ) : (
-                                <FileText className="w-4 h-4 text-purple-600" />
-                              )}
-                            </div>
-                            <div className="min-w-0">
-                              <p className="font-medium text-stone-900 group-hover:text-amber-700 transition-colors capitalize">
-                                {followup.type.replace('_', ' ')}
-                              </p>
-                              {followup.notes && (
-                                <p className="text-sm text-stone-500 truncate">{followup.notes}</p>
-                              )}
-                            </div>
-                          </div>
-                          <span className="text-sm text-stone-400 flex-shrink-0 ml-2">
-                            {new Date(followup.scheduled_for).toLocaleDateString()}
-                          </span>
-                        </Link>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="bg-white rounded-xl border border-stone-200 p-8 text-center">
-                      <Calendar className="w-10 h-10 text-stone-300 mx-auto mb-3" />
-                      <p className="text-stone-500">No upcoming follow-ups</p>
-                    </div>
-                  )}
-                </section>
-              </div>
-
-              {/* Additional Tools */}
-              <section>
-                <h2 className="text-lg font-semibold text-stone-900 mb-4">More Tools</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <QuickAction
-                    icon={Mail}
-                    label="Newsletter"
-                    sublabel="Subscribers"
-                    href={`/ops/newsletter?ops_key=${opsKey}`}
-                    color="bg-green-100 text-green-600"
-                  />
-                  <QuickAction
-                    icon={TrendingUp}
-                    label="Conversion"
-                    sublabel="Funnel analysis"
-                    href={`/ops/intelligence?ops_key=${opsKey}`}
-                    color="bg-indigo-100 text-indigo-600"
-                  />
-                  <QuickAction
-                    icon={FileText}
-                    label="Proposals"
-                    sublabel="Manage quotes"
-                    href={`/ops/inquiries?ops_key=${opsKey}`}
-                    color="bg-rose-100 text-rose-600"
-                  />
-                  <QuickAction
+                  <AttentionCard
                     icon={Calendar}
-                    label="Follow-ups"
-                    sublabel="Schedule tasks"
-                    href={`/ops/inquiries?ops_key=${opsKey}`}
-                    color="bg-cyan-100 text-cyan-600"
+                    variant="info"
+                    count={stats.needsAttention.dueFollowUps.count}
+                    label="Follow-ups Due"
+                    href="/ops/inbox"
                   />
                 </div>
               </section>
+            )}
+
+            {/* All clear message */}
+            {totalAttention === 0 && (
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center">
+                <CheckCircle2 className="w-10 h-10 text-green-500 mx-auto mb-3" />
+                <h3 className="font-semibold text-green-900 dark:text-green-300">All caught up!</h3>
+                <p className="text-sm text-green-700 dark:text-green-400 mt-1">
+                  No urgent items requiring attention
+                </p>
+              </div>
+            )}
+
+            {/* Stats row */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <StatCard
+                label="This Week"
+                value={stats.thisWeek.newInquiries}
+                previousValue={stats.lastWeek.newInquiries}
+                suffix=" inquiries"
+              />
+              <StatCard
+                label="Responses"
+                value={stats.thisWeek.contacted}
+                previousValue={stats.lastWeek.contacted}
+              />
+              <StatCard
+                label="Quotes"
+                value={stats.thisWeek.quoted}
+                previousValue={stats.lastWeek.quoted}
+              />
+              <StatCard
+                label="Avg Response"
+                value={stats.thisWeek.avgResponseTimeHours?.toFixed(1) ?? '-'}
+                previousValue={stats.lastWeek.avgResponseTimeHours ?? undefined}
+                suffix="h"
+                invertTrend
+              />
             </div>
-          )}
-        </div>
-      </main>
-    </>
+
+            {/* Pipeline + Recent */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Pipeline */}
+              <PipelineBar
+                stages={[
+                  { label: 'New', count: stats.pipeline.new, color: 'bg-blue-500' },
+                  { label: 'Contacted', count: stats.pipeline.contacted, color: 'bg-purple-500' },
+                  { label: 'Quoted', count: stats.pipeline.quoted, color: 'bg-amber-500' },
+                  { label: 'Won', count: stats.pipeline.won, color: 'bg-green-500' },
+                  { label: 'Lost', count: stats.pipeline.lost, color: 'bg-red-500' },
+                ]}
+              />
+
+              {/* Recent Inquiries */}
+              <div className="bg-white dark:bg-zinc-900 rounded-xl border border-stone-200 dark:border-zinc-800 overflow-hidden">
+                <div className="flex items-center justify-between p-4 border-b border-stone-100 dark:border-zinc-800">
+                  <h3 className="text-sm font-medium text-stone-500 dark:text-zinc-400 uppercase tracking-wide">
+                    Recent Inquiries
+                  </h3>
+                  <Link
+                    href="/ops/inbox"
+                    className="text-sm text-amber-600 dark:text-amber-500 hover:text-amber-700 dark:hover:text-amber-400 flex items-center gap-1"
+                  >
+                    View all
+                    <ChevronRight className="w-4 h-4" />
+                  </Link>
+                </div>
+                {stats.recentInquiries.length > 0 ? (
+                  <div className="divide-y divide-stone-100 dark:divide-zinc-800">
+                    {stats.recentInquiries.slice(0, 5).map((inquiry) => (
+                      <Link
+                        key={inquiry.inquiry_id}
+                        href={`/ops/inquiries/${inquiry.inquiry_id}`}
+                        className="flex items-center justify-between p-4 hover:bg-stone-50 dark:hover:bg-zinc-800 transition-colors group"
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
+                            <Mail className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="font-medium text-stone-900 dark:text-white group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors truncate">
+                              {inquiry.email}
+                            </p>
+                            <p className="text-sm text-stone-500 dark:text-zinc-400">
+                              {inquiry.traveler_count} travelers
+                            </p>
+                          </div>
+                        </div>
+                        <span className="text-sm text-stone-400 dark:text-zinc-500 flex-shrink-0">
+                          {formatDistanceToNow(new Date(inquiry.created_at), { addSuffix: true })}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-8 text-center">
+                    <Inbox className="w-10 h-10 text-stone-300 dark:text-zinc-600 mx-auto mb-3" />
+                    <p className="text-stone-500 dark:text-zinc-400">No recent inquiries</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Quick Actions */}
+            <section>
+              <h2 className="text-lg font-semibold text-stone-900 dark:text-white mb-4">
+                Quick Actions
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <Link
+                  href="/ops/inbox"
+                  className="flex items-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-xl border border-stone-200 dark:border-zinc-800 hover:border-amber-300 dark:hover:border-amber-600 hover:shadow-md transition-all group"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-stone-900 dark:bg-white flex items-center justify-center">
+                    <Inbox className="w-5 h-5 text-white dark:text-stone-900" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-stone-900 dark:text-white group-hover:text-amber-700 dark:group-hover:text-amber-400">
+                      Inbox
+                    </p>
+                    <p className="text-sm text-stone-500 dark:text-zinc-400">
+                      {stats.pipeline.total} total
+                    </p>
+                  </div>
+                </Link>
+                <Link
+                  href="/ops/intelligence"
+                  className="flex items-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-xl border border-stone-200 dark:border-zinc-800 hover:border-amber-300 dark:hover:border-amber-600 hover:shadow-md transition-all group"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+                    <BarChart3 className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-stone-900 dark:text-white group-hover:text-amber-700 dark:group-hover:text-amber-400">
+                      Analytics
+                    </p>
+                    <p className="text-sm text-stone-500 dark:text-zinc-400">Insights</p>
+                  </div>
+                </Link>
+                <Link
+                  href="/ops/questions"
+                  className="flex items-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-xl border border-stone-200 dark:border-zinc-800 hover:border-amber-300 dark:hover:border-amber-600 hover:shadow-md transition-all group"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                    <MessageSquare className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-stone-900 dark:text-white group-hover:text-amber-700 dark:group-hover:text-amber-400">
+                      Questions
+                    </p>
+                    <p className="text-sm text-stone-500 dark:text-zinc-400">Quick Q&A</p>
+                  </div>
+                </Link>
+                <Link
+                  href="/ops/settings"
+                  className="flex items-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-xl border border-stone-200 dark:border-zinc-800 hover:border-amber-300 dark:hover:border-amber-600 hover:shadow-md transition-all group"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                    <Sparkles className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-stone-900 dark:text-white group-hover:text-amber-700 dark:group-hover:text-amber-400">
+                      Automation
+                    </p>
+                    <p className="text-sm text-stone-500 dark:text-zinc-400">Templates</p>
+                  </div>
+                </Link>
+              </div>
+            </section>
+          </>
+        )}
+      </div>
+    </div>
   );
 }
