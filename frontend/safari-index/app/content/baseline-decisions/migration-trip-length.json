@@ -1,0 +1,44 @@
+{
+  "topic_id": "migration-trip-length",
+  "outcome": "wait",
+  "headline": "Migration-focused trips need more time than standard safaris",
+  "summary": "A standard Tanzania safari can work in 5-7 days. Migration-focused trips benefit from 8-12 days to account for positioning, transit between regions, and waiting for unpredictable events. For river crossings specifically, 4-5 nights in the crossing zone provides approximately 70% probability of witnessing at least one crossing. Shorter trips should set realistic expectations or focus on calving.",
+  "assumptions": [
+    {
+      "id": "crossing-probability-time",
+      "text": "Crossing probability increases significantly with nights spent in crossing zone.",
+      "confidence": 0.85
+    },
+    {
+      "id": "transit-time-factor",
+      "text": "Migration positioning often requires transit between regions.",
+      "confidence": 0.90
+    },
+    {
+      "id": "standard-vs-migration",
+      "text": "Migration focus typically requires 2-4 more days than standard safari.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "8-12 days: Allows proper positioning and waiting time",
+      "4-5 nights in crossing zone: ~70% crossing probability",
+      "Extra days: Flexibility to follow herd movements",
+      "Combined itinerary: Migration plus reliable areas"
+    ],
+    "losses": [
+      "Longer trip: Higher total cost",
+      "5-7 days: ~40% crossing probability at best",
+      "Short trip focused on migration: High disappointment risk",
+      "More time does not guarantee specific events"
+    ]
+  },
+  "change_conditions": [
+    "If trip is under 7 days, focus on calving or accept migration as bonus.",
+    "If crossings are priority, minimum 4-5 nights in crossing zone.",
+    "If flexible on time, 10-12 days provides best migration experience.",
+    "If budget limits length, prioritize nights in key zone over breadth."
+  ],
+  "confidence": 0.80
+}

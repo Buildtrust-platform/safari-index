@@ -1,0 +1,14 @@
+{
+  "evidence_id": "migration-annual-cycle",
+  "version": "1.0.0",
+  "type": "seasonal_pattern",
+  "title": "Great Migration Annual Cycle",
+  "content": "The Great Migration involves approximately 1.5 million wildebeest, 500,000 zebra, and 200,000 gazelle moving in a clockwise circuit across the Serengeti-Mara ecosystem. General pattern: December-March: Southern Serengeti and Ndutu for calving. April-May: Central Serengeti, herds moving northwest. June-July: Western Serengeti and Grumeti River crossings. August-October: Northern Serengeti and Masai Mara, Mara River crossings. November: Return south through eastern Serengeti. Timing shifts 2-4 weeks annually based on rainfall patterns. The herds follow the grass, not the calendar.",
+  "source": "Serengeti National Park Research",
+  "tags": ["migration", "serengeti", "mara", "seasonal", "wildebeest", "timing"],
+  "topic_ids": ["migration-timing", "migration-month-position", "river-crossings", "calving-season"],
+  "destinations": ["Tanzania", "Kenya"],
+  "requires_annual_review": false,
+  "created_at": "2026-01-15T00:00:00Z",
+  "updated_at": "2026-01-15T00:00:00Z"
+}

@@ -1,0 +1,44 @@
+{
+  "topic_id": "migration-first-timer",
+  "outcome": "wait",
+  "headline": "First-timers should focus on the overall safari, not just migration",
+  "summary": "The migration is spectacular but unpredictable. First-time safari visitors often benefit more from a balanced itinerary that includes reliable wildlife areas (Ngorongoro, central Serengeti) alongside migration zones. This ensures satisfaction even if migration timing is off. Focusing exclusively on migration creates disappointment risk if herds are elsewhere.",
+  "assumptions": [
+    {
+      "id": "first-timer-expectations",
+      "text": "First-timers often have unrealistic expectations about migration predictability.",
+      "confidence": 0.85
+    },
+    {
+      "id": "balanced-better",
+      "text": "A balanced itinerary delivers more consistent satisfaction for first-timers.",
+      "confidence": 0.85
+    },
+    {
+      "id": "migration-bonus",
+      "text": "Migration should be positioned as a possible highlight, not the sole goal.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Balanced itinerary ensures wildlife regardless of migration position",
+      "Ngorongoro Crater delivers consistent Big Five viewing",
+      "Central Serengeti has resident populations year-round",
+      "Reduces pressure and disappointment risk"
+    ],
+    "losses": [
+      "May spend less time in migration zone",
+      "Splitting locations means transit time",
+      "Peak migration focus requires accepting higher risk",
+      "First-timers may still fixate on migration expectations"
+    ]
+  },
+  "change_conditions": [
+    "If migration is the only goal, accept the risk of disappointment and commit fully.",
+    "If satisfaction is the priority, include non-migration destinations for guaranteed wildlife.",
+    "If traveling during peak migration months, heavier weighting toward migration zones is reasonable.",
+    "If traveling during transition months, balanced approach is strongly recommended."
+  ],
+  "confidence": 0.75
+}

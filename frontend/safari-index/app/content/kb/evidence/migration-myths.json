@@ -1,0 +1,14 @@
+{
+  "evidence_id": "migration-myths",
+  "version": "1.0.0",
+  "type": "risk_factor",
+  "title": "Common Migration Misconceptions",
+  "content": "Misconception 1: The migration happens once a year. Reality: The migration is continuous. Animals are always moving. What changes is location. Misconception 2: River crossings can be scheduled. Reality: Crossings depend on herd behavior and conditions. Guides estimate probability, not timing. Misconception 3: August is the only time to see the migration. Reality: The migration is visible year-round in the Serengeti. August is when it is in the Mara and crossing rivers. Misconception 4: Calving is a minor event. Reality: Calving involves 8,000+ births per day at peak. Predator action is more reliable than crossings. Misconception 5: Any Serengeti safari sees the migration. Reality: The Serengeti is 14,750 square kilometers. You must be positioned in the correct region.",
+  "source": "Safari Industry Research",
+  "tags": ["migration", "myths", "expectations", "education", "common-errors"],
+  "topic_ids": ["migration-timing", "migration-first-timer", "river-crossings", "calving-season"],
+  "destinations": ["Tanzania", "Kenya"],
+  "requires_annual_review": false,
+  "created_at": "2026-01-15T00:00:00Z",
+  "updated_at": "2026-01-15T00:00:00Z"
+}

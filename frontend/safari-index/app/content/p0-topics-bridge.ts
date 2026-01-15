@@ -92,6 +92,15 @@ export function generateSlugFromId(id: string): string {
     'off-beaten-path': 'off-beaten-path',
     'bw-peak-flood': 'bw-peak-flood',
     'mokoro-canoe': 'mokoro-canoe',
+
+    // Migration decisions
+    'migration-month-position': 'migration-positioning-by-month',
+    'migration-first-timer': 'first-safari-migration-focus',
+    'migration-crowds': 'migration-without-crowds',
+    'migration-cost': 'migration-safari-cost',
+    'crossing-vs-calving': 'crossing-vs-calving-season',
+    'migration-trip-length': 'migration-safari-length',
+    'migration-serengeti-vs-mara': 'serengeti-vs-mara-migration',
   };
 
   return slugMappings[id] || id.replace(/_/g, '-');
@@ -125,6 +134,9 @@ function deriveDestinations(def: P0DecisionDefinition): string[] {
   if (id === 'uganda-vs-rwanda') return ['Uganda', 'Rwanda'];
   if (id === 'serengeti-vs-mara') return ['Tanzania', 'Kenya'];
   if (id === 'kruger-vs-private') return ['South Africa'];
+
+  // Migration topics
+  if (id.startsWith('migration-') || id === 'crossing-vs-calving') return ['Tanzania', 'Kenya'];
 
   // Generic multi-destination topics
   if (q.includes('tanzania') && q.includes('kenya')) return ['Tanzania', 'Kenya'];
@@ -319,6 +331,15 @@ function generateContextLine(def: P0DecisionDefinition, inv?: TopicInventoryItem
     'off-beaten-path': 'Remote areas trade predictability for exclusivity.',
     'bw-peak-flood': 'Flood timing determines which activities are possible.',
     'mokoro-canoe': 'Mokoro adds unique perspectives when water levels allow.',
+
+    // Migration decisions
+    'migration-month-position': 'Location matters more than dates. The herds follow the grass.',
+    'migration-first-timer': 'Migration focus trades breadth for spectacle. Consider the trade-off.',
+    'migration-crowds': 'Exclusivity and migration access pull in opposite directions.',
+    'migration-cost': 'Peak migration areas command 30-50% premium over baseline.',
+    'crossing-vs-calving': 'Different spectacles, different seasons, different trade-offs.',
+    'migration-trip-length': 'Crossing odds increase with time. Minimum viable differs by goal.',
+    'migration-serengeti-vs-mara': 'Same ecosystem, different countries, different access rules.',
   };
 
   return contextLines[id] || `A decision with trade-offs. Read the conditions.`;

@@ -1,0 +1,44 @@
+{
+  "topic_id": "migration-serengeti-vs-mara",
+  "outcome": "wait",
+  "headline": "For migration specifically, timing determines the better choice",
+  "summary": "The Serengeti and Masai Mara are the same ecosystem; the migration moves between them seasonally. For migration viewing: the Mara is better July-October when herds are crossing the Mara River; the Serengeti is better November-June when herds are in various Serengeti regions. The Serengeti offers migration for more months of the year; the Mara offers a more concentrated crossing season.",
+  "assumptions": [
+    {
+      "id": "same-ecosystem",
+      "text": "Serengeti and Mara are one continuous ecosystem divided by a political border.",
+      "confidence": 0.95
+    },
+    {
+      "id": "mara-crossings-jul-oct",
+      "text": "The Mara has migration herds and river crossings primarily July-October.",
+      "confidence": 0.90
+    },
+    {
+      "id": "serengeti-more-months",
+      "text": "The Serengeti hosts migration for more months across different regions.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Mara (Jul-Oct): Concentrated crossing season, off-road driving",
+      "Mara: Smaller area means less searching for herds",
+      "Serengeti (Nov-Jun): Migration across more months and regions",
+      "Serengeti: Combine with Ngorongoro, less crowded than Mara"
+    ],
+    "losses": [
+      "Mara (Jul-Oct): Peak crowds and pricing",
+      "Mara: On-road only in some conservancies",
+      "Serengeti: On-road only in national park",
+      "Serengeti: Requires correct region positioning by month"
+    ]
+  },
+  "change_conditions": [
+    "If traveling July-October, the Mara offers river crossings and concentrated herds.",
+    "If traveling November-June, the Serengeti is the only option for migration.",
+    "If off-road driving is essential, the Mara or Tanzania conservancies work.",
+    "If combining with other Tanzania destinations, Serengeti fits better logistically."
+  ],
+  "confidence": 0.85
+}

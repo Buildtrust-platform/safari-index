@@ -1,0 +1,44 @@
+{
+  "topic_id": "crossing-vs-calving",
+  "outcome": "wait",
+  "headline": "Crossings are dramatic but unpredictable; calving delivers consistent action",
+  "summary": "River crossings are the migration's most famous spectacle but require luck, patience, and strategic positioning. Calving season (January-March) delivers 8,000+ births daily at peak with reliable predator action as big cats hunt vulnerable newborns. Crossings are a lottery; calving is a guarantee. The choice depends on whether you prefer drama with uncertainty or reliable intensity.",
+  "assumptions": [
+    {
+      "id": "crossings-unpredictable",
+      "text": "River crossings cannot be scheduled or guaranteed regardless of positioning.",
+      "confidence": 0.95
+    },
+    {
+      "id": "calving-reliable",
+      "text": "Calving season delivers consistent wildlife action daily during peak weeks.",
+      "confidence": 0.90
+    },
+    {
+      "id": "predator-action-calving",
+      "text": "Predator density and hunting success are highest during calving.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Crossings: Iconic, dramatic footage opportunity if witnessed",
+      "Crossings: Crocodile action adds predator dimension",
+      "Calving: 8,000+ births daily at peak; action is constant",
+      "Calving: Predator hunting most reliable of any season"
+    ],
+    "losses": [
+      "Crossings: May wait days without seeing one",
+      "Crossings: Short trips may miss entirely",
+      "Calving: Less visually dramatic than crossings",
+      "Calving: Southern Serengeti plains are less scenic than Mara"
+    ]
+  },
+  "change_conditions": [
+    "If you must see crossings, commit 4-5 nights in crossing zone and accept uncertainty.",
+    "If consistent action matters most, calving season delivers daily.",
+    "If first safari, calving reduces disappointment risk significantly.",
+    "If returning visitor, crossing focus is reasonable with realistic expectations."
+  ],
+  "confidence": 0.75
+}

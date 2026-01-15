@@ -1,0 +1,44 @@
+{
+  "topic_id": "migration-cost",
+  "outcome": "wait",
+  "headline": "Migration safaris cost more due to demand, not superior quality",
+  "summary": "Migration-focused safaris typically cost $800-1,500/person/day compared to $400-800 for comparable off-peak trips. The premium reflects demand (limited camps, peak season) rather than intrinsically better experiences. Calving season (January-March) offers migration at slightly lower prices than crossing season (August). Green season visits miss some migration events but cost 30-50% less.",
+  "assumptions": [
+    {
+      "id": "demand-drives-price",
+      "text": "Migration pricing reflects demand and scarcity, not superior experience quality.",
+      "confidence": 0.90
+    },
+    {
+      "id": "calving-lower-price",
+      "text": "Calving season is less expensive than crossing season despite excellent wildlife.",
+      "confidence": 0.85
+    },
+    {
+      "id": "off-peak-substantial-savings",
+      "text": "Green season and shoulder months offer 30-50% savings with trade-offs.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Peak season: Highest probability of migration encounters",
+      "Premium camps: Better guides, positioning, and service",
+      "Calving season: Predator action at lower prices than crossings",
+      "Shoulder months: Migration present with reduced crowds and prices"
+    ],
+    "losses": [
+      "Peak season: $800-1,500/day vs $400-800 off-peak",
+      "August camps: Book 12+ months ahead or pay premium",
+      "Budget-focused: May miss optimal positioning",
+      "Green season: Lower migration probability, some rainfall"
+    ]
+  },
+  "change_conditions": [
+    "If budget is constrained, calving season offers excellent value for migration.",
+    "If flexibility exists, shoulder months (June, late October) balance cost and probability.",
+    "If budget is unlimited, August northern Serengeti/Mara maximizes crossing probability.",
+    "If willing to accept lower probability, green season delivers substantial savings."
+  ],
+  "confidence": 0.80
+}

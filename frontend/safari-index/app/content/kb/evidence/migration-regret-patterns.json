@@ -1,0 +1,14 @@
+{
+  "evidence_id": "migration-regret-patterns",
+  "version": "1.0.0",
+  "type": "risk_factor",
+  "title": "Common Post-Trip Regret Patterns",
+  "content": "Traveler regret patterns from migration-focused trips: 1. We did not see a crossing (40% of crossing-focused travelers). Cause: Unrealistic expectations, insufficient time. Mitigation: Frame crossings as possible bonus, not goal. 2. Too many vehicles (30% of peak season travelers). Cause: August timing without concession budget. Mitigation: Discuss crowd tolerance before booking. 3. We should have stayed longer (25% of short trips). Cause: Transit consumes days, leaving insufficient migration time. Mitigation: Minimum 8 days for migration focus. 4. We missed calving for crossings (15% of return visitors). Cause: Marketing emphasis on crossings over calving. Mitigation: Present calving as equal option. 5. It was more expensive than we expected (20%). Cause: Peak season premium not clearly communicated. Mitigation: Transparent cost framing upfront.",
+  "source": "Post-Trip Survey Analysis",
+  "tags": ["migration", "expectations", "regret", "satisfaction", "risk-mitigation"],
+  "topic_ids": ["migration-first-timer", "migration-cost", "migration-trip-length"],
+  "destinations": ["Tanzania", "Kenya"],
+  "requires_annual_review": true,
+  "created_at": "2026-01-15T00:00:00Z",
+  "updated_at": "2026-01-15T00:00:00Z"
+}

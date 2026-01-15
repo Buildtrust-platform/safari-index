@@ -1,0 +1,14 @@
+{
+  "evidence_id": "migration-crowd-patterns",
+  "version": "1.0.0",
+  "type": "historical_data",
+  "title": "Vehicle Density at Migration Hotspots",
+  "content": "Observed vehicle density patterns: Mara River crossings (peak season): Popular crossing points: 15-40 vehicles when crossing in progress. Remote crossing points: 5-10 vehicles. Northern Serengeti crossings: Accessible points: 10-20 vehicles. Remote points: 3-8 vehicles. Calving season (Ndutu area): Peak calving: 8-15 vehicles per sighting. General plains: 3-6 vehicles. Private concessions: Vehicle limits typically 2-6 per sighting. Premium pricing reflects exclusivity. Off-peak migration months (June, October): 40-60% fewer vehicles than August peak.",
+  "source": "Safari Operator Reports",
+  "tags": ["migration", "crowds", "vehicle-density", "exclusivity", "peak-season"],
+  "topic_ids": ["migration-crowds", "serengeti-vs-mara", "migration-serengeti-vs-mara"],
+  "destinations": ["Tanzania", "Kenya"],
+  "requires_annual_review": true,
+  "created_at": "2026-01-15T00:00:00Z",
+  "updated_at": "2026-01-15T00:00:00Z"
+}

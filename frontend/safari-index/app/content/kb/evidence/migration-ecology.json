@@ -1,0 +1,14 @@
+{
+  "evidence_id": "migration-ecology",
+  "version": "1.0.0",
+  "type": "expert_quote",
+  "title": "Migration Ecological Significance",
+  "content": "The Great Migration is the largest terrestrial mammal movement on Earth. Key ecological points: Grazing patterns prevent bush encroachment, maintaining the Serengeti grassland ecosystem. Dung deposits fertilize approximately 4,000 tonnes of nitrogen annually. Drowning wildebeest sustain river ecosystems (estimated 6,000-10,000 drown annually). Predator populations depend on migration: lions, hyenas, crocodiles, vultures. Conservation status: The migration corridor remains intact, unlike most African wildlife movements. Threats include proposed highway (Serengeti), fence construction, climate variability. Conservancy models in Kenya buffer the Mara from development pressure. This is not just spectacle. It is a functioning ecosystem visible at continental scale.",
+  "source": "Serengeti Research Institute",
+  "tags": ["migration", "ecology", "conservation", "education", "ecosystem"],
+  "topic_ids": ["migration-timing", "serengeti-vs-mara"],
+  "destinations": ["Tanzania", "Kenya"],
+  "requires_annual_review": false,
+  "created_at": "2026-01-15T00:00:00Z",
+  "updated_at": "2026-01-15T00:00:00Z"
+}

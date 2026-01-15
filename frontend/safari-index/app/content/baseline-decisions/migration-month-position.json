@@ -1,0 +1,44 @@
+{
+  "topic_id": "migration-month-position",
+  "outcome": "wait",
+  "headline": "Position depends on your travel month, not general migration timing",
+  "summary": "The migration is always somewhere in the Serengeti-Mara ecosystem. Your positioning depends on when you travel: December-March places you in southern Serengeti for calving; April-May in central Serengeti as herds move northwest; June-July in western Serengeti for Grumeti crossings; August-October in northern Serengeti or Masai Mara for Mara River crossings; November as herds return south. Position first, then choose camps.",
+  "assumptions": [
+    {
+      "id": "migration-continuous",
+      "text": "The migration is not an event but a continuous movement. Animals are always somewhere.",
+      "confidence": 0.95
+    },
+    {
+      "id": "month-determines-region",
+      "text": "Your travel month determines which region you should position in.",
+      "confidence": 0.90
+    },
+    {
+      "id": "timing-varies",
+      "text": "Actual timing varies 2-4 weeks annually based on rainfall patterns.",
+      "confidence": 0.90
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Correct positioning maximizes migration encounter probability",
+      "Each season offers different experiences (calving vs crossings)",
+      "Understanding timing prevents wrong-region disappointment",
+      "Flexible dates allow following real-time reports"
+    ],
+    "losses": [
+      "Fixed dates may not align perfectly with actual herd position",
+      "The Serengeti is 14,750 km²; wrong region means missing migration",
+      "Timing shifts mean camps booked far ahead may be wrong location",
+      "Following the herds requires flexibility in itinerary"
+    ]
+  },
+  "change_conditions": [
+    "If traveling December-March, position in southern Serengeti (Ndutu area) for calving.",
+    "If traveling July-October, position in northern Serengeti or Mara for river crossings.",
+    "If dates are fixed, adjust expectations to what is likely in your region.",
+    "If dates are flexible, book closer to travel and follow current migration reports."
+  ],
+  "confidence": 0.80
+}

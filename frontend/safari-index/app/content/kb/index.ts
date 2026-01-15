@@ -29,6 +29,14 @@ import assumptionTemplate from './templates/assumption-template.json';
 // Import sample evidence
 import serengetiParkFees from './evidence/sample-evidence.json';
 
+// Import migration evidence cards
+import migrationAnnualCycle from './evidence/migration-annual-cycle.json';
+import crossingProbabilityFactors from './evidence/crossing-probability-factors.json';
+import migrationMyths from './evidence/migration-myths.json';
+import migrationCrowdPatterns from './evidence/migration-crowd-patterns.json';
+import migrationRegretPatterns from './evidence/migration-regret-patterns.json';
+import migrationEcology from './evidence/migration-ecology.json';
+
 // Import baselines from existing structure (re-export with KB typing)
 import { baselineDecisions as legacyBaselines } from '../baseline-decisions';
 
@@ -53,6 +61,13 @@ export const templates: Record<string, TemplateRecord> = {
 
 export const evidenceCards: Record<string, EvidenceCard> = {
   'serengeti-park-fees-2025': serengetiParkFees as EvidenceCard,
+  // Migration evidence cards
+  'migration-annual-cycle': migrationAnnualCycle as EvidenceCard,
+  'crossing-probability-factors': crossingProbabilityFactors as EvidenceCard,
+  'migration-myths': migrationMyths as EvidenceCard,
+  'migration-crowd-patterns': migrationCrowdPatterns as EvidenceCard,
+  'migration-regret-patterns': migrationRegretPatterns as EvidenceCard,
+  'migration-ecology': migrationEcology as EvidenceCard,
 };
 
 // ============================================================================

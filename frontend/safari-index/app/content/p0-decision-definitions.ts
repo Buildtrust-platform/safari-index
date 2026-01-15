@@ -2859,4 +2859,289 @@ export const p0DecisionDefinitions: P0DecisionDefinition[] = [
       'Severe mobility limitations—mokoro ingress/egress not viable',
     ],
   },
+
+  // ============================================================
+  // MIGRATION DECISIONS (7 topics)
+  // Great Migration decisions for strategic season prominence
+  // ============================================================
+  {
+    id: 'migration-month-position',
+    question: 'Where should I position myself to see the migration?',
+    required_inputs: [
+      inp('travel_month'),
+      inp('trip_length'),
+      customInput({
+        key: 'user_context.migration_goal',
+        label: 'Migration goal',
+        description: 'What aspect of migration interests you most',
+        example: 'river crossings',
+      }),
+    ],
+    optional_inputs: [
+      inp('budget_band'),
+      inp('traveler_type'),
+    ],
+    assumptions: [
+      'The migration follows a general annual pattern but varies 2-4 weeks based on rainfall',
+      'Dec-Mar: Southern Serengeti for calving',
+      'Apr-May: Central Serengeti, herds moving northwest',
+      'Jun-Jul: Western Serengeti and Grumeti River crossings',
+      'Aug-Oct: Northern Serengeti and Masai Mara for Mara River crossings',
+      'Nov: Return south through eastern Serengeti',
+      'Being in the wrong region means missing the herds entirely',
+    ],
+    tradeoffs: [
+      { gain: 'Position in correct region maximizes encounter probability', loss: 'Fixed dates may not align with actual herd position' },
+      { gain: 'Moving between camps follows the herds', loss: 'Multiple camp bookings increase cost and logistics' },
+      { gain: 'Flexibility allows last-minute adjustment', loss: 'Last-minute bookings have limited availability' },
+      { gain: 'Following real-time reports maximizes success', loss: 'Cannot plan precisely months ahead' },
+    ],
+    change_conditions: [
+      'If dates are fixed to July, position in central-to-northern Serengeti',
+      'If dates are fixed to February, position in southern Serengeti for calving',
+      'If flexible, book last-minute based on current migration reports',
+      'If budget allows, plan camp-hopping itinerary to follow herds',
+    ],
+    refusal_triggers: [
+      'Fixed dates but insistence on guaranteed crossing sightings',
+      'Budget cannot support camp-hopping logistics',
+      'Trip length under 5 days with migration focus expectation',
+    ],
+  },
+  {
+    id: 'migration-first-timer',
+    question: 'Should my first safari focus on the migration?',
+    required_inputs: [
+      inp('traveler_type'),
+      inp('travel_month'),
+      inp('trip_length'),
+    ],
+    optional_inputs: [
+      inp('budget_band'),
+      inp('group_composition'),
+    ],
+    assumptions: [
+      'First-timers often conflate migration with "best safari"',
+      'Migration-focused trips trade general safari breadth for spectacle density',
+      'First-timer satisfaction correlates with diverse experiences, not singular events',
+      'Migration requires specific timing and positioning',
+      'Disappointment risk is higher when expectations are singular',
+    ],
+    tradeoffs: [
+      { gain: 'Witness one of nature\'s most dramatic events', loss: 'May miss crater, other parks, varied ecosystems' },
+      { gain: 'High concentration of animals in migration zone', loss: 'Crowds concentrate around migration hotspots' },
+      { gain: 'Potential for crossing or calving spectacle', loss: 'Unpredictability can disappoint expectation-heavy travelers' },
+      { gain: 'Iconic imagery if events occur', loss: 'No crossing is guaranteed regardless of effort' },
+    ],
+    change_conditions: [
+      'If trip is 10+ days, migration focus can combine with broader Tanzania experience',
+      'If dates are fixed to Feb or Aug, migration areas are worth including',
+      'If first safari and <8 days, classic circuit may satisfy more reliably',
+      'If expectations are flexible, migration adds spectacle without disappointment risk',
+    ],
+    refusal_triggers: [
+      'Expects guaranteed crossing or calving sighting',
+      'Trip under 7 days with migration as sole focus',
+      'Budget incompatible with migration area camps during peak',
+    ],
+  },
+  {
+    id: 'migration-crowds',
+    question: 'Can I see the migration without the crowds?',
+    required_inputs: [
+      inp('travel_month'),
+      inp('budget_band'),
+      customInput({
+        key: 'user_context.crowd_tolerance',
+        label: 'Crowd tolerance',
+        description: 'How you feel about multiple vehicles at sightings',
+        example: 'prefer fewer vehicles',
+      }),
+    ],
+    optional_inputs: [
+      inp('traveler_type'),
+      inp('trip_length'),
+    ],
+    assumptions: [
+      'Popular crossing points and calving areas have vehicle density',
+      'Peak season (Aug-Sep) has highest visitor numbers',
+      'Private concessions limit vehicles but may not access prime crossing points',
+      'Off-peak migration months (June, October) have fewer visitors',
+      'Tanzania offers more space than Kenya for same migration',
+    ],
+    tradeoffs: [
+      { gain: 'Private concessions limit vehicles', loss: 'Premium pricing, often 2-3x standard camps' },
+      { gain: 'Off-peak timing reduces crowds', loss: 'Migration position less predictable' },
+      { gain: 'Tanzania over Kenya offers more space', loss: 'Longer distances between camps' },
+      { gain: 'Remote crossing points have fewer vehicles', loss: 'May have fewer or no crossings' },
+    ],
+    change_conditions: [
+      'If budget supports concession camps, exclusivity is achievable',
+      'If traveling June or October, crowds are significantly lower',
+      'If crossing footage with no other vehicles is essential, documentary-length stays required',
+      'If Tanzania Serengeti over Kenya Mara, space increases',
+    ],
+    refusal_triggers: [
+      'Budget cannot support concession pricing but expects crowd-free',
+      'Dates fixed to August peak with crowd-free expectation',
+      'Insists on crossing footage with no other vehicles in standard trip',
+    ],
+  },
+  {
+    id: 'migration-cost',
+    question: 'Why does migration safari cost more?',
+    required_inputs: [
+      inp('travel_month'),
+      inp('budget_band'),
+      inp('trip_length'),
+    ],
+    optional_inputs: [
+      inp('traveler_type'),
+    ],
+    assumptions: [
+      'Demand peaks when migration is accessible',
+      'Remote northern Serengeti camps have higher operational costs',
+      'Fly-in logistics for migration zones add expense',
+      'Peak season (Jul-Oct) commands 30-50% premium over baseline',
+      'Calving season (Jan-Mar) is high season but slightly lower than crossing peak',
+    ],
+    tradeoffs: [
+      { gain: 'Peak season offers best probability', loss: 'Premium pricing 30-50% above baseline' },
+      { gain: 'Fly-in saves time', loss: 'Charter costs exceed driving costs significantly' },
+      { gain: 'Premium camps offer better positioning', loss: 'Budget camps are further from action' },
+      { gain: 'Longer stays improve odds', loss: 'Each additional night compounds cost' },
+    ],
+    change_conditions: [
+      'If budget-constrained, June or October shoulder months offer value',
+      'If willing to drive, costs decrease but time in transit increases',
+      'If flexible on migration spectacle, green season offers 30-40% savings',
+      'If calving over crossings appeals, Feb-Mar is slightly lower cost than Aug-Sep',
+    ],
+    refusal_triggers: [
+      'Budget expectation incompatible with migration area pricing',
+      'Expects value-season pricing during peak migration months',
+    ],
+  },
+  {
+    id: 'crossing-vs-calving',
+    question: 'River crossings or calving season?',
+    required_inputs: [
+      inp('travel_month'),
+      customInput({
+        key: 'user_context.spectacle_preference',
+        label: 'Spectacle preference',
+        description: 'Which type of wildlife drama interests you more',
+        example: 'predator action',
+      }),
+    ],
+    optional_inputs: [
+      inp('traveler_type'),
+      inp('budget_band'),
+      inp('trip_length'),
+    ],
+    assumptions: [
+      'Crossings are famous but unpredictable; calving is consistent but less marketed',
+      'Different times of year: crossings Jul-Oct, calving Jan-Mar',
+      'Different locations: crossings in north, calving in south',
+      'Crossings involve waiting and luck; calving delivers daily action',
+      'Photography goals differ between the two spectacles',
+    ],
+    tradeoffs: [
+      { gain: 'Crossings offer iconic imagery', loss: 'Cannot be scheduled or guaranteed' },
+      { gain: 'Calving offers sustained predator action', loss: 'Less cultural recognition' },
+      { gain: 'Crossing season (Jul-Oct) is dry and easy', loss: 'Peak crowds and pricing' },
+      { gain: 'Calving season (Jan-Mar) has fewer visitors', loss: 'Green season conditions' },
+    ],
+    change_conditions: [
+      'If predator action is priority, calving delivers more reliably',
+      'If iconic crossing footage is goal, commit to northern positioning in Aug-Sep',
+      'If dates are flexible, calving often provides better experience per dollar',
+      'If weather reliability matters, crossing season is drier',
+    ],
+    refusal_triggers: [
+      'Expects both in one trip (geographically impossible)',
+      'Cannot travel in either window (Jul-Oct or Jan-Mar)',
+    ],
+  },
+  {
+    id: 'migration-trip-length',
+    question: 'How many days do I need for a migration safari?',
+    required_inputs: [
+      inp('trip_length'),
+      customInput({
+        key: 'user_context.migration_goal',
+        label: 'Migration goal',
+        description: 'What aspect of migration you want to experience',
+        example: 'river crossing',
+      }),
+    ],
+    optional_inputs: [
+      inp('travel_month'),
+      inp('budget_band'),
+    ],
+    assumptions: [
+      'Transit to migration areas consumes 1-2 days each way',
+      'Crossing odds increase significantly with time in crossing zone',
+      'Calving is visible daily during peak, requiring less time',
+      '4-5 nights in crossing zone: ~70% chance of seeing a crossing',
+      '2-3 nights in crossing zone: ~40% chance',
+    ],
+    tradeoffs: [
+      { gain: 'Longer stays (9-12 days) dramatically improve crossing odds', loss: 'Higher total cost' },
+      { gain: '5-6 days is minimum viable', loss: 'Low probability of specific events' },
+      { gain: '10+ days allows camp-hopping to follow herds', loss: 'Significant budget required' },
+      { gain: 'Calving requires fewer days for reliable action', loss: 'Limited to Jan-Mar window' },
+    ],
+    change_conditions: [
+      'If crossing is priority, minimum 8-10 days recommended',
+      'If calving is goal, 6-8 days sufficient for reliable action',
+      'If under 6 days, treat migration as possible bonus not goal',
+      'If combining with other parks, add transit days to total',
+    ],
+    refusal_triggers: [
+      'Under 5 days and expects migration focus',
+      'Expects crossing guarantee with any trip length',
+    ],
+  },
+  {
+    id: 'migration-serengeti-vs-mara',
+    question: 'Serengeti or Mara for migration viewing?',
+    required_inputs: [
+      inp('travel_month'),
+      customInput({
+        key: 'user_context.photography_priority',
+        label: 'Photography priority',
+        description: 'Whether photography positioning matters',
+        example: 'serious photographer',
+      }),
+    ],
+    optional_inputs: [
+      inp('traveler_type'),
+      inp('budget_band'),
+      inp('trip_length'),
+    ],
+    assumptions: [
+      'Same ecosystem, different countries, different access rules',
+      'Mara allows off-road driving; Serengeti national park does not',
+      'Serengeti has more space; Mara has more concentrated action',
+      'Migration present in Mara Jul-Oct; Serengeti has migration year-round somewhere',
+      'Mara has higher vehicle density at sightings',
+    ],
+    tradeoffs: [
+      { gain: 'Mara: Off-road driving for photography positioning', loss: 'More vehicles per sighting' },
+      { gain: 'Serengeti: More territory, more space', loss: 'On-road only in national park' },
+      { gain: 'Mara: Migration concentrated Jul-Oct', loss: 'Kenya logistics differ from Tanzania' },
+      { gain: 'Serengeti: Migration present year-round (somewhere)', loss: 'Requires repositioning through year' },
+    ],
+    change_conditions: [
+      'If photography positioning is critical, Mara off-road advantage matters',
+      'If crowds are concern, Serengeti offers more space',
+      'If combining with Ngorongoro/Tarangire, Tanzania makes sense',
+      'If Aug-Oct and want concentrated action, Mara delivers',
+    ],
+    refusal_triggers: [
+      'Cannot travel Jul-Oct but expects Mara migration',
+      'Wants Tanzania itinerary but August migration as primary goal',
+    ],
+  },
 ];

@@ -1,0 +1,44 @@
+{
+  "topic_id": "migration-crowds",
+  "outcome": "wait",
+  "headline": "Crowds are manageable with strategic positioning and timing",
+  "summary": "Migration hotspots, especially Mara River crossings during August peak, attract significant vehicle density (15-40 vehicles at popular crossing points). Crowds can be reduced by: visiting shoulder months (June, late October), staying in private concessions with vehicle limits, positioning at less-known crossing points, or adjusting expectations. Peak crowds are the trade-off for peak migration.",
+  "assumptions": [
+    {
+      "id": "august-peak-crowds",
+      "text": "August is peak migration month with highest crowds and prices.",
+      "confidence": 0.95
+    },
+    {
+      "id": "concessions-reduce",
+      "text": "Private concessions enforce vehicle limits and offer more exclusive sightings.",
+      "confidence": 0.90
+    },
+    {
+      "id": "shoulder-months-viable",
+      "text": "June and late October offer migration with 40-60% fewer vehicles.",
+      "confidence": 0.85
+    }
+  ],
+  "tradeoffs": {
+    "gains": [
+      "Shoulder months: Migration present with significantly fewer vehicles",
+      "Private concessions: Vehicle limits ensure exclusivity",
+      "Remote crossing points: 5-10 vehicles vs 30+ at popular points",
+      "Northern Serengeti: Generally fewer crowds than Mara"
+    ],
+    "losses": [
+      "Shoulder months: Slightly lower crossing probability",
+      "Private concessions: Premium pricing (2-3x national park camps)",
+      "Remote points: May require longer drives or mobile camping",
+      "Avoiding August means missing peak probability window"
+    ]
+  },
+  "change_conditions": [
+    "If crowds are unacceptable, visit June or late October instead of August.",
+    "If budget allows, private concessions provide crowd control.",
+    "If willing to work harder, remote crossing points reward effort.",
+    "If crowds are acceptable trade-off, August delivers highest crossing probability."
+  ],
+  "confidence": 0.80
+}

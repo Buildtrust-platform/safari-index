@@ -47,6 +47,15 @@ import keAug from './ke-aug.json';
 import bwJun from './bw-jun.json';
 import bookingLeadTime from './booking-lead-time.json';
 
+// Migration (expanded)
+import migrationMonthPosition from './migration-month-position.json';
+import migrationFirstTimer from './migration-first-timer.json';
+import migrationCrowds from './migration-crowds.json';
+import migrationCost from './migration-cost.json';
+import crossingVsCalving from './crossing-vs-calving.json';
+import migrationTripLength from './migration-trip-length.json';
+import migrationSerengetiVsMara from './migration-serengeti-vs-mara.json';
+
 // Experience Type
 import walkingSafari from './walking-safari.json';
 import privateVsShared from './private-vs-shared.json';
@@ -137,6 +146,15 @@ export const baselineDecisions: Record<string, BaselineDecision> = {
   'ke-aug': keAug as BaselineDecision,
   'bw-jun': bwJun as BaselineDecision,
   'booking-lead-time': bookingLeadTime as BaselineDecision,
+
+  // Migration (expanded)
+  'migration-month-position': migrationMonthPosition as BaselineDecision,
+  'migration-first-timer': migrationFirstTimer as BaselineDecision,
+  'migration-crowds': migrationCrowds as BaselineDecision,
+  'migration-cost': migrationCost as BaselineDecision,
+  'crossing-vs-calving': crossingVsCalving as BaselineDecision,
+  'migration-trip-length': migrationTripLength as BaselineDecision,
+  'migration-serengeti-vs-mara': migrationSerengetiVsMara as BaselineDecision,
 
   // Experience Type
   'walking-safari': walkingSafari as BaselineDecision,
