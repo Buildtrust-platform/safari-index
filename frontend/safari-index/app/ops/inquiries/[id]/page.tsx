@@ -299,12 +299,8 @@ export default function OpsInquiryDetailPage() {
     }
   }, [matches, selectedTripId]);
 
-  // Load notes from inquiry
-  useEffect(() => {
-    if (inquiry?.ops_notes) {
-      setNotes(inquiry.ops_notes);
-    }
-  }, [inquiry]);
+  // Internal notes are session-only (not persisted to DB)
+  // TODO: Add ops_notes field to schema for persistent internal notes
 
   // Auto-generate if action=generate in URL
   useEffect(() => {
@@ -357,10 +353,12 @@ export default function OpsInquiryDetailPage() {
   );
 
   const handleSaveNotes = useCallback(async () => {
+    // Session-only notes - just show saved feedback
     setSaving(true);
-    await updateInquiry({ ops_notes: notes });
+    // TODO: Implement ops_notes persistence when field is added to schema
+    await new Promise(resolve => setTimeout(resolve, 300));
     setSaving(false);
-  }, [notes, updateInquiry]);
+  }, []);
 
   const handleGenerateDraft = useCallback(async () => {
     if (!opsKey || !inquiry) return;
@@ -607,23 +605,23 @@ Vurara Safaris`;
                       </div>
                     </div>
                   )}
-                  {inquiry.phone && (
+                  {inquiry.whatsapp && (
                     <div className="flex items-center gap-3">
                       <Phone className="w-5 h-5 text-stone-400 dark:text-zinc-500" />
-                      <p className="font-medium text-stone-900 dark:text-white">{inquiry.phone}</p>
+                      <p className="font-medium text-stone-900 dark:text-white">{inquiry.whatsapp}</p>
                     </div>
                   )}
                 </div>
 
                 {/* Their message */}
-                {inquiry.additional_notes && (
+                {inquiry.notes && (
                   <div className="mt-6 pt-4 border-t border-stone-100 dark:border-zinc-800">
                     <h3 className="text-xs font-medium text-stone-400 dark:text-zinc-500 uppercase tracking-wide mb-2">
                       Their Message
                     </h3>
                     <div className="bg-amber-50 dark:bg-amber-900/20 rounded-lg p-3">
                       <p className="text-sm text-stone-700 dark:text-amber-200/90 whitespace-pre-wrap">
-                        "{inquiry.additional_notes}"
+                        "{inquiry.notes}"
                       </p>
                     </div>
                   </div>

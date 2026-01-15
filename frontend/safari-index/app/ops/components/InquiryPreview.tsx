@@ -226,24 +226,24 @@ export function InquiryPreview({
                 <span>{timeline}</span>
               </div>
             )}
-            {inquiry.phone && (
+            {inquiry.whatsapp && (
               <div className="flex items-center gap-2 text-stone-700 dark:text-zinc-300 col-span-2">
                 <Phone className="w-4 h-4 text-stone-400 dark:text-zinc-500" />
-                <span>{inquiry.phone}</span>
+                <span>{inquiry.whatsapp}</span>
               </div>
             )}
           </div>
         </div>
 
         {/* Their Message */}
-        {inquiry.additional_notes && (
+        {inquiry.notes && (
           <div className="space-y-2">
             <h3 className="text-xs font-medium text-stone-400 dark:text-zinc-500 uppercase tracking-wide">
               Their Message
             </h3>
             <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4">
               <p className="text-sm text-stone-700 dark:text-amber-200/90 whitespace-pre-wrap leading-relaxed">
-                "{inquiry.additional_notes}"
+                "{inquiry.notes}"
               </p>
             </div>
           </div>

@@ -158,7 +158,7 @@ export function useInquiryDetail(inquiryId: string | null, opsKey: string | null
   }, [fetchDetail]);
 
   const updateInquiry = useCallback(
-    async (updates: Partial<Pick<InquiryRecord, 'status' | 'ops_notes'>>) => {
+    async (updates: Partial<Pick<InquiryRecord, 'status' | 'notes'>>) => {
       if (!opsKey || !inquiryId) return false;
 
       try {

@@ -47,7 +47,7 @@ export function useOpsKey() {
     setIsAuthenticated(false);
   }, []);
 
-  const getAuthHeaders = useCallback(() => {
+  const getAuthHeaders = useCallback((): Record<string, string> => {
     if (!opsKey) return {};
     return { 'x-ops-key': opsKey };
   }, [opsKey]);
