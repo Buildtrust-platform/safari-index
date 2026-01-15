@@ -131,8 +131,55 @@ export const WILDLIFE_EVENTS: WildlifeEvent[] = [
     title: 'Chimpanzee Fruit Season',
     description: 'Fruiting trees keep chimps in predictable areas, improving tracking success.',
     months: [6, 7, 8, 9],
-    destinations: ['uganda', 'tanzania'],
+    destinations: ['uganda', 'tanzania', 'rwanda'],
     species: ['chimpanzee'],
+  },
+  // Golden Monkey trekking
+  {
+    id: 'golden-monkey-bamboo',
+    title: 'Golden Monkey Bamboo Season',
+    description: 'Fresh bamboo shoots attract golden monkeys to lower elevations for easier viewing.',
+    months: [6, 7, 8, 9],
+    destinations: ['rwanda', 'uganda'],
+    species: ['golden-monkey'],
+  },
+  // Shoebill season
+  {
+    id: 'shoebill-nesting',
+    title: 'Shoebill Nesting Season',
+    description: 'The prehistoric shoebill stork nests in papyrus swamps. Best sightings during dry season.',
+    months: [12, 1, 2, 3],
+    destinations: ['uganda'],
+    species: ['shoebill'],
+    highlight: true,
+  },
+  // Uganda Tree-climbing lions
+  {
+    id: 'tree-climbing-lions',
+    title: 'Tree-Climbing Lions',
+    description: 'Ishasha\'s famous tree-climbing lions are most visible during dry months when they seek shade.',
+    months: [6, 7, 8, 9, 12, 1, 2],
+    destinations: ['uganda'],
+    species: ['lion'],
+  },
+  // Rwanda Big Five safari
+  {
+    id: 'akagera-safari-peak',
+    title: 'Akagera Safari Season',
+    description: 'Rwanda\'s only Big Five park offers excellent game viewing in the dry season.',
+    months: [6, 7, 8, 9],
+    destinations: ['rwanda'],
+    species: ['lion', 'elephant', 'buffalo', 'rhino'],
+    highlight: true,
+  },
+  // Colobus troops Nyungwe
+  {
+    id: 'nyungwe-colobus',
+    title: 'Nyungwe Colobus Troops',
+    description: 'Witness Africa\'s largest colobus monkey troops, up to 400 individuals in Nyungwe.',
+    months: [6, 7, 8, 9],
+    destinations: ['rwanda'],
+    species: ['colobus'],
   },
   // Zambia walking safari season
   {
@@ -285,8 +332,8 @@ export interface Destination {
 export const DESTINATIONS: Destination[] = [
   { id: 'tanzania', name: 'Tanzania', region: 'east-africa', parks: ['serengeti', 'ngorongoro', 'tarangire'] },
   { id: 'kenya', name: 'Kenya', region: 'east-africa', parks: ['masai-mara', 'amboseli'] },
-  { id: 'uganda', name: 'Uganda', region: 'east-africa', parks: ['bwindi', 'kibale', 'queen-elizabeth'] },
-  { id: 'rwanda', name: 'Rwanda', region: 'east-africa', parks: ['volcanoes-np'] },
+  { id: 'uganda', name: 'Uganda', region: 'east-africa', parks: ['bwindi', 'kibale', 'queen-elizabeth', 'murchison-falls', 'lake-mburo'] },
+  { id: 'rwanda', name: 'Rwanda', region: 'east-africa', parks: ['volcanoes-np', 'akagera', 'nyungwe'] },
   { id: 'botswana', name: 'Botswana', region: 'southern-africa', parks: ['okavango-delta', 'chobe'] },
   { id: 'south-africa', name: 'South Africa', region: 'southern-africa', parks: ['kruger', 'sabi-sands'] },
   { id: 'zambia', name: 'Zambia', region: 'southern-africa', parks: ['south-luangwa', 'lower-zambezi'] },
@@ -319,11 +366,14 @@ export const CALENDAR_SPECIES: CalendarSpecies[] = [
   // Primates
   { id: 'gorilla', name: 'Mountain Gorilla', category: 'primate' },
   { id: 'chimpanzee', name: 'Chimpanzee', category: 'primate' },
+  { id: 'golden-monkey', name: 'Golden Monkey', category: 'primate' },
+  { id: 'colobus', name: 'Colobus Monkey', category: 'primate' },
   // Other
   { id: 'wildebeest', name: 'Wildebeest', category: 'other' },
   { id: 'zebra', name: 'Zebra', category: 'other' },
   { id: 'giraffe', name: 'Giraffe', category: 'other' },
   { id: 'hippo', name: 'Hippo', category: 'other' },
+  { id: 'shoebill', name: 'Shoebill Stork', category: 'other' },
 ];
 
 /**
