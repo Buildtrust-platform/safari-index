@@ -21,6 +21,9 @@ import {
   Filter,
   X,
   ArrowRight,
+  TrendingUp,
+  Users,
+  AlertTriangle,
 } from 'lucide-react';
 import { cn } from '../ui/utils';
 import {
@@ -39,6 +42,8 @@ import {
   getProbabilityLabel,
   getProbabilityColor,
 } from '../content/wildlife-sightings';
+import { getMigrationVerdict, type MigrationMonthVerdict } from '../content/migration-verdicts';
+import { generateSlugFromId } from '../content/p0-topics-bridge';
 
 /**
  * Season icon component
@@ -90,6 +95,89 @@ function ProbabilityBar({ probability }: { probability: number }) {
         />
       </div>
       <span className="text-xs text-stone-500 w-8 text-right">{probability}%</span>
+    </div>
+  );
+}
+
+/**
+ * Migration verdict card for Tanzania/Kenya
+ */
+function MigrationVerdictCard({ verdict }: { verdict: MigrationMonthVerdict }) {
+  const phaseColors = {
+    calving: 'bg-green-100 text-green-700 border-green-200',
+    movement: 'bg-blue-100 text-blue-700 border-blue-200',
+    crossing: 'bg-amber-100 text-amber-700 border-amber-200',
+    return: 'bg-stone-100 text-stone-700 border-stone-200',
+  };
+
+  const phaseLabels = {
+    calving: 'Calving Season',
+    movement: 'Movement Phase',
+    crossing: 'Crossing Season',
+    return: 'Return Migration',
+  };
+
+  const crowdColors = {
+    low: 'text-green-600',
+    moderate: 'text-amber-600',
+    high: 'text-orange-600',
+    peak: 'text-red-600',
+  };
+
+  return (
+    <div className="bg-gradient-to-r from-amber-50 to-stone-50 rounded-lg border border-amber-200 p-4">
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-2">
+          <TrendingUp className="w-4 h-4 text-amber-600" />
+          <span className="font-medium text-stone-900 text-sm">Migration Verdict</span>
+        </div>
+        <span className={cn('px-2 py-0.5 text-xs font-medium rounded-full border', phaseColors[verdict.phase])}>
+          {phaseLabels[verdict.phase]}
+        </span>
+      </div>
+
+      <p className="text-sm text-stone-600 mb-3">{verdict.herdPosition}</p>
+
+      <p className="text-sm text-stone-700 mb-3">{verdict.verdict}</p>
+
+      <div className="flex flex-wrap gap-3 text-xs mb-3">
+        <span className={crowdColors[verdict.crowdLevel]}>
+          {verdict.crowdLevel.charAt(0).toUpperCase() + verdict.crowdLevel.slice(1)} crowds
+        </span>
+        {verdict.crossingProbability !== 'none' && (
+          <span className="text-stone-600">
+            Crossing: {verdict.crossingProbability}
+          </span>
+        )}
+        {verdict.calvingActive && (
+          <span className="text-green-600">Calving active</span>
+        )}
+      </div>
+
+      {verdict.refusalNote && (
+        <div className="flex items-start gap-2 p-2 bg-red-50 rounded border border-red-200 mb-3">
+          <AlertTriangle className="w-3.5 h-3.5 text-red-600 flex-shrink-0 mt-0.5" />
+          <p className="text-xs text-red-700">{verdict.refusalNote}</p>
+        </div>
+      )}
+
+      <div className="flex flex-wrap gap-1">
+        {verdict.linkedDecisions.slice(0, 2).map((id) => (
+          <Link
+            key={id}
+            href={`/decisions/${generateSlugFromId(id)}`}
+            className="text-xs px-2 py-1 bg-white text-stone-600 rounded border border-stone-200 hover:bg-amber-50 hover:border-amber-300 hover:text-amber-700 transition-colors"
+          >
+            {id.replace(/-/g, ' ')}
+          </Link>
+        ))}
+        <Link
+          href="/migration-logic"
+          className="text-xs px-2 py-1 bg-amber-100 text-amber-700 rounded border border-amber-200 hover:bg-amber-200 transition-colors"
+        >
+          Full migration guide
+        </Link>
+      </div>
     </div>
   );
 }
@@ -163,6 +251,14 @@ function MonthDetail({
       .sort((a, b) => b.probability - a.probability);
   }, [destination, month, selectedSpecies]);
 
+  // Get migration verdict for Tanzania/Kenya
+  const migrationVerdict = useMemo(() => {
+    if (destination === 'tanzania' || destination === 'kenya') {
+      return getMigrationVerdict(month);
+    }
+    return undefined;
+  }, [destination, month]);
+
   if (!monthData || !season || !destinationData) return null;
 
   return (
@@ -181,6 +277,11 @@ function MonthDetail({
       </div>
 
       <div className="p-5 space-y-6">
+        {/* Migration Verdict (Tanzania/Kenya only) */}
+        {migrationVerdict && (
+          <MigrationVerdictCard verdict={migrationVerdict} />
+        )}
+
         {/* Wildlife Events */}
         {events.length > 0 && (
           <div>

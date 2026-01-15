@@ -25,6 +25,7 @@ import { registerLogisticsBlogs } from './logistics-blogs';
 import { registerRiskBlogs } from './risk-blogs';
 import { registerValueBlogs } from './value-blogs';
 import { registerBirdingBlogs } from './birding-blogs';
+import { registerMigrationBlogs } from './migration-blogs';
 
 // ============================================================
 // tanzania-vs-kenya-first-safari: Tanzania or Kenya for first safari?
@@ -293,4 +294,5 @@ export function initializeBlogs(): void {
   registerRiskBlogs();
   registerValueBlogs();
   registerBirdingBlogs();
+  registerMigrationBlogs();
 }

@@ -29,7 +29,7 @@ interface NavbarProps {
 const NAV_LINKS = [
   { label: 'Safaris', href: '/trips' },
   { label: 'Destinations', href: '/destinations' },
-  { label: 'Activities', href: '/activities' },
+  { label: 'Migration', href: '/migration-logic' },
   { label: 'Wildlife Calendar', href: '/wildlife-calendar' },
   { label: 'Insights', href: '/blog' },
   { label: 'How it works', href: '/how-it-works' },

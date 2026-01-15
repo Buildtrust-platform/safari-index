@@ -27,6 +27,7 @@ import {
   Compass,
   Route,
   FileText,
+  TrendingUp,
 } from 'lucide-react';
 import { Navbar, Footer } from '../../components/layout';
 import {
@@ -652,6 +653,84 @@ function getParkImage(park: GamePark) {
 }
 
 /**
+ * Migration Cross-Border Card - Shows for Tanzania/Kenya only
+ * Explains the ecosystem unity and seasonal viewing windows
+ */
+function MigrationCrossBorderCard({ currentDestination }: { currentDestination: 'tanzania' | 'kenya' }) {
+  const isTanzania = currentDestination === 'tanzania';
+  const otherDestination = isTanzania ? 'Kenya' : 'Tanzania';
+  const otherSlug = isTanzania ? 'kenya' : 'tanzania';
+
+  return (
+    <div className="bg-gradient-to-r from-amber-50 to-stone-50 rounded-xl border border-amber-200/50 p-5">
+      <div className="flex items-start gap-3 mb-3">
+        <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0">
+          <TrendingUp className="w-4 h-4 text-amber-700" />
+        </div>
+        <div>
+          <h3 className="font-medium text-stone-900">
+            One Ecosystem, Two Countries
+          </h3>
+          <p className="text-sm text-stone-600 mt-1">
+            The Serengeti and Masai Mara are a single ecosystem divided by a border.
+            The migration moves between them seasonally.
+          </p>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-lg border border-stone-200 p-4 mb-3">
+        <div className="grid grid-cols-2 gap-4 text-sm">
+          <div>
+            <p className="font-medium text-stone-900 mb-1">
+              {isTanzania ? 'Serengeti (Tanzania)' : 'Masai Mara (Kenya)'}
+            </p>
+            <p className="text-stone-600">
+              {isTanzania
+                ? 'Migration present ~9 months. Calving (Jan-Mar), movement (Apr-Jun), crossings (Jul-Oct).'
+                : 'Migration present Jul-Oct. Peak river crossings. Concentrated herds.'}
+            </p>
+          </div>
+          <div>
+            <p className="font-medium text-stone-900 mb-1">
+              {isTanzania ? 'Masai Mara (Kenya)' : 'Serengeti (Tanzania)'}
+            </p>
+            <p className="text-stone-600">
+              {isTanzania
+                ? 'Migration Jul-Oct only. Peak crossing season. Off-road driving permitted.'
+                : 'Migration Nov-Jun. Calving season in south. More variety across regions.'}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        <Link
+          href="/migration-logic"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-100 text-amber-700 text-sm font-medium rounded-lg hover:bg-amber-200 transition-colors"
+        >
+          Migration Logic Hub
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
+        <Link
+          href={`/destinations/${otherSlug}`}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white text-stone-700 text-sm font-medium rounded-lg border border-stone-200 hover:bg-stone-50 transition-colors"
+        >
+          Compare with {otherDestination}
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
+        <Link
+          href="/decisions/serengeti-vs-mara-migration"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white text-stone-700 text-sm font-medium rounded-lg border border-stone-200 hover:bg-stone-50 transition-colors"
+        >
+          Serengeti vs Mara decision
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+/**
  * Images for trip cards - rotates through different images to avoid repetition
  */
 const TRIP_CARD_IMAGES = [
@@ -923,6 +1002,13 @@ export default async function DestinationPage({
             ))}
           </div>
         </section>
+
+        {/* Migration Cross-Border Card - Tanzania/Kenya only */}
+        {(destination.id === 'tanzania' || destination.id === 'kenya') && (
+          <section className="mb-8">
+            <MigrationCrossBorderCard currentDestination={destination.id as 'tanzania' | 'kenya'} />
+          </section>
+        )}
 
         <SectionDivider />
 
