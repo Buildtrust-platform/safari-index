@@ -219,9 +219,9 @@ function EventCard({ event }: { event: WildlifeEvent }) {
 }
 
 /**
- * Month detail panel
+ * Inline month results - appears directly below month strip
  */
-function MonthDetail({
+function MonthResults({
   month,
   destination,
   selectedSpecies,
@@ -262,63 +262,110 @@ function MonthDetail({
   if (!monthData || !season || !destinationData) return null;
 
   return (
-    <div className="bg-white rounded-xl border border-stone-200 overflow-hidden">
-      {/* Header */}
-      <div className="bg-stone-50 border-b border-stone-200 px-5 py-4">
+    <div className="mt-4 bg-white rounded-xl border border-stone-200 overflow-hidden">
+      {/* Compact header */}
+      <div className="bg-stone-50 border-b border-stone-200 px-4 py-3">
         <div className="flex items-center justify-between">
-          <div>
-            <h3 className="font-editorial text-xl font-semibold text-stone-900">
-              {monthData.name} in {destinationData.name}
+          <div className="flex items-center gap-3">
+            <h3 className="font-editorial text-lg font-semibold text-stone-900">
+              {monthData.name}
             </h3>
-            <p className="text-sm text-stone-500 mt-1">{season.description}</p>
+            <SeasonBadge season={season} />
           </div>
-          <SeasonBadge season={season} />
+          <span className="text-sm text-stone-500">{destinationData.name}</span>
         </div>
+        <p className="text-sm text-stone-500 mt-1">{season.description}</p>
       </div>
 
-      <div className="p-5 space-y-6">
-        {/* Migration Verdict (Tanzania/Kenya only) */}
-        {migrationVerdict && (
-          <MigrationVerdictCard verdict={migrationVerdict} />
-        )}
-
-        {/* Wildlife Events */}
-        {events.length > 0 && (
-          <div>
-            <h4 className="text-sm font-medium text-stone-700 mb-3 flex items-center gap-2">
-              <Calendar className="w-4 h-4" />
-              Wildlife Events
-            </h4>
-            <div className="space-y-2">
-              {events.map((event) => (
-                <EventCard key={event.id} event={event} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Species Probabilities */}
-        {speciesProbs.length > 0 && (
-          <div>
-            <h4 className="text-sm font-medium text-stone-700 mb-3">Sighting Probabilities</h4>
-            <div className="space-y-3">
-              {speciesProbs.slice(0, 8).map((species) => (
-                <div key={species.id}>
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm text-stone-700">{species.name}</span>
-                    <span className="text-xs text-stone-500">
-                      {getProbabilityLabel(species.probability)}
-                    </span>
-                  </div>
-                  <ProbabilityBar probability={species.probability} />
+      {/* Content in responsive grid */}
+      <div className="p-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* Column 1: Migration verdict or Events */}
+          <div className="space-y-4">
+            {migrationVerdict && (
+              <MigrationVerdictCard verdict={migrationVerdict} />
+            )}
+            {!migrationVerdict && events.length > 0 && (
+              <div>
+                <h4 className="text-sm font-medium text-stone-700 mb-2 flex items-center gap-2">
+                  <Calendar className="w-4 h-4" />
+                  Wildlife Events
+                </h4>
+                <div className="space-y-2">
+                  {events.slice(0, 3).map((event) => (
+                    <EventCard key={event.id} event={event} />
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
           </div>
-        )}
+
+          {/* Column 2: Events (if migration shown) or Species */}
+          <div className="space-y-4">
+            {migrationVerdict && events.length > 0 && (
+              <div>
+                <h4 className="text-sm font-medium text-stone-700 mb-2 flex items-center gap-2">
+                  <Calendar className="w-4 h-4" />
+                  Wildlife Events
+                </h4>
+                <div className="space-y-2">
+                  {events.slice(0, 3).map((event) => (
+                    <EventCard key={event.id} event={event} />
+                  ))}
+                </div>
+              </div>
+            )}
+            {!migrationVerdict && speciesProbs.length > 0 && (
+              <div>
+                <h4 className="text-sm font-medium text-stone-700 mb-2">Top Sightings</h4>
+                <div className="space-y-2">
+                  {speciesProbs.slice(0, 5).map((species) => (
+                    <div key={species.id} className="flex items-center justify-between">
+                      <span className="text-sm text-stone-700">{species.name}</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-16 h-1.5 bg-stone-100 rounded-full overflow-hidden">
+                          <div
+                            className={cn('h-full rounded-full', getProbabilityColor(species.probability))}
+                            style={{ width: `${species.probability}%` }}
+                          />
+                        </div>
+                        <span className="text-xs text-stone-500 w-8">{species.probability}%</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Column 3: Species probabilities */}
+          <div className="space-y-4">
+            {speciesProbs.length > 0 && (migrationVerdict || events.length > 0) && (
+              <div>
+                <h4 className="text-sm font-medium text-stone-700 mb-2">Top Sightings</h4>
+                <div className="space-y-2">
+                  {speciesProbs.slice(0, 6).map((species) => (
+                    <div key={species.id} className="flex items-center justify-between">
+                      <span className="text-sm text-stone-700">{species.name}</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-16 h-1.5 bg-stone-100 rounded-full overflow-hidden">
+                          <div
+                            className={cn('h-full rounded-full', getProbabilityColor(species.probability))}
+                            style={{ width: `${species.probability}%` }}
+                          />
+                        </div>
+                        <span className="text-xs text-stone-500 w-8">{species.probability}%</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
 
         {/* No data message */}
-        {events.length === 0 && speciesProbs.length === 0 && (
+        {events.length === 0 && speciesProbs.length === 0 && !migrationVerdict && (
           <p className="text-stone-500 text-sm text-center py-4">
             No specific wildlife data available for this selection.
           </p>
@@ -380,55 +427,45 @@ function FilterChips({
 }
 
 /**
- * Calendar grid component
+ * Compact month strip - horizontal scrollable on mobile
  */
-function CalendarGrid({
+function MonthStrip({
   selectedMonth,
   onMonthSelect,
   destination,
-  selectedSpecies,
 }: {
   selectedMonth: number;
   onMonthSelect: (month: number) => void;
   destination: string;
-  selectedSpecies: string[];
 }) {
   const regionKey = getRegionKey(destination);
 
   return (
-    <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+    <div className="flex gap-1 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap md:gap-1.5">
       {MONTHS.map((month) => {
         const season = REGION_SEASONS[regionKey]?.[month.value];
         const events = getEventsForDestinationMonth(destination, month.value);
         const hasHighlight = events.some((e) => e.highlight);
+        const isSelected = selectedMonth === month.value;
 
         return (
           <button
             key={month.value}
             onClick={() => onMonthSelect(month.value)}
             className={cn(
-              'relative p-3 rounded-xl border text-left transition-all',
-              selectedMonth === month.value
-                ? 'bg-amber-50 border-amber-300 ring-2 ring-amber-200'
-                : 'bg-white border-stone-200 hover:border-stone-300 hover:shadow-sm'
+              'relative flex-shrink-0 px-3 py-2 rounded-lg border text-center transition-all min-w-[4.5rem]',
+              isSelected
+                ? 'bg-stone-900 border-stone-900 text-white'
+                : 'bg-white border-stone-200 text-stone-700 hover:border-stone-300'
             )}
           >
-            <div className="flex items-center justify-between mb-1">
-              <span className="font-medium text-stone-900">{month.short}</span>
-              {season && <SeasonIcon type={season.type} />}
+            <div className="flex items-center justify-center gap-1.5">
+              <span className="font-medium text-sm">{month.short}</span>
+              {season && !isSelected && <SeasonIcon type={season.type} />}
+              {hasHighlight && (
+                <Star className={cn('w-3 h-3', isSelected ? 'text-amber-300' : 'text-amber-500')} />
+              )}
             </div>
-            <p className="text-xs text-stone-500">{season?.label || ''}</p>
-            {hasHighlight && (
-              <Star className="absolute top-2 right-2 w-3 h-3 text-amber-500" />
-            )}
-            {events.length > 0 && (
-              <div className="mt-2 flex items-center gap-1">
-                <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                <span className="text-xs text-stone-400">
-                  {events.length} event{events.length > 1 ? 's' : ''}
-                </span>
-              </div>
-            )}
           </button>
         );
       })}
@@ -585,28 +622,23 @@ export default function WildlifeCalendarContent() {
         )}
       </div>
 
-      {/* Highlighted events */}
+      {/* Month strip and results - stacked layout */}
       <div className="mb-8">
-        <HighlightedEvents destination={selectedDestination} />
+        <MonthStrip
+          selectedMonth={selectedMonth}
+          onMonthSelect={setSelectedMonth}
+          destination={selectedDestination}
+        />
+        <MonthResults
+          month={selectedMonth}
+          destination={selectedDestination}
+          selectedSpecies={selectedSpecies}
+        />
       </div>
 
-      {/* Calendar grid and detail */}
-      <div className="grid lg:grid-cols-5 gap-6">
-        <div className="lg:col-span-3">
-          <CalendarGrid
-            selectedMonth={selectedMonth}
-            onMonthSelect={setSelectedMonth}
-            destination={selectedDestination}
-            selectedSpecies={selectedSpecies}
-          />
-        </div>
-        <div className="lg:col-span-2">
-          <MonthDetail
-            month={selectedMonth}
-            destination={selectedDestination}
-            selectedSpecies={selectedSpecies}
-          />
-        </div>
+      {/* Highlighted events - moved below results */}
+      <div className="mb-8">
+        <HighlightedEvents destination={selectedDestination} />
       </div>
 
       {/* CTA */}
