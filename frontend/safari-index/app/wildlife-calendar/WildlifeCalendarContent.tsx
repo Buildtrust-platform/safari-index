@@ -26,6 +26,7 @@ import {
   AlertTriangle,
 } from 'lucide-react';
 import { cn } from '../ui/utils';
+import { MigrationTracker } from '../components/maps';
 import {
   MONTHS,
   DESTINATIONS,
@@ -635,6 +636,16 @@ export default function WildlifeCalendarContent() {
           selectedSpecies={selectedSpecies}
         />
       </div>
+
+      {/* Migration Tracker - shows for Tanzania/Kenya */}
+      {(selectedDestination === 'tanzania' || selectedDestination === 'kenya') && (
+        <div className="mb-8">
+          <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
+            Track the Great Migration
+          </h2>
+          <MigrationTracker initialMonth={selectedMonth} />
+        </div>
+      )}
 
       {/* Highlighted events - moved below results */}
       <div className="mb-8">

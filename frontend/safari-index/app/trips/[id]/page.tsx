@@ -48,6 +48,7 @@ import {
 import { ImageBand, ImageBandContent, ecosystemImages } from '../../components/visual';
 import { Navbar, Footer } from '../../components/layout';
 import { TypicalDaySection, AccommodationSection, CostSignalSection, ExclusionBlock } from '../../components/trips';
+import { TripPageClientActions } from './TripPageClientActions';
 
 /**
  * Generate static params for all trips
@@ -275,6 +276,16 @@ export default async function TripPage({
               </span>
             ))}
           </div>
+        </section>
+
+        {/* Route map and save button */}
+        <section className="mb-8">
+          <TripPageClientActions
+            tripId={id}
+            tripTitle={trip.title}
+            coreParks={trip.core_parks_or_areas}
+            region={getPrimaryDestination(trip)}
+          />
         </section>
 
         {/* Advisory Panel - consolidated fit/trade-offs/exclusion */}
