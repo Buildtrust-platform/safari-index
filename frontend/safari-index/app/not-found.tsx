@@ -30,6 +30,15 @@ export default function NotFound() {
             Let's get you back on track.
           </p>
 
+          {/* Primary CTA - Safari Finder */}
+          <Link
+            href="/safari-finder"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 text-white rounded-lg font-medium hover:bg-amber-600 transition-colors mb-8"
+          >
+            Find Your Safari
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+
           {/* Quick links */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
             <Link
@@ -48,17 +57,17 @@ export default function NotFound() {
             </Link>
 
             <Link
-              href="/decisions"
+              href="/trips"
               className="flex items-center gap-3 p-4 bg-white rounded-xl border border-stone-200 hover:border-amber-300 hover:shadow-sm transition-all group"
             >
               <div className="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center">
-                <Search className="w-5 h-5 text-amber-700" />
+                <Compass className="w-5 h-5 text-amber-700" />
               </div>
               <div className="text-left">
                 <p className="font-medium text-stone-900 group-hover:text-amber-700 transition-colors">
-                  Decisions
+                  Safaris
                 </p>
-                <p className="text-xs text-stone-500">Browse questions</p>
+                <p className="text-xs text-stone-500">Browse itineraries</p>
               </div>
             </Link>
 
@@ -78,17 +87,17 @@ export default function NotFound() {
             </Link>
 
             <Link
-              href="/trips"
+              href="/decisions"
               className="flex items-center gap-3 p-4 bg-white rounded-xl border border-stone-200 hover:border-amber-300 hover:shadow-sm transition-all group"
             >
               <div className="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center">
-                <Compass className="w-5 h-5 text-amber-700" />
+                <Search className="w-5 h-5 text-amber-700" />
               </div>
               <div className="text-left">
                 <p className="font-medium text-stone-900 group-hover:text-amber-700 transition-colors">
-                  Trips
+                  Decisions
                 </p>
-                <p className="text-xs text-stone-500">Safari itineraries</p>
+                <p className="text-xs text-stone-500">Answer questions</p>
               </div>
             </Link>
           </div>

@@ -58,11 +58,11 @@ export function Footer({ variant = 'operator' }: FooterProps) {
               <Link href="/decisions" className="block text-sm text-stone-400 hover:text-white transition-colors">
                 Decisions
               </Link>
+              <Link href="/practical-info" className="block text-sm text-stone-400 hover:text-white transition-colors">
+                Practical Info
+              </Link>
               <Link href="/faq" className="block text-sm text-stone-400 hover:text-white transition-colors">
                 FAQ
-              </Link>
-              <Link href="/guides" className="block text-sm text-stone-400 hover:text-white transition-colors">
-                Guides
               </Link>
               <Link href="/blog" className="block text-sm text-stone-400 hover:text-white transition-colors">
                 Insights

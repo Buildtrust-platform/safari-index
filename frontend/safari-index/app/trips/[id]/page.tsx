@@ -47,8 +47,9 @@ import {
 } from '../../../lib/trip-links';
 import { ImageBand, ImageBandContent, ecosystemImages } from '../../components/visual';
 import { Navbar, Footer } from '../../components/layout';
-import { TypicalDaySection, AccommodationSection, CostSignalSection, ExclusionBlock } from '../../components/trips';
+import { TypicalDaySection, AccommodationSection, CostSignalSection, ExclusionBlock, DayByDayVisualization } from '../../components/trips';
 import { TripPageClientActions } from './TripPageClientActions';
+import { getItineraryByTripShapeId } from '../../content/itineraries';
 
 /**
  * Generate static params for all trips
@@ -148,6 +149,7 @@ export default async function TripPage({
   const guideLinks = getGuideLinksForTrip(trip);
   const variants = getTripVariants(trip);
   const tripImage = getTripImage(trip);
+  const itinerary = getItineraryByTripShapeId(id);
 
   const regions = trip.regions
     .filter((r) => !['east-africa', 'southern-africa'].includes(r))
@@ -287,6 +289,16 @@ export default async function TripPage({
             region={getPrimaryDestination(trip)}
           />
         </section>
+
+        {/* Day-by-Day visualization - if itinerary data available */}
+        {itinerary && itinerary.core_segments.length > 0 && (
+          <DayByDayVisualization
+            segments={itinerary.core_segments}
+            tripTitle={trip.title}
+            totalDays={itinerary.duration_band.typical_days}
+            travelMode={itinerary.variant_options.travel_modes[0] || 'drive'}
+          />
+        )}
 
         {/* Advisory Panel - consolidated fit/trade-offs/exclusion */}
         <section className="mb-8" data-testid="section-advisory">

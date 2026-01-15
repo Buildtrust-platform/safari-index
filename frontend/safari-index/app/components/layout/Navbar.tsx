@@ -27,11 +27,11 @@ interface NavbarProps {
 }
 
 const NAV_LINKS = [
+  { label: 'Find Your Safari', href: '/safari-finder', highlight: true },
   { label: 'Safaris', href: '/trips' },
   { label: 'Destinations', href: '/destinations' },
   { label: 'Wildlife Calendar', href: '/wildlife-calendar' },
   { label: 'Insights', href: '/blog' },
-  { label: 'How it works', href: '/how-it-works' },
 ];
 
 export function Navbar({ variant = 'transparent' }: NavbarProps) {
@@ -107,9 +107,13 @@ export function Navbar({ variant = 'transparent' }: NavbarProps) {
                 href={link.href}
                 className={cn(
                   'px-4 py-2 text-sm font-medium rounded-md transition-colors',
-                  showSolid
-                    ? 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
-                    : 'text-white/80 hover:text-white hover:bg-white/10'
+                  link.highlight
+                    ? showSolid
+                      ? 'text-amber-700 hover:text-amber-800 hover:bg-amber-50'
+                      : 'text-amber-300 hover:text-amber-200 hover:bg-white/10'
+                    : showSolid
+                      ? 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
+                      : 'text-white/80 hover:text-white hover:bg-white/10'
                 )}
                 data-testid={`navbar-link-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
               >
@@ -182,7 +186,12 @@ export function Navbar({ variant = 'transparent' }: NavbarProps) {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block px-4 py-3 text-stone-700 hover:bg-stone-50 rounded-md transition-colors"
+                className={cn(
+                  'block px-4 py-3 rounded-md transition-colors',
+                  link.highlight
+                    ? 'text-amber-700 bg-amber-50 hover:bg-amber-100'
+                    : 'text-stone-700 hover:bg-stone-50'
+                )}
               >
                 {link.label}
               </Link>

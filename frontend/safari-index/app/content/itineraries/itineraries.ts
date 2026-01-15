@@ -6229,6 +6229,13 @@ export function getItineraryBySlug(slug: string): Itinerary | null {
 }
 
 /**
+ * Get itinerary by linked trip shape ID
+ */
+export function getItineraryByTripShapeId(tripShapeId: string): Itinerary | null {
+  return itineraries.find((i) => i.linked_trip_shape_id === tripShapeId && i.is_published) || null;
+}
+
+/**
  * Get itineraries by region
  */
 export function getItinerariesByRegion(region: string): Itinerary[] {

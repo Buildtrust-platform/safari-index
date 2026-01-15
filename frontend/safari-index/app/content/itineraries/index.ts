@@ -28,6 +28,7 @@ export {
   getFeaturedItineraries,
   getItineraryById,
   getItineraryBySlug,
+  getItineraryByTripShapeId,
   getItinerariesByRegion,
   getItinerariesByStyle,
   getItinerarySummaries,

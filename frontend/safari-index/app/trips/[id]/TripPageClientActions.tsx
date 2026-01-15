@@ -2,9 +2,11 @@
 
 /**
  * Client-side actions for trip page
- * Includes save button and route map (both require client-side interactivity)
+ * Includes save button, route map, and compare link (all require client-side interactivity)
  */
 
+import Link from 'next/link';
+import { ArrowRightLeft } from 'lucide-react';
 import { SaveTripButton } from '../../components/engagement';
 import { TravelMap } from '../../components/visual';
 
@@ -32,8 +34,15 @@ export function TripPageClientActions({
 
   return (
     <div className="space-y-6">
-      {/* Save button */}
-      <div className="flex justify-end">
+      {/* Action buttons - Save and Compare */}
+      <div className="flex items-center justify-between gap-4">
+        <Link
+          href={`/trips/compare?trips=${tripId}`}
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-stone-600 bg-stone-100 rounded-lg hover:bg-stone-200 transition-colors"
+        >
+          <ArrowRightLeft className="w-4 h-4" />
+          Compare with other trips
+        </Link>
         <SaveTripButton
           tripId={tripId}
           tripTitle={tripTitle}

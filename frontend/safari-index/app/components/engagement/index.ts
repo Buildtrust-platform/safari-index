@@ -6,3 +6,4 @@
 
 export { SaveTripButton } from './SaveTripButton';
 export { SavedTripsPanel } from './SavedTripsPanel';
+export { NewsletterSignup } from './NewsletterSignup';
