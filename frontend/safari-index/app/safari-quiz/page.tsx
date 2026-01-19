@@ -13,17 +13,17 @@ import { ImageBand, ImageBandContent, ecosystemImages } from '../components/visu
 import SafariQuizContent from './SafariQuizContent';
 
 export const metadata: Metadata = {
-  title: 'Safari Quiz - Find Your Perfect Trip | Vurara Safaris',
+  title: 'Safari Quiz - Find Your Match | Vurara Safaris',
   description:
-    'Take our quick quiz to discover which African safari matches your travel style, priorities, and dreams. Get personalized recommendations in minutes.',
+    'Answer questions about your travel style and priorities to find safari itineraries that fit. Results available immediately.',
   robots: 'index, follow',
   alternates: {
     canonical: '/safari-quiz',
   },
   openGraph: {
-    title: 'Safari Quiz - Find Your Perfect Trip | Vurara Safaris',
+    title: 'Safari Quiz - Find Your Match | Vurara Safaris',
     description:
-      'Answer a few questions about your travel preferences and discover which safari is right for you.',
+      'Answer questions about your travel style and priorities to find safari itineraries that fit.',
     type: 'website',
     url: '/safari-quiz',
   },
@@ -66,7 +66,7 @@ export default function SafariQuizPage() {
 
             {/* Subtitle */}
             <p className="text-white/80 text-lg max-w-xl mx-auto">
-              Answer a few questions and we'll recommend the perfect safari for you.
+              Answer a few questions to find safaris that match your priorities.
               <br className="hidden md:block" />
               Takes about 2 minutes.
             </p>

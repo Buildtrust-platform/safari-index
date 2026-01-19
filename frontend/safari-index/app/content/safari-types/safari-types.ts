@@ -25,7 +25,7 @@ export const safariTypes: SafariType[] = [
   {
     id: 'first-time-classic',
     name: 'First-Time Classic',
-    positioning_line: 'The safari most people imagine when they dream of Africa',
+    positioning_line: 'The classic safari format most travelers choose for a first experience',
 
     attributes: {
       pace: 'moderate',
@@ -476,7 +476,7 @@ export const safariTypes: SafariType[] = [
       ],
       losses: [
         'Significant price premium',
-        'May feel insulated from authentic bush experience',
+        'Limited interaction with landscape beyond scheduled game drives',
         'Luxury infrastructure limits location options',
         'Less interaction with other travelers',
       ],

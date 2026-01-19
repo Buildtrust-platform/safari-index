@@ -55,11 +55,11 @@ const DEFAULT_TEMPLATES: ResponseTemplate[] = [
     subject: 'Your Family Safari Inquiry',
     body: `Hi,
 
-Thank you for reaching out about planning a family safari adventure!
+Thank you for reaching out about a family safari.
 
-I've reviewed your inquiry and I'm excited to help create an unforgettable experience for your family. Based on what you've shared, I have some wonderful options in mind.
+I've reviewed your inquiry. Based on what you've shared, there are a few itineraries that could work for your group—though each involves trade-offs around timing, budget, and activity levels for the children.
 
-Would you like to schedule a quick call to discuss the details? I'm available this week and would love to learn more about what you're hoping for from this trip.
+Would a quick call work to discuss specifics? I'm available this week and can walk through what tends to work well for families with children in your age range.
 
 Best regards,
 Vurara Safaris`,
@@ -72,11 +72,11 @@ Vurara Safaris`,
     subject: 'Your Romantic Safari Getaway',
     body: `Hi,
 
-Congratulations! Thank you for considering us for your honeymoon safari.
+Thank you for reaching out about a honeymoon safari.
 
-A safari honeymoon is truly one of the most romantic experiences - imagine sundowners overlooking the savanna, private dinners under the stars, and waking up to the sounds of the African bush.
+Safari honeymoons work well for couples who enjoy shared outdoor experiences and can tolerate early mornings. The trade-off: wilderness camps prioritize location over amenities, while luxury lodges offer comfort but may feel less immersive.
 
-I'd love to chat about creating something special for you both. When would be a good time for a quick call?
+I can walk through what typically suits honeymooners based on your priorities. When would a brief call work?
 
 Best regards,
 Vurara Safaris`,

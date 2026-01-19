@@ -263,7 +263,7 @@ export default function SavedSafarisContent() {
                 Ready to plan your safari?
               </h3>
               <p className="text-stone-600">
-                Share your saved choices with us and we'll help you customize the perfect trip.
+                Share your saved choices with us and we'll match them to available options.
               </p>
             </div>
             <Link

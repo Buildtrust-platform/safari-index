@@ -47,7 +47,7 @@ const TRAVELER_TYPES = [
     id: 'first-timers',
     title: 'First-Time Safari Travelers',
     subtitle: 'Get it right the first time',
-    description: 'Proven itineraries, reliable wildlife, and guides who know how to make your first safari unforgettable.',
+    description: 'Proven itineraries, reliable wildlife, and guides experienced with first-time travelers.',
     icon: Compass,
     href: '/safaris-for/first-timers',
     color: 'bg-green-100 text-green-700',
@@ -175,7 +175,7 @@ export default function SafarisForPage() {
             <p className="text-white/80 text-lg max-w-xl mx-auto">
               Different travelers need different safaris.
               <br className="hidden md:block" />
-              Find itineraries curated for your specific travel style.
+              Find itineraries matched to your travel style and priorities.
             </p>
           </div>
         </ImageBandContent>

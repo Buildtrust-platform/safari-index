@@ -178,7 +178,7 @@ export const multigenerationalBlog: BlogContent = {
     alt: 'Three giraffes standing in golden African savannah grassland at dawn',
   },
 
-  whyNotSimple: `Multigenerational safari sounds wonderful in concept. Grandparents sharing the African bush with grandchildren. Three generations bonding over wildlife. The reality involves logistics that wedding planners would find challenging.
+  whyNotSimple: `Multigenerational safari presents logistical complexity. Grandparents sharing the African bush with grandchildren. Three generations bonding over wildlife. The reality involves logistics that wedding planners would find challenging.
 
 Different generations have different stamina, different interests, different tolerance for early mornings and bumpy roads. A 70-year-old with mobility limitations experiences safari differently than a 35-year-old parent or a 10-year-old child. Finding common ground that works for everyone requires careful planning, not optimistic assumptions.
 
@@ -194,7 +194,7 @@ The question is not whether it can be done. It absolutely can, and the results c
 
 **Medical considerations multiply.** Each generation has different health needs. Malaria prophylaxis options vary by age. Heat tolerance differs. Access to medical care at remote camps matters more when elderly family members are present.`,
 
-  tradeoffs: `The gain is genuine shared experience across generations. Grandparents watching grandchildren see their first elephant. Family stories that get retold for decades. A unique trip that differs from any beach vacation or city tour. These moments have value that is hard to quantify.
+  tradeoffs: `The gain is shared experience across generations that typically doesn't occur at home—grandparents watching grandchildren see their first elephant, family stories that get retold for decades. Success depends on shared interests and activity tolerance across age groups.
 
 The loss is flexibility and sometimes intensity. The pace slows to accommodate everyone. Some activities become unavailable. The trip optimizes for collective experience rather than any individual's ideal safari.
 

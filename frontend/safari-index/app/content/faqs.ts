@@ -74,7 +74,7 @@ export const FAQS: FAQ[] = [
     category: 'planning',
     question: 'How far in advance should I start planning?',
     answer:
-      'For peak season (June-October in East Africa, May-September in Southern Africa), start 6-12 months ahead. Popular lodges book out early. For green season travel, 3-6 months is usually sufficient. Last-minute trips are possible but limit your options.',
+      'Peak season requires 9-12 months for specific camps and 6 months if flexible on lodges. Green season needs 3-4 months. The difference: popular camps like Angama Mara or Singita book out a year ahead for July-September, while mid-range options remain available at 4-6 months.',
     showOn: ['contact'],
   },
   {
@@ -97,7 +97,7 @@ export const FAQS: FAQ[] = [
     category: 'planning',
     question: 'Is this suitable for first-time safari travelers?',
     answer:
-      'Yes. Most of our clients are first-time safari travelers. We explain everything clearly: what to pack, what to expect, how game drives work, and how to read wildlife behavior. We match the trip to your experience level.',
+      'Yes. Most of our clients are first-time travelers. We teach behavior reading—when a lion\'s ears are forward vs. pinned back, why leopards move slowly vs. quickly—which turns random sightings into legible narratives. First-timers typically do better with proven parks (Serengeti, Masai Mara) rather than remote specialist destinations.',
     showOn: ['inquire'],
   },
 
@@ -150,7 +150,7 @@ export const FAQS: FAQ[] = [
     category: 'destinations',
     question: 'Should I choose Tanzania or Kenya for my first safari?',
     answer:
-      'Both are excellent. Tanzania offers more wilderness (Serengeti is 6x larger than the Mara) and the Ngorongoro Crater. Kenya has the Masai Mara conservancies with exclusive game viewing and walking safaris. Budget often favors Kenya; raw wilderness favors Tanzania. We can help you decide based on your priorities.',
+      'Tanzania if you prioritize raw wilderness and want the Migration year-round—Serengeti is 6x larger than the Mara with fewer fenced boundaries. Kenya if you prefer conservancy access and shorter drives between parks—Mara conservancies limit vehicles to 4-6 per sighting vs. 20+ in Serengeti peak season. Tanzania costs 15-20% more in park fees; Kenya conservancy rates are comparable but include exclusive access.',
     showOn: ['destinations'],
   },
   {
@@ -166,7 +166,7 @@ export const FAQS: FAQ[] = [
     category: 'destinations',
     question: 'Which countries do you cover?',
     answer:
-      'We operate safaris in Tanzania, Kenya, Botswana, Zimbabwe, Zambia, Namibia, South Africa, Rwanda, and Uganda. Each has distinct strengths. We can help you choose based on what matters most to you.',
+      'Tanzania, Kenya, Botswana, Zimbabwe, Zambia, Namibia, South Africa, Rwanda, and Uganda. Each has specific strengths: Tanzania and Kenya for migration and Big Five density, Botswana for water-based safari and low crowds, Rwanda and Uganda for gorillas, Namibia for landscapes and self-drive, South Africa for malaria-free options and value.',
     showOn: ['destinations', 'home'],
   },
   {
@@ -185,7 +185,7 @@ export const FAQS: FAQ[] = [
     category: 'timing',
     question: 'When is the best time for a safari?',
     answer:
-      'It depends on what you want to see. Dry season (June-October in most regions) concentrates wildlife around water. Green season (November-May) brings lush landscapes, baby animals, and lower prices. The Migration has different timing depending on which part you want to witness. There is no single "best" time.',
+      'Big Five density: June-October when animals concentrate at water sources. Newborn animals: January-March during calving season. Migration river crossings: July-October in Kenya, December-July in Tanzania. Green season (November-May) offers 20-40% lower prices and quieter camps, with good but more dispersed wildlife.',
     showOn: ['home'],
   },
   {
@@ -207,7 +207,7 @@ export const FAQS: FAQ[] = [
     category: 'timing',
     question: 'How many days do I need for a safari?',
     answer:
-      '5-7 days is a good starting point for a single-country safari. 10-14 days allows for multiple regions or a beach extension. Under 5 days is possible but limits what you can see. Longer trips reduce per-day cost and transit fatigue.',
+      '5 days covers three parks and absorbs jet-lag loss. 7 days adds a second game drive per park—critical for shy species like leopards that require patience. Under 5 days means 40% of your time is transfers. 10-14 days allows multiple regions or a beach extension without rush.',
   },
 
   // ============================================
@@ -280,7 +280,7 @@ export const FAQS: FAQ[] = [
     category: 'logistics',
     question: 'Is it safe to go on safari?',
     answer:
-      'Safari travel has an excellent safety record. Lodges and camps are secure, guides are highly trained, and wildlife encounters are managed carefully. Political situations vary by country; we monitor conditions and advise accordingly. Medical evacuation insurance is essential.',
+      'Safari travel has a safety record comparable to European tourism. Lodges maintain 24-hour security; guides undergo annual certification in wilderness first aid; wildlife encounters follow established protocols. Incidents are rare—you are statistically safer on safari than driving to the airport. Medical evacuation insurance is essential for remote camps.',
   },
   {
     id: 'children-on-safari',

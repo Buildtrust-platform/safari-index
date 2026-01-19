@@ -218,7 +218,7 @@ export const PARKS: Record<string, GamePark> = {
     destinationId: 'tanzania',
     type: 'national-park',
     ecosystem: 'savannah',
-    tagline: 'Elephants and baobabs in Tanzania\'s hidden gem',
+    tagline: 'Elephants and baobabs in Tanzania\'s less-visited conservation area',
     description: 'Tarangire is defined by the Tarangire River, ancient baobab trees, and one of Africa\'s highest elephant densities. During dry season, wildlife concentrates along the river, creating spectacular viewing. Less crowded than northern circuit neighbors.',
     facts: [
       { label: 'Size', value: '2,850 km²' },

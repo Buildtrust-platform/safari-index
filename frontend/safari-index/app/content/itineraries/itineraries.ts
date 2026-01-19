@@ -1697,7 +1697,7 @@ export const itineraries: Itinerary[] = [
         location: 'Stellenbosch / Franschhoek',
         region: 'south-africa',
         nights: [2, 3],
-        description: 'Renowned wines in a stunning mountain setting.',
+        description: 'Renowned wines in mountainous terrain at 300-500m elevation.',
         highlights: [
           'Wine estate tastings',
           'Gourmet dining',

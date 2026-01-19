@@ -64,7 +64,7 @@ const DESTINATIONS = [
     id: 'botswana',
     name: 'Botswana',
     region: 'Southern Africa',
-    description: 'Okavango Delta, Chobe, and the Kalahari. Water-based safari and exclusive camps.',
+    description: 'Okavango Delta, Chobe, and the Kalahari. Water-based safari and low-density camps.',
     highlights: ['Okavango Delta', 'Chobe', 'Makgadikgadi', 'Kalahari'],
   },
   {
@@ -92,7 +92,7 @@ const DESTINATIONS = [
     id: 'namibia',
     name: 'Namibia',
     region: 'Southern Africa',
-    description: 'Desert landscapes, Sossusvlei dunes, and self-drive adventures. Photography paradise.',
+    description: 'Desert landscapes, Sossusvlei dunes, and self-drive adventures. Strong photography conditions.',
     highlights: ['Sossusvlei', 'Etosha', 'Skeleton Coast', 'Damaraland'],
   },
   {

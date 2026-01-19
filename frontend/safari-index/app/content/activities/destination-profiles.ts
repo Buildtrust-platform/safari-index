@@ -155,7 +155,7 @@ export const destinationProfiles: DestinationActivityProfile[] = [
     ],
     signature_experience: {
       title: 'Mokoro Through the Delta',
-      description: 'Gliding silently through papyrus-lined channels in a traditional dugout canoe, eye-level with hippos and lilies. The Okavango Delta\'s mokoro experience is utterly unique—silent, meditative, and deeply connected to water.',
+      description: 'Gliding silently through papyrus-lined channels in a traditional dugout canoe at water level with hippos and lilies. Mokoro is slower than motorboat safaris and involves 2-4 hour sessions—a different pace that suits some travelers more than others.',
       image_hint: 'Traditional mokoro canoe gliding through lily-covered Okavango Delta channel at golden hour',
     },
     typical_day: {

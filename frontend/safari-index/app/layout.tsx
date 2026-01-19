@@ -41,7 +41,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Vurara Safaris | Tailor-Made African Safari Trips",
+    default: "Vurara Safaris | African Safari Planning",
     template: "%s | Vurara Safaris",
   },
   description: "The truth of the wild, revealed. Logic-backed safari planning across East and Southern Africa.",

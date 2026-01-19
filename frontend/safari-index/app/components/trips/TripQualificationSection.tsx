@@ -90,7 +90,7 @@ function generateQualificationCriteria(trip: TripArchetype): {
   } else if (!trip.traveler_fit.includes('first-safari')) {
     notRightFor.push({
       icon: <Users className="w-4 h-4" />,
-      text: "You're a safari veteran looking for off-the-beaten-path experiences",
+      text: "You're a safari veteran looking for lesser-known reserves and specialist guides",
     });
   }
 

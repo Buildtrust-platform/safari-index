@@ -46,7 +46,7 @@ The question is not what safari costs but what the safari you want costs.`,
 
 Lower budgets require trade-offs but can deliver excellent wildlife. The animals are the same. The comfort and crowding differ. [Budget safari](/decisions/budget-safari-accommodation) explores what changes at lower price points.
 
-More days at lower daily cost sometimes beats fewer days at higher cost. A week at good mid-range camps might produce better memories than four days at luxury camps. Time in the bush has value.
+More days at lower daily cost sometimes beats fewer days at higher cost. A week at mid-range camps typically generates more sighting variety and vehicle flexibility than four days at luxury camps, which some travelers prefer.
 
 Splurging selectively offers the best value for many travelers. [Where to splurge and save](/decisions/safari-splurge-vs-save) identifies where extra spending delivers proportional returns.`,
 
