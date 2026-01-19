@@ -42,7 +42,7 @@ const COMPANY = {
     country: 'Netherlands',
   },
   phone: '+31 6 14855683',
-  email: 'hello@vurarasafaris.com',
+  email: 'info@vurarasafaris.com',
 };
 
 export default function AboutPage() {

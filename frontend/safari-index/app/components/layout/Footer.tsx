@@ -18,7 +18,7 @@ const COMPANY = {
     country: 'Netherlands',
   },
   phone: '+31 6 14855683',
-  email: 'hello@vurarasafaris.com',
+  email: 'info@vurarasafaris.com',
   socials: {
     instagram: 'https://instagram.com/vurarasafaris',
     facebook: 'https://facebook.com/vurarasafaris',

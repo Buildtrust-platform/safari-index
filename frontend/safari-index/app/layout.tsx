@@ -118,7 +118,7 @@ const organizationJsonLd = {
     longitude: 4.6003,
   },
   telephone: "+31614855683",
-  email: "hello@vurarasafaris.com",
+  email: "info@vurarasafaris.com",
   sameAs: [
     "https://instagram.com/vurarasafaris",
     "https://facebook.com/vurarasafaris",
