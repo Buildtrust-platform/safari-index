@@ -7,7 +7,7 @@
  */
 
 import Link from 'next/link';
-import { MapPin, Mail, Phone } from 'lucide-react';
+import { MapPin, Mail, Phone, Instagram, Facebook, Youtube } from 'lucide-react';
 
 // NAP data for SEO consistency
 const COMPANY = {
@@ -19,7 +19,22 @@ const COMPANY = {
   },
   phone: '+31 6 14855683',
   email: 'hello@vurarasafaris.com',
+  socials: {
+    instagram: 'https://instagram.com/vurarasafaris',
+    facebook: 'https://facebook.com/vurarasafaris',
+    youtube: 'https://youtube.com/@vurarasafaris',
+    x: 'https://x.com/vurarasafaris',
+  },
 };
+
+// X (Twitter) icon - not in lucide-react
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
 
 interface FooterProps {
   /** Tagline variant */
@@ -115,11 +130,51 @@ export function Footer({ variant = 'operator' }: FooterProps) {
             Vurara Safaris · {tagline}
           </p>
           <div className="flex items-center gap-6">
-            <Link href="/compare" className="text-sm text-stone-400 hover:text-white transition-colors">
-              Compare
+            {/* Social links */}
+            <div className="flex items-center gap-4">
+              <a
+                href={COMPANY.socials.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-stone-500 hover:text-white transition-colors"
+                aria-label="Follow us on Instagram"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a
+                href={COMPANY.socials.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-stone-500 hover:text-white transition-colors"
+                aria-label="Follow us on Facebook"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a
+                href={COMPANY.socials.x}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-stone-500 hover:text-white transition-colors"
+                aria-label="Follow us on X"
+              >
+                <XIcon className="w-5 h-5" />
+              </a>
+              <a
+                href={COMPANY.socials.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-stone-500 hover:text-white transition-colors"
+                aria-label="Subscribe on YouTube"
+              >
+                <Youtube className="w-5 h-5" />
+              </a>
+            </div>
+            <span className="text-stone-700">|</span>
+            <Link href="/privacy" className="text-sm text-stone-500 hover:text-white transition-colors">
+              Privacy
             </Link>
-            <Link href="/explore" className="text-sm text-stone-400 hover:text-white transition-colors">
-              Explore
+            <Link href="/terms" className="text-sm text-stone-500 hover:text-white transition-colors">
+              Terms
             </Link>
           </div>
         </div>
