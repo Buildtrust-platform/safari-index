@@ -3,9 +3,23 @@
  *
  * Consistent footer across all Vurara Safaris pages.
  * Documentary, operator-grade tone. No promotional language.
+ * Includes NAP (Name, Address, Phone) for local SEO signals.
  */
 
 import Link from 'next/link';
+import { MapPin, Mail, Phone } from 'lucide-react';
+
+// NAP data for SEO consistency
+const COMPANY = {
+  name: 'Vurara Safaris',
+  address: {
+    street: 'De Wetstraat 134',
+    city: 'Ridderkerk',
+    country: 'Netherlands',
+  },
+  phone: '+31 6 14855683',
+  email: 'hello@vurarasafaris.com',
+};
 
 interface FooterProps {
   /** Tagline variant */
@@ -58,9 +72,6 @@ export function Footer({ variant = 'operator' }: FooterProps) {
               <Link href="/decisions" className="block text-sm text-stone-400 hover:text-white transition-colors">
                 Decisions
               </Link>
-              <Link href="/practical-info" className="block text-sm text-stone-400 hover:text-white transition-colors">
-                Practical Info
-              </Link>
               <Link href="/faq" className="block text-sm text-stone-400 hover:text-white transition-colors">
                 FAQ
               </Link>
@@ -70,13 +81,31 @@ export function Footer({ variant = 'operator' }: FooterProps) {
               <Link href="/how-it-works" className="block text-sm text-stone-400 hover:text-white transition-colors">
                 How it works
               </Link>
+              <Link href="/about" className="block text-sm text-stone-400 hover:text-white transition-colors">
+                About
+              </Link>
               <Link href="/contact" className="block text-sm text-stone-400 hover:text-white transition-colors">
                 Contact
               </Link>
-              <Link href="/inquire" className="block text-sm text-stone-400 hover:text-white transition-colors">
-                Plan a Safari
-              </Link>
             </div>
+          </div>
+        </div>
+
+        {/* NAP Section - Name, Address, Phone for local SEO */}
+        <div className="border-t border-stone-800 pt-6 mb-6">
+          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8 text-sm text-stone-400">
+            <div className="flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-stone-500" />
+              <span>{COMPANY.address.street}, {COMPANY.address.city}, {COMPANY.address.country}</span>
+            </div>
+            <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-2 hover:text-white transition-colors">
+              <Mail className="w-4 h-4 text-stone-500" />
+              <span>{COMPANY.email}</span>
+            </a>
+            <a href={`tel:${COMPANY.phone.replace(/\s/g, '')}`} className="flex items-center gap-2 hover:text-white transition-colors">
+              <Phone className="w-4 h-4 text-stone-500" />
+              <span>{COMPANY.phone}</span>
+            </a>
           </div>
         </div>
 

@@ -167,6 +167,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  // About page - important for E-E-A-T and brand identity
+  const aboutPage = {
+    url: `${baseUrl}/about`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  };
+
   // Contact page
   const contactPage = {
     url: `${baseUrl}/contact`,
@@ -365,6 +373,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...decisionPages,
     blogIndexPage,
     ...blogPages,
+    aboutPage,
     contactPage,
     itinerariesIndexPage,
     ...itineraryPages,

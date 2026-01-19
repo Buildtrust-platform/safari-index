@@ -14,7 +14,7 @@
 
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Mail, ArrowRight, Phone, Send, Video } from 'lucide-react';
+import { Mail, ArrowRight, Phone, Send, Video, MapPin } from 'lucide-react';
 import { Navbar, Footer, PageGrid } from '../components/layout';
 import { FAQSection } from '../components/FAQSection';
 import { getFAQsForPage } from '../content/faqs';
@@ -23,7 +23,14 @@ import { BookingForm } from './BookingForm';
 
 // Environment variables with fallbacks
 const OPERATOR_EMAIL = process.env.OPERATOR_EMAIL || 'info@vurarasafaris.com';
-const OPERATOR_PHONE = process.env.OPERATOR_PHONE;
+const OPERATOR_PHONE = process.env.OPERATOR_PHONE || '+31 6 14855683';
+
+// Company address for NAP consistency
+const COMPANY_ADDRESS = {
+  street: 'De Wetstraat 134',
+  city: 'Ridderkerk',
+  country: 'Netherlands',
+};
 
 export const metadata: Metadata = {
   title: 'Contact | Vurara Safaris',
@@ -120,12 +127,12 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Direct contact options */}
+            {/* Direct contact options with address */}
             <div className="border-t border-stone-200 pt-8">
               <p className="text-center text-sm text-stone-500 mb-6">
                 Or reach us directly
               </p>
-              <div className="flex flex-wrap items-center justify-center gap-4">
+              <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
                 <a
                   href={`mailto:${OPERATOR_EMAIL}`}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-stone-100 text-stone-700 hover:bg-stone-200 transition-colors text-sm"
@@ -133,16 +140,36 @@ export default function ContactPage() {
                   <Mail className="w-4 h-4" />
                   {OPERATOR_EMAIL}
                 </a>
-                {OPERATOR_PHONE && (
-                  <a
-                    href={`tel:${OPERATOR_PHONE}`}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-stone-100 text-stone-700 hover:bg-stone-200 transition-colors text-sm"
-                  >
-                    <Phone className="w-4 h-4" />
-                    {OPERATOR_PHONE}
-                  </a>
-                )}
+                <a
+                  href={`tel:${OPERATOR_PHONE.replace(/\s/g, '')}`}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-stone-100 text-stone-700 hover:bg-stone-200 transition-colors text-sm"
+                >
+                  <Phone className="w-4 h-4" />
+                  {OPERATOR_PHONE}
+                </a>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-stone-100 text-stone-700 text-sm">
+                  <MapPin className="w-4 h-4" />
+                  {COMPANY_ADDRESS.street}, {COMPANY_ADDRESS.city}, {COMPANY_ADDRESS.country}
+                </div>
               </div>
+
+              {/* Google Map embed for local SEO signals */}
+              <div className="rounded-xl overflow-hidden border border-stone-200">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2466.8893!2d4.6003!3d51.8728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c43500!2sRidderkerk%2C%20Netherlands!5e0!3m2!1sen!2snl!4v1234567890"
+                  width="100%"
+                  height="250"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Vurara Safaris location in Ridderkerk, Netherlands"
+                  className="w-full"
+                />
+              </div>
+              <p className="text-center text-xs text-stone-400 mt-2">
+                Vurara Safaris · Ridderkerk, Netherlands · Serving travelers worldwide
+              </p>
             </div>
 
             {/* FAQs relevant to contact/booking */}
