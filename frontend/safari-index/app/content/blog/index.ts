@@ -43,6 +43,46 @@ const tzVsKeBlog: BlogContent = {
     alt: 'Sweeping landscape of Masai Mara National Reserve, Kenya',
   },
 
+  verdictBox: {
+    verdict: 'Kenya for budget flexibility, shorter trips, and off-road photography. Tanzania for scale, solitude, and year-round migration access.',
+    recommendation: 'Check your travel dates first—the migration calendar often makes the choice for you.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Kenya',
+    rightHeader: 'Tanzania',
+    rows: [
+      { left: '10-20% cheaper mid-range', right: 'Higher costs but more space' },
+      { left: 'Migration Jul-Oct only', right: 'Migration 8 months/year' },
+      { left: 'Off-road driving allowed', right: 'Track-only in national parks' },
+      { left: 'Compact, high sighting density', right: 'Vast, fewer vehicles' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years planning East Africa safaris',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Is Kenya or Tanzania better for first safari?',
+        answer: 'Neither is objectively better. Kenya is more compact and budget-friendly. Tanzania offers more space and year-round migration access. Your travel dates and budget matter more than the destination.',
+      },
+      {
+        question: 'Where is the Great Migration most of the year?',
+        answer: 'Tanzania. The migration spends about 8 months in the Serengeti (calving, central plains, northern crossings) and only 4 months in Kenya\'s Masai Mara (July-October).',
+      },
+      {
+        question: 'Is Tanzania more expensive than Kenya?',
+        answer: 'Generally yes. Tanzania\'s park fees are higher and the budget sector is thinner. Kenya offers 10-20% savings at mid-range level. At luxury tier, prices are comparable.',
+      },
+    ],
+  },
+
   whyNotSimple: `You see this question everywhere. Safari forums, travel blogs, Reddit threads. People frame it like there is a winner and a loser. Tanzania fans say Kenya is overcrowded. Kenya fans say Tanzania is overpriced. Both miss the point.
 
 These countries share the same ecosystem. The Great Migration does not stop at the border. The lions hunting in the Masai Mara are genetically the same as the lions hunting in the Serengeti. There is no "better wildlife" on either side. If you are weighing these parks specifically, see [Serengeti or Masai Mara](/decisions/serengeti-vs-masai-mara).
@@ -126,6 +166,46 @@ const firstTimerReadyBlog: BlogContent = {
     alt: 'Cheetah family resting in African savannah grassland',
   },
 
+  verdictBox: {
+    verdict: 'If you can handle early mornings, uncertainty, and basic bush conditions, you are ready. Safari readiness is about expectations, not fitness.',
+    recommendation: 'Calibrate expectations first. Documentary footage does not reflect daily safari reality.',
+    outcome: 'yes',
+  },
+
+  comparisonTable: {
+    leftHeader: 'What Safari Requires',
+    rightHeader: 'What Safari Does NOT Require',
+    rows: [
+      { left: 'Tolerance for uncertainty', right: 'Physical fitness or bravery' },
+      { left: 'Early mornings (5:30-6 AM)', right: 'Adventure sport stamina' },
+      { left: 'Patience and wildlife interest', right: 'Previous travel experience' },
+      { left: 'Flexibility when plans change', right: 'Special equipment or skills' },
+    ],
+  },
+
+  author: {
+    name: 'Anne Wambui',
+    role: 'Safari Hospitality Specialist',
+    credentials: '12 years welcoming first-time safari guests',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Do I need to be physically fit for safari?',
+        answer: 'No. Standard game drives involve sitting for 3-4 hours, climbing in and out of vehicles, and short walks in camp. Walking safaris require more fitness but are optional.',
+      },
+      {
+        question: 'Is safari dangerous?',
+        answer: 'No. Guides are professionals with strict protocols. Statistically, you are safer on safari than driving to work. Fear of wildlife rarely justifies avoiding the trip.',
+      },
+      {
+        question: 'What if I cannot handle early mornings?',
+        answer: 'You will miss the best wildlife activity. Animals are most active at dawn when lions hunt and leopards move. If you cannot function before 8 AM, you miss the best part of every day.',
+      },
+    ],
+  },
+
   whyNotSimple: `This question usually is not really about readiness. When people ask it, they are often asking something else. Will I enjoy this? Can I handle it? What if I hate it?
 
 Readiness for safari is not about fitness or packing the right clothes. It is about expectations. The gap between what people think safari is and what safari actually is creates most of the disappointment.
@@ -203,6 +283,46 @@ const migrationTimingBlog: BlogContent = {
   heroImage: {
     src: '/images/heroes/migration-hero.jpg',
     alt: 'Dramatic wildebeest river crossing during the Great Migration in Kenya',
+  },
+
+  verdictBox: {
+    verdict: 'The migration happens year-round. River crossings: July-October. Calving season: January-February. Both are the migration—just different expressions.',
+    recommendation: 'Choose based on what you want: dramatic crossings (unpredictable) or predator action on calves (reliable).',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Crossing Season (Jul-Oct)',
+    rightHeader: 'Calving Season (Jan-Feb)',
+    rows: [
+      { left: 'Dramatic river crossings', right: 'Consistent predator action' },
+      { left: 'Unpredictable timing', right: 'Reliable daily encounters' },
+      { left: 'Northern Serengeti / Mara', right: 'Southern Serengeti / Ndutu' },
+      { left: 'Peak prices, more crowds', right: 'Lower prices, fewer tourists' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years tracking the Great Migration',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'When is the best month to see the Great Migration?',
+        answer: 'There is no single best month. River crossings happen July-October. Calving peaks in February. The herds are migrating somewhere every month—the question is which aspect interests you.',
+      },
+      {
+        question: 'Can guides predict when river crossings happen?',
+        answer: 'No. Guides know where herds are gathering and which crossing points look likely, but no one knows when a lead wildebeest will decide to jump. That animal makes the decision.',
+      },
+      {
+        question: 'Do I need to see a river crossing to see the migration?',
+        answer: 'No. Crossings are dramatic but brief. The migration is millions of animals moving, grazing, giving birth, and dying every day. Calving season is the migration. The herds massing anywhere is the migration.',
+      },
+    ],
   },
 
   whyNotSimple: `The migration is not an event. There is no opening ceremony. It does not start in one place and end in another. About 1.5 million wildebeest, along with hundreds of thousands of zebras and gazelles, move in a continuous loop across the Serengeti-Mara ecosystem. They follow the grass. The grass follows the rain. This has been happening for thousands of years.
