@@ -237,7 +237,7 @@ export default function DecisionPage() {
             </p>
           </div>
 
-          <RelatedDecisions topics={relatedTopics} />
+          <RelatedDecisions topics={relatedTopics} currentDecisionSlug={slug} />
         </main>
       </>
     );
@@ -262,7 +262,7 @@ export default function DecisionPage() {
           <p className="text-gray-700 mb-2">Unable to retrieve a decision at this time.</p>
           <p className="text-gray-500 text-sm">{error}</p>
         </div>
-        <RelatedDecisions topics={relatedTopics} />
+        <RelatedDecisions topics={relatedTopics} currentDecisionSlug={slug} />
       </main>
     );
   }
@@ -551,7 +551,7 @@ export default function DecisionPage() {
           </>
         )}
 
-        <RelatedDecisions topics={relatedTopics} />
+        <RelatedDecisions topics={relatedTopics} currentDecisionSlug={slug} />
 
         <footer className={footerStyles} aria-label="Reference information">
           <p>Decision ID: {decision.decision_id}</p>
@@ -698,7 +698,7 @@ export default function DecisionPage() {
           {/* Trip Planning CTA - quiet link to inquiry system */}
           <TripPlanningCTA topicId={topic.topic_id} topicSlug={topic.slug} />
 
-          <RelatedDecisions topics={relatedTopics} />
+          <RelatedDecisions topics={relatedTopics} currentDecisionSlug={slug} />
 
           {/* Attribution Footer - non-promotional */}
           <AttributionFooter

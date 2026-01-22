@@ -22,6 +22,39 @@ export interface RelatedLink {
 }
 
 /**
+ * Verdict box for "Answer First" SEO pattern
+ */
+export interface BlogVerdictBox {
+  /** The direct answer/verdict */
+  verdict: string;
+  /** Optional recommendation or next step */
+  recommendation?: string;
+  /** Ratings (e.g., Wildlife: 8/10) */
+  ratings?: Array<{ label: string; score: number }>;
+  /** Outcome type for styling */
+  outcome?: 'yes' | 'no' | 'depends' | 'wait';
+}
+
+/**
+ * Comparison table for Featured Snippets
+ */
+export interface BlogComparisonTable {
+  leftHeader: string;
+  rightHeader: string;
+  rows: Array<{ left: string; right: string }>;
+}
+
+/**
+ * Commercial CTA for linking to trips
+ */
+export interface BlogCommercialCTA {
+  headline: string;
+  description?: string;
+  href: string;
+  linkText: string;
+}
+
+/**
  * Blog hero image reference
  */
 export interface BlogHeroImage {
@@ -68,6 +101,15 @@ export interface BlogContent {
 
   /** Section 6: How Vurara Safaris Approaches This Decision */
   ourApproach: string;
+
+  /** Optional: "Answer First" verdict box for AEO */
+  verdictBox?: BlogVerdictBox;
+
+  /** Optional: Comparison table for Featured Snippets */
+  comparisonTable?: BlogComparisonTable;
+
+  /** Optional: Commercial CTA linking to trip */
+  commercialCTA?: BlogCommercialCTA;
 
   /** Related decisions (max 6) */
   relatedDecisions: RelatedLink[];
@@ -122,6 +164,42 @@ export function getBlogByDecision(slug: string): BlogContent | null {
  */
 export function getAllBlogs(): BlogContent[] {
   return Array.from(blogRegistry.values()).filter(b => b.published);
+}
+
+/**
+ * Get blogs that reference a specific decision (bidirectional linking)
+ * Returns blogs where:
+ * - The blog is about this decision (decisionSlug matches)
+ * - The blog links to this decision in relatedDecisions
+ *
+ * Used for showing "Related articles" on decision pages
+ */
+export function getBlogsReferencingDecision(decisionSlug: string): BlogContent[] {
+  const allBlogs = getAllBlogs();
+
+  return allBlogs.filter(blog => {
+    // Blog is directly about this decision
+    if (blog.decisionSlug === decisionSlug) return true;
+
+    // Blog links to this decision
+    return blog.relatedDecisions.some(link => link.slug === decisionSlug);
+  });
+}
+
+/**
+ * Get blogs that link to a decision (excluding the main blog for that decision)
+ * Useful for showing "Other articles that mention this topic"
+ */
+export function getBlogsLinkingToDecision(decisionSlug: string): BlogContent[] {
+  const allBlogs = getAllBlogs();
+
+  return allBlogs.filter(blog => {
+    // Exclude the main blog for this decision
+    if (blog.decisionSlug === decisionSlug) return false;
+
+    // Include if blog links to this decision
+    return blog.relatedDecisions.some(link => link.slug === decisionSlug);
+  });
 }
 
 /**
