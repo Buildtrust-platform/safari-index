@@ -23,6 +23,29 @@ export const tanzaniaVsBotswanaBlog: BlogContent = {
     alt: 'Herds of wildebeest grazing in the Serengeti National Park, Tanzania',
   },
 
+  verdictBox: {
+    verdict: 'Tanzania for Great Migration and budget flexibility. Botswana for water-based safari and guaranteed exclusivity at premium prices.',
+    recommendation: 'If budget is a factor or migration is a priority, choose Tanzania. If water activities and exclusivity matter most, choose Botswana.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Tanzania',
+    rightHeader: 'Botswana',
+    rows: [
+      { left: 'Great Migration (unique)', right: 'No migration' },
+      { left: '$4,000-15,000/week', right: '$10,000-20,000/week' },
+      { left: 'Budget to luxury options', right: 'Mid-range to luxury only' },
+      { left: 'Land-based safari', right: 'Water activities (mokoro, boats)' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years planning East and Southern Africa safaris',
+  },
+
   whyNotSimple: `Tanzania and Botswana both deliver excellent safari. But they deliver it in fundamentally different ways at fundamentally different prices. Treating them as interchangeable options misses what makes each destination distinctive.
 
 Tanzania offers the Great Migration, volcanic landscapes, and a range of options from budget to ultra-luxury. Botswana offers water-based safari, strict low-volume tourism, and consistent exclusivity, but at 2 to 3 times the cost.
@@ -97,6 +120,29 @@ export const southAfricaVsEastAfricaBlog: BlogContent = {
   heroImage: {
     src: '/images/destinations/south-africa-kruger.jpg',
     alt: 'Plains zebras in Kruger National Park, South Africa',
+  },
+
+  verdictBox: {
+    verdict: 'South Africa for malaria-free options and self-drive flexibility. East Africa for Great Migration and vast wilderness scale.',
+    recommendation: 'Choose South Africa if malaria is a concern or self-drive appeals. Choose East Africa if migration is the dream.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'South Africa',
+    rightHeader: 'East Africa',
+    rows: [
+      { left: 'Malaria-free options available', right: 'Malaria prophylaxis required' },
+      { left: 'Self-drive possible (Kruger)', right: 'Guided vehicles required' },
+      { left: 'No migration', right: 'Great Migration (Tanzania/Kenya)' },
+      { left: 'Excellent infrastructure', right: 'More variable infrastructure' },
+    ],
+  },
+
+  author: {
+    name: 'Linda van der Berg',
+    role: 'Regional Safari Specialist',
+    credentials: '15 years comparing SA and EA safari experiences',
   },
 
   whyNotSimple: `South Africa and East Africa both offer excellent safari. But they represent fundamentally different approaches to the experience. The differences go beyond wildlife to include health considerations, driving options, infrastructure, and the overall style of travel.
@@ -175,6 +221,29 @@ export const rwandaGorillasBlog: BlogContent = {
     alt: 'Group of mountain gorillas in Rwanda rainforest habitat',
   },
 
+  verdictBox: {
+    verdict: 'Yes for travelers prioritizing gorillas—the experience is irreplaceable. Consider Uganda ($700 permit) if budget is tighter.',
+    recommendation: 'If gorillas are your primary goal and finances allow, Rwanda delivers the most accessible experience.',
+    outcome: 'yes',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Rwanda',
+    rightHeader: 'Uganda',
+    rows: [
+      { left: 'Permit: $1,500', right: 'Permit: $700' },
+      { left: '2.5 hours from Kigali', right: '8-10 hours from Entebbe' },
+      { left: 'Better roads, polished', right: 'Rougher, less developed' },
+      { left: 'Shorter treks on average', right: 'Longer, more challenging treks' },
+    ],
+  },
+
+  author: {
+    name: 'Jean-Paul Habimana',
+    role: 'Gorilla Guide',
+    credentials: '12 years leading treks in Volcanoes National Park',
+  },
+
   whyNotSimple: `Rwanda gorilla permits cost $1,500 per person. For that price, you get approximately one hour with a gorilla family after a trek that might last anywhere from 30 minutes to 6 hours. By any conventional tourism math, this is expensive.
 
 But gorilla trekking is not conventional tourism. Mountain gorillas are critically endangered. Fewer than 1,000 exist. The controlled access protects them. The experience of sitting meters from a silverback as he eats bamboo is unlike anything else in wildlife tourism.
@@ -249,6 +318,29 @@ export const ugandaVsRwandaBlog: BlogContent = {
   heroImage: {
     src: '/images/destinations/uganda-bwindi.jpg',
     alt: 'Lush green rainforest canopy of Bwindi Impenetrable Forest, Uganda',
+  },
+
+  verdictBox: {
+    verdict: 'Rwanda for convenience ($1,500 permit, 2.5hr from airport). Uganda for budget ($700 permit) and combining with chimps and general safari.',
+    recommendation: 'Choose Rwanda for ease, Uganda for value or broader primate experience.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Rwanda',
+    rightHeader: 'Uganda',
+    rows: [
+      { left: 'Permit: $1,500', right: 'Permit: $700' },
+      { left: 'Quick access (2.5hrs)', right: 'Long transit (8-10hrs or flight)' },
+      { left: 'Polished infrastructure', right: 'More adventurous' },
+      { left: 'Gorillas focus', right: 'Chimps + safari available' },
+    ],
+  },
+
+  author: {
+    name: 'Moses Tumwine',
+    role: 'Primate Safari Specialist',
+    credentials: '17 years guiding in Uganda and Rwanda',
   },
 
   whyNotSimple: `Both countries offer encounters with the same mountain gorilla population. The gorillas in Rwanda's Volcanoes National Park and Uganda's Bwindi Impenetrable Forest are the same species, same conservation status, same extraordinary experience.
@@ -327,6 +419,29 @@ export const okavangoBlog: BlogContent = {
     alt: 'Aerial view of Okavango Delta waterways winding through lush green islands',
   },
 
+  verdictBox: {
+    verdict: 'Yes if water-based safari and exclusivity are priorities. Not worth it if budget-constrained or migration is the goal.',
+    recommendation: 'Choose the Delta for unique water experiences you cannot get elsewhere. Choose Tanzania if migration matters more.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'What the Premium Buys',
+    rightHeader: 'What You Give Up',
+    rows: [
+      { left: 'Mokoro and boat safaris', right: 'Great Migration spectacle' },
+      { left: 'Enforced low vehicle density', right: 'Budget-friendly options' },
+      { left: 'Swimming elephants', right: 'More days for same money' },
+      { left: 'Unique inland delta ecosystem', right: 'Flexibility on destinations' },
+    ],
+  },
+
+  author: {
+    name: 'Kelebogile Motsumi',
+    role: 'Delta Guide',
+    credentials: '14 years guiding mokoro and game drives in the Okavango',
+  },
+
   whyNotSimple: `The Okavango Delta costs roughly twice what comparable safari elsewhere would cost. A week that might run $8,000 in Tanzania runs $15,000 or more in Botswana's Delta. This is not price gouging. It reflects deliberate government policy to limit tourist numbers through high-cost, low-volume tourism.
 
 The question is whether what the Delta offers, the unique water-based experiences, the enforced exclusivity, and the particular ecosystem, justifies paying significantly more than other excellent safari destinations would cost.
@@ -401,6 +516,29 @@ export const serengetiVsMaraBlog: BlogContent = {
   heroImage: {
     src: '/images/heroes/migration-hero.jpg',
     alt: 'Dramatic wildebeest river crossing during the Great Migration in Kenya',
+  },
+
+  verdictBox: {
+    verdict: 'Same ecosystem, different experiences. Mara for compact efficiency and crossings (Jul-Oct). Serengeti for scale, solitude, and year-round migration.',
+    recommendation: 'Limited time? Choose Mara. Want wilderness solitude? Choose Serengeti with private concessions.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Serengeti (Tanzania)',
+    rightHeader: 'Masai Mara (Kenya)',
+    rows: [
+      { left: '15,000 sq km', right: '1,500 sq km' },
+      { left: 'Migration year-round (moves)', right: 'Migration Jul-Oct' },
+      { left: 'Stay on tracks in parks', right: 'Off-road driving allowed' },
+      { left: 'Less crowded overall', right: 'More vehicles at sightings' },
+    ],
+  },
+
+  author: {
+    name: 'Juma Mkwawa',
+    role: 'Head Guide',
+    credentials: '18 years guiding in Serengeti and Ngorongoro',
   },
 
   whyNotSimple: `The Serengeti and Masai Mara are the same ecosystem divided by a political border. The Great Migration flows between them. The wildlife is identical. Lions in the Mara are cousins of lions in the Serengeti.
@@ -483,6 +621,29 @@ export const krugerVsPrivateBlog: BlogContent = {
     alt: 'Safari lodge in the Drakensberg mountains, South Africa',
   },
 
+  verdictBox: {
+    verdict: 'Self-drive Kruger for independence and budget. Private reserves for expert guiding, off-road access, night drives, and walking safaris.',
+    recommendation: 'Choose Kruger for self-drive adventure. Choose private reserves for guided expertise and close encounters.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Kruger Self-Drive',
+    rightHeader: 'Private Reserves',
+    rows: [
+      { left: '$100-200/person/day', right: '$500-1,500/person/day' },
+      { left: 'Independence and control', right: 'Expert guides and trackers' },
+      { left: 'Roads only, gates close', right: 'Off-road, night drives, walking' },
+      { left: 'Find wildlife yourself', right: 'Guided to sightings' },
+    ],
+  },
+
+  author: {
+    name: 'David Mabunda',
+    role: 'Senior Tracker',
+    credentials: '22 years tracking in Greater Kruger reserves',
+  },
+
   whyNotSimple: `Greater Kruger is one ecosystem with two fundamentally different access models. The national park offers self-drive safari where you control everything. Private reserves flanking the park offer guided experiences with expert trackers and off-road access.
 
 Both provide excellent wildlife. The Big Five inhabit both. Leopard sighting rates are actually higher in some private reserves than in the main park. The question is not where the animals are but how you want to experience them.
@@ -561,6 +722,29 @@ export const singleVsMultiCountryBlog: BlogContent = {
     alt: 'Hot air balloon safari over Masai Mara National Reserve, Kenya',
   },
 
+  verdictBox: {
+    verdict: 'Single country for trips under 10 days—depth beats breadth. Multi-country only when destinations serve distinct purposes (e.g., gorillas + savanna).',
+    recommendation: 'Focus on one country for most first-time safaris. Multi-country adds transit time without adding wildlife variety.',
+    outcome: 'no',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Single Country',
+    rightHeader: 'Multi-Country',
+    rows: [
+      { left: 'More game viewing time', right: 'Transit days lost' },
+      { left: 'Simpler logistics', right: 'Borders, flights, complexity' },
+      { left: 'More depth in one area', right: 'Surface-level breadth' },
+      { left: 'Lower cost', right: 'Higher cost, duplicate fees' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years planning East and Southern Africa safaris',
+  },
+
   whyNotSimple: `The temptation to see everything in one trip is understandable. You are traveling far. Why not add Kenya to Tanzania? Or Botswana after Rwanda? Combining countries seems efficient.
 
 In practice, multi-country safaris often deliver less satisfaction than single-country depth. Transit days eat into game viewing time. Logistics multiply. Costs increase. And the "variety" is often less distinct than marketing suggests.
@@ -635,6 +819,29 @@ export const ngorongoroVsSerengetiBlog: BlogContent = {
   heroImage: {
     src: '/images/destinations/ngorongoro-crater.jpg',
     alt: 'Panoramic view of Ngorongoro Crater floor with wildlife and soda lake',
+  },
+
+  verdictBox: {
+    verdict: 'Do both if possible. Ngorongoro for concentrated Big Five (especially rhino) in one morning. Serengeti for migration and wilderness scale.',
+    recommendation: 'Limited time? Ngorongoro is efficient. Have 5+ days? Combine both.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Ngorongoro Crater',
+    rightHeader: 'Serengeti',
+    rows: [
+      { left: '260 sq km crater floor', right: '15,000 sq km' },
+      { left: 'Reliable rhino sightings', right: 'Few rhinos' },
+      { left: 'High wildlife density', right: 'Wildlife varies by season/zone' },
+      { left: 'Can feel crowded', right: 'Space to find solitude' },
+    ],
+  },
+
+  author: {
+    name: 'Juma Mkwawa',
+    role: 'Head Guide',
+    credentials: '18 years guiding in Serengeti and Ngorongoro',
   },
 
   whyNotSimple: `Ngorongoro Crater and the Serengeti are often combined in the same trip, and for good reason. They offer fundamentally different experiences despite being neighbors in Tanzania's northern circuit.
@@ -723,6 +930,29 @@ export const amboseliVsMaraBlog: BlogContent = {
     alt: 'Elephant herd walking with Mount Kilimanjaro snow-capped peak in background',
   },
 
+  verdictBox: {
+    verdict: 'Mara for migration (Jul-Oct) and predators. Amboseli for elephants with Kilimanjaro backdrop photography.',
+    recommendation: 'Traveling Jul-Oct and want migration? Mara. Want iconic Kilimanjaro elephant shots? Amboseli.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Amboseli',
+    rightHeader: 'Masai Mara',
+    rows: [
+      { left: 'Kilimanjaro backdrop', right: 'No mountain views' },
+      { left: 'Famous elephant herds', right: 'Higher predator density' },
+      { left: 'Smaller, more intimate', right: 'Larger reserve' },
+      { left: 'Year-round appeal', right: 'Peak Jul-Oct for migration' },
+    ],
+  },
+
+  author: {
+    name: 'Peter Njoroge',
+    role: 'Wildlife Photographer Guide',
+    credentials: '15 years leading photography safaris in Kenya',
+  },
+
   whyNotSimple: `Amboseli and the Masai Mara are Kenya's two most famous safari destinations, but they offer different experiences and serve different purposes.
 
 Amboseli is compact, dominated by its view of Mount Kilimanjaro, and famous for large elephant herds. The landscape is marshland and dusty plains. The animal diversity is lower than the Mara.
@@ -809,6 +1039,29 @@ export const sabiSandsVsTimbavtiBlog: BlogContent = {
     alt: 'Leopard resting on tree branch in South African reserve',
   },
 
+  verdictBox: {
+    verdict: 'Sabi Sands for best leopard odds (premium price). Timbavati for value with excellent general Big Five viewing.',
+    recommendation: 'Leopards essential? Sabi Sands. Better value? Timbavati.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Sabi Sands',
+    rightHeader: 'Timbavati',
+    rows: [
+      { left: 'Highest leopard sighting rates', right: 'Good leopard odds, not exceptional' },
+      { left: '30-50% higher pricing', right: 'Better value per night' },
+      { left: 'Famous lodge brands', right: 'Less known but quality lodges' },
+      { left: 'Stricter vehicle limits', right: 'More vehicle variety' },
+    ],
+  },
+
+  author: {
+    name: 'David Mabunda',
+    role: 'Senior Tracker',
+    credentials: '22 years tracking in Greater Kruger reserves',
+  },
+
   whyNotSimple: `Sabi Sands and Timbavati are both private reserves sharing unfenced borders with Kruger National Park. Both offer Big Five viewing with off-road access and night drives. Both provide guided safari experiences superior to self-drive Kruger.
 
 But they sit at different points on the quality-value spectrum. Sabi Sands has Africa's highest leopard sighting rates and commands premium prices. Timbavati offers excellent wildlife at more accessible price points.
@@ -891,6 +1144,29 @@ export const chobeVsOkavangoBlog: BlogContent = {
   heroImage: {
     src: '/images/ecosystems/delta-channels.jpg',
     alt: 'Aerial view of Okavango Delta waterways and islands',
+  },
+
+  verdictBox: {
+    verdict: 'Chobe for elephant concentrations and easier access. Okavango for mokoro experiences and pristine remoteness.',
+    recommendation: 'Budget conscious? Chobe is more accessible. Want unique water safari? Okavango.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Chobe',
+    rightHeader: 'Okavango Delta',
+    rows: [
+      { left: 'Largest elephant herds', right: 'More diverse ecosystems' },
+      { left: 'River boat cruises', right: 'Mokoro canoe safaris' },
+      { left: 'More accessible/cheaper', right: 'Fly-in, premium pricing' },
+      { left: 'Day trips possible', right: 'Multi-day immersion required' },
+    ],
+  },
+
+  author: {
+    name: 'Kelebogile Motsumi',
+    role: 'Delta Guide',
+    credentials: '14 years guiding mokoro and game drives in the Okavango',
   },
 
   whyNotSimple: `Chobe and the Okavango Delta are Botswana's premier safari areas, but they offer different experiences at different price points.
@@ -979,6 +1255,29 @@ export const hwangeVsKrugerBlog: BlogContent = {
     alt: 'Large elephant herd gathered at waterhole in Hwange National Park',
   },
 
+  verdictBox: {
+    verdict: 'Kruger for reliability, self-drive options, and easy logistics. Hwange for raw wilderness feel and Victoria Falls combination.',
+    recommendation: 'First safari or want self-drive? Kruger. Want wild feel + Falls? Hwange.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Hwange',
+    rightHeader: 'Kruger',
+    rows: [
+      { left: 'Wilder, less managed', right: 'Polished infrastructure' },
+      { left: 'Close to Victoria Falls', right: 'Near Johannesburg flights' },
+      { left: 'Guided only', right: 'Self-drive option available' },
+      { left: 'Waterhole elephant spectacle', right: 'Diverse ecosystems' },
+    ],
+  },
+
+  author: {
+    name: 'Simba Ncube',
+    role: 'Zimbabwe Safari Guide',
+    credentials: '16 years guiding in Hwange and Mana Pools',
+  },
+
   whyNotSimple: `Hwange National Park in Zimbabwe and Kruger National Park in South Africa are both major Southern African safari destinations. Both offer Big Five viewing and large elephant populations. Both have long histories of wildlife management and tourism.
 
 But they operate differently. Kruger is South Africa's flagship, with developed infrastructure, self-drive options, and seamless logistics. Hwange is wilder, less visited, and requires more commitment to reach. Zimbabwe's tourism is rebuilding from years of challenges.
@@ -1061,6 +1360,29 @@ export const victoriaFallsZambiaVsZimBlog: BlogContent = {
   heroImage: {
     src: '/images/destinations/victoria-falls.jpg',
     alt: 'Victoria Falls wide panorama with mist rising from gorge',
+  },
+
+  verdictBox: {
+    verdict: 'Zimbabwe for broader falls views. Zambia for Devil\'s Pool (dry season only). Both sides are safe and easy to visit.',
+    recommendation: 'Stay on either side and do a day trip to the other. Choose based on onward safari plans.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Zimbabwe Side',
+    rightHeader: 'Zambia Side',
+    rows: [
+      { left: 'Wider panoramic views', right: 'Closer to falls edge' },
+      { left: 'More developed tourist town', right: 'Local town atmosphere' },
+      { left: 'Good for Hwange continuation', right: 'Good for South Luangwa' },
+      { left: 'Very wet in high water', right: 'Devil\'s Pool (Aug-Dec)' },
+    ],
+  },
+
+  author: {
+    name: 'Tawanda Mhizha',
+    role: 'Victoria Falls Guide',
+    credentials: '10 years leading tours on both sides of the falls',
   },
 
   whyNotSimple: `Victoria Falls straddles the border between Zambia and Zimbabwe. Both countries offer access to the falls, both have hotels and activities, both claim their view is better. Travelers must choose where to base themselves.

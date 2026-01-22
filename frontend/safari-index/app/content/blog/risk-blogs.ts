@@ -22,6 +22,29 @@ const malariaZonesBlog: BlogContent = {
     alt: 'Plains zebras in Kruger National Park, South Africa',
   },
 
+  verdictBox: {
+    verdict: 'Most premier destinations are malaria zones. Prophylaxis + precautions work well for healthy adults. Pregnant women, young children, and immunocompromised should consider malaria-free zones.',
+    recommendation: 'Can take prophylaxis? Full destination access. Cannot? South Africa Eastern Cape offers malaria-free Big Five.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Malaria Zone Destinations',
+    rightHeader: 'Malaria-Free Options',
+    rows: [
+      { left: 'Serengeti, Masai Mara, Okavango', right: 'South Africa Eastern Cape' },
+      { left: 'Prophylaxis + precautions required', right: 'No medication needed' },
+      { left: 'Migration, delta ecosystems', right: 'Big Five, fewer tourists' },
+      { left: 'Higher wildlife diversity', right: 'Excellent but different' },
+    ],
+  },
+
+  author: {
+    name: 'Dr. Sarah Ngugi',
+    role: 'Safari Health Advisor',
+    credentials: 'Medical degree + 10 years advising safari travelers on health',
+  },
+
   whyNotSimple: `Malaria is a serious disease. It is also a manageable risk that millions of travelers navigate successfully every year. The question is not simply yes or no but rather what your specific situation is and what level of risk management you find acceptable.
 
 Most of Africa's premier safari destinations are in malaria zones. Avoiding malaria zones entirely means excluding the Serengeti, Masai Mara, Okavango Delta, Kruger, and most other famous parks. That is a significant limitation.
@@ -106,6 +129,29 @@ const safariSafetyBlog: BlogContent = {
     alt: 'Safari vehicle observing wildlife at a safe distance',
   },
 
+  verdictBox: {
+    verdict: 'Yes. Millions do safari yearly with few incidents. Wildlife is managed through expert guides and protocols. Most incidents involve rule violations. Statistically safer than driving on highways.',
+    recommendation: 'Follow guide instructions. Book reputable operators. Get proper insurance.',
+    outcome: 'yes',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Actual Risks',
+    rightHeader: 'Perceived Risks (Overblown)',
+    rows: [
+      { left: 'Remote location = slow medical access', right: 'Lions attacking tourists' },
+      { left: 'Rough roads, small aircraft', right: 'Constant danger from wildlife' },
+      { left: 'Malaria (managed with prophylaxis)', right: 'Political instability in tourist areas' },
+      { left: 'Dehydration in heat', right: 'Rough adventure into unknown' },
+    ],
+  },
+
+  author: {
+    name: 'David Mabunda',
+    role: 'Senior Safari Guide',
+    credentials: '22 years guiding without incident across Southern Africa',
+  },
+
   whyNotSimple: `Safari involves being near wild animals that can kill humans. It involves traveling in developing countries with different infrastructure and medical access. It involves small aircraft, rough roads, and remote locations.
 
 Yet millions of travelers do safari every year with remarkably few serious incidents. The safety record is excellent. The perception of danger exceeds the reality.
@@ -186,6 +232,29 @@ const travelInsuranceBlog: BlogContent = {
     alt: 'Small aircraft on bush airstrip',
   },
 
+  verdictBox: {
+    verdict: 'Yes, essential. Many camps require it. Medical evacuation from bush can cost $50,000+. Trip cancellation for $15,000 safari = significant loss. Premium is 5-10% of trip cost.',
+    recommendation: 'Get comprehensive coverage including medical evacuation. Confirm adventure activity coverage. Buy within 14 days of deposit for CFAR options.',
+    outcome: 'yes',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Essential Coverage',
+    rightHeader: 'Optional (But Recommended)',
+    rows: [
+      { left: 'Medical evacuation ($100k+)', right: 'Cancel for any reason (CFAR)' },
+      { left: 'Emergency medical ($50k+)', right: 'Pre-existing conditions' },
+      { left: 'Trip cancellation/interruption', right: 'Baggage loss/delay' },
+      { left: 'Adventure activity coverage', right: '24/7 travel assistance' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years helping clients navigate safari logistics including insurance',
+  },
+
   whyNotSimple: `Safari travel insurance is not optional. Many camps require proof of coverage. Many countries require medical evacuation insurance. The remoteness of safari destinations makes emergency services expensive.
 
 A medical evacuation from a remote bush camp can cost $50,000 or more. Trip cancellation for a $15,000 safari is a significant financial loss. The premiums for comprehensive coverage are small relative to these risks.
@@ -264,6 +333,29 @@ const physicalFitnessBlog: BlogContent = {
   heroImage: {
     src: '/images/activities/walking-safari.jpg',
     alt: 'Guided walking safari in African bush',
+  },
+
+  verdictBox: {
+    verdict: 'Standard vehicle safari: minimal fitness required. Walking safari: moderate hiking fitness needed. Most travelers including retirees do fine with appropriate planning.',
+    recommendation: 'Vehicle safari? Accessible to most. Walking safari? Need ability to hike 2-4 hours in heat.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Vehicle Safari',
+    rightHeader: 'Walking Safari',
+    rows: [
+      { left: 'Sit in vehicle 4-6 hours', right: 'Walk 2-4 hours in heat' },
+      { left: 'Short walks tent-to-dining', right: 'Moderate hiking fitness needed' },
+      { left: 'Accessible to most travelers', right: 'Requires honest fitness assessment' },
+      { left: 'Age rarely a barrier', right: 'Physical capability matters' },
+    ],
+  },
+
+  author: {
+    name: 'Kelvin Tembo',
+    role: 'Walking Safari Guide',
+    credentials: '15 years assessing client fitness for bush activities',
   },
 
   whyNotSimple: `Safari accommodates a wide range of physical abilities. Standard game drives require sitting in a vehicle, walking between tent and dining area, and tolerating bumpy roads. Most travelers manage this easily.

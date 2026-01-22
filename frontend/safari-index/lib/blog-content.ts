@@ -55,6 +55,20 @@ export interface BlogCommercialCTA {
 }
 
 /**
+ * Author attribution for E-E-A-T signals
+ */
+export interface BlogAuthor {
+  /** Author name */
+  name: string;
+  /** Role/title (e.g., "Head Guide", "Safari Specialist") */
+  role: string;
+  /** Years of experience or credentials */
+  credentials?: string;
+  /** Optional photo URL */
+  image?: string;
+}
+
+/**
  * Blog hero image reference
  */
 export interface BlogHeroImage {
@@ -110,6 +124,9 @@ export interface BlogContent {
 
   /** Optional: Commercial CTA linking to trip */
   commercialCTA?: BlogCommercialCTA;
+
+  /** Optional: Author attribution for E-E-A-T */
+  author?: BlogAuthor;
 
   /** Related decisions (max 6) */
   relatedDecisions: RelatedLink[];

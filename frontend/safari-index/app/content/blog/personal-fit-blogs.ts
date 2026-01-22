@@ -22,6 +22,29 @@ export const soloSafariBlog: BlogContent = {
     alt: 'Cheetah family resting in African savannah grassland',
   },
 
+  verdictBox: {
+    verdict: 'Solo safari works well but costs 30-50% more due to solo supplements. Group departures eliminate the premium. Camp social dynamics provide built-in company.',
+    recommendation: 'Budget tolerant? Book solo at quality camps. Budget conscious? Group departures offer safari without the solo premium.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Solo Safari',
+    rightHeader: 'Group Departure',
+    rows: [
+      { left: '30-50% solo supplement', right: 'No solo premium' },
+      { left: 'Complete schedule freedom', right: 'Fixed itinerary and dates' },
+      { left: 'Camp social experience', right: 'Built-in travel companions' },
+      { left: 'Private vehicle option', right: 'Shared vehicle standard' },
+    ],
+  },
+
+  author: {
+    name: 'Anne Wambui',
+    role: 'Solo Travel Specialist',
+    credentials: '12 years helping solo travelers plan safaris',
+  },
+
   whyNotSimple: `Solo travel in cities is straightforward. You book a hotel, walk around, eat when you want. Safari is different. The economics work differently. The social structure of camps changes the experience. And some of what makes safari meaningful is harder to access alone.
 
 This is not about whether solo safari is possible. It absolutely is. Thousands of people do it every year. The question is whether it fits you specifically, given how you travel and what you want from the experience.
@@ -98,6 +121,29 @@ export const familyYoungKidsBlog: BlogContent = {
   heroImage: {
     src: '/images/destinations/botswana-delta.jpg',
     alt: 'Elephants wading through the Okavango Delta waters, Botswana',
+  },
+
+  verdictBox: {
+    verdict: 'Possible but requires planning. Many lodges have 6+ age minimums. Private vehicles become necessary ($200-500/day extra). Consider malaria-free South Africa for peace of mind.',
+    recommendation: 'Kids under 3? Consider waiting. Ages 4-6? Choose family-friendly lodges in Kenya or South Africa.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Family Safari Challenges',
+    rightHeader: 'Family Safari Benefits',
+    rows: [
+      { left: 'Age restrictions at many lodges', right: 'Extraordinary bonding experience' },
+      { left: 'Private vehicles required (extra cost)', right: 'Education beyond textbooks' },
+      { left: 'Shorter drives for attention spans', right: 'Children remember elephants forever' },
+      { left: 'Malaria prophylaxis for kids', right: 'Malaria-free options exist (SA)' },
+    ],
+  },
+
+  author: {
+    name: 'Sarah Ngugi',
+    role: 'Family Safari Specialist',
+    credentials: '10 years designing family safari experiences',
   },
 
   whyNotSimple: `Parents ask this question expecting a clear yes or no. The reality is more complicated. Safari with young children is absolutely possible. Thousands of families do it successfully. But it requires specific planning, costs more than adult-only travel, and involves trade-offs that some families accept happily while others find frustrating.
@@ -178,6 +224,29 @@ export const multigenerationalBlog: BlogContent = {
     alt: 'Three giraffes standing in golden African savannah grassland at dawn',
   },
 
+  verdictBox: {
+    verdict: 'Yes, but requires careful planning. Private vehicles essential. Pace accommodates slowest member. South Africa offers best accessibility and medical infrastructure.',
+    recommendation: 'Book private vehicles. Choose lodges with good accessibility. Allow flexible pace for different energy levels.',
+    outcome: 'yes',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Multigenerational Challenges',
+    rightHeader: 'Multigenerational Benefits',
+    rows: [
+      { left: 'Mobility varies by age', right: 'Three generations bonding' },
+      { left: 'Pace must fit slowest member', right: 'Grandparents + grandchildren magic' },
+      { left: 'Accommodation complexity', right: 'Stories retold for decades' },
+      { left: 'Private vehicles required', right: 'Shared experiences unlike home' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years planning family and group safaris',
+  },
+
   whyNotSimple: `Multigenerational safari presents logistical complexity. Grandparents sharing the African bush with grandchildren. Three generations bonding over wildlife. The reality involves logistics that wedding planners would find challenging.
 
 Different generations have different stamina, different interests, different tolerance for early mornings and bumpy roads. A 70-year-old with mobility limitations experiences safari differently than a 35-year-old parent or a 10-year-old child. Finding common ground that works for everyone requires careful planning, not optimistic assumptions.
@@ -252,6 +321,29 @@ export const honeymoonBlog: BlogContent = {
   heroImage: {
     src: '/images/ecosystems/floodplain-evening.jpg',
     alt: 'Hippopotamus in Botswana river at sunset with golden light reflections',
+  },
+
+  verdictBox: {
+    verdict: 'Yes for adventurous couples who genuinely both want it. Romance requires higher-end camps. 5am wake-ups are not romantic. Consider safari + beach combination.',
+    recommendation: 'Both want adventure? Safari can be magical. Want relaxation? Beach first, or beach only.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Safari Honeymoon',
+    rightHeader: 'Beach Honeymoon',
+    rows: [
+      { left: 'Shared adventure creates bonding', right: 'Relaxation and pampering' },
+      { left: '5am wake-ups required', right: 'Sleep in, leisurely mornings' },
+      { left: 'Romantic at premium camps', right: 'Romance at any tier' },
+      { left: 'Weather and wildlife unpredictable', right: 'More predictable experience' },
+    ],
+  },
+
+  author: {
+    name: 'Anne Wambui',
+    role: 'Safari Romance Specialist',
+    credentials: '12 years planning honeymoon and celebration safaris',
   },
 
   whyNotSimple: `Safari honeymoons have become popular for good reason. Sharing extraordinary wildlife moments with your new spouse creates memories that differ from any beach resort. But safari is not automatically romantic. Dust, 5am wake-ups, and shared vehicles with strangers can undermine romance as easily as they can enhance it.
@@ -332,6 +424,30 @@ export const bigFiveExpectationsBlog: BlogContent = {
     alt: 'Pride of lions walking towards the camera in African savannah',
   },
 
+  verdictBox: {
+    verdict: 'The Big Five is a marketing term, not ecological significance. Leopard and rhino are hard anywhere. Cheetahs, wild dogs, and hippos are excluded despite being remarkable. Flexibility mindset matters more than checklist.',
+    recommendation: 'Most travelers see 4 of 5. Leopard requires luck or Sabi Sands. Rhino requires specific destinations.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Big Five Species',
+    rightHeader: 'Sighting Difficulty',
+    rows: [
+      { left: 'Lion', right: 'Common in most destinations' },
+      { left: 'Elephant', right: 'Very common everywhere' },
+      { left: 'Buffalo', right: 'Common (but not exciting)' },
+      { left: 'Leopard', right: 'Difficult except Sabi Sands' },
+      { left: 'Rhino', right: 'Rare, requires specific destinations' },
+    ],
+  },
+
+  author: {
+    name: 'Juma Mkwawa',
+    role: 'Head Guide',
+    credentials: '18 years setting realistic wildlife expectations',
+  },
+
   whyNotSimple: `The Big Five has become safari's marketing default. Lion, leopard, elephant, buffalo, rhino. Travelers arrive with a mental checklist, expecting to tick off all five. Some destinations encourage this expectation because it is easy to sell.
 
 The reality is more nuanced. The Big Five is a colonial hunting term that has nothing to do with ecological significance, viewing likelihood, or even the most impressive animals. Leopards are notoriously difficult to spot anywhere. Rhinos are endangered and scarce in most locations. Meanwhile, cheetahs, wild dogs, and hippos are excluded despite being remarkable.
@@ -406,6 +522,29 @@ export const photographyPriorityBlog: BlogContent = {
     alt: 'Photographer with telephoto lens on safari vehicle',
   },
 
+  verdictBox: {
+    verdict: 'Yes, but standard safari may not serve serious photography. Private vehicles essential for positioning. 15-20kg luggage limits on bush flights conflict with heavy glass.',
+    recommendation: 'Serious photographers: Private vehicle + photography-aware guide. Consider road-based itineraries to avoid weight limits.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Standard Safari',
+    rightHeader: 'Photography Safari',
+    rows: [
+      { left: 'Shared vehicle positioning', right: 'Private vehicle, optimal angles' },
+      { left: 'Guide shows variety', right: 'Guide optimizes for light' },
+      { left: 'Move between sightings', right: 'Stay at single subject for hours' },
+      { left: 'Strict luggage limits', right: 'Road itinerary = flexible gear' },
+    ],
+  },
+
+  author: {
+    name: 'Peter Njoroge',
+    role: 'Wildlife Photography Guide',
+    credentials: '15 years leading photography safaris in East Africa',
+  },
+
   whyNotSimple: `Safari photography has produced some of the most iconic images in nature photography. The potential is extraordinary. Lions at dawn, leopards in trees, river crossings with thousands of wildebeest. The raw material exists.
 
 But serious photography requires conditions that standard safari may not provide. You need good light, which means specific timing. You need positioning, which requires vehicle flexibility. You need patience at single subjects, which conflicts with guide expectations to show variety. You need equipment that weighs more than luggage limits allow.
@@ -478,6 +617,29 @@ export const firstTimerReadinessBlog: BlogContent = {
   heroImage: {
     src: '/images/activities/game-drive.jpg',
     alt: 'Safari vehicle on game drive in African bush',
+  },
+
+  verdictBox: {
+    verdict: 'If you want to go, you are ready. Safari requires no special skills, just willingness to adapt to early mornings, developing country infrastructure, and passive wildlife observation.',
+    recommendation: 'Most people asking this question are ready. The question itself shows appropriate thoughtfulness.',
+    outcome: 'yes',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Safari Requires',
+    rightHeader: 'Safari Does NOT Require',
+    rows: [
+      { left: 'Tolerance for 5am wake-ups', right: 'Adventure sport fitness' },
+      { left: 'Flexibility with plans', right: 'Prior Africa experience' },
+      { left: 'Patience for watching/waiting', right: 'Wildlife knowledge beforehand' },
+      { left: 'Developing country tolerance', right: 'Wealthy budget (options exist)' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years helping first-time safari travelers prepare',
   },
 
   whyNotSimple: `The question often masks deeper uncertainties. Readiness is not about passing a test. It is about matching expectations to reality and understanding what safari actually involves.

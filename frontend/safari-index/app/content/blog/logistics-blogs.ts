@@ -22,6 +22,29 @@ const fiveDaysSafariBlog: BlogContent = {
     alt: 'Wild giraffes and zebras together on the African plains',
   },
 
+  verdictBox: {
+    verdict: 'Yes for a meaningful introduction. Five nights with good structure = 8-10 game drives = Big Five probable. Not enough for multi-park variety or rare sighting probability.',
+    recommendation: '5 days at one excellent camp > 5 days rushing between camps.',
+    outcome: 'yes',
+  },
+
+  comparisonTable: {
+    leftHeader: '5-Day Safari Can Deliver',
+    rightHeader: '5-Day Safari Cannot Deliver',
+    rows: [
+      { left: 'Big Five sightings (probable)', right: 'Multi-ecosystem variety' },
+      { left: 'Memorable wildlife encounters', right: 'High rare sighting odds (wild dogs)' },
+      { left: 'Life-changing experience', right: 'Extended wilderness immersion' },
+      { left: 'Great introduction to safari', right: 'Everything on the checklist' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years designing safari itineraries of all lengths',
+  },
+
   whyNotSimple: `Five days means different things depending on how you count. Five nights in the bush with ten game drives is substantial. Three nights in the bush because two days are transit is limited. The number of safari days matters more than the number of calendar days.
 
 The question also depends on what you expect. If you expect to see everything, check every box, and have abundant sightings of rare animals, five days will feel short. If you expect a meaningful introduction to African wildlife with good chances at the major species, five days can deliver.
@@ -96,6 +119,29 @@ const idealLengthBlog: BlogContent = {
   heroImage: {
     src: '/images/activities/migration.jpg',
     alt: 'Wildebeest and zebras jumping during Great Migration river crossing',
+  },
+
+  verdictBox: {
+    verdict: 'Sweet spot for first-timers: 5-7 nights. Minimum viable: 3 nights. Diminishing returns after 10 days unless you have specific rare sighting goals.',
+    recommendation: 'Budget and schedule matter more than ideal length. A 4-day safari now beats a 10-day safari never.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Trip Length',
+    rightHeader: 'What It Delivers',
+    rows: [
+      { left: '3-4 nights', right: 'Good introduction, Big Five possible' },
+      { left: '5-7 nights', right: 'Sweet spot, multiple ecosystems viable' },
+      { left: '8-10 nights', right: 'Strong rare sighting odds, depth' },
+      { left: '10+ nights', right: 'Immersion, but repetition fatigue possible' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years optimizing safari itineraries',
   },
 
   whyNotSimple: `The question assumes an optimal answer exists independent of your constraints. It does not. The ideal length is whatever fits your budget, schedule, and how much safari specifically you want relative to other travel priorities.
@@ -178,6 +224,29 @@ const flyVsDriveBlog: BlogContent = {
     alt: 'Safari bush plane flying over African savannah landscape',
   },
 
+  verdictBox: {
+    verdict: 'Flying saves time but costs $300-500/leg. Some drives (Ngorongoro highlands) have wildlife value. Others (Arusha to Serengeti) do not.',
+    recommendation: 'Short trip? Fly long distances. Longer trip? Scenic drives add value. Route-specific analysis matters.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Flying',
+    rightHeader: 'Driving',
+    rows: [
+      { left: '5-hour drive = 45-min flight', right: 'Saves $300-500 per leg' },
+      { left: 'More game viewing time', right: 'Landscape experience included' },
+      { left: 'Soft bag 15-20kg limit', right: 'Flexible luggage' },
+      { left: 'Fixed schedules', right: 'Stop for wildlife en route' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years optimizing safari logistics',
+  },
+
   whyNotSimple: `Flying saves time. Driving costs less and sometimes includes game viewing en route. The simple answer would be "fly if you can afford it" but this misses nuances.
 
 Some drives are genuinely scenic with wildlife along the way. Others are tedious hours on rough roads with nothing to see. Some flights are quick hops that save half a day. Others involve backtracking through hubs and barely save time at all.
@@ -256,6 +325,29 @@ const beachExtensionBlog: BlogContent = {
   heroImage: {
     src: '/images/activities/beach-relaxation.jpg',
     alt: 'Tropical beach with turquoise waters and white sand in Zanzibar',
+  },
+
+  verdictBox: {
+    verdict: 'Classic combination for a reason, but optional. Beach adds variety and recovery time. Skip it if you love safari and find beaches boring.',
+    recommendation: 'Have 2 weeks? Safari + beach works well. Have 1 week? More safari days > beach days.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Add Beach Extension',
+    rightHeader: 'Safari-Only Trip',
+    rows: [
+      { left: 'Variety and pace change', right: 'Maximum wildlife time' },
+      { left: 'Recovery after early mornings', right: 'Deeper safari immersion' },
+      { left: 'Adds 30-50% to cost', right: 'More safari days for same budget' },
+      { left: 'Zanzibar has culture + beach', right: 'Simpler logistics' },
+    ],
+  },
+
+  author: {
+    name: 'Anne Wambui',
+    role: 'Safari Hospitality Specialist',
+    credentials: '12 years designing safari and beach combinations',
   },
 
   whyNotSimple: `Safari and beach is the classic East Africa combination. Zanzibar after Tanzania safari. Diani or Mombasa after Kenya safari. The pattern is common because the geography works.
@@ -338,6 +430,29 @@ const agentVsDirectBlog: BlogContent = {
     alt: 'Wildebeest grazing in Ngorongoro Crater with misty highlands in background',
   },
 
+  verdictBox: {
+    verdict: 'Good agents provide real expertise. Prices are often the same (agents earn commission without inflating your price). First-timers benefit most from agent guidance.',
+    recommendation: 'First safari or complex itinerary? Use a quality agent. Simple self-drive Kruger? Direct booking works.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Use an Agent',
+    rightHeader: 'Book Direct',
+    rows: [
+      { left: 'Expert camp/guide knowledge', right: 'Do your own research' },
+      { left: 'Logistics coordination', right: 'Manage multiple bookings' },
+      { left: 'Often same price', right: 'Sometimes cheaper' },
+      { left: 'Support when problems arise', right: 'You solve problems' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years in safari planning and agent evaluation',
+  },
+
   whyNotSimple: `The internet has made direct booking possible for almost everything. Why would safari be different? Because safari involves more complexity, less standardization, and higher stakes than typical travel booking.
 
 Safari camps are not hotels with consistent product. Quality varies enormously. Positioning matters. Guide quality matters. Knowing which camps deliver and which disappoint requires expertise most travelers lack.
@@ -418,6 +533,29 @@ const bookingLeadTimeBlog: BlogContent = {
     alt: 'Sunrise over African savannah with acacia trees',
   },
 
+  verdictBox: {
+    verdict: 'Peak season (Jul-Oct): 6-12 months. Shoulder season: 4-6 months. Green season: 2-4 months. Famous camps sell out fastest.',
+    recommendation: 'Early booking secures preferred camps. Mid-range (4-6 months) balances selection with flexibility.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Book Early (6-12 months)',
+    rightHeader: 'Book Later (1-3 months)',
+    rows: [
+      { left: 'Best camp selection', right: 'Take what remains' },
+      { left: 'Less flexibility if plans change', right: 'Maximum flexibility' },
+      { left: 'Essential for peak season', right: 'Works for green season' },
+      { left: 'Specific camps guaranteed', right: 'Last-minute deals possible' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years tracking safari availability patterns',
+  },
+
   whyNotSimple: `The ideal booking window varies dramatically based on season, destination, and flexibility. Peak season at popular camps can sell out a year in advance. Off-season at less famous properties might be available days ahead.
 
 Booking too early locks you into plans when life changes. Booking too late risks losing preferred options. The balance depends on your circumstances.`,
@@ -484,6 +622,29 @@ const visaRequirementsBlog: BlogContent = {
   heroImage: {
     src: '/images/destinations/tanzania-serengeti.jpg',
     alt: 'Migration herds in Tanzania landscape',
+  },
+
+  verdictBox: {
+    verdict: 'Most safari countries offer e-visa or visa on arrival for US/UK/EU. East African Community visa ($100) covers Kenya + Uganda + Rwanda. Requirements change—verify before travel.',
+    recommendation: 'Check official sources. Apply for e-visas in advance to avoid airport queues.',
+    outcome: 'yes',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Common Requirements',
+    rightHeader: 'Multi-Country Options',
+    rows: [
+      { left: 'Tanzania: e-visa or VOA $50', right: 'EAC visa: Kenya + Uganda + Rwanda $100' },
+      { left: 'Kenya: e-visa required', right: 'KAZA UniVisa: Zambia + Zimbabwe $50' },
+      { left: 'South Africa: visa-free for many', right: 'Single-country often simpler' },
+      { left: 'Yellow fever certificate often required', right: 'Check transit country requirements' },
+    ],
+  },
+
+  author: {
+    name: 'Anne Wambui',
+    role: 'Safari Travel Specialist',
+    credentials: '12 years assisting travelers with safari documentation',
   },
 
   whyNotSimple: `Visa requirements vary by your nationality, destination country, and how many countries you visit. Most safari destinations offer visas on arrival or e-visas for common nationalities, but requirements change and exceptions exist.
@@ -558,6 +719,29 @@ const packingEssentialsBlog: BlogContent = {
   heroImage: {
     src: '/images/activities/sundowner.jpg',
     alt: 'Safari sundowner setup at sunset',
+  },
+
+  verdictBox: {
+    verdict: 'Bush flights limit you to 15-20kg in soft bags. Camps do laundry. Pack neutral colors, layers for cold mornings, and good binoculars. Most travelers overpack.',
+    recommendation: 'Binoculars > extra clothes. One warm layer for cold mornings. Laundry service means you need less.',
+    outcome: 'yes',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Essential Items',
+    rightHeader: 'Common Overpacking Mistakes',
+    rows: [
+      { left: 'Good binoculars', right: 'Too many outfit changes' },
+      { left: 'One warm fleece/jacket', right: 'Heavy jeans (quick-dry better)' },
+      { left: 'Neutral colors (khaki, olive)', right: 'Bright colors for game drives' },
+      { left: 'Camera + one zoom lens', right: 'Multiple camera bodies' },
+    ],
+  },
+
+  author: {
+    name: 'David Mabunda',
+    role: 'Senior Safari Guide',
+    credentials: '22 years advising guests on what actually matters in the bush',
   },
 
   whyNotSimple: `Safari packing involves trade-offs between comfort and luggage restrictions. Bush flights typically limit you to 15-20kg in soft bags. Camps provide laundry service. The temptation to overpack is universal and counterproductive.

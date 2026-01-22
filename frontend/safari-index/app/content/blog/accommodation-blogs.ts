@@ -22,6 +22,29 @@ const luxurySafariBlog: BlogContent = {
     alt: 'Safari lodge in the Drakensberg mountains, South Africa',
   },
 
+  verdictBox: {
+    verdict: 'Luxury buys exclusivity (fewer vehicles), better guides, and prime positioning—not better wildlife. First-timers benefit less from the marginal value.',
+    recommendation: 'First safari? Good mid-range delivers. Repeat visitors or photographers? Luxury exclusivity often justifies the premium.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Luxury Safari',
+    rightHeader: 'Mid-Range Safari',
+    rows: [
+      { left: '6-12 guests per camp', right: '40-60 guests per lodge' },
+      { left: 'Top-tier experienced guides', right: 'Competent but variable guiding' },
+      { left: 'Exclusive concession access', right: 'Shared park areas' },
+      { left: 'Same wildlife', right: 'Same wildlife' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years planning East and Southern Africa safaris',
+  },
+
   whyNotSimple: `The price gap between mid-range and luxury safari can be significant. A week at a mid-range camp might cost what three days at a luxury property costs. The question of worth depends on what "luxury" means and what you value.
 
 Luxury in safari does not primarily mean thread count and turndown service, though those exist. It means access. Smaller camps. Better positioning. More experienced guides. Exclusive concessions where vehicle limits keep crowds away. The relationship between price and wildlife experience is real, if not always linear.
@@ -100,6 +123,29 @@ const budgetSafariBlog: BlogContent = {
   heroImage: {
     src: '/images/activities/game-drive.jpg',
     alt: 'Safari touring vehicle among wildebeest and zebras on game drive',
+  },
+
+  verdictBox: {
+    verdict: 'Yes, budget safari exists. Best in South Africa (self-drive Kruger) and Kenya. Botswana has no true budget tier. Expect simpler accommodation and less experienced guides.',
+    recommendation: 'Self-drive Kruger is the cheapest quality option. Kenya offers more budget guided options than Tanzania.',
+    outcome: 'yes',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Budget Safari',
+    rightHeader: 'Mid-Range Safari',
+    rows: [
+      { left: 'Under $200/day possible', right: '$300-500/day typical' },
+      { left: 'Basic rooms, shared facilities', right: 'Private bathroom, A/C' },
+      { left: 'Less experienced guides', right: 'Competent professional guides' },
+      { left: 'Larger group sizes', right: 'Smaller groups' },
+    ],
+  },
+
+  author: {
+    name: 'Linda van der Berg',
+    role: 'Regional Safari Specialist',
+    credentials: '15 years helping travelers find value across price points',
   },
 
   whyNotSimple: `Budget safari exists but the term means different things in different contexts. What counts as budget in Botswana is mid-range in Tanzania is expensive in South Africa. The baseline costs of different destinations vary dramatically.
@@ -182,6 +228,29 @@ const insideOutsideParkBlog: BlogContent = {
     alt: 'Busy waterhole in Etosha National Park with zebras and other wildlife',
   },
 
+  verdictBox: {
+    verdict: 'Inside maximizes game time. Outside often cheaper. BUT: Private conservancies "outside" parks often outperform properties "inside" (Mara conservancies vs Mara reserve).',
+    recommendation: 'Strict gate hours? Stay inside. Private concession available? Outside can be better.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Inside Park',
+    rightHeader: 'Outside Park',
+    rows: [
+      { left: 'Immediate wildlife access', right: '30-60 min transit each way' },
+      { left: 'Wildlife through camp', right: 'Separated from wildlife' },
+      { left: 'Often higher cost', right: 'Often budget-friendly' },
+      { left: 'More vehicles', right: 'Conservancy = fewer vehicles' },
+    ],
+  },
+
+  author: {
+    name: 'Anne Wambui',
+    role: 'Safari Hospitality Specialist',
+    credentials: '12 years advising on lodge positioning across East Africa',
+  },
+
   whyNotSimple: `National parks have gates that open and close. Staying inside the park means you are there when gates close. Staying outside means you drive to the gate each day, potentially losing time to access.
 
 But parks and the areas around them are not equal. Some parks have excellent internal camps. Others have mediocre internal options and excellent external ones. Some park-adjacent conservancies or concessions offer better wildlife than the parks themselves.
@@ -260,6 +329,29 @@ const multipleCampsBlog: BlogContent = {
   heroImage: {
     src: '/images/activities/hot-air-balloon.jpg',
     alt: 'Hot air balloon safari over Masai Mara National Reserve, Kenya',
+  },
+
+  verdictBox: {
+    verdict: 'Short trips (5 days or less): Stay put. Longer trips: 2-3 nights per camp allows variety without exhaustion. One-night stands waste time.',
+    recommendation: 'Under 5 days? One or two camps max. Over 10 days? Three camps can work well.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Multiple Camps',
+    rightHeader: 'Single Base',
+    rows: [
+      { left: 'Ecosystem variety', right: 'Deep local knowledge' },
+      { left: 'Transit time lost', right: 'No packing/unpacking' },
+      { left: 'Hedges against quiet locations', right: 'All-in on one spot' },
+      { left: 'Often costs more (flights)', right: 'Simpler budgeting' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years designing safari itineraries',
   },
 
   whyNotSimple: `Safari itineraries range from single-camp stays to moving every one or two nights. More camps means more ecosystems, more variety, more chances for different sightings. But it also means transit time, packing and unpacking, and less depth in each location.
@@ -342,6 +434,29 @@ const allInclusiveVsAlaCarteBlog: BlogContent = {
     alt: 'Safari sundowner drinks at sunset in the African bush',
   },
 
+  verdictBox: {
+    verdict: 'All-inclusive simplifies budgeting—compare total costs, not sticker prices. What "all-inclusive" includes varies by property. Premium activities often cost extra either way.',
+    recommendation: 'Calculate true total cost for both. All-inclusive rarely costs more once you add drinks, laundry, and fees.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'All-Inclusive',
+    rightHeader: 'Pay-As-You-Go',
+    rows: [
+      { left: 'Predictable total cost', right: 'Surprises at checkout' },
+      { left: 'Drinks/laundry often included', right: 'Each item adds up' },
+      { left: 'May subsidize non-drinkers', right: 'Pay only for what you use' },
+      { left: 'Premium activities often extra', right: 'Premium activities extra' },
+    ],
+  },
+
+  author: {
+    name: 'Anne Wambui',
+    role: 'Safari Hospitality Specialist',
+    credentials: '12 years in East African safari lodge management',
+  },
+
   whyNotSimple: `Safari pricing varies from fully all-inclusive to almost nothing included. The sticker price tells you little about total cost until you understand what is and is not covered.
 
 All-inclusive typically means accommodation, meals, drinks (sometimes premium drinks excluded), game drives, and laundry. At the other extreme, you might pay separately for park fees, transfers, activities, and every drink.
@@ -418,6 +533,29 @@ const familyVsAdultsOnlyBlog: BlogContent = {
   heroImage: {
     src: '/images/activities/family-safari.jpg',
     alt: 'Family on safari game drive watching elephants',
+  },
+
+  verdictBox: {
+    verdict: 'Age restrictions exist for safety and guest experience, not gatekeeping. Children under 8: limited options. 8-12: more options. 12+: most camps available.',
+    recommendation: 'Private vehicle arrangements can bypass some restrictions. South Africa and Kenya have the best family options.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Family-Friendly Camps',
+    rightHeader: 'Adults-Only Camps',
+    rows: [
+      { left: 'Kids programs available', right: 'Tranquil adult atmosphere' },
+      { left: 'Family room configurations', right: 'Standard couples rooms' },
+      { left: 'Flexible meal/activity times', right: 'Set adult schedules' },
+      { left: 'Children on game drives', right: 'Walking safari priority possible' },
+    ],
+  },
+
+  author: {
+    name: 'Sarah Ngugi',
+    role: 'Family Safari Specialist',
+    credentials: '10 years designing family safari experiences',
   },
 
   whyNotSimple: `Many safari camps have age restrictions, typically no children under 8, 10, or 12 years old. These restrictions exist for safety and experience reasons, not arbitrary gatekeeping.

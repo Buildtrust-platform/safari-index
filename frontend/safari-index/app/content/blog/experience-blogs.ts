@@ -22,6 +22,29 @@ const walkingSafariBlog: BlogContent = {
     alt: 'Wild giraffes and zebras together on the African plains',
   },
 
+  verdictBox: {
+    verdict: 'Yes for travelers seeking intensity and ecological depth over efficient sightings. Best in Zambia, Zimbabwe, and northern Tanzania.',
+    recommendation: 'Add walking to a vehicle-based trip for variety. Dedicated walking safaris are for those who value depth over breadth.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Walking Safari',
+    rightHeader: 'Vehicle Safari',
+    rows: [
+      { left: 'Intensity and vulnerability', right: 'Safety and comfort' },
+      { left: 'Tracks, plants, ecology focus', right: 'Big animal encounters' },
+      { left: 'Few kilometers covered', right: 'Dozens of kilometers' },
+      { left: 'Requires fitness', right: 'Accessible to most' },
+    ],
+  },
+
+  author: {
+    name: 'Kelvin Tembo',
+    role: 'Walking Safari Guide',
+    credentials: '15 years leading walking safaris in South Luangwa',
+  },
+
   whyNotSimple: `Walking safari is a different category of experience from vehicle-based safari. It is not "safari but walking." It is a fundamentally different relationship with the landscape and animals.
 
 In a vehicle, you are observer. You watch from above, protected by metal, moved by engine. The animals know you are there but largely ignore you as a known, unthreatening shape.
@@ -102,6 +125,29 @@ const selfDriveBlog: BlogContent = {
     alt: 'Plains zebras in Kruger National Park, South Africa',
   },
 
+  verdictBox: {
+    verdict: 'Best in Kruger (South Africa) and Etosha (Namibia). Saves 40-60% on costs but you lose guide expertise and off-road access.',
+    recommendation: 'Choose self-drive for independence and budget. Choose guided for interpretation and efficient sightings.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Self-Drive Safari',
+    rightHeader: 'Guided Safari',
+    rows: [
+      { left: 'Independence and control', right: 'Expert knowledge and tracking' },
+      { left: '40-60% cost savings', right: 'Higher but inclusive cost' },
+      { left: 'Roads only, gate hours', right: 'Off-road, night drives' },
+      { left: 'You find wildlife', right: 'Guide finds wildlife' },
+    ],
+  },
+
+  author: {
+    name: 'Linda van der Berg',
+    role: 'Regional Safari Specialist',
+    credentials: '15 years comparing self-drive and guided safari experiences',
+  },
+
   whyNotSimple: `Self-drive safari means renting a vehicle and navigating African national parks yourself. No guide. No driver. Your schedule. Your choices. Your responsibility.
 
 This is possible in some places and not others. South Africa's Kruger National Park is the classic self-drive destination. Namibia's Etosha works well for self-drive. Kenya and Tanzania's national parks mostly do not allow self-drive for tourists.
@@ -180,6 +226,29 @@ const privateVsSharedBlog: BlogContent = {
     alt: 'Safari touring vehicle among wildebeest and zebras on game drive',
   },
 
+  verdictBox: {
+    verdict: 'Private vehicles add 30-50% cost but give full control. Essential for photographers and families. Optional for flexible general viewers.',
+    recommendation: 'Photographers and families: private. Budget travelers and social types: shared can work well.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Private Vehicle',
+    rightHeader: 'Shared Vehicle',
+    rows: [
+      { left: 'You control timing/duration', right: 'Group compromise required' },
+      { left: '30-50% higher cost', right: 'Standard pricing' },
+      { left: 'Guide learns your interests', right: 'Guide serves the group' },
+      { left: 'Privacy for your party', right: 'Social experience with others' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years planning East and Southern Africa safaris',
+  },
+
   whyNotSimple: `Private vehicle means your group has a dedicated guide and vehicle. You control the schedule. You decide how long to stay at sightings. You negotiate among yourselves, not with strangers.
 
 Shared vehicle means you join other guests from your camp or lodge. You compromise on timing, sightings, and interests. Decisions are group decisions.
@@ -256,6 +325,29 @@ const lodgeVsTentedBlog: BlogContent = {
   heroImage: {
     src: '/images/activities/fly-camping.jpg',
     alt: 'Milky Way galaxy over Lake Naivasha camp under African night sky',
+  },
+
+  verdictBox: {
+    verdict: 'Luxury tented camps are not roughing it—they have king beds and en-suite bathrooms. They offer closer bush connection. Lodges offer more insulation.',
+    recommendation: 'Want immersion and bush sounds? Tented camp. Prefer solid walls and climate control? Lodge.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Tented Camp',
+    rightHeader: 'Lodge',
+    rows: [
+      { left: 'Canvas walls, bush sounds', right: 'Solid walls, more insulation' },
+      { left: 'Often smaller, intimate', right: 'Often larger, more guests' },
+      { left: 'Can be placed in remote areas', right: 'Requires permanent access' },
+      { left: 'Both can be very luxurious', right: 'Both can be very luxurious' },
+    ],
+  },
+
+  author: {
+    name: 'Anne Wambui',
+    role: 'Safari Hospitality Specialist',
+    credentials: '12 years in East African safari lodge management',
   },
 
   whyNotSimple: `The terminology creates confusion. A safari "tent" is not what you pitched at summer camp. Luxury tented camps have king beds, private bathrooms, running water, and electricity. The "tent" is canvas walls and a canvas roof, not roughing it.
@@ -338,6 +430,29 @@ const mobileCampsVsFixedBlog: BlogContent = {
     alt: 'Luxury mobile safari camp setup in the Serengeti wilderness',
   },
 
+  verdictBox: {
+    verdict: 'Mobile camps follow the migration for optimal positioning. Fixed lodges offer consistency. Mobile camps are NOT roughing it—they have proper beds and bathrooms.',
+    recommendation: 'Migration season? Mobile camps position you best. Other times? Fixed lodges are simpler.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Mobile Camp',
+    rightHeader: 'Fixed Lodge',
+    rows: [
+      { left: 'Moves with wildlife', right: 'Stays in one location' },
+      { left: 'Smaller, intimate groups', right: 'More guests, more amenities' },
+      { left: 'Expedition feeling', right: 'Hotel-like consistency' },
+      { left: 'Premium pricing', right: 'Range of price points' },
+    ],
+  },
+
+  author: {
+    name: 'Juma Mkwawa',
+    role: 'Head Guide',
+    credentials: '18 years guiding in Serengeti, including mobile camp operations',
+  },
+
   whyNotSimple: `Mobile camps move with the wildlife. Fixed lodges stay where they are built. This fundamental difference creates distinct safari experiences, but the terms are often misunderstood.
 
 A mobile camp is not roughing it. Quality mobile camps have comfortable beds, proper bathrooms, and good food. They simply pack up and relocate as animal movements dictate, typically following the Great Migration across the Serengeti.
@@ -416,6 +531,29 @@ const groupVsPrivateBlog: BlogContent = {
   heroImage: {
     src: '/images/activities/game-drive.jpg',
     alt: 'Safari touring vehicle with guests on game drive',
+  },
+
+  verdictBox: {
+    verdict: 'Group tours save 30-50% and remove planning burden. Private safaris offer customization and flexibility. Groups of 4+ often find private comparable in per-person cost.',
+    recommendation: 'Solo/couple on budget? Group tour. Group of 4+ or specific interests? Private often works.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Group Tour',
+    rightHeader: 'Private Safari',
+    rows: [
+      { left: '30-50% lower cost', right: 'Higher but customized' },
+      { left: 'Fixed dates and itinerary', right: 'Your dates, your choices' },
+      { left: 'Social experience', right: 'Privacy for your party' },
+      { left: 'Median preferences served', right: 'Your interests prioritized' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years planning East and Southern Africa safaris',
   },
 
   whyNotSimple: `Group tours run fixed itineraries with multiple strangers in one vehicle. Private safaris design custom trips for your group alone. The price difference is substantial, often 30-50 percent more for private arrangements.
@@ -500,6 +638,29 @@ const flyInVsOverlandBlog: BlogContent = {
   heroImage: {
     src: '/images/activities/hot-air-balloon.jpg',
     alt: 'Small aircraft on bush airstrip in African savannah',
+  },
+
+  verdictBox: {
+    verdict: 'Flying saves time but costs $300-500/leg. Driving saves money but loses days. Short trips benefit most from flying. Long trips can absorb driving time.',
+    recommendation: 'Under 7 days? Fly when distances are long. Over 10 days? Driving becomes more viable.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Fly-In Safari',
+    rightHeader: 'Overland Safari',
+    rows: [
+      { left: '5-hour drive becomes 45-min flight', right: 'Full day in vehicle' },
+      { left: '$300-500 per leg', right: '$50-100 or included' },
+      { left: 'More game viewing time', right: 'See the landscape in between' },
+      { left: 'Some areas fly-in only', right: 'Flexible stops possible' },
+    ],
+  },
+
+  author: {
+    name: 'Emmanuel Mollel',
+    role: 'Safari Consultant',
+    credentials: '20 years planning East and Southern Africa safaris',
   },
 
   whyNotSimple: `Fly-in safaris use small aircraft to hop between bush airstrips near camps. Overland safaris drive between destinations on roads. The choice affects time efficiency, cost, and the style of experience.

@@ -22,6 +22,29 @@ const bestTimeLionsBlog: BlogContent = {
     alt: 'Male lion resting in golden savannah grass',
   },
 
+  verdictBox: {
+    verdict: 'Lions are visible year-round in good destinations. Dry season (June-October) concentrates prey and improves predictability. Dawn drives maximize active lion encounters.',
+    recommendation: 'Choose high-density destinations like Serengeti, Masai Mara, or Ngorongoro for best odds.',
+    outcome: 'yes',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Dry Season (Jun-Oct)',
+    rightHeader: 'Wet Season (Nov-May)',
+    rows: [
+      { left: 'Lions predictable around water', right: 'Lions dispersed across landscape' },
+      { left: 'Higher prices, more tourists', right: 'Lower prices, fewer crowds' },
+      { left: 'Easier photography in sparse bush', right: 'Lush scenery, harder visibility' },
+      { left: 'Best for guaranteed sightings', right: 'Best for value and green landscapes' },
+    ],
+  },
+
+  author: {
+    name: 'Juma Mkwawa',
+    role: 'Head Guide',
+    credentials: '18 years guiding in Serengeti and Ngorongoro',
+  },
+
   whyNotSimple: `Lions are present year-round in most safari destinations. You do not need specific timing to see lions. They are resident animals, not migratory.
 
 But lion visibility varies by season and time of day. Dry season concentrates prey around water, and lions follow prey. Wet season disperses animals across the landscape. Time of day matters because lions are primarily crepuscular and nocturnal.
@@ -86,6 +109,29 @@ const leopardSightingBlog: BlogContent = {
   heroImage: {
     src: '/images/destinations/south-africa-leopard.jpg',
     alt: 'Leopard resting on tree branch in dappled sunlight',
+  },
+
+  verdictBox: {
+    verdict: 'Sabi Sands in South Africa offers Africa\'s highest leopard sighting rates. Elsewhere, leopards are elusive and sightings are bonuses, not expectations.',
+    recommendation: 'If leopards are essential, choose Sabi Sands. If secondary, accept them as fortunate bonuses.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Sabi Sands (SA)',
+    rightHeader: 'Other Destinations',
+    rows: [
+      { left: 'Daily sightings common', right: 'Sightings unpredictable' },
+      { left: 'Habituated leopards', right: 'Leopards avoid vehicles' },
+      { left: 'Premium pricing', right: 'Various price points' },
+      { left: 'Best for leopard priority', right: 'Better for general safari' },
+    ],
+  },
+
+  author: {
+    name: 'David Mabunda',
+    role: 'Senior Tracker',
+    credentials: '22 years tracking in Greater Kruger reserves',
   },
 
   whyNotSimple: `Leopards are solitary, nocturnal, and exceptionally well-camouflaged. Unlike lions, they do not live in visible prides. Unlike elephants, they actively avoid detection. Seeing a leopard requires finding an animal that does not want to be found.
@@ -154,6 +200,29 @@ const wildDogsBlog: BlogContent = {
     alt: 'Pack of African wild dogs on the hunt',
   },
 
+  verdictBox: {
+    verdict: 'Botswana (Moremi/Khwai), Zambia (South Luangwa), and Zimbabwe (Mana Pools) offer best wild dog odds. Denning season (May-August) concentrates dogs for easier sighting.',
+    recommendation: 'If wild dogs are priority, choose these destinations during denning season.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Best Wild Dog Areas',
+    rightHeader: 'Limited Wild Dog Areas',
+    rows: [
+      { left: 'Botswana Moremi/Khwai', right: 'Serengeti (rare)' },
+      { left: 'Zambia South Luangwa', right: 'Masai Mara (very rare)' },
+      { left: 'Zimbabwe Mana Pools', right: 'Kruger (unpredictable)' },
+      { left: 'Denning: May-Aug best', right: 'Year-round: luck dependent' },
+    ],
+  },
+
+  author: {
+    name: 'Kelvin Tembo',
+    role: 'Wildlife Guide',
+    credentials: '15 years guiding in South Luangwa, wild dog specialist',
+  },
+
   whyNotSimple: `African wild dogs are endangered, with fewer than 6,000 remaining in the wild. They need vast territories and roam unpredictably. Unlike lions that hold stable territories, wild dog packs cover enormous areas.
 
 This makes sightings genuinely difficult. You cannot stake out a known location. You must be in the right place when dogs move through. Some destinations have better odds because of pack territories overlapping with safari areas, but even there, sightings are not guaranteed.
@@ -218,6 +287,29 @@ const rhinoViewingBlog: BlogContent = {
   heroImage: {
     src: '/images/wildlife/rhino.jpg',
     alt: 'White rhinoceros in African grassland',
+  },
+
+  verdictBox: {
+    verdict: 'Ngorongoro Crater offers best black rhino odds in East Africa. South African reserves offer both species most reliably. Many destinations have few or no rhinos.',
+    recommendation: 'If rhinos are essential, choose Ngorongoro (black) or Greater Kruger reserves (both species).',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'White Rhino',
+    rightHeader: 'Black Rhino',
+    rows: [
+      { left: 'More common (wider mouth)', right: 'Critically endangered' },
+      { left: 'Best in South Africa, Zimbabwe', right: 'Best in Ngorongoro, Kenya conservancies' },
+      { left: 'Grazers, open grassland', right: 'Browsers, thicker bush' },
+      { left: 'Often seen in groups', right: 'Solitary, more elusive' },
+    ],
+  },
+
+  author: {
+    name: 'Sarah Ngugi',
+    role: 'Conservation Specialist',
+    credentials: '12 years in rhino conservation and guiding',
   },
 
   whyNotSimple: `Rhinos have been devastated by poaching. Black rhino populations collapsed to under 5,000 animals. White rhinos, while more numerous, face ongoing threats. Many former rhino areas now have none.
@@ -286,6 +378,29 @@ const cheetahVsLeopardBlog: BlogContent = {
     alt: 'Cheetah scanning savannah from termite mound',
   },
 
+  verdictBox: {
+    verdict: 'Cheetahs: East Africa (Serengeti, Mara). Leopards: Sabi Sands. Both cats require different destinations to maximize sighting odds.',
+    recommendation: 'Prioritize based on your destination—cheetah hunts in East Africa or leopard reliability in Sabi Sands.',
+    outcome: 'depends',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Cheetah',
+    rightHeader: 'Leopard',
+    rows: [
+      { left: 'Diurnal (daytime hunter)', right: 'Nocturnal/crepuscular' },
+      { left: 'Open grassland habitat', right: 'Woodland and thickets' },
+      { left: 'Best in Serengeti/Mara', right: 'Best in Sabi Sands' },
+      { left: 'Tolerates vehicles', right: 'Secretive (except habituated)' },
+    ],
+  },
+
+  author: {
+    name: 'Juma Mkwawa',
+    role: 'Head Guide',
+    credentials: '18 years guiding in Serengeti and Ngorongoro',
+  },
+
   whyNotSimple: `Cheetahs and leopards are both spotted cats but have completely different behaviors and therefore different viewing patterns. Optimizing for one does not optimize for the other.
 
 Cheetahs are diurnal, hunt in open savannah, and tolerate observation. They are visible when present. Leopards are nocturnal, secretive, and use cover. They actively avoid detection.
@@ -352,6 +467,29 @@ const elephantHerdsBlog: BlogContent = {
     alt: 'Large elephant herd walking across savannah',
   },
 
+  verdictBox: {
+    verdict: 'Chobe (Botswana) and Hwange (Zimbabwe) offer largest herds during dry season. Amboseli offers iconic Kilimanjaro backdrop photography.',
+    recommendation: 'For elephant spectacle, visit Chobe or Hwange July-October. For Kilimanjaro shots, choose Amboseli.',
+    outcome: 'yes',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Best Elephant Destinations',
+    rightHeader: 'Characteristics',
+    rows: [
+      { left: 'Chobe, Botswana', right: '130,000+ elephants, dry season river gatherings' },
+      { left: 'Hwange, Zimbabwe', right: 'Large herds at pumped waterholes' },
+      { left: 'Amboseli, Kenya', right: 'Kilimanjaro backdrop, research herds' },
+      { left: 'Tarangire, Tanzania', right: 'Dry season migrations, baobab scenery' },
+    ],
+  },
+
+  author: {
+    name: 'Thabo Mokoena',
+    role: 'Elephant Researcher',
+    credentials: '14 years studying elephant behavior in Chobe',
+  },
+
   whyNotSimple: `Elephants exist across safari Africa, but herd sizes vary dramatically. Some destinations have solitary bulls and small family groups. Others have concentrations of hundreds.
 
 If large herds and elephant spectacle matter to you, destination selection is critical. The difference between destinations is not subtle—it is the difference between seeing ten elephants and seeing two hundred.`,
@@ -416,6 +554,29 @@ const hippoCrocBlog: BlogContent = {
     alt: 'Hippos in river at sunset',
   },
 
+  verdictBox: {
+    verdict: 'Destinations with significant rivers or lakes offer best hippo and crocodile viewing. Mara River, Chobe River, and Luangwa River are top choices.',
+    recommendation: 'Choose water-based destinations like Chobe, South Luangwa, or areas along the Mara River.',
+    outcome: 'yes',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Best Water Safari Destinations',
+    rightHeader: 'Features',
+    rows: [
+      { left: 'Chobe River, Botswana', right: 'Boat safaris, large hippo pods' },
+      { left: 'Mara River, Kenya/Tanzania', right: 'Famous crossing point, crocodiles' },
+      { left: 'South Luangwa, Zambia', right: 'Walking safaris along river' },
+      { left: 'Okavango Delta, Botswana', right: 'Mokoro channels, water-based' },
+    ],
+  },
+
+  author: {
+    name: 'Gift Ngwenya',
+    role: 'River Guide',
+    credentials: '16 years conducting boat safaris on Chobe River',
+  },
+
   whyNotSimple: `Hippos and crocodiles require water. Not all safari destinations have significant water features. If these species matter to you, destination selection must account for rivers, lakes, or deltas.
 
 Beyond presence, viewing quality varies. A hippo pool with fifty animals differs from occasional hippo sightings in a stream. Crocodile size and visibility vary by location.`,
@@ -478,6 +639,29 @@ const giraffeViewingBlog: BlogContent = {
   heroImage: {
     src: '/images/ecosystems/woodland-clearing.jpg',
     alt: 'Giraffe browsing acacia trees in African woodland',
+  },
+
+  verdictBox: {
+    verdict: 'Giraffes are common across most safari destinations—you will see them. Different regions have different species with distinct patterns.',
+    recommendation: 'No special planning needed. Enjoy the species you encounter at your destination.',
+    outcome: 'yes',
+  },
+
+  comparisonTable: {
+    leftHeader: 'Giraffe Species',
+    rightHeader: 'Location',
+    rows: [
+      { left: 'Masai Giraffe (jagged patches)', right: 'Tanzania, Kenya' },
+      { left: 'Reticulated Giraffe (geometric)', right: 'Northern Kenya' },
+      { left: 'Southern Giraffe (rounded patches)', right: 'South Africa, Botswana, Zimbabwe' },
+      { left: 'Rothschild Giraffe (rare)', right: 'Uganda, Kenya sanctuaries' },
+    ],
+  },
+
+  author: {
+    name: 'Anne Wambui',
+    role: 'Safari Guide',
+    credentials: '10 years guiding in Kenya diverse giraffe regions',
   },
 
   whyNotSimple: `Giraffes are common across safari destinations. You will almost certainly see giraffes. But different regions have different giraffe species with distinct patterns, and some areas have notably better viewing than others.
