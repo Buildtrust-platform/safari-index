@@ -328,6 +328,164 @@ We do not default to multiple camps because it seems more comprehensive. We iden
 };
 
 // ============================================================
+// all-inclusive-vs-a-la-carte: All-inclusive or pay-as-you-go?
+// ============================================================
+const allInclusiveVsAlaCarteBlog: BlogContent = {
+  decisionSlug: 'all-inclusive-vs-a-la-carte',
+  title: 'All-inclusive or pay-as-you-go?',
+  subtitle: 'Understanding safari pricing structures and what they include',
+  updatedAt: '2025-01',
+  wordCount: 1280,
+  published: true,
+  heroImage: {
+    src: '/images/activities/sundowner.jpg',
+    alt: 'Safari sundowner drinks at sunset in the African bush',
+  },
+
+  whyNotSimple: `Safari pricing varies from fully all-inclusive to almost nothing included. The sticker price tells you little about total cost until you understand what is and is not covered.
+
+All-inclusive typically means accommodation, meals, drinks (sometimes premium drinks excluded), game drives, and laundry. At the other extreme, you might pay separately for park fees, transfers, activities, and every drink.
+
+Understanding what is included prevents budget surprises and enables real comparison between properties.`,
+
+  variables: `**What "all-inclusive" actually includes** varies by property. Some include unlimited premium alcohol. Others exclude it. Some include conservation fees. Others charge separately. Read the fine print.
+
+**Your drinking habits** affect value perception. Heavy drinkers benefit significantly from alcohol-inclusive pricing. Non-drinkers subsidize others. Match inclusions to your consumption.
+
+**Activity patterns** interact with pricing. If all-inclusive includes two game drives daily and that is all you want, it works. If you want extra activities, those might cost extra even at "all-inclusive" properties.
+
+**Transfer and park fee handling** significantly affects comparison. A camp quoting $500 per night might reach $650 with fees and transfers that another camp at $600 includes.
+
+**Your desire to know total cost upfront** shapes preference. All-inclusive simplifies budgeting. You know the number. Pay-as-you-go can feel unpredictable as extras accumulate.`,
+
+  tradeoffs: `All-inclusive simplifies planning and eliminates surprise costs. What you pay is what you spend. This certainty has value.
+
+Pay-as-you-go can be cheaper if you want less than what is included. If you do not drink, do not want laundry, and only want one game drive daily, paying only for what you use might cost less.
+
+All-inclusive sometimes subsidizes others. If inclusions assume certain consumption levels you will not reach, you are paying for services you do not use.
+
+Premium experiences are often extra regardless of structure. Hot air balloons, walking safaris, and bush dinners typically cost additional even at all-inclusive properties.
+
+Comparing properties requires normalizing to what you actually want. Add extras to pay-as-you-go prices. Subtract unused inclusions from all-inclusive. Then compare.`,
+
+  misconceptions: `All-inclusive is not always more expensive. When you factor in everything you would pay for anyway, all-inclusive often matches or beats pay-as-you-go.
+
+Pay-as-you-go is not always cheaper. Small charges accumulate. The perception of saving can evaporate when the final bill arrives.
+
+"All-inclusive" does not mean identical across properties. Each camp defines it differently. Compare specific inclusions, not just the label.
+
+You cannot negotiate inclusions at most safari camps. Unlike cruise ships, safari lodges rarely customize packages.`,
+
+  breaksDown: `If you want premium alcohol and unlimited game drives, all-inclusive typically offers better value.
+
+If you have specific dietary restrictions and would not consume standard inclusions, pay-as-you-go might serve better.
+
+If predictable budgeting matters and you dislike surprise charges, all-inclusive eliminates that stress.
+
+If comparing properties, always normalize to total actual cost. Sticker prices mislead without inclusion analysis.`,
+
+  ourApproach: `We clarify what specific properties include and calculate realistic total costs. We normalize pricing for fair comparison.
+
+We do not compare headline rates. We compare what you will actually pay for the experience you want.`,
+
+  relatedDecisions: [
+    { slug: 'safari-total-budget', title: 'What should I budget for safari?', type: 'decision' },
+    { slug: 'luxury-safari-worth-it', title: 'Is luxury safari worth the premium?', type: 'decision' },
+    { slug: 'safari-splurge-vs-save', title: 'Where should I splurge and where should I save?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'tanzania-classic-northern-circuit', title: 'Tanzania Classic Northern Circuit', type: 'trip' },
+    { slug: 'botswana-okavango-delta', title: 'Botswana Okavango Delta Safari', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'budget/pricing-structures', title: 'Safari Pricing Structures', type: 'guide' },
+    { slug: 'budget/cost-breakdown', title: 'Safari Cost Breakdown', type: 'guide' },
+  ],
+};
+
+// ============================================================
+// family-friendly-vs-adults-only: Family-friendly or adults-only camps?
+// ============================================================
+const familyVsAdultsOnlyBlog: BlogContent = {
+  decisionSlug: 'family-friendly-vs-adults-only',
+  title: 'Family-friendly or adults-only camps?',
+  subtitle: 'Understanding age restrictions and family accommodation options',
+  updatedAt: '2025-01',
+  wordCount: 1320,
+  published: true,
+  heroImage: {
+    src: '/images/activities/family-safari.jpg',
+    alt: 'Family on safari game drive watching elephants',
+  },
+
+  whyNotSimple: `Many safari camps have age restrictions, typically no children under 8, 10, or 12 years old. These restrictions exist for safety and experience reasons, not arbitrary gatekeeping.
+
+Walking safaris are dangerous with young children. Small camps cannot accommodate noisy children without affecting other guests. Some activities simply are not appropriate for small kids.
+
+Understanding why restrictions exist helps parents choose appropriate camps rather than viewing policies as obstacles.`,
+
+  variables: `**Your children's ages** determine which camps are available. Many camps accept children over 8. Fewer accept children 5-7. Camps accepting children under 5 are limited. Know your constraints.
+
+**Whether your children can sit quietly** for extended periods affects suitability. Game drives require hours of patient watching. Children who cannot manage this disrupt both their family's experience and others'.
+
+**Your interest in activities beyond game drives** matters. Walking safaris typically exclude children under 12-16 for safety. If walking safari is a priority, children prevent that activity.
+
+**Family room availability** varies. Most safari tents accommodate two adults. Families need interconnecting rooms, family suites, or separate tents. Availability is more limited than standard rooms.
+
+**Private guide and vehicle** often solve age restriction issues. Camps that exclude young children from shared drives may accept them on private vehicles where their restlessness affects only you.
+
+**Budget** encounters family premiums. Family rooms cost more. Private vehicles cost more. Flying four people costs more than two. Family safari has meaningful cost multiplication.`,
+
+  tradeoffs: `Family-friendly camps accommodate children but may have less exclusive atmosphere. Other families with children create different energy than adults-only settings.
+
+Adults-only camps offer tranquility but exclude families. If traveling with children, these are simply unavailable.
+
+Some family-friendly camps separate families and non-family guests through different dining times, activity schedules, or accommodation areas. This can work well for both groups.
+
+Private vehicle arrangements allow children at stricter camps but at premium cost. Whether that premium is worth it depends on the specific camp's appeal.
+
+Family safari programs designed for children add value at some camps. Kids' clubs, junior ranger programs, and age-appropriate activities make safari engaging for children. These exist only at certain properties.`,
+
+  misconceptions: `Age restrictions are not about excluding families as customers. They exist because certain experiences do not work for young children, and other guests paid premium prices for tranquility.
+
+Children do not ruin safari. Children at appropriate camps with appropriate expectations have wonderful experiences. The issue is matching expectations to capabilities.
+
+Not all children are the same. A mature 7-year-old might handle safari better than an immature 10-year-old. Some camps evaluate individual children rather than applying strict age cutoffs.
+
+Adults-only does not mean unfamily-friendly. It means the property serves a different market segment. Both segments deserve appropriate options.`,
+
+  breaksDown: `If your children are under 5, options are limited. Some exist, particularly in South Africa and Kenya, but require specific research.
+
+If a specific camp matters more than flexibility, inquire about private vehicle arrangements that might accommodate your family despite standard restrictions.
+
+If budget is constrained, family safari costs significantly more per person than couple travel. The math might push toward waiting until children are older.
+
+If your children cannot sit quietly for hours, honest assessment suggests waiting or choosing camp types with alternatives to traditional game drives.`,
+
+  ourApproach: `We evaluate family safari using your children's ages, temperaments, and your activity priorities. We identify camps that genuinely serve families versus camps that merely accept them.
+
+We match families to appropriate experiences rather than trying to fit children into settings designed for adults.`,
+
+  relatedDecisions: [
+    { slug: 'safari-with-young-children', title: 'Safari with young children?', type: 'decision' },
+    { slug: 'multigenerational-safari', title: 'Planning a multigenerational safari?', type: 'decision' },
+    { slug: 'luxury-safari-worth-it', title: 'Is luxury safari worth the premium?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'kenya-family-safari', title: 'Kenya Family Safari', type: 'trip' },
+    { slug: 'south-africa-family-safari', title: 'South Africa Family Safari', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'personal-fit/family-safari-guide', title: 'Family Safari Guide', type: 'guide' },
+    { slug: 'accommodation/family-camps', title: 'Family-Friendly Camps', type: 'guide' },
+  ],
+};
+
+// ============================================================
 // Register all accommodation blogs
 // ============================================================
 export function registerAccommodationBlogs(): void {
@@ -335,4 +493,6 @@ export function registerAccommodationBlogs(): void {
   registerBlog(budgetSafariBlog);
   registerBlog(insideOutsideParkBlog);
   registerBlog(multipleCampsBlog);
+  registerBlog(allInclusiveVsAlaCarteBlog);
+  registerBlog(familyVsAdultsOnlyBlog);
 }

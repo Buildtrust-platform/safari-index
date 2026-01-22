@@ -92,8 +92,249 @@ Medical decisions require medical consultation. We provide context for the trave
 };
 
 // ============================================================
+// safari-safety-concerns: Is safari safe?
+// ============================================================
+const safariSafetyBlog: BlogContent = {
+  decisionSlug: 'safari-safety-concerns',
+  title: 'Is safari safe?',
+  subtitle: 'Understanding the real risks and safety record of African safari',
+  updatedAt: '2025-01',
+  wordCount: 1360,
+  published: true,
+  heroImage: {
+    src: '/images/activities/game-drive.jpg',
+    alt: 'Safari vehicle observing wildlife at a safe distance',
+  },
+
+  whyNotSimple: `Safari involves being near wild animals that can kill humans. It involves traveling in developing countries with different infrastructure and medical access. It involves small aircraft, rough roads, and remote locations.
+
+Yet millions of travelers do safari every year with remarkably few serious incidents. The safety record is excellent. The perception of danger exceeds the reality.
+
+Understanding what is actually dangerous versus what feels dangerous helps make informed decisions.`,
+
+  variables: `**The specific country and region** affects safety contexts. Some African countries have areas with political instability or high crime. Tourist areas in safari destinations are generally safe, but country-level risks vary.
+
+**Wildlife interaction risk** is managed through guide expertise and established protocols. Following guide instructions eliminates most animal-related danger. The exceptions are rare and typically involve rule violations.
+
+**Medical access** varies by remoteness. Flying safari destinations may have evacuation capabilities. Remote camps may be hours from meaningful medical care. This matters more for travelers with health conditions.
+
+**Your risk tolerance and anxiety levels** shape experience. If you find proximity to lions terrifying rather than exciting, the stress might outweigh the experience regardless of actual risk levels.
+
+**Whether you follow instructions** affects outcomes. Most safari incidents involve guests who ignored guide directions. Compliance with safety protocols makes safari very safe.
+
+**Your health situation** interacts with remoteness. Healthy travelers face minimal risk. Travelers with conditions requiring rapid medical intervention face higher stakes from remote locations.`,
+
+  tradeoffs: `Safari provides managed wildlife encounters with professional guides. The structure exists to make it safe. Unguided wilderness exploration would be genuinely dangerous.
+
+Remote locations provide authentic wilderness experience but limited emergency response. The trade is access to pristine environments for distance from hospitals.
+
+Developing country infrastructure means different standards. Roads are rougher. Medical facilities are less advanced. Power may be unreliable. These affect comfort more than safety for most travelers.
+
+Bush flights have excellent safety records but feel scarier than commercial aviation. The pilots are experienced. The routes are familiar. The statistics are reassuring. But small planes in turbulence can frighten travelers.`,
+
+  misconceptions: `Animals are not trying to kill tourists. Wildlife has adapted to safari vehicles as non-threatening objects. Animals ignore vehicles unless provoked or approached wrongly.
+
+Safari is not dangerous compared to many activities tourists do regularly. It is statistically safer than driving on American highways.
+
+Political instability in some African countries does not affect tourist safari areas in most cases. Tourist economies create incentives for safety. Authorities protect safari regions.
+
+You are not adventuring into the unknown. Safari is a mature industry with established safety protocols, insurance requirements, and emergency procedures.
+
+Guides are not just chauffeurs. They have extensive training in animal behavior, emergency response, and guest safety. Their expertise is the primary safety mechanism.`,
+
+  breaksDown: `If you have a medical condition requiring quick access to advanced care, remote safari destinations increase risk. Consider South Africa where medical infrastructure is stronger.
+
+If your anxiety about wildlife or flying makes the experience stressful rather than enjoyable, the low actual risk does not solve the experiential problem.
+
+If traveling during political instability, tourist areas may still be safe but monitoring and flexibility are required.
+
+If you cannot or will not follow guide instructions, you create risk that professional management cannot control.`,
+
+  ourApproach: `We evaluate safety using your health situation, anxiety levels, and destination choices. We identify when safety concerns are real and when they are disproportionate to actual risk.
+
+We provide realistic context rather than minimizing or exaggerating. Safari is very safe for most travelers when done through reputable operators.`,
+
+  relatedDecisions: [
+    { slug: 'avoid-malaria-zones-safari', title: 'Should I avoid malaria zones?', type: 'decision' },
+    { slug: 'am-i-ready-for-first-safari', title: 'Am I ready for my first safari?', type: 'decision' },
+    { slug: 'walking-safari-worth-it', title: 'Is walking safari worth it?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'south-africa-kruger', title: 'South Africa Kruger Safari', type: 'trip' },
+    { slug: 'kenya-classic-safari', title: 'Kenya Classic Safari', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'health/safari-safety', title: 'Safari Safety Guide', type: 'guide' },
+    { slug: 'logistics/travel-insurance', title: 'Safari Travel Insurance', type: 'guide' },
+  ],
+};
+
+// ============================================================
+// safari-travel-insurance: Do I need safari travel insurance?
+// ============================================================
+const travelInsuranceBlog: BlogContent = {
+  decisionSlug: 'safari-travel-insurance',
+  title: 'Do I need safari travel insurance?',
+  subtitle: 'Understanding coverage requirements for African safari travel',
+  updatedAt: '2025-01',
+  wordCount: 1290,
+  published: true,
+  heroImage: {
+    src: '/images/activities/scenic-flight.jpg',
+    alt: 'Small aircraft on bush airstrip',
+  },
+
+  whyNotSimple: `Safari travel insurance is not optional. Many camps require proof of coverage. Many countries require medical evacuation insurance. The remoteness of safari destinations makes emergency services expensive.
+
+A medical evacuation from a remote bush camp can cost $50,000 or more. Trip cancellation for a $15,000 safari is a significant financial loss. The premiums for comprehensive coverage are small relative to these risks.
+
+The question is not whether to get insurance but what coverage you need.`,
+
+  variables: `**Medical evacuation coverage** is essential. Remote locations require air evacuation to reach meaningful medical care. Standard travel insurance often excludes or limits evacuation. Confirm specific coverage.
+
+**Trip cancellation/interruption coverage** protects your investment. Safari is expensive. Life circumstances can force cancellation. Insurance converts catastrophic loss to manageable premium.
+
+**Your health insurance situation** affects needs. Some domestic health insurance covers international medical care. Most does not, or limits coverage significantly. Understand your existing coverage before buying supplemental.
+
+**Adventure activity coverage** matters for walking safari and other activities. Standard policies sometimes exclude activities that safari includes. Verify coverage for what you plan to do.
+
+**Cancel for any reason (CFAR)** coverage provides maximum flexibility at higher cost. Standard trip cancellation requires covered reasons (illness, job loss, etc.). CFAR covers changing your mind, though typically at 75 percent reimbursement.
+
+**Pre-existing condition coverage** varies by policy. Medical coverage often excludes pre-existing conditions unless you meet specific enrollment windows or pay additional premium.`,
+
+  tradeoffs: `Comprehensive coverage provides peace of mind but costs more. For expensive trips, the premium is worth the protection. For budget trips, the premium might represent significant portion of trip cost.
+
+Medical-only coverage is cheaper but leaves trip investment unprotected. If you can absorb trip loss but not medical bills, this might make sense.
+
+CFAR coverage costs significantly more but provides maximum flexibility. Whether the premium is worth it depends on your circumstances and trip cost.
+
+Some credit cards include travel insurance. Coverage is typically limited. Verify what is actually covered rather than assuming cards provide adequate protection.
+
+Purchasing insurance promptly after booking is important. Many protections require purchasing within windows of initial trip deposit.`,
+
+  misconceptions: `Standard travel insurance is not sufficient for remote safari. Generic policies often exclude bush evacuations or cap coverage below actual costs.
+
+Medical evacuation is not covered by regular health insurance in most cases. Even international medical coverage often excludes or limits evacuation expenses.
+
+Trip cancellation coverage does not cover everything. Read what qualifies as covered reasons. "Changed my mind" is not a covered reason in standard policies.
+
+Insurance is not expensive relative to trip cost. Comprehensive safari coverage typically costs 5-10 percent of trip cost. That is meaningful but not prohibitive.`,
+
+  breaksDown: `If you have significant pre-existing conditions, finding adequate coverage at reasonable cost requires more research. Specialty insurers serve this market.
+
+If booking very last-minute, some coverage options (particularly CFAR) may not be available. Planning allows more options.
+
+If your trip cost is very low, insurance premium might feel disproportionate. The coverage need remains; the math just feels worse.
+
+If you already have excellent international medical coverage and can absorb trip cancellation, your needs might be more limited than typical.`,
+
+  ourApproach: `We advise appropriate insurance coverage as essential trip component. We identify what coverage you specifically need based on your trip, health situation, and risk tolerance.
+
+We do not sell insurance. We help you understand what to buy and why.`,
+
+  relatedDecisions: [
+    { slug: 'avoid-malaria-zones-safari', title: 'Should I avoid malaria zones?', type: 'decision' },
+    { slug: 'safari-safety-concerns', title: 'Is safari safe?', type: 'decision' },
+    { slug: 'book-safari-agent-vs-direct', title: 'Should I book through an agent?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'tanzania-classic-northern-circuit', title: 'Tanzania Classic Northern Circuit', type: 'trip' },
+    { slug: 'botswana-okavango-delta', title: 'Botswana Okavango Delta Safari', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'logistics/travel-insurance', title: 'Safari Insurance Guide', type: 'guide' },
+    { slug: 'health/medical-preparation', title: 'Medical Preparation', type: 'guide' },
+  ],
+};
+
+// ============================================================
+// safari-physical-fitness: How fit do I need to be for safari?
+// ============================================================
+const physicalFitnessBlog: BlogContent = {
+  decisionSlug: 'safari-physical-fitness',
+  title: 'How fit do I need to be for safari?',
+  subtitle: 'Understanding the physical demands of different safari styles',
+  updatedAt: '2025-01',
+  wordCount: 1260,
+  published: true,
+  heroImage: {
+    src: '/images/activities/walking-safari.jpg',
+    alt: 'Guided walking safari in African bush',
+  },
+
+  whyNotSimple: `Safari accommodates a wide range of physical abilities. Standard game drives require sitting in a vehicle, walking between tent and dining area, and tolerating bumpy roads. Most travelers manage this easily.
+
+But safari can also include walking safaris requiring hours of hiking, camps accessed by steep stairs, and situations where rapid movement might be necessary. The physical demands vary dramatically by safari type.
+
+Understanding what your specific trip requires allows honest assessment of fit.`,
+
+  variables: `**The type of safari** determines requirements. Vehicle safari is physically undemanding. Walking safari requires hiking fitness. Canoe safari requires paddling capability. Know what activities you are booking.
+
+**Specific camp layout** affects daily demands. Some camps have flat paths between tent and common areas. Others involve stairs, uneven terrain, or significant distances. Luxury does not guarantee accessibility.
+
+**Your mobility situation** might require accommodation. Camps can sometimes adapt. But remote locations have inherent limitations. Discuss specific needs with operators.
+
+**How you tolerate long vehicle time** matters. Game drives can last four to six hours. Bumpy roads jar joints. If sitting is painful, this becomes challenging.
+
+**Heat tolerance** affects energy. Safari often involves significant heat. Dehydration and heat exhaustion are possible. Reasonable fitness and hydration help manage this.
+
+**Sleep disruption** affects many travelers. Early mornings, different time zones, and unfamiliar sleeping environments combine with physical demands. Accumulated fatigue is real.`,
+
+  tradeoffs: `Standard vehicle safari requires minimal fitness but limits activity options. You see wildlife from the vehicle. Walking safaris, canoeing, and other activities are unavailable.
+
+More active safari provides richer experience but requires corresponding fitness. Walking through the bush is incomparable. It also requires being able to walk.
+
+Luxury camps are often less accessible than expected. Dramatic settings mean stairs, hills, and distances. Mid-range camps might be more practically accessible.
+
+Discussing mobility needs before booking enables appropriate matching. Surprising camps with mobility issues upon arrival creates problems for everyone.`,
+
+  misconceptions: `Safari is not an expedition requiring athletic training. Standard safari is accessible to most travelers including those with modest fitness.
+
+Age is not a barrier. Many safari travelers are retired. The experience accommodates different energy levels when appropriately planned.
+
+Mobility devices can sometimes be accommodated. Wheelchairs work in some contexts, not others. Discuss specifics rather than assuming impossibility or assuming accommodation.
+
+Walking safari requires fitness, not extreme fitness. Hours of walking in heat is demanding but not athletic competition. Moderate hiking fitness is typically sufficient.`,
+
+  breaksDown: `If you have significant mobility limitations, safari is still possible but requires careful property selection. Some camps are wheelchair accessible. Many are not.
+
+If you want walking safari or other active components, honest fitness assessment is required. You cannot walk for hours if you cannot walk for hours.
+
+If heat intolerance is significant, dry season safari becomes more challenging. Green season offers cooler temperatures in some destinations.
+
+If sitting for extended periods causes pain, vehicle safari might be difficult regardless of other fitness. The vehicle time is non-negotiable.`,
+
+  ourApproach: `We evaluate physical requirements based on your specific trip and honest assessment of your situation. We match activity levels to capabilities.
+
+We do not assume everyone wants or can do active safari. We also do not assume limitations that might not exist. Individual assessment matters.`,
+
+  relatedDecisions: [
+    { slug: 'walking-safari-worth-it', title: 'Is walking safari worth it?', type: 'decision' },
+    { slug: 'am-i-ready-for-first-safari', title: 'Am I ready for my first safari?', type: 'decision' },
+    { slug: 'multigenerational-safari', title: 'Planning a multigenerational safari?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'zambia-walking-safari', title: 'Zambia Walking Safari', type: 'trip' },
+    { slug: 'south-africa-kruger', title: 'South Africa Kruger Safari', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'health/physical-preparation', title: 'Physical Preparation', type: 'guide' },
+    { slug: 'experience/walking-safari-guide', title: 'Walking Safari Guide', type: 'guide' },
+  ],
+};
+
+// ============================================================
 // Register all risk blogs
 // ============================================================
 export function registerRiskBlogs(): void {
   registerBlog(malariaZonesBlog);
+  registerBlog(safariSafetyBlog);
+  registerBlog(travelInsuranceBlog);
+  registerBlog(physicalFitnessBlog);
 }
