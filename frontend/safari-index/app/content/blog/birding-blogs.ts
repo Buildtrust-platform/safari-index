@@ -78,6 +78,23 @@ The output tells you which season aligns with your goals and what you sacrifice 
   relatedTrips: [],
 
   relatedGuides: [],
+
+  faq: {
+    items: [
+      {
+        question: 'When is the best time for birding in East Africa?',
+        answer: 'Green season (November-April) adds 150-200 Palearctic migrants to your potential species list, though vegetation is denser. Dry season (June-October) offers better visibility and bird concentration at water sources. Peak diversity typically occurs December through February.',
+      },
+      {
+        question: 'Is green season or dry season better for bird photography?',
+        answer: 'Dry season generally offers cleaner backgrounds, less foliage obstruction, and birds concentrated at water where you can position for optimal light. Green season offers lush backgrounds and breeding plumage but denser vegetation that can obscure views.',
+      },
+      {
+        question: 'Can I see migratory birds in dry season?',
+        answer: 'No. Palearctic migrants (European Bee-eaters, Steppe Eagles, etc.) are only present November through March/April. During dry season they are in Europe and Asia breeding. Dry season birding focuses on resident African species.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -146,6 +163,23 @@ We will tell you if your expectations are unrealistic. Wanting 350 species and a
   relatedTrips: [],
 
   relatedGuides: [],
+
+  faq: {
+    items: [
+      {
+        question: 'Can I do serious birding and see the Big Five on the same trip?',
+        answer: 'Yes, but with compromises. A dedicated birding safari yields around 350 species in 12 days. A Big Five safari yields around 180. A combined approach lands around 250 species with decent mammal sightings. You gain breadth but sacrifice depth on both ends.',
+      },
+      {
+        question: 'Do I need a private vehicle for birding on safari?',
+        answer: 'Yes, for serious birding. Shared vehicles default to majority interest. If three of four guests want to follow the leopard, you follow the leopard. Private vehicle adds 30-50% to costs but transforms the birding experience.',
+      },
+      {
+        question: 'Are safari guides good birders?',
+        answer: 'Most safari guides identify 100-150 common birds competently. For serious birding with cisticolas, prinias, or call identification, you need a specialist birding guide. Request named specialist guides in advance and expect higher costs.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -216,6 +250,23 @@ If your list includes species from both endemic centers, we will tell you that h
   relatedTrips: [],
 
   relatedGuides: [],
+
+  faq: {
+    items: [
+      {
+        question: 'Is Uganda or Tanzania better for endemic bird species?',
+        answer: 'They target completely different endemic centers with zero overlap. Uganda has Albertine Rift endemics (about 40 species). Tanzania has Eastern Arc endemics (about 30 species). Your target species list determines the answer, not general preference.',
+      },
+      {
+        question: 'Where can I reliably see a Shoebill?',
+        answer: 'Uganda, specifically Mabamba Swamp near Entebbe, is the only reliable location. Tanzania theoretically has Shoebill on Lake Victoria shores but sightings are rare and unreliable. If Shoebill is a must-see, Uganda is the only realistic choice.',
+      },
+      {
+        question: 'Can I combine Uganda and Tanzania birding in one trip?',
+        answer: 'Technically possible but practically inadvisable for serious endemic birding. Each country requires 12-16 days minimum for decent coverage. Combining them means either a month-long trip or superficial treatment of both endemic centers.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -284,6 +335,23 @@ The output specifies optimal windows for your priorities and what you sacrifice 
   relatedTrips: [],
 
   relatedGuides: [],
+
+  faq: {
+    items: [
+      {
+        question: 'When do Palearctic migrants arrive in East Africa?',
+        answer: 'Early arrivals appear in October, with most species present by November. Peak diversity clusters in December through February. Late departures linger into April. Different species peak at different times within this window.',
+      },
+      {
+        question: 'What is the best month to see migratory birds in East Africa?',
+        answer: 'Late November through mid-February maximizes diversity. January-February offers peak diversity plus wildebeest calving if combining interests. Early November or late February offer 80% of diversity with lower costs.',
+      },
+      {
+        question: 'Where is the best location for migratory bird watching?',
+        answer: 'Kenya Rift Valley lakes (Nakuru, Naivasha, Baringo) are excellent for waders November-February. Northern Kenya sees spectacular raptor passage in October-November. Location depends on which migrant groups you are targeting.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -350,6 +418,23 @@ If your expectations are incompatible with physics, we say so directly.`,
   relatedTrips: [],
 
   relatedGuides: [],
+
+  faq: {
+    items: [
+      {
+        question: 'Can I do both bird listing and bird photography on the same trip?',
+        answer: 'The goals conflict in practice. A lister wants to identify and move on (30 seconds per bird). A photographer wants to wait for perfect light and behavior (30 minutes per bird). Hybrid approaches produce neither a compelling portfolio nor a maximum species count.',
+      },
+      {
+        question: 'What camera equipment do I need for bird photography on safari?',
+        answer: 'Quality bird photography requires 500-600mm lenses weighing 2-4kg. Light aircraft have strict 15kg total baggage limits. Something has to give. Many photographers bring a 100-400mm zoom for documentation shots that serves listing without the weight of serious telephotos.',
+      },
+      {
+        question: 'Is dry season or wet season better for bird photography?',
+        answer: 'Dry season offers cleaner backgrounds and birds concentrated at water where you can position for optimal light. Wet season offers breeding plumage and behavior but denser vegetation. Hide photography at waterholes works best in dry season.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -420,6 +505,23 @@ We will recommend specific regions that match your time budget and tell you what
   relatedTrips: [],
 
   relatedGuides: [],
+
+  faq: {
+    items: [
+      {
+        question: 'How many bird species can I see in a 5-7 day birding safari?',
+        answer: 'In a focused single-region trip with a specialist guide, 250-300 species is achievable in 5-6 days. Kenya Rift Valley lakes or Uganda forest corridor are ideal for short, intensive birding trips that maximize species density.',
+      },
+      {
+        question: 'Is a short birding trip worthwhile for serious birders?',
+        answer: 'Yes, with proper focus. A short trip attempting multiple regions fails. A short trip intensively working a single species-rich area succeeds. Guide quality matters more on short trips where every hour counts.',
+      },
+      {
+        question: 'What is the best location for a short birding safari?',
+        answer: 'Kenya Rift Valley (Naivasha, Nakuru, Baringo, Bogoria) lies within 4 hours of Nairobi and offers exceptional species density. Uganda forest corridor from Entebbe through Bwindi to Queen Elizabeth delivers similar counts. Choose geography that matches your time budget.',
+      },
+    ],
+  },
 };
 
 // ============================================================

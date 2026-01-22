@@ -83,6 +83,23 @@ Both deliver intense migration experiences. The difference is spectacle type and
     { slug: 'timing/migration-calendar', title: 'Migration Calendar', type: 'guide' },
     { slug: 'wildlife/predator-behavior', title: 'Predator Behavior Guide', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Are river crossings or calving season better for a first migration safari?',
+        answer: 'Calving season (January-February) is often better for first-timers because it delivers reliable predator action daily, while river crossings are unpredictable and you might wait several days without seeing one. Calving reduces disappointment risk while still offering intense migration drama.',
+      },
+      {
+        question: 'Can I see both river crossings and calving on one trip?',
+        answer: 'No. River crossings happen July-October in the northern Serengeti/Mara region. Calving happens January-February in the southern Serengeti. These are different locations and different times of year within the same annual migration cycle.',
+      },
+      {
+        question: 'What are the chances of seeing a river crossing?',
+        answer: 'With a 4-5 night stay in the crossing zone during peak season (August-September), you have roughly 70% probability of witnessing at least one crossing. A 2-3 night stay drops that to around 40%. Crossings cannot be scheduled or guaranteed.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -159,6 +176,23 @@ We do not pad itineraries to increase costs. We recommend the length that makes 
     { slug: 'logistics/itinerary-planning', title: 'Safari Itinerary Planning', type: 'guide' },
     { slug: 'timing/migration-calendar', title: 'Migration Calendar', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'How many nights do I need to see a river crossing?',
+        answer: 'A 4-5 night stay in the crossing zone gives roughly 70% probability of witnessing at least one crossing. Shorter stays of 2-3 nights drop that to around 40%. More nights increases probability but with diminishing returns after 5-7 nights.',
+      },
+      {
+        question: 'Is a 5-day trip long enough for a migration safari?',
+        answer: 'A 5-day trip can work for calving season where predator action is reliable daily. For river crossings, 5 days is marginal because crossings are unpredictable. Migration trips focused on crossings ideally need 7-10 days to account for unpredictable timing.',
+      },
+      {
+        question: 'Can I combine migration viewing with other parks?',
+        answer: 'Yes, but each additional park needs 1-2 nights minimum and adds transit time. A 10-day trip spending 3 nights in crossing territory plus other parks reduces migration probability compared to spending 7 nights focused on migration.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -237,6 +271,23 @@ The question is not "how much can you spend" but "what does spending accomplish.
     { slug: 'budget/cost-breakdown', title: 'Safari Cost Breakdown', type: 'guide' },
     { slug: 'timing/migration-calendar', title: 'Migration Calendar', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'How much more expensive is crossing season than calving season?',
+        answer: 'Crossing season (July-September) typically costs 10-20% more than calving season (January-February). Peak crossing season camps can run $800-1,500 per person per day, while calving season camps are generally $600-1,200 per person per day for comparable quality.',
+      },
+      {
+        question: 'Is it worth paying more for a luxury camp during migration?',
+        answer: 'Higher prices buy better accommodation, food, and service but do not guarantee better wildlife. A $2,000/night camp might be empty of herds while a $600 camp has crossings happening nearby. For migration probability, invest in more nights rather than fancier lodges.',
+      },
+      {
+        question: 'What is the most affordable way to see the migration?',
+        answer: 'Calving season (January-February) offers the best value for dramatic migration experiences, with lower costs and more reliable wildlife action than crossing season. Shoulder months like June or October offer migration proximity at reduced prices but with less certainty about herd positions.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -313,6 +364,23 @@ For migration specifically, this is often a timing question more than a preferen
     { slug: 'destination/serengeti-mara-comparison', title: 'Serengeti vs Mara Comparison', type: 'guide' },
     { slug: 'timing/migration-calendar', title: 'Migration Calendar', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Which is better for the migration: Serengeti or Masai Mara?',
+        answer: 'Neither is universally better. The migration spends 8 months in Tanzania (Serengeti) and 4 months crossing into Kenya (Mara). Your travel dates largely determine the answer. July-October favors either side for crossings. January-June means the herds are in Tanzania only.',
+      },
+      {
+        question: 'Is the Masai Mara more crowded than the Serengeti?',
+        answer: 'Yes. The Mara is approximately 1,500 square kilometers while the Serengeti is nearly 15,000. During peak crossing season, vehicle density per square kilometer is higher in the Mara. Popular crossing points can have 30+ vehicles.',
+      },
+      {
+        question: 'Can I see river crossings from both the Kenya and Tanzania side?',
+        answer: 'Yes. The Mara River crosses the Tanzania-Kenya border, with crossing points accessible from both countries. Kenya offers more concentrated crossing points within easier reach. Tanzania offers more space and potentially fewer vehicles at each crossing.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -389,6 +457,23 @@ We do not pretend exclusive experiences exist at budget prices during peak seaso
     { slug: 'logistics/managing-expectations', title: 'Managing Safari Expectations', type: 'guide' },
     { slug: 'destination/conservancy-guide', title: 'Understanding Conservancies', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Can I see the migration without crowds?',
+        answer: 'You cannot entirely avoid other vehicles during peak migration season. However, you can reduce crowd exposure through private conservancies (which limit vehicle numbers), strategic timing (arriving early at sightings), and choosing calving season over crossing season.',
+      },
+      {
+        question: 'How crowded are river crossings?',
+        answer: 'Popular crossing points during peak season (August-September) can attract 30 or more vehicles. Some crossing points are less popular and see fewer vehicles. Guides who know the area can find less-crowded positions, but complete solitude at crossings is unrealistic.',
+      },
+      {
+        question: 'Are Kenya conservancies less crowded than the Mara reserve?',
+        answer: 'Yes. Private conservancies limit vehicles to camp guests only, typically meaning 3 vehicles at a sighting instead of 15. However, conservancies may not be positioned at major crossing points, so you trade crowd control for crossing access.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -465,6 +550,23 @@ First safaris should create positive foundations for wildlife appreciation. Whet
     { slug: 'personal-fit/first-safari-preparation', title: 'First Safari Preparation', type: 'guide' },
     { slug: 'timing/migration-calendar', title: 'Migration Calendar', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Should first-time safari travelers plan around the migration?',
+        answer: 'Not necessarily. The migration is specific to certain places and times with particular requirements. First-time travelers may benefit more from a broader safari experience. If dates happen to align with migration, embrace it. If not, excellent wildlife exists year-round.',
+      },
+      {
+        question: 'Is it disappointing to miss the migration on a first safari?',
+        answer: 'Most first-time travelers have life-changing safaris without timing around the migration. Tanzania and Kenya have excellent resident wildlife year-round. Missing the migration does not mean missing great wildlife. What disappoints is unrealistic expectations, not the wildlife itself.',
+      },
+      {
+        question: 'Which migration season is better for first-timers: crossings or calving?',
+        answer: 'Calving season (January-February) is often better for first-timers because the predator action is reliable and daily. River crossing season involves uncertainty and possible disappointment if crossings do not happen during your visit.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -541,6 +643,23 @@ Migration photography ranges from "capture something memorable" to "produce publ
     { slug: 'photography/safari-photography-guide', title: 'Safari Photography Guide', type: 'guide' },
     { slug: 'photography/migration-shots', title: 'Capturing Migration Moments', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'What camera equipment do I need for migration photography?',
+        answer: 'Crossing shots benefit from zoom lenses (200-400mm minimum) to isolate action amid chaos. A private vehicle is essentially required for serious migration photography. Professional wildlife photographers use 500-600mm lenses, but these create weight and luggage challenges on internal flights.',
+      },
+      {
+        question: 'Is calving season or crossing season better for photography?',
+        answer: 'Calving season often offers better photographic conditions: open plains with clear sightlines, fewer vehicles competing for angles, and more predictable predator action. Crossing season offers iconic shots but with intense competition from other photographers and vehicles.',
+      },
+      {
+        question: 'Can I get professional-quality migration photos on a standard safari?',
+        answer: 'Documentary-quality migration footage comes from crews waiting weeks for specific moments. Standard safari trips produce memorable photos but rarely match professional results. Calibrate expectations based on your time investment and equipment.',
+      },
+    ],
+  },
 };
 
 // ============================================================

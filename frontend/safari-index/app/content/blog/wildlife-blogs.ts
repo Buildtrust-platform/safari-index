@@ -45,6 +45,23 @@ const bestTimeLionsBlog: BlogContent = {
     credentials: '18 years guiding in Serengeti and Ngorongoro',
   },
 
+  faq: {
+    items: [
+      {
+        question: 'Are lions rare to see on safari?',
+        answer: 'No, lions are not rare on safari. In good lion destinations like Serengeti, Masai Mara, and Ngorongoro, sightings are probable, often daily. Multiple encounters per trip are common.',
+      },
+      {
+        question: 'Do I need special timing to see lions?',
+        answer: 'No, you do not need special timing. Year-round sightings are normal in lion-rich destinations. However, dry season (June-October) concentrates prey around water, making lions more predictable.',
+      },
+      {
+        question: 'Do male lions hunt?',
+        answer: 'Yes, male lions do hunt, despite the popular narrative that females do all the work. Males specialize in different prey and hunting situations.',
+      },
+    ],
+  },
+
   whyNotSimple: `Lions are present year-round in most safari destinations. You do not need specific timing to see lions. They are resident animals, not migratory.
 
 But lion visibility varies by season and time of day. Dry season concentrates prey around water, and lions follow prey. Wet season disperses animals across the landscape. Time of day matters because lions are primarily crepuscular and nocturnal.
@@ -132,6 +149,23 @@ const leopardSightingBlog: BlogContent = {
     name: 'David Mabunda',
     role: 'Senior Tracker',
     credentials: '22 years tracking in Greater Kruger reserves',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Are leopard sightings common on safari?',
+        answer: 'No, leopard sightings are not common at most destinations. While marketing shows leopards everywhere, reality is more limited. Sabi Sands in South Africa is the exception with daily sightings.',
+      },
+      {
+        question: 'Are habituated leopards tame?',
+        answer: 'No, habituated does not mean tame. Sabi Sands leopards are wild animals that have learned vehicles are not threatening. They behave naturally while tolerating observation.',
+      },
+      {
+        question: 'Should I only look for leopards in trees?',
+        answer: 'No, trees are not the only place to find leopards. While they do climb trees, leopards spend significant time on the ground, in thickets, and moving through cover.',
+      },
+    ],
   },
 
   whyNotSimple: `Leopards are solitary, nocturnal, and exceptionally well-camouflaged. Unlike lions, they do not live in visible prides. Unlike elephants, they actively avoid detection. Seeing a leopard requires finding an animal that does not want to be found.
@@ -223,6 +257,23 @@ const wildDogsBlog: BlogContent = {
     credentials: '15 years guiding in South Luangwa, wild dog specialist',
   },
 
+  faq: {
+    items: [
+      {
+        question: 'Are African wild dogs related to domestic dogs?',
+        answer: 'No, African wild dogs are not related to domestic dogs. They are a distinct species (Lycaon pictus) with unique social structure and physiology.',
+      },
+      {
+        question: 'Are wild dogs less impressive than big cats?',
+        answer: 'No, many experienced safari-goers consider African wild dogs the most exciting predator to watch. Pack hunts with 80% success rates are extraordinary wildlife encounters.',
+      },
+      {
+        question: 'Do wild dogs only appear near water?',
+        answer: 'No, wild dogs can appear anywhere within their vast territories. Unlike cats that rest near water, wild dog packs are constantly moving and can cover 40+ kilometers daily.',
+      },
+    ],
+  },
+
   whyNotSimple: `African wild dogs are endangered, with fewer than 6,000 remaining in the wild. They need vast territories and roam unpredictably. Unlike lions that hold stable territories, wild dog packs cover enormous areas.
 
 This makes sightings genuinely difficult. You cannot stake out a known location. You must be in the right place when dogs move through. Some destinations have better odds because of pack territories overlapping with safari areas, but even there, sightings are not guaranteed.
@@ -310,6 +361,23 @@ const rhinoViewingBlog: BlogContent = {
     name: 'Sarah Ngugi',
     role: 'Conservation Specialist',
     credentials: '12 years in rhino conservation and guiding',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Are rhinos common across Africa?',
+        answer: 'No, rhinos are not common across Africa. Due to poaching, most safari destinations have few or no rhinos. Specific destinations like Ngorongoro and South African reserves offer best sighting odds.',
+      },
+      {
+        question: 'What is the difference between white and black rhinos?',
+        answer: 'White and black rhinos are not distinguished by color—both are grey. The names refer to mouth shape: white rhinos have wide, square lips for grazing (from Dutch "wijd" meaning wide), while black rhinos have pointed lips for browsing.',
+      },
+      {
+        question: 'Are rhino encounters safe?',
+        answer: 'Rhino encounters can be dangerous. These are large, powerful animals that can be aggressive. Experienced guides maintain safe distances and read rhino behavior to ensure visitor safety.',
+      },
+    ],
   },
 
   whyNotSimple: `Rhinos have been devastated by poaching. Black rhino populations collapsed to under 5,000 animals. White rhinos, while more numerous, face ongoing threats. Many former rhino areas now have none.
@@ -401,6 +469,23 @@ const cheetahVsLeopardBlog: BlogContent = {
     credentials: '18 years guiding in Serengeti and Ngorongoro',
   },
 
+  faq: {
+    items: [
+      {
+        question: 'Are cheetahs small leopards?',
+        answer: 'No, cheetahs are not small leopards. They are a distinct species with completely different body structure (built for speed vs. strength), hunting behavior (diurnal pursuit vs. nocturnal ambush), and social patterns.',
+      },
+      {
+        question: 'Are cheetah sightings easy everywhere?',
+        answer: 'No, while more visible than leopards, cheetahs are still wild predators with large territories. East Africa (Serengeti, Masai Mara) offers the best cheetah viewing opportunities.',
+      },
+      {
+        question: 'Do I have to choose between seeing cheetahs or leopards?',
+        answer: 'No, you do not have to choose one or the other. Many destinations have both cats. However, if forcing trade-offs, cheetah priority favors East Africa while leopard reliability favors Sabi Sands.',
+      },
+    ],
+  },
+
   whyNotSimple: `Cheetahs and leopards are both spotted cats but have completely different behaviors and therefore different viewing patterns. Optimizing for one does not optimize for the other.
 
 Cheetahs are diurnal, hunt in open savannah, and tolerate observation. They are visible when present. Leopards are nocturnal, secretive, and use cover. They actively avoid detection.
@@ -490,6 +575,23 @@ const elephantHerdsBlog: BlogContent = {
     credentials: '14 years studying elephant behavior in Chobe',
   },
 
+  faq: {
+    items: [
+      {
+        question: 'Are elephants equally distributed across Africa?',
+        answer: 'No, elephants are not equally distributed. Some areas like Botswana (130,000+ elephants) have exceptional populations creating massive herds, while other safari destinations have much smaller numbers.',
+      },
+      {
+        question: 'Will I always see large elephant herds on safari?',
+        answer: 'No, herd size varies dramatically by destination and season. Dry season concentrations at places like Chobe River disperse when rains begin, so timing matters for spectacle.',
+      },
+      {
+        question: 'Is elephant viewing only about numbers?',
+        answer: 'No, elephant viewing is not just about herd size. Behavior, family interactions, and individual encounters—like watching a baby learn to use its trunk—can be as compelling as seeing large herds.',
+      },
+    ],
+  },
+
   whyNotSimple: `Elephants exist across safari Africa, but herd sizes vary dramatically. Some destinations have solitary bulls and small family groups. Others have concentrations of hundreds.
 
 If large herds and elephant spectacle matter to you, destination selection is critical. The difference between destinations is not subtle—it is the difference between seeing ten elephants and seeing two hundred.`,
@@ -577,6 +679,23 @@ const hippoCrocBlog: BlogContent = {
     credentials: '16 years conducting boat safaris on Chobe River',
   },
 
+  faq: {
+    items: [
+      {
+        question: 'Are hippos dangerous?',
+        answer: 'Yes, hippos are Africa\'s most dangerous large animal, killing more people than any predator. They are extremely territorial and aggressive in water. Experienced guides maintain safe distances.',
+      },
+      {
+        question: 'Do crocodiles hunt actively?',
+        answer: 'Crocodiles are patient ambush predators. Most safari observations show basking crocodiles, not hunting. Active crocodile hunts are rare to witness but spectacular during wildebeest river crossings.',
+      },
+      {
+        question: 'Are hippos and crocs the only reason to visit water destinations?',
+        answer: 'No, water features add multiple dimensions to safari. River ecosystems support diverse birdlife, other wildlife coming to drink, and unique boat safari experiences beyond hippo and croc viewing.',
+      },
+    ],
+  },
+
   whyNotSimple: `Hippos and crocodiles require water. Not all safari destinations have significant water features. If these species matter to you, destination selection must account for rivers, lakes, or deltas.
 
 Beyond presence, viewing quality varies. A hippo pool with fifty animals differs from occasional hippo sightings in a stream. Crocodile size and visibility vary by location.`,
@@ -662,6 +781,23 @@ const giraffeViewingBlog: BlogContent = {
     name: 'Anne Wambui',
     role: 'Safari Guide',
     credentials: '10 years guiding in Kenya diverse giraffe regions',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Are all giraffes the same species?',
+        answer: 'No, all giraffes are not the same species. Recent research identified four distinct species: Masai, Reticulated, Southern, and Northern giraffe, each with unique coat patterns and geographic ranges.',
+      },
+      {
+        question: 'Are giraffes rare on safari?',
+        answer: 'No, giraffes are not rare. Most safari destinations have healthy giraffe populations and you will almost certainly see them without any special planning.',
+      },
+      {
+        question: 'Is giraffe behavior interesting to watch?',
+        answer: 'Yes, giraffe behavior can be fascinating. Watching them drink (splaying legs awkwardly), observing sparring males, or seeing how they feed on thorny acacias using their tough tongues provides engaging wildlife observation.',
+      },
+    ],
   },
 
   whyNotSimple: `Giraffes are common across safari destinations. You will almost certainly see giraffes. But different regions have different giraffe species with distinct patterns, and some areas have notably better viewing than others.

@@ -108,6 +108,23 @@ We do not assume luxury is better. We identify what matters to you and match pri
     { slug: 'accommodation/luxury-guide', title: 'Luxury Safari Guide', type: 'guide' },
     { slug: 'budget/value-analysis', title: 'Safari Value Analysis', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Does luxury safari mean better wildlife sightings?',
+        answer: 'No. Luxury buys exclusivity, better guides, and prime positioning—not better wildlife. The animals are the same regardless of your accommodation price.',
+      },
+      {
+        question: 'Is luxury safari worth it for first-time visitors?',
+        answer: 'First-timers benefit less from luxury because everything is new and exciting. The marginal value of exclusivity is lower when you cannot yet distinguish subtle quality differences.',
+      },
+      {
+        question: 'What does luxury safari actually buy?',
+        answer: 'Smaller camps (6-12 guests vs 40-60), more experienced guides, exclusive concession access with fewer vehicles, and premium service—but not different wildlife.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -211,6 +228,23 @@ We do not pretend budget safari is equivalent to higher-priced options. We clari
     { slug: 'budget/budget-safari-guide', title: 'Budget Safari Guide', type: 'guide' },
     { slug: 'budget/cost-breakdown', title: 'Safari Cost Breakdown', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is budget safari dangerous or low quality?',
+        answer: 'No. Budget safari is not dangerous or sketchy. Legitimate budget operators maintain vehicles, train guides, and meet safety standards. The difference is comfort and expertise, not safety.',
+      },
+      {
+        question: 'Which countries have the best budget safari options?',
+        answer: 'South Africa (self-drive Kruger) has the lowest entry point. Kenya has more budget guided options than Tanzania. Botswana has no true budget tier—the government deliberately priced the market high.',
+      },
+      {
+        question: 'Can I still see good wildlife on a budget safari?',
+        answer: 'Yes. Wildlife does not check your accommodation price. Adequate guiding plus the right location produces memorable sightings regardless of budget level.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -314,6 +348,23 @@ We identify when inside accommodation is essential and when quality outside opti
     { slug: 'accommodation/positioning-guide', title: 'Safari Camp Positioning', type: 'guide' },
     { slug: 'logistics/gate-times', title: 'Park Gate Times Guide', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is staying inside the park always better?',
+        answer: 'No. Private conservancies outside parks often outperform properties inside—for example, Mara conservancies vs Mara reserve offer fewer vehicles and more exclusive access.',
+      },
+      {
+        question: 'How much time do I lose staying outside the park?',
+        answer: 'Typically 30-60 minutes each direction for transit to and from the gate. Over a multi-day stay, this adds up, but some outside conservancies offer better value despite transit.',
+      },
+      {
+        question: 'Does outside the park mean far from wildlife?',
+        answer: 'Not necessarily. Some outside accommodation is minutes from the gate. Conservancies bordering parks often offer exclusive wildlife areas with night drives and off-road driving not permitted in parks.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -417,6 +468,23 @@ We do not default to multiple camps because it seems more comprehensive. We iden
     { slug: 'logistics/itinerary-structure', title: 'Itinerary Structure Guide', type: 'guide' },
     { slug: 'accommodation/camp-selection', title: 'Camp Selection Guide', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is moving every night better for safari?',
+        answer: 'No. One-night stands are exhausting and inefficient. The typical recommendation is 2-3 nights per camp. Many experienced travelers prefer fewer camps with longer stays because depth beats breadth.',
+      },
+      {
+        question: 'How many camps should I visit on safari?',
+        answer: 'It depends on trip length. Under 5 days: one or two camps max. Over 10 days: three camps can work well. Short trips cannot support multiple camp changes without transit consuming the experience.',
+      },
+      {
+        question: 'Do I need multiple camps to see different wildlife?',
+        answer: 'Not necessarily. A well-positioned single camp can access multiple ecosystems depending on location. Multiple camps provide variety but also mean transit time and logistics.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -518,6 +586,23 @@ We do not compare headline rates. We compare what you will actually pay for the 
     { slug: 'budget/pricing-structures', title: 'Safari Pricing Structures', type: 'guide' },
     { slug: 'budget/cost-breakdown', title: 'Safari Cost Breakdown', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is all-inclusive safari more expensive than pay-as-you-go?',
+        answer: 'Not necessarily. When you factor in drinks, laundry, and fees you would pay anyway, all-inclusive often matches or beats pay-as-you-go on total cost.',
+      },
+      {
+        question: 'What does all-inclusive actually include on safari?',
+        answer: 'It varies by property. Typically: accommodation, meals, standard drinks, game drives, and laundry. Premium alcohol, spa treatments, and special activities are often extra even at all-inclusive camps.',
+      },
+      {
+        question: 'Should non-drinkers choose pay-as-you-go?',
+        answer: 'Possibly. All-inclusive pricing often assumes moderate alcohol consumption. Non-drinkers may subsidize others. However, other inclusions like laundry and park fees can still make all-inclusive worthwhile.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -621,6 +706,23 @@ We match families to appropriate experiences rather than trying to fit children 
     { slug: 'personal-fit/family-safari-guide', title: 'Family Safari Guide', type: 'guide' },
     { slug: 'accommodation/family-camps', title: 'Family-Friendly Camps', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Why do safari camps have age restrictions?',
+        answer: 'Age restrictions exist for safety and experience reasons. Walking safaris are dangerous with young children, small camps cannot accommodate noisy children without affecting other guests, and open vehicles near wildlife require passengers who follow instructions.',
+      },
+      {
+        question: 'Can children under 8 go on safari?',
+        answer: 'Yes, but options are more limited. Many camps accept children over 8, fewer accept ages 5-7, and camps accepting children under 5 are limited. Private vehicle arrangements can sometimes bypass restrictions.',
+      },
+      {
+        question: 'Which destinations are best for family safari?',
+        answer: 'South Africa and Kenya have the best family options. South Africa offers malaria-free reserves and good infrastructure. Kenya has many family-friendly lodges with kids programs.',
+      },
+    ],
+  },
 };
 
 // ============================================================

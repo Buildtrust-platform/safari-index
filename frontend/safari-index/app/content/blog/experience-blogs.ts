@@ -45,6 +45,23 @@ const walkingSafariBlog: BlogContent = {
     credentials: '15 years leading walking safaris in South Luangwa',
   },
 
+  faq: {
+    items: [
+      {
+        question: 'Is walking safari dangerous?',
+        answer: 'Not in the way people imagine. Guides are trained to read animal behavior and avoid conflict. They carry rifles but almost never use them. The danger is managed, not eliminated, and the risk is lower than perception suggests.',
+      },
+      {
+        question: 'Do I need to be very fit for walking safari?',
+        answer: 'No, you do not need to be an athlete. Walking safaris move at moderate pace with frequent stops and accommodate varying fitness levels. You do need to walk for several hours in the sun—that is the baseline.',
+      },
+      {
+        question: 'Will I get close encounters with dangerous animals on foot?',
+        answer: 'No. You will deliberately avoid close approaches to elephants, buffalo, and lions. The tracking and awareness of nearby dangerous animals is the experience, not approaching them directly.',
+      },
+    ],
+  },
+
   whyNotSimple: `Walking safari is a different category of experience from vehicle-based safari. It is not "safari but walking." It is a fundamentally different relationship with the landscape and animals.
 
 In a vehicle, you are observer. You watch from above, protected by metal, moved by engine. The animals know you are there but largely ignore you as a known, unthreatening shape.
@@ -148,6 +165,23 @@ const selfDriveBlog: BlogContent = {
     credentials: '15 years comparing self-drive and guided safari experiences',
   },
 
+  faq: {
+    items: [
+      {
+        question: 'Is self-drive safari dangerous?',
+        answer: 'Not in the way people imagine. In Kruger, you stay in your vehicle. Lions and elephants largely ignore vehicles. The risks are normal driving risks: accidents, breakdowns, getting stuck. Wildlife attacks are extremely rare.',
+      },
+      {
+        question: 'Do I need special training to self-drive safari?',
+        answer: 'No. Standard driving skills transfer. Learning to handle dirt roads takes an hour of practice. The challenge is navigation and wildlife knowledge, not driving technique.',
+      },
+      {
+        question: 'Does self-drive mean I have to camp?',
+        answer: 'No. You can stay in lodges and self-drive for game viewing only. Accommodation choice is completely separate from vehicle arrangement.',
+      },
+    ],
+  },
+
   whyNotSimple: `Self-drive safari means renting a vehicle and navigating African national parks yourself. No guide. No driver. Your schedule. Your choices. Your responsibility.
 
 This is possible in some places and not others. South Africa's Kruger National Park is the classic self-drive destination. Namibia's Etosha works well for self-drive. Kenya and Tanzania's national parks mostly do not allow self-drive for tourists.
@@ -249,6 +283,23 @@ const privateVsSharedBlog: BlogContent = {
     credentials: '20 years planning East and Southern Africa safaris',
   },
 
+  faq: {
+    items: [
+      {
+        question: 'Does shared vehicle mean bad safari experience?',
+        answer: 'No. Most shared game drives are pleasant. Guides are professional. Guests are generally cooperative. The worst-case scenarios people imagine are uncommon.',
+      },
+      {
+        question: 'Does private vehicle give me exclusive sightings?',
+        answer: 'No. You still share sightings with other vehicles from other camps. Private vehicle gives you flexibility within your party, not exclusivity from the entire park.',
+      },
+      {
+        question: 'Do guides prefer private vehicle guests?',
+        answer: 'No. Guides are paid to serve whoever is in the vehicle. Guide quality is independent of vehicle arrangement.',
+      },
+    ],
+  },
+
   whyNotSimple: `Private vehicle means your group has a dedicated guide and vehicle. You control the schedule. You decide how long to stay at sightings. You negotiate among yourselves, not with strangers.
 
 Shared vehicle means you join other guests from your camp or lodge. You compromise on timing, sightings, and interests. Decisions are group decisions.
@@ -348,6 +399,23 @@ const lodgeVsTentedBlog: BlogContent = {
     name: 'Anne Wambui',
     role: 'Safari Hospitality Specialist',
     credentials: '12 years in East African safari lodge management',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Are tented safari camps uncomfortable?',
+        answer: 'No. Luxury tented camps have better mattresses, linens, and service than average hotels. The canvas walls are the only difference. Many have king beds, en-suite bathrooms, and electricity.',
+      },
+      {
+        question: 'Are lodges safer than tented camps?',
+        answer: 'No. Both accommodate guests safely. Wildlife protocol exists regardless of construction type. Neither puts you at meaningful risk.',
+      },
+      {
+        question: 'Will rain flood tented camps?',
+        answer: 'No. Quality tented camps are properly positioned and drained. Rain on canvas is romantic, not problematic.',
+      },
+    ],
   },
 
   whyNotSimple: `The terminology creates confusion. A safari "tent" is not what you pitched at summer camp. Luxury tented camps have king beds, private bathrooms, running water, and electricity. The "tent" is canvas walls and a canvas roof, not roughing it.
@@ -453,6 +521,23 @@ const mobileCampsVsFixedBlog: BlogContent = {
     credentials: '18 years guiding in Serengeti, including mobile camp operations',
   },
 
+  faq: {
+    items: [
+      {
+        question: 'Does mobile camp mean roughing it?',
+        answer: 'No. Quality mobile camps have en-suite bathrooms, hot water, comfortable beds, and excellent food. The canvas moves with the wildlife—the comfort does not.',
+      },
+      {
+        question: 'Are fixed lodges always in worse positions for wildlife?',
+        answer: 'No. Well-placed fixed lodges in wildlife-rich areas provide excellent game viewing year-round. The disadvantage only appears during migration when animals move and fixed lodges cannot follow.',
+      },
+      {
+        question: 'Do I need a mobile camp to see the migration?',
+        answer: 'No. Fixed lodges in the northern Serengeti or Mara see the migration when it arrives in their area. Mobile camps can follow it more precisely, but they are not required.',
+      },
+    ],
+  },
+
   whyNotSimple: `Mobile camps move with the wildlife. Fixed lodges stay where they are built. This fundamental difference creates distinct safari experiences, but the terms are often misunderstood.
 
 A mobile camp is not roughing it. Quality mobile camps have comfortable beds, proper bathrooms, and good food. They simply pack up and relocate as animal movements dictate, typically following the Great Migration across the Serengeti.
@@ -554,6 +639,23 @@ const groupVsPrivateBlog: BlogContent = {
     name: 'Emmanuel Mollel',
     role: 'Safari Consultant',
     credentials: '20 years planning East and Southern Africa safaris',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Are group tours low quality safaris?',
+        answer: 'No. Many excellent safari operators run group tours. The guides are professional, the camps are good, and the wildlife is the same. Quality varies by operator, not by group vs private.',
+      },
+      {
+        question: 'Does private safari mean private wilderness?',
+        answer: 'No. You share sightings with other vehicles. You share camps with other guests. Private vehicle and private trip are not the same as having the park to yourself.',
+      },
+      {
+        question: 'Are all group tours the same size?',
+        answer: 'No. Some group tours have six guests, others have sixteen. The difference in experience is significant—ask about group size before booking.',
+      },
+    ],
   },
 
   whyNotSimple: `Group tours run fixed itineraries with multiple strangers in one vehicle. Private safaris design custom trips for your group alone. The price difference is substantial, often 30-50 percent more for private arrangements.
@@ -661,6 +763,23 @@ const flyInVsOverlandBlog: BlogContent = {
     name: 'Emmanuel Mollel',
     role: 'Safari Consultant',
     credentials: '20 years planning East and Southern Africa safaris',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Are bush flights dangerous?',
+        answer: 'No. Africa has mature aviation operations with experienced pilots and good safety records. Small aircraft feel different from commercial jets, but the risk is not elevated.',
+      },
+      {
+        question: 'Is driving always scenic?',
+        answer: 'No. Some drives are on main roads through unremarkable terrain. The romantic notion of driving through Africa does not always match reality.',
+      },
+      {
+        question: 'Is flying only for luxury travelers?',
+        answer: 'No. Mid-range safaris use flights when distances require it. The association of flying with premium safari is not absolute—it is often about practicality.',
+      },
+    ],
   },
 
   whyNotSimple: `Fly-in safaris use small aircraft to hop between bush airstrips near camps. Overland safaris drive between destinations on roads. The choice affects time efficiency, cost, and the style of experience.

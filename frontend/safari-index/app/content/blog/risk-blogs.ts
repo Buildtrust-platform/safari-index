@@ -112,6 +112,23 @@ Medical decisions require medical consultation. We provide context for the trave
     { slug: 'health/malaria-guide', title: 'Malaria Prevention Guide', type: 'guide' },
     { slug: 'health/safari-health-prep', title: 'Safari Health Preparation', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Are all safari destinations in malaria zones?',
+        answer: 'No. Most premier destinations are in malaria zones, but malaria-free options exist. South Africa Eastern Cape offers excellent Big Five viewing without malaria risk.',
+      },
+      {
+        question: 'Is malaria prophylaxis 100% effective?',
+        answer: 'No prophylaxis prevents all infections, but effectiveness is very high when combined with protective measures like repellent, appropriate clothing, and bed nets. Layers of protection work together.',
+      },
+      {
+        question: 'Who should avoid malaria zones for safari?',
+        answer: 'Pregnant women, young children, immunocompromised travelers, and those who cannot take prophylaxis should strongly consider malaria-free destinations. Consult your physician for individual medical advice.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -215,6 +232,23 @@ We provide realistic context rather than minimizing or exaggerating. Safari is v
     { slug: 'health/safari-safety', title: 'Safari Safety Guide', type: 'guide' },
     { slug: 'logistics/travel-insurance', title: 'Safari Travel Insurance', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Are wild animals dangerous on safari?',
+        answer: 'Animals are not trying to kill tourists. Wildlife has adapted to safari vehicles as non-threatening objects. Animals ignore vehicles unless provoked or approached wrongly. Most incidents involve guests who ignored guide directions.',
+      },
+      {
+        question: 'Is safari more dangerous than driving at home?',
+        answer: 'No. Safari is statistically safer than driving on highways. Professional guides, established safety protocols, and mature industry standards make safari very safe for most travelers.',
+      },
+      {
+        question: 'What are the actual risks of safari?',
+        answer: 'Real risks include remote location (slow medical access), rough roads, small aircraft travel, malaria (managed with prophylaxis), and dehydration in heat. Wildlife danger is overblown compared to these practical concerns.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -318,6 +352,23 @@ We do not sell insurance. We help you understand what to buy and why.`,
     { slug: 'logistics/travel-insurance', title: 'Safari Insurance Guide', type: 'guide' },
     { slug: 'health/medical-preparation', title: 'Medical Preparation', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is travel insurance required for safari?',
+        answer: 'Yes, effectively essential. Many camps require proof of coverage. Medical evacuation from remote bush camps can cost $50,000 or more. Trip cancellation for a $15,000 safari is a significant financial loss.',
+      },
+      {
+        question: 'What insurance coverage do I need for safari?',
+        answer: 'Essential: medical evacuation ($100k+), emergency medical ($50k+), trip cancellation/interruption, and adventure activity coverage. Recommended: Cancel for any reason (CFAR), pre-existing condition coverage.',
+      },
+      {
+        question: 'How much does safari travel insurance cost?',
+        answer: 'Comprehensive safari coverage typically costs 5-10% of trip cost. That is meaningful but not prohibitive relative to the protection it provides.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -419,6 +470,23 @@ We do not assume everyone wants or can do active safari. We also do not assume l
     { slug: 'health/physical-preparation', title: 'Physical Preparation', type: 'guide' },
     { slug: 'experience/walking-safari-guide', title: 'Walking Safari Guide', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Do I need to be athletic for safari?',
+        answer: 'No. Standard vehicle safari requires minimal fitness—sitting in a vehicle 4-6 hours and short walks between tent and dining area. Most travelers including retirees do fine with appropriate planning.',
+      },
+      {
+        question: 'What fitness level is needed for walking safari?',
+        answer: 'Walking safari requires moderate hiking fitness—ability to walk 2-4 hours in heat. It is demanding but not athletic competition. Honest self-assessment is important.',
+      },
+      {
+        question: 'Can elderly travelers do safari?',
+        answer: 'Yes. Many safari travelers are retired. Age is not a barrier. The experience accommodates different energy levels when appropriately planned. Specific mobility limitations require careful property selection.',
+      },
+    ],
+  },
 };
 
 // ============================================================

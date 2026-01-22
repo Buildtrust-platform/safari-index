@@ -13,7 +13,7 @@ import { registerBlog, type BlogContent } from '../../../lib/blog-content';
 // ============================================================
 export const tanzaniaVsBotswanaBlog: BlogContent = {
   decisionSlug: 'tanzania-vs-botswana-safari',
-  title: 'Tanzania or Botswana?',
+  title: 'Tanzania or Botswana? ',
   subtitle: 'Migration spectacle versus exclusive wilderness at very different price points',
   updatedAt: '2025-01',
   wordCount: 1380,
@@ -44,6 +44,23 @@ export const tanzaniaVsBotswanaBlog: BlogContent = {
     name: 'Emmanuel Mollel',
     role: 'Safari Consultant',
     credentials: '20 years planning East and Southern Africa safaris',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Is Botswana better than Tanzania for safari?',
+        answer: 'No, Botswana is not objectively better—it is different. Higher cost does not equal superior wildlife. Botswana offers water-based safari and exclusivity, while Tanzania offers the Great Migration and more budget flexibility.',
+      },
+      {
+        question: 'Is Tanzania more crowded than Botswana?',
+        answer: 'Not necessarily. Vehicle density is higher in specific areas during peak season, but much of Tanzania offers solitude comparable to Botswana, especially in private concessions.',
+      },
+      {
+        question: 'Do I have to choose between Tanzania and Botswana forever?',
+        answer: 'No. Many travelers do Tanzania first for the migration, then Botswana later for the water experience. They serve different purposes and both are worth experiencing.',
+      },
+    ],
   },
 
   whyNotSimple: `Tanzania and Botswana both deliver excellent safari. But they deliver it in fundamentally different ways at fundamentally different prices. Treating them as interchangeable options misses what makes each destination distinctive.
@@ -112,7 +129,7 @@ The destinations serve different purposes. The right choice depends on what you 
 // ============================================================
 export const southAfricaVsEastAfricaBlog: BlogContent = {
   decisionSlug: 'south-africa-vs-east-africa-safari',
-  title: 'South Africa or East Africa for first safari?',
+  title: 'South Africa or East Africa for first safari? ',
   subtitle: 'Malaria, self-drive, and the fundamental differences between regions',
   updatedAt: '2025-01',
   wordCount: 1420,
@@ -143,6 +160,23 @@ export const southAfricaVsEastAfricaBlog: BlogContent = {
     name: 'Linda van der Berg',
     role: 'Regional Safari Specialist',
     credentials: '15 years comparing SA and EA safari experiences',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Is South Africa "safari lite" compared to East Africa?',
+        answer: 'No. Private reserves in Greater Kruger offer some of the best game viewing anywhere, including Africa\'s highest leopard sighting rates. The experience is different, not lesser.',
+      },
+      {
+        question: 'Is East Africa dangerous or difficult to travel?',
+        answer: 'No. Tourism infrastructure exists throughout East Africa. Guides are professional. The experience is less polished than South Africa but entirely manageable for first-time safari visitors.',
+      },
+      {
+        question: 'Should I avoid East Africa because of malaria?',
+        answer: 'Not necessarily. Malaria prophylaxis is effective and generally well-tolerated. The medications work. Millions of tourists take them annually without incident.',
+      },
+    ],
   },
 
   whyNotSimple: `South Africa and East Africa both offer excellent safari. But they represent fundamentally different approaches to the experience. The differences go beyond wildlife to include health considerations, driving options, infrastructure, and the overall style of travel.
@@ -211,7 +245,7 @@ Both regions offer excellent safari. The question is which style matches your pr
 // ============================================================
 export const rwandaGorillasBlog: BlogContent = {
   decisionSlug: 'rwanda-gorillas-worth-it',
-  title: 'Is Rwanda worth it just for gorillas?',
+  title: 'Is Rwanda worth it just for gorillas? ',
   subtitle: 'Permit costs, physical demands, and the value of a one-hour encounter',
   updatedAt: '2025-01',
   wordCount: 1350,
@@ -242,6 +276,23 @@ export const rwandaGorillasBlog: BlogContent = {
     name: 'Jean-Paul Habimana',
     role: 'Gorilla Guide',
     credentials: '12 years leading treks in Volcanoes National Park',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Is the $1,500 Rwanda gorilla permit price gouging?',
+        answer: 'No. Much of the permit fee funds conservation and community programs. Gorilla populations have actually increased because this money supports their protection.',
+      },
+      {
+        question: 'Why is gorilla trekking limited to one hour?',
+        answer: 'Research determined that more contact time stresses the gorillas without adding proportional value for visitors. The one-hour limit protects the gorillas\' health and wellbeing.',
+      },
+      {
+        question: 'Can I book an easier gorilla trek?',
+        answer: 'No. Trek difficulty varies unpredictably because gorillas move daily. Yesterday\'s 2-hour trek might be 5 hours today if the family moved overnight. You cannot select the "easy" group.',
+      },
+    ],
   },
 
   whyNotSimple: `Rwanda gorilla permits cost $1,500 per person. For that price, you get approximately one hour with a gorilla family after a trek that might last anywhere from 30 minutes to 6 hours. By any conventional tourism math, this is expensive.
@@ -310,7 +361,7 @@ We do not recommend gorilla trekking to everyone. The experience must align with
 // ============================================================
 export const ugandaVsRwandaBlog: BlogContent = {
   decisionSlug: 'uganda-vs-rwanda-gorillas',
-  title: 'Uganda or Rwanda for gorillas?',
+  title: 'Uganda or Rwanda for gorillas? ',
   subtitle: 'Cost versus convenience in the mountain gorilla choice',
   updatedAt: '2025-01',
   wordCount: 1280,
@@ -341,6 +392,23 @@ export const ugandaVsRwandaBlog: BlogContent = {
     name: 'Moses Tumwine',
     role: 'Primate Safari Specialist',
     credentials: '17 years guiding in Uganda and Rwanda',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Is the gorilla experience better in Rwanda than Uganda?',
+        answer: 'No. The hour with gorillas is comparable in both countries. The same species, same behavior, same profound experience. You are not getting "lesser" gorillas by choosing Uganda.',
+      },
+      {
+        question: 'Is Uganda unsafe for tourists?',
+        answer: 'No. Both countries are stable for tourism. Security concerns about Uganda are outdated for the tourist regions where gorilla trekking occurs.',
+      },
+      {
+        question: 'Is Uganda too undeveloped for comfortable travel?',
+        answer: 'No. Quality lodges exist near Bwindi Forest. The infrastructure is less polished than Rwanda but entirely adequate for comfortable safari.',
+      },
+    ],
   },
 
   whyNotSimple: `Both countries offer encounters with the same mountain gorilla population. The gorillas in Rwanda's Volcanoes National Park and Uganda's Bwindi Impenetrable Forest are the same species, same conservation status, same extraordinary experience.
@@ -409,7 +477,7 @@ Both deliver the core gorilla experience. The question is which supporting facto
 // ============================================================
 export const okavangoBlog: BlogContent = {
   decisionSlug: 'okavango-delta-worth-premium',
-  title: 'Is the Okavango Delta worth the premium?',
+  title: 'Is the Okavango Delta worth the premium? ',
   subtitle: 'Understanding what Botswana pricing buys and whether it fits your priorities',
   updatedAt: '2025-01',
   wordCount: 1320,
@@ -440,6 +508,23 @@ export const okavangoBlog: BlogContent = {
     name: 'Kelebogile Motsumi',
     role: 'Delta Guide',
     credentials: '14 years guiding mokoro and game drives in the Okavango',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Does expensive mean better wildlife in the Okavango?',
+        answer: 'No. Lions in the Delta are the same as lions in Kenya. The higher cost reflects Botswana\'s tourism policy (high-cost, low-volume), not superior game viewing.',
+      },
+      {
+        question: 'Is the Okavango Delta always flooded?',
+        answer: 'No. Water levels vary seasonally and annually. "Okavango Delta" does not guarantee water everywhere at all times. Peak flooding typically occurs June through August.',
+      },
+      {
+        question: 'Is the private concession the only way to visit Botswana?',
+        answer: 'No. You can visit Botswana for less. The dry season Moremi Game Reserve offers land-based safari at lower costs than the private Delta concessions.',
+      },
+    ],
   },
 
   whyNotSimple: `The Okavango Delta costs roughly twice what comparable safari elsewhere would cost. A week that might run $8,000 in Tanzania runs $15,000 or more in Botswana's Delta. This is not price gouging. It reflects deliberate government policy to limit tourist numbers through high-cost, low-volume tourism.
@@ -508,7 +593,7 @@ The Delta is not universally superior. It is uniquely suited to specific priorit
 // ============================================================
 export const serengetiVsMaraBlog: BlogContent = {
   decisionSlug: 'serengeti-vs-masai-mara',
-  title: 'Serengeti or Masai Mara?',
+  title: 'Serengeti or Masai Mara? ',
   subtitle: 'Scale versus accessibility in the migration heartland',
   updatedAt: '2025-01',
   wordCount: 1350,
@@ -539,6 +624,23 @@ export const serengetiVsMaraBlog: BlogContent = {
     name: 'Juma Mkwawa',
     role: 'Head Guide',
     credentials: '18 years guiding in Serengeti and Ngorongoro',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Is the Serengeti or Masai Mara objectively better for wildlife?',
+        answer: 'No. Animal density and species variety are comparable. The difference is context (size, vehicle density, off-road rules), not wildlife content.',
+      },
+      {
+        question: 'Is the Masai Mara a separate ecosystem from the Serengeti?',
+        answer: 'No. They are the same ecosystem divided by a political border. The Great Migration flows between them. Animals cross the border freely.',
+      },
+      {
+        question: 'Is the Serengeti too big to see wildlife?',
+        answer: 'No. Camps position in wildlife-rich areas. Guides know where to go. The size creates driving time between zones, but not empty sightings.',
+      },
+    ],
   },
 
   whyNotSimple: `The Serengeti and Masai Mara are the same ecosystem divided by a political border. The Great Migration flows between them. The wildlife is identical. Lions in the Mara are cousins of lions in the Serengeti.
@@ -611,7 +713,7 @@ Many travelers do both over multiple trips. The question for your current trip i
 // ============================================================
 export const krugerVsPrivateBlog: BlogContent = {
   decisionSlug: 'kruger-vs-private-reserves',
-  title: 'Kruger National Park or private reserves?',
+  title: 'Kruger National Park or private reserves? ',
   subtitle: 'Self-drive freedom versus guided expertise in South Africa',
   updatedAt: '2025-01',
   wordCount: 1280,
@@ -642,6 +744,23 @@ export const krugerVsPrivateBlog: BlogContent = {
     name: 'David Mabunda',
     role: 'Senior Tracker',
     credentials: '22 years tracking in Greater Kruger reserves',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Are private reserves just fenced game farms?',
+        answer: 'No. Private reserves share unfenced borders with Kruger. Animals move freely between them. You are seeing wild animals in their natural range, not captive wildlife.',
+      },
+      {
+        question: 'Is self-drive Kruger inferior to guided safari?',
+        answer: 'No. You can see everything in Kruger that private reserves offer. The animals do not know the boundary. What differs is access (off-road, night drives) and expert interpretation, not animal presence.',
+      },
+      {
+        question: 'Do I need safari experience to self-drive Kruger?',
+        answer: 'No. Kruger\'s roads are good, signage is clear, and many first-time safari visitors self-drive successfully. It is different from guided safari, not harder.',
+      },
+    ],
   },
 
   whyNotSimple: `Greater Kruger is one ecosystem with two fundamentally different access models. The national park offers self-drive safari where you control everything. Private reserves flanking the park offer guided experiences with expert trackers and off-road access.
@@ -712,7 +831,7 @@ Both options deliver excellent wildlife. The question is what style of experienc
 // ============================================================
 export const singleVsMultiCountryBlog: BlogContent = {
   decisionSlug: 'single-vs-multi-country-safari',
-  title: 'Should I focus on one country or visit multiple?',
+  title: 'Should I focus on one country or visit multiple? ',
   subtitle: 'Depth versus breadth in safari planning',
   updatedAt: '2025-01',
   wordCount: 1250,
@@ -743,6 +862,23 @@ export const singleVsMultiCountryBlog: BlogContent = {
     name: 'Emmanuel Mollel',
     role: 'Safari Consultant',
     credentials: '20 years planning East and Southern Africa safaris',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Does visiting more countries make a better safari?',
+        answer: 'No. The quality of experience matters more than passport stamps. Depth in one destination often creates better memories than surface-level breadth across multiple countries.',
+      },
+      {
+        question: 'Do animals differ between Tanzania and Kenya?',
+        answer: 'No. Kenya\'s Mara and Tanzania\'s Serengeti are one ecosystem. Animals cross the border freely. "Doing both" does not double your wildlife variety—it adds transit time.',
+      },
+      {
+        question: 'Should I see everything on my first trip?',
+        answer: 'No. You can always return. Doing Tanzania properly now and Kenya next time often delivers more satisfaction than cramming both into insufficient days.',
+      },
+    ],
   },
 
   whyNotSimple: `The temptation to see everything in one trip is understandable. You are traveling far. Why not add Kenya to Tanzania? Or Botswana after Rwanda? Combining countries seems efficient.
@@ -811,7 +947,7 @@ Most first-time travelers are better served by depth in one destination than bre
 // ============================================================
 export const ngorongoroVsSerengetiBlog: BlogContent = {
   decisionSlug: 'ngorongoro-vs-serengeti',
-  title: 'Ngorongoro Crater or Serengeti?',
+  title: 'Ngorongoro Crater or Serengeti? ',
   subtitle: 'Concentrated wildlife viewing versus endless plains and migration',
   updatedAt: '2025-01',
   wordCount: 1380,
@@ -842,6 +978,23 @@ export const ngorongoroVsSerengetiBlog: BlogContent = {
     name: 'Juma Mkwawa',
     role: 'Head Guide',
     credentials: '18 years guiding in Serengeti and Ngorongoro',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Is Ngorongoro Crater a zoo?',
+        answer: 'No. Animals in the crater are completely wild. They hunt, mate, and die without human intervention. The caldera walls simply prevent emigration, but the ecosystem is natural.',
+      },
+      {
+        question: 'Is the Serengeti empty between sightings?',
+        answer: 'No. Wildlife density varies by zone and season, but excellent viewing exists year-round in the right areas. The Serengeti is vast, not empty.',
+      },
+      {
+        question: 'Are rhino sightings guaranteed in Ngorongoro?',
+        answer: 'No. Rhinos in the Crater are more likely than almost anywhere else in East Africa, but they are still wild animals that move unpredictably. Sightings are probable, not guaranteed.',
+      },
+    ],
   },
 
   whyNotSimple: `Ngorongoro Crater and the Serengeti are often combined in the same trip, and for good reason. They offer fundamentally different experiences despite being neighbors in Tanzania's northern circuit.
@@ -920,7 +1073,7 @@ When time forces a choice, we optimize for what matters most to you.`,
 // ============================================================
 export const amboseliVsMaraBlog: BlogContent = {
   decisionSlug: 'amboseli-vs-masai-mara',
-  title: 'Amboseli or Masai Mara?',
+  title: 'Amboseli or Masai Mara? ',
   subtitle: 'Kilimanjaro backdrops versus migration heartland in Kenya',
   updatedAt: '2025-01',
   wordCount: 1320,
@@ -951,6 +1104,23 @@ export const amboseliVsMaraBlog: BlogContent = {
     name: 'Peter Njoroge',
     role: 'Wildlife Photographer Guide',
     credentials: '15 years leading photography safaris in Kenya',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Is Amboseli only good for elephants?',
+        answer: 'No. You will see lions, cheetahs, buffalo, hippos, and numerous other species. The elephant focus is real but not exclusive—Amboseli is a full safari destination.',
+      },
+      {
+        question: 'Is the Masai Mara overwhelmed by crowds?',
+        answer: 'Not everywhere. Private conservancies flanking the reserve offer lower vehicle density. Even within the reserve, vehicle concentration varies by location.',
+      },
+      {
+        question: 'Is Mount Kilimanjaro always visible from Amboseli?',
+        answer: 'No. Clouds often obscure the mountain, especially later in the day. Clear views typically happen early morning. Do not expect the iconic backdrop shot all day every day.',
+      },
+    ],
   },
 
   whyNotSimple: `Amboseli and the Masai Mara are Kenya's two most famous safari destinations, but they offer different experiences and serve different purposes.
@@ -1029,7 +1199,7 @@ Many travelers include both in longer Kenya itineraries.`,
 // ============================================================
 export const sabiSandsVsTimbavtiBlog: BlogContent = {
   decisionSlug: 'sabi-sands-vs-timbavati',
-  title: 'Sabi Sands or Timbavati?',
+  title: 'Sabi Sands or Timbavati? ',
   subtitle: 'Leopard density versus value in Greater Kruger private reserves',
   updatedAt: '2025-01',
   wordCount: 1350,
@@ -1060,6 +1230,23 @@ export const sabiSandsVsTimbavtiBlog: BlogContent = {
     name: 'David Mabunda',
     role: 'Senior Tracker',
     credentials: '22 years tracking in Greater Kruger reserves',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Is Timbavati inferior to Sabi Sands for wildlife?',
+        answer: 'No. Big Five sightings are excellent in Timbavati. Leopards are present. The difference is probability and habituation level, not species availability.',
+      },
+      {
+        question: 'Does the Sabi Sands name guarantee top-tier experience?',
+        answer: 'No. Properties within Sabi Sands range from mid-range to ultra-luxury. The reserve name alone does not guarantee the highest quality experience—specific lodge choice matters.',
+      },
+      {
+        question: 'Are these reserves fenced off from Kruger?',
+        answer: 'No. Neither reserve is fenced from Kruger National Park. Animals move freely between all three areas. You are seeing the same genetic populations as the national park.',
+      },
+    ],
   },
 
   whyNotSimple: `Sabi Sands and Timbavati are both private reserves sharing unfenced borders with Kruger National Park. Both offer Big Five viewing with off-road access and night drives. Both provide guided safari experiences superior to self-drive Kruger.
@@ -1136,7 +1323,7 @@ Both reserves are excellent. The question is which serves your specific interest
 // ============================================================
 export const chobeVsOkavangoBlog: BlogContent = {
   decisionSlug: 'chobe-vs-okavango',
-  title: 'Chobe or Okavango Delta?',
+  title: 'Chobe or Okavango Delta? ',
   subtitle: 'River frontage versus inland delta in Botswana',
   updatedAt: '2025-01',
   wordCount: 1340,
@@ -1167,6 +1354,23 @@ export const chobeVsOkavangoBlog: BlogContent = {
     name: 'Kelebogile Motsumi',
     role: 'Delta Guide',
     credentials: '14 years guiding mokoro and game drives in the Okavango',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Is Chobe just "budget Botswana"?',
+        answer: 'No. While more accessible than the Delta, Chobe is still Botswana pricing. Budget travelers find even Chobe expensive compared to East Africa.',
+      },
+      {
+        question: 'Is the Okavango Delta always flooded?',
+        answer: 'No. Water levels vary seasonally. Some areas are dry at certain times. Water-based activities like mokoro depend on timing—peak flooding is typically June through August.',
+      },
+      {
+        question: 'Do I have to choose between Chobe and the Delta?',
+        answer: 'No. You can often combine both in one trip. Many Botswana itineraries include Chobe and Delta for the full range of experiences.',
+      },
+    ],
   },
 
   whyNotSimple: `Chobe and the Okavango Delta are Botswana's premier safari areas, but they offer different experiences at different price points.
@@ -1245,7 +1449,7 @@ Many travelers include both in Botswana itineraries for the full range of experi
 // ============================================================
 export const hwangeVsKrugerBlog: BlogContent = {
   decisionSlug: 'hwange-vs-kruger',
-  title: 'Hwange or Kruger?',
+  title: 'Hwange or Kruger? ',
   subtitle: 'Zimbabwe wilderness versus South Africa infrastructure',
   updatedAt: '2025-01',
   wordCount: 1310,
@@ -1276,6 +1480,23 @@ export const hwangeVsKrugerBlog: BlogContent = {
     name: 'Simba Ncube',
     role: 'Zimbabwe Safari Guide',
     credentials: '16 years guiding in Hwange and Mana Pools',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Is Zimbabwe dangerous for safari tourists?',
+        answer: 'No. Political and economic challenges have not affected tourist safety in national parks. Current travel advisories are generally permissive for safari regions.',
+      },
+      {
+        question: 'Is Hwange too undeveloped for comfortable safari?',
+        answer: 'No. Quality camps and lodges operate in Hwange. The infrastructure is less extensive than Kruger but entirely adequate for comfortable safari.',
+      },
+      {
+        question: 'Is Kruger overcrowded everywhere?',
+        answer: 'No. Private reserves have strict vehicle limits. Even self-drive Kruger disperses visitors across a vast area. Crowding is localized to popular spots.',
+      },
+    ],
   },
 
   whyNotSimple: `Hwange National Park in Zimbabwe and Kruger National Park in South Africa are both major Southern African safari destinations. Both offer Big Five viewing and large elephant populations. Both have long histories of wildlife management and tourism.
@@ -1352,7 +1573,7 @@ Zimbabwe tourism is rebuilding and offering good value. Kruger remains Africa's 
 // ============================================================
 export const victoriaFallsZambiaVsZimBlog: BlogContent = {
   decisionSlug: 'victoria-falls-zambia-vs-zimbabwe',
-  title: 'Victoria Falls: Zambia or Zimbabwe side?',
+  title: 'Victoria Falls: Zambia or Zimbabwe side? ',
   subtitle: 'Which country offers the better falls experience',
   updatedAt: '2025-01',
   wordCount: 1280,
@@ -1383,6 +1604,23 @@ export const victoriaFallsZambiaVsZimBlog: BlogContent = {
     name: 'Tawanda Mhizha',
     role: 'Victoria Falls Guide',
     credentials: '10 years leading tours on both sides of the falls',
+  },
+
+  faq: {
+    items: [
+      {
+        question: 'Can I only see Victoria Falls from the side where I stay?',
+        answer: 'No. You can see the falls from both sides regardless of where you stay. Border crossing for day visits is routine and part of most itineraries.',
+      },
+      {
+        question: 'Is one side of Victoria Falls dramatically better year-round?',
+        answer: 'No. Seasonal water levels change which view is superior. High water favors Zambia for clearer views; low water favors Zimbabwe for fuller cascades.',
+      },
+      {
+        question: 'Is Zimbabwe dangerous for tourists at Victoria Falls?',
+        answer: 'No. Tourist areas in both Zambia and Zimbabwe are well-policed and safe. Both countries welcome visitors to this shared natural wonder.',
+      },
+    ],
   },
 
   whyNotSimple: `Victoria Falls straddles the border between Zambia and Zimbabwe. Both countries offer access to the falls, both have hotels and activities, both claim their view is better. Travelers must choose where to base themselves.

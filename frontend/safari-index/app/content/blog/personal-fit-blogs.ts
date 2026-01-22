@@ -106,6 +106,23 @@ Solo safari works well for many travelers. The question is whether the trade-off
     { slug: 'personal-fit/solo-travel-tips', title: 'Solo Safari Travel Tips', type: 'guide' },
     { slug: 'logistics/group-departures', title: 'Understanding Group Departures', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is solo safari safe?',
+        answer: 'Yes. Safari camps are professional operations with security protocols. You are not more vulnerable alone than as part of a couple. Guides and staff look after all guests, and crime against tourists at established properties is rare.',
+      },
+      {
+        question: 'How much more does solo safari cost?',
+        answer: 'Solo safari typically costs 30-50% more due to solo supplements on accommodation. On a 7-night trip, this can add $2,000-$5,000 depending on properties. Group departures eliminate this premium entirely.',
+      },
+      {
+        question: 'Will I be lonely on solo safari?',
+        answer: 'Not unless you choose isolation. Safari camps create constant social opportunity—communal meals, shared game drives, sundowners with other guests. If you want connection, it is available.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -207,6 +224,23 @@ If constraints are significant, we will tell you directly rather than suggesting
     { slug: 'personal-fit/family-safari-planning', title: 'Family Safari Planning Guide', type: 'guide' },
     { slug: 'logistics/what-to-pack', title: 'Safari Packing Guide', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'What is the best age for children to go on safari?',
+        answer: 'Children under 3 may not retain memories and face logistical challenges. Ages 4-6 can work with family-friendly lodges. Children 8+ have the most options as many age restrictions lift at this age.',
+      },
+      {
+        question: 'Do safari lodges accept children under 6?',
+        answer: 'Some do, but options are limited. Many camps have 6+ or 8+ age minimums for safety reasons. Private vehicle arrangements ($200-500/day extra) can sometimes bypass restrictions.',
+      },
+      {
+        question: 'Is safari dangerous for young children?',
+        answer: 'No, at appropriate lodges. Family-friendly camps have fenced areas, experienced staff, and safety protocols. The animals are wild, but camp environments are designed with families in mind.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -306,6 +340,23 @@ We flag when expectations may not align with what is realistically possible give
     { slug: 'personal-fit/multigenerational-planning', title: 'Multigenerational Safari Planning', type: 'guide' },
     { slug: 'logistics/accessibility', title: 'Safari Accessibility Guide', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Can elderly travelers do safari?',
+        answer: 'Yes. Standard game drives involve sitting in a vehicle—age is not a barrier. Mobility limitations require careful property selection, but many 70+ travelers thrive on safari with appropriate planning.',
+      },
+      {
+        question: 'Does a multigenerational group need private vehicles?',
+        answer: 'Essentially yes. Different generations have different interests and stamina. Private vehicles let guides balance the 10-year-old wanting lions, the 70-year-old wanting birds, and the 35-year-old wanting photos.',
+      },
+      {
+        question: 'Which destination is best for multigenerational safari?',
+        answer: 'South Africa offers the best accessibility and medical infrastructure. Private reserves tend to have better accessibility than East African tented camps. Research specific properties for mobility needs.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -407,6 +458,23 @@ If there is misalignment, we say so. Better to know before booking than to be di
     { slug: 'personal-fit/honeymoon-planning', title: 'Safari Honeymoon Planning', type: 'guide' },
     { slug: 'destination/zanzibar-extension', title: 'Zanzibar Beach Extension', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is safari romantic for a honeymoon?',
+        answer: 'It can be magical for adventurous couples who both genuinely want it. However, 5am wake-ups are not inherently romantic. Romance requires higher-end camps with private dining, spa services, and honeymoon touches.',
+      },
+      {
+        question: 'Should we add a beach extension to safari honeymoon?',
+        answer: 'Many honeymoon couples pair safari with Zanzibar, Seychelles, or Mauritius. This provides both adventure and relaxation. The trade-off is more logistics and travel time.',
+      },
+      {
+        question: 'What if one partner wants safari and the other does not?',
+        answer: 'Do not force it. Safari requires genuine enthusiasm from both people. If adventure tolerance does not align, the experience creates tension. Consider whether safari fits both of you.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -505,6 +573,23 @@ If your expectations seem misaligned with safari reality, we address that direct
     { slug: 'wildlife/species-guide', title: 'Safari Wildlife Guide', type: 'guide' },
     { slug: 'personal-fit/expectation-setting', title: 'Setting Safari Expectations', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'What does Big Five actually mean?',
+        answer: 'The Big Five is a colonial hunting term: lion, leopard, elephant, buffalo, rhino. It has nothing to do with ecological significance or viewing likelihood. Cheetahs, wild dogs, and hippos are excluded despite being remarkable.',
+      },
+      {
+        question: 'How likely am I to see all Big Five on safari?',
+        answer: 'Most travelers see 4 of 5. Elephants and buffalo are very common. Lions are common in most destinations. Leopard requires luck or specific destinations like Sabi Sands. Rhino requires specific destinations due to poaching.',
+      },
+      {
+        question: 'Will missing a Big Five species ruin my safari?',
+        answer: 'Only if you let it. Seeing all five does not make a safari successful—many travelers return unable to recall specific moments despite completing the checklist. Memorable encounters matter more than species counts.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -602,6 +687,23 @@ If you cannot adjust to sharing vehicle positioning and timing with others, shar
     { slug: 'photography/safari-photography-guide', title: 'Safari Photography Guide', type: 'guide' },
     { slug: 'photography/equipment-guide', title: 'Safari Camera Equipment Guide', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Can I take professional photos on a standard safari?',
+        answer: 'You can take good photos, but standard safari may not serve serious photography. Shared vehicles limit positioning, guides optimize for viewing not shooting, and 15-20kg luggage limits conflict with heavy camera equipment.',
+      },
+      {
+        question: 'Do I need a private vehicle for safari photography?',
+        answer: 'For serious photography, essentially yes. Private vehicles let you position for optimal angles and light, stay at subjects for hours, and work with a photographically-aware guide. The cost is significant but necessary for portfolio-quality work.',
+      },
+      {
+        question: 'How do I handle camera equipment weight limits on safari flights?',
+        answer: 'Bush flights limit you to 15-20kg in soft bags—a serious conflict with heavy lenses. Options: prioritize essential gear, consider road-based itineraries with flexible luggage, or accept equipment compromises.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -699,6 +801,23 @@ Most people asking this question are ready. The question itself often indicates 
     { slug: 'personal-fit/first-timer-guide', title: 'First Safari Guide', type: 'guide' },
     { slug: 'logistics/preparation-checklist', title: 'Safari Preparation Checklist', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Do I need prior Africa experience for safari?',
+        answer: 'No. Safari does not require special skills, exceptional fitness, or prior experience. It requires willingness to adapt to different conditions, tolerance for early mornings, and ability to enjoy watching rather than participating.',
+      },
+      {
+        question: 'What does safari actually require from travelers?',
+        answer: 'Tolerance for 5am wake-ups, flexibility with plans, patience for watching and waiting, and comfort with developing country infrastructure. It does NOT require adventure sport fitness, wildlife knowledge beforehand, or a wealthy budget.',
+      },
+      {
+        question: 'Am I ready if I am still asking this question?',
+        answer: 'Probably yes. Most people who want to do safari are ready. The question itself often indicates appropriate thoughtfulness rather than unreadiness. Perfect readiness does not exist—reasonable readiness is sufficient.',
+      },
+    ],
+  },
 };
 
 // ============================================================

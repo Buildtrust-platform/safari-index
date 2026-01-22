@@ -69,6 +69,24 @@ export interface BlogAuthor {
 }
 
 /**
+ * FAQ item for FAQPage schema
+ */
+export interface BlogFAQItem {
+  /** The question */
+  question: string;
+  /** The answer */
+  answer: string;
+}
+
+/**
+ * FAQ section for FAQPage structured data
+ */
+export interface BlogFAQ {
+  /** Array of FAQ items */
+  items: BlogFAQItem[];
+}
+
+/**
  * Blog hero image reference
  */
 export interface BlogHeroImage {
@@ -127,6 +145,9 @@ export interface BlogContent {
 
   /** Optional: Author attribution for E-E-A-T */
   author?: BlogAuthor;
+
+  /** Optional: FAQ items for FAQPage schema */
+  faq?: BlogFAQ;
 
   /** Related decisions (max 6) */
   relatedDecisions: RelatedLink[];

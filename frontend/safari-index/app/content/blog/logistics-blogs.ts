@@ -104,6 +104,23 @@ Five days well-designed often beats seven days poorly designed. We focus on qual
     { slug: 'logistics/trip-length-guide', title: 'Trip Length Guide', type: 'guide' },
     { slug: 'logistics/itinerary-structure', title: 'Itinerary Structure Guide', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is 5 days enough to see the Big Five?',
+        answer: 'Yes, 5 days is enough for a meaningful introduction with Big Five sightings probable. Five nights with good structure means 8-10 game drives, which is substantial wildlife viewing time.',
+      },
+      {
+        question: 'What can I NOT see in 5 days on safari?',
+        answer: 'Five days limits multi-ecosystem variety and reduces odds of rare sightings (like wild dogs). You cannot rush between multiple parks—5 days at one excellent camp beats 5 days rushing between camps.',
+      },
+      {
+        question: 'Do longer safaris guarantee better sightings?',
+        answer: 'No. Wildlife does not check your departure date. Longer trips increase probability through more time, but you might see more in 3 excellent days than 7 mediocre ones.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -207,6 +224,23 @@ We do not default to longer because it seems more thorough. We recommend the len
     { slug: 'logistics/trip-length-guide', title: 'Trip Length Guide', type: 'guide' },
     { slug: 'logistics/planning-timeline', title: 'Planning Timeline', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'What is the ideal safari length for first-timers?',
+        answer: 'The sweet spot for first-timers is 5-7 nights. This provides enough time for meaningful experience, multiple ecosystems if desired, and good sighting probability without excessive cost or repetition fatigue.',
+      },
+      {
+        question: 'Is a 3-day safari too short?',
+        answer: 'Not necessarily. Three nights can deliver good introduction and Big Five sightings in the right location. Short safaris can be remarkably rewarding if expectations are calibrated.',
+      },
+      {
+        question: 'When do diminishing returns set in on safari?',
+        answer: 'After about 10 days, diminishing returns set in for most travelers unless you have specific rare sighting goals. The same-day routine of early drive, rest, afternoon drive can feel repetitive.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -310,6 +344,23 @@ We do not default to flying because it seems premium. Some drives are worth taki
     { slug: 'logistics/transit-options', title: 'Safari Transit Options', type: 'guide' },
     { slug: 'logistics/bush-flights', title: 'Bush Flight Guide', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is flying between parks worth the extra cost?',
+        answer: 'It depends on the route. Flying saves time—a 5-hour drive becomes a 45-minute flight—but costs $300-500 per leg. On tight itineraries, the time savings often justify the cost.',
+      },
+      {
+        question: 'Are some safari drives worth taking instead of flying?',
+        answer: 'Yes. Some drives have genuine wildlife value—the Ngorongoro highlands and Lake Manyara road offer game viewing en route. Others (like Arusha to Serengeti) cross empty land with limited interest.',
+      },
+      {
+        question: 'Are bush flights safe?',
+        answer: 'Yes. Bush flights have excellent safety records. The pilots are experienced, routes are familiar, and statistics are reassuring. The anxiety some travelers feel is not proportional to actual risk.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -413,6 +464,23 @@ We do not assume the classic combination is right for everyone. Beach extension 
     { slug: 'destinations/beach-options', title: 'Beach Destination Guide', type: 'guide' },
     { slug: 'logistics/safari-beach-logistics', title: 'Safari-Beach Logistics', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is a beach extension required after safari?',
+        answer: 'No. Beach extension is optional, not default. Many travelers do safari only and feel fully satisfied. The combination is popular but personal preference determines whether it adds value for you.',
+      },
+      {
+        question: 'How much does a beach extension add to safari cost?',
+        answer: 'Beach extensions typically add 30-50% to trip cost depending on accommodation quality, flights, and length of stay. Two or three nights provides recovery time without consuming the trip.',
+      },
+      {
+        question: 'What are the best beach destinations after safari?',
+        answer: 'Zanzibar (after Tanzania) offers cultural exploration plus beaches. Diani or Mombasa (after Kenya) provide resort relaxation. The character differs—match destination to your interests.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -516,6 +584,23 @@ Good agents add real value. We identify when that value is essential and when se
     { slug: 'logistics/booking-guide', title: 'Safari Booking Guide', type: 'guide' },
     { slug: 'logistics/agent-selection', title: 'Choosing a Safari Agent', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Do safari agents charge more than booking direct?',
+        answer: 'Often not. Commission structures mean prices are frequently the same whether you book direct or through an agent. Many camps protect rate parity, especially at luxury levels.',
+      },
+      {
+        question: 'When should I book through an agent vs direct?',
+        answer: 'First safari or complex multi-camp itinerary? Use a quality agent—their expertise prevents costly mistakes. Simple self-drive Kruger? Direct booking works fine.',
+      },
+      {
+        question: 'What do good safari agents actually provide?',
+        answer: 'Expert knowledge of which camps are excellent vs overrated, which guides to request, logistics coordination across multiple bookings, and troubleshooting support when problems arise mid-trip.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -523,7 +608,7 @@ Good agents add real value. We identify when that value is essential and when se
 // ============================================================
 const bookingLeadTimeBlog: BlogContent = {
   decisionSlug: 'safari-booking-lead-time',
-  title: 'How far in advance should I book safari?',
+  title: 'How far in advance should I book safari? (2026 Guide)',
   subtitle: 'Understanding booking windows and availability patterns',
   updatedAt: '2025-01',
   wordCount: 1300,
@@ -607,6 +692,23 @@ If flexibility is high and you can accept whatever is available, last-minute can
     { slug: 'logistics/booking-timeline', title: 'Booking Timeline Guide', type: 'guide' },
     { slug: 'logistics/availability-patterns', title: 'Availability Patterns', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'How far in advance should I book safari?',
+        answer: 'Peak season (Jul-Oct): 6-12 months. Shoulder season: 4-6 months. Green season: 2-4 months. Famous camps at Singita, andBeyond, etc. sell out fastest.',
+      },
+      {
+        question: 'Can I book safari last-minute?',
+        answer: 'Yes, last-minute safari is possible. Cancellations create openings, less famous camps have availability. Green season offers the most flexibility. The deal is different but safari is possible.',
+      },
+      {
+        question: 'Does early booking get better prices?',
+        answer: 'Usually not. Most camps have fixed seasonal rates regardless of booking timing. Early booking secures preferred camps but rarely provides price advantage.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -614,7 +716,7 @@ If flexibility is high and you can accept whatever is available, last-minute can
 // ============================================================
 const visaRequirementsBlog: BlogContent = {
   decisionSlug: 'safari-visa-requirements',
-  title: 'What visas do I need for safari?',
+  title: 'What visas do I need for safari? (2026 Guide)',
   subtitle: 'Understanding entry requirements for safari destinations',
   updatedAt: '2025-01',
   wordCount: 1240,
@@ -704,6 +806,23 @@ We highlight common pitfalls and multi-country options but do not substitute for
     { slug: 'logistics/visa-guide', title: 'Safari Visa Guide', type: 'guide' },
     { slug: 'logistics/document-checklist', title: 'Document Checklist', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Do Americans need visas for African safari?',
+        answer: 'Most safari countries offer e-visa or visa on arrival for US citizens. Tanzania offers e-visa or VOA ($50), Kenya requires e-visa, South Africa is visa-free for many nationalities.',
+      },
+      {
+        question: 'What is the East African Community visa?',
+        answer: 'The EAC visa ($100) covers Kenya + Uganda + Rwanda with multiple entries. It often saves money and complexity for multi-country East Africa trips.',
+      },
+      {
+        question: 'Do I need yellow fever vaccination for safari?',
+        answer: 'Yellow fever certificate is required for entry to many safari countries, especially if transiting through endemic areas. It functions like a visa requirement—check specific destination rules.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -799,6 +918,23 @@ If luggage compliance stresses you, consider road-based itineraries with flexibl
     { slug: 'logistics/packing-list', title: 'Safari Packing List', type: 'guide' },
     { slug: 'logistics/luggage-guide', title: 'Luggage Requirements Guide', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'What are safari luggage weight limits?',
+        answer: 'Bush flights typically limit you to 15-20kg in soft bags. Weight limits are enforced—you might have to leave items behind. Road-based itineraries have more flexible luggage allowances.',
+      },
+      {
+        question: 'Do I need special safari clothing?',
+        answer: 'No. Safari-specific clothing is marketing as much as function. Neutral colors (khaki, olive, brown) in normal outdoor clothing work fine. Avoid bright colors for game drives.',
+      },
+      {
+        question: 'What is the most important item to pack for safari?',
+        answer: 'Good binoculars. They enhance every wildlife sighting more than any clothing choice. Camps sometimes provide them but quality varies. Binoculars matter more than extra outfit changes.',
+      },
+    ],
+  },
 };
 
 // ============================================================

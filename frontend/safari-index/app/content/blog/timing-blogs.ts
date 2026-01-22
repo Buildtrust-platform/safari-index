@@ -79,6 +79,23 @@ What we cannot do is guarantee anything. The honest answer is always conditional
     { slug: 'timing/migration-calendar', title: 'Migration Calendar', type: 'guide' },
     { slug: 'timing/crossing-points', title: 'Crossing Point Guide', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'When is the best month to see river crossings?',
+        answer: 'August and early September offer the highest probability. Late July and late September are also good. The Mara River crossings happen from late July through October, with the herds crossing multiple times in both directions.',
+      },
+      {
+        question: 'Can guides predict when river crossings will happen?',
+        answer: 'No. Guides know where herds are massing and which crossing points look active, but the decision to cross is made by animals, not humans. Claims of guaranteed crossings are marketing fiction.',
+      },
+      {
+        question: 'What are my chances of seeing a river crossing?',
+        answer: 'A 5-6 day stay in the crossing zone during peak season gives roughly 70% probability of witnessing at least one crossing. A 3-day visit might be 50%. There is no pattern predictable enough to plan around with certainty.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -153,6 +170,23 @@ The verdict reflects wildlife behavior probabilities. Calving season delivers mo
     { slug: 'timing/calving-explained', title: 'Calving Season Explained', type: 'guide' },
     { slug: 'wildlife/predator-behavior', title: 'Predator Behavior Guide', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'When is calving season in the Serengeti?',
+        answer: 'Late January through February, with approximately 400,000 wildebeest calves born over a roughly three-week window in the southern Serengeti around the Ndutu area.',
+      },
+      {
+        question: 'Is calving season as good as river crossing season?',
+        answer: 'Many experts consider it better for sustained wildlife action. Predator hunting is relentless and daily during calving, while river crossings are unpredictable and you might wait days without seeing one. Calving offers guaranteed predator action.',
+      },
+      {
+        question: 'Is calving season violent or disturbing to watch?',
+        answer: 'Yes, it can be. This is survival pressure at industrial scale. Hundreds of thousands of births means thousands of deaths. Predators kill newborns constantly. If watching predator hunts and kills is uncomfortable for you, calving season will be difficult.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -229,6 +263,23 @@ We also flag when green season is inadvisable. If your dates fall in the wettest
     { slug: 'timing/seasonal-guide', title: 'Safari Seasons Explained', type: 'guide' },
     { slug: 'budget/value-season-tips', title: 'Value Season Planning', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'What is green season on safari?',
+        answer: 'Green season is the industry term for wet/rainy season, roughly March through May in East Africa and November through March in Southern Africa. Rainfall transforms landscapes, prices drop 20-40%, and crowds thin dramatically.',
+      },
+      {
+        question: 'Does it rain all day during green season?',
+        answer: 'No. Green season rain typically comes in afternoon thunderstorms. Mornings are often clear. Game drives proceed normally most days. The rain patterns are more predictable than people fear.',
+      },
+      {
+        question: 'Is wildlife harder to see in green season?',
+        answer: 'Animals disperse as water is available everywhere rather than concentrating at waterholes. Finding them takes more effort, but they are there. A good guide matters more in green season. Predator sightings often decrease as vegetation provides more cover.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -305,6 +356,23 @@ If you are booking far ahead, we help optimize destination and property choice. 
     { slug: 'timing/holiday-travel', title: 'Holiday Safari Planning', type: 'guide' },
     { slug: 'family/traveling-with-kids', title: 'Safari with Children', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is Christmas a good time to go on safari?',
+        answer: 'It depends on destination. East Africa in December has good weather (short dry season). Southern Africa is hot and increasingly wet (summer). The bigger issue is demand: lodges fill 6-12 months ahead for Christmas and prices surge to peak levels.',
+      },
+      {
+        question: 'How far in advance should I book a Christmas safari?',
+        answer: 'Six to twelve months ahead. Popular family-friendly lodges book out quickly for holiday periods. Last-minute Christmas availability at quality properties is rare. If reading this in October for December travel, options are already limited.',
+      },
+      {
+        question: 'Is Christmas safari more expensive?',
+        answer: 'Yes, significantly. Christmas and New Year command peak season premiums, often 25-50% above already-high dry season rates. Minimum stay requirements also extend, sometimes to 5-7 nights over the holiday period.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -381,6 +449,23 @@ We also identify when February is not the right call. If your heart is set on th
     { slug: 'timing/tanzania-calendar', title: 'Tanzania Month by Month', type: 'guide' },
     { slug: 'timing/calving-explained', title: 'Calving Season Explained', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is February a good time for Tanzania safari?',
+        answer: 'Yes, February is arguably the best wildlife spectacle anywhere in Africa. Calving season in the southern Serengeti delivers intense predator action daily. Weather is typically dry with possible early rains, but most days are sunny.',
+      },
+      {
+        question: 'What is special about February in Tanzania?',
+        answer: 'Approximately 400,000 wildebeest calves are born over a three-week window in the southern Serengeti. Predators concentrate in the calving zone, hunting vulnerable newborns constantly. The action is more reliable than river crossings.',
+      },
+      {
+        question: 'Is February rainy season in Tanzania?',
+        answer: 'February sits between the short rains (November-December) and long rains (March-May). Some years February is fully dry. Other years early long rains arrive. It is not the wet season, but weather can be unpredictable.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -457,6 +542,23 @@ July is objectively excellent for Tanzania. The question is whether July's const
     { slug: 'timing/tanzania-calendar', title: 'Tanzania Month by Month', type: 'guide' },
     { slug: 'timing/migration-calendar', title: 'Migration Calendar', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is July a good month for Tanzania safari?',
+        answer: 'Yes, July is excellent. Weather is dry and predictable, wildlife concentrates around water, and roads are good. The migration is on the move toward the Mara River, though exact position varies by year.',
+      },
+      {
+        question: 'Can I see river crossings in Tanzania in July?',
+        answer: 'Possibly, but July is early for crossings. The herds might be in the western or central Serengeti still moving north. August and September offer higher probability for crossings. In July, you might see herds approaching but not yet crossing.',
+      },
+      {
+        question: 'Is July crowded in Tanzania?',
+        answer: 'Yes, July is peak season with high prices and vehicle density at prime sightings. Popular camps book months ahead. However, remote areas like Katavi or Ruaha see fewer visitors even in peak season.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -533,6 +635,23 @@ We also identify when August is wrong despite being "peak season." If crowds wil
     { slug: 'timing/kenya-calendar', title: 'Kenya Month by Month', type: 'guide' },
     { slug: 'destination/mara-guide', title: 'Masai Mara Guide', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is August a good time for Kenya safari?',
+        answer: 'August is the heart of peak season with the Great Migration in the Masai Mara and excellent dry weather. Wildlife viewing is arguably the best all year. The trade-off is crowds and premium prices.',
+      },
+      {
+        question: 'How crowded is the Masai Mara in August?',
+        answer: 'Very. A leopard in a tree might draw fifteen Land Cruisers. River crossings can have thirty or more vehicles. Private conservancies limit vehicle numbers but the main reserve is busy.',
+      },
+      {
+        question: 'Should I book a conservancy or the main Mara reserve for August?',
+        answer: 'Conservancies offer vehicle limits and off-road driving privileges, reducing crowds. However, the best crossing points are often in the main reserve. You trade exclusivity for potentially better crossing access. Budget also factors in, as conservancies cost more.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -609,6 +728,23 @@ If your priorities align with what June delivers, we recommend it. If they align
     { slug: 'timing/botswana-calendar', title: 'Botswana Month by Month', type: 'guide' },
     { slug: 'destination/okavango-guide', title: 'Okavango Delta Guide', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is June a good time for Botswana safari?',
+        answer: 'Yes. June is early dry season with peak Okavango Delta floods (from Angolan rains months earlier). Water activities like mokoro trips are optimal. Wildlife is beginning to concentrate but not at peak levels yet.',
+      },
+      {
+        question: 'Is June cold in Botswana?',
+        answer: 'Yes, mornings can drop to near freezing. Days are pleasant but early game drives at 6 AM require serious layers. The cold is concentrated in early morning and evening hours.',
+      },
+      {
+        question: 'Is June better than August for Botswana?',
+        answer: 'Different, not better. June offers peak water/flood levels ideal for mokoro and boat activities. August-October offers more intense predator-prey concentration as water becomes scarce. Choose based on your priorities.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -685,6 +821,23 @@ We recommend against reflexive dry-season-only thinking. The best month for your
     { slug: 'timing/tanzania-calendar', title: 'Tanzania Month by Month', type: 'guide' },
     { slug: 'timing/seasonal-guide', title: 'Safari Seasons Explained', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Should I only visit Tanzania in dry season?',
+        answer: 'No. This advice is outdated. Tanzania has excellent wildlife twelve months a year. The migration cycles through different areas year-round. Calving season (February) is arguably the best wildlife spectacle and is not dry season.',
+      },
+      {
+        question: 'What are the advantages of Tanzania in wet season?',
+        answer: 'Green season rates are 30-40% lower. Crowds thin dramatically. Landscapes are lush and photogenic. Bird populations explode with migratory species. Some travelers prefer the empty parks and dramatic skies.',
+      },
+      {
+        question: 'When is Tanzania dry season?',
+        answer: 'Broadly June through October, with July-September being peak dry. But calving season (January-February) is often dry too. The long rains (March-May) are the wettest period when some camps close.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -692,7 +845,7 @@ We recommend against reflexive dry-season-only thinking. The best month for your
 // ============================================================
 const bookingLeadTimeBlog: BlogContent = {
   decisionSlug: 'safari-booking-lead-time',
-  title: 'How far in advance should I book safari?',
+  title: 'How far in advance should I book safari? (2026 Guide)',
   subtitle: 'Understanding booking timelines and availability patterns',
   updatedAt: '2025-01',
   wordCount: 1380,
@@ -761,6 +914,23 @@ Safari operators have incentives to encourage early booking. We do not. We tell 
     { slug: 'logistics/booking-guide', title: 'Safari Booking Guide', type: 'guide' },
     { slug: 'logistics/planning-timeline', title: 'Planning Timeline', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'How far in advance should I book a safari?',
+        answer: 'Peak season (July-October in East Africa) and holiday periods require 6-12 months lead time. Green season and shoulder months have more availability closer to departure. Specific popular camps fill faster than interchangeable alternatives.',
+      },
+      {
+        question: 'Can I book a safari last minute?',
+        answer: 'Yes, for green season, less popular destinations, or if highly flexible. But last-minute peak season booking means accepting whatever remains. Quality drops quickly at lower price points as demand absorbs good inventory.',
+      },
+      {
+        question: 'Does booking early get me a better price?',
+        answer: 'Usually not. Safari pricing is generally fixed rather than dynamic like hotels. Early bookers pay similar rates as later bookers. The advantage of early booking is availability, not price.',
+      },
+    ],
+  },
 };
 
 // ============================================================

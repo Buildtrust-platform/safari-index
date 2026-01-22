@@ -12,7 +12,7 @@ import { registerBlog, type BlogContent } from '../../../lib/blog-content';
 // ============================================================
 const safariTotalBudgetBlog: BlogContent = {
   decisionSlug: 'safari-total-budget',
-  title: 'What should I budget for safari?',
+  title: 'What should I budget for safari? ',
   subtitle: 'Understanding the real costs of African safari travel',
   updatedAt: '2025-01',
   wordCount: 1440,
@@ -85,6 +85,23 @@ We do not suggest budgets are lower than they are. Realistic expectations preven
     { slug: 'budget/cost-breakdown', title: 'Safari Cost Breakdown', type: 'guide' },
     { slug: 'budget/value-analysis', title: 'Safari Value Analysis', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'How much does a week of safari cost?',
+        answer: 'Safari costs range from under $2,000 to over $20,000 per person per week depending on destination, accommodation tier, and season. Mid-range Tanzania safari typically costs $400-700 per person per day all-inclusive.',
+      },
+      {
+        question: 'What is included in safari pricing?',
+        answer: 'Safari all-inclusive rates typically include accommodation, all meals, some drinks, game drives, and park fees. International flights, travel insurance, and tips are usually separate.',
+      },
+      {
+        question: 'Is safari more expensive than other vacations?',
+        answer: 'Not necessarily. When you compare all-inclusive safari rates (meals, drinks, activities included) to other all-inclusive vacations with excursions, costs are often similar at equivalent quality levels.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -92,7 +109,7 @@ We do not suggest budgets are lower than they are. Realistic expectations preven
 // ============================================================
 const tanzaniaBudgetBlog: BlogContent = {
   decisionSlug: 'tanzania-safari-on-budget',
-  title: 'Can I do Tanzania on a budget?',
+  title: 'Can I do Tanzania on a budget? ',
   subtitle: 'Understanding realistic expectations for budget Tanzania travel',
   updatedAt: '2025-01',
   wordCount: 1380,
@@ -163,6 +180,23 @@ We do not pretend budget Tanzania is easy. Honest assessment prevents frustratin
     { slug: 'budget/tanzania-budget-guide', title: 'Tanzania Budget Guide', type: 'guide' },
     { slug: 'budget/cost-breakdown', title: 'Safari Cost Breakdown', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Is Tanzania more expensive than Kenya for safari?',
+        answer: 'Yes. Tanzania has higher park fees, less competition in the budget sector, and generally commands premium pricing. Budget Tanzania costs $250-400 per day versus Kenya at $200-350 per day.',
+      },
+      {
+        question: 'Can I do Tanzania safari for under $200 per day?',
+        answer: 'Rarely with quality. At this price point, you get camping with basic facilities, group transport, and limited park access. Kenya or South Africa serve budget travelers better.',
+      },
+      {
+        question: 'Why is Serengeti so expensive?',
+        answer: 'Serengeti has high park fees ($70/day) plus concession fees for camps. Its remote location adds logistics costs. The premium is for access to the best migration viewing on Earth.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -170,7 +204,7 @@ We do not pretend budget Tanzania is easy. Honest assessment prevents frustratin
 // ============================================================
 const peakVsValueBlog: BlogContent = {
   decisionSlug: 'peak-season-vs-value-season',
-  title: 'Is peak season worth the premium?',
+  title: 'Is peak season worth the premium? ',
   subtitle: 'Understanding what you pay for in seasonal pricing',
   updatedAt: '2025-01',
   wordCount: 1400,
@@ -239,6 +273,23 @@ We do not assume peak is better because it costs more. We analyze what you get f
     { slug: 'timing/seasonal-guide', title: 'Safari Seasons Explained', type: 'guide' },
     { slug: 'budget/value-season-tips', title: 'Value Season Planning', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'When is peak safari season?',
+        answer: 'Peak season is typically July-October in East Africa (dry season, migration) and June-October in Southern Africa. Dates vary by destination and what you want to see.',
+      },
+      {
+        question: 'How much more expensive is peak season?',
+        answer: 'Peak season rates are typically 30-50% higher than shoulder or green season. The same camp might charge $800/night in July versus $500/night in April.',
+      },
+      {
+        question: 'Is value season actually bad for wildlife?',
+        answer: 'No. Value season has excellent wildlife in most destinations. You trade predictable dry conditions for lower prices, fewer tourists, and lush green landscapes.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -246,7 +297,7 @@ We do not assume peak is better because it costs more. We analyze what you get f
 // ============================================================
 const cheapSafariWarningBlog: BlogContent = {
   decisionSlug: 'cheap-safari-warning',
-  title: 'What are the warning signs of a too-cheap safari?',
+  title: 'What are the warning signs of a too-cheap safari? ',
   subtitle: 'Understanding when low prices signal problems',
   updatedAt: '2025-01',
   wordCount: 1340,
@@ -319,6 +370,23 @@ We distinguish between good budget operators making clear trade-offs and problem
     { slug: 'budget/budget-safari-guide', title: 'Budget Safari Guide', type: 'guide' },
     { slug: 'logistics/operator-evaluation', title: 'Evaluating Safari Operators', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'What are red flags for budget safari operators?',
+        answer: 'Warning signs include prices significantly below market rates, no verifiable reviews, unclear inclusions, pressure to book immediately, and operators who cannot provide vehicle/guide details.',
+      },
+      {
+        question: 'How cheap is too cheap for safari?',
+        answer: 'In Tanzania, legitimate budget safari rarely goes below $200/day. In Kenya, $150/day is possible but tight. Prices well below these suggest cut corners or hidden costs.',
+      },
+      {
+        question: 'Can I trust online safari reviews?',
+        answer: 'Look for detailed reviews with specific names and dates, not generic praise. Check TripAdvisor and SafariBookings for patterns. Be suspicious of only 5-star reviews.',
+      },
+    ],
+  },
 };
 
 // ============================================================
@@ -326,7 +394,7 @@ We distinguish between good budget operators making clear trade-offs and problem
 // ============================================================
 const splurgeVsSaveBlog: BlogContent = {
   decisionSlug: 'safari-splurge-vs-save',
-  title: 'Where should I splurge and where should I save?',
+  title: 'Where should I splurge and where should I save? ',
   subtitle: 'Understanding which upgrades deliver proportional value',
   updatedAt: '2025-01',
   wordCount: 1420,
@@ -399,6 +467,23 @@ We do not assume everyone should prioritize the same things. We identify what ma
     { slug: 'budget/where-to-splurge', title: 'Where to Spend and Save', type: 'guide' },
     { slug: 'budget/value-analysis', title: 'Safari Value Analysis', type: 'guide' },
   ],
+
+  faq: {
+    items: [
+      {
+        question: 'Where should I spend more money on safari?',
+        answer: 'Splurge on guide quality, wildlife positioning (camps in prime locations), and one or two special experiences. These directly affect what you see and learn.',
+      },
+      {
+        question: 'Where can I safely save money on safari?',
+        answer: 'Save on accommodation luxury beyond mid-range, international flights (use points), internal road transfers vs flights for scenic routes, and extra nights beyond the sweet spot.',
+      },
+      {
+        question: 'Is luxury accommodation worth it on safari?',
+        answer: 'Depends. The jump from budget to mid-range is worth it. The jump from mid-range to luxury has diminishing returns for wildlife—you pay for comfort and exclusivity, not better animals.',
+      },
+    ],
+  },
 };
 
 // ============================================================
