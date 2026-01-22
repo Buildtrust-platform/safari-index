@@ -392,6 +392,154 @@ If your expectations seem misaligned with safari reality, we address that direct
 };
 
 // ============================================================
+// safari-photography-priority: Is safari right for serious photographers?
+// ============================================================
+export const photographyPriorityBlog: BlogContent = {
+  decisionSlug: 'safari-photography-priority',
+  title: 'Is safari right for serious photographers?',
+  subtitle: 'Balancing photographic ambitions with safari logistics',
+  updatedAt: '2025-01',
+  wordCount: 1340,
+  published: true,
+  heroImage: {
+    src: '/images/activities/photography.jpg',
+    alt: 'Photographer with telephoto lens on safari vehicle',
+  },
+
+  whyNotSimple: `Safari photography has produced some of the most iconic images in nature photography. The potential is extraordinary. Lions at dawn, leopards in trees, river crossings with thousands of wildebeest. The raw material exists.
+
+But serious photography requires conditions that standard safari may not provide. You need good light, which means specific timing. You need positioning, which requires vehicle flexibility. You need patience at single subjects, which conflicts with guide expectations to show variety. You need equipment that weighs more than luggage limits allow.
+
+The question is whether your photographic goals can be accommodated within safari structure or whether they require specialized arrangements.`,
+
+  variables: `**Your equipment weight** encounters bush flight restrictions. Serious wildlife photography involves heavy glass. A 600mm lens alone weighs several kilograms. Flight limits of 15-20kg in soft bags force difficult choices. Road-based itineraries offer more flexibility.
+
+**Vehicle positioning matters enormously.** The difference between shooting from the wrong angle with harsh light and perfect angle with soft light is the difference between snapshots and portfolio work. Private vehicles let you position for your photography. Shared vehicles position for group consensus.
+
+**Light timing is non-negotiable.** The best photography happens in the golden hour after sunrise and before sunset. Mid-day light is harsh and unforgiving. If game drives start late or return early, you lose the best light.
+
+**Other passengers affect your shooting.** On shared vehicles, your extended time photographing a single subject may frustrate others who want variety. Photography-focused safaris exist specifically to solve this tension.
+
+**Guide photography knowledge varies.** Some guides understand photography needs. Others do not. A guide who positions for viewing but not shooting wastes photographic opportunity.`,
+
+  tradeoffs: `General safari offers variety with photographic compromise. You see many species and situations. You photograph what you can within constraints. The results can be excellent but are rarely portfolio-quality for serious photographers.
+
+Photography-focused safaris optimize for imagery but sacrifice variety and flexibility. You stay at a single sighting for hours. You skip locations that do not photograph well. The trip serves photography rather than photography being one element of the trip.
+
+Private vehicles with photographically-aware guides provide middle ground. You control positioning and timing. You choose how long to stay. The cost is significant.
+
+Equipment compromises affect results. Leaving your best lens at home due to weight limits means potentially missing shots you traveled thousands of miles to get.`,
+
+  misconceptions: `Everyone gets lucky shots on safari. Even with a phone, you can capture memorable images. The question is not whether you can take photos but whether you can take photos that meet serious photographic standards.
+
+Professional-quality wildlife photography requires professional-grade commitment. The images you see in magazines represent many trips, many hours, and significant investment in positioning and access.
+
+Safari is not a photography workshop unless you book a photography-specific trip. Standard guides are not photography instructors.
+
+Post-processing cannot fix bad positioning and harsh light. Getting it right in the field matters. Safari's constraints make this harder.`,
+
+  breaksDown: `If portfolio-quality images are the primary goal, book photography-specific safaris with photographic guides, private vehicles, and extended shooting time.
+
+If you are a serious photographer but photography is one of several goals, private vehicles with informed guides offer reasonable balance.
+
+If equipment weight limits are binding, consider road-based itineraries that avoid bush flights.
+
+If you cannot adjust to sharing vehicle positioning and timing with others, shared vehicles will frustrate rather than serve your needs.`,
+
+  ourApproach: `We evaluate photography priority based on your goals, equipment, and willingness to prioritize photography over general safari experience. We identify when standard safari serves photographers adequately and when specialized arrangements are necessary.`,
+
+  relatedDecisions: [
+    { slug: 'private-vs-shared-vehicle', title: 'Private or shared vehicle?', type: 'decision' },
+    { slug: 'fly-vs-drive-between-parks', title: 'Fly or drive between parks?', type: 'decision' },
+    { slug: 'luxury-safari-worth-it', title: 'Is luxury safari worth the premium?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'tanzania-photography-safari', title: 'Tanzania Photography Safari', type: 'trip' },
+    { slug: 'kenya-masai-mara-photography', title: 'Kenya Masai Mara Photography Safari', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'photography/safari-photography-guide', title: 'Safari Photography Guide', type: 'guide' },
+    { slug: 'photography/equipment-guide', title: 'Safari Camera Equipment Guide', type: 'guide' },
+  ],
+};
+
+// ============================================================
+// first-time-safari-readiness: Am I ready for my first safari?
+// ============================================================
+export const firstTimerReadinessBlog: BlogContent = {
+  decisionSlug: 'am-i-ready-for-first-safari',
+  title: 'Am I ready for my first safari?',
+  subtitle: 'Assessing preparation, expectations, and personal fit',
+  updatedAt: '2025-01',
+  wordCount: 1300,
+  published: true,
+  heroImage: {
+    src: '/images/activities/game-drive.jpg',
+    alt: 'Safari vehicle on game drive in African bush',
+  },
+
+  whyNotSimple: `The question often masks deeper uncertainties. Readiness is not about passing a test. It is about matching expectations to reality and understanding what safari actually involves.
+
+Most people who want to do safari are ready in the sense that matters. Safari does not require special skills, exceptional fitness, or prior experience. It requires willingness to adapt to different conditions, tolerance for early mornings, and ability to enjoy watching rather than participating.
+
+The real question is whether you understand what you are signing up for and whether that aligns with what you want.`,
+
+  variables: `**Your comfort with developing countries** affects adjustment. Safari happens in Africa. Infrastructure differs from Western standards. Power outages occur. Internet is unreliable. Water pressure varies. If these things create significant stress, safari requires mental preparation.
+
+**Your tolerance for early mornings** is practical reality. Game drives typically leave at 5:30 or 6am. The best wildlife activity happens at dawn. Night owls find this schedule challenging.
+
+**Your patience for watching rather than doing** determines enjoyment. Safari involves sitting, watching, waiting. There is no interaction with wildlife. If you need activity and engagement, the passive nature of game viewing may frustrate.
+
+**Your flexibility with plans** matters. Weather, wildlife, and logistics create unpredictability. Rigid expectations lead to disappointment. Flexible travelers enjoy surprises.
+
+**Your health situation** affects logistics rather than possibility. Safari accommodates most health situations with proper planning. Significant mobility limitations or complex medical needs require research but do not prohibit safari.`,
+
+  tradeoffs: `Doing more research increases preparation but can create analysis paralysis. At some point, you book and see what happens. Most safari experiences are positive regardless of preparation level.
+
+Waiting until you feel completely ready may mean waiting indefinitely. Perfect readiness does not exist. Reasonable readiness is sufficient.
+
+First safari creates context for future trips. You learn what matters to you, what you would do differently, what destinations interest you. The first trip educates for subsequent trips.`,
+
+  misconceptions: `You do not need to be adventurous in the adrenaline-seeking sense. Safari is not dangerous or extreme. It is observational travel with professional support.
+
+You do not need to know animals before arriving. Guides teach you. Learning on safari is part of the experience.
+
+You do not need to be wealthy. Budget safari exists. It involves trade-offs but makes safari accessible at various price points.
+
+Age is not a barrier in either direction. Children and elderly travelers do safari successfully. Specific accommodations may be needed but the activity itself is inclusive.`,
+
+  breaksDown: `If you cannot tolerate unpredictability, safari's inherent uncertainty will create stress. Consider whether this trip is right for you right now.
+
+If you need constant activity and stimulation, safari's contemplative nature may not satisfy. Be honest about how you enjoy spending time.
+
+If health conditions require guaranteed medical access, remote locations increase risk. South Africa offers better infrastructure proximity.
+
+If budget is extremely tight, the safari you can afford may not match expectations formed by luxury marketing. Calibrate expectations to budget.`,
+
+  ourApproach: `We help calibrate readiness by clarifying what safari actually involves and matching that to your situation. We identify when hesitation reflects legitimate concern versus unnecessary worry.
+
+Most people asking this question are ready. The question itself often indicates appropriate thoughtfulness.`,
+
+  relatedDecisions: [
+    { slug: 'big-five-expectations', title: 'Will I see the Big Five?', type: 'decision' },
+    { slug: 'is-5-days-enough-for-safari', title: 'Is five days enough?', type: 'decision' },
+    { slug: 'safari-total-budget', title: 'What should I budget?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'kenya-classic-safari', title: 'Kenya Classic Safari', type: 'trip' },
+    { slug: 'south-africa-kruger', title: 'South Africa Kruger Safari', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'personal-fit/first-timer-guide', title: 'First Safari Guide', type: 'guide' },
+    { slug: 'logistics/preparation-checklist', title: 'Safari Preparation Checklist', type: 'guide' },
+  ],
+};
+
+// ============================================================
 // Register all Personal Fit blogs
 // ============================================================
 export function registerPersonalFitBlogs(): void {
@@ -400,4 +548,6 @@ export function registerPersonalFitBlogs(): void {
   registerBlog(multigenerationalBlog);
   registerBlog(honeymoonBlog);
   registerBlog(bigFiveExpectationsBlog);
+  registerBlog(photographyPriorityBlog);
+  registerBlog(firstTimerReadinessBlog);
 }
