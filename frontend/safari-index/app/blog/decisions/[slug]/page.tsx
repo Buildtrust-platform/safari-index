@@ -20,12 +20,16 @@ import type { Metadata } from 'next';
 import { getBlogByDecision, getAllBlogs } from '../../../../lib/blog-content';
 import { getTopicBySlug } from '../../../content/decision-topics';
 import {
+  AuthorByline,
   BlogHeader,
   BlogSchema,
   BlogSection,
+  ComparisonTable,
   DecisionAnchor,
   DecisionSpine,
+  FAQSection,
   RelatedContent,
+  VerdictBox,
 } from '../../_components';
 import { ImageBand, pageImages } from '../../../components/visual';
 import { Navbar, Footer } from '../../../components/layout';
@@ -176,11 +180,20 @@ export default async function DecisionBlogPage({ params }: PageProps) {
             updatedAt={blog.updatedAt}
           />
 
+          {/* Author Byline (E-E-A-T signal) */}
+          {blog.author && <AuthorByline author={blog.author} />}
+
           {/* 2. Decision Spine - visible decision block */}
           <DecisionSpine
             decisionSlug={blog.decisionSlug}
             decisionTitle={blog.title}
           />
+
+          {/* Verdict Box (if available) */}
+          {blog.verdictBox && <VerdictBox verdictBox={blog.verdictBox} />}
+
+          {/* Comparison Table (if available) */}
+          {blog.comparisonTable && <ComparisonTable comparisonTable={blog.comparisonTable} />}
 
           {/* 3. Core Analysis Sections */}
           <BlogSection
@@ -219,6 +232,9 @@ export default async function DecisionBlogPage({ params }: PageProps) {
             trips={blog.relatedTrips}
             guides={blog.relatedGuides}
           />
+
+          {/* FAQ Section (visible + structured data) */}
+          {blog.faq && <FAQSection faq={blog.faq} />}
 
           {/* 7. Closing with CTA */}
           <DecisionAnchor
