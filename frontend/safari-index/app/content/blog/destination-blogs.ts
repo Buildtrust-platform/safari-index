@@ -623,6 +623,518 @@ Most first-time travelers are better served by depth in one destination than bre
 };
 
 // ============================================================
+// ngorongoro-vs-serengeti: Ngorongoro Crater or Serengeti?
+// ============================================================
+export const ngorongoroVsSerengetiBlog: BlogContent = {
+  decisionSlug: 'ngorongoro-vs-serengeti',
+  title: 'Ngorongoro Crater or Serengeti?',
+  subtitle: 'Concentrated wildlife viewing versus endless plains and migration',
+  updatedAt: '2025-01',
+  wordCount: 1380,
+  published: true,
+  heroImage: {
+    src: '/images/destinations/ngorongoro-crater.jpg',
+    alt: 'Panoramic view of Ngorongoro Crater floor with wildlife and soda lake',
+  },
+
+  whyNotSimple: `Ngorongoro Crater and the Serengeti are often combined in the same trip, and for good reason. They offer fundamentally different experiences despite being neighbors in Tanzania's northern circuit.
+
+The Crater is a collapsed volcano with walls creating a natural enclosure. About 25,000 large animals live on the 260 square kilometer floor. Wildlife density is extraordinary. You will see lions, elephants, rhinos, buffalo, and countless other species in one morning's game drive.
+
+The Serengeti sprawls across 15,000 square kilometers of plains and woodlands. The Great Migration moves through. The landscape feels endless. Driving between sightings takes time. The experience is immersion in vastness rather than concentrated viewing.
+
+If you can do both, do both. If you must choose, the answer depends on what experience you want.`,
+
+  variables: `**Your time available** affects the choice. With limited days, Ngorongoro's efficiency delivers more sightings per hour. With ample days, the Serengeti's scale rewards patience.
+
+**Whether migration timing aligns with your dates** changes the Serengeti's appeal. During migration, the Serengeti offers spectacle the Crater cannot match. Outside migration, both destinations have excellent resident wildlife.
+
+**Your interest in rhinos** favors the Crater. Ngorongoro is one of the few places in East Africa with reliable black rhino sightings. The Serengeti has very few rhinos.
+
+**Your tolerance for other vehicles** matters. The Crater's small area and popularity concentrate vehicles at sightings. Morning game drives can feel crowded. The Serengeti's scale disperses vehicles. You can find solitude.
+
+**Your interest in landscape variety** differs between destinations. The Crater is dramatic but uniform, the same caldera rim everywhere. The Serengeti varies from southern grasslands to central kopjes to northern woodlands.
+
+**Accommodation preferences** might influence choice. Crater rim lodges are dramatic but cold at altitude. Serengeti camps vary from basic to ultra-luxury across different zones.`,
+
+  tradeoffs: `The Crater guarantees wildlife density. In one morning, you will likely see all the major species except cheetah. This efficiency serves travelers with limited time or checklists to complete.
+
+The Serengeti offers migration. Millions of wildebeest and zebras moving across the landscape is unique to the Serengeti-Mara ecosystem. The Crater has nothing comparable.
+
+The Crater feels intimate despite crowds. The walls create enclosure. You are in a defined space with animals. The Serengeti can feel empty between sightings.
+
+The Serengeti rewards extended time. Understanding the ecosystem, returning to the same areas, watching behavior unfold over days, these require time the Crater does not need.
+
+The Crater is colder. At 2,000 meters elevation, nights are genuinely cold. Rim lodges need heating. The Serengeti's lower elevation is warmer.
+
+Vehicle access differs. You descend into the Crater for half-day drives, then return to the rim. The Serengeti allows full-day exploration with picnic lunches anywhere.`,
+
+  misconceptions: `The Crater is not a zoo. Animals are wild. They hunt, mate, and die without human intervention. The walls simply prevent emigration.
+
+The Serengeti is not empty. Wildlife density varies by zone and season, but excellent viewing exists year-round in the right areas.
+
+You do not need to choose. Most northern Tanzania itineraries include both. The question is usually about time allocation, not either/or.
+
+Rhino sightings in the Crater are not guaranteed. They are more likely than almost anywhere else, but rhinos are still wild animals that move unpredictably.`,
+
+  breaksDown: `If you have only two or three days for northern Tanzania, the Crater delivers more efficiently. One morning there provides significant wildlife value.
+
+If the Great Migration is your priority and your dates align, the Serengeti is essential. The Crater is excellent but cannot substitute for migration spectacle.
+
+If rhinos are specifically important to you, the Crater offers the best odds in East Africa.
+
+If crowds genuinely ruin your experience, the Serengeti's scale offers escape routes the Crater cannot provide.
+
+The [Tanzania Classic Northern Circuit](/itineraries/tanzania-classic-northern-circuit) combines both for optimal experience.`,
+
+  ourApproach: `We evaluate this choice based on your available time, travel dates, specific wildlife priorities, and tolerance for vehicle density. Most travelers benefit from including both.
+
+When time forces a choice, we optimize for what matters most to you.`,
+
+  relatedDecisions: [
+    { slug: 'great-migration-timing', title: 'When to see the Great Migration?', type: 'decision' },
+    { slug: 'is-5-days-enough-for-safari', title: 'Is five days enough for safari?', type: 'decision' },
+    { slug: 'big-five-expectations', title: 'Will I see the Big Five?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'tanzania-classic-northern-circuit', title: 'Tanzania Classic Northern Circuit', type: 'trip' },
+    { slug: 'tanzania-ngorongoro-crater', title: 'Tanzania Ngorongoro Focus', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'destination/ngorongoro-guide', title: 'Ngorongoro Crater Guide', type: 'guide' },
+    { slug: 'destination/serengeti-zones', title: 'Serengeti Zone Guide', type: 'guide' },
+  ],
+};
+
+// ============================================================
+// amboseli-vs-masai-mara: Amboseli or Masai Mara?
+// ============================================================
+export const amboseliVsMaraBlog: BlogContent = {
+  decisionSlug: 'amboseli-vs-masai-mara',
+  title: 'Amboseli or Masai Mara?',
+  subtitle: 'Kilimanjaro backdrops versus migration heartland in Kenya',
+  updatedAt: '2025-01',
+  wordCount: 1320,
+  published: true,
+  heroImage: {
+    src: '/images/destinations/amboseli-elephants.jpg',
+    alt: 'Elephant herd walking with Mount Kilimanjaro snow-capped peak in background',
+  },
+
+  whyNotSimple: `Amboseli and the Masai Mara are Kenya's two most famous safari destinations, but they offer different experiences and serve different purposes.
+
+Amboseli is compact, dominated by its view of Mount Kilimanjaro, and famous for large elephant herds. The landscape is marshland and dusty plains. The animal diversity is lower than the Mara.
+
+The Masai Mara is larger, greener, and home to the Great Migration from July through October. Lion density is among Africa's highest. The landscape feels like classic savanna.
+
+Both are excellent. The choice depends on what you want to see and when you are traveling.`,
+
+  variables: `**Your travel dates** determine migration relevance. The Mara has the wildebeest migration from approximately July through October. Outside these months, both destinations offer excellent resident wildlife.
+
+**Your interest in elephants specifically** favors Amboseli. The elephant research there spans decades. Herds are habituated and relaxed. The iconic shots of elephants with Kilimanjaro behind are possible here and nowhere else.
+
+**Your interest in predators** favors the Mara. Lion prides are larger and more visible. Cheetah sightings are more frequent. Leopards are present. Amboseli has predators but lower density.
+
+**Your photography priorities** might favor one destination. Amboseli delivers Kilimanjaro as backdrop, distinctive red elephants coated in dust, and wetland birds. The Mara delivers crossing footage, open savanna, and predator action.
+
+**Your tolerance for tourism density** affects the choice. The Mara is busier, especially during peak migration months. Amboseli is generally quieter, though the compact size means vehicles concentrate at popular spots.
+
+**Trip length** influences combination decisions. A short Kenya trip might force choosing one. A longer trip combines them effectively.`,
+
+  tradeoffs: `Amboseli offers landscape photography unlike anywhere else. Kilimanjaro rising over elephant herds is uniquely Amboseli. No other park delivers this shot.
+
+The Mara offers migration spectacle. River crossings, predator hunting, and millions of animals in motion happen here from July through October.
+
+Amboseli feels more intimate. The park is smaller. You learn the terrain quickly. The elephants become familiar. Extended stays deepen the experience.
+
+The Mara feels grander. The scale of the ecosystem, the density of wildlife, the dramatic sightings, all create a feeling of abundance.
+
+Amboseli works year-round. No migration creates shoulder season. The elephants and Kilimanjaro are constants.
+
+The Mara has distinct seasons. Migration months are peak. Other months offer excellent wildlife but without the migration draw.`,
+
+  misconceptions: `Amboseli is not just for elephants. You will see lions, cheetahs, buffalo, hippos, and numerous other species. The elephant focus is real but not exclusive.
+
+The Mara is not overwhelmed by crowds everywhere. Private conservancies flanking the reserve offer lower density. Even within the reserve, vehicle concentration varies by location.
+
+Kilimanjaro is not always visible from Amboseli. Clouds often obscure the mountain. Clear views typically happen early morning. Do not expect the iconic shot all day every day.
+
+You do not need migration to enjoy the Mara. Resident wildlife populations are excellent. Non-migration months offer the same lions and leopards with fewer tourists.`,
+
+  breaksDown: `If your dates are July through October and migration is the priority, the Mara is the clear choice. Amboseli cannot substitute for this experience.
+
+If Kilimanjaro photography is specifically important, Amboseli is required. No other location provides this backdrop.
+
+If elephants are your primary interest, Amboseli's herds and research history make it the better choice.
+
+If predator action is the priority, the Mara's density delivers more reliably.
+
+The [Kenya Classic Safari](/itineraries/kenya-classic-safari) often combines both destinations.`,
+
+  ourApproach: `We evaluate this choice based on your travel dates, specific wildlife interests, and photography priorities. Both destinations are excellent. The question is which delivers what you most want.
+
+Many travelers include both in longer Kenya itineraries.`,
+
+  relatedDecisions: [
+    { slug: 'serengeti-vs-masai-mara', title: 'Serengeti or Masai Mara?', type: 'decision' },
+    { slug: 'tanzania-vs-kenya-first-safari', title: 'Tanzania or Kenya for first safari?', type: 'decision' },
+    { slug: 'great-migration-timing', title: 'When to see the Great Migration?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'kenya-classic-safari', title: 'Kenya Classic Safari', type: 'trip' },
+    { slug: 'kenya-amboseli-mara', title: 'Kenya Amboseli and Mara', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'destination/amboseli-guide', title: 'Amboseli National Park Guide', type: 'guide' },
+    { slug: 'destination/masai-mara-guide', title: 'Masai Mara Guide', type: 'guide' },
+  ],
+};
+
+// ============================================================
+// sabi-sands-vs-timbavati: Sabi Sands or Timbavati?
+// ============================================================
+export const sabiSandsVsTimbavtiBlog: BlogContent = {
+  decisionSlug: 'sabi-sands-vs-timbavati',
+  title: 'Sabi Sands or Timbavati?',
+  subtitle: 'Leopard density versus value in Greater Kruger private reserves',
+  updatedAt: '2025-01',
+  wordCount: 1350,
+  published: true,
+  heroImage: {
+    src: '/images/destinations/south-africa-leopard.jpg',
+    alt: 'Leopard resting on tree branch in South African reserve',
+  },
+
+  whyNotSimple: `Sabi Sands and Timbavati are both private reserves sharing unfenced borders with Kruger National Park. Both offer Big Five viewing with off-road access and night drives. Both provide guided safari experiences superior to self-drive Kruger.
+
+But they sit at different points on the quality-value spectrum. Sabi Sands has Africa's highest leopard sighting rates and commands premium prices. Timbavati offers excellent wildlife at more accessible price points.
+
+The question is whether Sabi Sands' leopard advantage and brand prestige justify its higher costs.`,
+
+  variables: `**Your leopard priority** is the key variable. Sabi Sands has habituated leopards that tolerate vehicles at close range. Sighting rates are extraordinary. If leopards are essential, Sabi Sands delivers most reliably.
+
+**Your budget** interacts directly with reserve choice. Sabi Sands properties typically cost 30-50 percent more than comparable Timbavati lodges. The premium buys leopard odds and prestige.
+
+**Your interest in exclusivity** matters. Sabi Sands reserves limit traverse rights between properties. Fewer vehicles share sightings. Timbavati has more properties and sometimes more vehicles.
+
+**Your landscape preferences** differ between reserves. Sabi Sands is river-focused with riparian woodland. Timbavati has more open savanna. The terrain affects game viewing style.
+
+**Brand recognition** matters to some travelers. Sabi Sands properties like Londolozi, Singita, and MalaMala are internationally famous. Timbavati names are less known but quality is high.
+
+**Your experience level** affects perceived value. First-time safari visitors might not distinguish between the reserves. Experienced travelers seeking specific animals or photography might value Sabi Sands' specialization.`,
+
+  tradeoffs: `Sabi Sands delivers leopards like nowhere else. Multiple sightings per day are common. Close-up encounters in good light are frequent. If leopard photography is the goal, this is the place.
+
+Timbavati offers better value. Similar overall wildlife experience at lower cost. The budget difference could fund additional nights or better accommodation elsewhere.
+
+Sabi Sands feels more exclusive. Older established properties, stricter traverse management, and premium positioning create a polished experience.
+
+Timbavati feels less crowded in some areas. More properties but also more space. The experience varies more by specific lodge than by reserve.
+
+Both reserves share wildlife. Animals cross freely between Sabi Sands, Timbavati, and Kruger. The same lions and elephants move through both areas.
+
+Neither has migration. This is Greater Kruger, not East Africa. The appeal is Big Five diversity, not mass movements.`,
+
+  misconceptions: `Timbavati is not inferior wildlife viewing. Big Five sightings are excellent. Leopards are present. The difference is probability and habituation, not species availability.
+
+Sabi Sands is not uniformly premium. Properties range from mid-range to ultra-luxury. The reserve name does not guarantee top-tier experience.
+
+Neither reserve is fenced from Kruger. Animals move freely. You are seeing the same genetic populations as the national park.
+
+Prices within reserves vary significantly. The cheapest Sabi Sands property might cost less than the most expensive Timbavati lodge. Compare specific camps, not just reserves.`,
+
+  breaksDown: `If leopards are the primary objective and budget allows, Sabi Sands is the straightforward choice. Nowhere else offers comparable reliability.
+
+If value matters and leopards are nice-to-have rather than essential, Timbavati serves you better. The savings are meaningful.
+
+If a specific property attracts you regardless of reserve, book that property. Camp quality varies more than reserve averages.
+
+If this is your first safari and you have no strong leopard priority, Timbavati offers excellent introduction at lower cost.
+
+The [South Africa Kruger Safari](/itineraries/south-africa-kruger) can be configured for either reserve.`,
+
+  ourApproach: `We evaluate this choice based on your specific wildlife priorities, budget, and interest in exclusivity. We match you to reserve and property combinations that optimize your priorities.
+
+Both reserves are excellent. The question is which serves your specific interests at acceptable cost.`,
+
+  relatedDecisions: [
+    { slug: 'kruger-vs-private-reserves', title: 'Kruger or private reserves?', type: 'decision' },
+    { slug: 'south-africa-vs-east-africa-safari', title: 'South Africa or East Africa?', type: 'decision' },
+    { slug: 'luxury-safari-worth-it', title: 'Is luxury safari worth the premium?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'south-africa-kruger', title: 'South Africa Kruger Safari', type: 'trip' },
+    { slug: 'south-africa-safari-and-cape', title: 'South Africa Safari and Cape', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'destination/greater-kruger-reserves', title: 'Greater Kruger Private Reserves', type: 'guide' },
+    { slug: 'destination/sabi-sands-guide', title: 'Sabi Sands Guide', type: 'guide' },
+  ],
+};
+
+// ============================================================
+// chobe-vs-okavango: Chobe or Okavango Delta?
+// ============================================================
+export const chobeVsOkavangoBlog: BlogContent = {
+  decisionSlug: 'chobe-vs-okavango',
+  title: 'Chobe or Okavango Delta?',
+  subtitle: 'River frontage versus inland delta in Botswana',
+  updatedAt: '2025-01',
+  wordCount: 1340,
+  published: true,
+  heroImage: {
+    src: '/images/ecosystems/delta-channels.jpg',
+    alt: 'Aerial view of Okavango Delta waterways and islands',
+  },
+
+  whyNotSimple: `Chobe and the Okavango Delta are Botswana's premier safari areas, but they offer different experiences at different price points.
+
+Chobe National Park centers on the Chobe River. Elephant densities are among Africa's highest, with herds of 50 to 100 common. Boat safaris on the river provide unique perspectives. The park is accessible and relatively affordable by Botswana standards.
+
+The Okavango Delta is an inland delta where the Okavango River spreads into the Kalahari sands. Mokoro excursions, island-hopping, and water-based wildlife viewing create experiences available nowhere else. Private concessions command premium prices.
+
+If you can do both, do both. If budget forces a choice, the answer depends on your priorities and price sensitivity.`,
+
+  variables: `**Your budget** is the first filter. Okavango Delta private concessions cost roughly twice what Chobe equivalents cost. If budget is constrained, Chobe offers excellent safari at accessible prices.
+
+**Your interest in water activities** differentiates the destinations. The Delta offers mokoro excursions, swimming (where safe), and water-based immersion. Chobe offers boat safaris but from motorized craft on a navigable river, not paddling through lily-covered channels.
+
+**Your elephant priority** might favor Chobe. Elephant herds at Chobe are larger and more concentrated, especially along the river in dry season. The Delta has elephants but dispersed across islands and floodplains.
+
+**Your interest in exclusivity** affects the comparison. Okavango private concessions limit vehicles and offer off-road driving. Chobe's public areas have more vehicles and track restrictions.
+
+**Your tolerance for tourism density** matters. Chobe's riverfront is popular. Boat safaris concentrate at good sighting spots. The Delta's dispersed geography spreads visitors across greater area.
+
+**Your seasonal timing** affects both destinations differently. Chobe's dry season concentrates elephants along the river. Delta water levels peak June through August, determining water activity availability.`,
+
+  tradeoffs: `The Delta offers unique water experiences. Gliding through papyrus in a mokoro, watching elephants swim between islands, and experiencing the aquatic ecosystem provide something no other safari destination offers.
+
+Chobe offers elephant abundance efficiently. Dry season herds along the river are spectacular and relatively accessible. This is Africa's largest elephant population.
+
+The Delta costs significantly more. Botswana's high-cost policy applies most strongly to private Delta concessions. Budget constraints push travelers toward Chobe.
+
+Chobe offers Victoria Falls access. The park is close to the falls, allowing combination trips. The Delta is further from any secondary attraction.
+
+The Delta feels more remote. Fly-in access, dispersed camps, and vast waterways create isolation. Chobe feels more connected to the outside world.
+
+Both offer excellent general wildlife. Beyond their signature features, both have Big Five potential and excellent bird life.`,
+
+  misconceptions: `Chobe is not "budget Botswana." While more accessible than the Delta, it is still Botswana pricing. Budget travelers find even Chobe expensive compared to East Africa.
+
+The Delta is not always flooded. Water levels vary seasonally. Some areas are dry at certain times. Water-based activities depend on timing.
+
+Elephants exist in both places. The difference is concentration, not presence. Delta elephants are excellent; they are just more dispersed.
+
+You can often combine both in one trip. Many Botswana itineraries include Chobe and Delta for the full range of experiences.`,
+
+  breaksDown: `If budget is the binding constraint, Chobe offers the better value. Excellent safari at Botswana's most accessible prices.
+
+If water activities are essential to your vision, the Delta is required. Chobe boat safaris are not the same as mokoro through the Delta.
+
+If elephants specifically are the priority, Chobe's dry season concentrations are unmatched.
+
+If exclusivity matters and budget allows, Delta concessions deliver low-density experiences Chobe's public areas cannot match.
+
+The [Botswana Okavango Delta](/itineraries/botswana-okavango-delta) can be extended to include Chobe.`,
+
+  ourApproach: `We evaluate this choice based on your budget, interest in water activities, and elephant priority. Both are excellent. The question is which fits your resources and priorities.
+
+Many travelers include both in Botswana itineraries for the full range of experiences.`,
+
+  relatedDecisions: [
+    { slug: 'okavango-delta-worth-premium', title: 'Is the Okavango worth the premium?', type: 'decision' },
+    { slug: 'tanzania-vs-botswana-safari', title: 'Tanzania or Botswana?', type: 'decision' },
+    { slug: 'safari-total-budget', title: 'What should I budget for safari?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'botswana-okavango-delta', title: 'Botswana Okavango Delta Safari', type: 'trip' },
+    { slug: 'botswana-chobe-delta', title: 'Botswana Chobe and Delta', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'destination/chobe-guide', title: 'Chobe National Park Guide', type: 'guide' },
+    { slug: 'destination/botswana-overview', title: 'Botswana Safari Planning', type: 'guide' },
+  ],
+};
+
+// ============================================================
+// hwange-vs-kruger: Hwange or Kruger?
+// ============================================================
+export const hwangeVsKrugerBlog: BlogContent = {
+  decisionSlug: 'hwange-vs-kruger',
+  title: 'Hwange or Kruger?',
+  subtitle: 'Zimbabwe wilderness versus South Africa infrastructure',
+  updatedAt: '2025-01',
+  wordCount: 1310,
+  published: true,
+  heroImage: {
+    src: '/images/destinations/hwange-elephants.jpg',
+    alt: 'Large elephant herd gathered at waterhole in Hwange National Park',
+  },
+
+  whyNotSimple: `Hwange National Park in Zimbabwe and Kruger National Park in South Africa are both major Southern African safari destinations. Both offer Big Five viewing and large elephant populations. Both have long histories of wildlife management and tourism.
+
+But they operate differently. Kruger is South Africa's flagship, with developed infrastructure, self-drive options, and seamless logistics. Hwange is wilder, less visited, and requires more commitment to reach. Zimbabwe's tourism is rebuilding from years of challenges.
+
+The choice involves trade-offs between accessibility and exclusivity, infrastructure and wilderness feel.`,
+
+  variables: `**Your logistics tolerance** affects destination choice. South Africa is easy. Flights connect globally. Roads are excellent. Services are reliable. Zimbabwe requires more planning, potentially more flexibility, and acceptance of occasional unpredictability.
+
+**Your interest in remoteness** shapes preference. Hwange feels wilder. Fewer visitors, less infrastructure, more sense of being in actual wilderness. Kruger feels managed, which provides reliability but reduces rawness.
+
+**Your elephant priority** favors Hwange. Elephant populations are massive, concentrated at waterholes during dry season. Vehicle density is lower. The experience of elephants at waterholes in Hwange differs from Kruger.
+
+**Your budget** interacts differently with each destination. Zimbabwe offers value at mid-range. South Africa's private reserves command premiums. Self-drive Kruger is budget-friendly. The comparison is complex.
+
+**Your Victoria Falls interest** might favor Hwange. The park is close to the falls, allowing easy combination. Kruger is far from any comparable secondary attraction.
+
+**Your concern about safety and stability** matters to some travelers. Zimbabwe has had challenging periods. Current tourism is rebuilding and generally safe, but perceptions linger.`,
+
+  tradeoffs: `Hwange offers wilderness experience that Kruger's managed environment does not replicate. Fewer visitors, rougher edges, and the feeling of being somewhere less tamed.
+
+Kruger offers reliability. What you expect is what you get. Infrastructure works. Services are professional. The experience is polished.
+
+Hwange's elephant concentrations at waterholes are remarkable. Dry season brings hundreds of elephants to pumped water sources. This spectacle is distinctive.
+
+Kruger's diversity of options suits different travelers. Self-drive budget safari to ultra-luxury private reserves, all in one ecosystem. Hwange has narrower options.
+
+Zimbabwe combination with Victoria Falls creates efficient trip structure. Hwange plus falls is a logical package. Kruger requires different trip architecture.
+
+Kruger's flight access is easier. Johannesburg is a global hub. Connecting to Hwange involves smaller airlines and potentially less reliable schedules.`,
+
+  misconceptions: `Zimbabwe is not dangerous for tourists in safari areas. The political and economic challenges have not affected tourist safety in national parks. Current travel advisories are generally permissive for safari regions.
+
+Hwange is not undeveloped. Quality camps and lodges operate there. The infrastructure is less extensive than Kruger but entirely adequate for comfortable safari.
+
+Kruger is not overcrowded everywhere. Private reserves have strict vehicle limits. Even self-drive Kruger disperses visitors across vast area.
+
+You do not need to choose Southern Africa. Both destinations can be experienced on different trips. This is not a permanent decision.`,
+
+  breaksDown: `If ease of logistics is paramount, Kruger is the straightforward choice. Less planning complexity, more reliable connections.
+
+If you value wilder, less-managed feeling, Hwange offers something Kruger has engineered away.
+
+If Victoria Falls is part of your trip vision, Hwange combines more efficiently.
+
+If self-drive appeals, Kruger enables this option. Hwange does not.
+
+If you want maximum lodge variety and price competition, Kruger's larger tourism sector provides more options.`,
+
+  ourApproach: `We evaluate this choice based on your logistics tolerance, wilderness interest, and whether Victoria Falls is part of your trip. Both are excellent safari destinations with different personalities.
+
+Zimbabwe tourism is rebuilding and offering good value. Kruger remains Africa's most accessible premier safari destination.`,
+
+  relatedDecisions: [
+    { slug: 'south-africa-vs-east-africa-safari', title: 'South Africa or East Africa?', type: 'decision' },
+    { slug: 'kruger-vs-private-reserves', title: 'Kruger or private reserves?', type: 'decision' },
+    { slug: 'victoria-falls-zambia-vs-zimbabwe', title: 'Victoria Falls: Zambia or Zimbabwe side?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'zimbabwe-hwange-falls', title: 'Zimbabwe Hwange and Victoria Falls', type: 'trip' },
+    { slug: 'south-africa-kruger', title: 'South Africa Kruger Safari', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'destination/hwange-guide', title: 'Hwange National Park Guide', type: 'guide' },
+    { slug: 'destination/zimbabwe-overview', title: 'Zimbabwe Safari Planning', type: 'guide' },
+  ],
+};
+
+// ============================================================
+// victoria-falls-zambia-vs-zimbabwe: Victoria Falls - Zambia or Zimbabwe side?
+// ============================================================
+export const victoriaFallsZambiaVsZimBlog: BlogContent = {
+  decisionSlug: 'victoria-falls-zambia-vs-zimbabwe',
+  title: 'Victoria Falls: Zambia or Zimbabwe side?',
+  subtitle: 'Which country offers the better falls experience',
+  updatedAt: '2025-01',
+  wordCount: 1280,
+  published: true,
+  heroImage: {
+    src: '/images/destinations/victoria-falls.jpg',
+    alt: 'Victoria Falls wide panorama with mist rising from gorge',
+  },
+
+  whyNotSimple: `Victoria Falls straddles the border between Zambia and Zimbabwe. Both countries offer access to the falls, both have hotels and activities, both claim their view is better. Travelers must choose where to base themselves.
+
+The falls themselves do not change based on which country you stand in. But viewing angles, spray intensity, and surrounding experiences differ. Seasonally, one side or the other offers better views. Activities and town atmosphere vary.
+
+Most travelers stay on one side and do a day visit to the other. The question is which side to base yourself on.`,
+
+  variables: `**Your travel dates** determine which side has better views. High water (March-May) makes the Zimbabwe side wetter and harder to photograph, while Zambia views through the spray. Low water (September-November) exposes rock on the Zambia side while Zimbabwe maintains falls across its width.
+
+**Your intended activities** might favor one side. Bungee jumping operates from the bridge between countries. Devil's Pool swimming is Zambia-only (dry season). Helicopter flights operate from both sides. White water rafting launches from both.
+
+**Your accommodation preferences** differ between towns. Victoria Falls town in Zimbabwe is more developed with more options across price ranges. Livingstone in Zambia is a working town with tourist overlay, often slightly cheaper.
+
+**Your onward travel plans** affect logical positioning. Continuing to Hwange favors Zimbabwe. Continuing to South Luangwa favors Zambia. Connecting flights favor whichever airport better connects to your next destination.
+
+**Your visa situation** matters. Some nationalities have easier access to one country or the other. KAZA UniVisa covers both for many nationalities but check your specific situation.
+
+**Your perception of safety and stability** might influence choice. Both countries are safe for tourists at the falls, but Zimbabwe's reputation makes some travelers prefer Zambia.`,
+
+  tradeoffs: `Zimbabwe offers arguably better views of the falls' full width. The main viewing path runs along the gorge opposite the broadest section of falls.
+
+Zambia offers closer interaction at low water. Devil's Pool puts you at the falls' edge. The experience is more intimate if less panoramic.
+
+Zimbabwe town has more developed tourism infrastructure. More restaurants, more shops, more activity operator competition.
+
+Zambia town feels less touristy. Livingstone has local character beyond the falls. Some travelers prefer this atmosphere.
+
+Both countries are straightforward for day visits to the other side. Wherever you stay, you can experience both views.
+
+Spray is inescapable during high water on both sides, but Zimbabwe's main viewpoints get wetter. Cameras require protection.`,
+
+  misconceptions: `You can see the falls from both sides regardless of where you stay. Border crossing for day visits is routine.
+
+Neither side is dramatically better year-round. Seasonal water levels change which view is superior.
+
+Neither country is dangerous at the falls. Tourist areas in both Zambia and Zimbabwe are well-policed and safe.
+
+The KAZA UniVisa works for many nationalities, allowing unlimited border crossings for day visits. Check your eligibility.
+
+Devil's Pool is seasonal. It only operates when water levels allow safe swimming, roughly August through December. You cannot assume it will be available.`,
+
+  breaksDown: `If visiting during high water (March-May), Zambia's views are somewhat clearer through the spray. Zimbabwe viewpoints are dramatically wet.
+
+If Devil's Pool is essential to your experience, you must visit during low water season and base on the Zambia side or do a day trip.
+
+If continuing to safari in Zimbabwe, basing on the Zimbabwe side reduces border crossings.
+
+If continuing to Zambia safari, Zambia basing makes sense.
+
+For most travelers, accommodation quality and price at specific properties matter more than country.`,
+
+  ourApproach: `We evaluate this choice based on your travel dates, specific activities desired, and onward journey plans. We recommend day visits to the opposite side regardless of where you stay.
+
+The falls are spectacular from both countries. The question is logistics and seasonal optimization.`,
+
+  relatedDecisions: [
+    { slug: 'hwange-vs-kruger', title: 'Hwange or Kruger?', type: 'decision' },
+    { slug: 'south-africa-vs-east-africa-safari', title: 'South Africa or East Africa?', type: 'decision' },
+    { slug: 'safari-beach-extension', title: 'Should I add beach to my safari?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'zimbabwe-hwange-falls', title: 'Zimbabwe Hwange and Victoria Falls', type: 'trip' },
+    { slug: 'zambia-south-luangwa-falls', title: 'Zambia Safari and Victoria Falls', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'destination/victoria-falls-guide', title: 'Victoria Falls Planning Guide', type: 'guide' },
+    { slug: 'logistics/border-crossings', title: 'Border Crossing Guide', type: 'guide' },
+  ],
+};
+
+// ============================================================
 // Register all Destination Choice blogs
 // ============================================================
 export function registerDestinationBlogs(): void {
@@ -634,4 +1146,10 @@ export function registerDestinationBlogs(): void {
   registerBlog(serengetiVsMaraBlog);
   registerBlog(krugerVsPrivateBlog);
   registerBlog(singleVsMultiCountryBlog);
+  registerBlog(ngorongoroVsSerengetiBlog);
+  registerBlog(amboseliVsMaraBlog);
+  registerBlog(sabiSandsVsTimbavtiBlog);
+  registerBlog(chobeVsOkavangoBlog);
+  registerBlog(hwangeVsKrugerBlog);
+  registerBlog(victoriaFallsZambiaVsZimBlog);
 }

@@ -324,6 +324,254 @@ We do not default to lodges as "safe" or tented camps as "better." The right cho
 };
 
 // ============================================================
+// mobile-camps-vs-fixed-lodges: Mobile camps or fixed lodges?
+// ============================================================
+const mobileCampsVsFixedBlog: BlogContent = {
+  decisionSlug: 'mobile-camps-vs-fixed-lodges',
+  title: 'Mobile camps or fixed lodges?',
+  subtitle: 'Following the wildlife versus staying in one place',
+  updatedAt: '2025-01',
+  wordCount: 1320,
+  published: true,
+  heroImage: {
+    src: '/images/activities/fly-camping.jpg',
+    alt: 'Luxury mobile safari camp setup in the Serengeti wilderness',
+  },
+
+  whyNotSimple: `Mobile camps move with the wildlife. Fixed lodges stay where they are built. This fundamental difference creates distinct safari experiences, but the terms are often misunderstood.
+
+A mobile camp is not roughing it. Quality mobile camps have comfortable beds, proper bathrooms, and good food. They simply pack up and relocate as animal movements dictate, typically following the Great Migration across the Serengeti.
+
+Fixed lodges offer consistency and often more amenities, but they cannot chase the herds. If the migration moves early or late, your fixed lodge might be in the wrong place.
+
+The choice is about positioning strategy and flexibility tolerance.`,
+
+  variables: `**Your dates relative to migration** determine mobile camp value. If you are traveling during migration season and want to be positioned optimally, mobile camps adjust to animal movements. Fixed lodges hope the animals come to them.
+
+**Your comfort expectations** matter within categories. High-end mobile camps are comfortable. Basic mobile camps are basic. The mobile aspect is separate from the quality tier. Same applies to fixed lodges.
+
+**Your tolerance for unpredictability** affects satisfaction. Mobile camps involve more variables. Exact locations may shift. Setup might vary slightly. If you need everything precisely as described, mobile camps introduce uncertainty.
+
+**Trip length** changes the calculus. On a ten-day trip, moving with a mobile camp for part of it and staying at fixed properties for others creates variety. On a four-day trip, the logistics of mobile camp might eat into game viewing time.
+
+**Your budget** interacts differently with each option. Premium mobile camps cost more than mid-range fixed lodges. Budget mobile camps are hard to find. The overlap exists in the middle.`,
+
+  tradeoffs: `Mobile camps position you where animals are, not where buildings are. This is their fundamental advantage. During migration, being in the right place is everything. Mobile camps optimize for this.
+
+Fixed lodges offer consistency. The room you saw online is the room you get. The facilities are what you expected. No surprises about exactly where you will sleep.
+
+Mobile camps feel more adventurous. Setting up camp in the wilderness, moving with the herds, the temporary nature of the accommodation all contribute to a feeling of expedition rather than hotel stay.
+
+Fixed lodges often have better amenities. Swimming pools, wifi, bars, and restaurants are easier in permanent structures. Mobile camps prioritize portability over facilities.
+
+Mobile camps typically have fewer guests. The logistics limit capacity. Fixed lodges can accommodate more people. If intimacy matters, mobile camps deliver it.`,
+
+  misconceptions: `Mobile does not mean roughing it. Quality mobile camps have en-suite bathrooms, hot water, comfortable beds, and excellent food. The canvas moves. The comfort does not.
+
+Fixed lodges are not always in worse positions. Well-placed fixed lodges in wildlife-rich areas provide excellent game viewing year-round. The disadvantage is only during migration when animals move.
+
+You do not need mobile camps to see the migration. Fixed lodges in the northern Serengeti or Mara see the migration when it arrives in their area. Mobile camps can follow it more precisely.
+
+Mobile camps are not only for the Serengeti. Botswana has mobile operations. Zambia does as well. The concept applies wherever wildlife moves seasonally.`,
+
+  breaksDown: `If your dates are outside migration season, mobile camp positioning advantage disappears. Fixed lodges work fine when animals are resident rather than migrating.
+
+If you need specific amenities like pool, gym, or reliable internet, fixed lodges are more likely to provide them. Mobile camps prioritize portability.
+
+If you are booking last minute, mobile camps may be unavailable or not in optimal position. They work best with advance planning.
+
+If your budget is tight, quality mobile camps are hard to find. The mobile segment skews toward premium pricing.`,
+
+  ourApproach: `We evaluate mobile versus fixed based on your travel dates, migration priority, comfort expectations, and budget. Mobile camps are recommended when positioning advantage justifies the premium and uncertainty.
+
+We do not recommend mobile camps as default. They serve specific purposes for specific travelers at specific times.`,
+
+  relatedDecisions: [
+    { slug: 'lodge-vs-tented-camp', title: 'Lodge or tented camp?', type: 'decision' },
+    { slug: 'great-migration-timing', title: 'When to see the Great Migration?', type: 'decision' },
+    { slug: 'luxury-safari-worth-it', title: 'Is luxury safari worth the premium?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'tanzania-great-migration', title: 'Tanzania Great Migration Safari', type: 'trip' },
+    { slug: 'serengeti-mobile-safari', title: 'Serengeti Mobile Safari', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'accommodation/mobile-camps-guide', title: 'Mobile Safari Camps Guide', type: 'guide' },
+    { slug: 'timing/migration-calendar', title: 'Migration Calendar', type: 'guide' },
+  ],
+};
+
+// ============================================================
+// group-tour-vs-private-safari: Group tour or private safari?
+// ============================================================
+const groupVsPrivateBlog: BlogContent = {
+  decisionSlug: 'group-tour-vs-private-safari',
+  title: 'Group tour or private safari?',
+  subtitle: 'Pre-set itineraries versus custom planning at different price points',
+  updatedAt: '2025-01',
+  wordCount: 1380,
+  published: true,
+  heroImage: {
+    src: '/images/activities/game-drive.jpg',
+    alt: 'Safari touring vehicle with guests on game drive',
+  },
+
+  whyNotSimple: `Group tours run fixed itineraries with multiple strangers in one vehicle. Private safaris design custom trips for your group alone. The price difference is substantial, often 30-50 percent more for private arrangements.
+
+But the decision is not purely financial. Group tours remove planning burden. They guarantee minimum viability regardless of group size. They sometimes access economies of scale that make certain experiences affordable.
+
+Private safaris provide flexibility, but flexibility has costs beyond money. You need to make decisions. You need to research. You carry the cognitive load of planning.
+
+The question is which trade-offs align with your preferences and resources.`,
+
+  variables: `**Your travel party composition** affects the calculation. Solo travelers and couples pay premium for private because they cannot share costs. Groups of four or six often find private safari comparable in per-person cost to group tours.
+
+**Your decision-making preference** matters. Some travelers want to research, choose, and customize. Others want someone to hand them a good itinerary. Group tours serve the latter well.
+
+**Your schedule flexibility** differentiates the options. Group tours run fixed dates. Private safaris depart when you want. If your dates are locked and match a group tour, fine. If you need specific timing, private offers flexibility.
+
+**Your tolerance for strangers** is honest self-assessment. You will spend many hours in close proximity with people you did not choose. Some travelers enjoy this social dimension. Others find it exhausting or irritating.
+
+**Your specific interests** may not align with group tour design. Group tours serve median preferences. If you have specialized interests like photography, birding, or walking safari focus, private arrangements serve them better.
+
+**Your budget** is the obvious variable. Group tours cost less. If money is the binding constraint, group tours make safari accessible.`,
+
+  tradeoffs: `Group tours remove decision burden. The itinerary exists. The camps are booked. You show up. For travelers who find planning stressful, this is valuable.
+
+Private safaris customize to your interests. Every choice reflects your priorities rather than median group preference. The trip fits you rather than you fitting the trip.
+
+Group tours provide built-in social experience. You meet people. You share meals and drives. Solo travelers especially may value this connection. See [solo safari travel](/decisions/solo-safari-travel).
+
+Private safaris provide privacy. Your vehicle, your guide, your conversation. No negotiating with strangers about how long to watch the lions.
+
+Group tours can access better pricing on certain properties. High-volume operators negotiate rates that individual bookings cannot match. Sometimes group tours stay at better camps than equivalent private budget.
+
+Private safaris offer schedule control. Leave when you want. Stop when you want. Extend if something amazing is happening.`,
+
+  misconceptions: `Group tours are not low quality. Many excellent safari operators run group tours. The guides are professional. The camps are good. The wildlife is the same.
+
+Private safari does not mean isolation. You share sightings with other vehicles. You share camps with other guests. Private vehicle and private trip are not the same as private wilderness.
+
+Group size varies. Some group tours have six guests. Others have sixteen. Ask before booking. The difference is significant.
+
+You can sometimes convert group to private. Operators may allow you to book out a group departure for your party, gaining fixed itinerary convenience with private vehicle arrangement.`,
+
+  breaksDown: `If budget is the binding constraint and private safari is not affordable, group tours provide access to safari that might otherwise be impossible.
+
+If you have strong specific interests that group tours do not serve, private arrangement is worth the premium. Photography-focused travelers rarely thrive in group tours.
+
+If traveling with children or elderly companions with specific needs, private arrangement accommodates them better than group tour schedules.
+
+If your dates do not match group tour departures and flexibility does not exist, private is your only option regardless of preference.`,
+
+  ourApproach: `We evaluate group versus private based on your budget, travel party, specific interests, and social preferences. We identify when group tours serve you well and when private investment is justified.
+
+We do not assume private is better. Group tours are excellent for many travelers and make safari accessible to more people.`,
+
+  relatedDecisions: [
+    { slug: 'private-vs-shared-vehicle', title: 'Private or shared vehicle?', type: 'decision' },
+    { slug: 'solo-safari-travel', title: 'Is solo safari travel right for me?', type: 'decision' },
+    { slug: 'safari-total-budget', title: 'What should I budget for safari?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'tanzania-classic-northern-circuit', title: 'Tanzania Classic Northern Circuit', type: 'trip' },
+    { slug: 'kenya-classic-safari', title: 'Kenya Classic Safari', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'logistics/booking-guide', title: 'Safari Booking Guide', type: 'guide' },
+    { slug: 'budget/group-vs-private-costs', title: 'Group vs Private Cost Analysis', type: 'guide' },
+  ],
+};
+
+// ============================================================
+// fly-in-vs-overland-safari: Fly-in or overland safari?
+// ============================================================
+const flyInVsOverlandBlog: BlogContent = {
+  decisionSlug: 'fly-in-vs-overland-safari',
+  title: 'Fly-in or overland safari?',
+  subtitle: 'Aviation access versus road travel in African safari',
+  updatedAt: '2025-01',
+  wordCount: 1340,
+  published: true,
+  heroImage: {
+    src: '/images/activities/hot-air-balloon.jpg',
+    alt: 'Small aircraft on bush airstrip in African savannah',
+  },
+
+  whyNotSimple: `Fly-in safaris use small aircraft to hop between bush airstrips near camps. Overland safaris drive between destinations on roads. The choice affects time efficiency, cost, and the style of experience.
+
+Flying saves time. A five-hour drive becomes a forty-minute flight. More days of game viewing, less days of transit. For travelers with limited time, this efficiency matters.
+
+Driving costs less. Vehicle transfers are cheaper than charter flights. For budget-conscious travelers, overland makes safari affordable.
+
+But the experience differs beyond time and money. Driving through the landscape provides transition and context. Flying skips the journey entirely.`,
+
+  variables: `**Your available time** is the primary variable. On a short trip, driving eats days you could spend watching wildlife. Flying compresses transit and expands game viewing. On a long trip, driving time is absorbed more easily.
+
+**Your budget** interacts differently with each mode. Internal flights in Tanzania or Kenya can cost $300-500 per leg. Multiple legs add up quickly. Driving transfers might be included or cost $50-100. The math favors driving for budget travelers.
+
+**The distances involved** affect the calculation. Short distances favor driving. Even with traffic, a two-hour drive is simpler than coordinating aircraft. Long distances favor flying. A nine-hour drive is exhausting and loses a full day.
+
+**Your travel philosophy** shapes preference. Some travelers want the journey. Driving through villages, seeing the landscape change, experiencing the country between parks. Others want to maximize time at destinations and minimize time between.
+
+**Your susceptibility to motion sickness** matters. Bush flights in small aircraft can be turbulent. Long drives on rough roads can be jarring. Know which you tolerate better.
+
+**The specific destinations** affect options. Some areas are fly-in only. Remote Botswana camps have no road access. Some areas are drive-only. Not every location has an airstrip.`,
+
+  tradeoffs: `Flying buys time but costs money. Every flight is hours not spent in a vehicle. Every flight is hundreds of dollars not spent elsewhere. The trade is explicit.
+
+Driving provides landscape experience that flying skips. The transition from city to bush, from one ecosystem to another, the villages and farms along the way, all disappear from the air.
+
+Flying is more comfortable for long distances. Air-conditioned aircraft versus bumpy roads for hours. The physical experience differs.
+
+Driving allows flexibility. You can stop. You can take detours. You can respond to wildlife along the route. Flying commits you to fixed endpoints.
+
+Flying adds logistical complexity. Flight schedules constrain arrival and departure times. Weather can delay or cancel flights. Driving has fewer variables.
+
+Overland safaris can incorporate en-route game viewing. In some areas, the drive itself is productive wildlife time. Flying makes game viewing only possible at endpoints.`,
+
+  misconceptions: `Bush flights are not dangerous. Africa has mature aviation operations. Pilots are experienced. The safety record is good. Small aircraft feel different from commercial jets, but the risk is not elevated.
+
+Driving is not always scenic. Some drives are on main roads through unremarkable terrain. The romantic notion of driving through Africa does not always match reality.
+
+You do not need to choose one mode for the entire trip. Many itineraries mix flying and driving, using each where it makes sense.
+
+Flying is not only for luxury travelers. Mid-range safaris use flights when distances require it. The association of flying with premium safari is not absolute.`,
+
+  breaksDown: `If time is severely limited, three or four days, flying is almost always worth the cost. Driving consumes too much of your limited resource.
+
+If budget is severely constrained, driving is almost always necessary. Flight costs cannot be absorbed without cutting other elements.
+
+If specific destinations are fly-in only, the decision is made for you. Remote Botswana, some Tanzanian locations, and certain Kenya properties require aircraft.
+
+If you value the journey experience and have adequate time, driving provides something flying cannot.`,
+
+  ourApproach: `We evaluate fly versus drive based on your time available, budget, specific destinations, and travel philosophy. We identify where flying efficiency justifies cost and where driving serves you better.
+
+The decision is route-specific. The same traveler might fly some legs and drive others within one trip.`,
+
+  relatedDecisions: [
+    { slug: 'is-5-days-enough-for-safari', title: 'Is five days enough for safari?', type: 'decision' },
+    { slug: 'safari-total-budget', title: 'What should I budget for safari?', type: 'decision' },
+    { slug: 'ideal-safari-length', title: 'How long should my safari be?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'tanzania-fly-in-safari', title: 'Tanzania Fly-In Safari', type: 'trip' },
+    { slug: 'botswana-okavango-delta', title: 'Botswana Okavango Delta Safari', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'logistics/internal-flights', title: 'Internal Flights Guide', type: 'guide' },
+    { slug: 'logistics/transfer-options', title: 'Safari Transfer Options', type: 'guide' },
+  ],
+};
+
+// ============================================================
 // Register all experience blogs
 // ============================================================
 export function registerExperienceBlogs(): void {
@@ -331,4 +579,7 @@ export function registerExperienceBlogs(): void {
   registerBlog(selfDriveBlog);
   registerBlog(privateVsSharedBlog);
   registerBlog(lodgeVsTentedBlog);
+  registerBlog(mobileCampsVsFixedBlog);
+  registerBlog(groupVsPrivateBlog);
+  registerBlog(flyInVsOverlandBlog);
 }
