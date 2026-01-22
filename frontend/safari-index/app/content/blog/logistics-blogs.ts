@@ -404,6 +404,220 @@ Good agents add real value. We identify when that value is essential and when se
 };
 
 // ============================================================
+// safari-booking-lead-time: How far in advance should I book safari?
+// ============================================================
+const bookingLeadTimeBlog: BlogContent = {
+  decisionSlug: 'safari-booking-lead-time',
+  title: 'How far in advance should I book safari?',
+  subtitle: 'Understanding booking windows and availability patterns',
+  updatedAt: '2025-01',
+  wordCount: 1300,
+  published: true,
+  heroImage: {
+    src: '/images/ecosystems/savannah-morning.jpg',
+    alt: 'Sunrise over African savannah with acacia trees',
+  },
+
+  whyNotSimple: `The ideal booking window varies dramatically based on season, destination, and flexibility. Peak season at popular camps can sell out a year in advance. Off-season at less famous properties might be available days ahead.
+
+Booking too early locks you into plans when life changes. Booking too late risks losing preferred options. The balance depends on your circumstances.`,
+
+  variables: `**Your travel season** is the primary factor. Peak season (July-October in East Africa) requires earlier booking, often 6-12 months. Green season might be available weeks ahead.
+
+**Specific camp desirability** affects availability. Famous camps at Singita, andBeyond, and similar sell out first. Less known but excellent camps remain available longer.
+
+**Group size** affects booking complexity. Large groups or family configurations need specific room types that sell out faster.
+
+**Your flexibility** on camps and dates determines how late you can book. High flexibility allows later booking. Rigid requirements need earlier commitment.
+
+**Special events** compress availability. Great Migration river crossing season, calving season, and holidays book earlier than usual.`,
+
+  tradeoffs: `Early booking secures preferred options but reduces flexibility. Life changes happen. Cancellation policies may not accommodate changed circumstances.
+
+Late booking maintains flexibility but limits options. You get what remains, which might be excellent or might be compromised.
+
+Mid-range booking (4-6 months) often balances well. Good selection remains. Flexibility exists.`,
+
+  misconceptions: `Last-minute safari is not impossible. Cancellations create openings. Less famous camps have availability. The deal is different but safari is possible.
+
+Early booking does not guarantee better prices. Most camps have fixed seasonal rates regardless of booking timing.
+
+Booking through agents does not mean earlier access. Agents and direct bookers draw from the same inventory in most cases.`,
+
+  breaksDown: `If traveling peak season to famous camps, book 9-12 months ahead. These sell out.
+
+If traveling green season with flexibility, 2-4 months provides good options.
+
+If specific property is essential, check their specific patterns rather than applying general rules.
+
+If flexibility is high and you can accept whatever is available, last-minute can work well.`,
+
+  ourApproach: `We advise booking timelines based on your season, flexibility, and priorities. We identify when early booking is essential and when waiting preserves options.`,
+
+  relatedDecisions: [
+    { slug: 'book-safari-agent-vs-direct', title: 'Should I book through an agent?', type: 'decision' },
+    { slug: 'peak-season-vs-value-season', title: 'Is peak season worth the premium?', type: 'decision' },
+    { slug: 'safari-total-budget', title: 'What should I budget for safari?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'tanzania-classic-northern-circuit', title: 'Tanzania Classic Northern Circuit', type: 'trip' },
+    { slug: 'kenya-classic-safari', title: 'Kenya Classic Safari', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'logistics/booking-timeline', title: 'Booking Timeline Guide', type: 'guide' },
+    { slug: 'logistics/availability-patterns', title: 'Availability Patterns', type: 'guide' },
+  ],
+};
+
+// ============================================================
+// safari-visa-requirements: What visas do I need for safari?
+// ============================================================
+const visaRequirementsBlog: BlogContent = {
+  decisionSlug: 'safari-visa-requirements',
+  title: 'What visas do I need for safari?',
+  subtitle: 'Understanding entry requirements for safari destinations',
+  updatedAt: '2025-01',
+  wordCount: 1240,
+  published: true,
+  heroImage: {
+    src: '/images/destinations/tanzania-serengeti.jpg',
+    alt: 'Migration herds in Tanzania landscape',
+  },
+
+  whyNotSimple: `Visa requirements vary by your nationality, destination country, and how many countries you visit. Most safari destinations offer visas on arrival or e-visas for common nationalities, but requirements change and exceptions exist.
+
+Multi-country itineraries add complexity. East Africa has a multi-country visa. Southern Africa does not. Border crossing procedures vary.
+
+Current, accurate information from official sources supersedes any general guidance.`,
+
+  variables: `**Your nationality** determines requirements at each destination. US, UK, and EU citizens typically have straightforward options. Other nationalities may face different requirements.
+
+**Which countries you are visiting** creates the requirement list. Single-country trips are simpler. Multi-country trips multiply requirements.
+
+**Length of stay** occasionally matters. Most tourist visas cover 30-90 days, more than sufficient for safari. Longer stays may need different visas.
+
+**East African Community visa** covers Kenya, Uganda, and Rwanda for $100 with multiple entries. This can save money and complexity for multi-country trips.
+
+**Transit countries** sometimes require visas. Stopping in Ethiopia, Doha, or other hubs might need transit visas depending on nationality and layover length.`,
+
+  tradeoffs: `Visa on arrival is convenient but can involve airport queues. E-visas processed in advance avoid queuing but require advance planning.
+
+Multi-country visas save money and hassle when available. When not available, separate visas for each country add cost and complexity.
+
+Some nationalities need letters of invitation or sponsorship. These add booking complexity and require coordination with operators.`,
+
+  misconceptions: `Visa requirements are not static. They change. Information from last year might be outdated. Verify current requirements.
+
+Visa on arrival does not mean no visa. You still need the visa; you just obtain it at the airport. Fees are payable, often cash-only.
+
+Yellow fever vaccination is not technically a visa requirement but is required for entry to many safari countries. It functions similarly.
+
+Your operator or agent should provide guidance but the responsibility is yours. Arriving without proper documentation is your problem.`,
+
+  breaksDown: `If your nationality faces complex requirements, begin visa research early. Some require embassy visits, multiple documents, or extended processing.
+
+If visiting multiple countries, map the entire journey's requirements, including transit stops.
+
+If traveling on short notice, confirm visa availability. Some require advance processing that cannot be expedited.
+
+If planning a multi-country East Africa trip, the EAC visa typically offers the best value.`,
+
+  ourApproach: `We provide general visa context but direct you to authoritative sources for current requirements. Your nationality and itinerary determine specific needs.
+
+We highlight common pitfalls and multi-country options but do not substitute for embassy verification.`,
+
+  relatedDecisions: [
+    { slug: 'single-vs-multi-country-safari', title: 'Single country or multi-country safari?', type: 'decision' },
+    { slug: 'safari-booking-lead-time', title: 'How far ahead should I book?', type: 'decision' },
+    { slug: 'book-safari-agent-vs-direct', title: 'Should I book through an agent?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'kenya-tanzania-combined', title: 'Kenya and Tanzania Combined', type: 'trip' },
+    { slug: 'east-africa-gorilla-safari', title: 'East Africa Gorilla Safari', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'logistics/visa-guide', title: 'Safari Visa Guide', type: 'guide' },
+    { slug: 'logistics/document-checklist', title: 'Document Checklist', type: 'guide' },
+  ],
+};
+
+// ============================================================
+// safari-packing-essentials: What should I pack for safari?
+// ============================================================
+const packingEssentialsBlog: BlogContent = {
+  decisionSlug: 'safari-packing-essentials',
+  title: 'What should I pack for safari?',
+  subtitle: 'Understanding luggage limits and essential gear',
+  updatedAt: '2025-01',
+  wordCount: 1280,
+  published: true,
+  heroImage: {
+    src: '/images/activities/sundowner.jpg',
+    alt: 'Safari sundowner setup at sunset',
+  },
+
+  whyNotSimple: `Safari packing involves trade-offs between comfort and luggage restrictions. Bush flights typically limit you to 15-20kg in soft bags. Camps provide laundry service. The temptation to overpack is universal and counterproductive.
+
+The other challenge is packing appropriately for diverse conditions. Early morning game drives are cold. Midday is hot. Evening might be formal or casual depending on camp. Anticipating this range in limited luggage requires thought.`,
+
+  variables: `**Your transfer method** determines luggage limits. Bush flights have strict weight limits and soft bag requirements. Road transfers are more flexible. Know your itinerary's restrictions.
+
+**Your destinations' climates** vary. High altitude locations like Ngorongoro Crater get cold. Low-lying areas are warm. Water-based safari gets you wet. Pack for actual conditions.
+
+**Your photography ambitions** affect camera gear weight. Serious photographers face the hardest packing decisions. Camera equipment consumes weight allowance that might otherwise be clothing.
+
+**Camp formality levels** vary. Some luxury camps expect evening dress standards. Others are casual throughout. Know what your specific camps expect.
+
+**Your laundry tolerance** enables lighter packing. Camps do laundry, often within hours. If you are comfortable rewearing cleaned clothes, you need less.`,
+
+  tradeoffs: `Light packing means flexibility and compliance with weight limits. The trade is potentially not having exactly what you want for every situation.
+
+Heavy packing means more options but weight limit stress and potential fees. The trade is convenience against compliance.
+
+Neutral colors (khaki, olive, brown) work for both game drives and camp. Bright colors are discouraged on drives but pack one nice item if evening dress is expected.
+
+Technical fabrics dry quickly and pack small. Cotton is more comfortable but heavier and slower drying.`,
+
+  misconceptions: `You do not need safari-specific clothing. Neutral colors in normal outdoor clothing work fine. Safari wear is marketing as much as function.
+
+Laundry service means you need less than you think. Most travelers overpack significantly.
+
+Weight limits are enforced. Do not assume you will get away with excess. You might have to leave items behind.
+
+Binoculars are more important than most travelers realize. Camps sometimes provide them but quality varies. Good binoculars enhance every sighting.`,
+
+  breaksDown: `If doing bush flights, take the weight limit seriously. Weigh your bag before traveling.
+
+If photography is a priority, camera gear takes precedence over clothing variety. Pack minimal clothes.
+
+If visiting multiple climate zones, layers become essential. One warm layer covers cold mornings across destinations.
+
+If luggage compliance stresses you, consider road-based itineraries with flexible allowances.`,
+
+  ourApproach: `We provide packing guidance based on your specific itinerary, including weight limits and climate conditions. We help prioritize essentials over nice-to-haves.`,
+
+  relatedDecisions: [
+    { slug: 'fly-vs-drive-between-parks', title: 'Fly or drive between parks?', type: 'decision' },
+    { slug: 'luxury-safari-worth-it', title: 'Is luxury safari worth the premium?', type: 'decision' },
+    { slug: 'safari-photography-equipment', title: 'What camera equipment for safari?', type: 'decision' },
+  ],
+
+  relatedTrips: [
+    { slug: 'tanzania-classic-northern-circuit', title: 'Tanzania Classic Northern Circuit', type: 'trip' },
+    { slug: 'botswana-okavango-delta', title: 'Botswana Okavango Delta Safari', type: 'trip' },
+  ],
+
+  relatedGuides: [
+    { slug: 'logistics/packing-list', title: 'Safari Packing List', type: 'guide' },
+    { slug: 'logistics/luggage-guide', title: 'Luggage Requirements Guide', type: 'guide' },
+  ],
+};
+
+// ============================================================
 // Register all logistics blogs
 // ============================================================
 export function registerLogisticsBlogs(): void {
@@ -412,4 +626,7 @@ export function registerLogisticsBlogs(): void {
   registerBlog(flyVsDriveBlog);
   registerBlog(beachExtensionBlog);
   registerBlog(agentVsDirectBlog);
+  registerBlog(bookingLeadTimeBlog);
+  registerBlog(visaRequirementsBlog);
+  registerBlog(packingEssentialsBlog);
 }
