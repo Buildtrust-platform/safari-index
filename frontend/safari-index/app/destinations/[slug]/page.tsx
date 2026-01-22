@@ -52,6 +52,7 @@ import {
 } from '../../content/itineraries';
 import { WildlifeSightings } from '../../components/WildlifeSightings';
 import { getRegionSightings } from '../../content/wildlife-sightings';
+import { getDestinationCluster, type ClusterItem } from '../../content/destination-clusters';
 
 /**
  * Ecosystem types for park images - matches EcosystemImage tags
@@ -903,6 +904,119 @@ function GameParkCard({ park }: { park: GamePark }) {
   );
 }
 
+/**
+ * Destination Cluster Section - Hub & Spoke SEO
+ * Links to all decision/blog spokes relevant to this destination
+ */
+function DestinationClusterSection({
+  destinationId,
+  destinationName,
+}: {
+  destinationId: string;
+  destinationName: string;
+}) {
+  const cluster = getDestinationCluster(destinationId);
+
+  if (!cluster) return null;
+
+  const hasContent =
+    cluster.decisions.length > 0 ||
+    cluster.comparisons.length > 0 ||
+    cluster.timing.length > 0;
+
+  if (!hasContent) return null;
+
+  return (
+    <section className="mb-10">
+      <h2 className="font-editorial text-xl font-semibold text-stone-900 mb-4">
+        {destinationName} decisions
+      </h2>
+      <p className="text-stone-600 text-sm mb-6">
+        Key questions travelers ask about {destinationName}. Each decision explains trade-offs and conditions.
+      </p>
+
+      <div className="space-y-6">
+        {/* Comparisons - Most valuable for SEO */}
+        {cluster.comparisons.length > 0 && (
+          <div>
+            <h3 className="text-sm font-medium text-stone-500 uppercase tracking-wider mb-3">
+              Comparisons
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {cluster.comparisons.map((item) => (
+                <ClusterLink key={item.slug} item={item} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Timing Decisions */}
+        {cluster.timing.length > 0 && (
+          <div>
+            <h3 className="text-sm font-medium text-stone-500 uppercase tracking-wider mb-3">
+              When to visit
+            </h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {cluster.timing.map((item) => (
+                <ClusterLink key={item.slug} item={item} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Other Decisions */}
+        {cluster.decisions.length > 0 && (
+          <div>
+            <h3 className="text-sm font-medium text-stone-500 uppercase tracking-wider mb-3">
+              Planning decisions
+            </h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {cluster.decisions.slice(0, 6).map((item) => (
+                <ClusterLink key={item.slug} item={item} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/**
+ * Cluster Link - Individual spoke link with type badge
+ */
+function ClusterLink({ item }: { item: ClusterItem }) {
+  const href =
+    item.type === 'decision'
+      ? `/decisions/${item.slug}`
+      : item.type === 'blog'
+        ? `/blog/decisions/${item.slug}`
+        : `/guides/${item.slug}`;
+
+  const typeLabel =
+    item.type === 'decision' ? 'Decision' : item.type === 'blog' ? 'Deep dive' : 'Guide';
+
+  return (
+    <Link
+      href={href}
+      className="group flex items-start gap-3 p-3 bg-white rounded-lg border border-stone-200 hover:border-amber-300 hover:shadow-sm transition-all"
+    >
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-medium text-stone-900 group-hover:text-amber-700 transition-colors">
+          {item.title}
+        </p>
+        {item.context && (
+          <p className="text-xs text-stone-500 mt-0.5">{item.context}</p>
+        )}
+        <span className="inline-block mt-1.5 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider bg-stone-100 text-stone-500 rounded">
+          {typeLabel}
+        </span>
+      </div>
+      <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all flex-shrink-0 mt-0.5" />
+    </Link>
+  );
+}
+
 export default async function DestinationPage({
   params,
 }: {
@@ -1110,6 +1224,9 @@ export default async function DestinationPage({
             </Link>
           </div>
         </div>
+
+        {/* Decision Cluster Hub - SEO Hub & Spoke */}
+        <DestinationClusterSection destinationId={slug} destinationName={destination.name} />
 
         {/* Planning Essentials - Combined timing + practical */}
         <section className="mb-10">

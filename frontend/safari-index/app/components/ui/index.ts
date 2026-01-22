@@ -103,3 +103,16 @@ export {
   TagIcon,
   LocationIcon,
 } from './Icon';
+
+// Verdict & SEO components
+export {
+  VerdictBox,
+  ComparisonTable,
+  CommercialCTA,
+  type VerdictBoxProps,
+  type VerdictOutcome,
+  type VerdictRating,
+  type ComparisonTableProps,
+  type ComparisonRow,
+  type CommercialCTAProps,
+} from './VerdictBox';
